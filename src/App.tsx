@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import NavWrapper from './components/NavWrapper'
 import { createContext, useState } from 'react'
-import ErrorAccountNotFound from './routes/account/ErrorAccountNotFound'
-import Error404 from './routes/error404'
+// import ErrorAccountNotFound from './routes/account/ErrorAccountNotFound'
+// import Error404 from './routes/error404'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import UserProfilePage from './routes/account/UserProfilePage'
@@ -43,31 +43,19 @@ const App = () => {
 				</header>
 				<main id="main">
 					<Routes>
-						<Route path="/" element={<RootPage loggedin={userIsLoggedIn} />} errorElement={<ErrorAccountNotFound />} />
-						<Route
-							path="/account/login"
-							element={<UserLoginPage />}
-							errorElement={<ErrorAccountNotFound />}
-						/>
-						<Route
-							path="/account/forgotpassword"
-							element={<CheckMailPasswordPage />}
-							errorElement={<Error404 />}
-						/>
-						<Route
-							path="/account/new"
-							element={<CheckMailNewAccountPage />}
-							errorElement={<Error404 />}
-						/>
-						<Route path="/account/profile" element={<UserProfilePage />} errorElement={<Error404 />} />
-						<Route path="/account/logout" element={<UserLogoutPage />} errorElement={<Error404 />} />
-						<Route path="/account/*" element={<UserLoginPage />} errorElement={<ErrorAccountNotFound />} />
-						<Route path="/dashboard" element={<DashboardPage />} errorElement={<Error404 />} />
-						<Route path="/search" element={<SearchPage />} errorElement={<Error404 />} />
-						<Route path="/saved-books" element={<SavedBooksPage />} errorElement={<Error404 />} />
-						<Route path="/wishlist" element={<WishlistPage />} errorElement={<Error404 />} />
-						<Route path="/reading" element={<ReadingPage />} errorElement={<Error404 />} />
-						<Route path="/clear-my-books" element={<ClearMyBooks />} errorElement={<Error404 />} />
+						<Route exact path="/" Component={RootPage({userIsLoggedIn})} />
+						<Route path="/account/login" Component={UserLoginPage} />
+						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
+						<Route path="/account/new" Component={CheckMailNewAccountPage} />
+						<Route path="/account/profile" Component={UserProfilePage} />
+						<Route path="/account/logout" Component={UserLogoutPage} />
+						<Route path="/account/*" Component={UserLoginPage} />
+						<Route path="/dashboard" Component={DashboardPage} />
+						<Route path="/search" Component={SearchPage} />
+						<Route path="/saved-books" Component={SavedBooksPage} />
+						<Route path="/wishlist" Component={WishlistPage} />
+						<Route path="/reading" Component={ReadingPage} />
+						<Route path="/clear-my-books" Component={ClearMyBooks} />
 					</Routes>
 				</main>
 			</AppContext.Provider>
