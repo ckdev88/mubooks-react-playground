@@ -25,8 +25,8 @@ const DashboardPage = () => {
 			<Reading />
 			<Saved />
 			<Wishlist />
-			<Favorites />
 
+			<Favorites />
 			<Tropes />
 			<Stats />
 			<Explore />
