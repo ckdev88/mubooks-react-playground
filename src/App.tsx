@@ -43,7 +43,7 @@ const App = () => {
 				</header>
 				<main id="main">
 					<Routes>
-						<Route exact path="/" Component={RootPage(userIsLoggedIn)} />
+						<Route path="/" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
 						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
 						<Route path="/account/new" Component={CheckMailNewAccountPage} />

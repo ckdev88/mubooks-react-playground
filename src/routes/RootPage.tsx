@@ -2,7 +2,8 @@ import NavWrapper from '../components/NavWrapper'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
-const RootPage = (loggedin: boolean) => {
+const RootPage = () => {
+	const loggedin:boolean=false
 	const navigate = useNavigate()
 
 	useEffect(() => {
