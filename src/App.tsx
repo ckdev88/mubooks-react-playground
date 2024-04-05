@@ -1,8 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import NavWrapper from './components/NavWrapper'
 import { createContext, useState } from 'react'
-// import ErrorAccountNotFound from './routes/account/ErrorAccountNotFound'
-// import Error404 from './routes/error404'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import UserProfilePage from './routes/account/UserProfilePage'
