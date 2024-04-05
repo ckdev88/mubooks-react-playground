@@ -40,7 +40,7 @@ export default function WishlistItems() {
 			<main  className="toadd">
 				<aside>
 					<button>
-						<img src="/img/icon-wishlist.png" />
+						<img src="img/icon-wishlist.png" />
 					</button>
 				</aside>
 				Next in line.

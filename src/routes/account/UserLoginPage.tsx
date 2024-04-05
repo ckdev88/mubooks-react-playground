@@ -13,7 +13,7 @@ export default function UserLoginPage() {
 				<h1 style={{ textAlign: 'center' }}>MuBooks</h1>
 				<img
 					id="welcome-logo-img"
-					src="/img/logo.svg"
+					src="img/logo.svg"
 					style={{
 						maxWidth: '33%',
 						display: 'block',

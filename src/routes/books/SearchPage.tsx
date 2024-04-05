@@ -3,7 +3,7 @@ import bookData from '../../../data/books.json'
 import BooksOverviewPage from './BooksOverviewPage'
 
 const SearchPage = () => {
-	const boeken: BookData = bookData as BookData
+	const boeken: any = bookData as any
 	const searchForm = useRef(null)
 
 	const [resultsWarning, setResultsWarning] = useState<string>('')

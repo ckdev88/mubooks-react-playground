@@ -32,7 +32,7 @@ return (
 
 	<main  className="toadd">
 		<aside>
-			<button><img src="/img/icon-favorites.png" /></button>
+			<button><img src="img/icon-favorites.png" /></button>
 		</aside>
 		Only the best ones here
 	</main>

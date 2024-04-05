@@ -26,7 +26,7 @@ export default function ReadingItem(){
 <>
 	<main>
 		<aside>
-			<button><img src="/img/plus-icon.svg" /></button>
+			<button><img src="img/plus-icon.svg" /></button>
 		</aside>
 		If you're already reading a book, let's add it here.
 	</main>

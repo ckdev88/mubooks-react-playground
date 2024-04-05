@@ -12,7 +12,7 @@ const SavedItems = () => {
 			<main className="toadd">
 				<aside>
 					<button onClick={() => goSavedBooks()}>
-						<img src="/img/save-books-icon.png" />
+						<img src="img/save-books-icon.png" />
 					</button>
 				</aside>
 				Let's start saving books.

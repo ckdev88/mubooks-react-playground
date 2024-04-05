@@ -23,7 +23,7 @@ export default function Explore() {
 			<article className="adder alt">
 				<header>Let's go straight to explore them books!</header>
 				<aside>
-					<img src="/img/explore.png" alt="Explore" onClick={goExplore} />
+					<img src="img/explore.png" alt="Explore" onClick={goExplore} />
 					Find a book
 				</aside>
 			</article>
