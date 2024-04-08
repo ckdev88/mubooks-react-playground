@@ -9,7 +9,6 @@ const AddBookToSaved = (book: Book) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
-		console.log(myBooks)
 	} else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 	if (myBooks.filter((presentbook) => presentbook.id === book.id).length > 0) return // keep unique
 

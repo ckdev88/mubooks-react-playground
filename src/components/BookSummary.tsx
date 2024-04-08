@@ -29,9 +29,9 @@ const BookSummary = ({ book }: BookObject) => {
 				<div className="marks">
 					<div className="mark">
 						{!book.saved && SaveBookButton(book)}
-						{book.saved && RemoveBookButton(book.id, book.saved)}<br />
-						{!book.wishlist && AddToWishlistButton(book.id)}
-						{book.wishlist && RemoveFromWishlistButton(book.id)}<br />
+						{book.saved && RemoveBookButton(book.id, book?.saved)}<br />
+						{!book.wishlist && AddToWishlistButton(book)}
+						{book.wishlist && RemoveFromWishlistButton(book.id,book?.wishlist)}<br />
 						{!book.reading && AddToReadingButton(book.id)}
 						{book.reading && RemoveFromReadingButton(book.id)}<br />
 					</div>

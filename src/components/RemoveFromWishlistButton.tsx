@@ -18,7 +18,7 @@ const RemoveBookFromWishlist = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const RemoveFromWishlistButton = (id: number) => {
+const RemoveFromWishlistButton = (id: number, wishlist: boolean) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	function RemoveFromWishlistButtonAct() {
@@ -26,6 +26,7 @@ const RemoveFromWishlistButton = (id: number) => {
 		setUserMyBooks(newArr) // update global state
 	}
 
+	if (!wishlist) return <></>
 	return (
 		<a onClick={() => RemoveFromWishlistButtonAct()}>
 			<span className="icon icon-remove"></span>Remove from wishlist

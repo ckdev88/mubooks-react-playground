@@ -4,15 +4,20 @@ import { AppContext } from "../../App"
 
 const WishlistPage = () => {
 	const { userMyBooks } = useContext(AppContext)
+
 	let hasbooks = false
 	let books: Books
+	let booksFiltered: Books = []
 
-	if (localStorage.getItem('MyBooks') === 'undefined') books = []
+	if (localStorage.getItem('MyBooks') === 'undefined') {
+		books = []
+	}
 	else {
-		books = JSON.parse(userMyBooks)
-		books = books.filter(book => book.wishlist === true)
-		if (books !== undefined) {
-			if (books.length > 0) hasbooks = true
+		books = JSON.parse(userMyBooks as string)
+		if (typeof (books) !== 'object') books = JSON.parse(books)
+		booksFiltered = books.filter((book) => book.wishlist === true)
+		if (booksFiltered !== undefined) {
+			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false
 		}
 	}
@@ -27,7 +32,7 @@ const WishlistPage = () => {
 				<button className="wauto mr1">Mu Books</button>
 				<button className="wauto">Search</button>
 			</div>
-			<BooksOverviewPage books={books} page="wishlistpage" />
+			<BooksOverviewPage books={booksFiltered} page="wishlistpage" />
 		</>
 	)
 }

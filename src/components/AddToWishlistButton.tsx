@@ -1,31 +1,44 @@
 import UpdateMyBooks from '../stores/UpdateMyBooks'
 import { useContext } from 'react'
 import { AppContext } from '../App'
+import AddBookToSaved from '../stores/AddBookToSaved'
 
-
-const AddBookToWishlist = (id: number) => {
+const AddBookToWishlist = async (book: Book) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
 	} else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 
+	// check if already saved in localstorage, database. if not, add first	
+	let bookIsSaved = false
+	let returnval: string
 	for (let i = 0; i < myBooks.length; i++) {
-		if (myBooks[i].id === id) myBooks[i].wishlist = !myBooks[i].wishlist
+		if (myBooks[i].id === book.id) {
+			bookIsSaved = true
+			myBooks[i].wishlist = true
+		}
 	}
-	const myBooksNew: string = JSON.stringify(myBooks)
+	if (bookIsSaved === false) {
+		// add book to saved, mark as wishlist (+toggle?)
+		await AddBookToSaved(book, true)
+	}
+	else {
+		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
+	}
+	returnval = JSON.stringify(localStorage.getItem('MyBooks'))
+	return returnval
 
-	UpdateMyBooks(myBooksNew) // update localstorage, database
-	return myBooksNew // return value for update global state
 }
 
-const AddToWishlistButton = (id: number) => {
+const AddToWishlistButton = (book: Book) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
-	function AddToWishlistButtonAct() {
-		const newArr = AddBookToWishlist(id) // update localstorage, database
-		setUserMyBooks(newArr) // update global state
+	async function AddToWishlistButtonAct() {
+		const refreshState = AddBookToWishlist(book)
+		setUserMyBooks(await refreshState) // TODO: running twice needed right now, far from ideal, refactor
 	}
 
+	if (book?.wishlist) return <></>
 	return (
 		<a onClick={() => AddToWishlistButtonAct()}>
 			<span className="icon icon-wishlist"></span>Add to wishlist
