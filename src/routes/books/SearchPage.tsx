@@ -47,7 +47,7 @@ const SearchPage = () => {
 					booksToAdd[i].title_short = boeken[i].title.slice(0, 35)
 					booksToAdd[count].title_short += '...'
 				} else booksToAdd[count].title_short = boeken[i].title
-				if (boeken[i].image !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image+'.jpg'
+				if (boeken[i].image !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image + '.jpg'
 
 				count++
 			}
@@ -68,7 +68,7 @@ const SearchPage = () => {
 					booksToAdd[count].title_short = boeken[i].title.slice(0, 35)
 					booksToAdd[count].title_short += '...'
 				} else booksToAdd[count].title_short = boeken[i].title
-				if (boeken[i].image !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image+'.jpg'
+				if (boeken[i].image !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image + '.jpg'
 
 				count++
 			}
@@ -76,7 +76,7 @@ const SearchPage = () => {
 		if (count > 30) setResultsMessage('Showing only 30 results. Specify a bit more.')
 		else if (count === 0) setResultsMessage('Loosen up your search a bit.')
 		else setResultsMessage('')
-		// if(booksToAdd)
+
 		setResults(booksToAdd)
 		setResultCount(count)
 	}
