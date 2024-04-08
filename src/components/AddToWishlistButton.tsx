@@ -16,18 +16,18 @@ const AddBookToWishlist = async (book: Book) => {
 		if (myBooks[i].id === book.id) {
 			bookIsSaved = true
 			myBooks[i].wishlist = true
+			myBooks[i].reading = false
 		}
 	}
 	if (bookIsSaved === false) {
 		// add book to saved, mark as wishlist (+toggle?)
-		await AddBookToSaved(book, true)
+		await AddBookToSaved(book, true, false)
 	}
 	else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
 	}
 	returnval = JSON.stringify(localStorage.getItem('MyBooks'))
 	return returnval
-
 }
 
 const AddToWishlistButton = (book: Book) => {

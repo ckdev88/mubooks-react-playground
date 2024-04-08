@@ -1,6 +1,6 @@
 import UpdateMyBooks from "./UpdateMyBooks"
 
-export default async function AddBookToSaved(book: Book, wishlist = book.wishlist) {
+export default async function AddBookToSaved(book: Book, wishlist = book.wishlist, reading = book.reading) {
 	if (book.title.length > 35) {
 		book.title_short = book.title.slice(0, 35) + '...'
 	} else book.title_short = book.title
@@ -17,6 +17,7 @@ export default async function AddBookToSaved(book: Book, wishlist = book.wishlis
 		pages: book.pages,
 		saved: true,
 		wishlist: wishlist,
+		reading: reading,
 		title: book.title,
 		title_short: book.title_short,
 	})

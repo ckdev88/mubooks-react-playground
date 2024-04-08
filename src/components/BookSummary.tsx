@@ -32,8 +32,8 @@ const BookSummary = ({ book }: BookObject) => {
 						{book.saved && RemoveBookButton(book.id, book?.saved)}<br />
 						{!book.wishlist && AddToWishlistButton(book)}
 						{book.wishlist && RemoveFromWishlistButton(book.id,book?.wishlist)}<br />
-						{!book.reading && AddToReadingButton(book.id)}
-						{book.reading && RemoveFromReadingButton(book.id)}<br />
+						{!book.reading && AddToReadingButton(book)}
+						{book.reading && RemoveFromReadingButton(book.id,book?.reading)}<br />
 					</div>
 				</div>
 				<hr />

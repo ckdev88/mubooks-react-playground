@@ -4,15 +4,20 @@ import { AppContext } from "../../App"
 
 const ReadingPage = () => {
 	const { userMyBooks } = useContext(AppContext)
+
 	let hasbooks = false
 	let books: Books
+	let booksFiltered: Books = []
 
-	if (localStorage.getItem('MyBooks') === 'undefined') books = []
+	if (localStorage.getItem('MyBooks') === 'undefined') {
+		books = []
+	}
 	else {
-		books = JSON.parse(userMyBooks)
-		books = books.filter(book => book.reading === true)
-		if (books !== undefined) {
-			if (books.length > 0) hasbooks = true
+		books = JSON.parse(userMyBooks as string)
+		if (typeof (books) !== 'object') books = JSON.parse(books)
+		booksFiltered = books.filter((book) => book.reading === true)
+		if (booksFiltered !== undefined) {
+			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false
 		}
 	}

@@ -19,7 +19,7 @@ const RemoveBookFromReading = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const RemoveFromReadingButton = (id: number) => {
+const RemoveFromReadingButton = (id: number,reading:boolean) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	function RemoveFromReadingButtonAct() {
@@ -27,6 +27,7 @@ const RemoveFromReadingButton = (id: number) => {
 		setUserMyBooks(newArr) // update global state
 	}
 
+	if (!reading) return <></>
 	return (
 		<a onClick={() => RemoveFromReadingButtonAct()}>
 			<span className="icon icon-remove"></span>Remove from reading

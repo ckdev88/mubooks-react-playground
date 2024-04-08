@@ -19,9 +19,9 @@ const BooksOverviewPage = ({ books, page }: { books: Books, page: string }) => {
 			if (wishlistCheck.length > 0) book.wishlist = true
 			else book.wishlist = false
 
-			// const readingCheck = userMyBooksBuffer.filter(stateBook => stateBook.id === book.id && stateBook.reading === true)
-			// if (readingCheck.length > 0) book.reading = true
-			// else book.reading = false
+			const readingCheck = savedArr.filter(stateBook => stateBook.id === book.id && stateBook.reading === true)
+			if (readingCheck.length > 0) book.reading = true
+			else book.reading = false
 
 		}
 		return <BookSummary book={book} key={book.id} />
