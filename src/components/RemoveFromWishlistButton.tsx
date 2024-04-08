@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 
 // TODO: this could just be a toggle with addtowishlist... its basically the same code
+
 const RemoveBookFromWishlist = (id: number) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
