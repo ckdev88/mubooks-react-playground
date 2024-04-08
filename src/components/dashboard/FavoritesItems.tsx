@@ -20,12 +20,13 @@
 				:style="index ? 'z-index:' + (10 - index) : 'z-index:10'"
 			>
 				<div>
-					<img :src="book.image" :alt="book.title" />
+					<img :src="book.img" :alt="book.ti" />
 				</div>
 			</article>
 		</div>
 	</main>
 */
+
 export default function FavoritesItems(){
 return (
 <>

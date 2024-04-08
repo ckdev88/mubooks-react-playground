@@ -16,7 +16,7 @@
 		<article className="book-summary" v-for="(book, index) in books">
 			<aside className="cover"><img :src="book.image" /></aside>
 			<div className="in-short">
-				<h2>{{ book.title }}</h2>
+				<h2>{{ book.ti }}</h2>
 			</div>
 		</article>
 	</main>

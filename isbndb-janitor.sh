@@ -124,7 +124,7 @@ jq '.[] | select(.pages > 149) | {title:.title, authors:.authors, pages:.pages, 
 cp fallback7 swap &&
 formatJSON &&
 
-du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: pages < 400... ' &&
+du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: pages < 350... ' &&
 jq '.[] | select(.pages < 400) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}'  swap > fallback8 &&
 
 echo '          sanitize date_published...' &&
@@ -188,6 +188,36 @@ du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: filter titles' &&
 	and contains("Rac")==false
 	and contains("ism")==false
 	and contains("Sister")==false
+	and contains("Olusu")==false
+	and contains("Icin")==false
+	and contains("Yeni")==false
+	and contains("Istiklal")==false
+	and contains("Yeni")==false
+	and contains("Dergisi")==false
+	and contains("Edibi")==false
+	and contains("Harabi")==false
+	and contains("Yaprak")==false
+	and contains("Damla")==false
+	and contains("Gramam")==false
+	and contains("Donemi")==false
+	and contains("Makamda")==false
+	and contains("Becewab")==false
+	and contains("Direni")==false
+	and contains("Moron")==false
+	and contains("Edebi")==false
+	and contains("Hell")==false
+	and contains("God")==false
+	and contains("Jesus")==false
+	and contains("Allah")==false
+	and contains("Torah")==false
+	and contains("Hitler")==false
+	and contains("Islam")==false
+	and contains("Mozes")==false
+	and contains("Religion")==false
+	and contains("religion")==false
+	and contains("Church")==false
+	and contains("Ulgener")==false
+	and contains("Vardu")==false
 	) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > fallback11 &&
 du -h --block-size=M fallback11 && echo 'fallback11....' &&
 
@@ -216,15 +246,15 @@ rm swap1 swap2 s.jsonl s2.jsonl s3.jsonl source.jsonl final.jsonl &&
 cp final.json final-smaller.json &&
 sed -i 's/": "/":"/g' final-smaller.json &&
 sed -i 's/\.jpg//g' final-smaller.json &&
+sed -i 's/"date_published"/"dp"/g' final-smaller.json && 
+sed -i 's/"pages"/"pg"/g' final-smaller.json && 
+sed -i 's/"image"/"img"/g' final-smaller.json && 
+sed -i 's/"authors"/"au"/g' final-smaller.json && 
+sed -i 's/"title"/"ti"/g' final-smaller.json && 
 cp final-smaller.json books.json &&
 
 cp final-smaller.json final-compressed.json &&
 echo 'compressing column names...' && 
-sed -i 's/"title"/"t"/g' final-compressed.json && 
-sed -i 's/"pages"/"p"/g' final-compressed.json && 
-sed -i 's/"authors"/"a"/g' final-compressed.json && 
-sed -i 's/"date_published"/"d"/g' final-compressed.json && 
-sed -i 's/"image"/"i"/g' final-compressed.json && 
 sed -i 's/\.jpg//g' final-compressed.json && 
 
 du -h --block-size=M final-compressed.json && 

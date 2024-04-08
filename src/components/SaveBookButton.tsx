@@ -3,9 +3,9 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 
 const AddBookToSaved = (book: Book) => {
-	if (book.title.length > 35) {
-		book.title_short = book.title.slice(0, 35) + '...'
-	} else book.title_short = book.title
+	if (book.ti.length > 35) {
+		book.title_short = book.ti.slice(0, 35) + '...'
+	} else book.title_short = book.ti
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -14,15 +14,14 @@ const AddBookToSaved = (book: Book) => {
 
 	myBooks.push({
 		id: book.id,
-		authors: book.authors,
+		au: book.au,
 		cover: book.cover,
-		date_published: book.date_published,
-		image: book.image,
-		language: book.language,
-		pages: book.pages,
+		dp: book.dp,
+		img: book.img,
+		pg: book.pg,
 		saved: true,
 		wishlist: book.wishlist,
-		title: book.title,
+		ti: book.ti,
 		title_short: book.title_short,
 	})
 

@@ -19,9 +19,9 @@ const BookSummary = ({ book }: BookObject) => {
 						{book.title_short}
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
-					{book.date_published}
+					{book.dp}
 					<br />
-					{book.pages} pages
+					{book.pg} pages
 					<br />
 				</div>
 			</header>
