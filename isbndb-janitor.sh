@@ -118,19 +118,19 @@ grep -v '"date_published":.*/' swap2 > swap1 &&       echo '.*/' &&
 mv swap1 fallback6 &&
 du -h --block-size=M fallback6 | tr '\n' '    ' &&  echo '...' &&
 
-ls -1 -lh --block-size=M fallback6 | tr '\n' '    ' && echo 'JQ: pages > 175... ' &&
-jq '.[] | select(.pages > 175) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}' fallback6 > fallback7 &&
+ls -1 -lh --block-size=M fallback6 | tr '\n' '    ' && echo 'JQ: pages > 149... ' &&
+jq '.[] | select(.pages > 149) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}' fallback6 > fallback7 &&
 
 cp fallback7 swap &&
-formatJSON
+formatJSON &&
 
-du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: pages < 450... ' &&
-jq '.[] | select(.pages < 450) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}'  swap > fallback8 &&
+du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: pages < 400... ' &&
+jq '.[] | select(.pages < 400) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}'  swap > fallback8 &&
 
 echo '          sanitize date_published...' &&
 grep -v '"date_published":.*"' fallback8 > swap &&
 
-formatJSON
+formatJSON &&
 
 du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: date_published  > 2020 (strings values not included)...' &&
 jq '.[] | select(.date_published > 2020) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}' swap > fallback9 &&
@@ -141,7 +141,7 @@ echo '          sanitize date_published...' &&
 grep -v '"date_published":.*"' swap2 > swap &&
 
 # --- filter books written in English
-formatJSON
+formatJSON &&
 
 du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: language  ==  en (null values not included)...' &&
 jq '.[] | select(.language == "en") | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > fallback10 &&
@@ -149,9 +149,9 @@ jq '.[] | select(.language == "en") | {title:.title, authors:.authors, pages:.pa
 
 # --- filter titles
 cp fallback10 swap &&
-formatJSON
+formatJSON &&
 
-du -h --block-size=M swap && echo 'checker10....' &&
+du -h --block-size=M swap && echo 'fallback....' &&
 du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: filter titles' &&
 	jq '.[] | select(.title | 
 	contains("Portugues") == false 
@@ -188,20 +188,20 @@ du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: filter titles' &&
 	and contains("Rac")==false
 	and contains("ism")==false
 	and contains("Sister")==false
-	) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > checker11 &&
-du -h --block-size=M fallback11 && echo 'checker11....' &&
+	) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > fallback11 &&
+du -h --block-size=M fallback11 && echo 'fallback11....' &&
 
 cp fallback11 swap &&
 # --- /filter titles
 
 # --- filter empty images
-formatJSON
+formatJSON &&
 
 jq '.[] | select(.image > null) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > fallback12 &&
 # --- /filter empty images
 
 cp fallback12 swap && 
-formatJSON
+formatJSON &&
 mv swap fallback12-formatted.json &&
 
 cp fallback12-formatted.json final.json &&
@@ -213,7 +213,12 @@ du -h --block-size=M final.json | tr '\n' '    ' && echo 'opruimen...' | tr '\n'
 echo 'fallbackfixes' > swap1 > swap2 > s.jsonl > s2.jsonl > s3.jsonl > source.jsonl > final.jsonl &&
 rm swap1 swap2 s.jsonl s2.jsonl s3.jsonl source.jsonl final.jsonl &&
 
-cp final.json final-compressed.json &&
+cp final.json final-smaller.json &&
+sed -i 's/": "/":"/g' final-smaller.json &&
+sed -i 's/\.jpg//g' final-smaller.json &&
+cp final-smaller.json books.json &&
+
+cp final-smaller.json final-compressed.json &&
 echo 'compressing column names...' && 
 sed -i 's/"title"/"t"/g' final-compressed.json && 
 sed -i 's/"pages"/"p"/g' final-compressed.json && 
