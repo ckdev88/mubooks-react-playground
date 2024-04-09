@@ -29,7 +29,7 @@
 	line-height: 1.5em;
 }
 
-.adder .toadd:hover {
+.adder .toadd:hover,.adder main:hover {
 	background-color: white;
 }
 
@@ -58,54 +58,41 @@
 
 .deck {
 	position: relative;
-	overflow: hidden;
-	height: 14rem;
-	position: relative;
-	min-height: 14rem;
 }
 
 .deck-container {
-	left: 0;
-	top: 0;
-	overflow-y: hidden;
-	height: 14rem;
-	width: 100rem;
-	position: absolute;
 	padding-top: 0.125rem;
-	padding-bottom: 0.125rem;
+}
+
+.deck::after,
+.deck-container::after {
+	content: ' ';
+	display: block;
+	clear: both;
+	height: 0.5vw;
 }
 
 .deck-container .book-cover {
-	display: inline-block;
-	padding: 0.2rem;
-	border-radius: 0.75rem;
-	box-shadow: 0 0 0.2rem #666;
-	width: 9rem;
-	height: 13.5rem;
+	display: block;
+	float: left;
+	padding: 0;
+	border-radius: 0.5rem;
+	box-shadow: 0 0 1vw #555;
+	width: calc(100% / 3);
+	aspect-ratio: 324/500;
 	box-sizing: border-box;
 	background: white;
-	margin-top: 0.1rem;
-	margin-bottom: 0.1rem;
 	position: relative;
 }
 
-.deck-container .book-cover+.book-cover {
-	margin-left: -4.75rem;
-}
-
-.deck-container .book-cover div {
-	margin: 1%;
-	width: 98%;
-	height: 98%;
-	object-fit: cover;
+.deck-container .book-cover + .book-cover {
+	margin-left: -20.1%;
 }
 
 .deck-container .book-cover img {
-	/* display: block; */
-	/* box-sizing: border-box; */
+	display: block;
 	width: 100%;
 	height: 100%;
 	border-radius: 0.5rem;
-	/* object-fit: cover; */
-	/* border-radius: 0.5rem; */
+	object-fit: cover;
 }
