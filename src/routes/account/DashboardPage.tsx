@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
 import QuoteCard from '../../components/QuoteCard'
 import Reading from '../../components/dashboard/Reading'
 import Saved from '../../components/dashboard/Saved'
