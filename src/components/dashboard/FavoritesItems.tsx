@@ -27,15 +27,15 @@
 	</main>
 */
 
-export default function FavoritesItems(){
-return (
-<>
-
-	<main  className="toadd">
-		<aside>
-			<button><img src="img/icon-favorites.png" /></button>
-		</aside>
-		Only the best ones here
-	</main>
-</>
-	)}
+export default function FavoritesItems() {
+	return (
+		<>
+			<main className="toadd">
+				<aside>
+					<button><img src="img/icon-favorites.png" /></button>
+				</aside>
+				Only the best ones here.
+			</main>
+		</>
+	)
+}

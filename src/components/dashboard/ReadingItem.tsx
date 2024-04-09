@@ -21,15 +21,16 @@
 		</article>
 	</main>
 	*/
-export default function ReadingItem(){
+export default function ReadingItem() {
 	return (
-<>
-	<main>
-		<aside>
-			<button><img src="img/plus-icon.svg" /></button>
-		</aside>
-		If you're already reading a book, let's add it here.
-	</main>
-</>
-)}
+		<>
+			<main className="toadd">
+				<aside>
+					<button><img src="img/plus-icon.svg" /></button>
+				</aside>
+				If you're already reading a book, let's add it here.
+			</main>
+		</>
+	)
+}
 

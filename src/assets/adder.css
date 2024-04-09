@@ -2,6 +2,7 @@
 	margin-bottom: 1rem;
 	cursor: pointer;
 }
+
 .adder header {
 	font-family: 'Merriweather', 'serif';
 	font-size: 1.3rem;
@@ -11,10 +12,12 @@
 	letter-spacing: -0.04em;
 	padding-bottom: 0.5rem;
 }
+
 .adder a {
 	text-decoration: none;
-	color: #6a0088;
+	color: #000000;
 }
+
 .adder main {
 	border-radius: 0.3rem;
 	background-color: #f4f1ea;
@@ -25,27 +28,34 @@
 	align-items: center;
 	line-height: 1.5em;
 }
-.adder:hover .toadd {
+
+.adder .toadd:hover {
 	background-color: white;
 }
+
 .adder aside {
 	font-size: 0.9rem;
 }
+
 .adder.alt header {
 	font-size: 1.3rem;
 	text-align: center;
 	display: block;
 }
+
 .adder .adder.alt {
 	text-align: center;
 	justify-content: space-around;
 }
+
 .adder.alt img {
 	margin: 1rem auto;
 }
+
 .adder.alt aside {
 	text-align: center;
 }
+
 .deck {
 	position: relative;
 	overflow: hidden;
@@ -53,6 +63,7 @@
 	position: relative;
 	min-height: 14rem;
 }
+
 .deck-container {
 	left: 0;
 	top: 0;
@@ -63,6 +74,7 @@
 	padding-top: 0.125rem;
 	padding-bottom: 0.125rem;
 }
+
 .deck-container .book-cover {
 	display: inline-block;
 	padding: 0.2rem;
@@ -76,7 +88,8 @@
 	margin-bottom: 0.1rem;
 	position: relative;
 }
-.deck-container .book-cover + .book-cover {
+
+.deck-container .book-cover+.book-cover {
 	margin-left: -4.75rem;
 }
 
@@ -86,6 +99,7 @@
 	height: 98%;
 	object-fit: cover;
 }
+
 .deck-container .book-cover img {
 	/* display: block; */
 	/* box-sizing: border-box; */
