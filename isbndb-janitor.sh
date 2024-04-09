@@ -124,8 +124,8 @@ jq '.[] | select(.pages > 149) | {title:.title, authors:.authors, pages:.pages, 
 cp fallback7 swap &&
 formatJSON &&
 
-du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: pages < 350... ' &&
-jq '.[] | select(.pages < 400) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}'  swap > fallback8 &&
+du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: pages < 500... ' &&
+jq '.[] | select(.pages < 500) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image,language:.language}'  swap > fallback8 &&
 
 echo '          sanitize date_published...' &&
 grep -v '"date_published":.*"' fallback8 > swap &&
@@ -147,12 +147,18 @@ du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: language  ==  en (null
 jq '.[] | select(.language == "en") | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > fallback10 &&
 # --- /filter books written in English
 
+# --- filter titles < 30 chars
+cp fallback10 swap && 
+	formatJSON &&
+	du -h --block-size=m swap && echo 'fallback....' &&
+	du -h --block-size=m swap | tr '\n' '    ' && echo '  jq: filter titles (length)' &&
+	jq '.[] | select(.title | length < 60) | {title:.title,authors:.authors,pages:.pages, date_published:.date_published,image:.image}' swap > fallback10 && 
+# --- /filter titles < 30 chars
+
 # --- filter titles
 cp fallback10 swap &&
 formatJSON &&
-
-du -h --block-size=M swap && echo 'fallback....' &&
-du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: filter titles' &&
+du -h --block-size=m swap | tr '\n' '    ' && echo '  jq: filter titles (words)' &&
 	jq '.[] | select(.title | 
 	contains("Portugues") == false 
 	and contains ("portuguese") == false 
@@ -202,11 +208,12 @@ du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: filter titles' &&
 	and contains("Donemi")==false
 	and contains("Makamda")==false
 	and contains("Becewab")==false
-	and contains("Direni")==false
 	and contains("Moron")==false
+	and contains("Direni")==false
 	and contains("Edebi")==false
 	and contains("Hell")==false
 	and contains("God")==false
+	and contains("Climate")==false
 	and contains("Jesus")==false
 	and contains("Allah")==false
 	and contains("Torah")==false
@@ -218,15 +225,23 @@ du -h --block-size=M swap | tr '\n' '    ' && echo '  JQ: filter titles' &&
 	and contains("Church")==false
 	and contains("Ulgener")==false
 	and contains("Vardu")==false
+	and contains("coraz")==false
+	and contains("Todo")==false
+	and contains("Christ")==false
+	and contains("ist ")==false
+	and contains("Trump")==false
+	and contains("Biden")==false
+	and contains("Election")==false
+	and contains("Leaders")==false
+	and contains("Political")==false
+	and contains("Politics")==false
 	) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > fallback11 &&
 du -h --block-size=M fallback11 && echo 'fallback11....' &&
-
 cp fallback11 swap &&
 # --- /filter titles
 
 # --- filter empty images
 formatJSON &&
-
 jq '.[] | select(.image > null) | {title:.title, authors:.authors, pages:.pages, date_published:.date_published, image:.image}' swap > fallback12 &&
 # --- /filter empty images
 
@@ -243,19 +258,15 @@ du -h --block-size=M final.json | tr '\n' '    ' && echo 'opruimen...' | tr '\n'
 echo 'fallbackfixes' > swap1 > swap2 > s.jsonl > s2.jsonl > s3.jsonl > source.jsonl > final.jsonl &&
 rm swap1 swap2 s.jsonl s2.jsonl s3.jsonl source.jsonl final.jsonl &&
 
-cp final.json final-smaller.json &&
-sed -i 's/": "/":"/g' final-smaller.json &&
-sed -i 's/\.jpg//g' final-smaller.json &&
-sed -i 's/"date_published"/"dp"/g' final-smaller.json && 
-sed -i 's/"pages"/"pg"/g' final-smaller.json && 
-sed -i 's/"image"/"img"/g' final-smaller.json && 
-sed -i 's/"authors"/"au"/g' final-smaller.json && 
-sed -i 's/"title"/"ti"/g' final-smaller.json && 
-cp final-smaller.json books.json &&
-
-cp final-smaller.json final-compressed.json &&
-echo 'compressing column names...' && 
-sed -i 's/\.jpg//g' final-compressed.json && 
+cp final.json final-compressed.json &&
+sed -i 's/": "/":"/g' final-compressed.json &&
+sed -i 's/\.jpg//g' final-compressed.json &&
+sed -i 's/"date_published"/"dp"/g' final-compressed.json && 
+sed -i 's/"pages"/"pg"/g' final-compressed.json && 
+sed -i 's/"image"/"img"/g' final-compressed.json && 
+sed -i 's/"authors"/"au"/g' final-compressed.json && 
+sed -i 's/"title"/"ti"/g' final-compressed.json && 
+cp final-compressed.json books.json &&
 
 du -h --block-size=M final-compressed.json && 
 echo 'compressing done'
