@@ -21,15 +21,19 @@
 .adder main {
 	border-radius: 0.3rem;
 	background-color: #f4f1ea;
-	/* background-color: #409970; */
 	padding: 0.5rem;
-	display: flex;
-	justify-content: left;
-	align-items: center;
-	line-height: 1.5em;
 }
 
-.adder .toadd:hover,.adder main:hover {
+.adder main.toadd {
+	display: flex;
+	line-height: 1.5em;
+	justify-content: left;
+	display: flex;
+	align-items: center;
+}
+
+.adder .toadd:hover,
+.adder main:hover {
 	background-color: white;
 }
 
@@ -69,7 +73,7 @@
 	content: ' ';
 	display: block;
 	clear: both;
-	height: 0.5vw;
+	height: 0.2vw;
 }
 
 .deck-container .book-cover {
