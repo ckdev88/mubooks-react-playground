@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 import AddBookToSaved from '../stores/AddBookToSaved'
 
-const AddBookToWishlist = async (book: Book) => {
+const AddToFavorites = async (book: Book) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -15,14 +15,14 @@ const AddBookToWishlist = async (book: Book) => {
 	for (let i = 0; i < myBooks.length; i++) {
 		if (myBooks[i].id === book.id) {
 			bookIsSaved = true
-			myBooks[i].wishlist = true
+			myBooks[i].wishlist = false
 			myBooks[i].reading = false
-			myBooks[i].favorite = false
+			myBooks[i].favorite = true
 		}
 	}
 	if (bookIsSaved === false) {
 		// add book to saved, mark as wishlist (+toggle?)
-		await AddBookToSaved(book, true, false)
+		await AddBookToSaved(book, false, false, true) /* wishlist false, reading false, favorite true */
 	}
 	else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
@@ -31,19 +31,19 @@ const AddBookToWishlist = async (book: Book) => {
 	return returnval
 }
 
-const AddToWishlistButton = (book: Book) => {
+const AddToFavoritesButton = (book: Book) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
-	async function AddToWishlistButtonAct() {
-		const refreshState = AddBookToWishlist(book)
-		setUserMyBooks(await refreshState) // TODO: running twice needed right now, far from ideal, refactor
+	async function AddToFavoritesButtonAct() {
+		const refreshState = AddToFavorites(book) // update localstorage, database
+		setUserMyBooks(await refreshState) // update global state
 	}
 
-	if (book?.wishlist) return <></>
+	if (book?.favorite) return <></>
 	return (
-		<a onClick={() => AddToWishlistButtonAct()}>
-			<span className="icon icon-wishlist"></span>Add to wishlist
+		<a onClick={() => AddToFavoritesButtonAct()}>
+			<span className="icon icon-favorites"></span>Favorite
 		</a>
 	)
 }
-export default AddToWishlistButton
+export default AddToFavoritesButton

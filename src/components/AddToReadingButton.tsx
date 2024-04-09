@@ -17,6 +17,7 @@ const AddToReading = async (book: Book) => {
 			bookIsSaved = true
 			myBooks[i].wishlist = false
 			myBooks[i].reading = true
+			myBooks[i].favorite = false
 		}
 	}
 	if (bookIsSaved === false) {

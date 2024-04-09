@@ -1,7 +1,7 @@
 import BookSummary from '../../components/BookSummary'
 const BooksOverviewPage = ({ books, page }: { books: Books, page: string }) => {
 	let savedArr: Books
-	if (page === 'savedbookspage' || page === 'wishlistpage' || page === 'readingpage') savedArr = books // TODO: actually might be better to turn
+	if (page === 'savedbookspage' || page === 'wishlistpage' || page === 'readingpage' || page === 'favoritespage') savedArr = books // TODO: actually might be better to turn
 	// conditionals around, since saved books (reading/finished/wishlist) will always be saved,
 	// whereas search results are mostly not
 	else savedArr = JSON.parse(localStorage.getItem('MyBooks') as string)
@@ -25,8 +25,12 @@ const BooksOverviewPage = ({ books, page }: { books: Books, page: string }) => {
 			else book.reading = false
 			if (page === 'readingpage' && book.reading === false) return
 
-		}
+			const favoriteCheck = savedArr.filter(stateBook => stateBook.id === book.id && stateBook.favorite === true)
+			if (favoriteCheck.length > 0) book.favorite = true
+			else book.favorite = false
+			if (page === 'favoritespage' && book.favorite === false) return
 
+		}
 		return <BookSummary book={book} key={book.id} />
 	})
 }

@@ -5,6 +5,8 @@ import AddToWishlistButton from './AddToWishlistButton'
 import RemoveFromWishlistButton from './RemoveFromWishlistButton'
 import AddToReadingButton from './AddToReadingButton'
 import RemoveFromReadingButton from './RemoveFromReadingButton'
+import AddToFavoritesButton from './AddToFavoritesButton'
+import RemoveFromFavoritesButton from './RemoveFromFavoritesButton'
 
 const BookSummary = ({ book }: BookObject) => {
 	return (
@@ -31,9 +33,11 @@ const BookSummary = ({ book }: BookObject) => {
 						{!book.saved && SaveBookButton(book)}
 						{book.saved && RemoveBookButton(book.id, book?.saved)}<br />
 						{!book.wishlist && AddToWishlistButton(book)}
-						{book.wishlist && RemoveFromWishlistButton(book.id,book?.wishlist)}<br />
+						{book.wishlist && RemoveFromWishlistButton(book.id, book?.wishlist)}<br />
 						{!book.reading && AddToReadingButton(book)}
-						{book.reading && RemoveFromReadingButton(book.id,book?.reading)}<br />
+						{book.reading && RemoveFromReadingButton(book.id, book?.reading)}<br />
+						{!book.favorite && AddToFavoritesButton(book)}
+						{book.favorite && RemoveFromFavoritesButton(book.id, book?.favorite)}<br />
 					</div>
 				</div>
 				<hr />

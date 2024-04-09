@@ -72,6 +72,7 @@ const NavWrapper = () => {
 						<Link to={'/saved-books'} onClick={toggleNav0}>Saved books</Link>
 						<Link to={'/wishlist'} onClick={toggleNav0}>Wishlist</Link>
 						<Link to={'/reading'} onClick={toggleNav0}>Reading</Link>
+						<Link to={'/favorites'} onClick={toggleNav0}>Favorites</Link>
 						<Link to={'/clear-my-books'} onClick={toggleNav0}>Clear My Books</Link>
 					</li>
 				</ul>
