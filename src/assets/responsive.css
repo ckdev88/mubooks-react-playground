@@ -1,11 +1,12 @@
 @media screen and (max-width: 600px) and (min-width: 320px) {
 	#root {
+		margin:0 auto;
 		max-width: calc(100vw - 1rem);
 	}
 	#header,
 	#navIcons {
+		margin:0 auto;
 		width: 100%;
-		width: calc(100% - 1rem);
 	}
 }
 @media screen and (min-width: 601px) {

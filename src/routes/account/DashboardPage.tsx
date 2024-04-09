@@ -5,9 +5,6 @@ import Reading from '../../components/dashboard/Reading'
 import Saved from '../../components/dashboard/Saved'
 import Favorites from '../../components/dashboard/Favorites'
 import Wishlist from '../../components/dashboard/Wishlist'
-import Tropes from '../../components/dashboard/Tropes'
-import Stats from '../../components/dashboard/Stats'
-import Explore from '../../components/dashboard/Explore'
 import { AppContext } from '../../App'
 
 const DashboardPage = () => {
@@ -25,14 +22,9 @@ const DashboardPage = () => {
 			<Reading />
 			<Saved />
 			<Wishlist />
-
 			<Favorites />
-			<Tropes />
-			<Stats />
-			<Explore />
-			<Link to="/account/login">To login page</Link>
-			<Link to="/account/logout">Logout</Link>
 		</>
 	)
 }
 export default DashboardPage
+/* <Tropes /> <Stats /> <Explore /> */
