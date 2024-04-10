@@ -4,7 +4,7 @@ import RemoveBookButton from './RemoveBookButton'
 import AddToWishlistButton from './AddToWishlistButton'
 import RemoveFromWishlistButton from './RemoveFromWishlistButton'
 import AddToReadingButton from './AddToReadingButton'
-import RemoveFromReadingButton from './RemoveFromReadingButton'
+// import RemoveFromReadingButton from './RemoveFromReadingButton'
 import AddToFavoritesButton from './AddToFavoritesButton'
 import RemoveFromFavoritesButton from './RemoveFromFavoritesButton'
 
