@@ -4,19 +4,23 @@
 	font-size: 1.3rem;
 	margin: 1.5em 0;
 }
+
 .book-summary {
 	list-style: none;
 	padding: 0 0 1rem;
 	margin: 0;
 }
+
 .book-summary hr {
 	margin-top: 1rem;
 }
+
 .book-summary {
 	transition:
 		padding 0.15s linear,
 		background-color 0.15s linear;
 }
+
 .search .book-summary.saved {
 	padding: 0.5rem;
 	background-color: hsl(325, 55%, 93%);
@@ -25,6 +29,7 @@
 	box-sizing: border-box;
 	border: 1px solid #ddd;
 }
+
 .book-summary.reading {
 	padding: 0.5rem;
 	background-color: hsl(325, 55%, 93%);
@@ -33,55 +38,69 @@
 	box-sizing: border-box;
 	border: 1px solid #ddd;
 }
+
 .search .book-summary.saved hr {
 	display: none;
 }
+
 .book-summary header {
 	display: flex;
 	justify-content: left;
 }
+
 .book-summary h2 {
 	font-size: 1.4rem;
 	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
 }
+
 .book-summary h2 sub {
 	font-size: 0.8em;
 	font-weight: normal;
 	display: block;
 }
+
 .book-summary .cover {
 	width: 9rem;
 	height: auto;
 	margin: 0 1rem 1rem 0;
 	min-width: 9rem;
 }
+
 .book-summary .cover img {
 	display: block;
 	width: 100%;
 	height: auto;
 	max-width: 100%;
+	border-radius: .4rem;
+	box-shadow: 0 0 .5rem #555;
 }
+
 .book-summary .synopsis {
 	align-self: flex-end;
 }
+
 .book-summary button {
 	width: auto;
 	display: inline-block;
 }
+
 .book-summary h3 {
 	margin-bottom: 0.25rem;
 	font-size: 1rem;
 }
+
 .book-summary .icon-remove img {
 	height: 0.8em;
 	width: auto;
 	display: inline-block;
 }
+
 .book-summary .mark {
 	font-size: 0.9rem;
 	line-height: 1.5em;
 }
+
 .book-summary .icon {
 	display: block;
 	clear: both;
@@ -95,25 +114,32 @@
 	background-position: 50% 50%;
 	text-align: center;
 }
+
 /* TODO: icons should be svg, preferrably home-made, else unicode */
 .book-summary .icon-add {
 	background-image: url('/img/icon-add.svg');
 }
+
 .book-summary .icon-reading {
 	background-image: url('/img/icon-reading.png');
 }
+
 .book-summary .icon-read {
 	background-image: url('/img/icon-read.png');
 }
+
 .book-summary .icon-wishlist {
 	background-image: url('/img/icon-wishlist.png');
 }
+
 .book-summary .icon-favorites {
 	background-image: url('/img/icon-favorites.png');
 }
+
 .book-summary .icon-hide {
 	background-image: url('/img/icon-hide.png');
 }
+
 .book-summary .icon-remove {
 	background-image: url('/img/icon-remove.png');
 }
@@ -129,24 +155,30 @@
 	text-align: center;
 	margin-bottom: 1rem;
 }
+
 .book-summary .rating h3 {
 	margin-top: 0.5rem;
 }
+
 .book-summary .tropes {
 	padding-bottom: 1rem;
 	border-bottom: 1px solid #666;
 	margin-bottom: 1rem;
 }
+
 .book-summary .tropes h3 {
 	padding-bottom: 0;
 }
+
 .book-summary .marks .favorites.active {
 	color: red;
 }
+
 .book-summary .marks .icon-favorites,
 .book-summary .marks .icon-read {
 	font-weight: 900;
 }
+
 .book-summary .marked {
 	color: hsl(325, 55%, 46%);
 	font-weight: bold;

@@ -1,8 +1,10 @@
 import { useContext } from "react"
 import BooksOverviewPage from "./BooksOverviewPage"
 import { AppContext } from "../../App"
+import { useNavigate } from "react-router-dom"
 
 const FavoritesPage = () => {
+	const navigate = useNavigate()
 	const { userMyBooks } = useContext(AppContext)
 
 	let hasbooks = false
@@ -29,8 +31,8 @@ const FavoritesPage = () => {
 			<div className={hasbooks === true ? 'dnone' : 'dblock'}>
 				<h4>No books marked as favorite yet.</h4>
 				<p>Select and mark your favorite book from Mu Books or use the search.</p>
-				<button className="wauto mr1">Mu Books</button>
-				<button className="wauto">Search</button>
+				<button className="wauto mr1" onClick={() => navigate('/saved-books')}>Mu Books</button>
+				<button className="wauto" onClick={() => navigate('/search')}>Search</button>
 			</div>
 			<BooksOverviewPage books={books} page="favoritespage" />
 		</>

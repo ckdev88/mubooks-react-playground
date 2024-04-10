@@ -1,6 +1,6 @@
-// import { ref } from 'vue'
-// import { useMuBooksStore } from '../../stores/MuBooksStore'
-// const muBooksStore = useMuBooksStore()
+import { useContext } from "react"
+import { AppContext } from "../../App"
+import BookSummary from "../BookSummary"
 
 // let hasbooks = false
 // let books = []
@@ -20,16 +20,33 @@
 			</div>
 		</article>
 	</main>
-	*/
+*/
+
 export default function ReadingItem() {
+	let hasbook = false
+	const { userMyBooks } = useContext(AppContext)
+	let readingBookArr: Books = JSON.parse(userMyBooks)
+	if (typeof (readingBookArr) !== 'object') readingBookArr = JSON.parse(readingBookArr)
+	readingBookArr = readingBookArr.filter((book) => book.reading === true)
+	if (readingBookArr.length > 0) hasbook = true
+	function showReadingBooks(readingBookArr: Books) {
+		return readingBookArr.map((book: Book) => {
+			return <BookSummary book={book} key={book.id} />
+		})
+	}
+
 	return (
 		<>
-			<main className="toadd">
-				<aside>
-					<button><img src="img/plus-icon.svg" /></button>
-				</aside>
-				If you're already reading a book, let's add it here.
-			</main>
+			{hasbook ? (
+				<main>{showReadingBooks(readingBookArr)}</main>
+			) : (
+				<main className="toadd">
+					<aside>
+						<button><img src="img/plus-icon.svg" /></button>
+					</aside>
+					If you're already reading a book, let's add it here.
+				</main>
+			)}
 		</>
 	)
 }

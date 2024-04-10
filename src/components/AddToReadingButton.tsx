@@ -13,11 +13,13 @@ const AddToReading = async (book: Book) => {
 	let bookIsSaved = false
 	let returnval: string
 	for (let i = 0; i < myBooks.length; i++) {
+		// TODO: refactor/combine together with other AddTo***Button.tsx files using args
 		if (myBooks[i].id === book.id) {
 			bookIsSaved = true
 			myBooks[i].wishlist = false
 			myBooks[i].reading = true
 			myBooks[i].favorite = false
+			myBooks[i].finished = false
 		}
 	}
 	if (bookIsSaved === false) {
@@ -42,7 +44,7 @@ const AddToReadingButton = (book: Book) => {
 	if (book?.reading) return <></>
 	return (
 		<a onClick={() => AddToReadingButtonAct()}>
-			<span className="icon icon-reading"></span>Reading now
+			<span className="icon icon-reading"></span>Mark as Reading now
 		</a>
 	)
 }

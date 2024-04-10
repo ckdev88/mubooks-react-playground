@@ -12,7 +12,7 @@ export default function WishlistItems() {
 		return booksarr.slice(-6).map((book: Book, index: number) => {
 			var img = 'https://images.isbndb.com/covers' + book.img + '.jpg'
 			return (
-				<article className="book-cover" key={index} style={{ zIndex: 10 - index }}>
+				<article className="book-cover" key={book.id} style={{ zIndex: 10 - index }}>
 					<img src={img} />
 				</article>
 			)

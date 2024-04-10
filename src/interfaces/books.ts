@@ -42,6 +42,7 @@ interface Book {
 	saved?: boolean
 	wishlist?: boolean
 	reading?: boolean
+	finished?: boolean
 	favorite?: boolean
 	ti: string
 	title_short: string

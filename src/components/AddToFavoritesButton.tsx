@@ -18,6 +18,7 @@ const AddToFavorites = async (book: Book) => {
 			myBooks[i].wishlist = false
 			myBooks[i].reading = false
 			myBooks[i].favorite = true
+			myBooks[i].finished = false
 		}
 	}
 	if (bookIsSaved === false) {
@@ -42,7 +43,7 @@ const AddToFavoritesButton = (book: Book) => {
 	if (book?.favorite) return <></>
 	return (
 		<a onClick={() => AddToFavoritesButtonAct()}>
-			<span className="icon icon-favorites"></span>Favorite
+			<span className="icon icon-favorites"></span>Add to Favorites
 		</a>
 	)
 }
