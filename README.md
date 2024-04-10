@@ -9,3 +9,5 @@
 - Testing:				Jest
 - User data handling:	Supabase & PostGreSQL
 - Styling:				Vanilla CSS (Optimize w/PostCSS later)
+- Data:					JSON
+- Data sanitation:		Shell script
