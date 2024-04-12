@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import SavedItems from './SavedItems'
-export default function Saved() {
 
+export default function Saved() {
 	return (
 		<>
 			<article className="adder">
@@ -9,8 +9,8 @@ export default function Saved() {
 					<header>
 						All of Mu Books<span>›</span>
 					</header>
-					<SavedItems />
 				</Link>
+				<SavedItems />
 			</article>
 		</>
 	)

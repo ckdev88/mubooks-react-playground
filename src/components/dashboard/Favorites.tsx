@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import FavoritesItems from './FavoritesItems'
+
 export default function Favorites() {
 	return (
 		<>
