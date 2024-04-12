@@ -21,6 +21,10 @@
 		background-color 0.15s linear;
 }
 
+.book-summary .in-short {
+	font-size: 0.9rem;
+}
+
 .search .book-summary.saved {
 	padding: 0.5rem;
 	background-color: hsl(325, 55%, 93%);
@@ -49,7 +53,7 @@
 }
 
 .book-summary h2 {
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
 }
@@ -66,14 +70,24 @@
 	margin: 0 1rem 1rem 0;
 	min-width: 9rem;
 }
+@media screen and (max-width: 320px) {
+	.book-summary h2 {
+		font-size: 1.4rem;
+	}
+	.book-summary .cover {
+		max-width: 8rem;
+		min-width: 8rem;
+		width: 8rem;
+	}
+}
 
 .book-summary .cover img {
 	display: block;
 	width: 100%;
 	height: auto;
 	max-width: 100%;
-	border-radius: .4rem;
-	box-shadow: 0 0 .5rem #555;
+	border-radius: 0.4rem;
+	box-shadow: 0 0 0.4rem #555;
 }
 
 .book-summary .synopsis {
@@ -98,7 +112,7 @@
 
 .book-summary .mark {
 	font-size: 0.9rem;
-	line-height: 1.5em;
+	line-height: 1.7em;
 }
 
 .book-summary .icon {

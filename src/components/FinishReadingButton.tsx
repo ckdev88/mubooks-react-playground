@@ -32,9 +32,11 @@ const FinishReadingButton = (id: number, reading: boolean) => {
 
 	if (!reading) return <></>
 	return (
-		<a onClick={() => FinishReadingButtonAct()}>
-			<span className="icon icon-read"></span>Finish reading
-		</a>
+		<div className='mark'>
+			<a onClick={() => FinishReadingButtonAct()}>
+				<span className="icon icon-read"></span>Finish reading
+			</a>
+		</div>
 	)
 }
 export default FinishReadingButton 

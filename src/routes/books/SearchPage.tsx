@@ -43,8 +43,8 @@ const SearchPage = () => {
 				booksToAdd[count] = boeken[i]
 				booksToAdd[count].id = i
 
-				if (boeken[i].ti.length > 35) {
-					booksToAdd[i].title_short = boeken[i].ti.slice(0, 35)
+				if (boeken[i].ti.length > 40) {
+					booksToAdd[i].title_short = boeken[i].ti.slice(0, 40)
 					booksToAdd[count].title_short += '...'
 				} else booksToAdd[count].title_short = boeken[i].ti
 				if (boeken[i].img !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].img + '.jpg'
@@ -64,8 +64,8 @@ const SearchPage = () => {
 				// TODO: marker isSaved to highlight saved books in results
 				booksToAdd[count] = boeken[i]
 				booksToAdd[count].id = i
-				if (boeken[i].ti.length > 35) {
-					booksToAdd[count].title_short = boeken[i].ti.slice(0, 35)
+				if (boeken[i].ti.length > 40) {
+					booksToAdd[count].title_short = boeken[i].ti.slice(0, 40)
 					booksToAdd[count].title_short += '...'
 				} else booksToAdd[count].title_short = boeken[i].ti
 				if (boeken[i].img !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].img + '.jpg'

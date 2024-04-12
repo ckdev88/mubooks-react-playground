@@ -29,9 +29,11 @@ const RemoveFromWishlistButton = (id: number, wishlist: boolean) => {
 
 	if (!wishlist) return <></>
 	return (
-		<a onClick={() => RemoveFromWishlistButtonAct()}>
-			<span className="icon icon-remove"></span>Remove from wishlist
-		</a>
+		<div className="mark">
+			<a onClick={() => RemoveFromWishlistButtonAct()}>
+				<span className="icon icon-remove"></span>Remove from wishlist
+			</a>
+		</div>
 	)
 }
 export default RemoveFromWishlistButton

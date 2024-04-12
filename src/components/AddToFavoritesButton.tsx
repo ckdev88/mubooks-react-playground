@@ -9,7 +9,7 @@ const AddToFavorites = async (book: Book) => {
 		myBooks = []
 	} else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 
-	// check if already saved in localstorage, database. if not, add first	
+	// check if already saved in localstorage, database. if not, add first
 	let bookIsSaved = false
 	let returnval: string
 	for (let i = 0; i < myBooks.length; i++) {
@@ -23,9 +23,13 @@ const AddToFavorites = async (book: Book) => {
 	}
 	if (bookIsSaved === false) {
 		// add book to saved, mark as wishlist (+toggle?)
-		await AddBookToSaved(book, false, false, true) /* wishlist false, reading false, favorite true */
-	}
-	else {
+		await AddBookToSaved(
+			book,
+			false,
+			false,
+			true
+		) /* wishlist false, reading false, favorite true */
+	} else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
 	}
 	returnval = JSON.stringify(localStorage.getItem('MyBooks'))
@@ -42,9 +46,11 @@ const AddToFavoritesButton = (book: Book) => {
 
 	if (book?.favorite) return <></>
 	return (
-		<a onClick={() => AddToFavoritesButtonAct()}>
-			<span className="icon icon-favorites"></span>Add to Favorites
-		</a>
+		<div className="mark">
+			<a onClick={() => AddToFavoritesButtonAct()}>
+				<span className="icon icon-favorites"></span>Add to Favorites
+			</a>
+		</div>
 	)
 }
 export default AddToFavoritesButton

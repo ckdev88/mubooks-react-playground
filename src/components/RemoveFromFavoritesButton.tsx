@@ -29,9 +29,11 @@ const RemoveFromFavoritesButton = (id: number, favorite: boolean) => {
 
 	if (!favorite) return <></>
 	return (
-		<a onClick={() => RemoveFromFavoritesButtonAct()}>
-			<span className="icon icon-remove"></span>Remove from favorites
-		</a>
+		<div className="mark">
+			<a onClick={() => RemoveFromFavoritesButtonAct()}>
+				<span className="icon icon-remove"></span>Remove from favorites
+			</a>
+		</div>
 	)
 }
 export default RemoveFromFavoritesButton

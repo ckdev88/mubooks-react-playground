@@ -39,9 +39,11 @@ const SaveBookButton = (book: Book) => {
 	}
 	if (book?.saved) return <></>
 	return (
-		<a onClick={() => SaveBookButtonAct()}>
-			<span className="icon icon-add"></span>Save in my books
-		</a>
+		<div className="mark">
+			<a onClick={() => SaveBookButtonAct()}>
+				<span className="icon icon-add"></span>Save in my books
+			</a>
+		</div>
 	)
 }
 export default SaveBookButton

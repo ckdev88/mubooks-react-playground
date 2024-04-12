@@ -9,7 +9,7 @@ const AddToReading = async (book: Book) => {
 		myBooks = []
 	} else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 
-	// check if already saved in localstorage, database. if not, add first	
+	// check if already saved in localstorage, database. if not, add first
 	let bookIsSaved = false
 	let returnval: string
 	for (let i = 0; i < myBooks.length; i++) {
@@ -25,8 +25,7 @@ const AddToReading = async (book: Book) => {
 	if (bookIsSaved === false) {
 		// add book to saved, mark as wishlist (+toggle?)
 		await AddBookToSaved(book, false, true) // wishlist false, reading true
-	}
-	else {
+	} else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
 	}
 	returnval = JSON.stringify(localStorage.getItem('MyBooks'))
@@ -43,9 +42,11 @@ const AddToReadingButton = (book: Book) => {
 
 	if (book?.reading) return <></>
 	return (
-		<a onClick={() => AddToReadingButtonAct()}>
-			<span className="icon icon-reading"></span>Mark as Reading now
-		</a>
+		<div className="mark">
+			<a onClick={() => AddToReadingButtonAct()}>
+				<span className="icon icon-reading"></span>Mark as Reading now
+			</a>
+		</div>
 	)
 }
 export default AddToReadingButton

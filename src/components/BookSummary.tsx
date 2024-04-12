@@ -31,13 +31,13 @@ const BookSummary = ({ book }: BookObject) => {
 				<div className="marks">
 					<div className="mark">
 						{!book.saved && SaveBookButton(book)}
-						{book.saved && RemoveBookButton(book.id, book?.saved)}<br />
-						{!book.wishlist && AddToWishlistButton(book)}
-						{book.wishlist && RemoveFromWishlistButton(book.id, book?.wishlist)}<br />
+						{book.saved && RemoveBookButton(book.id, book?.saved)}
+						{(!book.wishlist && !book.reading) && AddToWishlistButton(book)}
+						{book.wishlist && RemoveFromWishlistButton(book.id, book?.wishlist)}
 						{!book.reading && AddToReadingButton(book)}
-						{book.reading && FinishReadingButton(book.id, book?.reading)}<br />
+						{book.reading && FinishReadingButton(book.id, book?.reading)}
 						{!book.favorite && AddToFavoritesButton(book)}
-						{book.favorite && RemoveFromFavoritesButton(book.id, book?.favorite)}<br />
+						{book.favorite && RemoveFromFavoritesButton(book.id, book?.favorite)}
 					</div>
 				</div>
 				<hr />
