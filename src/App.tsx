@@ -26,7 +26,8 @@ const App = () => {
 	else userIsLoggedInInitval = false
 
 	let userMyBooksInitval: string
-	if (localStorage.getItem('MyBooks')) userMyBooksInitval = localStorage.getItem('MyBooks') as string
+	if (localStorage.getItem('MyBooks'))
+		userMyBooksInitval = localStorage.getItem('MyBooks') as string
 	else userMyBooksInitval = '[]'
 
 	const [username, setUsername] = useState<string>('')
@@ -34,10 +35,21 @@ const App = () => {
 	const [userMyBooks, setUserMyBooks] = useState<string>(userMyBooksInitval)
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitval)
 
+	if (username === '') setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
+
 	return (
 		<>
 			<AppContext.Provider
-				value={{ username, setUsername, usermail, setUsermail, userMyBooks, setUserMyBooks, userIsLoggedIn, setUserIsLoggedIn }}
+				value={{
+					username,
+					setUsername,
+					usermail,
+					setUsermail,
+					userMyBooks,
+					setUserMyBooks,
+					userIsLoggedIn,
+					setUserIsLoggedIn,
+				}}
 			>
 				<header id="header">
 					<NavWrapper />
