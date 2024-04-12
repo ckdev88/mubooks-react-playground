@@ -122,9 +122,9 @@ a {
 hr {
 	border-width: 0 0 1px;
 	border-style: solid;
-	border-color: darkgreen;
+	border-color: hsl(325,65%,90%);
 	height: 1px;
 	background-color: transparent;
 	height: 1px;
-	box-shadow: 0 1px 0 lightgreen;
+	box-shadow: 0 1px 0 hsl(325,65%,20%);
 }
