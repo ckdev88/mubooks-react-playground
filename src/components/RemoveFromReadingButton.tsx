@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 // TODO: this could just be a toggle with addtoreading... its basically the same code
 // TODO: should also be a button, which is actually more important: done reading
-const RemoveBookFromReading = (id: number) => {
+const RemoveFromReading = (id: number) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -19,15 +19,14 @@ const RemoveBookFromReading = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const RemoveFromReadingButton = (id: number,reading:boolean) => {
+const RemoveFromReadingButton = (id:number) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	function RemoveFromReadingButtonAct() {
-		const newArr = RemoveBookFromReading(id) // update localstorage, database
+		const newArr = RemoveFromReading(id) // update localstorage, database
 		setUserMyBooks(newArr) // update global state
 	}
 
-	if (!reading) return <></>
 	return (
 		<a onClick={() => RemoveFromReadingButtonAct()}>
 			<span className="icon icon-remove"></span>Remove from reading

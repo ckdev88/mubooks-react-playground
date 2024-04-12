@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 // TODO: this could just be a toggle with addtoreading... its basically the same code
 // TODO: should also be a button, which is actually more important: done reading
-const FinishReading = (id: number) => {
+const AddToFinished = (id: number) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -12,7 +12,7 @@ const FinishReading = (id: number) => {
 
 	for (let i = 0; i < myBooks.length; i++) {
 		if (myBooks[i].id === id) {
-			myBooks[i].reading = !myBooks[i].reading
+			myBooks[i].reading = false
 			myBooks[i].finished = true
 		}
 	}
@@ -22,21 +22,20 @@ const FinishReading = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const FinishReadingButton = (id: number, reading: boolean) => {
+const AddToFinishedButton = (id: number) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
-	function FinishReadingButtonAct() {
-		const newArr = FinishReading(id) // update localstorage, database
+	function AddToFinishedButtonAct() {
+		const newArr = AddToFinished(id) // update localstorage, database
 		setUserMyBooks(newArr) // update global state
 	}
 
-	if (!reading) return <></>
 	return (
 		<div className='mark'>
-			<a onClick={() => FinishReadingButtonAct()}>
+			<a onClick={() => AddToFinishedButtonAct()}>
 				<span className="icon icon-read"></span>Finish reading
 			</a>
 		</div>
 	)
 }
-export default FinishReadingButton 
+export default AddToFinishedButton 

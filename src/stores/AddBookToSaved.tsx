@@ -1,6 +1,12 @@
-import UpdateMyBooks from "./UpdateMyBooks"
+import UpdateMyBooks from './UpdateMyBooks'
 
-export default async function AddBookToSaved(book: Book, wishlist = book.wishlist, reading = book.reading, favorite = book.favorite, finished = false) {
+export default async function AddBookToSaved(
+	book: Book,
+	wishlist = book.wishlist,
+	reading = book.reading,
+	favorite = book.favorite,
+	finished = book.finished
+) {
 	if (book.ti.length > 35) {
 		book.title_short = book.ti.slice(0, 35) + '...'
 	} else book.title_short = book.ti
@@ -26,4 +32,3 @@ export default async function AddBookToSaved(book: Book, wishlist = book.wishlis
 	UpdateMyBooks(JSON.stringify(myBooks))
 	return JSON.stringify(myBooks)
 }
-

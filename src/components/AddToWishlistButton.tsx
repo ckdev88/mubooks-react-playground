@@ -39,7 +39,7 @@ const AddToWishlistButton = (book: Book) => {
 		setUserMyBooks(await refreshState) // TODO: running twice needed right now, far from ideal, refactor
 	}
 
-	if (book?.wishlist) return <></>
+	if (book?.wishlist || book?.finished || book?.favorite) return <></>
 	return (
 		<div className="mark">
 			<a onClick={() => AddToWishlistButtonAct()}>

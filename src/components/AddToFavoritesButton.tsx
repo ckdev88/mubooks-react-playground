@@ -17,8 +17,8 @@ const AddToFavorites = async (book: Book) => {
 			bookIsSaved = true
 			myBooks[i].wishlist = false
 			myBooks[i].reading = false
+			myBooks[i].finished = true
 			myBooks[i].favorite = true
-			myBooks[i].finished = false
 		}
 	}
 	if (bookIsSaved === false) {
@@ -27,8 +27,9 @@ const AddToFavorites = async (book: Book) => {
 			book,
 			false,
 			false,
+			true,
 			true
-		) /* wishlist false, reading false, favorite true */
+		) /* wishlist false, reading false, finished true, favorite true */
 	} else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
 	}

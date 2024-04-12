@@ -4,7 +4,7 @@ import RemoveBookButton from './RemoveBookButton'
 import AddToWishlistButton from './AddToWishlistButton'
 import RemoveFromWishlistButton from './RemoveFromWishlistButton'
 import AddToReadingButton from './AddToReadingButton'
-import FinishReadingButton from './FinishReadingButton'
+import AddToFinishedButton from './AddToFinishedButton'
 import AddToFavoritesButton from './AddToFavoritesButton'
 import RemoveFromFavoritesButton from './RemoveFromFavoritesButton'
 
@@ -32,11 +32,11 @@ const BookSummary = ({ book }: BookObject) => {
 					<div className="mark">
 						{!book.saved && SaveBookButton(book)}
 						{book.saved && RemoveBookButton(book.id, book?.saved)}
-						{(!book.wishlist && !book.reading) && AddToWishlistButton(book)}
+						{(!book.wishlist && !book.reading && !book.finished) && AddToWishlistButton(book)}
 						{book.wishlist && RemoveFromWishlistButton(book.id, book?.wishlist)}
-						{!book.reading && AddToReadingButton(book)}
-						{book.reading && FinishReadingButton(book.id, book?.reading)}
-						{!book.favorite && AddToFavoritesButton(book)}
+						{(!book.reading && !book.finished) && AddToReadingButton(book)}
+						{book.reading && AddToFinishedButton(book.id)}
+						{(!book.favorite && !book.reading && !book.wishlist) && AddToFavoritesButton(book)}
 						{book.favorite && RemoveFromFavoritesButton(book.id, book?.favorite)}
 					</div>
 				</div>

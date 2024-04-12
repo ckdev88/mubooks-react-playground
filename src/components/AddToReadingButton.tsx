@@ -40,7 +40,7 @@ const AddToReadingButton = (book: Book) => {
 		setUserMyBooks(await refreshState) // update global state
 	}
 
-	if (book?.reading) return <></>
+	if (book?.reading || book?.favorite || book?.finished) return <></>
 	return (
 		<div className="mark">
 			<a onClick={() => AddToReadingButtonAct()}>

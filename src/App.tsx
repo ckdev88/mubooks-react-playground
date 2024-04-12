@@ -12,6 +12,7 @@ import ClearMyBooks from './routes/books/ClearMyBooks'
 import UserLoginPage from './routes/account/UserLoginPage'
 import WishlistPage from './routes/books/WishlistPage'
 import ReadingPage from './routes/books/ReadingPage'
+import FinishedPage from './routes/books/FinishedPage'
 import FavoritesPage from './routes/books/FavoritesPage'
 import RootPage from './routes/RootPage'
 
@@ -55,6 +56,7 @@ const App = () => {
 						<Route path="/saved-books" Component={SavedBooksPage} />
 						<Route path="/wishlist" Component={WishlistPage} />
 						<Route path="/reading" Component={ReadingPage} />
+						<Route path="/finished" Component={FinishedPage} />
 						<Route path="/favorites" Component={FavoritesPage} />
 						<Route path="/clear-my-books" Component={ClearMyBooks} />
 					</Routes>
