@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import UserSignup from '../../stores/UserSignup'
 import { useNavigate } from 'react-router-dom'
@@ -5,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 export default function SignupCard() {
 	const navigate = useNavigate()
 	const { login } = useCardRotate()
+	const [error, setError] = useState('')
 
 	async function processSignupForm(event: any) {
 		event.preventDefault()
@@ -13,10 +15,10 @@ export default function SignupCard() {
 			screenname: event.target.screenname.value,
 			password: event.target.password.value,
 		}
-		const isSignedUp = UserSignup(user)
-		if ((await isSignedUp).success === true) {
-			navigate(`/account/new?addr=${user.email}`) // beetje unsafe dit, beter via sessie of api
-		}
+		const signup = await UserSignup(user)
+
+		if (signup.error) setError(signup.error.message)
+		else navigate(`/account/new?addr=${user.email}`) // beetje unsafe dit, beter via sessie of api
 	}
 
 	return (
@@ -31,11 +33,12 @@ export default function SignupCard() {
 						<input type="email" id="signup-email" name="email" required />
 						<label htmlFor="password">Password: *</label>
 						<input type="password" id="signup-password" name="password" required />
+						<div className={error !== '' ? 'dblock error' : 'dnone'}>{error}</div>
 						<button>Create</button>
 					</form>
 				</main>
 				<footer className="content-right">
-					<a onClick={login}>Already have an account</a>
+					<a onClick={login}>Already have an account.</a>
 				</footer>
 			</article>
 		</>

@@ -8,6 +8,7 @@ export default function MyAccountEditCard() {
 	const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
 	const [sbUsermail, setSbUsermail] = useState<string>(usermail)
 	const [sbUsername, setSbUsername] = useState<string>(username)
+	const [updateError, setUpdateError] = useState<string>('')
 
 	useEffect(() => {
 		userdata()
@@ -37,24 +38,25 @@ export default function MyAccountEditCard() {
 				password: form_userpass,
 				data: { screenname: form_username },
 			})
-			// TODO: use error to show to user
-			if (!error) afterUpdateSb(form_username, form_usermail)
+			if (error) return { error }
+			else afterUpdateSb(form_username, form_usermail)
 		} else {
 			const { error } = await supabase.auth.updateUser({
 				email: form_usermail,
 				data: { screenname: form_username },
 			})
-			// TODO: use error to show to user
-			if (!error) afterUpdateSb(form_username, form_usermail)
+			if (error) return { error }
+			else afterUpdateSb(form_username, form_usermail)
 		}
 	}
 
-	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		const form_username: string = e.currentTarget.account_screenname.value.trim()
 		const form_usermail: string = e.currentTarget.account_email.value.trim()
 		const form_userpass: string = e.currentTarget.account_password.value.trim()
-		updateUser(form_username, form_usermail, form_userpass)
+		const update = await updateUser(form_username, form_usermail, form_userpass)
+		if (update?.error) setUpdateError(update.error.message)
 	}
 
 	return (
@@ -71,9 +73,22 @@ export default function MyAccountEditCard() {
 							defaultValue={sbUsername}
 						/>
 						<label htmlFor="account_email">Email address</label>
-						<input type="email" id="account_email" name="account_email" defaultValue={sbUsermail} />
-						<label htmlFor="account_password">Password (leave empty to keep current)</label>
-						<input type="password" id="account_password" name="account_password" defaultValue="" />
+						<input
+							type="email"
+							id="account_email"
+							name="account_email"
+							defaultValue={sbUsermail}
+						/>
+						<label htmlFor="account_password">
+							Password (leave empty to keep current)
+						</label>
+						<input
+							type="password"
+							id="account_password"
+							name="account_password"
+							defaultValue=""
+						/>
+						<div className={updateError !== '' ? 'dblock error' : 'dnone'}>{updateError}</div>
 						<button>Save and return</button>
 					</form>
 				</main>

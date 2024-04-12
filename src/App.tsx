@@ -35,7 +35,9 @@ const App = () => {
 	const [userMyBooks, setUserMyBooks] = useState<string>(userMyBooksInitval)
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitval)
 
-	if (username === '') setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
+	if (username === '') {
+		if (localStorage.getItem(localStorageKey)) setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
+	}
 
 	return (
 		<>
