@@ -40,9 +40,7 @@ export default function FavoritesItems() {
 	return (
 		<>
 			{hasbooks ? (
-				<main className="favorites deck">
-					<div className="deck-container">{DeckCovers(booksarr)}</div>
-				</main>
+				<main className="favorites deck">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/favorites">
 					<main className="toadd">

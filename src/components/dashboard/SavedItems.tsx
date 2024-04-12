@@ -42,9 +42,7 @@ const SavedItems = () => {
 	return (
 		<>
 			{hasbooks ? (
-				<main className="saved deck">
-					<div className="deck-container">{DeckCovers(booksarr)}</div>
-				</main>
+				<main className="saved deck">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/saved">
 					<main className="toadd">

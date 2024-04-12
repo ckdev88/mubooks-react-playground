@@ -40,7 +40,7 @@ export default function ReadingItems() {
 	return (
 		<>
 			{hasbook ? (
-				<main>{DeckCovers(booksarr)}</main>
+				<main className="reading deck">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/reading">
 					<main className="toadd">

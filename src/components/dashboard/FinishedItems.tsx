@@ -40,9 +40,7 @@ export default function FinishedItems() {
 	return (
 		<>
 			{hasbooks ? (
-				<main className="finished deck">
-					<div className="deck-container">{DeckCovers(booksarr)}</div>
-				</main>
+				<main className="finished deck">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/finished">
 					<main className="toadd">
