@@ -38,7 +38,7 @@ const SearchPage = () => {
 		let count = 0
 		let booksToAdd: any = [] // the only any... TODO: lets not have any any
 		for (let i = 0; i < boeken.length; i++) {
-			if (searchTermInput === boeken[i].ti.toLowerCase()) {
+			if (searchTermInput.toLowerCase() === boeken[i].ti.toLowerCase()) {
 				// TODO: marker isSaved to highlight saved books in results
 				booksToAdd[count] = boeken[i]
 				booksToAdd[count].id = i
@@ -58,7 +58,7 @@ const SearchPage = () => {
 			if (count > 30) break
 			if (
 				boeken[i].ti.toLowerCase().includes(String(searchTermInput)) &&
-				boeken[i].ti.toLowerCase() !== searchTermInput
+				boeken[i].ti.toLowerCase() !== searchTermInput.toLowerCase()
 			) {
 				// TODO: search could use some algorithmic tweaking
 				// TODO: marker isSaved to highlight saved books in results
