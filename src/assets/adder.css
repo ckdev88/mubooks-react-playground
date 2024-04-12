@@ -1,6 +1,5 @@
 .adder {
 	margin-bottom: 1rem;
-	cursor: pointer;
 }
 
 .adder header {
@@ -33,7 +32,7 @@
 }
 
 .adder .toadd:hover,
-.adder main:hover {
+.adder .deck:has(a):hover {
 	background-color: white;
 }
 

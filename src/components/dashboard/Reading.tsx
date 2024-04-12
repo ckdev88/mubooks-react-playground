@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import ReadingItem from './ReadingItem'
+import ReadingItems from './ReadingItems'
 // check if there are any saved books
 // if yes, check if any of saved books are marked as reading
 // if yes, router.push to saved books
@@ -18,8 +18,8 @@ export default function Reading() {
 					<header>
 						What I'm reading now <span>›</span>
 					</header>
-					<ReadingItem />
 				</Link>
+				<ReadingItems />
 			</article>
 		</>
 	)

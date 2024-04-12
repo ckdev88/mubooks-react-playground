@@ -3,15 +3,13 @@ import { AppContext } from '../../App'
 import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
 
-// TODO: add deck of "cards" to show first n of saved books (covers)
-
-const SavedItems = () => {
+export default function ReadingItems() {
 	const { userMyBooks } = useContext(AppContext)
-	let hasbooks: boolean = false
+	let hasbook = false
 	let booksParsed: Books = JSON.parse(userMyBooks)
 	if (typeof booksParsed !== 'object') booksParsed = JSON.parse(booksParsed)
-	const booksarr = booksParsed
-	if (booksarr.length > 0) hasbooks = true
+	const booksarr = booksParsed.filter((book) => book.reading === true)
+	if (booksarr.length > 0) hasbook = true
 
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
@@ -20,7 +18,7 @@ const SavedItems = () => {
 			})
 		}
 		return (
-			<Link to="/saved">
+			<Link to="/reading">
 				<div className="deck-container">
 					{booksarr.slice(-6).map((book: Book, index: number) => {
 						var img = 'https://images.isbndb.com/covers' + book.img + '.jpg'
@@ -41,23 +39,20 @@ const SavedItems = () => {
 
 	return (
 		<>
-			{hasbooks ? (
-				<main className="saved deck">
-					<div className="deck-container">{DeckCovers(booksarr)}</div>
-				</main>
+			{hasbook ? (
+				<main>{DeckCovers(booksarr)}</main>
 			) : (
-				<Link to="/saved">
+				<Link to="/reading">
 					<main className="toadd">
 						<aside>
 							<button>
-								<img src="img/save-books-icon.png" />
+								<img src="img/plus-icon.svg" />
 							</button>
 						</aside>
-						Let's start saving books.
+						If you're already reading a book, let's add it here.
 					</main>
 				</Link>
 			)}
 		</>
 	)
 }
-export default SavedItems

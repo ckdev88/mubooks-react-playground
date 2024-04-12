@@ -9,8 +9,8 @@ export default function Wishlist() {
 					<header>
 						Mu Wishlist<span>›</span>
 					</header>
-					<WishlistItems />
 				</Link>
+				<WishlistItems />
 			</article>
 		</>
 	)

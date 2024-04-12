@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { AppContext } from '../../App'
+import { Link } from 'react-router-dom'
 
 export default function WishlistItems() {
 	const { userMyBooks } = useContext(AppContext)
@@ -23,17 +24,21 @@ export default function WishlistItems() {
 		<>
 			{hasbooks ? (
 				<main className="wishlist deck">
-					<div className="deck-container">{DeckCovers(booksarr)}</div>
+					<Link to="/wishlist">
+						<div className="deck-container">{DeckCovers(booksarr)}</div>
+					</Link>
 				</main>
 			) : (
-				<main className="toadd">
-					<aside>
-						<button>
-							<img src="img/icon-wishlist.png" />
-						</button>
-					</aside>
-					Next in line.
-				</main>
+				<Link to="/wishlist">
+					<main className="toadd">
+						<aside>
+							<button>
+								<img src="img/icon-wishlist.png" />
+							</button>
+						</aside>
+						Next in line.
+					</main>
+				</Link>
 			)}
 		</>
 	)
