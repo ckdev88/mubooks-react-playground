@@ -54,7 +54,7 @@ const App = () => {
 				<header id="header">
 					<NavWrapper />
 				</header>
-				<main id="main">
+				<main id="main" className='textwrapper'>
 					<Routes>
 						<Route path="/" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
