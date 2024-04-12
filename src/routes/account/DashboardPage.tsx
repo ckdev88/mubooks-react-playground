@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import QuoteCard from '../../components/QuoteCard'
 import Reading from '../../components/dashboard/Reading'
 import Saved from '../../components/dashboard/Saved'
+import Finished from '../../components/dashboard/Finished'
 import Favorites from '../../components/dashboard/Favorites'
 import Wishlist from '../../components/dashboard/Wishlist'
 import { AppContext } from '../../App'
@@ -19,9 +20,10 @@ const DashboardPage = () => {
 			</p>
 			<QuoteCard />
 			<Reading />
-			<Saved />
 			<Wishlist />
 			<Favorites />
+			<Finished />
+			<Saved />
 		</>
 	)
 }
