@@ -19,14 +19,16 @@ const LoginCard = () => {
 		if (login?.error) {
 			setError(login.error.message)
 		}
-		if (login?.data) {
-			setUserIsLoggedIn(true)
-			setUsername(login?.data.user?.user_metadata.screenname)
-			localStorage.setItem('MyBooks', login?.data.user?.user_metadata.MyBooks)
-			setUserMyBooks(localStorage.getItem('MyBooks') as string)
-			setTimeout(() => {
-				navigate('/dashboard')
-			}, 600)
+		else {
+			if (login?.data) {
+				setUserIsLoggedIn(true)
+				setUsername(login?.data.user?.user_metadata.screenname)
+				localStorage.setItem('MyBooks', login?.data.user?.user_metadata.MyBooks)
+				setUserMyBooks(localStorage.getItem('MyBooks') as string)
+				setTimeout(() => {
+					navigate('/dashboard')
+				}, 600)
+			}else setError('Something unexpected happened, try again later.')
 		}
 
 	}
