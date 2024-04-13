@@ -3,8 +3,6 @@ import { AppContext } from '../../App'
 import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
 
-// TODO: add deck of "cards" to show first n of saved books (covers)
-
 const SavedItems = () => {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
