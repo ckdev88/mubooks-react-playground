@@ -20,7 +20,7 @@ const SavedItems = () => {
 			})
 		}
 		return (
-			<Link to="/saved">
+			<Link to="/saved-books">
 				<div className="deck-container">
 					{booksarr.slice(-6).map((book: Book, index: number) => {
 						var img = 'https://images.isbndb.com/covers' + book.img + '.jpg'
