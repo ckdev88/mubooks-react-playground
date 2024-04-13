@@ -63,6 +63,18 @@
 	position: relative;
 }
 
+.adder .deck .book-summary {
+	padding-bottom: 0
+}
+
+.adder .deck .book-summary header {
+	padding: 0;
+}
+
+.adder .deck .book-summary hr {
+	display: none;
+}
+
 .deck-container {
 	padding-top: 0.125rem;
 }
@@ -80,7 +92,7 @@
 	float: left;
 	padding: 0;
 	border-radius: 0.5rem;
-	box-shadow: 0 0 0.4rem #555;
+	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);
 	width: calc(100% / 3);
 	aspect-ratio: 324/500;
 	box-sizing: border-box;
@@ -88,7 +100,7 @@
 	position: relative;
 }
 
-.deck-container .book-cover + .book-cover {
+.deck-container .book-cover+.book-cover {
 	margin-left: -20.1%;
 }
 

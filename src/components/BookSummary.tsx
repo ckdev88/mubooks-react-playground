@@ -7,8 +7,11 @@ import AddToReadingButton from './AddToReadingButton'
 import AddToFinishedButton from './AddToFinishedButton'
 import AddToFavoritesButton from './AddToFavoritesButton'
 import RemoveFromFavoritesButton from './RemoveFromFavoritesButton'
+import { useLocation } from 'react-router-dom'
 
 const BookSummary = ({ book }: BookObject) => {
+	const location = useLocation()
+	const { pathname } = location
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary" key={book.id}>
@@ -30,21 +33,19 @@ const BookSummary = ({ book }: BookObject) => {
 			<footer>
 				<div className="marks">
 					<div className="mark">
-						{!book.saved && 
-							SaveBookButton(book)}
-						{book.saved && 
+						{(book.saved && pathname === '/saved-books') &&
 							RemoveBookButton(book.id, book?.saved)}
-						{(!book.wishlist && !book.reading && !book.finished) && 
+						{(!book.wishlist && !book.reading && !book.finished) &&
 							AddToWishlistButton(book)}
-						{book.wishlist && 
+						{book.wishlist &&
 							RemoveFromWishlistButton(book.id, book?.wishlist)}
-						{(!book.reading && !book.finished) && 
+						{(!book.reading && !book.finished) &&
 							AddToReadingButton(book)}
-						{book.reading && 
+						{book.reading &&
 							AddToFinishedButton(book.id)}
 						{(!book.favorite && !book.reading && !book.wishlist && book.finished) &&
 							AddToFavoritesButton(book)}
-						{book.favorite && 
+						{book.favorite &&
 							RemoveFromFavoritesButton(book.id, book?.favorite)}
 					</div>
 				</div>

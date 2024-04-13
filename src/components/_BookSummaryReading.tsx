@@ -1,5 +1,4 @@
 import BookAuthorList from './BookAuthorList'
-import SaveBookButton from './SaveBookButton'
 import RemoveBookButton from './RemoveBookButton'
 import AddToReadingButton from './AddToReadingButton'
 import RemoveFromReadingButton from './RemoveFromReadingButton'
@@ -20,14 +19,13 @@ const BookSummary = ({ book }: BookObject) => {
 					</h2>
 					{book.dp}
 					<br />
-					{book.pg} pages
+					{book.pg} pagess asdfasdf
 					<br />
 				</div>
 			</header>
 			<footer>
 				<div className="marks">
 					<div className="mark">
-						{!book.saved && SaveBookButton(book)}
 						{book.saved && RemoveBookButton(book.id, book?.saved)}<br />
 						{!book.reading && AddToReadingButton(book)}
 						{book.reading && RemoveFromReadingButton(book.id)}<br />

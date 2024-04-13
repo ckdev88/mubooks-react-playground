@@ -87,7 +87,7 @@
 	height: auto;
 	max-width: 100%;
 	border-radius: 0.4rem;
-	box-shadow: 0 0 0.4rem #555;
+	box-shadow: 0 0 0.4rem rgba(0,0,0,40%);
 }
 
 .book-summary .synopsis {
