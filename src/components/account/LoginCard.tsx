@@ -27,8 +27,8 @@ const LoginCard = () => {
 				setUserMyBooks(localStorage.getItem('MyBooks') as string)
 				setTimeout(() => {
 					navigate('/dashboard')
-				}, 600)
-			}else setError('Something unexpected happened, try again later.')
+				}, 500)
+			} else setError('Something unexpected happened, try again later.')
 		}
 
 	}
