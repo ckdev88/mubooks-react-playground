@@ -17,6 +17,7 @@ import FavoritesPage from './routes/books/FavoritesPage'
 import RootPage from './routes/RootPage'
 
 import { localStorageKey } from '../utils/supabase'
+import AddBookPage from './routes/books/AddBookPage'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -67,6 +68,7 @@ const App = () => {
 						<Route path="/account/*" Component={UserLoginPage} />
 						<Route path="/dashboard" Component={DashboardPage} />
 						<Route path="/search" Component={SearchPage} />
+						<Route path="/add-book" Component={AddBookPage} />
 						<Route path="/saved-books" Component={SavedBooksPage} />
 						<Route path="/wishlist" Component={WishlistPage} />
 						<Route path="/reading" Component={ReadingPage} />

@@ -24,3 +24,5 @@ form .error {
 	color: red;
 }
 .clr::after{content:"";display:block;clear:both;}
+.sf{font-size:.8em}
+label .sf{float:right;}

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&display=swap');
+
 body {
 	font-size: 16px;
 	padding: 0;
@@ -6,23 +7,28 @@ body {
 	background-color: black;
 	color: white;
 }
+
 body,
 input,
 button,
 textarea {
 	font-family: 'Merriweather', 'serif';
 }
+
 .light-mode body {
 	color: black;
 	background-color: lightgoldenrodyellow;
 }
+
 a {
 	color: black;
 }
+
 a:hover {
 	color: black;
 	text-decoration: underline;
 }
+
 h1,
 h2 {
 	margin-top: 1rem;
@@ -30,14 +36,17 @@ h2 {
 	font-family: Merriweather, serif;
 	letter-spacing: -0.04em;
 }
+
 h1 {
 	text-shadow: 2px 2px 0 white;
 	margin-bottom: 1rem;
 }
+
 h2 {
 	margin-bottom: 0.5rem;
 	text-shadow: 1px 1px 0 white;
 }
+
 pre {
 	font-size: 0.7em;
 	max-width: calc(100vw);
@@ -45,9 +54,11 @@ pre {
 	background: black;
 	color: lightgray;
 }
+
 img {
 	max-width: 100%;
 }
+
 #header {
 	position: fixed;
 	top: 0;
@@ -57,18 +68,29 @@ img {
 	padding-top: 0.25rem;
 	box-sizing: border-box;
 }
+
 #main {
 	position: relative;
 	z-index: 1;
 	padding: 3rem 0.25rem;
 }
+
 dl dd {
 	font-weight: bold;
 }
+
 dt {
 	font-style: italic;
 }
+
+fieldset {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
 input[type='text'],
+input[type='url'],
 input[type='password'],
 input[type='number'],
 input[type='email'],
@@ -83,7 +105,9 @@ main button {
 	border-style: solid;
 	border-radius: 0.2rem;
 }
+
 input[type='text'],
+input[type='url'],
 input[type='password'],
 input[type='number'],
 input[type='email'],
@@ -92,12 +116,14 @@ textarea {
 	border-color: white;
 	background: white;
 }
+
 a,
 button,
 input[type='submit'] {
 	cursor: pointer;
 	transition: background-color 0.15s linear;
 }
+
 main button,
 input[type='submit'] {
 	background-color: hsl(325, 55%, 46%);
@@ -106,25 +132,29 @@ input[type='submit'] {
 	text-align: center;
 	font-size: 1rem;
 }
+
 main form button:hover,
 input[type='submit']:hover {
 	background-color: hsl(325, 60%, 41%);
 }
+
 main button:active,
 main button:focus,
 input[type='submit']:active,
 input[type='submit']:focus {
 	background-color: hsl(325, 65%, 36%);
 }
+
 a {
 	color: #0d99ff;
 }
+
 hr {
 	border-width: 0 0 1px;
 	border-style: solid;
-	border-color: hsl(325,65%,90%);
+	border-color: hsl(325, 65%, 90%);
 	height: 1px;
 	background-color: transparent;
 	height: 1px;
-	box-shadow: 0 1px 0 hsl(325,65%,20%);
+	box-shadow: 0 1px 0 hsl(325, 65%, 20%);
 }

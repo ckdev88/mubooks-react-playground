@@ -69,6 +69,7 @@ const NavWrapper = () => {
 					<li>
 						<Link to={'/dashboard'} onClick={toggleNav0}>Dashboard</Link>
 						<Link to={'/search'} onClick={toggleNav0}>Search</Link>
+						<Link to={'/add-book'} onClick={toggleNav0}>Add book</Link>
 						<Link to={'/wishlist'} onClick={toggleNav0}>Wishlist</Link>
 						<Link to={'/reading'} onClick={toggleNav0}>Reading</Link>
 						<Link to={'/finished'} onClick={toggleNav0}>Finished</Link>
