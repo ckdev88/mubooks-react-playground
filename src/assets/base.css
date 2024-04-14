@@ -54,7 +54,7 @@ img {
 	width: calc(100% - 2rem);
 	box-sizing: border-box;
 	height: 3rem;
-	padding-top: 0.5rem;
+	padding-top: 0.25rem;
 	box-sizing: border-box;
 }
 #main {

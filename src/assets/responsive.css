@@ -3,33 +3,32 @@
 		margin: 0 auto;
 		max-width: calc(100vw - 1rem);
 	}
-	#header,
-	#navIcons {
-		margin: 0 auto;
-		width: 100%;
-	}
-	#header {
-		padding-left: 0.5rem;
-		left: -0.5rem;
-	}
 }
+
 @media screen and (min-width: 601px) {
 	#navIcons {
 		width: calc(100% - 1rem);
 	}
 }
+
 @media screen and (max-width: 320px) {
 	#root {
 		min-width: auto;
 	}
+
+	#header {
+		padding-left: .5rem
+	}
+
 	#navIcons {
-		justify-content: start !important;
-		max-width: 100%;
+		width: auto;
 		min-width: 0;
 	}
+
 	#nav1 {
 		text-align: left !important;
 	}
+
 	.nav-collapsable.expanded {
 		width: 100%;
 	}

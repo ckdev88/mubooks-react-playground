@@ -8,7 +8,8 @@
 	transition: background-color 0.15s ease-in-out;
 	height: 2rem;
 	line-height: 2rem;
-	padding: 1rem 0.25rem;
+	padding: 1rem 0.75rem;
+	left:0;
 }
 .nav-collapsable .history {
 	display: none; /* hide for now */
@@ -53,6 +54,7 @@
 	line-height: 2rem;
 	position: fixed;
 	z-index: 99;
+	margin: 0 auto;
 }
 #navIcons button {
 	border: 0;
@@ -88,9 +90,6 @@
 .nav-collapsable.expanded li,
 .nav-collapsable.collapsed li {
 	opacity: 1;
-}
-#navIcons {
-	margin: 0 auto;
 }
 #nav1 {
 	text-align: right;

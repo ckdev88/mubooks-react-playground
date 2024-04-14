@@ -3,21 +3,37 @@
 	min-height: 100vh;
 	box-sizing: border-box;
 }
+
 .light-mode body {
 	background-color: #f4f1ea;
 }
+
 #root,
 .nav-collapsable,
 #header,
 #navIcons {
 	max-width: 600px;
 }
+
 #header {
 	z-index: 10;
+	background-color: #b73581;
+	padding-left: 1rem;
+	padding-right: 3rem;
+	left: -.5rem;
+	min-width: calc(100% + .5rem);
 }
+
+#navIcons {
+	margin: 0 auto;
+	width: calc(100% - 1rem);
+	/* background-color:lime */
+}
+
 #navIcons {
 	min-width: 300px;
 }
+
 #root {
 	width: 100%;
 	margin: 0 auto;
@@ -29,6 +45,7 @@
 .hidden {
 	display: none;
 }
+
 #alert {
 	box-sizing: border-box;
 	position: fixed;
@@ -46,12 +63,15 @@
 	padding: 0.75rem;
 	font-weight: bold;
 }
+
 .dblock {
 	display: block;
 }
+
 .dnone {
 	display: none !important;
 }
+
 .textwrapper {
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
