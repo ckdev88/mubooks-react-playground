@@ -7,7 +7,7 @@ const RootPage = () => {
 	let loggedin: boolean = false
 	const navigate = useNavigate()
 
-	if(JSON.parse(localStorage.getItem(localStorageKey) as string).user.aud==='authenticated')loggedin=true
+	if(JSON.parse(localStorage.getItem(localStorageKey) as string)?.user?.aud==='authenticated')loggedin=true
 
 	let navigateTo: string = '/account/login'
 	if (loggedin) navigateTo = '/dashboard'
