@@ -1,10 +1,9 @@
 import { useContext } from "react"
 import BooksOverviewPage from "./BooksOverviewPage"
 import { AppContext } from "../../App"
-import { useNavigate, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const WishlistPage = () => {
-	const navigate = useNavigate()
 	const { userMyBooks } = useContext(AppContext)
 
 	let hasbooks = false
