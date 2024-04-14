@@ -29,6 +29,10 @@
 		text-align: left !important;
 	}
 
+	.nav-collapsable {
+		padding-left: .25rem
+	}
+
 	.nav-collapsable.expanded {
 		width: 100%;
 	}
