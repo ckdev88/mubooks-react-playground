@@ -42,11 +42,7 @@ const NavWrapper = () => {
 				</button>
 				<div>
 					<button className="toggleZoekNav" onClick={() => goSearch()}>
-						<div className="zoekIcon">
-							<div className="glass"></div>
-							<div className="glassOuter"></div>
-							<div className="stick"></div>
-						</div>
+						<img src='/img/vergrootglas.svg' alt="search" className='zoekIcon'/>
 					</button>
 					<button
 						id="toggleNavProfile"
