@@ -43,8 +43,9 @@ const AddBookPage = () => {
 		const searchTitle = e.currentTarget.searchTitle.value.trim()
 		if (searchTitle.length > 4) {
 			setSearchMsg('')
-			console.log('searching......')
-			const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + searchTitle + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
+			console.log('searching...')
+			// const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + searchTitle + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
+			const wacht = await fetch('https://openlibrary.org/search.json?q=' + searchTitle + '&mode=everything')
 			await wacht.json().then(res => { setSearchResults(res.docs); console.log(res.docs) })
 
 			// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
@@ -79,7 +80,8 @@ const AddBookPage = () => {
 	}
 
 	function getOlCover(isbn: []) {
-		const isbnimg: string = isbn.slice(-1).toString()
+		let isbnimg: string = ''
+		if (isbn.length > 0) { isbnimg = isbn.slice(-1).toString() }
 		console.log('isbn', isbnimg)
 
 		return 'https://covers.openlibrary.org/b/isbn/' + isbnimg + '-S.jpg'
@@ -96,18 +98,23 @@ const AddBookPage = () => {
 			</div>
 			<div className="booksearchresults">
 				{searchResults.map((res, index) => {
-					let title:string
-					if(res.title.length>45)title=res.title.slice(0,40)+'...'
-					else title=res.title
-					return (
-						<div key={index} style={{ clear: 'both', height: '48px',display:'flex',alignItems:'center', marginBottom:'1rem' }}>
-							<img src={getOlCover(res.isbn)} style={{ display: 'block', maxHeight: '48px',marginRight:'.5rem' }} />
-							<div className="title" style={{fontSize:'.9em'}}>
-								{title} <em className="sf"> ({res.first_publish_year})</em> <br />
-								<em className="sf" style={{ clear: 'both' }}>{res.author_name}</em>
+					if (res.isbn !== undefined) {
+						let title: string
+						if (res.title.length > 45) title = res.title.slice(0, 40) + '...'
+						else title = res.title
+
+						return (
+							<div key={index} style={{ clear: 'both', height: '48px', display: 'flex', alignContent: 'center', marginBottom: '.5rem', marginTop: '.5rem', borderBottom: '1px dashed rgba(255,255,255,1)' }}>
+								<div className="title" style={{ fontSize: '.9em', display: 'flex', alignContent: 'center', flexWrap: 'wrap', flexGrow: '3' }}>
+									<img src="/img/vergrootglas.svg" style={{ height: '16px', width: '16px', alignSelf: 'center' }} />
+									<div style={{ width: 'calc(100% - 24px)', alignContent: 'center', flexWrap: 'wrap', marginLeft: '8px' }}>{title} <em className="sf"> ({res.first_publish_year})</em><br />
+										<em className="sf" style={{ clear: 'both' }}>{res.author_name}</em>
+									</div>
+								</div>
+								<img src={getOlCover(res.isbn)} style={{ display: 'block', maxHeight: '48px', marginLeft: '.5rem' }} />
 							</div>
-						</div>
-					)
+						)
+					}
 				})}
 			</div>
 			<h1>Add a book</h1>
