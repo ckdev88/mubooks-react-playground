@@ -35,7 +35,7 @@ for covers: https://covers.openlibrary.org/b/isbn/isbnnummerhier-S.jpg
 const AddBookPage = () => {
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
 	const [searchResults, setSearchResults] = useState<SearchResults>([])
-	const [isLoading, setIsLoading] = useState<boolean>(false)
+	// const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [searchMsg, setSearchMsg] = useState<string>('')
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
