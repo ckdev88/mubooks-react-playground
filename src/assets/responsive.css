@@ -6,6 +6,10 @@
 		left: -.5rem;
 		min-width: calc(100% + .5rem);
 	}
+
+	.nav-collapsable {
+		left: 0;
+	}
 }
 
 @media screen and (max-width: 600px) and (min-width: 320px) {
