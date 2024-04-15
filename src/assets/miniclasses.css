@@ -23,7 +23,21 @@ form .error {
 	margin-bottom: .5em;
 	color: red;
 }
-.cl{clear:both;}
-.clr::after{content:"";display:block;clear:both;}
-.sf{font-size:.8em}
-label .sf{float:right;}
+
+.cl {
+	clear: both;
+}
+
+.clr::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.sf {
+	font-size: .8em
+}
+
+label .sf {
+	float: right;
+}
