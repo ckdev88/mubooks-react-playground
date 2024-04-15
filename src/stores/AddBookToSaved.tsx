@@ -7,25 +7,25 @@ export default async function AddBookToSaved(
 	favorite = book.favorite,
 	finished = book.finished
 ) {
-	if (book.ti.length > 35) {
-		book.title_short = book.ti.slice(0, 35) + '...'
-	} else book.title_short = book.ti
+	if (book.title.length > 35) {
+		book.title_short = book.title.slice(0, 35) + '...'
+	} else book.title_short = book.title
 	let myBooks: Books = JSON.parse(localStorage.getItem('MyBooks') as string)
 
 	if (myBooks === null) myBooks = []
 	myBooks.push({
 		id: book.id,
-		au: book.au,
+		author_name: book.author_name,
 		cover: book.cover,
-		dp: book.dp,
+		first_publish_year: book.first_publish_year,
 		img: book.img,
-		pg: book.pg,
+		number_of_pages_median: book.number_of_pages_median,
 		saved: true,
 		wishlist: wishlist,
 		reading: reading,
 		finished: finished,
 		favorite: favorite,
-		ti: book.ti,
+		title: book.title,
 		title_short: book.title_short,
 	})
 

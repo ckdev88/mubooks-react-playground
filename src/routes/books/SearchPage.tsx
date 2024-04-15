@@ -26,13 +26,13 @@ const SearchPage = () => {
 				setResultsWarning('')
 			}
 		}
-		const before=performance.now()
-		if (searchTermInput){
-			for(let i=0;i<100;i++){
-		getResults(searchTermInput.toLowerCase())
+		const before = performance.now()
+		if (searchTermInput) {
+			for (let i = 0; i < 100; i++) {
+				getResults(searchTermInput.toLowerCase())
 			}
 		}
-		console.log(performance.now()-before)
+		console.log(performance.now() - before)
 	}
 
 	// const totalBooks = boeken.reduce((a, obj) => a + Object.keys(obj).length, 0)
@@ -44,15 +44,15 @@ const SearchPage = () => {
 		let count = 0
 		let booksToAdd: any = [] // the only any... TODO: lets not have any any
 		for (let i = 0; i < boeken.length; i++) {
-			if (searchTermInput === boeken[i].ti.toLowerCase()) {
+			if (searchTermInput === boeken[i].title.toLowerCase()) {
 				// TODO: marker isSaved to highlight saved books in results
 				booksToAdd[count] = boeken[i]
 				booksToAdd[count].id = i
 
-				if (boeken[i].ti.length > 40) {
-					booksToAdd[i].title_short = boeken[i].ti.slice(0, 40)
+				if (boeken[i].title.length > 40) {
+					booksToAdd[i].title_short = boeken[i].title.slice(0, 40)
 					booksToAdd[count].title_short += '...'
-				} else booksToAdd[count].title_short = boeken[i].ti
+				} else booksToAdd[count].title_short = boeken[i].title
 				if (boeken[i].img !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].img + '.jpg'
 
 				count++
@@ -63,17 +63,17 @@ const SearchPage = () => {
 		for (let i = 0; i < boeken.length; i++) {
 			if (count > 30) break
 			if (
-				boeken[i].ti.toLowerCase().includes(searchTermInput) &&
-				boeken[i].ti.toLowerCase() !== searchTermInput
+				boeken[i].title.toLowerCase().includes(searchTermInput) &&
+				boeken[i].title.toLowerCase() !== searchTermInput
 			) {
 				// TODO: search could use some algorithmic tweaking
 				// TODO: marker isSaved to highlight saved books in results
 				booksToAdd[count] = boeken[i]
 				booksToAdd[count].id = i
-				if (boeken[i].ti.length > 40) {
-					booksToAdd[count].title_short = boeken[i].ti.slice(0, 40)
+				if (boeken[i].title.length > 40) {
+					booksToAdd[count].title_short = boeken[i].title.slice(0, 40)
 					booksToAdd[count].title_short += '...'
-				} else booksToAdd[count].title_short = boeken[i].ti
+				} else booksToAdd[count].title_short = boeken[i].title
 				if (boeken[i].img !== null) booksToAdd[count].cover = 'https://images.isbndb.com/covers' + boeken[i].img + '.jpg'
 
 				count++

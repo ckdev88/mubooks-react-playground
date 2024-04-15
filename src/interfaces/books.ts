@@ -22,10 +22,10 @@ type BookData = [
 	{
 		id?: number
 		index?: number
-		ti: string
-		au: [string]
-		pg: number
-		dp: number
+		title: string
+		author_name: [string]
+		number_of_pages_median: number
+		first_publish_year: number
 		img?: string
 		title_short?: string
 		cover?: string
@@ -34,17 +34,17 @@ type BookData = [
 interface Book {
 	index?: number
 	id: number
-	au: [string]
+	author_name: [string]
 	cover?: string
-	dp: string
+	first_publish_year: string
 	img?: string
-	pg: number
+	number_of_pages_median: number
 	saved?: boolean
 	wishlist?: boolean
 	reading?: boolean
 	finished?: boolean
 	favorite?: boolean
-	ti: string
+	title: string
 	title_short: string
 }
 type Results = [Book]
