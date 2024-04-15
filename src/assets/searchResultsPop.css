@@ -1,0 +1,36 @@
+.booksearchresults .result {
+	clear: both;
+	min-height: 3rem;
+	display: flex;
+	align-content: center;
+	margin-bottom: .5rem;
+	margin-top: .5rem;
+	border-bottom: 1px dashed rgba(255, 255, 255, 1)
+}
+
+.booksearchresults .result .title {
+	font-size: .9em;
+	display: flex;
+	align-content: center;
+	flex-wrap: wrap;
+	flex-grow: 3
+}
+
+.booksearchresults .result .loep {
+	height: 16px;
+	width: 16px;
+	align-self: center
+}
+
+.booksearchresults .result .text {
+	width: calc(100% - 24px);
+	align-content: center;
+	flex-wrap: wrap;
+	margin-left: 8px
+}
+
+.booksearchresults .result .thumbnail {
+	display: block;
+	max-height: 3rem;
+	margin-left: .5rem
+}
