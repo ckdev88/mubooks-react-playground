@@ -17,11 +17,6 @@
 
 #header {
 	z-index: 10;
-	background-color: #b73581;
-	padding-left: 1rem;
-	padding-right: 3rem;
-	left: -.5rem;
-	min-width: calc(100% + .5rem);
 }
 
 #navIcons {
