@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { isUrl } from "../../Helpers"
 
 /*
 const explore = reactive({
@@ -61,30 +62,26 @@ const AddBookPage = () => {
 	// ab = abbreviation for Add Book
 	function processAbForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		console.log(e.currentTarget.abIsbn.value.trim())
 		setCoverImg(e.currentTarget.abCover.value.trim())
 	}
 	let showCover = (<><img src={coverImg} style={{ width: '50%' }} /></>)
-	function isUrl(url: string) {
-		if (url.slice(0, 8) === 'https://') return true
-		return false
-	}
+
 	function changeCover(e: React.ChangeEvent<HTMLInputElement>) {
 		let url = e.currentTarget.value
 		console.log(e.currentTarget.value)
-		if (!isUrl(url)) { console.log('is geen url') }
+		if (!isUrl(url)) { console.log('is no url') }
 		else {
-			console.log('is wel url')
 			setCoverImg(e.currentTarget.value.trim())
 		}
 	}
 
-	function getOlCover(isbn: []) {
+	function getOlCover(isbn: [], size: string = '') {
+		let appendSize: string = ''
+		if (size !== '') appendSize = '-' + size
 		let isbnimg: string = ''
 		if (isbn.length > 0) { isbnimg = isbn.slice(-1).toString() }
-		console.log('isbn', isbnimg)
 
-		return 'https://covers.openlibrary.org/b/isbn/' + isbnimg + '-S.jpg'
+		return 'https://covers.openlibrary.org/b/isbn/' + isbnimg + appendSize + '.jpg'
 	}
 	return (
 		<>
