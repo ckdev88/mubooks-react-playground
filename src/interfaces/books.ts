@@ -62,3 +62,11 @@ interface IdObject {
 interface SavedObject {
 	saved: boolean
 }
+
+interface SearchResult {
+	title: string,
+	first_publish_year: number,
+	isbn: [],
+	author_name: [string]
+}
+interface SearchResults extends Array<SearchResult> { }
