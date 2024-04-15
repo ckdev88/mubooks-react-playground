@@ -103,7 +103,7 @@ const AddBookPage = () => {
 						return (
 							<div key={index} style={{ clear: 'both', height: '48px', display: 'flex', alignContent: 'center', marginBottom: '.5rem', marginTop: '.5rem', borderBottom: '1px dashed rgba(255,255,255,1)' }}>
 								<div className="title" style={{ fontSize: '.9em', display: 'flex', alignContent: 'center', flexWrap: 'wrap', flexGrow: '3' }}>
-									<img src="/img/vergrootglas.svg" style={{ height: '16px', width: '16px', alignSelf: 'center' }} />
+									<img src="img/vergrootglas.svg" style={{ height: '16px', width: '16px', alignSelf: 'center' }} />
 									<div style={{ width: 'calc(100% - 24px)', alignContent: 'center', flexWrap: 'wrap', marginLeft: '8px' }}>{title} <em className="sf"> ({res.first_publish_year})</em><br />
 										<em className="sf" style={{ clear: 'both' }}>{res.author_name}</em>
 									</div>

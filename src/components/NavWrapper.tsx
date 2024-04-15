@@ -40,19 +40,16 @@ const NavWrapper = () => {
 						<div className="burgerbar bar3"></div>
 					</div>
 				</button>
-				<div>
+				<div style={{display:'flex',alignContent:'center'}}>
 					<button className="toggleZoekNav" onClick={() => goSearch()}>
-						<img src='/img/vergrootglas.svg' alt="search" className='zoekIcon'/>
+						<img src='/img/vergrootglas.svg' alt="search" className='zoekIcon' />
 					</button>
 					<button
 						id="toggleNavProfile"
 						className={nav1Expanded ? 'expanded' : 'collapsed'}
 						onClick={toggleNav1}
 					>
-						<div className="profileIcon">
-							<div className="profileIcon-head"></div>
-							<div className="profileIcon-body"></div>
-						</div>
+						<img src='/img/profile-icon.svg' alt="profile" className='profileIcon' />
 					</button>
 				</div>
 			</nav>
