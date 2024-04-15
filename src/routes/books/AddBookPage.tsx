@@ -104,7 +104,7 @@ const AddBookPage = () => {
 
 						return (
 							<div key={'result' + result_index} className="result">
-								<div>
+								<div className="wrapper">
 									<img src="img/loep.svg" className='loep' />
 									<div className='text'>{title} <em className="sf"> ({res.first_publish_year})</em><br />
 										<em className="sf cl">{authors}</em>

@@ -8,7 +8,7 @@
 	border-bottom: 1px dashed rgba(255, 255, 255, 1)
 }
 
-.booksearchresults .result .title {
+.booksearchresults .result .wrapper {
 	font-size: .9em;
 	display: flex;
 	align-content: center;
