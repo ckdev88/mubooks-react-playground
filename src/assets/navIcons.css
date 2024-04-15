@@ -2,16 +2,19 @@
 .profileIcon {
 	margin: 0 auto;
 }
+
 .zoekIcon {
 	position: relative;
 	height: 1rem;
 	width: 1rem;
 }
+
 .profileIcon {
 	position: relative;
 	height: 1rem;
 	width: 1rem;
 }
+
 .profileIcon-head {
 	background-color: rgba(0, 0, 0, 80%);
 	width: 35%;
