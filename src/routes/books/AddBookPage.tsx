@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { isUrl } from "../../Helpers"
+import { isUrl, getOlCover } from "../../Helpers"
 
 /*
 const explore = reactive({
@@ -36,27 +36,52 @@ for covers: https://covers.openlibrary.org/b/isbn/isbnnummerhier-S.jpg
 const AddBookPage = () => {
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
 	const [searchResults, setSearchResults] = useState<SearchResults>([])
-	// const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [searchMsg, setSearchMsg] = useState<string>('')
+	const [resultsWarning, setResultsWarning] = useState<string>('')
+	const [resultCount,setResultCount]=useState<number>(0)
+	const [resultsMessage, setResultsMessage] = useState<string>('')
+	const [searchTerm, setSearchTerm] = useState('')
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		const searchTitle = e.currentTarget.searchTitle.value.trim()
-		if (searchTitle.length > 4) {
-			setSearchMsg('')
-			console.log('searching...')
-			// const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + searchTitle + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
-			const wacht = await fetch('https://openlibrary.org/search.json?q=' + searchTitle + '&mode=everything&limit=8&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
-			await wacht.json().then(res => { setSearchResults(res.docs); console.log(res.docs) })
+		const search_term = e.currentTarget.search_term.value.trim()
+		if (search_term.length > 4) {
+			setResultsWarning('')
+			// const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + search_term + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
+			const wacht = await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=8&fields=title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median')
+			await wacht.json().then(json => json.docs.filter((r: Book) => r.author_key !== undefined && r.edition_key !== undefined && r.isbn !== undefined && r.cover_edition_key !== undefined))
+				.then(filtered => {
+					setResultCount(filtered.length)
+					for (let i = 0; i < filtered.length; i++) {
+						filtered[i].id = filtered[i].edition_key.slice(0, 1).toString()
+						filtered[i].title_short = filtered[i].title.slice(0, 40).toString()
+						if (filtered[i].isbn.length > 0) {
+							filtered[i].isbn0 = filtered[i].isbn.slice(0, 1).toString()
+							filtered[i].isbn1 = filtered[i].isbn.slice(-1).toString()
+						} else {
+							filtered[i].isbn0 = ''
+							filtered[i].isbn1 = ''
+						}
+						console.log(filtered[i])
+					filtered[i].cover =getOlCover(filtered[i].cover_edition_key) 
+					filtered[i].coverS=getOlCover(filtered[i].cover_edition_key,'S')
+					filtered[i].coverM=getOlCover(filtered[i].cover_edition_key,'M')
+					filtered[i].coverL=getOlCover(filtered[i].cover_edition_key,'L')
+					}
+					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + filtered.length + ' results.'))
+					setSearchTerm(search_term)
+					return filtered
+				})
+				.then(result => setSearchResults(result))
+
+
 
 			// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
 			// fields: '&fields=title,author_name,edition,thumbnail'
 
 		}
-		else if (searchTitle.length === 0) setSearchMsg(searchTitle.length)
-		else {
-			setSearchMsg('keep typing...')
-		}
+		else if (search_term.length === 0) setResultsWarning(search_term.length)
+		else setResultsWarning('keep typing...')
+
 	}
 
 	// ab = abbreviation for Add Book
@@ -68,34 +93,22 @@ const AddBookPage = () => {
 
 	function changeCover(e: React.ChangeEvent<HTMLInputElement>) {
 		let url = e.currentTarget.value
-		console.log(e.currentTarget.value)
-		if (!isUrl(url)) { console.log('is no url') }
-		else {
-			setCoverImg(e.currentTarget.value.trim())
-		}
+		if (isUrl(url)) setCoverImg(e.currentTarget.value.trim())
 	}
 
-	function getOlCover(isbn: [], size: string = '') {
-		let appendSize: string = ''
-		if (size !== '') appendSize = '-' + size
-		let isbnimg: string = ''
-		if (isbn.length > 0) { isbnimg = isbn.slice(-1).toString() }
-
-		return 'https://covers.openlibrary.org/b/isbn/' + isbnimg + appendSize + '.jpg'
-	}
 	return (
 		<>
 			<div className="booksearch">
 				<h1>Search book</h1>
 				<form onSubmit={processSearchForm}>
-					<input type="text" id='searchTitle' name='searchTitle' />
-					{searchMsg}
+					<input type="text" id='search_term' name='search_term' />
+					{resultsWarning}
 					<button>Search</button>
 				</form>
 			</div>
 			<div className="booksearchresults">
 				{searchResults.map((res, result_index) => {
-					if (res.isbn !== undefined) {
+					if (res.id !== undefined) {
 						let title: string
 						if (res.title.length > 45) title = res.title.slice(0, 40) + '...'
 						else title = res.title
@@ -110,7 +123,7 @@ const AddBookPage = () => {
 										<em className="sf cl">{authors}</em>
 									</div>
 								</div>
-								<img src={getOlCover(res.isbn)} className="thumbnail" />
+								<img src={res.coverS} className="thumbnail" />
 							</div>
 						)
 					}

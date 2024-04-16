@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 // TODO: this could just be a toggle with addtoreading... its basically the same code
 // TODO: should also be a button, which is actually more important: done reading
-const RemoveBookFromFavorites = (id: number) => {
+const RemoveBookFromFavorites = (id: Id) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -19,7 +19,7 @@ const RemoveBookFromFavorites = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const RemoveFromFavoritesButton = (id: number, favorite: boolean) => {
+const RemoveFromFavoritesButton = (id: Id, favorite: boolean) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	function RemoveFromFavoritesButtonAct() {

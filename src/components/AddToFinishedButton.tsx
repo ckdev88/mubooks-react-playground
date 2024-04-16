@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 // TODO: this could just be a toggle with addtoreading... its basically the same code
 // TODO: should also be a button, which is actually more important: done reading
-const AddToFinished = (id: number) => {
+const AddToFinished = (id: Id) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -22,7 +22,7 @@ const AddToFinished = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const AddToFinishedButton = (id: number) => {
+const AddToFinishedButton = (id: Id) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	function AddToFinishedButtonAct() {

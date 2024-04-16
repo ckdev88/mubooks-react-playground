@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 // TODO: this could just be a toggle with addtowishlist... its basically the same code
 
-const RemoveBookFromWishlist = (id: number) => {
+const RemoveBookFromWishlist = (id: Id) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -19,7 +19,7 @@ const RemoveBookFromWishlist = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const RemoveFromWishlistButton = (id: number, wishlist: boolean) => {
+const RemoveFromWishlistButton = (id: Id, wishlist: boolean) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	function RemoveFromWishlistButtonAct() {

@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../App'
 import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
+import { getOlCover } from '../../Helpers'
 
 export default function ReadingItems() {
 	const { userMyBooks } = useContext(AppContext)
@@ -21,7 +22,8 @@ export default function ReadingItems() {
 			<Link to="/reading">
 				<div className="deck-container">
 					{booksarr.slice(-6).map((book: Book, index: number) => {
-						var img = 'https://images.isbndb.com/covers' + book.img + '.jpg'
+						const img = getOlCover(book.cover_edition_key, 'L')
+
 						return (
 							<article
 								className="book-cover"

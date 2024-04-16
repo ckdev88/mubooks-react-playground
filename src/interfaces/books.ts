@@ -20,25 +20,40 @@ interface LoginFormInput {
 }
 type BookData = [
 	{
-		id?: number
+		id: Id
+		isbn0: string
+		isbn1: string
 		index?: number
 		title: string
 		author_name: [string]
 		number_of_pages_median: number
 		first_publish_year: number
+		cover_edition_key: string
+		cover: string
+		coverS: string
+		coverM: string
+		coverL: string
 		img?: string
 		title_short?: string
-		cover?: string
 	},
 ]
 interface Book {
 	index?: number
-	id: number
+	id: Id
+	isbn?: [string]
+	isbn0: string
+	isbn1: string
 	author_name: [string]
-	cover?: string
-	first_publish_year: string
+	cover_edition_key: string
+	cover: string
+	coverS: string
+	coverM: string
+	coverL: string
 	img?: string
+	first_publish_year: string
 	number_of_pages_median: number
+	author_key: [string]
+	edition_key: [string]
 	saved?: boolean
 	wishlist?: boolean
 	reading?: boolean
@@ -57,16 +72,24 @@ interface BooksObject {
 	books: Books
 }
 interface IdObject {
-	id: number
+	id: Id
 }
+type Id = string
 interface SavedObject {
 	saved: boolean
 }
 
 interface SearchResult {
-	title: string,
-	first_publish_year: number,
-	isbn: [],
+	title: string
+	first_publish_year: number
+	id:string
+	isbn0: string
+	isbn1: string
+	cover_edition_key: string
+	cover: string
+	coverS: string
+	coverM: string
+	coverL: string
 	author_name: [string]
 }
 interface SearchResults extends Array<SearchResult> { }

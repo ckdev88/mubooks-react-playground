@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 // TODO: this could just be a toggle with addtoreading... its basically the same code
 // TODO: should also be a button, which is actually more important: done reading
-const RemoveFromReading = (id: number) => {
+const RemoveFromReading = (id: Id) => {
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		myBooks = []
@@ -19,7 +19,7 @@ const RemoveFromReading = (id: number) => {
 	return myBooksNew // return value for update global state
 }
 
-const RemoveFromReadingButton = (id:number) => {
+const RemoveFromReadingButton = (id: Id) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	function RemoveFromReadingButtonAct() {

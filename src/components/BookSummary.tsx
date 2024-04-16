@@ -11,12 +11,13 @@ import { useLocation } from 'react-router-dom'
 const BookSummary = ({ book }: BookObject) => {
 	const location = useLocation()
 	const { pathname } = location
+
 	return (
 		// TODO: add className for when marked as saved
-		<article className="book-summary" key={book.id}>
+		<article className="book-summary">
 			<header>
 				<aside className="cover">
-					<img src={book.cover !== undefined ? book.cover : 'img/coverless.png'} alt="" />
+					<img src={book.coverM !== undefined ? book.coverM : 'img/coverless.png'} alt="" />
 				</aside>
 				<div className="in-short">
 					<h2>
