@@ -38,29 +38,29 @@ type BookData = [
 	},
 ]
 interface Book {
-	index?: number
+	author_key: [string]
+	author_name: [string]
+	cover: string
+	coverL: string
+	coverM: string
+	coverS: string
+	cover_edition_key: string
+	edition_key: [string]
+	favorite?: boolean
+	finished?: boolean
+	first_publish_year: string
 	id: Id
-	isbn?: [string]
+	img?: string
+	index?: number
 	isbn0: string
 	isbn1: string
-	author_name: [string]
-	cover_edition_key: string
-	cover: string
-	coverS: string
-	coverM: string
-	coverL: string
-	img?: string
-	first_publish_year: string
+	isbn?: [string]
 	number_of_pages_median: number
-	author_key: [string]
-	edition_key: [string]
-	saved?: boolean
-	wishlist?: boolean
 	reading?: boolean
-	finished?: boolean
-	favorite?: boolean
+	saved?: boolean
 	title: string
 	title_short: string
+	wishlist?: boolean
 }
 type Results = [Book]
 interface Books extends Array<Book> { }

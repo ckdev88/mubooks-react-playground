@@ -37,9 +37,8 @@ const AddBookPage = () => {
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
 	const [searchResults, setSearchResults] = useState<SearchResults>([])
 	const [resultsWarning, setResultsWarning] = useState<string>('')
-	const [resultCount,setResultCount]=useState<number>(0)
+	const [resultCount, setResultCount] = useState<number>(0)
 	const [resultsMessage, setResultsMessage] = useState<string>('')
-	const [searchTerm, setSearchTerm] = useState('')
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
@@ -62,19 +61,15 @@ const AddBookPage = () => {
 							filtered[i].isbn1 = ''
 						}
 						console.log(filtered[i])
-					filtered[i].cover =getOlCover(filtered[i].cover_edition_key) 
-					filtered[i].coverS=getOlCover(filtered[i].cover_edition_key,'S')
-					filtered[i].coverM=getOlCover(filtered[i].cover_edition_key,'M')
-					filtered[i].coverL=getOlCover(filtered[i].cover_edition_key,'L')
+						filtered[i].cover = getOlCover(filtered[i].cover_edition_key)
+						filtered[i].coverS = getOlCover(filtered[i].cover_edition_key, 'S')
+						filtered[i].coverM = getOlCover(filtered[i].cover_edition_key, 'M')
+						filtered[i].coverL = getOlCover(filtered[i].cover_edition_key, 'L')
 					}
-					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + filtered.length + ' results.'))
-					setSearchTerm(search_term)
+					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + resultCount + ' results for ' + search_term + '.'))
 					return filtered
 				})
 				.then(result => setSearchResults(result))
-
-
-
 			// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
 			// fields: '&fields=title,author_name,edition,thumbnail'
 
@@ -102,7 +97,8 @@ const AddBookPage = () => {
 				<h1>Search book</h1>
 				<form onSubmit={processSearchForm}>
 					<input type="text" id='search_term' name='search_term' />
-					{resultsWarning}
+					<div className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</div>
+					<div className={resultsWarning !== '' ? 'dblock' : 'dnone'}>{resultsWarning}</div>
 					<button>Search</button>
 				</form>
 			</div>

@@ -3,7 +3,6 @@ import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
 
 const SearchPage = () => {
-	const [resultsWarning, setResultsWarning] = useState<string>('')
 	const [resultsMessage, setResultsMessage] = useState<string>('')
 	const [resultCount, setResultCount] = useState<number>(0)
 	const [searchResults, setSearchResults] = useState<Books>([])
@@ -62,7 +61,6 @@ const SearchPage = () => {
 				<button>Search</button>
 			</form>
 			<div>
-				<div className={resultsWarning !== '' ? 'dblock' : 'dnone'}>{resultsWarning}</div>
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>
 					<h2 className="resultsfound">
 						{resultCount > 30 ? 'Over 30' : resultCount} {resultCount > 1 || resultCount === 0 ? 'books' : 'book'} found for <em>"{searchTerm}"</em>
