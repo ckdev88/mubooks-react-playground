@@ -35,9 +35,8 @@ for covers: https://covers.openlibrary.org/b/isbn/isbnnummerhier-S.jpg
 
 const AddBookPage = () => {
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
-	const [searchResults, setSearchResults] = useState<SearchResults>([])
+	const [searchResults, setSearchResults] = useState<Books>([])
 	const [resultsWarning, setResultsWarning] = useState<string>('')
-	const [resultCount, setResultCount] = useState<number>(0)
 	const [resultsMessage, setResultsMessage] = useState<string>('')
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
@@ -46,10 +45,9 @@ const AddBookPage = () => {
 		if (search_term.length > 4) {
 			setResultsWarning('')
 			// const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + search_term + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
-			const wacht = await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=8&fields=title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median')
+			const wacht = await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=8&fields=author_key,author_name,cover_edition_key,edition_key,first_publish_year,isbn,number_of_pages_median,title')
 			await wacht.json().then(json => json.docs.filter((r: Book) => r.author_key !== undefined && r.edition_key !== undefined && r.isbn !== undefined && r.cover_edition_key !== undefined))
 				.then(filtered => {
-					setResultCount(filtered.length)
 					for (let i = 0; i < filtered.length; i++) {
 						filtered[i].id = filtered[i].edition_key.slice(0, 1).toString()
 						filtered[i].title_short = filtered[i].title.slice(0, 40).toString()
@@ -66,7 +64,7 @@ const AddBookPage = () => {
 						filtered[i].coverM = getOlCover(filtered[i].cover_edition_key, 'M')
 						filtered[i].coverL = getOlCover(filtered[i].cover_edition_key, 'L')
 					}
-					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + resultCount + ' results for ' + search_term + '.'))
+					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + filtered.length + ' results for ' + search_term + '.'))
 					return filtered
 				})
 				.then(result => setSearchResults(result))

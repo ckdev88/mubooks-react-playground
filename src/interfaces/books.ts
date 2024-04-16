@@ -38,14 +38,14 @@ type BookData = [
 	},
 ]
 interface Book {
-	author_key: [string]
+	author_key?: [string]
 	author_name: [string]
 	cover: string
 	coverL: string
 	coverM: string
 	coverS: string
 	cover_edition_key: string
-	edition_key: [string]
+	edition_key?: [string]
 	favorite?: boolean
 	finished?: boolean
 	first_publish_year: string
@@ -78,18 +78,3 @@ type Id = string
 interface SavedObject {
 	saved: boolean
 }
-
-interface SearchResult {
-	title: string
-	first_publish_year: number
-	id:string
-	isbn0: string
-	isbn1: string
-	cover_edition_key: string
-	cover: string
-	coverS: string
-	coverM: string
-	coverL: string
-	author_name: [string]
-}
-interface SearchResults extends Array<SearchResult> { }

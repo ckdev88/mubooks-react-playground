@@ -20,14 +20,13 @@ export default function WishlistItems() {
 			<Link to="/wishlist">
 				<div className="deck-container">
 					{booksarr.slice(-6).map((book: Book, index: number) => {
-						var img = 'https://images.isbndb.com/covers' + book.img + '.jpg'
 						return (
 							<article
 								className="book-cover"
 								key={book.id}
 								style={{ zIndex: 10 - index }}
 							>
-								<img src={img} />
+								<img src={book.coverL} />
 							</article>
 						)
 					})}

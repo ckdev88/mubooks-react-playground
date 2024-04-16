@@ -8,8 +8,6 @@ const RecoverCard = () => {
 
 	function processRecoverForm(event: any) {
 		event.preventDefault()
-		console.log('doe iets')
-		console.log('recover', event.target.email.value)
 		const email: string = event.target.email.value
 		recoverAccount(email)
 	}
