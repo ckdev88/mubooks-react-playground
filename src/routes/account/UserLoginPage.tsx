@@ -5,23 +5,14 @@ import RecoverCard from '../../components/account/RecoverCard'
 import setDraaideurHeight from '../../hooks/setDraaideurHeight'
 
 export default function UserLoginPage() {
-	useEffect(() => { setDraaideurHeight() }, [])
-	// TODO: proper redirect if already logged in, probably has to be done in routes or app
+	useEffect(() => {
+		setDraaideurHeight()
+	}, [])
 	return (
 		<>
-			<div id="welcome-logo" style={{ marginBottom: 1 + 'rem' }}>
+			<div id="welcome-logo">
 				<h1 style={{ textAlign: 'center' }}>MuBooks</h1>
-				<img
-					id="welcome-logo-img"
-					src="img/logo.svg"
-					style={{
-						maxWidth: '33%',
-						display: 'block',
-						margin: '0 auto',
-						position: 'relative',
-						zIndex: 2,
-					}}
-				/>
+				<img id="welcome-logo-img" src="img/logo.svg" />
 			</div>
 			<div id="cards-draaideur" className="cards-draaideur">
 				<div className="axis">
