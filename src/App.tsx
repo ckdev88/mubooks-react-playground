@@ -22,6 +22,7 @@ import AddBookPage from './routes/books/AddBookPage'
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const App = () => {
+
 	let userIsLoggedInInitval: boolean
 	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitval = true
 	else userIsLoggedInInitval = false
@@ -37,10 +38,14 @@ const App = () => {
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitval)
 
 	if (username === '') {
-		if (localStorage.getItem(localStorageKey)) setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
+		if (localStorage.getItem(localStorageKey))
+			setUsername(
+				JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata
+					.screenname
+			)
 	}
 
-	if(userIsLoggedIn)document.getElementsByTagName('html')[0].classList.add('loggedin')
+	if (userIsLoggedIn) document.getElementsByTagName('html')[0].classList.add('loggedin')
 	else document.getElementsByTagName('html')[0].classList.remove('loggedin')
 
 	return (
@@ -60,7 +65,7 @@ const App = () => {
 				<header id="header">
 					<NavWrapper />
 				</header>
-				<main id="main" className='textwrapper'>
+				<main id="main" className="textwrapper">
 					<Routes>
 						<Route path="/" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />

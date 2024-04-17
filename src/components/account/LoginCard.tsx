@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import useCardRotate from '../../hooks/useCardRotate'
-import UserLogin from '../../stores/UserLogin'
 import { useContext, useState } from "react"
 import { AppContext } from '../../App'
+import { UserLogin } from '../../hooks/AuthHelpers'
 
 const LoginCard = () => {
 	const navigate = useNavigate()

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
-import UserSignup from '../../stores/UserSignup'
+import { UserSignup } from '../../hooks/AuthHelpers'
 import { useNavigate } from 'react-router-dom'
 
 export default function SignupCard() {

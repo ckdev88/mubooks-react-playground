@@ -1,28 +1,28 @@
 import useCardRotate from '../../hooks/useCardRotate'
-import { supabase } from '../../../utils/supabase'
 import { AppContext } from '../../App'
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
+import { UserGetData, UserUpdate } from '../../hooks/AuthHelpers'
 
 export default function MyAccountEditCard() {
 	const { see } = useCardRotate()
 	const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
 	const [sbUsermail, setSbUsermail] = useState<string>(usermail)
 	const [sbUsername, setSbUsername] = useState<string>(username)
-	const [updateError, setUpdateError] = useState<string>('')
 
-	useEffect(() => {
-		userdata()
-	}, [])
-
-	const userdata = async () => {
-		const { data, error } = await supabase.auth.getUser()
-		if (error) {
-			console.log('error updating userdata', error)
+	async function doUserData() {
+		const userGetData = await UserGetData()
+		if (userGetData.error !== null) {
+			console.log('error fetching userdata...', userGetData.error)
 		} else {
-			if (data.user.email) setSbUsermail(data.user.email)
-			setSbUsername(data.user.user_metadata?.screenname)
+			const d = userGetData.data.user
+			if (d !== null) {
+				if (d.email !== null && d.email !== undefined) setSbUsermail(d.email)
+				setSbUsername(d.user_metadata?.screenname)
+			}
 		}
 	}
+	doUserData()
+
 	function afterUpdateSb(name: string, mail: string) {
 		setUsername(name)
 		setUsermail(mail)
@@ -30,33 +30,18 @@ export default function MyAccountEditCard() {
 		setSbUsermail(mail)
 		see()
 	}
-	async function updateUser(form_username: string, form_usermail: string, form_userpass: string) {
-		if (form_userpass !== '') {
-			// TODO: ugly conditional, make nice
-			const { error } = await supabase.auth.updateUser({
-				email: form_usermail,
-				password: form_userpass,
-				data: { screenname: form_username },
-			})
-			if (error) return { error }
-			else afterUpdateSb(form_username, form_usermail)
-		} else {
-			const { error } = await supabase.auth.updateUser({
-				email: form_usermail,
-				data: { screenname: form_username },
-			})
-			if (error) return { error }
-			else afterUpdateSb(form_username, form_usermail)
-		}
+
+	const updateUser = async (form_username: string, form_usermail: string, form_userpass: string) => {
+		const updater = await UserUpdate(form_username, form_usermail, form_userpass)
+		if (!updater.error) afterUpdateSb(form_username, form_usermail)
 	}
 
-	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		const form_username: string = e.currentTarget.account_screenname.value.trim()
 		const form_usermail: string = e.currentTarget.account_email.value.trim()
 		const form_userpass: string = e.currentTarget.account_password.value.trim()
-		const update = await updateUser(form_username, form_usermail, form_userpass)
-		if (update?.error) setUpdateError(update.error.message)
+		updateUser(form_username, form_usermail, form_userpass)
 	}
 
 	return (
@@ -73,26 +58,9 @@ export default function MyAccountEditCard() {
 							defaultValue={sbUsername}
 						/>
 						<label htmlFor="account_email">Email address</label>
-						<input
-							type="email"
-							id="account_email"
-							name="account_email"
-							defaultValue={sbUsermail}
-						/>
-						<label htmlFor="account_password">
-							Password (leave empty to keep current)
-						</label>
-						<input
-							type="password"
-							id="account_password"
-							name="account_password"
-							defaultValue=""
-						/>
-						<div style={{ height: '1rem' }}>
-							<span className={updateError !== '' ? 'dblock error' : 'dnone'}>
-								{updateError}
-							</span>
-						</div>
+						<input type="email" id="account_email" name="account_email" defaultValue={sbUsermail} />
+						<label htmlFor="account_password">Password (leave empty to keep current)</label>
+						<input type="password" id="account_password" name="account_password" defaultValue="" />
 						<button>Save and return</button>
 					</form>
 				</main>
