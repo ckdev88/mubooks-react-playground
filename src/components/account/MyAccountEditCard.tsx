@@ -88,7 +88,11 @@ export default function MyAccountEditCard() {
 							name="account_password"
 							defaultValue=""
 						/>
-						<div className={updateError !== '' ? 'dblock error' : 'dnone'}>{updateError}</div>
+						<div style={{ height: '1rem' }}>
+							<span className={updateError !== '' ? 'dblock error' : 'dnone'}>
+								{updateError}
+							</span>
+						</div>
 						<button>Save and return</button>
 					</form>
 				</main>

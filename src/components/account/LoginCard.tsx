@@ -16,7 +16,7 @@ const LoginCard = () => {
 			password: event.currentTarget.loginpassword.value,
 		}
 		const login = await UserLogin(user as User)
-		if (login?.error) {
+		if (login.error) {
 			setError(login.error.message)
 		}
 		else {

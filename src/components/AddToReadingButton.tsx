@@ -13,18 +13,22 @@ const AddToReading = async (book: Book) => {
 	let bookIsSaved = false
 	let returnval: string
 	for (let i = 0; i < myBooks.length; i++) {
-		// TODO: refactor/combine together with other AddTo***Button.tsx files using args
 		if (myBooks[i].id === book.id) {
 			bookIsSaved = true
 			myBooks[i].wishlist = false
 			myBooks[i].reading = true
-			myBooks[i].favorite = false
 			myBooks[i].finished = false
+			myBooks[i].favorite = false
 		}
 	}
 	if (bookIsSaved === false) {
-		// add book to saved, mark as wishlist (+toggle?)
-		await AddBookToSaved(book, false, true) // wishlist false, reading true
+		await AddBookToSaved(
+			book,
+			false,
+			true,
+			false,
+			false
+		) // wishlist false, reading true, finished false, favorite false
 	} else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
 	}

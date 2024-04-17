@@ -22,8 +22,13 @@ const AddBookToWishlist = async (book: Book) => {
 		}
 	}
 	if (bookIsSaved === false) {
-		// add book to saved, mark as wishlist (+toggle?)
-		await AddBookToSaved(book, true, false)
+		await AddBookToSaved(
+			book,
+			true,
+			false,
+			false,
+			false
+		) // wishlist true, reading false, finished false, favorite false
 	} else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
 	}
@@ -35,8 +40,8 @@ const AddToWishlistButton = (book: Book) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
 	async function AddToWishlistButtonAct() {
-		const refreshState = AddBookToWishlist(book)
-		setUserMyBooks(await refreshState) // TODO: running twice needed right now, far from ideal, refactor
+		const refreshState = AddBookToWishlist(book) // update localstorage, database
+		setUserMyBooks(await refreshState) // update global state
 	}
 
 	if (book?.wishlist || book?.finished || book?.favorite) return <></>

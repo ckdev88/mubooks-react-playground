@@ -22,14 +22,13 @@ const AddToFavorites = async (book: Book) => {
 		}
 	}
 	if (bookIsSaved === false) {
-		// add book to saved, mark as wishlist (+toggle?)
 		await AddBookToSaved(
 			book,
 			false,
 			false,
 			true,
 			true
-		) /* wishlist false, reading false, finished true, favorite true */
+		) // wishlist false, reading false, finished true, favorite true
 	} else {
 		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
 	}
