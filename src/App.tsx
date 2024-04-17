@@ -40,6 +40,9 @@ const App = () => {
 		if (localStorage.getItem(localStorageKey)) setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
 	}
 
+	if(userIsLoggedIn)document.getElementsByTagName('html')[0].classList.add('loggedin')
+	else document.getElementsByTagName('html')[0].classList.remove('loggedin')
+
 	return (
 		<>
 			<AppContext.Provider

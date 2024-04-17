@@ -60,6 +60,7 @@ img {
 }
 
 #header {
+	display: none;
 	position: fixed;
 	top: 0;
 	width: calc(100% - 2rem);
@@ -69,10 +70,18 @@ img {
 	box-sizing: border-box;
 }
 
+.loggedin #header {
+	display: block;
+}
+
 #main {
 	position: relative;
 	z-index: 1;
-	padding: 5rem 0.25rem 1rem;
+	padding: 1rem 0.25rem 1rem;
+}
+
+.loggedin #main {
+	padding-top: 5rem;
 }
 
 dl dd {
