@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
-import AddBookToSaved from '../stores/AddBookToSaved'
-import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
+import { MyBooksAdd, MyBooksUpdate } from '../helpers/MyBooksHelpers'
 
 const AddToFavorites = async (book: Book) => {
 	let myBooks: Books
@@ -22,7 +21,7 @@ const AddToFavorites = async (book: Book) => {
 		}
 	}
 	if (bookIsSaved === false) {
-		await AddBookToSaved(
+		await MyBooksAdd(
 			book,
 			false,
 			false,
