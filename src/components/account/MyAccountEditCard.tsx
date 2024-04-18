@@ -1,13 +1,11 @@
 import useCardRotate from '../../hooks/useCardRotate'
 import { AppContext } from '../../App'
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { UserGetData, UserUpdate } from '../../hooks/AuthHelpers'
 
 export default function MyAccountEditCard() {
 	const { see } = useCardRotate()
 	const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
-	const [sbUsermail, setSbUsermail] = useState<string>(usermail)
-	const [sbUsername, setSbUsername] = useState<string>(username)
 
 	async function doUserData() {
 		const userGetData = await UserGetData()
@@ -16,8 +14,8 @@ export default function MyAccountEditCard() {
 		} else {
 			const d = userGetData.data.user
 			if (d !== null) {
-				if (d.email !== null && d.email !== undefined) setSbUsermail(d.email)
-				setSbUsername(d.user_metadata?.screenname)
+				if (d.email !== null && d.email !== undefined) setUsermail(d.email)
+				setUsername(d.user_metadata?.screenname)
 			}
 		}
 	}
@@ -26,8 +24,6 @@ export default function MyAccountEditCard() {
 	function afterUpdateSb(name: string, mail: string) {
 		setUsername(name)
 		setUsermail(mail)
-		setSbUsername(name)
-		setSbUsermail(mail)
 		see()
 	}
 
@@ -55,10 +51,10 @@ export default function MyAccountEditCard() {
 							type="text"
 							id="account_screenname"
 							name="account_screenname"
-							defaultValue={sbUsername}
+							defaultValue={username}
 						/>
 						<label htmlFor="account_email">Email address</label>
-						<input type="email" id="account_email" name="account_email" defaultValue={sbUsermail} />
+						<input type="email" id="account_email" name="account_email" defaultValue={usermail} />
 						<label htmlFor="account_password">Password (leave empty to keep current)</label>
 						<input type="password" id="account_password" name="account_password" defaultValue="" />
 						<button>Save and return</button>

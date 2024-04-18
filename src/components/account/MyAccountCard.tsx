@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
@@ -8,23 +8,22 @@ export default function MyAccountCard() {
 	const { change } = useCardRotate()
 	const { username, usermail, setUsermail, setUsername } = useContext(AppContext)
 
-	async function doUserData() {
-		const userGetData = await UserGetData()
-		if (userGetData.error !== null) {
-			console.log('error fetching userdata...', userGetData.error)
-		} else {
-			const d = userGetData.data.user
-			if (d !== null) {
-				if (d.email !== null && d.email !== undefined) setUsermail(d.email)
-				setUsername(d.user_metadata?.screenname)
-			}
+	const doUserData = async () => {
+		const d = await UserGetData()
+		if (d.error) console.error(d.error)
+		else {
+			if (d.data.user?.email) setUsermail(d.data.user?.email);
+			setUsername(d.data.user?.user_metadata.screenname)
 		}
 	}
-	doUserData()
+
+	useEffect(() => {
+		doUserData()
+	}, [])
 
 	return (
 		<div className="card">
-			<header>My account</header>
+			<header>My account.</header>
 			<main>
 				<dl>
 					<dt>Screen name</dt>

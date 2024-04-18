@@ -25,36 +25,27 @@ const UserGetData = async () => {
 	return { data, error }
 }
 
-// const UserUpdate = async () => {
-// 	const { data, error } = await supabase.auth.updateUser({
-// 		email: 'i.likeespressoalot@gmail.com',
-// 		data: { screenname: 'asdasdasd' },
-// 	})
-// 	return { error, data }
-// }
-
-	 const  UserUpdate = async (form_username: string, form_usermail: string, form_userpass: string)=> {
-		if (form_userpass !== '') {
-			// TODO: ugly conditional, make nice
-			const { error } = await supabase.auth.updateUser({
-				email: form_usermail,
-				password: form_userpass,
-				data: { screenname: form_username },
-			})
-		return {error,form_username,form_usermail}
-			// if(error){return error}
-			// else afterUpdateSb(form_username, form_usermail)
-		} else {
-			const { error } = await supabase.auth.updateUser({
-				email: form_usermail,
-				data: { screenname: form_username },
-			})
-			// TODO: use error to show to user
-			// if(error){return error}
-		return {error,form_username,form_usermail}
-			// else afterUpdateSb(form_username, form_usermail)
-		}
+const UserUpdate = async (form_username: string, form_usermail: string, form_userpass: string) => {
+	if (form_userpass !== '') {
+		const { error } = await supabase.auth.updateUser({
+			email: form_usermail,
+			password: form_userpass,
+			data: { screenname: form_username },
+		})
+		return { error }
+		// if(error){return error}
+		// else afterUpdateSb(form_username, form_usermail)
+	} else {
+		const { error } = await supabase.auth.updateUser({
+			email: form_usermail,
+			data: { screenname: form_username },
+		})
+		// TODO: use error to show to user
+		// if(error){return error}
+		return { error }
+		// else afterUpdateSb(form_username, form_usermail)
 	}
+}
 
 const UserLogout = async () => {
 	let { error } = await supabase.auth.signOut()
