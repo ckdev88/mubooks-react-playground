@@ -1,12 +1,12 @@
-import UpdateMyBooks from '../stores/UpdateMyBooks'
 import { useContext } from 'react'
 import { AppContext } from '../App'
+import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
 
 const RemoveBookFromSaved = (id: Id) => {
 	let myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 	myBooks = myBooks.filter((presentbook: Book) => presentbook.id !== id)
 	const myBooksNew: string = JSON.stringify(myBooks)
-	UpdateMyBooks(myBooksNew) // update localstorage, database, state with saved booklist
+	MyBooksUpdate(myBooksNew) // update localstorage, database, state with saved booklist
 	return myBooksNew
 }
 

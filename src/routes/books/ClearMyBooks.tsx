@@ -1,10 +1,11 @@
-import UpdateMyBooks from "../../stores/UpdateMyBooks"
 import { useContext } from "react"
 import { AppContext } from "../../App"
+import { MyBooksUpdate } from "../../helpers/MyBooksHelpers"
+
 const ClearMyBooks = () => {
 	const { setUserMyBooks } = useContext(AppContext)
 	function clearbooks() {
-		UpdateMyBooks('[]')
+		MyBooksUpdate('[]')
 		setUserMyBooks('[]')
 	}
 	return (

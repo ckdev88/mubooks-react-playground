@@ -1,6 +1,6 @@
-import UpdateMyBooks from '../stores/UpdateMyBooks'
 import { useContext } from 'react'
 import { AppContext } from '../App'
+import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
 
 // TODO: this could just be a toggle with addtoreading... its basically the same code
 // TODO: should also be a button, which is actually more important: done reading
@@ -15,7 +15,7 @@ const RemoveBookFromFavorites = (id: Id) => {
 	}
 	const myBooksNew: string = JSON.stringify(myBooks)
 
-	UpdateMyBooks(myBooksNew) // update localstorage, database
+	MyBooksUpdate(myBooksNew) // update localstorage, database
 	return myBooksNew // return value for update global state
 }
 

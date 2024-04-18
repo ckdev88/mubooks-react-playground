@@ -1,4 +1,4 @@
-import UpdateMyBooks from './UpdateMyBooks'
+import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
 
 export default async function AddBookToSaved(
 	book: Book,
@@ -35,6 +35,6 @@ export default async function AddBookToSaved(
 		wishlist: wishlist,
 	})
 
-	UpdateMyBooks(JSON.stringify(myBooks))
+	MyBooksUpdate(JSON.stringify(myBooks))
 	return JSON.stringify(myBooks)
 }

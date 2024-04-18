@@ -1,6 +1,6 @@
-import UpdateMyBooks from '../stores/UpdateMyBooks'
 import { useContext } from 'react'
 import { AppContext } from '../App'
+import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
 
 const AddToFinished = (id: Id) => {
 	let myBooks: Books
@@ -18,7 +18,7 @@ const AddToFinished = (id: Id) => {
 	}
 	const myBooksNew: string = JSON.stringify(myBooks)
 
-	UpdateMyBooks(myBooksNew) // update localstorage, database
+	MyBooksUpdate(myBooksNew) // update localstorage, database
 	return myBooksNew // return value for update global state
 }
 

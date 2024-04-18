@@ -1,7 +1,7 @@
-import UpdateMyBooks from '../stores/UpdateMyBooks'
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import AddBookToSaved from '../stores/AddBookToSaved'
+import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
 
 const AddToReading = async (book: Book) => {
 	let myBooks: Books
@@ -30,7 +30,7 @@ const AddToReading = async (book: Book) => {
 			false
 		) // wishlist false, reading true, finished false, favorite false
 	} else {
-		await UpdateMyBooks(JSON.stringify(myBooks)) // update localstorage, database
+		await MyBooksUpdate(JSON.stringify(myBooks)) // update localstorage, database
 	}
 	returnval = JSON.stringify(localStorage.getItem('MyBooks'))
 	return returnval
