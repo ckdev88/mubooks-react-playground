@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserLogout } from '../../hooks/AuthHelpers'
+import { UserLogout } from '../../helpers/AuthHelpers'
 import { useContext } from "react"
 import { AppContext } from '../../App'
 

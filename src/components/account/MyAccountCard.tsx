@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
-import { UserGetData } from '../../hooks/AuthHelpers'
+import { UserGetData } from '../../helpers/AuthHelpers'
 
 export default function MyAccountCard() {
 	const { change } = useCardRotate()
