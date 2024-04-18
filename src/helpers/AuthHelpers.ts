@@ -16,7 +16,6 @@ const UserLogin = async (user: User) => {
 		email: user.email,
 		password: user.password,
 	})
-	console.log('error', error, 'data', data)
 	return { error, data }
 }
 

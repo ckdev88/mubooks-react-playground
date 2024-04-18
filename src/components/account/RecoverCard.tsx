@@ -14,10 +14,9 @@ const RecoverCard = () => {
 
 	async function recoverAccount(email: string) {
 		console.log('recovering..')
-		let { data, error } = await supabase.auth.resetPasswordForEmail(email)
+		let { error } = await supabase.auth.resetPasswordForEmail(email)
 		if (error) console.log(error)
 		else {
-			console.log('data:', data)
 			navigate(`/account/checkmail?addr=${email}`)
 		}
 	}
