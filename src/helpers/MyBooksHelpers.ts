@@ -2,10 +2,7 @@ import { supabase } from '../../utils/supabase'
 
 const MyBooksAdd = async (
 	book: Book,
-	wishlist = book.wishlist,
-	reading = book.reading,
-	favorite = book.favorite,
-	finished = book.finished
+	list = book.list
 ) => {
 	if (book.title.length > 35) {
 		book.title_short = book.title.slice(0, 35) + '...'
@@ -21,18 +18,14 @@ const MyBooksAdd = async (
 		coverM: book.coverM,
 		coverS: book.coverS,
 		cover_edition_key: book.cover_edition_key,
-		edition_key: book.edition_key,
-		favorite: favorite,
-		finished: finished,
+		list: list,
 		first_publish_year: book.first_publish_year,
 		id: book.id,
 		img: book.img,
 		number_of_pages_median: book.number_of_pages_median,
-		reading: reading,
 		saved: true,
 		title: book.title,
 		title_short: book.title_short,
-		wishlist: wishlist,
 	})
 
 	MyBooksUpdate(JSON.stringify(myBooks))

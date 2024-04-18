@@ -55,8 +55,6 @@ interface Book {
 	coverS: string
 	cover_edition_key: string
 	edition_key?: [string]
-	favorite?: boolean
-	finished?: boolean
 	first_publish_year: string
 	id: Id
 	img?: string
@@ -64,12 +62,12 @@ interface Book {
 	isbn0: string
 	isbn1: string
 	isbn?: [string]
+	/** 1: Wishlist | 2: Reading | 3: Finished | 4: Favorite (+Finished) */
+	list: BookList
 	number_of_pages_median: number
-	reading?: boolean
 	saved?: boolean
 	title: string
 	title_short: string
-	wishlist?: boolean
 }
 type Results = [Book]
 interface Books extends Array<Book> { }

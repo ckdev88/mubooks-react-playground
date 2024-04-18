@@ -16,7 +16,8 @@ const WishlistPage = () => {
 	else {
 		books = JSON.parse(userMyBooks as string)
 		if (typeof (books) !== 'object') books = JSON.parse(books)
-		booksFiltered = books.filter((book) => book.wishlist === true)
+
+		booksFiltered = books.filter((book) => book.list === 1)
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false

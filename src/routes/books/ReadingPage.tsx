@@ -1,11 +1,10 @@
 import { useContext } from "react"
 import BooksOverviewPage from "./BooksOverviewPage"
 import { AppContext } from "../../App"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const ReadingPage = () => {
 	const { userMyBooks } = useContext(AppContext)
-	const navigate = useNavigate()
 
 	let hasbooks = false
 	let books: Books
@@ -17,7 +16,8 @@ const ReadingPage = () => {
 	else {
 		books = JSON.parse(userMyBooks as string)
 		if (typeof (books) !== 'object') books = JSON.parse(books)
-		booksFiltered = books.filter((book) => book.reading === true)
+
+		booksFiltered = books.filter((book) => book.list === 2)
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false
@@ -27,14 +27,13 @@ const ReadingPage = () => {
 	return (
 		<>
 			<h1>What I'm reading now</h1>
-			<p>This can later be used to see for how long you enjoyed reading this book.</p>
-			<div className={hasbooks === true ? 'dnone' : 'dblock'}>
-				<h4>Currently not reading anything.</h4>
-				<p>Select a book from Mu Books or use the search.</p>
-				<button className="wauto mr1" onClick={() => navigate('/saved-books')}>Mu Books</button>
-				<button className="wauto" onClick={() => navigate('/search')}>Search</button>
-			</div>
-			<BooksOverviewPage books={books} page="readingpage" />
+			<p className="subHead">This can later be used to see for how long you enjoyed reading this book.</p>
+			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>Currently not reading anything.</h4>
+			<p>
+				Want to add a book to your reading list?<br />
+				<Link to="/wishlist">View your wishlist</Link> or <Link to="/search">Search</Link> to add a book.<br /><br />
+			</p>
+			<BooksOverviewPage books={booksFiltered} page="readingpage" />
 		</>
 	)
 }

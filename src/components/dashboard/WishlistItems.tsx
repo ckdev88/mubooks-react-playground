@@ -8,7 +8,7 @@ export default function WishlistItems() {
 	let hasbooks = false
 	let booksParsed: Books = JSON.parse(userMyBooks)
 	if (typeof booksParsed !== 'object') booksParsed = JSON.parse(booksParsed)
-	const booksarr = booksParsed.filter((book: Book) => book.wishlist === true)
+	const booksarr = booksParsed.filter((book: Book) => book.list === 1)
 	if (booksarr.length > 0) hasbooks = true
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {

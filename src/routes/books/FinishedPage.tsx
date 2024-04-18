@@ -1,10 +1,9 @@
 import { useContext } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const FinishedPage = () => {
-	const navigate = useNavigate()
 	const { userMyBooks } = useContext(AppContext)
 
 	let hasbooks = false
@@ -16,7 +15,8 @@ const FinishedPage = () => {
 	} else {
 		books = JSON.parse(userMyBooks as string)
 		if (typeof books !== 'object') books = JSON.parse(books)
-		booksFiltered = books.filter((book) => book.finished === true)
+
+		booksFiltered = books.filter((book) => book.list === 3 || book.list === 4)
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false
@@ -26,17 +26,18 @@ const FinishedPage = () => {
 	return (
 		<>
 			<h1>Finished books</h1>
-			<p>
+			<p className="subHead">
 				Books I finished reading. Have any favorites? Add them to your favorites from here.
 			</p>
-			<div className={hasbooks === true ? 'dnone' : 'dblock'}>
-				<h4>No books marked as finished yet.</h4>
-				<p>Select and mark your currently reading book as finished.</p>
-				<button className="wauto mr1" onClick={() => navigate('/reading')}>
-					Currently Reading Books
-				</button>
-			</div>
-			<BooksOverviewPage books={books} page="finishedpage" />
+			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>Not finished any book yet.</h4>
+			<p>
+				Are you finished with the book you're reading?
+				<br />
+				Select and mark your <Link to="/reading">currently reading book</Link> as finished.
+				<br />
+				<br />
+			</p>
+			<BooksOverviewPage books={booksFiltered} page="finishedpage" />
 		</>
 	)
 }

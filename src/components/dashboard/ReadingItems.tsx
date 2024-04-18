@@ -8,7 +8,7 @@ export default function ReadingItems() {
 	let hasbook = false
 	let booksParsed: Books = JSON.parse(userMyBooks)
 	if (typeof booksParsed !== 'object') booksParsed = JSON.parse(booksParsed)
-	const booksarr = booksParsed.filter((book) => book.reading === true)
+	const booksarr = booksParsed.filter((book) => book.list === 2)
 	if (booksarr.length > 0) hasbook = true
 
 	function DeckCovers(booksarr: Books) {

@@ -1,23 +1,17 @@
 import BookAuthorList from './BookAuthorList'
-import RemoveBookButton from './RemoveBookButton'
-import AddToWishlistButton from './AddToWishlistButton'
-import RemoveFromWishlistButton from './RemoveFromWishlistButton'
-import AddToReadingButton from './AddToReadingButton'
-import AddToFinishedButton from './AddToFinishedButton'
-import AddToFavoritesButton from './AddToFavoritesButton'
-import RemoveFromFavoritesButton from './RemoveFromFavoritesButton'
-import { useLocation } from 'react-router-dom'
+import AddBookToXButton from './AddBookToXButton'
+import RemoveBookFromXButton from './RemoveBookFromXButton'
 
 const BookSummary = ({ book }: BookObject) => {
-	const location = useLocation()
-	const { pathname } = location
-
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary">
 			<header>
 				<aside className="cover">
-					<img src={book.coverM !== undefined ? book.coverM : 'img/coverless.png'} alt="" />
+					<img
+						src={book.coverM !== undefined ? book.coverM : 'img/coverless.png'}
+						alt=""
+					/>
 				</aside>
 				<div className="in-short">
 					<h2>
@@ -33,20 +27,16 @@ const BookSummary = ({ book }: BookObject) => {
 			<footer>
 				<div className="marks">
 					<div className="mark">
-						{(book.saved && pathname === '/saved-books') &&
-							RemoveBookButton(book.id, book?.saved)}
-						{(!book.wishlist && !book.reading && !book.finished) &&
-							AddToWishlistButton(book)}
-						{book.wishlist &&
-							RemoveFromWishlistButton(book.id, book?.wishlist)}
-						{(!book.reading && !book.finished) &&
-							AddToReadingButton(book)}
-						{book.reading &&
-							AddToFinishedButton(book.id)}
-						{(!book.favorite && !book.reading && !book.wishlist && book.finished) &&
-							AddToFavoritesButton(book)}
-						{book.favorite &&
-							RemoveFromFavoritesButton(book.id, book?.favorite)}
+						{/* TODO: build further on new feature; highlight saved books in search view */}
+						{/* (pathname === '/search' && book.list !== undefined) ? 'SAVED in ' + book.list : 'not saved' */}
+						{!book.list && AddBookToXButton(book, 1)}
+						{book.list === 1 && RemoveBookFromXButton(book, 1)}
+						{book.list === 1 && AddBookToXButton(book, 2)}
+						{book.list === 2 && RemoveBookFromXButton(book, 2)}
+						{book.list === 2 && AddBookToXButton(book, 3)}
+						{book.list === 3 && RemoveBookFromXButton(book, 3)}
+						{book.list === 3 && AddBookToXButton(book, 4)}
+						{book.list === 4 && RemoveBookFromXButton(book, 4)}
 					</div>
 				</div>
 				<hr />

@@ -1,12 +1,13 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import { MyBooksAdd, MyBooksUpdate } from '../helpers/MyBooksHelpers'
+import getListName from '../hooks/getListName'
 
-const AddToFavorites = async (book: Book) => {
+const AddBookToX = async (book: Book, targetList: BookList) => {
+	// return false
 	let myBooks: Books
-	if (localStorage.getItem('MyBooks') === 'undefined') {
-		myBooks = []
-	} else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
+	if (localStorage.getItem('MyBooks') === undefined) myBooks = []
+	else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 
 	// check if already saved in localstorage, database. if not, add first
 	let bookIsSaved = false
@@ -14,20 +15,14 @@ const AddToFavorites = async (book: Book) => {
 	for (let i = 0; i < myBooks.length; i++) {
 		if (myBooks[i].id === book.id) {
 			bookIsSaved = true
-			myBooks[i].wishlist = false
-			myBooks[i].reading = false
-			myBooks[i].finished = true
-			myBooks[i].favorite = true
+			myBooks[i].list = targetList
 		}
 	}
 	if (bookIsSaved === false) {
 		await MyBooksAdd(
 			book,
-			false,
-			false,
-			true,
-			true
-		) // wishlist false, reading false, finished true, favorite true
+			targetList,
+		) 
 	} else {
 		await MyBooksUpdate(JSON.stringify(myBooks)) // update localstorage, database
 	}
@@ -35,21 +30,20 @@ const AddToFavorites = async (book: Book) => {
 	return returnval
 }
 
-const AddToFavoritesButton = (book: Book) => {
+const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const { setUserMyBooks } = useContext(AppContext)
 
-	async function AddToFavoritesButtonAct() {
-		const refreshState = AddToFavorites(book) // update localstorage, database
+	async function AddBookToXButtonAct() {
+		const refreshState = AddBookToX(book, targetList) // update localstorage, database
 		setUserMyBooks(await refreshState) // update global state
 	}
 
-	if (book?.favorite) return <></>
 	return (
 		<div className="mark">
-			<a onClick={() => AddToFavoritesButtonAct()}>
-				<span className="icon icon-favorites"></span>Add to Favorites
+			<a onClick={() => AddBookToXButtonAct()}>
+				<span className="icon icon-wishlist"></span>Add to {getListName(targetList)} X
 			</a>
 		</div>
 	)
 }
-export default AddToFavoritesButton
+export default AddBookToXButton 

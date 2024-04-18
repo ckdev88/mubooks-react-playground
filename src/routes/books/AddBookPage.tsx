@@ -58,7 +58,6 @@ const AddBookPage = () => {
 							filtered[i].isbn0 = ''
 							filtered[i].isbn1 = ''
 						}
-						console.log(filtered[i])
 						filtered[i].cover = getOlCover(filtered[i].cover_edition_key)
 						filtered[i].coverS = getOlCover(filtered[i].cover_edition_key, 'S')
 						filtered[i].coverM = getOlCover(filtered[i].cover_edition_key, 'M')
@@ -106,7 +105,6 @@ const AddBookPage = () => {
 						let title: string
 						if (res.title.length > 45) title = res.title.slice(0, 40) + '...'
 						else title = res.title
-						console.log(typeof (res.author_name), res.author_name.toString())
 						let authors = res.author_name.map((author, author_index) => { return (<span key={'author' + result_index + author_index} >{author}{(author_index < res.author_name.length - 1) && ', '}</span>) })
 
 						return (
