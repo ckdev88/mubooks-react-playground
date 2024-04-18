@@ -14,6 +14,15 @@ type User = {
 	screenname?: string
 	MyBooks?: string
 }
+/** 
+* On which list the book is or should be.
+* 1: Wishlist -- Reading,  finished, favorite = false
+* 2: Reading  -- Wishlist, finished, favorite = false
+* 3: Finished -- Wishlist & reading = false, favorite ambiguous
+* 4: Favorite -- Wishlist & reading = false, finished true
+*/
+type BookList = 1 | 2 | 3 | 4
+
 interface LoginFormInput {
 	loginemail: { value: string }
 	loginpassword: { value: string }
