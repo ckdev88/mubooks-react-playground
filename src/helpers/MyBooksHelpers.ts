@@ -4,8 +4,8 @@ const MyBooksAdd = async (
 	book: Book,
 	list = book.list
 ) => {
-	if (book.title.length > 35) {
-		book.title_short = book.title.slice(0, 35) + '...'
+	if (book.title.length > 45) {
+		book.title_short = book.title.slice(0, 45) + '...'
 	} else book.title_short = book.title
 	let myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 
