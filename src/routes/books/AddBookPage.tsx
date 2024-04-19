@@ -38,11 +38,13 @@ const AddBookPage = () => {
 	const [searchResults, setSearchResults] = useState<Books>([])
 	const [resultsWarning, setResultsWarning] = useState<string>('')
 	const [resultsMessage, setResultsMessage] = useState<string>('')
+	const [loading, setLoading] = useState<boolean>(false)
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		const search_term = e.currentTarget.search_term.value.trim()
 		if (search_term.length > 4) {
+			setLoading(true)
 			setResultsWarning('')
 			// const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + search_term + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
 			const wacht = await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=8&fields=author_key,author_name,cover_edition_key,edition_key,first_publish_year,isbn,number_of_pages_median,title')
@@ -67,6 +69,7 @@ const AddBookPage = () => {
 			// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
 			// fields: '&fields=title,author_name,edition,thumbnail'
 
+			setLoading(false)
 		}
 		else if (search_term.length === 0) setResultsWarning(search_term.length)
 		else setResultsWarning('keep typing...')
@@ -93,7 +96,7 @@ const AddBookPage = () => {
 					<input type="text" id='search_term' name='search_term' />
 					<div className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</div>
 					<div className={resultsWarning !== '' ? 'dblock' : 'dnone'}>{resultsWarning}</div>
-					<button>Search</button>
+					<button disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
 				</form>
 			</div>
 			<div className="booksearchresults">
