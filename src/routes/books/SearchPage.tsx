@@ -7,6 +7,7 @@ const SearchPage = () => {
 	const [resultCount, setResultCount] = useState<number>(0)
 	const [searchResults, setSearchResults] = useState<Books>([])
 	const [searchTerm, setSearchTerm] = useState('')
+	const [loading, setLoading] = useState(false)
 
 	// TODO: marker isSaved to highlight saved books in results
 	// booksToAdd[count] = boeken[i]
@@ -18,6 +19,7 @@ const SearchPage = () => {
 		const before = performance.now()
 		const search_term: string = e.currentTarget.search_term.value.trim()
 		if (search_term.length > 4) {
+			setLoading(true)
 			setResultsMessage('')
 			await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=30&fields=title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median')
 				.then(response => response.json())
@@ -41,6 +43,7 @@ const SearchPage = () => {
 					return filtered
 				})
 				.then(result => setSearchResults(result))
+			setLoading(false)
 		}
 		else if (search_term.length === 0) setResultsMessage(search_term)
 		else setResultsMessage('keep typing...')
@@ -54,7 +57,7 @@ const SearchPage = () => {
 			</p>
 			<form onSubmit={processSearchForm} >
 				<input type="text" name="search_term" id="search_term" />
-				<button>Search</button>
+				<button disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
 			</form>
 			<div>
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>

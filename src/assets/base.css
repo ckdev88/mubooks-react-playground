@@ -154,6 +154,14 @@ input[type='submit']:focus {
 	background-color: hsl(325, 65%, 36%);
 }
 
+main button:disabled,
+main button:disabled:hover,
+main button:disabled:active,
+main button:disabled:focus {
+	border-color:transparent;
+	background-color: hsl(325, 25%, 76%)
+}
+
 a {
 	color: #0d99ff;
 }
