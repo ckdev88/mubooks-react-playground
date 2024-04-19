@@ -35,9 +35,6 @@ const SearchPage = () => {
 							filtered[i].isbn1 = ''
 						}
 						filtered[i].cover = getOlCover(filtered[i].cover_edition_key)
-						filtered[i].coverS = getOlCover(filtered[i].cover_edition_key, 'S')
-						filtered[i].coverM = getOlCover(filtered[i].cover_edition_key, 'M')
-						filtered[i].coverL = getOlCover(filtered[i].cover_edition_key, 'L')
 					}
 					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + filtered.length + ' results.'))
 					setSearchTerm(search_term)

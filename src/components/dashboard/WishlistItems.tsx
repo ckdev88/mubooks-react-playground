@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../App'
 import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
+import { getBookCover } from '../../Helpers'
 
 export default function WishlistItems() {
 	const { userMyBooks } = useContext(AppContext)
@@ -26,7 +27,7 @@ export default function WishlistItems() {
 								key={book.id}
 								style={{ zIndex: 10 - index }}
 							>
-								<img src={book.coverL} />
+								<img src={getBookCover(book.cover, 'L')} />
 							</article>
 						)
 					})}

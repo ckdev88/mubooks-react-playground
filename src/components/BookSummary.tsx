@@ -1,6 +1,7 @@
-import BookAuthorList from './BookAuthorList'
 import AddBookToXButton from './AddBookToXButton'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
+import BookAuthorList from './BookAuthorList'
+import { getBookCover } from '../Helpers'
 
 const BookSummary = ({ book }: BookObject) => {
 	return (
@@ -9,7 +10,7 @@ const BookSummary = ({ book }: BookObject) => {
 			<header>
 				<aside className="cover">
 					<img
-						src={book.coverM !== undefined ? book.coverM : 'img/coverless.png'}
+						src={getBookCover(book.cover, 'M') !== undefined ? getBookCover(book.cover, 'M') : 'img/coverless.png'}
 						alt=""
 					/>
 				</aside>

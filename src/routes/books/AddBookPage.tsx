@@ -59,9 +59,6 @@ const AddBookPage = () => {
 							filtered[i].isbn1 = ''
 						}
 						filtered[i].cover = getOlCover(filtered[i].cover_edition_key)
-						filtered[i].coverS = getOlCover(filtered[i].cover_edition_key, 'S')
-						filtered[i].coverM = getOlCover(filtered[i].cover_edition_key, 'M')
-						filtered[i].coverL = getOlCover(filtered[i].cover_edition_key, 'L')
 					}
 					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + filtered.length + ' results for ' + search_term + '.'))
 					return filtered
@@ -115,7 +112,7 @@ const AddBookPage = () => {
 										<em className="sf cl">{authors}</em>
 									</div>
 								</div>
-								<img src={res.coverS} className="thumbnail" />
+								<img src={getOlCover(res.id,'S')} className="thumbnail" />
 							</div>
 						)
 					}

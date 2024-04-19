@@ -23,6 +23,8 @@ type User = {
 */
 type BookList = 1 | 2 | 3 | 4
 
+type CoverSize = undefined | 'S' | 'M' | 'L'
+
 interface LoginFormInput {
 	loginemail: { value: string }
 	loginpassword: { value: string }
@@ -39,9 +41,6 @@ type BookData = [
 		first_publish_year: number
 		cover_edition_key: string
 		cover: string
-		coverS: string
-		coverM: string
-		coverL: string
 		img?: string
 		title_short?: string
 	},
@@ -50,9 +49,6 @@ interface Book {
 	author_key?: [string]
 	author_name: [string]
 	cover: string
-	coverL: string
-	coverM: string
-	coverS: string
 	cover_edition_key: string
 	edition_key?: [string]
 	first_publish_year: string
