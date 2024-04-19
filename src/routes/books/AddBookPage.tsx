@@ -68,7 +68,6 @@ const AddBookPage = () => {
 				.then(result => setSearchResults(result))
 			// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
 			// fields: '&fields=title,author_name,edition,thumbnail'
-
 			setLoading(false)
 		}
 		else if (search_term.length === 0) setResultsWarning(search_term.length)
@@ -115,7 +114,7 @@ const AddBookPage = () => {
 										<em className="sf cl">{authors}</em>
 									</div>
 								</div>
-								<img src={getOlCover(res.id,'S')} className="thumbnail" />
+								<img src={getOlCover(res.id, 'S')} className="thumbnail" />
 							</div>
 						)
 					}
