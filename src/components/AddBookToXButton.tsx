@@ -41,7 +41,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 	return (
 		<div className="mark">
 			<a onClick={() => AddBookToXButtonAct()}>
-				<span className="icon icon-wishlist"></span>Add to {getListName(targetList)} X
+				<span className="icon icon-wishlist"></span>Add to {getListName(targetList)} 
 			</a>
 		</div>
 	)

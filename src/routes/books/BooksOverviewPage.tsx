@@ -1,16 +1,11 @@
 import BookSummary from '../../components/BookSummary'
 const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
-	// let savedArr: Books
+	let savedArr: Books
 
 	// TODO: build further on new feature; highlight saved books in search view
-	//	if (page === 'searchpage') savedArr = JSON.parse(localStorage.getItem('MyBooks') as string)
-	const savedArr=' yes'
-	if(page==='searchpage')console.log('search... tmp text to please TS'+savedArr)
+	if (page === 'searchpage') savedArr = JSON.parse(localStorage.getItem('MyBooks') as string)
 
 	return books.map((book) => {
-
-		/* TODO: build further on new feature; highlight saved books in search view */
-		/*
 		if (page === 'searchpage') {
 			savedArr.find((savedbook) => {
 				if (savedbook.id === book.id) {
@@ -18,7 +13,6 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 				}
 			})
 		}
-		*/
 
 		return <BookSummary book={book} key={book.id} />
 	})
