@@ -1,0 +1,22 @@
+#popupNotification {
+	border-radius: 2rem;
+	color: white;
+	background: rgba(20,20,30,.95);
+	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+	display: block;
+	padding: 0.5rem;
+	margin: 0 auto;
+	width: 80vw;
+	left: 50%;
+	margin-left: -40vw;
+	position: fixed;
+	bottom: 3rem;
+	transition: bottom 0.1s linear;
+	text-align: center;
+	/* background-color: rgba(255, 255, 250, 0.9); for dark theme later*/
+	/* color: #0f0f0f;  for dark theme later*/
+}
+
+#popupNotification.hide {
+	bottom: -3rem;
+}
