@@ -4,7 +4,7 @@ import { AppContext } from "../../App"
 import { Link } from "react-router-dom"
 
 const WishlistPage = () => {
-	const { userMyBooks } = useContext(AppContext)
+	const { userMyBooks,popupNotification } = useContext(AppContext)
 
 	let hasbooks = false
 	let books: Books
@@ -27,6 +27,7 @@ const WishlistPage = () => {
 	return (
 		<>
 			<h1>Mu Wishlist</h1>
+			{popupNotification}
 			<p className="subHead">All the books I will read read soon go here.</p>
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books on mu wishlist yet.</h4>
 			<p>

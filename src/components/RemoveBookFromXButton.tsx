@@ -35,17 +35,26 @@ const RemoveBookFromX = (book: Book) => {
 }
 
 const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
-	const { setUserMyBooks } = useContext(AppContext)
+	const { setUserMyBooks, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
+
+	function popupNote() {
+		setPopupNotification('Removed ' + book.title_short + ' from ' + getListName(targetList) + '')
+		setPopupNotificationShow(true)
+		setTimeout(() => {
+			setPopupNotificationShow(false)
+		}, 1500)
+	}
 
 	function RemoveBookFromXButtonAct() {
 		const newArr = RemoveBookFromX(book) // update localstorage, database
 		setUserMyBooks(newArr) // update global state
 	}
 
+	// TODO: use favorite-star instead of icon-remove on different spot
 	return (
 		<div className="mark">
-			<a onClick={() => RemoveBookFromXButtonAct()}>
-				<span className="icon icon-remove"></span>Remove from {getListName(targetList)} 
+			<a onClick={() => { RemoveBookFromXButtonAct(); popupNote() }}>
+				<span className="icon icon-remove"></span>Remove from {getListName(targetList)}
 			</a>
 		</div>
 	)

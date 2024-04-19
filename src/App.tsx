@@ -35,6 +35,8 @@ const App = () => {
 	const [usermail, setUsermail] = useState<string>('')
 	const [userMyBooks, setUserMyBooks] = useState<string>(userMyBooksInitval)
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitval)
+	const [popupNotification, setPopupNotification] = useState<string>('')
+	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
@@ -59,12 +61,17 @@ const App = () => {
 					setUserMyBooks,
 					userIsLoggedIn,
 					setUserIsLoggedIn,
+					popupNotification,
+					setPopupNotification,
+					popupNotificationShow,
+					setPopupNotificationShow
 				}}
 			>
 				<header id="header">
 					<NavWrapper />
 				</header>
 				<main id="main" className="textwrapper">
+					<div id='popupNotification' className={popupNotificationShow ? 'show' : 'hide'}>{popupNotification}</div>
 					<Routes>
 						<Route path="/" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />

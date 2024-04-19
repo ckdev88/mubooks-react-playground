@@ -7,6 +7,10 @@ interface AppContextType {
 	setUserMyBooks(userMyBooks: string): void
 	userIsLoggedIn: boolean
 	setUserIsLoggedIn(userIsLoggedIn: boolean): void
+	popupNotification: string
+	setPopupNotification(popupNotification: string): void
+	popupNotificationShow: boolean
+	setPopupNotificationShow(popupNotificationShow: boolean): void
 }
 type User = {
 	email: string

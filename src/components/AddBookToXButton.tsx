@@ -4,7 +4,6 @@ import { MyBooksAdd, MyBooksUpdate } from '../helpers/MyBooksHelpers'
 import getListName from '../hooks/getListName'
 
 const AddBookToX = async (book: Book, targetList: BookList) => {
-	// return false
 	let myBooks: Books
 	if (localStorage.getItem('MyBooks') === undefined) myBooks = []
 	else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
@@ -31,17 +30,26 @@ const AddBookToX = async (book: Book, targetList: BookList) => {
 }
 
 const AddBookToXButton = (book: Book, targetList: BookList) => {
-	const { setUserMyBooks } = useContext(AppContext)
+	const { setUserMyBooks, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
+
+	function popupNote() {
+		setPopupNotification('Added ' + book.title_short + ' to ' + getListName(targetList) + '')
+		setPopupNotificationShow(true)
+		setTimeout(() => {
+			setPopupNotificationShow(false)
+		}, 1500)
+	}
 
 	async function AddBookToXButtonAct() {
 		const refreshState = AddBookToX(book, targetList) // update localstorage, database
 		setUserMyBooks(await refreshState) // update global state
 	}
 
+	// TODO: make icon-wishlist dynamic based on targetList
 	return (
 		<div className="mark">
-			<a onClick={() => AddBookToXButtonAct()}>
-				<span className="icon icon-wishlist"></span>Add to {getListName(targetList)} 
+			<a onClick={() => { AddBookToXButtonAct(); popupNote() }}>
+				<span className="icon icon-wishlist"></span>Add to {getListName(targetList)}
 			</a>
 		</div>
 	)
