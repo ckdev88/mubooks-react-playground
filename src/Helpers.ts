@@ -7,7 +7,8 @@ function getOlCover(id: string, size: string = '') {
 	let appendSize: string = ''
 	if (size !== '') appendSize = '-' + size
 
-	if (id.slice(0, 2) === 'OL') return 'https://covers.openlibrary.org/b/olid/' + id + appendSize + '.jpg'
+	if (id.slice(0, 2) === 'OL')
+		return 'https://covers.openlibrary.org/b/olid/' + id + appendSize + '.jpg'
 	return 'https://covers.openlibrary.org/b/isbn/' + id + appendSize + '.jpg'
 }
 

@@ -22,7 +22,6 @@ import AddBookPage from './routes/books/AddBookPage'
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const App = () => {
-
 	let userIsLoggedInInitval: boolean
 	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitval = true
 	else userIsLoggedInInitval = false
