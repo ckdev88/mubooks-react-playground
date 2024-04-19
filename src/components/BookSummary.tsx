@@ -2,11 +2,8 @@ import AddBookToXButton from './AddBookToXButton'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
 import BookAuthorList from './BookAuthorList'
 import { getBookCover } from '../Helpers'
-import { useContext } from 'react'
-import { AppContext } from '../App'
 
 const BookSummary = ({ book }: BookObject) => {
-	const {popupNotification} = useContext(AppContext)
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary">
