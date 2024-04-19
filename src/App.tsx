@@ -41,8 +41,7 @@ const App = () => {
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
 			setUsername(
-				JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata
-					.screenname
+				JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname
 			)
 	}
 

@@ -8,7 +8,6 @@ const AddBookToX = async (book: Book, targetList: BookList) => {
 	if (localStorage.getItem('MyBooks') === undefined) myBooks = []
 	else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 
-	// check if already saved in localstorage, database. if not, add first
 	let bookIsSaved = false
 	let returnval: string
 	for (let i = 0; i < myBooks.length; i++) {
@@ -21,7 +20,7 @@ const AddBookToX = async (book: Book, targetList: BookList) => {
 		await MyBooksAdd(
 			book,
 			targetList,
-		) 
+		)
 	} else {
 		await MyBooksUpdate(JSON.stringify(myBooks)) // update localstorage, database
 	}
