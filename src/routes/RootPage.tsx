@@ -2,19 +2,27 @@ import NavWrapper from '../components/NavWrapper'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { localStorageKey } from '../../utils/supabase'
+import { useContext } from 'react'
+import { AppContext } from '../App'
 
 const RootPage = () => {
+	const { setUsermail } = useContext(AppContext)
 	let loggedin: boolean = false
 	const navigate = useNavigate()
 
-	if (JSON.parse(localStorage.getItem(localStorageKey) as string)?.user?.aud === 'authenticated')
+	const userInLs = JSON.parse(localStorage.getItem(localStorageKey) as string)
+	if (userInLs?.user?.aud === 'authenticated') {
 		loggedin = true
+	}
 
 	let navigateTo: string = '/account/login'
 	if (loggedin) navigateTo = '/dashboard'
 
 	useEffect(() => {
-		if (loggedin) navigate(navigateTo)
+		if (loggedin) {
+			setUsermail(userInLs.user.email)
+			navigate(navigateTo)
+		}
 		else navigate(navigateTo)
 	}, [])
 
