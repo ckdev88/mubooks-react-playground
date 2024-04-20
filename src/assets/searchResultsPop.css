@@ -3,34 +3,34 @@
 	min-height: 3rem;
 	display: flex;
 	align-content: center;
-	margin-bottom: .5rem;
-	margin-top: .5rem;
-	border-bottom: 1px dashed rgba(255, 255, 255, 1)
+	margin-bottom: 0.5rem;
+	margin-top: 0.5rem;
+	border-bottom: 1px dashed rgba(255, 255, 255, 1);
 }
 
 .booksearchresults .result .wrapper {
-	font-size: .9em;
+	font-size: 0.9em;
 	display: flex;
 	align-content: center;
 	flex-wrap: wrap;
-	flex-grow: 3
+	flex-grow: 3;
 }
 
 .booksearchresults .result .loep {
 	height: 16px;
 	width: 16px;
-	align-self: center
+	align-self: center;
 }
 
 .booksearchresults .result .text {
 	width: calc(100% - 24px);
 	align-content: center;
 	flex-wrap: wrap;
-	margin-left: 8px
+	margin-left: 8px;
 }
 
 .booksearchresults .result .thumbnail {
 	display: block;
 	max-height: 3rem;
-	margin-left: .5rem
+	margin-left: 0.5rem;
 }
