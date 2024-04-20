@@ -1,17 +1,19 @@
 import useCardRotate from '../../hooks/useCardRotate'
 import { AppContext } from '../../App'
-import { useContext } from 'react'
-import { UserGetData, UserUpdate } from '../../helpers/AuthHelpers'
+// import { useContext, useEffect } from 'react'
+import { useContext} from 'react'
+// import { UserGetData, UserUpdate } from '../../helpers/AuthHelpers'
+import { UserUpdate } from '../../helpers/AuthHelpers'
 
 export default function MyAccountEditCard() {
 	const { see } = useCardRotate()
 	const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
 
-	async function doUserData() {
+	/* async function doUserData() {
 		const userGetData = await UserGetData()
-		if (userGetData.error !== null) {
-			console.log('error fetching userdata...', userGetData.error)
-		} else {
+		if (userGetData.error !== null)
+			console.log('error fetching userdata..........', userGetData.error)
+		else {
 			const d = userGetData.data.user
 			if (d !== null) {
 				if (d.email !== null && d.email !== undefined) setUsermail(d.email)
@@ -19,7 +21,9 @@ export default function MyAccountEditCard() {
 			}
 		}
 	}
-	doUserData()
+	useEffect(() => {
+		doUserData()
+	}, []) */
 
 	function afterUpdateSb(name: string, mail: string) {
 		setUsername(name)
@@ -27,9 +31,14 @@ export default function MyAccountEditCard() {
 		see()
 	}
 
-	const updateUser = async (form_username: string, form_usermail: string, form_userpass: string) => {
+	const updateUser = async (
+		form_username: string,
+		form_usermail: string,
+		form_userpass: string
+	) => {
 		const updater = await UserUpdate(form_username, form_usermail, form_userpass)
-		if (!updater.error) afterUpdateSb(form_username, form_usermail)
+		if (updater.error) console.log('^^^^^^^^^', updater.error)
+		else afterUpdateSb(form_username, form_usermail)
 	}
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -54,9 +63,21 @@ export default function MyAccountEditCard() {
 							defaultValue={username}
 						/>
 						<label htmlFor="account_email">Email address</label>
-						<input type="email" id="account_email" name="account_email" defaultValue={usermail} />
-						<label htmlFor="account_password">Password (leave empty to keep current)</label>
-						<input type="password" id="account_password" name="account_password" defaultValue="" />
+						<input
+							type="email"
+							id="account_email"
+							name="account_email"
+							defaultValue={usermail}
+						/>
+						<label htmlFor="account_password">
+							Password (leave empty to keep current)
+						</label>
+						<input
+							type="password"
+							id="account_password"
+							name="account_password"
+							defaultValue=""
+						/>
 						<button>Save and return</button>
 					</form>
 				</main>

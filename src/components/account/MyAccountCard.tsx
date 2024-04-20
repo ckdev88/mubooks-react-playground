@@ -1,12 +1,14 @@
-import { useContext, useEffect } from 'react'
+// import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
-import { UserGetData } from '../../helpers/AuthHelpers'
+// import { UserGetData } from '../../helpers/AuthHelpers'
 
 export default function MyAccountCard() {
 	const { change } = useCardRotate()
-	const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
+	// const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
+	const { username, usermail } = useContext(AppContext)
 
 	/* const doUserData = async () => {
 		const d = await UserGetData()
