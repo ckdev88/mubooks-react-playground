@@ -1,10 +1,12 @@
 // TODO: design & copywrite confirmation email
 // TODO: check global state of auth
 
+import { useContext } from "react"
+import { AppContext } from "../../App"
+
 const CheckMailNewAccountPage = () => {
-	const queryString = window.location.search
-	const urlParams = new URLSearchParams(queryString)
-	const recipientAddress = urlParams.get('addr')
+	const {usermail} = useContext(AppContext)
+	const recipientAddress = usermail
 	return (
 		<>
 			<h1>Check your email</h1>

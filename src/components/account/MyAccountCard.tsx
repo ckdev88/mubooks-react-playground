@@ -6,20 +6,21 @@ import { UserGetData } from '../../helpers/AuthHelpers'
 
 export default function MyAccountCard() {
 	const { change } = useCardRotate()
-	const { username, usermail, setUsermail, setUsername } = useContext(AppContext)
+	const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
 
-	const doUserData = async () => {
+	/* const doUserData = async () => {
 		const d = await UserGetData()
+		console.log('ddddd', d)
 		if (d.error) console.error(d.error)
 		else {
-			if (d.data.user?.email) setUsermail(d.data.user?.email);
+			if (d.data.user?.user_metadata.email) setUsermail(d.data.user?.user_metadata.email);
 			setUsername(d.data.user?.user_metadata.screenname)
 		}
 	}
 
 	useEffect(() => {
 		doUserData()
-	}, [])
+	}, []) */
 
 	return (
 		<div className="card">

@@ -6,7 +6,7 @@ import { UserLogin } from '../../helpers/AuthHelpers'
 
 const LoginCard = () => {
 	const navigate = useNavigate()
-	const { setUsername, setUserMyBooks, setUserIsLoggedIn } = useContext(AppContext)
+	const { setUsername, setUsermail, setUserMyBooks, setUserIsLoggedIn } = useContext(AppContext)
 	const [error, setError] = useState('')
 
 	async function processLoginForm(event: React.FormEvent<HTMLFormElement>) {
@@ -23,6 +23,7 @@ const LoginCard = () => {
 			if (login?.data) {
 				setUserIsLoggedIn(true)
 				setUsername(login?.data.user?.user_metadata.screenname)
+				setUsermail(login?.data.user?.user_metadata.email)
 				localStorage.setItem('MyBooks', login?.data.user?.user_metadata.MyBooks)
 				setUserMyBooks(localStorage.getItem('MyBooks') as string)
 				setTimeout(() => {

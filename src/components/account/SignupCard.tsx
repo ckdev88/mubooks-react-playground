@@ -2,8 +2,11 @@ import { useState } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { UserSignup } from '../../helpers/AuthHelpers'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { AppContext } from '../../App'
 
 export default function SignupCard() {
+	const {setUsermail} = useContext(AppContext)
 	const navigate = useNavigate()
 	const { login } = useCardRotate()
 	const [error, setError] = useState('')
@@ -18,7 +21,10 @@ export default function SignupCard() {
 		const signup = await UserSignup(user)
 
 		if (signup.error) setError(signup.error.message)
-		else navigate(`/account/new?addr=${user.email}`) // beetje unsafe dit, beter via sessie of api
+		else{
+			setUsermail(user.email)
+			navigate(`/account/new?addr=${user.email}`) // beetje unsafe dit, beter via sessie of api
+		}
 	}
 
 	return (
