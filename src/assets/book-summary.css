@@ -146,7 +146,11 @@
 	background-image: url('/img/icon-wishlist.png');
 }
 
-.book-summary .icon-favorites {
+.book-summary .icon-finished {
+	background-image: url('/img/icon-finished.png')
+}
+
+.book-summary .icon-favorite {
 	background-image: url('/img/icon-favorites.png');
 }
 

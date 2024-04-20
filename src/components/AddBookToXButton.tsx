@@ -44,11 +44,13 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		setUserMyBooks(await refreshState) // update global state
 	}
 
+	const iconClassName = 'icon icon-'+getListName(targetList)
 	// TODO: make icon-wishlist dynamic based on targetList
 	return (
 		<div className="mark">
 			<a onClick={() => { AddBookToXButtonAct(); popupNote() }}>
-				<span className="icon icon-wishlist"></span>Add to {getListName(targetList)}
+				<span className={iconClassName}></span>Add to {getListName(targetList)}
+
 			</a>
 		</div>
 	)
