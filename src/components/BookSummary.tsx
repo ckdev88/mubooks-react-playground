@@ -31,12 +31,12 @@ const BookSummary = ({ book }: BookObject) => {
 						{/* TODO: build further on new feature; highlight saved books in search view */}
 						{/* (pathname === '/search' && book.list !== undefined) ? 'SAVED in ' + book.list : 'not saved' */}
 						{!book.list && AddBookToXButton(book, 1)}
-						{book.list === 1 && RemoveBookFromXButton(book, 1)}
 						{book.list === 1 && AddBookToXButton(book, 2)}
-						{book.list === 2 && RemoveBookFromXButton(book, 2)}
 						{book.list === 2 && AddBookToXButton(book, 3)}
-						{book.list === 3 && RemoveBookFromXButton(book, 3)}
 						{book.list === 3 && AddBookToXButton(book, 4)}
+						{book.list === 1 && RemoveBookFromXButton(book, 1)}
+						{book.list === 2 && RemoveBookFromXButton(book, 2)}
+						{book.list === 3 && RemoveBookFromXButton(book, 3)}
 						{book.list === 4 && RemoveBookFromXButton(book, 4)}
 					</div>
 				</div>
