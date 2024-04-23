@@ -52,9 +52,15 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 	// TODO: use favorite-star instead of icon-remove on different spot
 	return (
 		<div className="mark">
-			<a onClick={() => { RemoveBookFromXButtonAct(); popupNote() }}>
+			<button
+				className="btn-text"
+				onClick={() => {
+					RemoveBookFromXButtonAct()
+					popupNote()
+				}}
+			>
 				<span className="icon icon-remove"></span>Remove from {getListName(targetList)}
-			</a>
+			</button>
 		</div>
 	)
 }

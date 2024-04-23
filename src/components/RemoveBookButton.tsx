@@ -19,9 +19,9 @@ const RemoveBookButton = (id: Id, saved: boolean) => {
 	if (!saved) return <></>
 	return (
 		<div className="mark">
-			<a onClick={() => RemoveBookButtonAct()}>
+			<button className="btn-text" onClick={() => RemoveBookButtonAct()}>
 				<span className="icon icon-remove"></span>Remove from saved books
-			</a>
+			</button>
 		</div>
 	)
 }
