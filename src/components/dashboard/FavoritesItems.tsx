@@ -45,7 +45,7 @@ export default function FavoritesItems() {
 				<Link to="/favorites">
 					<main className="toadd">
 						<aside>
-							<button>
+							<button className="btn-icon">
 								<img src="img/icon-favorites.png" />
 							</button>
 						</aside>

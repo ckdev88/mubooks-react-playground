@@ -45,7 +45,7 @@ export default function ReadingItems() {
 				<Link to="/reading">
 					<main className="toadd">
 						<aside>
-							<button>
+							<button className="btn-icon">
 								<img src="img/plus-icon.svg" />
 							</button>
 						</aside>

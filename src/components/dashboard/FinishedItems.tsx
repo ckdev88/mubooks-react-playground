@@ -45,7 +45,7 @@ export default function FinishedItems() {
 				<Link to="/finished">
 					<main className="toadd">
 						<aside>
-							<button>
+							<button className="btn-icon">
 								<img src="img/icon-finished.png" />
 							</button>
 						</aside>

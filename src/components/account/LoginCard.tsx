@@ -50,10 +50,12 @@ const LoginCard = () => {
 					</form>
 				</main>
 				<footer>
-					<a onClick={recover}>Forgot password</a>
-					<a onClick={signup}>New here? Join now.</a>
-					<button className='btn-text' onClick={recover}>Forgot password</button>
-					<button className='btn-text ta-right' onClick={signup}>New here? Join now.</button>
+					<button className="btn-text" onClick={recover}>
+						Forgot password
+					</button>
+					<button className="btn-text ta-right" onClick={signup}>
+						New here? Join now.
+					</button>
 				</footer>
 			</article>
 		</>

@@ -45,7 +45,7 @@ const SavedItems = () => {
 				<Link to="/saved">
 					<main className="toadd">
 						<aside>
-							<button>
+							<button className="btn-icon">
 								<img src="img/save-books-icon.png" />
 							</button>
 						</aside>

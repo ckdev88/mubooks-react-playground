@@ -3,7 +3,7 @@ main button.alt, .card footer button.alt {
 	color: #333;
 	border-color: transparent;
 }
-.adder button {
+.adder button.btn-icon {
 	background-color: white;
 	background-size: cover;
 	width: 2.5rem;
@@ -39,6 +39,7 @@ main button.alt, .card footer button.alt {
 	color: #0d99ff;
 }
 .btn-text {
+	display:inline-block;
 	border: 0;
 	cursor: pointer;
 	font-size: 0.9rem;

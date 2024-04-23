@@ -44,7 +44,7 @@ export default function WishlistItems() {
 				<Link to="/wishlist">
 					<main className="toadd">
 						<aside>
-							<button>
+							<button className="btn-icon">
 								<img src="img/icon-wishlist.png" />
 							</button>
 						</aside>

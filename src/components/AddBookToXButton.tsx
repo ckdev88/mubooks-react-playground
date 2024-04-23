@@ -50,7 +50,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 	return (
 		<div className="mark">
 
-			<button
+			<button className='btn-text'
 				onClick={() => {
 					AddBookTest(book,targetList),
 					popupNote()
