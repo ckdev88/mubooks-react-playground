@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 
 const RootPage = () => {
-	const {usermail,  setUsermail,setUserIsLoggedIn } = useContext(AppContext)
+	const { setUsermail, setUserIsLoggedIn } = useContext(AppContext)
 	let loggedin: boolean = false
 	const navigate = useNavigate()
 

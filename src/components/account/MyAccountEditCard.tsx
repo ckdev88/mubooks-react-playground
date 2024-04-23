@@ -1,7 +1,6 @@
 import useCardRotate from '../../hooks/useCardRotate'
 import { AppContext } from '../../App'
 import { useContext } from 'react'
-import { UserUpdate } from '../../helpers/AuthHelpers'
 import { supabase } from '../../../utils/supabase'
 
 export default function MyAccountEditCard() {
