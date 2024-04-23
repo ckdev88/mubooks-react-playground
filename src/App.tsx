@@ -1,23 +1,22 @@
 import { Routes, Route } from 'react-router-dom'
-import NavWrapper from './components/NavWrapper'
 import { createContext, useState } from 'react'
-import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
-import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
-import UserProfilePage from './routes/account/UserProfilePage'
-import UserLogoutPage from './routes/account/UserLogoutPage'
-import DashboardPage from './routes/account/DashboardPage'
-import SearchPage from './routes/books/SearchPage'
-import SavedBooksPage from './routes/books/SavedBooksPage'
-import ClearMyBooks from './routes/books/ClearMyBooks'
-import UserLoginPage from './routes/account/UserLoginPage'
-import WishlistPage from './routes/books/WishlistPage'
-import ReadingPage from './routes/books/ReadingPage'
-import FinishedPage from './routes/books/FinishedPage'
-import FavoritesPage from './routes/books/FavoritesPage'
-import RootPage from './routes/RootPage'
-
 import { localStorageKey } from '../utils/supabase'
 import AddBookPage from './routes/books/AddBookPage'
+import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
+import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
+import ClearMyBooks from './routes/books/ClearMyBooks'
+import DashboardPage from './routes/account/DashboardPage'
+import FavoritesPage from './routes/books/FavoritesPage'
+import FinishedPage from './routes/books/FinishedPage'
+import NavWrapper from './components/NavWrapper'
+import ReadingPage from './routes/books/ReadingPage'
+import RootPage from './routes/RootPage'
+import SavedBooksPage from './routes/books/SavedBooksPage'
+import SearchPage from './routes/books/SearchPage'
+import UserLoginPage from './routes/account/UserLoginPage'
+import UserLogoutPage from './routes/account/UserLogoutPage'
+import UserProfilePage from './routes/account/UserProfilePage'
+import WishlistPage from './routes/books/WishlistPage'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -70,7 +69,9 @@ const App = () => {
 					<NavWrapper />
 				</header>
 				<main id="main" className="textwrapper">
-					<div id="popupNotification" className={popupNotificationShow ? "show" : "hide"}>{popupNotification}</div>
+					<div id="popupNotification" className={popupNotificationShow ? 'show' : 'hide'}>
+						{popupNotification}
+					</div>
 					<Routes>
 						<Route path="/" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />

@@ -1,16 +1,24 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserLogout } from '../../helpers/AuthHelpers'
 import { useContext } from "react"
 import { AppContext } from '../../App'
+import { supabase } from '../../../utils/supabase'
 
+const UserLogout = async () => {
+	let { error } = await supabase.auth.signOut()
+	if (error === null) {
+		console.log('logged out')
+	} else {
+		return error
+	}
+	return error
+}
 export default function UserLogoutPage() {
 	const { setUserIsLoggedIn } = useContext(AppContext)
 	const navigate = useNavigate()
 	async function processLogout() {
 		setUserIsLoggedIn(false)
 		UserLogout()
-		localStorage.clear()
 		// TODO: for now we assume there are no errors... this will need to change
 
 		setTimeout(() => {

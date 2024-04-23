@@ -20,7 +20,6 @@ const MyBooksAdd = async (
 		id: book.id,
 		img: book.img,
 		number_of_pages_median: book.number_of_pages_median,
-		saved: true,
 		title: book.title,
 		title_short: book.title_short,
 	})
@@ -30,7 +29,6 @@ const MyBooksAdd = async (
 }
 
 const MyBooksUpdate = async (myBooksNew: string) => {
-	localStorage.setItem('MyBooks', myBooksNew)
 	await supabase.auth.updateUser({
 		data: { MyBooks: myBooksNew },
 	})

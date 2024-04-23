@@ -1,14 +1,30 @@
-import { useNavigate } from 'react-router-dom'
-import useCardRotate from '../../hooks/useCardRotate'
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../App'
-import { UserLogin } from '../../helpers/AuthHelpers'
+// import { UserLogin } from '../../helpers/AuthHelpers'
+import { supabase } from '../../../utils/supabase'
+import useCardRotate from '../../hooks/useCardRotate'
+import { useNavigate } from 'react-router-dom'
 
 const LoginCard = () => {
 	const navigate = useNavigate()
-	const { setUsername, setUsermail, setUserMyBooks, setUserIsLoggedIn } = useContext(AppContext)
+	const {
+		setUsername,
+		setUsermail,
+		setUserMyBooks,
+		userIsLoggedIn,
+		setUserIsLoggedIn,
+		setPopupNotificationShow,
+		setPopupNotification,
+	} = useContext(AppContext)
 	const [error, setError] = useState('')
 
+	const UserLogin = async (user: User) => {
+		const { data, error } = await supabase.auth.signInWithPassword({
+			email: user.email,
+			password: user.password,
+		})
+		return { error, data }
+	}
 	async function processLoginForm(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		const user: User = {
@@ -18,8 +34,7 @@ const LoginCard = () => {
 		const login = await UserLogin(user as User)
 		if (login.error) {
 			setError(login.error.message)
-		}
-		else {
+		} else {
 			if (login?.data) {
 				setUserIsLoggedIn(true)
 				setUsername(login?.data.user?.user_metadata.screenname)
@@ -28,10 +43,9 @@ const LoginCard = () => {
 				setUserMyBooks(localStorage.getItem('MyBooks') as string)
 				setTimeout(() => {
 					navigate('/dashboard')
-				}, 500)
+				}, 100)
 			} else setError('Something unexpected happened, try again later.')
 		}
-
 	}
 
 	const { recover, signup } = useCardRotate()

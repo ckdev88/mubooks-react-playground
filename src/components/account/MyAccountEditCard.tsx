@@ -1,44 +1,44 @@
 import useCardRotate from '../../hooks/useCardRotate'
 import { AppContext } from '../../App'
-// import { useContext, useEffect } from 'react'
-import { useContext} from 'react'
-// import { UserGetData, UserUpdate } from '../../helpers/AuthHelpers'
+import { useContext } from 'react'
 import { UserUpdate } from '../../helpers/AuthHelpers'
+import { supabase } from '../../../utils/supabase'
 
 export default function MyAccountEditCard() {
 	const { see } = useCardRotate()
 	const { username, setUsername, usermail, setUsermail } = useContext(AppContext)
 
-	/* async function doUserData() {
-		const userGetData = await UserGetData()
-		if (userGetData.error !== null)
-			console.log('error fetching userdata..........', userGetData.error)
-		else {
-			const d = userGetData.data.user
-			if (d !== null) {
-				if (d.email !== null && d.email !== undefined) setUsermail(d.email)
-				setUsername(d.user_metadata?.screenname)
-			}
-		}
-	}
-	useEffect(() => {
-		doUserData()
-	}, []) */
-
-	function afterUpdateSb(name: string, mail: string) {
+	function afterSbUpdate(name: string, mail: string) {
 		setUsername(name)
 		setUsermail(mail)
 		see()
 	}
 
-	const updateUser = async (
+	const updateSbUser = async (
 		form_username: string,
 		form_usermail: string,
 		form_userpass: string
 	) => {
-		const updater = await UserUpdate(form_username, form_usermail, form_userpass)
-		if (updater.error) console.log('^^^^^^^^^', updater.error)
-		else afterUpdateSb(form_username, form_usermail)
+		if (form_userpass !== '') {
+			const { data, error } = await supabase.auth.updateUser({
+				email: form_usermail,
+				password: form_userpass,
+				data: { screenname: form_username },
+			})
+			else {
+				afterSbUpdate(form_username, form_usermail)
+			}
+		} else {
+			const { data, error } = await supabase.auth.updateUser({
+				email: form_userpass,
+				data: { screenname: form_username },
+			})
+			if (error) console.log(error)
+			else {
+				afterSbUpdate(form_username, form_usermail)
+			}
+
+		}
 	}
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -46,7 +46,7 @@ export default function MyAccountEditCard() {
 		const form_username: string = e.currentTarget.account_screenname.value.trim()
 		const form_usermail: string = e.currentTarget.account_email.value.trim()
 		const form_userpass: string = e.currentTarget.account_password.value.trim()
-		updateUser(form_username, form_usermail, form_userpass)
+		updateSbUser(form_username, form_usermail, form_userpass)
 	}
 
 	return (

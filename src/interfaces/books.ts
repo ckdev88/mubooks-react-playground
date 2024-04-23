@@ -65,7 +65,6 @@ interface Book {
 	/** 1: Wishlist | 2: Reading | 3: Finished | 4: Favorite (+Finished) */
 	list: BookList
 	number_of_pages_median: number
-	saved?: boolean
 	title: string
 	title_short: string
 }
@@ -82,6 +81,3 @@ interface IdObject {
 	id: Id
 }
 type Id = string
-interface SavedObject {
-	saved: boolean
-}

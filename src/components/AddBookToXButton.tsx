@@ -1,35 +1,44 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
-import { MyBooksAdd, MyBooksUpdate } from '../helpers/MyBooksHelpers'
+import { supabase } from '../../utils/supabase'
 import getListName from '../hooks/getListName'
 
-const AddBookToX = async (book: Book, targetList: BookList) => {
-	let myBooks: Books
-	if (localStorage.getItem('MyBooks') === undefined) myBooks = []
-	else myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
+const AddBookToXButton = (book: Book, targetList: BookList) => {
+	const { userMyBooks, setUserMyBooks, setPopupNotification, setPopupNotificationShow } =
+		useContext(AppContext)
 
-	let bookIsSaved = false
-	let returnval: string
-	for (let i = 0; i < myBooks.length; i++) {
-		if (myBooks[i].id === book.id) {
-			bookIsSaved = true
-			myBooks[i].list = targetList
+	function MyBooksAdd(book: Book, list = book.list): void {
+		if (book.title.length > 45) {
+			book.title_short = book.title.slice(0, 45) + '...'
+		} else book.title_short = book.title
+		let myBooks = JSON.parse(userMyBooks as string)
+
+		if (myBooks === null) myBooks = []
+		myBooks.push({
+			author_key: book.author_key,
+			author_name: book.author_name,
+			cover: book.cover,
+			cover_edition_key: book.cover_edition_key,
+			list: list,
+			first_publish_year: book.first_publish_year,
+			id: book.id,
+			img: book.img,
+			number_of_pages_median: book.number_of_pages_median,
+			title: book.title,
+			title_short: book.title_short,
+		})
+		MyBooksUpdate(JSON.stringify(myBooks))
+	}
+
+	async function MyBooksUpdate(myBooksNew: string) {
+		setUserMyBooks(myBooksNew)
+		const updater = await supabase.auth.updateUser({
+			data: { MyBooks: myBooksNew },
+		})
+		if (!updater) console.log('oops? MyBooksUpdate')
+		else {
 		}
 	}
-	if (bookIsSaved === false) {
-		await MyBooksAdd(
-			book,
-			targetList,
-		)
-	} else {
-		await MyBooksUpdate(JSON.stringify(myBooks)) // update localstorage, database
-	}
-	returnval = JSON.stringify(localStorage.getItem('MyBooks'))
-	return returnval
-}
-
-const AddBookToXButton = (book: Book, targetList: BookList) => {
-	const { setUserMyBooks, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 
 	function popupNote() {
 		setPopupNotification('Added ' + book.title_short + ' to ' + getListName(targetList) + '')
@@ -39,20 +48,33 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		}, 1500)
 	}
 
-	async function AddBookToXButtonAct() {
-		const refreshState = AddBookToX(book, targetList) // update localstorage, database
-		setUserMyBooks(await refreshState) // update global state
+	function AddBookToX(book: Book, targetList: BookList): void {
+		let myBooks: Books
+		if (userMyBooks === undefined) myBooks = []
+		else myBooks = JSON.parse(userMyBooks as string)
+
+		let bookIsSaved = false
+		for (let i = 0; i < myBooks.length; i++) {
+			if (myBooks[i].id === book.id) {
+				bookIsSaved = true
+				myBooks[i].list = targetList
+			}
+		}
+		if (bookIsSaved === false) {
+			MyBooksAdd(book, targetList)
+		} else {
+			setUserMyBooks(JSON.stringify(myBooks))
+		}
 	}
 
-	const iconClassName = 'icon icon-'+getListName(targetList)
 	const iconClassName = 'icon icon-' + getListName(targetList)
-	// TODO: make icon-wishlist dynamic based on targetList
 	return (
 		<div className="mark">
-
-			<button className='btn-text'
+			{book.list} - {targetList} &nbsp;
+			<button
+				className="btn-text"
 				onClick={() => {
-					AddBookTest(book,targetList),
+					AddBookToX(book, targetList)
 					popupNote()
 				}}
 			>

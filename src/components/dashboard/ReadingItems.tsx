@@ -28,7 +28,7 @@ export default function ReadingItems() {
 								key={book.id}
 								style={{ zIndex: 10 - index }}
 							>
-								<img src={getBookCover(book.cover,'L')} />
+								<img src={getBookCover(book.cover, 'L')} />
 							</article>
 						)
 					})}

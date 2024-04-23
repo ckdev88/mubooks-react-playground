@@ -10,13 +10,12 @@ const RemoveBookFromSaved = (id: Id) => {
 	return myBooksNew
 }
 
-const RemoveBookButton = (id: Id, saved: boolean) => {
+const RemoveBookButton = (id: Id) => {
 	const { setUserMyBooks } = useContext(AppContext)
 	function RemoveBookButtonAct() {
 		const newArr = RemoveBookFromSaved(id) // update localstorage, database
 		setUserMyBooks(newArr) // update global state
 	}
-	if (!saved) return <></>
 	return (
 		<div className="mark">
 			<button className="btn-text" onClick={() => RemoveBookButtonAct()}>

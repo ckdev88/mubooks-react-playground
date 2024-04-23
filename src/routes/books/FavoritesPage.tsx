@@ -30,8 +30,7 @@ const FavoritesPage = () => {
 				No books marked as favorite yet.
 			</h4>
 			<p>
-				Select and mark your favorite book from{' '}
-				<Link to="/finished">your finished books</Link> add to this list. 
+				Select and mark your favorite book from <Link to="/finished">your finished books</Link> add to this list. 
 			</p>
 			<BooksOverviewPage books={booksFiltered} page="favoritespage" />
 		</>
