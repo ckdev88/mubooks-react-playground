@@ -44,7 +44,7 @@ export default function SignupCard() {
 					</form>
 				</main>
 				<footer className="content-right">
-					<a onClick={login}>Already have an account.</a>
+					<button className='btn-text' onClick={login}>Already have an account.</button>
 				</footer>
 			</article>
 		</>

@@ -41,3 +41,6 @@ form .error {
 label .sf {
 	float: right;
 }
+.ta-right {
+	text-align: right;
+}

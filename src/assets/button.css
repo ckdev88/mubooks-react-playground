@@ -32,3 +32,25 @@ main button.alt, .card footer button.alt {
 	margin-top: 0.1rem;
 	margin-bottom: 0.1rem;
 }
+.btn-text,
+.btn-text:active,
+.btn-text:focus {
+	background: none;
+	color: #0d99ff;
+}
+.btn-text {
+	border: 0;
+	cursor: pointer;
+	font-size: 0.9rem;
+	font-weight: normal;
+	height: 1em;
+	padding: 0;
+	text-align: left;
+	text-decoration: none;
+	transition: text-decoration 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.btn-text:hover {
+	text-decoration: underline;
+	color: #000;
+}
