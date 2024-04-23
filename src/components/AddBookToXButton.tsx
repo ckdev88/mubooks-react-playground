@@ -83,4 +83,4 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		</div>
 	)
 }
-export default AddBookToXButton 
+export default AddBookToXButton

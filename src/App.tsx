@@ -62,7 +62,7 @@ const App = () => {
 					popupNotification,
 					setPopupNotification,
 					popupNotificationShow,
-					setPopupNotificationShow
+					setPopupNotificationShow,
 				}}
 			>
 				<header id="header">
