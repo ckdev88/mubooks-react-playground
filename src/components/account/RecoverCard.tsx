@@ -24,19 +24,22 @@ const RecoverCard = () => {
 	return (
 		<>
 			<article className="card" id="card-recover">
-				<img src="/img/recover-icon.png" width="82" height="82" alt="" className="recover-icon" />
-				<header>Forgot your password? Don't worry. Let's get it back.</header>
+				<header>
+					<img src="/img/recover-icon.png" width="82" height="82" alt="" className="recover-icon" />
+					Forgot your password? <br />
+					<span className='sub'>Don't worry. Let's reset it.</span>
+				</header>
 				<main>
 					<form onSubmit={processRecoverForm}>
 						<label htmlFor="recover-email">Email address: *</label>
 						<input type="email" id="recover-email" name="email" required />
-						<p>We'll send a link to this email if it matches an existing account.</p>
-						<button type="submit">Next</button>
+						<p>We'll send a link to this email address if it matches an existing account.</p>
+						<button type="submit">Send me a password reset link</button>
 					</form>
 				</main>
 				<footer>
-					<button onClick={login} className="alt">
-						Back
+					<button onClick={login} className="btn-text">
+						Back to login
 					</button>
 				</footer>
 			</article>

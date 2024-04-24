@@ -30,7 +30,7 @@ export default function SignupCard() {
 	return (
 		<>
 			<article className="card" id="card-signup">
-				<header>Create an account</header>
+				<header>Let's create an account</header>
 				<main>
 					<form onSubmit={processSignupForm}>
 						<label htmlFor="screenname">Screen name</label>
@@ -40,11 +40,11 @@ export default function SignupCard() {
 						<label htmlFor="password">Password: *</label>
 						<input type="password" id="signup-password" name="password" required />
 						<div className={error !== '' ? 'dblock error' : 'dnone'}>{error}</div>
-						<button>Create</button>
+						<button>Create account</button>
 					</form>
 				</main>
 				<footer className="content-right">
-					<button className='btn-text' onClick={login}>Already have an account.</button>
+					<button className='btn-text' onClick={login}>I already have an account</button>
 				</footer>
 			</article>
 		</>

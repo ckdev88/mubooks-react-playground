@@ -1,5 +1,5 @@
 #welcome-logo {
-	margin-bottom: 2rem
+	margin-bottom: 2rem;
 }
 
 #welcome-logo-img {
@@ -36,5 +36,5 @@
 .card .recover-icon {
 	display: block;
 	width: auto;
-	margin: 0 auto;
+	float: right;
 }

@@ -53,9 +53,9 @@ const LoginCard = () => {
 		<>
 			<article className="card" id="card-login">
 				<main>
-					<header>Log in</header>
+					<header>Log in<br/><span className='sub'>to continue</span></header>
 					<form onSubmit={processLoginForm}>
-						<label htmlFor="login-email">Email</label>
+						<label htmlFor="login-email">Email address</label>
 						<input type="email" id="loginemail" name="loginemail" required />
 						<label htmlFor="login-password">Password</label>
 						<input type="password" id="loginpassword" name="loginpassword" />
@@ -68,7 +68,7 @@ const LoginCard = () => {
 						Forgot password
 					</button>
 					<button className="btn-text ta-right" onClick={signup}>
-						New here? Join now.
+						New here? Join now
 					</button>
 				</footer>
 			</article>

@@ -15,7 +15,7 @@ export default function MyAccountCard() {
 
 	return (
 		<div className="card">
-			<header>My account.</header>
+			<header>My account</header>
 			<main>
 				<dl>
 					<dt>Screen name</dt>
