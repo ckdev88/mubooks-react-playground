@@ -77,11 +77,11 @@ img {
 #main {
 	position: relative;
 	z-index: 1;
-	padding: 1rem 0.25rem 1rem;
+	padding: 1rem 0.25rem;
 }
 
 .loggedin #main {
-	padding-top: 5rem;
+	padding-top: 4rem;
 }
 
 dl dd {
@@ -158,7 +158,7 @@ main button:disabled,
 main button:disabled:hover,
 main button:disabled:active,
 main button:disabled:focus {
-	border-color:transparent;
+	border-color: transparent;
 	background-color: hsl(325, 25%, 76%)
 }
 

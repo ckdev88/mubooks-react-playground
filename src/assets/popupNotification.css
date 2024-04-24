@@ -6,17 +6,17 @@
     background: #14141ef2;
     box-shadow: 0 0 1rem #00000080;
     display: block;
-    padding: .5rem 0;
+    padding: .5rem;
     height: auto;
     width: 80vw;
     left: calc(10vw - .5rem);
     position: fixed;
-    bottom: 4rem;
+    bottom: 5rem;
     transition: bottom .1s ease-in-out;
     text-align: center;
     font-size: .9rem;
 }
 
 #popupNotification.hide {
-	bottom: -3rem;
+	bottom: -4rem;
 }

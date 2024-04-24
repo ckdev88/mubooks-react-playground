@@ -68,7 +68,6 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const iconClassName = 'icon icon-' + getListName(targetList)
 	return (
 		<div className="mark">
-			{book.list} - {targetList} &nbsp;
 			<button
 				className="btn-text"
 				onClick={() => {
