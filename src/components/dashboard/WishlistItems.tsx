@@ -22,11 +22,7 @@ export default function WishlistItems() {
 				<div className="deck-container">
 					{booksarr.slice(-6).map((book: Book, index: number) => {
 						return (
-							<article
-								className="book-cover"
-								key={book.id}
-								style={{ zIndex: 10 - index }}
-							>
+							<article className="book-cover" key={book.id} style={{ zIndex: 10 - index }}>
 								<img src={getBookCover(book.cover, 'L')} />
 							</article>
 						)

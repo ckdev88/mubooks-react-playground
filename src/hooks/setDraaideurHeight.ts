@@ -4,14 +4,9 @@ export default function setDraaideurHeight(): void {
 	const cards = axis.getElementsByClassName('card') as HTMLCollectionOf<HTMLDivElement>
 
 	let max: number = cards[0].offsetHeight
-	for (let i = 0; i < cards.length; i++) {
-		// get max height
-		if (cards[i].offsetHeight > max) max = cards[i].offsetHeight
-	}
-	for (let i = 0; i < cards.length; i++) {
-		//	apply max height to all inner draaideur-cards
-		cards[i].style.height = max + 'px'
-	}
+	for (let i = 0; i < cards.length; i++) if (cards[i].offsetHeight > max) max = cards[i].offsetHeight + 16
+	for (let i = 0; i < cards.length; i++) cards[i].style.height = max + 'px'
+
 	draaideur.style.height = max + 'px'
 	axis.style.height = max + 'px'
 }

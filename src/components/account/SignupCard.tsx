@@ -39,7 +39,7 @@ export default function SignupCard() {
 						<input type="email" id="signup-email" name="email" required />
 						<label htmlFor="password">Password: *</label>
 						<input type="password" id="signup-password" name="password" required />
-						<div className={error !== '' ? 'dblock error' : 'dnone'}>{error}</div>
+						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button>Create account</button>
 					</form>
 				</main>

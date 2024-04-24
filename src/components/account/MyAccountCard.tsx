@@ -1,5 +1,5 @@
 // import { useContext, useEffect } from 'react'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
@@ -9,13 +9,22 @@ export default function MyAccountCard() {
 	const { change } = useCardRotate()
 	const { username, usermail, setUsermail } = useContext(AppContext)
 
-	const resfreshedEmail = UserRefreshEmail()
-	if (usermail === '') setUsermail(resfreshedEmail)
-
-
+	async function refreshmail() {
+		const refreshedEmail = await UserRefreshEmail()
+		setUsermail(refreshedEmail)
+	}
+	if (usermail === '') {
+		useEffect(() => {
+			refreshmail()
+		}, [])
+	}
 	return (
 		<div className="card">
-			<header>My account</header>
+			<header>
+				My account
+				<br />
+				<span className="sub">An overview of my profile</span>
+			</header>
 			<main>
 				<dl>
 					<dt>Screen name</dt>

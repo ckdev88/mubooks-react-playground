@@ -49,7 +49,12 @@ export default function MyAccountEditCard() {
 	return (
 		<>
 			<div className="card">
-				<header>My account</header>
+				<header>
+					Edit my account
+					<br />
+					<span className='sub'>Change your preferences</span>
+				</header>
+
 				<main>
 					<form onSubmit={handleSubmit}>
 						<label>Screen name</label>
