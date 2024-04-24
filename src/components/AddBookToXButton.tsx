@@ -4,8 +4,7 @@ import { supabase } from '../../utils/supabase'
 import getListName from '../hooks/getListName'
 
 const AddBookToXButton = (book: Book, targetList: BookList) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification, setPopupNotificationShow } =
-		useContext(AppContext)
+	const { userMyBooks, setUserMyBooks, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 
 	function MyBooksAdd(book: Book, list = book.list): void {
 		if (book.title.length > 45) {
@@ -35,9 +34,8 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		const updater = await supabase.auth.updateUser({
 			data: { MyBooks: myBooksNew },
 		})
-		if (!updater) console.log('oops? MyBooksUpdate')
-		else {
-		}
+		if (!updater) console.log('Something went wrong, Mu Books are not updated.')
+		else console.log('Mu Books updated.')
 	}
 
 	function popupNote() {

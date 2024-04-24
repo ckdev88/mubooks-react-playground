@@ -26,8 +26,7 @@ const App = () => {
 	else userIsLoggedInInitval = false
 
 	let userMyBooksInitval: string
-	if (localStorage.getItem('MyBooks'))
-		userMyBooksInitval = localStorage.getItem('MyBooks') as string
+	if (localStorage.getItem('MyBooks')) userMyBooksInitval = localStorage.getItem('MyBooks') as string
 	else userMyBooksInitval = '[]'
 
 	const [username, setUsername] = useState<string>('')
@@ -39,9 +38,7 @@ const App = () => {
 
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
-			setUsername(
-				JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname
-			)
+			setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
 	}
 
 	if (userIsLoggedIn) document.getElementsByTagName('html')[0].classList.add('loggedin')

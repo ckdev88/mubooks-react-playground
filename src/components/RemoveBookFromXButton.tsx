@@ -4,8 +4,7 @@ import getListName from '../hooks/getListName'
 import { supabase } from '../../utils/supabase'
 
 const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification, setPopupNotificationShow } =
-		useContext(AppContext)
+	const { userMyBooks, setUserMyBooks, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 
 	const RemoveBookFromX = async (book: Book) => {
 		let myBooks: Books
@@ -29,7 +28,7 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 			}
 			myBooks.splice(removeIndex, 1)
 		}
-		MyBooksUpdate(JSON.stringify(myBooks)) 
+		MyBooksUpdate(JSON.stringify(myBooks))
 	}
 	
 	async function MyBooksUpdate(myBooksNew: string) {
@@ -37,12 +36,12 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 		const updater = await supabase.auth.updateUser({
 			data: { MyBooks: myBooksNew },
 		})
+		if (!updater) console.log('Something went wrong, Mu Books are not updated.')
+		else console.log('Mu Books updated.')
 	}
 
 	function popupNote() {
-		setPopupNotification(
-			'Removed ' + book.title_short + ' from ' + getListName(targetList) + ''
-		)
+		setPopupNotification('Removed ' + book.title_short + ' from ' + getListName(targetList) + '')
 		setPopupNotificationShow(true)
 		setTimeout(() => {
 			setPopupNotificationShow(false)

@@ -13,18 +13,16 @@ export default function MyAccountEditCard() {
 		see()
 	}
 
-	const updateSbUser = async (
-		form_username: string,
-		form_usermail: string,
-		form_userpass: string
-	) => {
+	const updateSbUser = async (form_username: string, form_usermail: string, form_userpass: string) => {
 		if (form_userpass !== '') {
 			const { data, error } = await supabase.auth.updateUser({
 				email: form_usermail,
 				password: form_userpass,
 				data: { screenname: form_username },
 			})
+			if (error) console.log('Error updating user:', error)
 			else {
+				console.log('adata', data)
 				afterSbUpdate(form_username, form_usermail)
 			}
 		} else {
@@ -32,11 +30,11 @@ export default function MyAccountEditCard() {
 				email: form_userpass,
 				data: { screenname: form_username },
 			})
-			if (error) console.log(error)
+			if (error) console.log('Error updating user:', error)
 			else {
+				console.log('bdata', data)
 				afterSbUpdate(form_username, form_usermail)
 			}
-
 		}
 	}
 
@@ -55,28 +53,11 @@ export default function MyAccountEditCard() {
 				<main>
 					<form onSubmit={handleSubmit}>
 						<label>Screen name</label>
-						<input
-							type="text"
-							id="account_screenname"
-							name="account_screenname"
-							defaultValue={username}
-						/>
+						<input type="text" id="account_screenname" name="account_screenname" defaultValue={username} />
 						<label htmlFor="account_email">Email address</label>
-						<input
-							type="email"
-							id="account_email"
-							name="account_email"
-							defaultValue={usermail}
-						/>
-						<label htmlFor="account_password">
-							Password (leave empty to keep current)
-						</label>
-						<input
-							type="password"
-							id="account_password"
-							name="account_password"
-							defaultValue=""
-						/>
+						<input type="email" id="account_email" name="account_email" defaultValue={usermail} />
+						<label htmlFor="account_password">Password (leave empty to keep current)</label>
+						<input type="password" id="account_password" name="account_password" defaultValue="" />
 						<button>Save and return</button>
 					</form>
 				</main>
