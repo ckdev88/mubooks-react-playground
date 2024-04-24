@@ -63,7 +63,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		if (bookIsSaved === false) {
 			MyBooksAdd(book, targetList)
 		} else {
-			setUserMyBooks(JSON.stringify(myBooks))
+			MyBooksUpdate(JSON.stringify(myBooks))
 		}
 	}
 
