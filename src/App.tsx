@@ -62,13 +62,9 @@ const App = () => {
 					setPopupNotificationShow,
 				}}
 			>
-				<header id="header">
-					<NavWrapper />
-				</header>
+				{userIsLoggedIn && <header id="header"> <NavWrapper /> </header> }
 				<main id="main" className="textwrapper">
-					<div id="popupNotification" className={popupNotificationShow ? 'show' : 'hide'}>
-						{popupNotification}
-					</div>
+					<div id="popupNotification" className={popupNotificationShow ? 'show' : 'hide'}>{popupNotification}</div>
 					<Routes>
 						<Route path="/" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />

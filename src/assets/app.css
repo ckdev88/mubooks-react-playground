@@ -1,5 +1,4 @@
 #root {
-	padding-bottom: 3rem;
 	min-height: 100vh;
 	box-sizing: border-box;
 }
@@ -34,6 +33,13 @@
 	margin: 0 auto;
 	min-width: 300px;
 	overflow-x: auto;
+}
+
+html:not(.loggedin) #root {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding-bottom:1rem;
 }
 
 /* utils */

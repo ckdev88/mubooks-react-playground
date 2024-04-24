@@ -59,7 +59,7 @@ const LoginCard = () => {
 						<input type="email" id="loginemail" name="loginemail" required />
 						<label htmlFor="login-password">Password</label>
 						<input type="password" id="loginpassword" name="loginpassword" />
-						<div className={error !== '' ? 'dblock error' : 'dnone'}>{error}</div>
+						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button>Log in</button>
 					</form>
 				</main>
