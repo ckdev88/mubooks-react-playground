@@ -4,6 +4,7 @@ import { AppContext } from '../../App'
 const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 	const { userMyBooks } = useContext(AppContext)
 	let savedArr: Books
+	console.log('page', page)
 
 	// TODO: build further on new feature; highlight saved books in search view
 	// if (page === 'searchpage')
