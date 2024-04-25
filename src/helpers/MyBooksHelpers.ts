@@ -1,12 +1,8 @@
 import { supabase } from '../../utils/supabase'
 
-const MyBooksAdd = async (
-	book: Book,
-	list = book.list
-) => {
-	if (book.title.length > 45) {
-		book.title_short = book.title.slice(0, 45) + '...'
-	} else book.title_short = book.title
+const MyBooksAdd = async (book: Book, list = book.list) => {
+	if (book.title.length > 55) book.title_short = book.title.slice(0, 55) + '...'
+	else book.title_short = book.title
 	let myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 
 	if (myBooks === null) myBooks = []

@@ -102,7 +102,7 @@ const AddBookPage = () => {
 				{searchResults.map((res, result_index) => {
 					if (res.id !== undefined) {
 						let title: string
-						if (res.title.length > 45) title = res.title.slice(0, 40) + '...'
+						if (res.title.length > 55) title = res.title.slice(0, 55) + '...'
 						else title = res.title
 						let authors = res.author_name.map((author, author_index) => { return (<span key={'author' + result_index + author_index} >{author}{(author_index < res.author_name.length - 1) && ', '}</span>) })
 

@@ -7,8 +7,8 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 
 	function MyBooksAdd(book: Book, list = book.list): void {
-		if (book.title.length > 45) {
-			book.title_short = book.title.slice(0, 45) + '...'
+		if (book.title.length > 55) {
+			book.title_short = book.title.slice(0, 55) + '...'
 		} else book.title_short = book.title
 		let myBooks = JSON.parse(userMyBooks as string)
 
