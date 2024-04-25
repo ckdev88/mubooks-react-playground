@@ -3,17 +3,18 @@ import { AppContext } from '../App'
 import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
 
 const RemoveBookFromSaved = (id: Id) => {
+	// TODO: get rid of localStorage reference
 	let myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
 	myBooks = myBooks.filter((presentbook: Book) => presentbook.id !== id)
 	const myBooksNew: string = JSON.stringify(myBooks)
-	MyBooksUpdate(myBooksNew) // update localstorage, database, state with saved booklist
+	MyBooksUpdate(myBooksNew) // update database, state with saved booklist
 	return myBooksNew
 }
 
 const RemoveBookButton = (id: Id) => {
 	const { setUserMyBooks } = useContext(AppContext)
 	function RemoveBookButtonAct() {
-		const newArr = RemoveBookFromSaved(id) // update localstorage, database
+		const newArr = RemoveBookFromSaved(id) // update database
 		setUserMyBooks(newArr) // update global state
 	}
 	return (

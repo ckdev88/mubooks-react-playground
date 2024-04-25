@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import { AppContext } from '../../App'
-// import { UserLogin } from '../../helpers/AuthHelpers'
 import { supabase } from '../../../utils/supabase'
 import useCardRotate from '../../hooks/useCardRotate'
 import { useNavigate } from 'react-router-dom'
@@ -8,11 +7,11 @@ import { useNavigate } from 'react-router-dom'
 const LoginCard = () => {
 	const navigate = useNavigate()
 	const {
+		setUserIsLoggedIn,
 		setUsername,
 		setUsermail,
 		setUserMyBooks,
 		userIsLoggedIn,
-		setUserIsLoggedIn,
 		setPopupNotificationShow,
 		setPopupNotification,
 	} = useContext(AppContext)
@@ -25,6 +24,7 @@ const LoginCard = () => {
 		})
 		return { error, data }
 	}
+
 	async function processLoginForm(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		const user: User = {
@@ -53,7 +53,11 @@ const LoginCard = () => {
 		<>
 			<article className="card" id="card-login">
 				<main>
-					<header>Log in<br/><span className='sub'>to continue</span></header>
+					<header>
+						Log in
+						<br />
+						<span className="sub">to continue</span>
+					</header>
 					<form onSubmit={processLoginForm}>
 						<label htmlFor="login-email">Email address</label>
 						<input type="email" id="loginemail" name="loginemail" required />

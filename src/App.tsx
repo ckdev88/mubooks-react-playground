@@ -23,8 +23,9 @@ export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const App = () => {
 	let userIsLoggedInInitval: boolean
-	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitval = true
-	else userIsLoggedInInitval = false
+	if (localStorage.getItem(localStorageKey)) {
+		userIsLoggedInInitval = true
+	} else userIsLoggedInInitval = false
 
 	let userMyBooksInitval: string
 	if (localStorage.getItem('MyBooks')) userMyBooksInitval = localStorage.getItem('MyBooks') as string

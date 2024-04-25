@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+// import { UserLogout } from '../../helpers/AuthHelpers'
 import { useContext } from "react"
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
@@ -13,6 +14,7 @@ const UserLogout = async () => {
 	}
 	return error
 }
+
 export default function UserLogoutPage() {
 	const { setUserIsLoggedIn } = useContext(AppContext)
 	const navigate = useNavigate()
