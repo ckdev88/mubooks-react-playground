@@ -11,11 +11,20 @@ const LoginCard = () => {
 		setUsername,
 		setUsermail,
 		setUserMyBooks,
-		userIsLoggedIn,
 		setPopupNotificationShow,
 		setPopupNotification,
 	} = useContext(AppContext)
 	const [error, setError] = useState('')
+
+	// TODO: either user of remove useAuthUserLogin(user) references
+
+	function popupNote() {
+		setPopupNotification('Logged in! Redirecting to your Dashboard.')
+		setPopupNotificationShow(true)
+		setTimeout(() => {
+			setPopupNotificationShow(false)
+		}, 1500)
+	}
 
 	const UserLogin = async (user: User) => {
 		const { data, error } = await supabase.auth.signInWithPassword({
@@ -31,21 +40,23 @@ const LoginCard = () => {
 			email: event.currentTarget.loginemail.value,
 			password: event.currentTarget.loginpassword.value,
 		}
-		const login = await UserLogin(user as User)
-		if (login.error) {
-			setError(login.error.message)
-		} else {
-			if (login?.data) {
-				setUserIsLoggedIn(true)
-				setUsername(login?.data.user?.user_metadata.screenname)
-				setUsermail(login?.data.user?.user_metadata.email)
-				localStorage.setItem('MyBooks', login?.data.user?.user_metadata.MyBooks)
-				setUserMyBooks(localStorage.getItem('MyBooks') as string)
-				setTimeout(() => {
+		await UserLogin(user as User)
+			.then((res) => {
+				if (res.error !== null) {
+					setError(res.error.message)
+					setUserIsLoggedIn(false)
+				} else {
+					setError('')
+					setUserIsLoggedIn(true)
+					popupNote()
+					setUsername(res.data.user?.user_metadata.screenname)
+					setUsermail(res.data.user?.user_metadata.email)
+					setUserMyBooks(res.data.user?.user_metadata.MyBooks)
 					navigate('/dashboard')
-				}, 100)
-			} else setError('Something unexpected happened, try again later.')
-		}
+				}
+			})
+			.catch(() => setError('Something unexpected happened, try again later.'))
+			.finally(() => console.log('LoginForm processed'))
 	}
 
 	const { recover, signup } = useCardRotate()
