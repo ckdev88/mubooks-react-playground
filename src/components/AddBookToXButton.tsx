@@ -4,7 +4,7 @@ import { supabase } from '../../utils/supabase'
 import getListName from '../hooks/getListName'
 
 const AddBookToXButton = (book: Book, targetList: BookList) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
+	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
 	function MyBooksAdd(book: Book, list = book.list): void {
 		if (book.title.length > 55) {
@@ -29,21 +29,15 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		MyBooksUpdate(JSON.stringify(myBooks))
 	}
 
-	async function MyBooksUpdate(myBooksNew: string) {
+	async function MyBooksUpdate(myBooksNew: string): Promise<void> {
+		let msg: string
 		setUserMyBooks(myBooksNew)
 		const updater = await supabase.auth.updateUser({
 			data: { MyBooks: myBooksNew },
 		})
-		if (!updater) console.log('Something went wrong, Mu Books are not updated.')
-		else console.log('Mu Books updated.')
-	}
-
-	function popupNote() {
-		setPopupNotification('Added ' + book.title_short + ' to ' + getListName(targetList) + '')
-		setPopupNotificationShow(true)
-		setTimeout(() => {
-			setPopupNotificationShow(false)
-		}, 1500)
+		if (!updater) msg = 'Something went wrong, Mu Books are not updated.'
+		else msg = 'Added ' + book.title_short + ' to ' + getListName(targetList) + ''
+		setPopupNotification(msg)
 	}
 
 	function AddBookToX(book: Book, targetList: BookList): void {
@@ -58,23 +52,14 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 				myBooks[i].list = targetList
 			}
 		}
-		if (bookIsSaved === false) {
-			MyBooksAdd(book, targetList)
-		} else {
-			MyBooksUpdate(JSON.stringify(myBooks))
-		}
+		if (bookIsSaved === false) MyBooksAdd(book, targetList)
+		else MyBooksUpdate(JSON.stringify(myBooks))
 	}
 
 	const iconClassName = 'icon icon-' + getListName(targetList)
 	return (
 		<div className="mark">
-			<button
-				className="btn-text"
-				onClick={() => {
-					AddBookToX(book, targetList)
-					popupNote()
-				}}
-			>
+			<button className="btn-text" onClick={() => AddBookToX(book, targetList)}>
 				<span className={iconClassName}></span>Add to {getListName(targetList)}
 			</button>
 		</div>

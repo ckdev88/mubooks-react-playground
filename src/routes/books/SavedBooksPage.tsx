@@ -4,9 +4,8 @@ import BooksOverviewPage from './BooksOverviewPage'
 export default function SavedBooksPage() {
 	let savedbooks: Books
 	let hasBooks: boolean = false
-	if (localStorage.getItem('MyBooks') === 'undefined') {
-		savedbooks = []
-	} else savedbooks = JSON.parse(localStorage.getItem('MyBooks') as string)
+	if (userMyBooks === '') savedbooks = []
+	else savedbooks = JSON.parse(userMyBooks as string)
 	if (savedbooks.length > 0) hasBooks = true
 
 	return (

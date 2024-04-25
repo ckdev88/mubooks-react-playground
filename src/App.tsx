@@ -23,9 +23,8 @@ export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const App = () => {
 	let userIsLoggedInInitval: boolean
-	if (localStorage.getItem(localStorageKey)) {
-		userIsLoggedInInitval = true
-	} else userIsLoggedInInitval = false
+	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitval = true
+	else userIsLoggedInInitval = false
 
 	let userMyBooksInitval: string
 	userMyBooksInitval = '[]'
@@ -44,6 +43,14 @@ const App = () => {
 
 	if (userIsLoggedIn) document.getElementsByTagName('html')[0].classList.add('loggedin')
 	else document.getElementsByTagName('html')[0].classList.remove('loggedin')
+
+	function popper() {
+		let ret: string
+		if (popupNotification) ret = popupNotification
+		else ret = ''
+		setTimeout(() => setPopupNotification(''), 1000)
+		return <>{ret}</>
+	}
 
 	return (
 		<>
@@ -69,8 +76,8 @@ const App = () => {
 					</header>
 				)}
 				<main id="main" className="textwrapper">
-					<div id="popupNotification" className={popupNotificationShow ? 'show' : 'hide'}>
-						{popupNotification}
+					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
+						{popupNotification && <>{popper()}</>}
 					</div>
 					<Routes>
 						<Route path="/" Component={RootPage} />

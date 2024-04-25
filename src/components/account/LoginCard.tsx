@@ -11,20 +11,11 @@ const LoginCard = () => {
 		setUsername,
 		setUsermail,
 		setUserMyBooks,
-		setPopupNotificationShow,
 		setPopupNotification,
 	} = useContext(AppContext)
 	const [error, setError] = useState('')
 
 	// TODO: either user of remove useAuthUserLogin(user) references
-
-	function popupNote() {
-		setPopupNotification('Logged in! Redirecting to your Dashboard.')
-		setPopupNotificationShow(true)
-		setTimeout(() => {
-			setPopupNotificationShow(false)
-		}, 1500)
-	}
 
 	const UserLogin = async (user: User) => {
 		const { data, error } = await supabase.auth.signInWithPassword({
@@ -48,7 +39,6 @@ const LoginCard = () => {
 				} else {
 					setError('')
 					setUserIsLoggedIn(true)
-					popupNote()
 					setUsername(res.data.user?.user_metadata.screenname)
 					setUsermail(res.data.user?.user_metadata.email)
 					setUserMyBooks(res.data.user?.user_metadata.MyBooks)
