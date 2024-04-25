@@ -1,7 +1,7 @@
-import { useContext } from "react"
-import BooksOverviewPage from "./BooksOverviewPage"
-import { AppContext } from "../../App"
-import { Link } from "react-router-dom"
+import { useContext } from 'react'
+import BooksOverviewPage from './BooksOverviewPage'
+import { AppContext } from '../../App'
+import { Link } from 'react-router-dom'
 
 const WishlistPage = () => {
 	const { userMyBooks, popupNotification } = useContext(AppContext)
@@ -12,10 +12,9 @@ const WishlistPage = () => {
 
 	if (localStorage.getItem('MyBooks') === 'undefined') {
 		books = []
-	}
-	else {
+	} else {
 		books = JSON.parse(userMyBooks as string)
-		if (typeof (books) !== 'object') books = JSON.parse(books)
+		if (typeof books !== 'object') books = JSON.parse(books)
 
 		booksFiltered = books.filter((book) => book.list === 1)
 		if (booksFiltered !== undefined) {
@@ -31,8 +30,10 @@ const WishlistPage = () => {
 			<p className="subHead">All the books I will read read soon go here.</p>
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books on mu wishlist yet.</h4>
 			<p>
-				Want to add a book to your wishlist?<br />
-				<Link to="/search">Search</Link> or <Link to="/add-book">Add a book yourself</Link>.<br /><br />
+				Want to add a book to your wishlist?
+				<br />
+				<Link to="/search">Search</Link> or <Link to="/add-book">Add a book yourself</Link>.<br />
+				<br />
 			</p>
 			<BooksOverviewPage books={booksFiltered} page="wishlistpage" />
 		</>

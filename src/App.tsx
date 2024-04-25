@@ -65,8 +65,7 @@ const App = () => {
 			>
 				{userIsLoggedIn && (
 					<header id="header">
-						{' '}
-						<NavWrapper />{' '}
+						<NavWrapper />
 					</header>
 				)}
 				<main id="main" className="textwrapper">
