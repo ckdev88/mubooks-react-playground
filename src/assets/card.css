@@ -12,9 +12,9 @@
 }
 .card header .sub {
 	font-weight: normal;
-	font-size:.8em;
-	letter-spacing: -.025em;
-	opacity: .5;
+	font-size: 0.8em;
+	letter-spacing: -0.025em;
+	opacity: 0.5;
 }
 .card footer {
 	display: flex;

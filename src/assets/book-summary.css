@@ -16,9 +16,7 @@
 }
 
 .book-summary {
-	transition:
-		padding 0.15s linear,
-		background-color 0.15s linear;
+	transition: padding 0.15s linear, background-color 0.15s linear;
 }
 
 .book-summary .in-short {
@@ -87,7 +85,7 @@
 	height: auto;
 	max-width: 100%;
 	border-radius: 0.4rem;
-	box-shadow: 0 0 0.4rem rgba(0,0,0,40%);
+	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);
 }
 
 .book-summary .synopsis {
@@ -147,7 +145,7 @@
 }
 
 .book-summary .icon-finished {
-	background-image: url('/img/icon-finished.png')
+	background-image: url('/img/icon-finished.png');
 }
 
 .book-summary .icon-favorite {
