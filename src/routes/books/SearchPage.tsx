@@ -2,7 +2,6 @@ import { useState } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
 
-
 const SearchPage = () => {
 	const [resultsMessage, setResultsMessage] = useState<string>('')
 	const [resultCount, setResultCount] = useState<number>(0)
@@ -19,7 +18,9 @@ const SearchPage = () => {
 			setResultsMessage('')
 			let searchfields: string
 			searchfields = 'title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median'
-			await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=30&fields=' + searchfields)
+			await fetch(
+				'https://openlibrary.org/search.json?q=' + search_term +
+				'&mode=everything&limit=30&fields=' + searchfields)
 				.then(response => response.json())
 				.then(json => json.docs.filter((r: Book) => r.author_key !== undefined && r.edition_key !== undefined && r.isbn !== undefined && r.cover_edition_key !== undefined))
 				.then(filtered => {
@@ -49,10 +50,9 @@ const SearchPage = () => {
 	}
 	return (
 		<>
-			<h1>Search</h1>
-			<p>
-				Find the book you want to add. <br />
-			</p>
+			<h1>Search<br />
+				<span className='sub'>Find the book you want to add.</span>
+			</h1>
 			<form onSubmit={processSearchForm}>
 				<input type="text" id="search_term" />
 				<input type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
