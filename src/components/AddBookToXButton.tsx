@@ -6,7 +6,7 @@ import getListName from '../hooks/getListName'
 const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
-	function MyBooksAdd(book: Book, list = book.list): void {
+	function MyBooksAdd(book: Book, list = book.list): string {
 		if (book.title.length > 55) {
 			book.title_short = book.title.slice(0, 55) + '...'
 		} else book.title_short = book.title
@@ -26,21 +26,26 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			title: book.title,
 			title_short: book.title_short,
 		})
-		MyBooksUpdate(JSON.stringify(myBooks))
+		return JSON.stringify(myBooks)
 	}
 
-	async function MyBooksUpdate(myBooksNew: string): Promise<void> {
+	async function MyBooksUpdate(myBooksNew: string) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		const updater = await supabase.auth.updateUser({
-			data: { MyBooks: myBooksNew },
-		})
-		if (!updater) msg = 'Something went wrong, Mu Books are not updated.'
-		else msg = 'Added ' + book.title_short + ' to ' + getListName(targetList) + ''
-		setPopupNotification(msg)
+		await supabase.auth
+			.updateUser({
+				data: { MyBooks: myBooksNew },
+			})
+			.then(() => {
+				msg = 'Added ' + book.title_short + ' to ' + getListName(targetList)
+			})
+			.catch(() => {
+				msg = 'Something went wrong, Mu Books are not updated.'
+			})
+			.finally(() => setPopupNotification(msg))
 	}
 
-	function AddBookToX(book: Book, targetList: BookList): void {
+	function AddBookToX(book: Book, targetList: BookList) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = JSON.parse(userMyBooks as string)
@@ -52,14 +57,23 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 				myBooks[i].list = targetList
 			}
 		}
-		if (bookIsSaved === false) MyBooksAdd(book, targetList)
-		else MyBooksUpdate(JSON.stringify(myBooks))
+
+		let myBooksNew: string
+		if (bookIsSaved === false) myBooksNew = MyBooksAdd(book, targetList)
+		else myBooksNew = JSON.stringify(myBooks)
+		MyBooksUpdate(myBooksNew)
+		return myBooksNew
+	}
+
+	function AddBookToXButtonAct() {
+		const newArr: string = AddBookToX(book, targetList)
+		setUserMyBooks(newArr)
 	}
 
 	const iconClassName = 'icon icon-' + getListName(targetList)
 	return (
 		<div className="mark">
-			<button className="btn-text" onClick={() => AddBookToX(book, targetList)}>
+			<button className="btn-text" onClick={AddBookToXButtonAct}>
 				<span className={iconClassName}></span>Add to {getListName(targetList)}
 			</button>
 		</div>

@@ -1,4 +1,3 @@
-import NavWrapper from '../components/NavWrapper'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { localStorageKey } from '../../utils/supabase'
@@ -28,9 +27,6 @@ const RootPage = () => {
 
 	return (
 		<>
-			<header id="header">
-				<NavWrapper />
-			</header>
 			<main id="main" className="textwrapper">
 				<div className="textwrapper">
 					Redirecting to wherever you should be right now... <br />

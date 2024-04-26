@@ -20,12 +20,13 @@ type User = {
 }
 /** 
 * On which list the book is or should be.
+* 0: No list, about to be removed
 * 1: Wishlist -- Reading,  finished, favorite = false
 * 2: Reading  -- Wishlist, finished, favorite = false
 * 3: Finished -- Wishlist & reading = false, favorite ambiguous
 * 4: Favorite -- Wishlist & reading = false, finished true
 */
-type BookList = 1 | 2 | 3 | 4
+type BookList = 0 | 1 | 2 | 3 | 4
 
 type CoverSize = undefined | 'S' | 'M' | 'L'
 

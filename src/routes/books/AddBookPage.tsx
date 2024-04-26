@@ -20,16 +20,12 @@ const fetchCurl = () => {
 	if (explore.limit > 0) ret += `&limit=${explore.limit}`
 	if (explore.fields !== '') ret += `&fields=${explore.fields}`
 	return ret
-	// https://openlibrary.org/search.json?q=language:eng&limit=10&title=Corrups&Author=Penelope&fields=title,author_name,edition,key,language,ebook_access,thumbnail
 }
 async function fetchBook() {
 	return await fetch(fetchCurl())
 		.then((res) => res.json())
 		.then((data) => (foundBooks.value = data.docs))
 }
-
-
-for covers: https://covers.openlibrary.org/b/isbn/isbnnummerhier-S.jpg
 */
 
 
@@ -46,11 +42,11 @@ const AddBookPage = () => {
 		if (search_term.length > 4) {
 			setLoading(true)
 			setResultsWarning('')
-			// const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + search_term + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
+			let searchfields: string
+			searchfields = 'title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median'
 			const wacht = await fetch(
-				'https://openlibrary.org/search.json?q=' +
-					search_term +
-					'&mode=everything&limit=8&fields=author_key,author_name,cover_edition_key,edition_key,first_publish_year,isbn,number_of_pages_median,title'
+				'https://openlibrary.org/search.json?q=' + search_term +
+				'&mode=everything&limit=8&fields=' + searchfields
 			)
 			await wacht
 				.json()
@@ -82,8 +78,6 @@ const AddBookPage = () => {
 					return filtered
 				})
 				.then((result) => setSearchResults(result))
-			// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
-			// fields: '&fields=title,author_name,edition,thumbnail'
 			setLoading(false)
 		} else if (search_term.length === 0) setResultsWarning(search_term.length)
 		else setResultsWarning('keep typing...')

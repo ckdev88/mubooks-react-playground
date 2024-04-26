@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import BooksOverviewPage from './BooksOverviewPage'
+import { useContext } from 'react'
+import { AppContext } from '../../App'
 
 export default function SavedBooksPage() {
+	const { userMyBooks } = useContext(AppContext)
 	let savedbooks: Books
 	let hasBooks: boolean = false
 	if (userMyBooks === '') savedbooks = []
