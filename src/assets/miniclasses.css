@@ -20,7 +20,7 @@
 }
 
 form .error {
-	margin-bottom: .5em;
+	margin-bottom: 0.5em;
 	color: red;
 }
 
@@ -29,13 +29,13 @@ form .error {
 }
 
 .clr::after {
-	content: "";
+	content: '';
 	display: block;
 	clear: both;
 }
 
 .sf {
-	font-size: .8em
+	font-size: 0.8em;
 }
 
 label .sf {
