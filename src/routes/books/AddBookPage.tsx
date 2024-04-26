@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { isUrl, getOlCover } from "../../Helpers"
+import { useState } from 'react'
+import { isUrl, getOlCover } from '../../Helpers'
 
 /*
 const explore = reactive({
@@ -47,9 +47,23 @@ const AddBookPage = () => {
 			setLoading(true)
 			setResultsWarning('')
 			// const wacht = await fetch('https://openlibrary.org/search.json?q=language:eng&limit=8&title=' + search_term + '&fields=title,author_name,isbn,first_publish_year,number_of_pages_median')
-			const wacht = await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=8&fields=author_key,author_name,cover_edition_key,edition_key,first_publish_year,isbn,number_of_pages_median,title')
-			await wacht.json().then(json => json.docs.filter((r: Book) => r.author_key !== undefined && r.edition_key !== undefined && r.isbn !== undefined && r.cover_edition_key !== undefined))
-				.then(filtered => {
+			const wacht = await fetch(
+				'https://openlibrary.org/search.json?q=' +
+					search_term +
+					'&mode=everything&limit=8&fields=author_key,author_name,cover_edition_key,edition_key,first_publish_year,isbn,number_of_pages_median,title'
+			)
+			await wacht
+				.json()
+				.then((json) =>
+					json.docs.filter(
+						(r: Book) =>
+							r.author_key !== undefined &&
+							r.edition_key !== undefined &&
+							r.isbn !== undefined &&
+							r.cover_edition_key !== undefined
+					)
+				)
+				.then((filtered) => {
 					for (let i = 0; i < filtered.length; i++) {
 						filtered[i].id = filtered[i].edition_key.slice(0, 1).toString()
 						filtered[i].title_short = filtered[i].title.slice(0, 45).toString()
@@ -62,17 +76,17 @@ const AddBookPage = () => {
 						}
 						filtered[i].cover = getOlCover(filtered[i].cover_edition_key)
 					}
-					(filtered.length > 30 ? setResultsMessage('Showing only 30 results. Specify a bit more.') : setResultsMessage('Showing ' + filtered.length + ' results for ' + search_term + '.'))
+					filtered.length > 30
+						? setResultsMessage('Showing only 30 results. Specify a bit more.')
+						: setResultsMessage('Showing ' + filtered.length + ' results for ' + search_term + '.')
 					return filtered
 				})
-				.then(result => setSearchResults(result))
+				.then((result) => setSearchResults(result))
 			// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
 			// fields: '&fields=title,author_name,edition,thumbnail'
 			setLoading(false)
-		}
-		else if (search_term.length === 0) setResultsWarning(search_term.length)
+		} else if (search_term.length === 0) setResultsWarning(search_term.length)
 		else setResultsWarning('keep typing...')
-
 	}
 
 	// ab = abbreviation for Add Book
@@ -80,7 +94,11 @@ const AddBookPage = () => {
 		e.preventDefault()
 		setCoverImg(e.currentTarget.abCover.value.trim())
 	}
-	let showCover = (<><img src={coverImg} style={{ width: '50%' }} /></>)
+	let showCover = (
+		<>
+			<img src={coverImg} style={{ width: '50%' }} />
+		</>
+	)
 
 	function changeCover(e: React.ChangeEvent<HTMLInputElement>) {
 		let url = e.currentTarget.value
@@ -92,7 +110,7 @@ const AddBookPage = () => {
 			<div className="booksearch">
 				<h1>Search book</h1>
 				<form onSubmit={processSearchForm}>
-					<input type="text" id='search_term' name='search_term' />
+					<input type="text" id="search_term" name="search_term" />
 					<div className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</div>
 					<div className={resultsWarning !== '' ? 'dblock' : 'dnone'}>{resultsWarning}</div>
 					<button disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
@@ -104,13 +122,22 @@ const AddBookPage = () => {
 						let title: string
 						if (res.title.length > 55) title = res.title.slice(0, 55) + '...'
 						else title = res.title
-						let authors = res.author_name.map((author, author_index) => { return (<span key={'author' + result_index + author_index} >{author}{(author_index < res.author_name.length - 1) && ', '}</span>) })
+						let authors = res.author_name.map((author, author_index) => {
+							return (
+								<span key={'author' + result_index + author_index}>
+									{author}
+									{author_index < res.author_name.length - 1 && ', '}
+								</span>
+							)
+						})
 
 						return (
 							<div key={'result' + result_index} className="result">
 								<div className="wrapper">
-									<img src="img/loep.svg" className='loep' />
-									<div className='text'>{title} <em className="sf"> ({res.first_publish_year})</em><br />
+									<img src="img/loep.svg" className="loep" />
+									<div className="text">
+										{title} <em className="sf"> ({res.first_publish_year})</em>
+										<br />
 										<em className="sf cl">{authors}</em>
 									</div>
 								</div>
@@ -127,16 +154,24 @@ const AddBookPage = () => {
 					<input type="text" id="abIsbn" name="abIsbn" required />
 					<label htmlFor="abTitle">Title</label>
 					<input type="text" id="abTitle" name="abTitle" required />
-					<label htmlFor="abAuthors">Author(s) <em className="sf">1 author per line</em></label>
+					<label htmlFor="abAuthors">
+						Author(s) <em className="sf">1 author per line</em>
+					</label>
 					<textarea name="abAuthors" id="abAuthors" />
-					<label htmlFor="abCover">Cover URL <em className="sf">starts with https://</em></label>
+					<label htmlFor="abCover">
+						Cover URL <em className="sf">starts with https://</em>
+					</label>
 					<input type="url" name="abCover" id="abCover" onChange={changeCover} />
-					{showCover}<br /><br />
+					{showCover}
+					<br />
+					<br />
 					<label htmlFor="abYearPublished">Year published</label>
 					<input type="number" name="abYearPublished" id="abYearPublished" />
 					<label htmlFor="abPages">Pages</label>
 					<input type="number" name="abPages" id="abPages" />
-					<label htmlFor="abTropes">Tropes <em className="sf">one trope per line</em></label>
+					<label htmlFor="abTropes">
+						Tropes <em className="sf">one trope per line</em>
+					</label>
 					<textarea name="abTropes" id="abTropes"></textarea>
 					<button>Add book to wishlist</button>
 				</fieldset>

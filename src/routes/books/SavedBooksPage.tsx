@@ -12,8 +12,8 @@ export default function SavedBooksPage() {
 		<>
 			<h1>My Books</h1>
 			<p>
-				An overview of my saved books, this includes books that are favorited, read and
-				finished, the wishlist and the book currently reading.
+				An overview of my saved books, this includes books that are favorited, read and finished, the wishlist
+				and the book currently reading.
 			</p>
 			<div className={hasBooks === true ? 'dnone' : 'dblock'}>
 				<h4>No books added yet, find them and add them.</h4>

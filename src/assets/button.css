@@ -1,4 +1,5 @@
-main button.alt, .card footer button.alt {
+main button.alt,
+.card footer button.alt {
 	background: white;
 	color: #333;
 	border-color: transparent;
@@ -18,7 +19,6 @@ main button.alt, .card footer button.alt {
 	height: 100%;
 	padding: 0.25rem;
 	width: auto;
-	/* transform: translateY(50%), translateX(50%); */
 }
 .badge {
 	font-size: 0.9em;
@@ -39,7 +39,7 @@ main button.alt, .card footer button.alt {
 	color: #0d99ff;
 }
 .btn-text {
-	display:inline-block;
+	display: inline-block;
 	border: 0;
 	cursor: pointer;
 	font-size: 0.9rem;

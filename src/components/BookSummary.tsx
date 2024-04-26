@@ -10,7 +10,11 @@ const BookSummary = ({ book }: BookObject) => {
 			<header>
 				<aside className="cover">
 					<img
-						src={getBookCover(book.cover, 'M') !== undefined ? getBookCover(book.cover, 'M') : 'img/coverless.png'}
+						src={
+							getBookCover(book.cover, 'M') !== undefined
+								? getBookCover(book.cover, 'M')
+								: 'img/coverless.png'
+						}
 						alt=""
 					/>
 				</aside>

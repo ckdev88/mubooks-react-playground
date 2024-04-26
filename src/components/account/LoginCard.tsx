@@ -11,7 +11,6 @@ const LoginCard = () => {
 		setUsername,
 		setUsermail,
 		setUserMyBooks,
-		setPopupNotification,
 	} = useContext(AppContext)
 	const [error, setError] = useState('')
 
