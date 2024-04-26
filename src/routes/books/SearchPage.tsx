@@ -10,11 +10,6 @@ const SearchPage = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	const [loading, setLoading] = useState(false)
 
-	// TODO: marker isSaved to highlight saved books in results
-	// booksToAdd[count] = boeken[i]
-	// booksToAdd[count].id = i
-	// else if (count === 0) setResultsMessage('Loosen up your search a bit.')
-
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		const before = performance.now()
@@ -22,7 +17,9 @@ const SearchPage = () => {
 		if (search_term.length > 4) {
 			setLoading(true)
 			setResultsMessage('')
-			await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=30&fields=title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median')
+			let searchfields: string
+			searchfields = 'title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median'
+			await fetch('https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=30&fields=' + searchfields)
 				.then(response => response.json())
 				.then(json => json.docs.filter((r: Book) => r.author_key !== undefined && r.edition_key !== undefined && r.isbn !== undefined && r.cover_edition_key !== undefined))
 				.then(filtered => {
@@ -56,7 +53,7 @@ const SearchPage = () => {
 			<p>
 				Find the book you want to add. <br />
 			</p>
-			<form onSubmit={processSearchForm}> 
+			<form onSubmit={processSearchForm}>
 				<input type="text" id="search_term" />
 				<input type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
 			</form>
