@@ -2,6 +2,7 @@ import { useState } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
 
+
 const SearchPage = () => {
 	const [resultsMessage, setResultsMessage] = useState<string>('')
 	const [resultCount, setResultCount] = useState<number>(0)
@@ -55,9 +56,9 @@ const SearchPage = () => {
 			<p>
 				Find the book you want to add. <br />
 			</p>
-			<form onSubmit={processSearchForm} >
-				<input type="text" name="search_term" id="search_term" />
-				<button disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
+			<form onSubmit={processSearchForm}> 
+				<input type="text" id="search_term" />
+				<input type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
 			</form>
 			<div>
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>
