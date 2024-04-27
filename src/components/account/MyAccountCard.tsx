@@ -21,9 +21,7 @@ export default function MyAccountCard() {
 	return (
 		<div className="card">
 			<header>
-				My account
-				<br />
-				<span className="sub">An overview of my profile</span>
+				My account <sub>An overview of my profile</sub>
 			</header>
 			<main>
 				<dl>

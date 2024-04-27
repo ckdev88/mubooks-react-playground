@@ -13,12 +13,10 @@ const DashboardPage = () => {
 	return (
 		<>
 			<div className="textwrapper">
-				<h1>Hi, {username}</h1>
-				<p>
-					MuBOOKS is your journal for your books. <br />
-					<br />
-					Let's get started!
-				</p>
+				<h1>
+					Hi, {username}
+					<sub>MuBOOKS is your reading journal.</sub>
+				</h1>
 			</div>
 			<QuoteCard />
 			<Reading />

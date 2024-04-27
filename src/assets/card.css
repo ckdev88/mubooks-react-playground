@@ -11,9 +11,7 @@
 	margin-bottom: 1rem;
 	width: 100%;
 }
-.card header .sub {
-	font-size: 0.8em;
-}
+
 .card footer {
 	display: flex;
 	justify-content: space-between;

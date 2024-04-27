@@ -66,8 +66,7 @@ const SearchPage = () => {
 		<>
 			<h1>
 				Search
-				<br />
-				<span className="sub">Find the book you want to add.</span>
+				<sub>Find the book you want to add.</sub>
 			</h1>
 			<form onSubmit={processSearchForm}>
 				<input type="text" id="search_term" />

@@ -50,8 +50,7 @@ const LoginCard = () => {
 				<main>
 					<header>
 						Log in
-						<br />
-						<span className="sub">to continue</span>
+						<sub>to continue</sub>
 					</header>
 					<form onSubmit={processLoginForm}>
 						<label htmlFor="login-email">Email address</label>

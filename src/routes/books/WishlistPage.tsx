@@ -25,9 +25,10 @@ const WishlistPage = () => {
 
 	return (
 		<>
-			<h1>Mu Wishlist</h1>
-			{popupNotification}
-			<p className="subHead">All the books I will read read soon go here.</p>
+			<h1>
+				Mu Wishlist
+				<sub>All the books I will read read soon.</sub>
+			</h1>
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books on mu wishlist yet.</h4>
 			<p>
 				Want to add a book to your wishlist?

@@ -20,11 +20,9 @@ const BookSummary = ({ book }: BookObject) => {
 				</aside>
 				<div className="in-short">
 					<h2>
-						{book.title_short}
+						{book.title_short} <sup>({book.first_publish_year})</sup>
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
-					{book.first_publish_year}
-					<br />
 					{book.number_of_pages_median} pages
 					<br />
 				</div>

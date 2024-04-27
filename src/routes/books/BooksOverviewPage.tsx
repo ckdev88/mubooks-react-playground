@@ -6,12 +6,10 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 	let savedArr: Books
 
 	// TODO: build further on new feature; highlight saved books in search view
-	// if (page === 'searchpage')
 	savedArr = JSON.parse(userMyBooks as string)
 
 	return books.map((book) => {
-		if (page) {
-			// === 'searchpage') {
+		if (page === 'searchpage') {
 			savedArr.find((savedbook) => {
 				if (savedbook.id === book.id) {
 					book.list = savedbook.list

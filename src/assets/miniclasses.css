@@ -44,9 +44,16 @@ label .sf {
 .ta-right {
 	text-align: right;
 }
-.sub {
+sub,
+sup {
 	font-weight: normal;
-	font-size: 0.7em;
 	letter-spacing: -0.025em;
 	opacity: 0.5;
+}
+sub {
+	font-size: 0.8em;
+	display: block;
+}
+sup {
+	font-size: 0.7em;
 }

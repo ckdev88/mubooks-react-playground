@@ -24,13 +24,14 @@ const FavoritesPage = () => {
 
 	return (
 		<>
-			<h1>Favorites</h1>
-			<p className="subHead">My beloved, adored, hottest favorite books.</p>
-			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>
-				No books marked as favorite yet.
-			</h4>
+			<h1>
+				Favorites <sub>My beloved, adored, hottest favorite books.</sub>
+			</h1>
+
+			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books marked as favorite yet.</h4>
 			<p>
-				Select and mark your favorite book from <Link to="/finished">your finished books</Link> add to this list. 
+				Select and mark your favorite book from <Link to="/finished">your finished books</Link> add to this
+				list.
 			</p>
 			<BooksOverviewPage books={booksFiltered} page="favoritespage" />
 		</>

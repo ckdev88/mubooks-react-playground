@@ -1,9 +1,8 @@
 import useCardRotate from '../../hooks/useCardRotate'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../../utils/supabase'
-import {useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { AppContext } from '../../App'
-
 
 const RecoverCard = () => {
 	const { setUsermail } = useContext(AppContext)
@@ -33,8 +32,8 @@ const RecoverCard = () => {
 			<article className="card" id="card-recover">
 				<header>
 					<img src="/img/recover-icon.png" width="82" height="82" alt="" className="recover-icon" />
-					Forgot your password? <br />
-					<span className="sub">Don't worry. Let's reset it.</span>
+					Forgot your password?
+					<sub>Don't worry. Let's reset it.</sub>
 				</header>
 				<main>
 					<form onSubmit={processRecoverForm}>

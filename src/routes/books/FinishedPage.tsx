@@ -25,10 +25,11 @@ const FinishedPage = () => {
 
 	return (
 		<>
-			<h1>Finished books</h1>
-			<p className="subHead">
-				Books I finished reading. Have any favorites? Add them to your favorites from here.
-			</p>
+			<h1>
+				Finished books
+				<sub>Books I finished reading.</sub>
+			</h1>
+			<p>Have any favorites? Add them to your favorites from here.</p>
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>Not finished any book yet.</h4>
 			<p>
 				Are you finished with the book you're reading?
