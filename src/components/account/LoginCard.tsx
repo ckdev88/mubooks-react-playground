@@ -6,12 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 const LoginCard = () => {
 	const navigate = useNavigate()
-	const {
-		setUserIsLoggedIn,
-		setUsername,
-		setUsermail,
-		setUserMyBooks,
-	} = useContext(AppContext)
+	const { setUserIsLoggedIn, setUsername, setUsermail, setUserMyBooks } = useContext(AppContext)
 	const [error, setError] = useState('')
 
 	// TODO: either user of remove useAuthUserLogin(user) references

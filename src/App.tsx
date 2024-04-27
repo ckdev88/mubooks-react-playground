@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import './helpers/miscEventListeners.ts'
 import AddBookPage from './routes/books/AddBookPage'
@@ -35,6 +35,12 @@ const App = () => {
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitval)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
+
+	// retrieve from localstorage in case of accidental page refresh
+	if (userIsLoggedIn && userMyBooks === '[]') {
+		const localMyBooks:Books = JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.MyBooks
+		if (localMyBooks?.length > 2) setUserMyBooks(JSON.stringify(localMyBooks))
+	}
 
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
