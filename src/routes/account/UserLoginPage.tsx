@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import LoginCard from '../../components/account/LoginCard'
 import SignupCard from '../../components/account/SignupCard'
 import RecoverCard from '../../components/account/RecoverCard'
-import setDraaideurHeight from '../../hooks/setDraaideurHeight'
+import setDraaideurHeight from '../../functions/setDraaideurHeight'
 
 export default function UserLoginPage() {
 	useEffect(() => {

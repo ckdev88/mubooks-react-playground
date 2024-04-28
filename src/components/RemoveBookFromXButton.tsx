@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
-import getListName from '../hooks/getListName'
+import getListName from '../functions/getListName'
 import { supabase } from '../../utils/supabase'
 
 const RemoveBookFromXButton = (book: Book, targetList: BookList) => {

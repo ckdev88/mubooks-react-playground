@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import setDraaideurHeight from '../../hooks/setDraaideurHeight'
+import setDraaideurHeight from '../../functions/setDraaideurHeight'
 import MyAccountCard from '../../components/account/MyAccountCard'
 import MyAccountEditCard from '../../components/account/MyAccountEditCard'
 const UserProfilePage = () => {

@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
-import './helpers/miscEventListeners.ts'
+import './functions/miscEventListeners.ts'
 import AddBookPage from './routes/books/AddBookPage'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'

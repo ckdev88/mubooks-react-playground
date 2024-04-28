@@ -4,7 +4,7 @@ import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
 const WishlistPage = () => {
-	const { userMyBooks, popupNotification } = useContext(AppContext)
+	const { userMyBooks } = useContext(AppContext)
 
 	let hasbooks = false
 	let books: Books

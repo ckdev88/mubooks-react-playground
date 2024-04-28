@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
-import getListName from '../hooks/getListName'
+import getListName from '../functions/getListName'
 
 const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
