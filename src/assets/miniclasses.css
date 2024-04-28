@@ -41,19 +41,23 @@ form .error {
 label .sf {
 	float: right;
 }
+
 .ta-right {
 	text-align: right;
 }
+
 sub,
 sup {
 	font-weight: normal;
 	letter-spacing: -0.025em;
 	opacity: 0.5;
 }
+
 sub {
-	font-size: 0.8em;
+	font-size: 0.7em;
 	display: block;
 }
+
 sup {
 	font-size: 0.7em;
 }
