@@ -4,6 +4,7 @@ main button.alt,
 	color: #333;
 	border-color: transparent;
 }
+
 .adder button.btn-icon {
 	background-color: white;
 	background-size: cover;
@@ -14,12 +15,14 @@ main button.alt,
 	overflow: hidden;
 	border-color: white;
 }
+
 .adder button img {
 	box-sizing: border-box;
 	height: 100%;
 	padding: 0.25rem;
 	width: auto;
 }
+
 .badge {
 	font-size: 0.9em;
 	padding: 0.2rem;
@@ -32,12 +35,14 @@ main button.alt,
 	margin-top: 0.1rem;
 	margin-bottom: 0.1rem;
 }
+
 .btn-text,
 .btn-text:active,
 .btn-text:focus {
 	background: none;
 	color: #0d99ff;
 }
+
 .btn-text {
 	display: inline-block;
 	border: 0;
@@ -57,6 +62,7 @@ main button.alt,
 	text-decoration: underline;
 	color: #000;
 }
+
 .btn-text.caret-toggle:after {
 	content: ' ';
 	display: inline-block;

@@ -29,7 +29,6 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 			}
 			myBooks.splice(removeIndex, 1)
 		}
-
 		const myBooksNew: string = JSON.stringify(myBooks)
 		MyBooksUpdate(myBooksNew)
 		return myBooksNew

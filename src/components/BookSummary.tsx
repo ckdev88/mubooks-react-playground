@@ -19,7 +19,7 @@ const BookSummary = ({ book }: BookObject) => {
 				.then((json) => json.description?.value)
 				.then((synopsis) => {
 					setIsShowingSynopsis(true)
-					if (synopsis !== undefined) setSynopsis(synopsis + '-----')
+					if (synopsis !== undefined) setSynopsis(synopsis)
 					else setSynopsis('No synopsis available yet.')
 				})
 				.catch((err) => {
