@@ -63,6 +63,7 @@ interface Book {
 	isbn0: string
 	isbn1: string
 	isbn?: [string]
+	key?: [string]
 	/** 1: Wishlist | 2: Reading | 3: Finished | 4: Favorite (+Finished) */
 	list: BookList
 	number_of_pages_median: number

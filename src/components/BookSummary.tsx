@@ -2,8 +2,28 @@ import AddBookToXButton from './AddBookToXButton'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
 import BookAuthorList from './BookAuthorList'
 import { getBookCover } from '../Helpers'
+import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 const BookSummary = ({ book }: BookObject) => {
+	const [synopsis, setSynopsis] = useState<string>('')
+	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
+	async function toggleSynopsis() {
+		setIsLoading(true)
+		setIsShowingSynopsis(!isShowingSynopsis)
+
+		await fetch('https://openlibrary.org/works/' + book.id + '.json')
+			.then((res) => res.json())
+			.then((json) => json.description.value)
+			.then((synopsis) => {
+				setSynopsis(synopsis)
+				console.log('syn gezet...')
+			})
+			.catch((err) => console.log(err, 'error?'))
+			.finally(() => setIsLoading(false))
+	}
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary">
@@ -28,6 +48,17 @@ const BookSummary = ({ book }: BookObject) => {
 				</div>
 			</header>
 			<footer>
+				<button
+					className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
+					onClick={toggleSynopsis}
+				>
+					{isLoading ? 'Loading...' : 'Synopsis'}
+				</button>
+				<div className="synopsis">
+					<div className={isShowingSynopsis ? 'dblock' : 'dnone'}>
+						<ReactMarkdown>{synopsis}</ReactMarkdown>
+					</div>
+				</div>
 				<div className="marks">
 					<div className="mark">
 						{/* TODO: build further on new feature; highlight saved books in search view */}

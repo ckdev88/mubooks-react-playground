@@ -43,7 +43,7 @@ const AddBookPage = () => {
 			setLoading(true)
 			setResultsWarning('')
 			let searchfields: string
-			searchfields = 'title,author_name,isbn,cover_edition_key,author_key,edition_key,first_publish_year,number_of_pages_median'
+			searchfields = 'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median'
 			const wacht = await fetch(
 				'https://openlibrary.org/search.json?q=' + search_term +
 				'&mode=everything&limit=8&fields=' + searchfields

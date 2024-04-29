@@ -48,10 +48,27 @@ main button.alt,
 	padding: 0;
 	text-align: left;
 	text-decoration: none;
-	transition: text-decoration 0.2s ease-in-out, color 0.2s ease-in-out;
+	transition:
+		text-decoration 0.2s ease-in-out,
+		color 0.2s ease-in-out;
 }
 
 .btn-text:hover {
 	text-decoration: underline;
 	color: #000;
+}
+.btn-text.caret-toggle:after {
+	content: ' ';
+	display: inline-block;
+	width: 1em;
+	background-image: url('/img/cv-caret-medium.light.svg');
+	background-size: 1.5em;
+	height: 1em;
+	background-position-y: 30%;
+	transform: scaleY(-1);
+}
+
+.btn-text.caret-toggle.active:hover::after {
+	background-position: left top;
+	transform: scaleY(1);
 }
