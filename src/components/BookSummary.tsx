@@ -11,19 +11,25 @@ const BookSummary = ({ book }: BookObject) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	async function toggleSynopsis() {
-		setIsLoading(true)
-		setIsShowingSynopsis(!isShowingSynopsis)
-
-		await fetch('https://openlibrary.org/works/' + book.id + '.json')
-			.then((res) => res.json())
-			.then((json) => json.description.value)
-			.then((synopsis) => {
-				setSynopsis(synopsis)
-				console.log('syn gezet...')
-			})
-			.catch((err) => console.log(err, 'error?'))
-			.finally(() => setIsLoading(false))
+		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
+		else {
+			setIsLoading(true)
+			await fetch('https://openlibrary.org/works/' + book.id + '.json')
+				.then((res) => res.json())
+				.then((json) => json.description?.value)
+				.then((synopsis) => {
+					setIsShowingSynopsis(true)
+					if (synopsis !== undefined) setSynopsis(synopsis + '-----')
+					else setSynopsis('No synopsis available yet.')
+				})
+				.catch((err) => {
+					setSynopsis('No synopsis available yet.')
+					console.log('error',err)
+				})
+				.finally(() => setIsLoading(false))
+		}
 	}
+
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary">
@@ -43,7 +49,7 @@ const BookSummary = ({ book }: BookObject) => {
 						{book.title_short} <sup>({book.first_publish_year})</sup>
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
-					{book.number_of_pages_median} pages
+					{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
 					<br />
 				</div>
 			</header>
