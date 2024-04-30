@@ -54,13 +54,10 @@ const BookSummary = ({ book }: BookObject) => {
 				</div>
 			</header>
 			<footer>
-				<button
-					className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
-					onClick={toggleSynopsis}
-				>
-					{isLoading ? 'Loading...' : 'Synopsis'}
-				</button>
-				<div className="synopsis">
+				<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
+					<button className="btn-text caret-toggle" onClick={toggleSynopsis}>
+						{isLoading ? 'Loading...' : 'Synopsis'}
+					</button>
 					<div className={isShowingSynopsis ? 'dblock' : 'dnone'}>
 						<ReactMarkdown>{synopsis}</ReactMarkdown>
 					</div>

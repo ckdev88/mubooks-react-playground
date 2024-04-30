@@ -74,7 +74,7 @@ main button.alt,
 	transform: scaleY(-1);
 }
 
-.btn-text.caret-toggle.active:hover::after {
+.synopsis[aria-expanded='true'] .btn-text.caret-toggle::after {
 	background-position: left top;
 	transform: scaleY(1);
 }
