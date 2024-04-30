@@ -63,7 +63,7 @@ main button.alt,
 	color: #000;
 }
 
-.btn-text.caret-toggle:after {
+.btn-text.caret-toggle::after {
 	content: ' ';
 	display: inline-block;
 	width: 1em;
@@ -74,7 +74,7 @@ main button.alt,
 	transform: scaleY(-1);
 }
 
-.synopsis[aria-expanded='true'] .btn-text.caret-toggle::after {
+.synopsisWrapper[aria-expanded='true'] .btn-text.caret-toggle::after {
 	background-position: left top;
 	transform: scaleY(1);
 }
