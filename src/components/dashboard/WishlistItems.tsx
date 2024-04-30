@@ -6,11 +6,11 @@ import { getBookCover } from '../../Helpers'
 
 export default function WishlistItems() {
 	const { userMyBooks } = useContext(AppContext)
-	let hasbooks = false
+	let hasbooks: boolean = false
 	let booksParsed: Books = JSON.parse(userMyBooks)
-	if (typeof booksParsed !== 'object') booksParsed = JSON.parse(booksParsed)
 	const booksarr = booksParsed.filter((book: Book) => book.list === 1)
 	if (booksarr.length > 0) hasbooks = true
+
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {

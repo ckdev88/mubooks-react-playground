@@ -8,7 +8,6 @@ export default function FavoritesItems() {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
 	let booksParsed: Books = JSON.parse(userMyBooks)
-	if (typeof booksParsed !== 'object') booksParsed = JSON.parse(booksParsed)
 	const booksarr = booksParsed.filter((book: Book) => book.list === 4)
 	if (booksarr.length > 0) hasbooks = true
 

@@ -4,11 +4,10 @@ import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
 import { getBookCover } from '../../Helpers'
 
-const SavedItems = () => {
+export default function SavedItems() {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
 	let booksParsed: Books = JSON.parse(userMyBooks)
-	if (typeof booksParsed !== 'object') booksParsed = JSON.parse(booksParsed)
 	const booksarr = booksParsed
 	if (booksarr.length > 0) hasbooks = true
 
@@ -56,4 +55,3 @@ const SavedItems = () => {
 		</>
 	)
 }
-export default SavedItems

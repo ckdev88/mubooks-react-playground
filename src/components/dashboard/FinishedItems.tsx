@@ -8,7 +8,6 @@ export default function FinishedItems() {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
 	let booksParsed: Books = JSON.parse(userMyBooks)
-	if (typeof booksParsed !== 'object') booksParsed = JSON.parse(booksParsed)
 	const booksarr = booksParsed.filter((book: Book) => book.list === 3 || book.list === 4)
 	if (booksarr.length > 0) hasbooks = true
 
