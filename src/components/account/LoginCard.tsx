@@ -35,7 +35,7 @@ const LoginCard = () => {
 					setUserIsLoggedIn(true)
 					setUsername(res.data.user?.user_metadata.screenname)
 					setUsermail(res.data.user?.user_metadata.email)
-					setUserMyBooks(res.data.user?.user_metadata.MyBooks)
+					if (res.data.user?.user_metadata.MyBooks) setUserMyBooks(res.data.user.user_metadata.MyBooks)
 					navigate('/dashboard')
 				}
 			})
