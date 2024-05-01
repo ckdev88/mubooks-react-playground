@@ -62,14 +62,9 @@ const BookSummary = ({ book }: BookObject) => {
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
 					{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
-					<br />
-					<p style={{ marginBottom: '0' }}>
-						<em>
-							{book.list > 1 && 'Started reading: ' + dateConverter(book.date_reading)} <br />
-							{book.list > 2 && 'Finished reading: ' + dateConverter(book.date_finished)} <br />
-						</em>
-					</p>
-				</div>
+					{book.list > 1 && <div style={{ paddingTop: '.5em' }}><em>{'Started: ' + dateConverter(book.date_reading)}</em></div>}
+						{book.list > 2 && <div><em>{'Finished: ' + dateConverter(book.date_finished)}</em></div>}
+					</div>
 			</header>
 			<main>
 				<div className="marks">
@@ -82,15 +77,15 @@ const BookSummary = ({ book }: BookObject) => {
 					{book.list === 2 && RemoveBookFromXButton(book, 2)}
 					{book.list === 3 && RemoveBookFromXButton(book, 3)}
 					{book.list === 4 && RemoveBookFromXButton(book, 4)}
+					<button
+						className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
+						onClick={toggleSynopsis}
+						>
+						{isLoading && 'Loading...'}
+						{!isLoading && !isShowingSynopsis && 'Read synopsis'}
+						{!isLoading && isShowingSynopsis && 'Hide synopsis'}
+					</button>
 				</div>
-				<button
-					className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
-					onClick={toggleSynopsis}
-				>
-					{isLoading && 'Loading...'}
-					{!isLoading && !isShowingSynopsis && 'Read synopsis'}
-					{!isLoading && isShowingSynopsis && 'Hide synopsis'}
-				</button>
 			</main>
 			<footer>
 				<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
