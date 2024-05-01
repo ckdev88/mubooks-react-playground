@@ -12,6 +12,7 @@ interface AppContextType {
 	popupNotificationShow: boolean
 	setPopupNotificationShow(popupNotificationShow: boolean): void
 }
+
 type User = {
 	email: string
 	password: string
@@ -70,6 +71,8 @@ interface Book {
 	number_of_pages_median: number
 	title: string
 	title_short: string
+	date_reading?: number
+	date_finished?: number
 }
 type Results = [Book]
 interface Books extends Array<Book> {}
