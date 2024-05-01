@@ -33,17 +33,17 @@ const BookSummary = ({ book }: BookObject) => {
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary">
+			<aside className="cover">
+				<img
+					src={
+						getBookCover(book.cover, 'M') !== undefined
+							? getBookCover(book.cover, 'M')
+							: 'img/coverless.png'
+					}
+					alt=""
+				/>
+			</aside>
 			<header>
-				<aside className="cover">
-					<img
-						src={
-							getBookCover(book.cover, 'M') !== undefined
-								? getBookCover(book.cover, 'M')
-								: 'img/coverless.png'
-						}
-						alt=""
-					/>
-				</aside>
 				<div className="in-short">
 					<h2>
 						{book.title_short} <sup>({book.first_publish_year})</sup>
@@ -53,28 +53,32 @@ const BookSummary = ({ book }: BookObject) => {
 					<br />
 				</div>
 			</header>
+			<main>
+				<div className="marks">
+					{/* TODO: build further on new feature; highlight saved books in search view */}
+					{!book.list && AddBookToXButton(book, 1)}
+					{book.list === 1 && AddBookToXButton(book, 2)}
+					{book.list === 2 && AddBookToXButton(book, 3)}
+					{book.list === 3 && AddBookToXButton(book, 4)}
+					{book.list === 1 && RemoveBookFromXButton(book, 1)}
+					{book.list === 2 && RemoveBookFromXButton(book, 2)}
+					{book.list === 3 && RemoveBookFromXButton(book, 3)}
+					{book.list === 4 && RemoveBookFromXButton(book, 4)}
+				</div>
+				<button className={isShowingSynopsis?'btn-text caret-toggle active':'btn-text caret-toggle'} onClick={toggleSynopsis} >
+				{isLoading && 'Loading...'}
+				{(!isLoading && !isShowingSynopsis) && 'Read synopsis'}
+				{(!isLoading && isShowingSynopsis) && 'Hide synopsis'}
+</button>
+			</main>
 			<footer>
 				<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-					<button className="btn-text caret-toggle" onClick={toggleSynopsis}>
-						{isLoading ? 'Loading...' : 'Synopsis'}
-					</button>
-					<div className={isShowingSynopsis ? 'dblock' : 'dnone'}>
+					<div className="synopsis">
+						<h3>Synopsis</h3>
 						<ReactMarkdown>{synopsis}</ReactMarkdown>
 					</div>
 				</div>
-				<div className="marks">
-					<div className="mark">
-						{/* TODO: build further on new feature; highlight saved books in search view */}
-						{!book.list && AddBookToXButton(book, 1)}
-						{book.list === 1 && AddBookToXButton(book, 2)}
-						{book.list === 2 && AddBookToXButton(book, 3)}
-						{book.list === 3 && AddBookToXButton(book, 4)}
-						{book.list === 1 && RemoveBookFromXButton(book, 1)}
-						{book.list === 2 && RemoveBookFromXButton(book, 2)}
-						{book.list === 3 && RemoveBookFromXButton(book, 3)}
-						{book.list === 4 && RemoveBookFromXButton(book, 4)}
-					</div>
-				</div>
+
 				<hr />
 			</footer>
 		</article>

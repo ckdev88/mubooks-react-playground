@@ -63,7 +63,7 @@ main button.alt,
 	color: #000;
 }
 
-.btn-text.caret-toggle::after {
+.btn-text.caret-toggle::before {
 	content: ' ';
 	display: inline-block;
 	width: 1em;
@@ -71,10 +71,23 @@ main button.alt,
 	background-size: 1.5em;
 	height: 1em;
 	background-position-y: 30%;
+	background-position-x: center;
 	transform: scaleY(-1);
+	margin-right: 0.35em;
 }
 
-.synopsisWrapper[aria-expanded='true'] .btn-text.caret-toggle::after {
-	background-position: left top;
+.synopsisWrapper[aria-expanded='true'] .caret-toggle::before,
+.caret-toggle.active::before {
+	background-position-y: top;
 	transform: scaleY(1);
+}
+
+.synopsisWrapper .synopsis {
+	height: 0;
+	overflow: hidden;
+}
+
+.synopsisWrapper[aria-expanded='true'] .synopsis {
+	height: unset;
+	overflow: auto;
 }
