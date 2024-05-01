@@ -30,6 +30,18 @@ const BookSummary = ({ book }: BookObject) => {
 		}
 	}
 
+	function dateConverter(UNIX_timestamp: number | undefined) {
+		if (UNIX_timestamp !== undefined) {
+			const a = new Date(UNIX_timestamp)
+			const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			const year = a.getFullYear()
+			const month = months[a.getMonth()]
+			const date = a.getDate()
+			const ret = date + ' ' + month + ' ' + year
+			return ret
+		}
+	}
+
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary">
@@ -51,6 +63,12 @@ const BookSummary = ({ book }: BookObject) => {
 					</h2>
 					{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
 					<br />
+					<p style={{ marginBottom: '0' }}>
+						<em>
+							{book.list > 1 && 'Started reading: ' + dateConverter(book.date_reading)} <br />
+							{book.list > 2 && 'Finished reading: ' + dateConverter(book.date_finished)} <br />
+						</em>
+					</p>
 				</div>
 			</header>
 			<main>

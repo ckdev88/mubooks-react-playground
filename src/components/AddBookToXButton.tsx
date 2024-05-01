@@ -54,6 +54,8 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			if (myBooks[i].id === book.id) {
 				bookIsSaved = true
 				myBooks[i].list = targetList
+				if(targetList===2)myBooks[i].date_reading = Date.now()
+				if(targetList===3)myBooks[i].date_finished = Date.now()
 			}
 		}
 

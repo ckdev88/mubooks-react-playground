@@ -50,7 +50,7 @@ type BookData = [
 		cover: string
 		img?: string
 		title_short?: string
-	},
+	}
 ]
 interface Book {
 	author_key?: [string]
@@ -74,6 +74,7 @@ interface Book {
 	date_reading?: number
 	date_finished?: number
 }
+
 type Results = [Book]
 interface Books extends Array<Book> {}
 
