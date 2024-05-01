@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import QuoteCard from '../../components/QuoteCard'
 import Reading from '../../components/dashboard/Reading'
 import Saved from '../../components/dashboard/Saved'
@@ -6,9 +6,17 @@ import Finished from '../../components/dashboard/Finished'
 import Favorites from '../../components/dashboard/Favorites'
 import Wishlist from '../../components/dashboard/Wishlist'
 import { AppContext } from '../../App'
+import { localStorageKey } from '../../../utils/supabase'
+import { useNavigate } from 'react-router-dom'
 
-const DashboardPage = () => {
+export default function DashboardPage() {
 	const { username } = useContext(AppContext)
+	const navigate = useNavigate()
+	if (localStorage.getItem(localStorageKey) === null) {
+		useEffect(() => {
+			navigate('/account/login')
+		}, [])
+	}
 
 	return (
 		<>
@@ -27,5 +35,4 @@ const DashboardPage = () => {
 		</>
 	)
 }
-export default DashboardPage
 /* <Tropes /> <Stats /> <Explore /> */
