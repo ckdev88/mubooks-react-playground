@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
-import { UserSignup } from '../../helpers/AuthHelpers'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
+import { supabase } from '../../../utils/supabase'
+
+async function userSignup(user: User) {
+	const signup = await supabase.auth.signUp(user)
+	return signup
+}
 
 export default function SignupCard() {
-	const {setUsermail} = useContext(AppContext)
+	const { setUsermail } = useContext(AppContext)
 	const navigate = useNavigate()
 	const { login } = useCardRotate()
 	const [error, setError] = useState('')
@@ -18,10 +23,10 @@ export default function SignupCard() {
 			screenname: event.target.screenname.value,
 			password: event.target.password.value,
 		}
-		const signup = await UserSignup(user)
+		const signup = await userSignup(user)
 
 		if (signup.error) setError(signup.error.message)
-		else{
+		else {
 			setUsermail(user.email)
 			navigate(`/account/new?addr=${user.email}`) // beetje unsafe dit, beter via sessie of api
 		}
@@ -44,7 +49,9 @@ export default function SignupCard() {
 					</form>
 				</main>
 				<footer className="content-right">
-					<button className='btn-text' onClick={login}>I already have an account</button>
+					<button className="btn-text" onClick={login}>
+						I already have an account
+					</button>
 				</footer>
 			</article>
 		</>

@@ -1,17 +1,22 @@
-// import { useContext, useEffect } from 'react'
 import { useContext, useEffect } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
-import { UserRefreshEmail } from '../../helpers/AuthHelpers'
+import { supabase } from '../../../utils/supabase'
+
+async function userRefreshEmail() {
+	const userdata = await supabase.auth.getSession()
+	if (userdata.error) return false
+	else return userdata.data.session?.user.email
+}
 
 export default function MyAccountCard() {
 	const { change } = useCardRotate()
 	const { username, usermail, setUsermail } = useContext(AppContext)
 
 	async function refreshmail() {
-		const refreshedEmail = await UserRefreshEmail()
-		setUsermail(refreshedEmail)
+		const refreshedEmail = await userRefreshEmail()
+		if (typeof refreshedEmail === 'string') setUsermail(refreshedEmail)
 	}
 	if (usermail === '') {
 		useEffect(() => {
