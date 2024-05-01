@@ -24,7 +24,7 @@ const BookSummary = ({ book }: BookObject) => {
 				})
 				.catch((err) => {
 					setSynopsis('No synopsis available yet.')
-					console.log('error',err)
+					console.log('error', err)
 				})
 				.finally(() => setIsLoading(false))
 		}
@@ -65,11 +65,14 @@ const BookSummary = ({ book }: BookObject) => {
 					{book.list === 3 && RemoveBookFromXButton(book, 3)}
 					{book.list === 4 && RemoveBookFromXButton(book, 4)}
 				</div>
-				<button className={isShowingSynopsis?'btn-text caret-toggle active':'btn-text caret-toggle'} onClick={toggleSynopsis} >
-				{isLoading && 'Loading...'}
-				{(!isLoading && !isShowingSynopsis) && 'Read synopsis'}
-				{(!isLoading && isShowingSynopsis) && 'Hide synopsis'}
-</button>
+				<button
+					className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
+					onClick={toggleSynopsis}
+				>
+					{isLoading && 'Loading...'}
+					{!isLoading && !isShowingSynopsis && 'Read synopsis'}
+					{!isLoading && isShowingSynopsis && 'Hide synopsis'}
+				</button>
 			</main>
 			<footer>
 				<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
