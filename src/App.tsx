@@ -22,28 +22,29 @@ import WishlistPage from './routes/books/WishlistPage'
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const App = () => {
-	let userIsLoggedInInitval: boolean
-	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitval = true
-	else userIsLoggedInInitval = false
+	let userIsLoggedInInitVal: boolean
+	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitVal = true
+	else userIsLoggedInInitVal = false
 
-	let userMyBooksInitval: string
-	userMyBooksInitval = '[]'
+	// add persistency to userMyBooks state throughout page refreshes
+	const csMyBooks = () => {
+		// TODO: this loads multi (unnecessary) times on page load, to fix, but low prio
+		let localMyBooks: string
+		if (localStorage.getItem(localStorageKey) !== null) {
+			localMyBooks = JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.MyBooks
+			if (localMyBooks) return localMyBooks.toString()
+		}
+		return '[]'
+	}
+	const userMyBooksInitVal: string = csMyBooks()
+	// /add persistency to userMyBooks state throughout page refreshes
 
 	const [username, setUsername] = useState<string>('')
 	const [usermail, setUsermail] = useState<string>('')
-	const [userMyBooks, setUserMyBooks] = useState<string>(userMyBooksInitval)
-	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitval)
+	const [userMyBooks, setUserMyBooks] = useState(userMyBooksInitVal)
+	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
-
-	// retrieve from localstorage in case of (accidental) page refresh
-	if (userIsLoggedIn && userMyBooks === '[]') {
-		const localMyBooks: Books = JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.MyBooks
-		if (localMyBooks?.length > 2) setUserMyBooks(JSON.stringify(localMyBooks))
-		const localStorageTmp = JSON.parse(localStorage.getItem(localStorageKey) as string)
-		const localStorageMyBooks = JSON.parse(localStorageTmp.user.user_metadata.MyBooks as string)
-		if (localStorageMyBooks.length > 0) setUserMyBooks(String(localStorageTmp.user.user_metadata.MyBooks))
-	}
 
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
