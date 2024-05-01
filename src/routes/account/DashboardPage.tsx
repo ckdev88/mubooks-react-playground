@@ -12,11 +12,11 @@ import { useNavigate } from 'react-router-dom'
 export default function DashboardPage() {
 	const { username } = useContext(AppContext)
 	const navigate = useNavigate()
-	if (localStorage.getItem(localStorageKey) === null) {
-		useEffect(() => {
+	useEffect(() => {
+		if (localStorage.getItem(localStorageKey) === null) {
 			navigate('/account/login')
-		}, [])
-	}
+		}
+	}, [])
 
 	return (
 		<>

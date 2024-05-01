@@ -7,7 +7,7 @@ import { getBookCover } from '../../Helpers'
 export default function SavedItems() {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
-	let booksParsed: Books = JSON.parse(userMyBooks)
+	const booksParsed: Books = JSON.parse(userMyBooks)
 	const booksarr = booksParsed
 	if (booksarr.length > 0) hasbooks = true
 
