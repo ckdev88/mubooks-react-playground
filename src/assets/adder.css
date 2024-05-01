@@ -22,6 +22,16 @@
 	background-color: #f4f1ea;
 	padding: 0.5rem;
 }
+@media screen and (max-width: 480px) {
+	.adder main {
+		padding: 0;
+	}
+}
+@media screen and (max-width: 380px) {
+	.adder main {
+		padding: 0;
+	}
+}
 
 .adder main.toadd {
 	display: flex;
@@ -64,7 +74,7 @@
 }
 
 .adder .deck .book-summary {
-	padding-bottom: 0
+	padding-bottom: 0;
 }
 
 .adder .deck .book-summary header {
@@ -100,7 +110,7 @@
 	position: relative;
 }
 
-.deck-container .book-cover+.book-cover {
+.deck-container .book-cover + .book-cover {
 	margin-left: -20.1%;
 }
 

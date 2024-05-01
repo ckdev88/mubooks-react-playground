@@ -70,6 +70,19 @@
 	min-width: 9rem;
 	float: left;
 }
+@media screen and (max-width: 480px) {
+	.book-summary aside {
+		width: 7rem;
+		min-width: 7rem;
+	}
+}
+@media screen and (max-width: 380px) {
+	.book-summary aside {
+		width: 6rem;
+		min-width: 6rem;
+	}
+}
+
 .book-summary footer {
 	clear: both;
 }
@@ -127,6 +140,11 @@
 	font-size: 0.9rem;
 	line-height: 1.7em;
 }
+@media screen and (max-width: 380px) {
+	.book-summary .mark {
+		line-height: 1em;
+	}
+}
 
 .book-summary .icon {
 	display: block;
@@ -174,8 +192,6 @@
 .book-summary .icon-remove {
 	background-image: url('/img/icon-remove.png');
 }
-
-
 
 /* .book-summary .marks span { */
 /* 	display: inline-block; */
