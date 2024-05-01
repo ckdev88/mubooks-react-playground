@@ -28,7 +28,6 @@ async function fetchBook() {
 }
 */
 
-
 const AddBookPage = () => {
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
 	const [searchResults, setSearchResults] = useState<Books>([])
@@ -42,11 +41,13 @@ const AddBookPage = () => {
 		if (search_term.length > 4) {
 			setLoading(true)
 			setResultsWarning('')
-			let searchfields: string
-			searchfields = 'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median'
+			const searchfields: string =
+				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median'
 			const wacht = await fetch(
-				'https://openlibrary.org/search.json?q=' + search_term +
-				'&mode=everything&limit=8&fields=' + searchfields
+				'https://openlibrary.org/search.json?q=' +
+					search_term +
+					'&mode=everything&limit=8&fields=' +
+					searchfields
 			)
 			await wacht
 				.json()
@@ -88,14 +89,14 @@ const AddBookPage = () => {
 		e.preventDefault()
 		setCoverImg(e.currentTarget.abCover.value.trim())
 	}
-	let showCover = (
+	const showCover = (
 		<>
 			<img src={coverImg} style={{ width: '50%' }} />
 		</>
 	)
 
 	function changeCover(e: React.ChangeEvent<HTMLInputElement>) {
-		let url = e.currentTarget.value
+		const url = e.currentTarget.value
 		if (isUrl(url)) setCoverImg(e.currentTarget.value.trim())
 	}
 
@@ -116,7 +117,7 @@ const AddBookPage = () => {
 						let title: string
 						if (res.title.length > 55) title = res.title.slice(0, 55) + '...'
 						else title = res.title
-						let authors = res.author_name.map((author, author_index) => {
+						const authors = res.author_name.map((author, author_index) => {
 							return (
 								<span key={'author' + result_index + author_index}>
 									{author}

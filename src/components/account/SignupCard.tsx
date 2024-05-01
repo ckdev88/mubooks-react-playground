@@ -16,12 +16,12 @@ export default function SignupCard() {
 	const { login } = useCardRotate()
 	const [error, setError] = useState('')
 
-	async function processSignupForm(event: any) {
+	async function processSignupForm(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		const user: User = {
-			email: event.target.email.value,
-			screenname: event.target.screenname.value,
-			password: event.target.password.value,
+			email: event.currentTarget.email.value,
+			screenname: event.currentTarget.screenname.value,
+			password: event.currentTarget.password.value,
 		}
 		const signup = await userSignup(user)
 

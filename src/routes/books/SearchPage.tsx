@@ -16,8 +16,7 @@ const SearchPage = () => {
 		if (search_term.length > 4) {
 			setLoading(true)
 			setResultsMessage('')
-			let searchfields: string
-			searchfields =
+			const searchfields: string =
 				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median'
 			await fetch(
 				'https://openlibrary.org/search.json?q=' +
@@ -40,7 +39,7 @@ const SearchPage = () => {
 					setResultCount(filtered.length)
 					for (let i = 0; i < filtered.length; i++) {
 						// filtered[i].id = filtered[i].edition_key.slice(0, 1).toString()
-						filtered[i].id = filtered[i].key.toString().replace('/works/','')
+						filtered[i].id = filtered[i].key.toString().replace('/works/', '')
 						filtered[i].title_short = filtered[i].title.slice(0, 45).toString()
 						if (filtered[i].isbn.length > 0) {
 							filtered[i].isbn0 = filtered[i].isbn.slice(0, 1).toString()

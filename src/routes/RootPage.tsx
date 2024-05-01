@@ -23,7 +23,7 @@ const RootPage = () => {
 			setUsermail(userInLs.user.email)
 			navigate(navigateTo)
 		} else navigate(navigateTo)
-	}, [])
+	}, [loggedin, navigateTo, navigate, setUsermail, userInLs])
 
 	return (
 		<>

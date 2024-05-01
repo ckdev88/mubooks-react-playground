@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
 
@@ -18,13 +17,13 @@ export default function UserLogoutPage() {
 			.finally(() =>
 				setTimeout(() => {
 					navigate('/account/login')
-				}, 1500),
+				}, 1500)
 			)
 	}
-
-	useEffect(() => {
+	function logout() {
 		dologout()
-	}, [])
+	}
+	useEffect(() => logout())
 
 	return (
 		<>

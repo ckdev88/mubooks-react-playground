@@ -3,10 +3,9 @@ import BookSummary from '../../components/BookSummary'
 import { AppContext } from '../../App'
 const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 	const { userMyBooks } = useContext(AppContext)
-	let savedArr: Books
 
 	// TODO: build further on new feature; highlight saved books in search view
-	savedArr = JSON.parse(userMyBooks as string)
+	const savedArr: Books = JSON.parse(userMyBooks as string)
 
 	return books.map((book) => {
 		if (page === 'searchpage') {

@@ -16,7 +16,7 @@ export default function DashboardPage() {
 		if (localStorage.getItem(localStorageKey) === null) {
 			navigate('/account/login')
 		}
-	}, [])
+	}, [navigate])
 
 	return (
 		<>

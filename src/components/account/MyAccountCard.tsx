@@ -2,27 +2,21 @@ import { useContext, useEffect } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
-import { supabase } from '../../../utils/supabase'
-
-async function userRefreshEmail() {
-	const userdata = await supabase.auth.getSession()
-	if (userdata.error) return false
-	else return userdata.data.session?.user.email
-}
+import { localStorageKey } from '../../../utils/supabase'
 
 export default function MyAccountCard() {
 	const { change } = useCardRotate()
 	const { username, usermail, setUsermail } = useContext(AppContext)
 
-	async function refreshmail() {
-		const refreshedEmail = await userRefreshEmail()
-		if (typeof refreshedEmail === 'string') setUsermail(refreshedEmail)
-	}
-	if (usermail === '') {
-		useEffect(() => {
-			refreshmail()
-		}, [])
-	}
+	// refresh usermail state using the one saved in localStorage
+	useEffect(() => {
+		if (usermail === '') {
+			const localUser: User = JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata
+			const localUserEmail = localUser.email
+			if (typeof localUserEmail === 'string' && localUserEmail !== undefined) setUsermail(localUserEmail)
+		}
+	})
+
 	return (
 		<div className="card">
 			<header>

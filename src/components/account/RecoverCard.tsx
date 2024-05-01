@@ -10,9 +10,9 @@ const RecoverCard = () => {
 	const navigate = useNavigate()
 	const { login } = useCardRotate()
 
-	function processRecoverForm(event: any) {
+	function processRecoverForm(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
-		const email: string = event.target.email.value
+		const email: string = event.currentTarget.email.value
 		recoverAccount(email)
 	}
 
