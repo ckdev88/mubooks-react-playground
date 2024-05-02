@@ -55,12 +55,16 @@
 .book-summary h2 {
 	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
+	font-size: 1.3em;
 }
 
 .book-summary h2 sub {
 	font-size: 0.8em;
 	font-weight: normal;
 	display: block;
+}
+.book-summary h2 sup {
+	vertical-align: baseline;
 }
 
 .book-summary aside {
@@ -70,12 +74,15 @@
 	min-width: 9rem;
 	float: left;
 }
-@media screen and (max-width: 480px) {
-	.book-summary aside {
-		width: 7rem;
-		min-width: 7rem;
-	}
+.book-summary .article-main {
+	float: left;
+	max-width: calc(100vw - 10rem);
 }
+.book-summary aside {
+	width: 7rem;
+	min-width: 7rem;
+}
+
 @media screen and (max-width: 380px) {
 	.book-summary aside {
 		width: 6rem;

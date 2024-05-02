@@ -30,7 +30,7 @@ const BookSummary = ({ book }: BookObject) => {
 		}
 	}
 
-	function dateConverter(UNIX_timestamp: number | undefined) {
+	function dateConverter(UNIX_timestamp: number) {
 		if (UNIX_timestamp !== undefined) {
 			const a = new Date(UNIX_timestamp)
 			const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -55,38 +55,48 @@ const BookSummary = ({ book }: BookObject) => {
 					alt=""
 				/>
 			</aside>
-			<header>
-				<div className="in-short">
-					<h2>
-						{book.title_short} <sup>({book.first_publish_year})</sup>
-						<sub>{BookAuthorList(book)}</sub>
-					</h2>
-					{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
-					{book.list > 1 && <div style={{ paddingTop: '.5em' }}><em>{'Started: ' + dateConverter(book.date_reading)}</em></div>}
-						{book.list > 2 && <div><em>{'Finished: ' + dateConverter(book.date_finished)}</em></div>}
+			<div className="article-main">
+				<header>
+					<div className="in-short">
+						<h2>
+							{book.title_short} <sup>({book.first_publish_year})</sup>
+							<sub>{BookAuthorList(book)}</sub>
+						</h2>
+						{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
+						{book.list > 1 && book.date_reading !== undefined && (
+							<div style={{ paddingTop: '.5em' }}>
+								<em>{'Started: ' + dateConverter(book.date_reading)}</em>
+							</div>
+						)}
+						{book.list > 2 && book.date_finished !== undefined && (
+							<div>
+								<em>{'Finished: ' + dateConverter(book.date_finished)}</em>
+							</div>
+						)}
 					</div>
-			</header>
-			<main>
-				<div className="marks">
-					{/* TODO: build further on new feature; highlight saved books in search view */}
-					{!book.list && AddBookToXButton(book, 1)}
-					{book.list === 1 && AddBookToXButton(book, 2)}
-					{book.list === 2 && AddBookToXButton(book, 3)}
-					{book.list === 3 && AddBookToXButton(book, 4)}
-					{book.list === 1 && RemoveBookFromXButton(book, 1)}
-					{book.list === 2 && RemoveBookFromXButton(book, 2)}
-					{book.list === 3 && RemoveBookFromXButton(book, 3)}
-					{book.list === 4 && RemoveBookFromXButton(book, 4)}
-					<button
-						className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
-						onClick={toggleSynopsis}
+				</header>
+				<main>
+					<div className="marks">
+						{/* TODO: build further on new feature; highlight saved books in search view */}
+						{!book.list && AddBookToXButton(book, 1)}
+						{book.list === 1 && AddBookToXButton(book, 2)}
+						{book.list === 2 && AddBookToXButton(book, 3)}
+						{book.list === 3 && AddBookToXButton(book, 4)}
+						{book.list === 1 && RemoveBookFromXButton(book, 1)}
+						{book.list === 2 && RemoveBookFromXButton(book, 2)}
+						{book.list === 3 && RemoveBookFromXButton(book, 3)}
+						{book.list === 4 && RemoveBookFromXButton(book, 4)}
+						<button
+							className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
+							onClick={toggleSynopsis}
 						>
-						{isLoading && 'Loading...'}
-						{!isLoading && !isShowingSynopsis && 'Read synopsis'}
-						{!isLoading && isShowingSynopsis && 'Hide synopsis'}
-					</button>
-				</div>
-			</main>
+							{isLoading && 'Loading...'}
+							{!isLoading && !isShowingSynopsis && 'Read synopsis'}
+							{!isLoading && isShowingSynopsis && 'Hide synopsis'}
+						</button>
+					</div>
+				</main>
+			</div>
 			<footer>
 				<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
 					<div className="synopsis">
