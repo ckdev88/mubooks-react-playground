@@ -78,6 +78,9 @@
 	float: left;
 	max-width: calc(100vw - 10rem);
 }
+.book-summary .article-main button.modify{
+	margin-left:.5em;
+}
 .book-summary aside {
 	width: 7rem;
 	min-width: 7rem;
