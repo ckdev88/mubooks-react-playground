@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import AddBookPage from './routes/books/AddBookPage'
@@ -18,10 +18,13 @@ import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
+import { supabase } from '../utils/supabase'
+import { useNavigate } from 'react-router-dom'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const App = () => {
+	const navigate = useNavigate()
 	let userIsLoggedInInitVal: boolean
 	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitVal = true
 	else userIsLoggedInInitVal = false
@@ -45,6 +48,28 @@ const App = () => {
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
+
+	async function dologout() {
+		await supabase.auth
+			.signOut()
+			.then(() => {
+				localStorage.clear()
+			})
+			.finally(() =>
+				setTimeout(() => {
+					navigate('/account/login')
+				}, 1500)
+			)
+	}
+
+	function logout() {
+		dologout()
+	}
+	useEffect(() => {
+		if (userIsLoggedIn === false) {
+			logout()
+		}
+	}, [userIsLoggedIn])
 
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
