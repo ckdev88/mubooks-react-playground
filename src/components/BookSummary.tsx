@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
+import convertDate from '../helpers/convertDate'
 
 const BookSummary = ({ book }: BookObject) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
@@ -19,6 +20,7 @@ const BookSummary = ({ book }: BookObject) => {
 		if (book.date_reading !== undefined) setReadingDate(book.date_reading)
 		if (book.date_finished !== undefined) setFinishedDate(book.date_finished)
 	}, [book])
+
 	async function toggleSynopsis() {
 		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
 		else {
@@ -37,44 +39,6 @@ const BookSummary = ({ book }: BookObject) => {
 				})
 				.finally(() => setIsLoading(false))
 		}
-	}
-
-	// TODO: move this function to generic helper location
-	function dateConverter(dateToConvert: number | string, outputFormat: 'human' | 'input' | 'normal'): string {
-		const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-		let monthNum: number = 0
-		let monthName: string = ''
-		let a
-		let year: number = 0
-		let dayNum: number = 0
-		if (typeof dateToConvert === 'number') {
-			a = new Date(dateToConvert)
-			monthNum = a.getMonth()
-			year = a.getFullYear()
-			dayNum = a.getDate()
-			monthName = months[monthNum]
-		} else if (typeof dateToConvert === 'string') {
-			a = dateToConvert.split('-')
-			monthNum = Number(a[1])
-			year = Number(a[0])
-			dayNum = Number(a[2])
-			monthName = months[monthNum - 1]
-		}
-
-		let returnvalue: string
-		let dayNumPadded: string | number = dayNum
-		let monthNumPadded: string | number = monthNum
-		if (Number(dayNumPadded) < 9) dayNumPadded = '0' + dayNum.toString()
-		if (Number(monthNumPadded) < 9) monthNumPadded = '0' + monthNum.toString()
-		switch (outputFormat) {
-			case 'human':
-				returnvalue = dayNum + ' ' + monthName + ' ' + year
-				break
-			default:
-				returnvalue = year + '-' + monthNumPadded + '-' + dayNumPadded
-				break
-		}
-		return returnvalue
 	}
 
 	async function MyBooksUpdate(myBooksNew: string) {
@@ -100,12 +64,11 @@ const BookSummary = ({ book }: BookObject) => {
 		const inputfield: string = field + book.id
 		if (inputfield === '') return
 
-		let inputfieldNode
 		if (document.getElementById(inputfield) !== null) {
-			inputfieldNode = document.getElementById(inputfield) as HTMLInputElement
-			newValue = inputfieldNode.value
-			if (field === 'date_reading') setReadingDate(newValue)
-			if (field === 'date_finished') setFinishedDate(newValue)
+			newValue = (document.getElementById(inputfield) as HTMLInputElement).value
+
+			// if (field === 'date_reading') setReadingDate(newValue)
+			// if (field === 'date_finished') setFinishedDate(newValue)
 			changeDates(field, newValue)
 		}
 	}
@@ -114,8 +77,8 @@ const BookSummary = ({ book }: BookObject) => {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = JSON.parse(userMyBooks as string)
-		if (fieldName === 'date_finished') setFinishedDate(fieldVal)
-		if (fieldName === 'date_reading') setReadingDate(fieldVal)
+		// if (fieldName === 'date_finished') setFinishedDate(fieldVal)
+		// if (fieldName === 'date_reading') setReadingDate(fieldVal)
 
 		for (let i = 0; i < myBooks.length; i++) {
 			if (myBooks[i].id === book.id) {
@@ -128,11 +91,27 @@ const BookSummary = ({ book }: BookObject) => {
 		MyBooksUpdate(myBooksNew)
 	}
 
-	function showElement(id: string): void {
-		document.getElementById(id)?.classList.toggle('dnone')
-		document.getElementById(id)?.focus()
-	}
+	// function showElement(id: string): void {
+	// 	document.getElementById(id)?.addEventListener('focus', function() {
+	// 		openCalendarPopUp(id)
+	// 	})
+	// 	// document.getElementById(id)?.classList.toggle('dnone')
+	// 	// document.getElementById(id)?.focus()
+	// }
 
+	function openCalendarPopUp(dateFieldId: string): void {
+
+		console.log('sesam open u', dateFieldId)
+		const dateElement = document.getElementById(dateFieldId) as HTMLInputElement
+		try {
+			console.log('trying ', dateFieldId)
+			dateElement.showPicker()
+			console.info(dateElement)
+		} catch (e) {
+			dateElement.focus()
+			console.error(e)
+		}
+	}
 	return (
 		// TODO: add className for when marked as saved
 		<article className="book-summary">
@@ -156,31 +135,28 @@ const BookSummary = ({ book }: BookObject) => {
 						{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
 						{book.list > 1 && book.date_reading !== undefined && (
 							<div style={{ paddingTop: '.5em' }}>
-								<form>
-									<em onClick={() => showElement('date_reading' + book.id)}>{'Started: ' + dateConverter(readingDate, 'human')}</em>
-									<input
-										id={'date_reading' + book.id}
-										name={'date_reading' + book.id}
-										type="date"
-										className='dnone'
-										onChange={() => modifyDateReading('date_reading')}
-									/>
-								</form>
+								<button className='btn-calendar btn-text' onClick={() => openCalendarPopUp('date_reading' + book.id)}>{'Started: ' + convertDate(readingDate, 'human')}</button>
+								<input
+									id={'date_reading' + book.id}
+									name={'date_reading' + book.id}
+									type="date"
+									className='calendar-hidden'
+									onChange={() => modifyDateReading('date_reading')}
+								/>
 							</div>
 						)}
 						{
 							book.list > 2 && book.date_finished !== undefined && (
 								<div>
-									<form>
-										<em onClick={() => showElement('date_finished' + book.id)}>{'Finished: ' + dateConverter(finishedDate, 'human')}</em>
-										<input
-											id={'date_finished' + book.id}
-											name={'date_finished' + book.id}
-											type="date"
-											className='dnone'
-											onChange={() => modifyDateReading('date_finished')}
-										/>
-									</form>
+									<button className='btn-calendar btn-text' onClick={() => openCalendarPopUp('date_finished' + book.id)}>{'Finished: ' + convertDate(finishedDate, 'human')}</button>
+
+									<input
+										id={'date_finished' + book.id}
+										name={'date_finished' + book.id}
+										type="date"
+										className='calendar-hidden'
+										onChange={() => modifyDateReading('date_finished')}
+									/>
 								</div>
 							)
 						}

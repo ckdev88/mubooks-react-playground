@@ -75,6 +75,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		return ''
 	}
 
+
 	function AddBookToX(book: Book, targetList: BookList) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []

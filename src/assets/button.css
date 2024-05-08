@@ -5,6 +5,28 @@ main button.alt,
 	border-color: transparent;
 }
 
+.btn-calendar {
+	font-style: italic
+}
+
+.btn-calendar:hover::after {
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	line-height: 1em;
+	padding: 0;
+	margin: 0;
+	content: " ";
+	background-color: transparent;
+	background-size: 80%;
+	background-repeat: no-repeat;
+	background-position: 100%;
+	background-image: url('/img/calendar-icon.svg');
+	max-width: 1em;
+	max-height: 1em;
+}
+
+
 .adder button.btn-icon {
 	background-color: white;
 	background-size: cover;

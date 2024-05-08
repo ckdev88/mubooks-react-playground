@@ -16,7 +16,16 @@
 }
 
 .book-summary {
-	transition: padding 0.15s linear, background-color 0.15s linear;
+	transition:
+		padding 0.15s linear,
+		background-color 0.15s linear;
+}
+	
+.book-summary input[type='date'] {
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	opacity: 0;
 }
 
 .book-summary .in-short {
