@@ -62,12 +62,9 @@ const App = () => {
 			)
 	}
 
-	function logout() {
-		dologout()
-	}
 	useEffect(() => {
 		if (userIsLoggedIn === false) {
-			logout()
+			dologout()
 		}
 	}, [userIsLoggedIn])
 
