@@ -50,7 +50,7 @@ const BookSummary = ({ book }: BookObject) => {
 				data: { MyBooks: myBooksNew },
 			})
 			.then(() => {
-				msg = 'Started: ' + book.date_reading + ', finished ' + book.date_finished
+				msg = 'Changed the date'
 			})
 			.catch(() => {
 				msg = 'Something went wrong, Mu Books are not updated.'
@@ -133,6 +133,7 @@ const BookSummary = ({ book }: BookObject) => {
 							<sub>{BookAuthorList(book)}</sub>
 						</h2>
 						{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
+
 						{book.list > 1 && book.date_reading !== undefined && (
 							<div style={{ paddingTop: '.5em' }}>
 								<button className='btn-calendar btn-text' onClick={() => openCalendarPopUp('date_reading' + book.id)}>{'Started: ' + convertDate(readingDate, 'human')}</button>
