@@ -13,6 +13,7 @@ const SearchPage = () => {
 		e.preventDefault()
 		const before = performance.now()
 		const search_term: string = e.currentTarget.search_term.value.trim()
+		// const search_author: string = e.currentTarget.search_term.value.trim()
 		if (search_term.length > 4) {
 			setLoading(true)
 			setResultsMessage('')
@@ -70,7 +71,8 @@ const SearchPage = () => {
 				<sub>Find the book you want to add.</sub>
 			</h1>
 			<form onSubmit={processSearchForm}>
-				<input type="text" id="search_term" />
+				<label htmlFor="search_term">Term or title</label><br/>
+				<input type="text" id="search_term" /><br/>
 				<input type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
 			</form>
 			<div>

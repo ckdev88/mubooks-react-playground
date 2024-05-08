@@ -28,6 +28,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		return JSON.stringify(myBooks)
 	}
 
+	// TODO: move this function to generic helper location
 	async function MyBooksUpdate(myBooksNew: string) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
@@ -44,6 +45,36 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			.finally(() => setPopupNotification(msg))
 	}
 
+	// TODO: move this function to generic helper location
+	function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'input' | 'normal'): string {
+		if (UNIX_timestamp !== undefined) {
+			const a = new Date(UNIX_timestamp)
+			const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			const year = a.getFullYear()
+			const monthNum = a.getMonth() +1
+			const month = months[monthNum]
+			const dateNum = a.getDate()
+			let returnvalue: string
+			let datePadded: string | number = dateNum
+			let monthPadded: string | number = monthNum
+			if (Number(datePadded) < 9) datePadded = '0' + dateNum.toString()
+			if (Number(monthPadded) < 9) monthPadded = '0' + monthNum.toString()
+			switch (outputFormat) {
+				case 'input':
+					returnvalue = year + '-' + monthPadded + '-' + datePadded
+					break;
+				case 'human':
+					returnvalue = dateNum + ' ' + month + ' ' + year
+					break;
+				default:
+					returnvalue = year + '-' + monthPadded + '-' + datePadded
+					break
+			}
+			return returnvalue
+		}
+		return ''
+	}
+
 	function AddBookToX(book: Book, targetList: BookList) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
@@ -54,8 +85,8 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			if (myBooks[i].id === book.id) {
 				bookIsSaved = true
 				myBooks[i].list = targetList
-				if(targetList===2)myBooks[i].date_reading = Date.now()
-				if(targetList===3)myBooks[i].date_finished = Date.now()
+				if (targetList === 2) myBooks[i].date_reading = timestampConverter(Date.now(), 'input')
+				if (targetList === 3) myBooks[i].date_finished = timestampConverter(Date.now(), 'input')
 			}
 		}
 

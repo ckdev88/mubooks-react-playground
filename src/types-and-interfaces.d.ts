@@ -71,12 +71,12 @@ interface Book {
 	number_of_pages_median: number
 	title: string
 	title_short: string
-	date_reading?: number
-	date_finished?: number
+	date_reading?: string
+	date_finished?: string
 }
 
 type Results = [Book]
-interface Books extends Array<Book> {}
+interface Books extends Array<Book> { }
 
 interface BookObject {
 	book: Book
