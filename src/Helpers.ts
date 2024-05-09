@@ -20,15 +20,24 @@ function getBookCover(url: string, size: CoverSize) {
 	return url
 }
 
-// TODO, any thing is better than any
-function debounce(fn: Function, delay: number): any {
-	let timerId: any // TODO, any thing is better than any
-	return function (...args: any[]) {
-		clearTimeout(timerId)
-		timerId = setTimeout(() => {
-			fn(...args)
-		}, delay)
+function debounce<T extends (...args: []) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
+	let timeoutId: NodeJS.Timeout 
+	return function (this: object) {
+		const context = this || window 
+		clearTimeout(timeoutId)
+		timeoutId = setTimeout(() => func.apply(context), delay)
 	}
 }
 
-export { isUrl, getOlCover, getBookCover, debounce }
+function openCalendarPopUp(dateFieldId: string): void {
+	const dateElement = document.getElementById(dateFieldId) as HTMLInputElement
+	try {
+		dateElement.showPicker()
+	} catch (e) {
+		dateElement.classList.remove('calendar-hidden')
+		dateElement.focus()
+		console.error(e)
+	}
+}
+
+export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp }

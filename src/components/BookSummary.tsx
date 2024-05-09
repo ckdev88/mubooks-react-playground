@@ -1,26 +1,19 @@
 import AddBookToXButton from './AddBookToXButton'
-import RemoveBookFromXButton from './RemoveBookFromXButton'
 import BookAuthorList from './BookAuthorList'
-import { getBookCover } from '../Helpers'
-import { useContext, useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { AppContext } from '../App'
-import { supabase } from '../../utils/supabase'
+import RemoveBookFromXButton from './RemoveBookFromXButton'
 import convertDate from '../helpers/convertDate'
-import { debounce } from '../Helpers'
+import { AppContext } from '../App'
+import { debounce, openCalendarPopUp } from '../Helpers'
+import { getBookCover } from '../Helpers'
+import { supabase } from '../../utils/supabase'
+import { useContext, useState } from 'react'
 
 const BookSummary = ({ book }: BookObject) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 	const [synopsis, setSynopsis] = useState<string>('')
-	const [readingDate, setReadingDate] = useState<string>('')
-	const [finishedDate, setFinishedDate] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
-
-	useEffect(() => {
-		if (book.date_reading !== undefined) setReadingDate(book.date_reading)
-		if (book.date_finished !== undefined) setFinishedDate(book.date_finished)
-	}, [book])
 
 	async function toggleSynopsis() {
 		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
@@ -51,7 +44,7 @@ const BookSummary = ({ book }: BookObject) => {
 				data: { MyBooks: myBooksNew },
 			})
 			.then(() => {
-				msg = 'Changed the date'
+				msg = 'Changed the date.'
 			})
 			.catch(() => {
 				msg = 'Something went wrong, Mu Books are not updated.'
@@ -61,57 +54,27 @@ const BookSummary = ({ book }: BookObject) => {
 
 	function modifyDateReading(field: 'date_reading' | 'date_finished') {
 		if (document.getElementById(field + book.id) === null) return
-		let newValue: string
 		const inputfield: string = field + book.id
-		if (inputfield === '') return
-
-		if (document.getElementById(inputfield) !== null) {
-			newValue = (document.getElementById(inputfield) as HTMLInputElement).value
-
-			// if (field === 'date_reading') setReadingDate(newValue)
-			// if (field === 'date_finished') setFinishedDate(newValue)
-			changeDates(field, newValue)
-		}
+		const newValue: string = (document.getElementById(inputfield) as HTMLInputElement).value
+		changeDates(field, newValue)
 	}
 
 	function changeDates(fieldName: string, fieldVal: string) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = JSON.parse(userMyBooks as string)
-		// if (fieldName === 'date_finished') setFinishedDate(fieldVal)
-		// if (fieldName === 'date_reading') setReadingDate(fieldVal)
-
 		for (let i = 0; i < myBooks.length; i++) {
 			if (myBooks[i].id === book.id) {
 				if (fieldName === 'date_reading') myBooks[i].date_reading = fieldVal
 				if (fieldName === 'date_finished') myBooks[i].date_finished = fieldVal
 			}
 		}
-
 		const myBooksNew: string = JSON.stringify(myBooks)
 		MyBooksUpdate(myBooksNew)
 	}
 
-	// function showElement(id: string): void {
-	// 	document.getElementById(id)?.addEventListener('focus', function() {
-	// 		openCalendarPopUp(id)
-	// 	})
-	// 	// document.getElementById(id)?.classList.toggle('dnone')
-	// 	// document.getElementById(id)?.focus()
-	// }
-
-	function openCalendarPopUp(dateFieldId: string): void {
-		const dateElement = document.getElementById(dateFieldId) as HTMLInputElement
-		try {
-			dateElement.showPicker()
-		} catch (e) {
-			dateElement.classList.remove('calendar-hidden')
-			dateElement.focus()
-			console.error(e)
-		}
-	}
 	return (
-		// TODO: add className for when marked as saved
+		// TODO: add className for when marked as saved in search results
 		<article className="book-summary">
 			<aside className="cover">
 				<img
@@ -140,7 +103,7 @@ const BookSummary = ({ book }: BookObject) => {
 										className="btn-calendar btn-text"
 										onClick={() => openCalendarPopUp('date_reading' + book.id)}
 									>
-										{convertDate(readingDate, 'human')}
+										{convertDate(book.date_reading, 'human')}
 									</button>
 								</em>
 								<input
@@ -148,7 +111,7 @@ const BookSummary = ({ book }: BookObject) => {
 									name={'date_reading' + book.id}
 									type="date"
 									className="calendar-hidden"
-									onChange={debounce(() => modifyDateReading('date_reading'), 800)}
+									onChange={debounce(() => modifyDateReading('date_reading'), 500)}
 								/>
 							</div>
 						)}
@@ -160,7 +123,7 @@ const BookSummary = ({ book }: BookObject) => {
 										className="btn-calendar btn-text"
 										onClick={() => openCalendarPopUp('date_finished' + book.id)}
 									>
-										{convertDate(finishedDate, 'human')}
+										{convertDate(book.date_finished, 'human')}
 									</button>
 								</em>
 
@@ -169,7 +132,7 @@ const BookSummary = ({ book }: BookObject) => {
 									name={'date_finished' + book.id}
 									type="date"
 									className="calendar-hidden"
-									onChange={debounce(() => modifyDateReading('date_finished'), 800)}
+									onChange={debounce(() => modifyDateReading('date_finished'), 500)}
 								/>
 							</div>
 						)}
