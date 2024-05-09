@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
 import useCardRotate from '../../hooks/useCardRotate'
@@ -44,6 +44,8 @@ const LoginCard = () => {
 	}
 
 	const { recover, signup } = useCardRotate()
+	useEffect(() => document.getElementById('loginemail')?.focus(), [])
+
 	return (
 		<>
 			<article className="card" id="card-login">

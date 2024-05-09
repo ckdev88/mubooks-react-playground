@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
