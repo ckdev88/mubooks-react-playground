@@ -91,12 +91,14 @@ const App = () => {
 						{popupNotification && <>{popper()}</>}
 					</div>
 					<Routes>
-						<Route path="/" Component={RootPage} />
+						<Route path="/*" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
 						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
+						<Route path="/account/logout" Component={UserLogoutPage} />
+						{ userIsLoggedIn && 
+							<>
 						<Route path="/account/new" Component={CheckMailNewAccountPage} />
 						<Route path="/account/profile" Component={UserProfilePage} />
-						<Route path="/account/logout" Component={UserLogoutPage} />
 						<Route path="/account/*" Component={UserLoginPage} />
 						<Route path="/dashboard" Component={DashboardPage} />
 						<Route path="/search" Component={SearchPage} />
@@ -107,6 +109,8 @@ const App = () => {
 						<Route path="/finished" Component={FinishedPage} />
 						<Route path="/favorites" Component={FavoritesPage} />
 						<Route path="/clear-my-books" Component={ClearMyBooks} />
+						</>
+						}
 					</Routes>
 				</main>
 			</AppContext.Provider>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
 
@@ -8,6 +8,10 @@ const SearchPage = () => {
 	const [searchResults, setSearchResults] = useState<Books>([])
 	const [searchTerm, setSearchTerm] = useState('')
 	const [loading, setLoading] = useState(false)
+
+	useEffect(() => {
+		document.getElementById('search_term')?.focus()
+	}, [])
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
@@ -71,8 +75,10 @@ const SearchPage = () => {
 				<sub>Find the book you want to add.</sub>
 			</h1>
 			<form onSubmit={processSearchForm}>
-				<label htmlFor="search_term">Term or title</label><br/>
-				<input type="text" id="search_term" /><br/>
+				<label htmlFor="search_term">Term or title</label>
+				<br />
+				<input type="text" id="search_term" />
+				<br />
 				<input type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
 			</form>
 			<div>
