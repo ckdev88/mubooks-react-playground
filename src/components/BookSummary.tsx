@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import convertDate from '../helpers/convertDate'
+import { debounce } from '../Helpers'
 
 const BookSummary = ({ book }: BookObject) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
@@ -136,31 +137,45 @@ const BookSummary = ({ book }: BookObject) => {
 
 						{book.list > 1 && book.date_reading !== undefined && (
 							<div style={{ paddingTop: '.5em' }}>
-								<button className='btn-calendar btn-text' onClick={() => openCalendarPopUp('date_reading' + book.id)}>{'Started: ' + convertDate(readingDate, 'human')}</button>
+								<em>
+									Started:&nbsp;
+									<button
+										className="btn-calendar btn-text"
+										onClick={() => openCalendarPopUp('date_reading' + book.id)}
+									>
+										{convertDate(readingDate, 'human')}
+									</button>
+								</em>
 								<input
 									id={'date_reading' + book.id}
 									name={'date_reading' + book.id}
 									type="date"
-									className='calendar-hidden'
-									onChange={() => modifyDateReading('date_reading')}
+									className="calendar-hidden"
+									onChange={debounce(() => modifyDateReading('date_reading'), 900)}
 								/>
 							</div>
 						)}
-						{
-							book.list > 2 && book.date_finished !== undefined && (
-								<div>
-									<button className='btn-calendar btn-text' onClick={() => openCalendarPopUp('date_finished' + book.id)}>{'Finished: ' + convertDate(finishedDate, 'human')}</button>
+						{book.list > 2 && book.date_finished !== undefined && (
+							<div>
+								<em>
+									Finished:&nbsp;
+									<button
+										className="btn-calendar btn-text"
+										onClick={() => openCalendarPopUp('date_finished' + book.id)}
+									>
+										{convertDate(finishedDate, 'human')}
+									</button>
+								</em>
 
-									<input
-										id={'date_finished' + book.id}
-										name={'date_finished' + book.id}
-										type="date"
-										className='calendar-hidden'
-										onChange={() => modifyDateReading('date_finished')}
-									/>
-								</div>
-							)
-						}
+								<input
+									id={'date_finished' + book.id}
+									name={'date_finished' + book.id}
+									type="date"
+									className="calendar-hidden"
+									onChange={debounce(() => modifyDateReading('date_finished'), 900)}
+								/>
+							</div>
+						)}
 					</div>
 				</header>
 				<main>

@@ -93,7 +93,7 @@ main button.alt,
 }
 
 .btn-calendar {
-	font-style: italic;
+	font-style: inherit;
 }
 
 .btn-calendar::after {
