@@ -101,14 +101,11 @@ const BookSummary = ({ book }: BookObject) => {
 	// }
 
 	function openCalendarPopUp(dateFieldId: string): void {
-
-		console.log('sesam open u', dateFieldId)
 		const dateElement = document.getElementById(dateFieldId) as HTMLInputElement
 		try {
-			console.log('trying ', dateFieldId)
 			dateElement.showPicker()
-			console.info(dateElement)
 		} catch (e) {
+			dateElement.classList.remove('calendar-hidden')
 			dateElement.focus()
 			console.error(e)
 		}
@@ -138,7 +135,7 @@ const BookSummary = ({ book }: BookObject) => {
 						{book.list > 1 && book.date_reading !== undefined && (
 							<div style={{ paddingTop: '.5em' }}>
 								<em>
-									Started:&nbsp;
+									Started:&nbsp;&nbsp;&nbsp;
 									<button
 										className="btn-calendar btn-text"
 										onClick={() => openCalendarPopUp('date_reading' + book.id)}
@@ -151,14 +148,14 @@ const BookSummary = ({ book }: BookObject) => {
 									name={'date_reading' + book.id}
 									type="date"
 									className="calendar-hidden"
-									onChange={debounce(() => modifyDateReading('date_reading'), 900)}
+									onChange={debounce(() => modifyDateReading('date_reading'), 800)}
 								/>
 							</div>
 						)}
 						{book.list > 2 && book.date_finished !== undefined && (
 							<div>
 								<em>
-									Finished:&nbsp;
+									Finished:&nbsp;&nbsp;
 									<button
 										className="btn-calendar btn-text"
 										onClick={() => openCalendarPopUp('date_finished' + book.id)}
@@ -172,7 +169,7 @@ const BookSummary = ({ book }: BookObject) => {
 									name={'date_finished' + book.id}
 									type="date"
 									className="calendar-hidden"
-									onChange={debounce(() => modifyDateReading('date_finished'), 900)}
+									onChange={debounce(() => modifyDateReading('date_finished'), 800)}
 								/>
 							</div>
 						)}

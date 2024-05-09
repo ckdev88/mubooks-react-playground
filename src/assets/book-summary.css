@@ -20,8 +20,8 @@
 		padding 0.15s linear,
 		background-color 0.15s linear;
 }
-	
-.book-summary input[type='date'] {
+
+.book-summary .calendar-hidden {
 	overflow: hidden;
 	width: 0;
 	height: 0;
@@ -70,6 +70,7 @@
 	font-weight: normal;
 	display: block;
 }
+
 .book-summary h2 sup {
 	vertical-align: baseline;
 }
@@ -81,13 +82,16 @@
 	min-width: 9rem;
 	float: left;
 }
+
 .book-summary .article-main {
 	float: left;
 	max-width: calc(100vw - 10rem);
 }
+
 .book-summary .article-main button.modify {
 	margin-left: 0.5em;
 }
+
 .book-summary aside {
 	width: 7rem;
 	min-width: 7rem;
