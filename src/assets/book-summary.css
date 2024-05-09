@@ -107,10 +107,12 @@
 .book-summary footer {
 	clear: both;
 }
+
 @media screen and (max-width: 320px) {
 	.book-summary h2 {
 		font-size: 1.4rem;
 	}
+
 	.book-summary .cover {
 		max-width: 8rem;
 		min-width: 8rem;
@@ -130,10 +132,12 @@
 .book-summary .synopsis {
 	align-self: flex-end;
 }
+
 .book-summary .synopsis p {
 	margin-top: 0;
 	font-size: 0.8em;
 }
+
 .book-summary .synopsis h3 {
 	margin: 0 0 1em;
 	padding: 0;
@@ -164,6 +168,7 @@
 	font-size: 0.9rem;
 	line-height: 1.7em;
 }
+
 @media screen and (max-width: 380px) {
 	.book-summary .mark {
 		line-height: 1em;

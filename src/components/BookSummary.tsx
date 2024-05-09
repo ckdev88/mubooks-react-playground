@@ -38,7 +38,6 @@ const BookSummary = ({ book }: BookObject) => {
 	async function MyBooksUpdate(myBooksNew: string) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-
 		await supabase.auth
 			.updateUser({
 				data: { MyBooks: myBooksNew },
@@ -167,7 +166,6 @@ const BookSummary = ({ book }: BookObject) => {
 						<ReactMarkdown>{synopsis}</ReactMarkdown>
 					</div>
 				</div>
-
 				<hr />
 			</footer>
 		</article>
