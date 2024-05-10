@@ -39,7 +39,13 @@ html:not(.loggedin) #root {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	padding-bottom:1rem;
+}
+html:not(.loggedin) #main {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+html:not(.loggedin) h1 {
+	margin-top: 0;
 }
 
 /* utils */

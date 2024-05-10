@@ -5,9 +5,7 @@ import RecoverCard from '../../components/account/RecoverCard'
 import setDraaideurHeight from '../../functions/setDraaideurHeight'
 
 export default function UserLoginPage() {
-	useEffect(() => {
-		setDraaideurHeight()
-	}, [])
+	useEffect(() => setDraaideurHeight(), [])
 	return (
 		<>
 			<div id="welcome-logo">
