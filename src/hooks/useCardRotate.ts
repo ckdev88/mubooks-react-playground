@@ -21,11 +21,11 @@ const useCardRotate = () => {
 	}
 	function login() {
 		document.getElementById('cards-draaideur')?.classList.remove('rotate')
-		document.getElementById('loginemail')?.focus()
+		document.getElementById('login_email')?.focus()
 	}
 	function see() {
 		document.getElementById('cards-draaideur')?.classList.remove('rotate')
-		document.getElementById('loginemail')?.focus()
+		document.getElementById('login_email')?.focus()
 	}
 	function change() {
 		document.getElementById('cards-draaideur')?.classList.add('rotate')

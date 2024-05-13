@@ -22,8 +22,8 @@ const LoginCard = () => {
 	async function processLoginForm(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		const user: User = {
-			email: event.currentTarget.loginemail.value,
-			password: event.currentTarget.loginpassword.value,
+			email: event.currentTarget.login_email.value,
+			password: event.currentTarget.login_password.value,
 		}
 		await UserLogin(user as User)
 			.then((res) => {
@@ -44,7 +44,7 @@ const LoginCard = () => {
 	}
 
 	const { recover, signup } = useCardRotate()
-	useEffect(() => document.getElementById('loginemail')?.focus(), [])
+	useEffect(() => document.getElementById('login_email')?.focus(), [])
 
 	return (
 		<>
@@ -55,10 +55,10 @@ const LoginCard = () => {
 						<sub>to continue</sub>
 					</header>
 					<form onSubmit={processLoginForm}>
-						<label htmlFor="login-email">Email address</label>
-						<input type="email" id="loginemail" name="loginemail" required />
-						<label htmlFor="login-password">Password</label>
-						<input type="password" id="loginpassword" name="loginpassword" />
+						<label htmlFor="login_email">Email address</label>
+						<input type="email" id="login_email" name="login_email" required />
+						<label htmlFor="login_password">Password</label>
+						<input type="password" id="login_password" name="login_password" />
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<input type="submit" value="Log in" />
 					</form>

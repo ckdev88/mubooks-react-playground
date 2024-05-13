@@ -33,8 +33,8 @@ type BookList = 0 | 1 | 2 | 3 | 4
 type CoverSize = undefined | 'S' | 'M' | 'L'
 
 interface LoginFormInput {
-	loginemail: { value: string }
-	loginpassword: { value: string }
+	login_email: { value: string }
+	login_password: { value: string }
 }
 type BookData = [
 	{
