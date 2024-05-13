@@ -91,7 +91,9 @@ main button.alt,
 	height: unset;
 	overflow: auto;
 }
-
+.btn-text {
+	margin-bottom: 0;
+}
 .btn-calendar {
 	font-style: inherit;
 }

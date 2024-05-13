@@ -76,7 +76,6 @@ const SearchPage = () => {
 			</h1>
 			<form onSubmit={processSearchForm}>
 				<label htmlFor="search_term">Term or title</label>
-				<br />
 				<input type="text" id="search_term" />
 				<br />
 				<input type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />

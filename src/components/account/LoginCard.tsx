@@ -60,7 +60,7 @@ const LoginCard = () => {
 						<label htmlFor="login-password">Password</label>
 						<input type="password" id="loginpassword" name="loginpassword" />
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-						<button>Log in</button>
+						<input type="submit" value="Log in" />
 					</form>
 				</main>
 				<footer>

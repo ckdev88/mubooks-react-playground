@@ -40,6 +40,7 @@ form .error {
 
 label .sf {
 	float: right;
+	padding-left:1em;
 }
 
 .ta-right {

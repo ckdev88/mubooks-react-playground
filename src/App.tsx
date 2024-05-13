@@ -46,7 +46,6 @@ const App = () => {
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 
-
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
 			setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
