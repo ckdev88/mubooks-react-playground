@@ -16,7 +16,7 @@ const useCardRotate = () => {
 		if (cardRecover) cardRecover.style.display = 'none'
 		if (cardSignup) {
 			cardSignup.style.display = 'flex'
-			document.getElementById('signup-screenname')?.focus()
+			document.getElementById('signup_screenname')?.focus()
 		}
 	}
 	function login() {

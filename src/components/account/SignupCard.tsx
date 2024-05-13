@@ -39,11 +39,11 @@ export default function SignupCard() {
 				<main>
 					<form onSubmit={processSignupForm}>
 						<label htmlFor="screenname">Screen name</label>
-						<input type="text" id="signup-screenname" name="screenname" />
 						<label htmlFor="email">Email address: *</label>
-						<input type="email" id="signup-email" name="email" required />
 						<label htmlFor="password">Password: *</label>
-						<input type="password" id="signup-password" name="password" required />
+							<input type="text" id="signup_screenname" name="screenname" />
+							<input type="email" id="signup_email" name="email" required />
+							<input type="password" id="signup_password" name="password" required />
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button>Create account</button>
 					</form>

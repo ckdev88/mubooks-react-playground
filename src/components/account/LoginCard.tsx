@@ -56,9 +56,9 @@ const LoginCard = () => {
 					</header>
 					<form onSubmit={processLoginForm}>
 						<label htmlFor="login_email">Email address</label>
-						<input type="email" id="login_email" name="login_email" required />
 						<label htmlFor="login_password">Password</label>
-						<input type="password" id="login_password" name="login_password" />
+							<input type="email" id="login_email" name="login_email" required />
+							<input type="password" id="login_password" name="login_password" />
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<input type="submit" value="Log in" />
 					</form>
