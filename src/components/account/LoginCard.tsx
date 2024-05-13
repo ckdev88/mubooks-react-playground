@@ -44,7 +44,6 @@ const LoginCard = () => {
 	}
 
 	const { recover, signup } = useCardRotate()
-	useEffect(() => document.getElementById('login_email')?.focus(), [])
 
 	return (
 		<>
@@ -55,19 +54,23 @@ const LoginCard = () => {
 						<sub>to continue</sub>
 					</header>
 					<form onSubmit={processLoginForm}>
-						<label htmlFor="login_email">Email address</label>
-						<label htmlFor="login_password">Password</label>
+						<label htmlFor="login_email">
+							<div className="description">Email address</div>
 							<input type="email" id="login_email" name="login_email" required />
+						</label>
+						<label htmlFor="login_password">
+							<div className="description">Password</div>
 							<input type="password" id="login_password" name="login_password" />
+						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<input type="submit" value="Log in" />
 					</form>
 				</main>
 				<footer>
-					<button className="btn-text" onClick={recover}>
+					<button className="btn-text wauto nowrap" onClick={recover}>
 						Forgot password
 					</button>
-					<button className="btn-text ta-right" onClick={signup}>
+					<button className="btn-text ta-right wauto nowrap" onClick={signup}>
 						New here? Join now
 					</button>
 				</footer>

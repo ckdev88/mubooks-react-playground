@@ -18,7 +18,9 @@
 	width: auto;
 	display: inline-block;
 }
-
+.nowrap {
+	white-space: nowrap;
+}
 form .error {
 	margin-bottom: 0.5em;
 	color: red;
@@ -40,7 +42,7 @@ form .error {
 
 label .sf {
 	float: right;
-	padding-left:1em;
+	padding-left: 1em;
 }
 
 .ta-right {

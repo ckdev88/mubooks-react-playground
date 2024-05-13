@@ -37,8 +37,10 @@ const RecoverCard = () => {
 				</header>
 				<main>
 					<form onSubmit={processRecoverForm}>
-						<label htmlFor="recover-email">Email address: *</label>
+						<label htmlFor="recover_email">
+							<div className="description">Email address: *</div>
 							<input type="email" id="recover_email" name="email" required />
+						</label>
 						<p>We'll send a link to this email address if it matches an existing account.</p>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button type="submit">Send me a password reset link</button>

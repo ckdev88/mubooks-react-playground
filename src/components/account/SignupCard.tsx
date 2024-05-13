@@ -38,12 +38,18 @@ export default function SignupCard() {
 				<header>Let's create an account</header>
 				<main>
 					<form onSubmit={processSignupForm}>
-						<label htmlFor="screenname">Screen name</label>
-						<label htmlFor="email">Email address: *</label>
-						<label htmlFor="password">Password: *</label>
+						<label htmlFor="screenname">
+							<div className="description">Screen name</div>
 							<input type="text" id="signup_screenname" name="screenname" />
+						</label>
+						<label htmlFor="email">
+							<div className="description">Email address: *</div>
 							<input type="email" id="signup_email" name="email" required />
+						</label>
+						<label htmlFor="password">
+							<div className="description">Password: *</div>
 							<input type="password" id="signup_password" name="password" required />
+						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button>Create account</button>
 					</form>

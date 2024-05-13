@@ -75,8 +75,10 @@ const SearchPage = () => {
 				<sub>Find the book you want to add.</sub>
 			</h1>
 			<form onSubmit={processSearchForm}>
-				<label htmlFor="search_term">Term or title</label>
-				<input type="text" id="search_term" />
+				<label htmlFor="search_term">
+					<div className="description">Term or title</div>
+					<input type="text" id="search_term" />
+				</label>
 				<br />
 				<input type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
 			</form>

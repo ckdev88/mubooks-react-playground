@@ -52,17 +52,28 @@ export default function MyAccountEditCard() {
 				<header>
 					Edit my account
 					<br />
-					<span className='sub'>Change your preferences</span>
+					<span className="sub">Change your preferences</span>
 				</header>
 
 				<main>
 					<form onSubmit={handleSubmit}>
-						<label>Screen name</label>
-						<input type="text" id="account_screenname" name="account_screenname" defaultValue={username} />
-						<label htmlFor="account_email">Email address</label>
-						<input type="email" id="account_email" name="account_email" defaultValue={usermail} />
-						<label htmlFor="account_password">Password (leave empty to keep current)</label>
-						<input type="password" id="account_password" name="account_password" defaultValue="" />
+						<label htmlFor="account_screenname">
+							<div className="description">Screen name</div>
+							<input
+								type="text"
+								id="account_screenname"
+								name="account_screenname"
+								defaultValue={username}
+							/>
+						</label>
+						<label htmlFor="account_email">
+							<div className="description">Email address</div>
+							<input type="email" id="account_email" name="account_email" defaultValue={usermail} />
+						</label>
+						<label htmlFor="account_password">
+							<div className="description">Password (leave empty to keep current)</div>
+							<input type="password" id="account_password" name="account_password" defaultValue="" />
+						</label>
 						<button>Save and return</button>
 					</form>
 				</main>

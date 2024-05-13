@@ -47,9 +47,10 @@ main button.alt,
 	display: inline-block;
 	border: 0;
 	cursor: pointer;
-	font-size: 0.9rem;
+	font-size: 1rem;
 	font-weight: normal;
-	height: 1em;
+	height: 1.3rem;
+	line-height: 1.3rem;
 	padding: 0;
 	text-align: left;
 	text-decoration: none;

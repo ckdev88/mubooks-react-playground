@@ -98,15 +98,26 @@ fieldset {
 	border: 0;
 }
 
-label {
+label .description {
 	position: absolute;
-	margin-top: -0.5em;
+	margin-top: -0.7em;
 	margin-left: 0.5em;
-	padding: 0 0.5em;
+	padding: 0.2em 0.5em;
 	background-color: white;
 	border-radius: 0.2rem;
-	font-size:.8rem;
-	color:rgba(0,0,0,50%)
+	font-size: 0.8rem;
+	color: rgba(0, 0, 0, 50%);
+	transition:
+		0.15s background-color ease-in-out,
+		0.15s color ease-in-out,
+		0.15s margin-left ease-in-out;
+}
+label:has(input:active) .description,
+label:has(input:focus) .description {
+	background-color: hsl(325, 55%, 46%);
+	color: white;
+	font-weight: bold;
+	margin-left: 0.7rem;
 }
 input[type='text'],
 input[type='url'],
