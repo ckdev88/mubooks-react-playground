@@ -14,13 +14,17 @@
 	color: red;
 }
 
-.wauto {
-	width: auto;
-	display: inline-block;
+.wauto-md {
+	@media screen and (min-width: 480px) {
+		width: auto;
+		display: inline-block;
+	}
 }
+
 .nowrap {
-	white-space: nowrap;
+		white-space: nowrap;
 }
+
 form .error {
 	margin-bottom: 0.5em;
 	color: red;

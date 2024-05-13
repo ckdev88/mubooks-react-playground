@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
 import useCardRotate from '../../hooks/useCardRotate'
@@ -67,11 +67,11 @@ const LoginCard = () => {
 					</form>
 				</main>
 				<footer>
-					<button className="btn-text wauto nowrap" onClick={recover}>
+					<button className="btn-text wauto-md nowrap" onClick={recover}>
 						Forgot password
 					</button>
-					<button className="btn-text ta-right wauto nowrap" onClick={signup}>
-						New here? Join now
+					<button className="btn-text ta-right wauto-md nowrap" onClick={signup}>
+						<span className='dnone diblock-md'>New here?&nbsp;</span>Join now
 					</button>
 				</footer>
 			</article>

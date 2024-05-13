@@ -76,7 +76,12 @@ html:not(.loggedin) h1 {
 }
 
 .dnone {
-	display: none !important;
+	display: none;
+}
+.diblock-md {
+	@media screen and (min-width: 480px) {
+		display: inline-block;
+	}
 }
 
 .textwrapper {

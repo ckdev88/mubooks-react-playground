@@ -1,18 +1,18 @@
-#welcome-logo {
+#welcome {
 	margin-bottom: 1rem;
+	line-height: 2rem;
+	font-size: 2rem;
+	width: calc(100vw - 2rem);
+	text-align: center;
 }
 
 #welcome-logo-img {
-	max-width: 33%;
-
-	display: block;
+	width: auto;
+	height: 0.8em;
+	display: inline-block;
 	margin: 0 auto;
 	position: relative;
 	z-index: 2;
-}
-img#welcome-logo-img{
-/* 	height:10vh; */
-	/* width:100px; */
 }
 
 .icon-forgot-password {

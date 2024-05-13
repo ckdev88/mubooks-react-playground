@@ -8,10 +8,9 @@ export default function UserLoginPage() {
 	useEffect(() => setDraaideurHeight(), [])
 	return (
 		<>
-			<div id="welcome-logo">
-				<h1 style={{ textAlign: 'center' }}>MuBooks</h1>
-				<img id="welcome-logo-img" src="img/logo.svg" />
-			</div>
+			<h1 id="welcome">
+				<img id="welcome-logo-img" src="img/logo.svg" alt="" /> MuBooks
+			</h1>
 			<div id="cards-draaideur" className="cards-draaideur">
 				<div className="axis">
 					<LoginCard />
