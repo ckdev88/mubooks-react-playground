@@ -106,6 +106,7 @@ const BookSummary = ({ book }: BookObject) => {
 									</button>
 								</em>
 								<input
+									tabIndex={-1}
 									id={'date_reading' + book.id}
 									name={'date_reading' + book.id}
 									type="date"
@@ -127,6 +128,7 @@ const BookSummary = ({ book }: BookObject) => {
 								</em>
 
 								<input
+									tabIndex={-1}
 									id={'date_finished' + book.id}
 									name={'date_finished' + book.id}
 									type="date"

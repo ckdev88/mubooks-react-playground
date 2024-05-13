@@ -118,6 +118,7 @@ main button.alt,
 	transition: opacity 0.15s ease-in-out;
 }
 
+.btn-calendar:focus::after,
 .btn-calendar:hover::after {
 	opacity: 1;
 }
