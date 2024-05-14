@@ -115,7 +115,7 @@ main button.alt,
 	background-image: url('/img/calendar-icon.svg');
 	max-height: 1em;
 	opacity: 0;
-	transition: opacity 0.15s ease-in-out;
+	transition: opacity 0.18s ease-in-out;
 }
 
 .btn-calendar:focus::after,

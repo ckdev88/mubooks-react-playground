@@ -17,8 +17,8 @@
 
 .book-summary {
 	transition:
-		padding 0.15s linear,
-		background-color 0.15s linear;
+		padding 0.18s linear,
+		background-color 0.18s linear;
 }
 
 .book-summary .calendar-hidden {

@@ -80,7 +80,7 @@ img {
 	padding: 1rem 0.25rem;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: calc(100% - 1rem)
+	max-width: calc(100% - 1rem);
 }
 
 .loggedin #main {
@@ -111,9 +111,9 @@ label .description {
 	font-size: 0.8rem;
 	color: rgba(0, 0, 0, 50%);
 	transition:
-		0.15s background-color ease-in-out,
-		0.15s color ease-in-out,
-		0.15s margin-left ease-in-out;
+		0.18s background-color ease-in-out,
+		0.18s color ease-in-out,
+		0.18s margin-left ease-in-out;
 }
 label:has(input:active) .description,
 label:has(input:focus) .description {
@@ -149,10 +149,10 @@ input[type='submit'] {
 	margin-bottom: 0.75rem;
 	border-color: hsl(325, 55%, 90%);
 	transition:
-		0.15s outline ease-in-out,
-		0.15s border-color ease-in-out,
-		0.15s box-shadow ease-in-out,
-		0.15s border ease-in-out;
+		0.18s outline ease-in-out,
+		0.18s border-color ease-in-out,
+		0.18s box-shadow ease-in-out,
+		0.18s border ease-in-out;
 }
 input[type='text']:focus,
 input[type='url']:focus,
@@ -175,7 +175,7 @@ a,
 button,
 input[type='submit'] {
 	cursor: pointer;
-	transition: background-color 0.15s linear;
+	transition: background-color 0.18s linear;
 }
 
 main button,

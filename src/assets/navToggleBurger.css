@@ -9,13 +9,24 @@
 	position: relative;
 	outline: none;
 }
+#navIcons button:hover {
+	background: rgba(255, 255, 255, 2%);
+}
+#navIcons button:active,
+#navIcons button.expanded{
+	background: #b73581 !important;
+}
+#toggleNavBurger:hover .burgerbar,
+#toggleNavBurger.expanded .burgerbar{
+	background-color: white;
+}
 
 .burger {
 	position: relative;
 }
 .burgerbar {
 	box-sizing: border-box;
-	background: rgba(0, 0, 0, 80%);
+	background: rgba(255, 255, 255, 100%);
 	width: 100%;
 	margin-top: 3px;
 	height: 3px;
@@ -28,13 +39,13 @@
 }
 .bar1,
 .bar3 {
-	transition: 0.15s width linear;
+	transition: 0.18s width linear;
 }
 .bar2,
 .bar2duplo {
 	transition:
-		width 0.15s linear,
-		transform 0.15s linear;
+		width 0.18s linear,
+		transform 0.18s linear;
 }
 .bar2duplo {
 	margin-top: -6px;

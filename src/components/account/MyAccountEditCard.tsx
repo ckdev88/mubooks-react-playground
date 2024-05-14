@@ -51,8 +51,7 @@ export default function MyAccountEditCard() {
 			<div className="card">
 				<header>
 					Edit my account
-					<br />
-					<span className="sub">Change your preferences</span>
+					<sub>Change your preferences</sub>
 				</header>
 
 				<main>

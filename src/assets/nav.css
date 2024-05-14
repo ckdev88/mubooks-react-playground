@@ -4,11 +4,15 @@
 	position: fixed;
 	top: 0;
 	width: calc(100% - 2rem);
-	background-color: hsla(360, 50%, 90%, 50%);
-	transition: background-color 0.15s ease-in-out;
+	background-color: #b73581;
+	transition: opacity 0.18s ease-in-out;
 	height: 2rem;
 	line-height: 2rem;
 	padding: 1rem 0.75rem;
+	opacity: 0;
+}
+.nav-collapsable.expanded {
+	opacity: 1;
 }
 
 .nav-collapsable .history {
@@ -21,7 +25,9 @@
 	height: 100vh;
 	z-index: 90;
 }
-
+#navIcons button.expanded {
+	background-color: rgba(255, 255, 255, 0.2);
+}
 .nav-collapsable {
 	box-sizing: border-box;
 }
@@ -40,19 +46,25 @@
 }
 
 .nav-collapsable a {
-	color: hsl(360, 50%, 20%);
+	color: hsla(28, 100%, 93%, 0.97);
 	padding: 0.1em 0.2em;
-	display: block;
 	text-decoration: none;
 	font-weight: bold;
 	text-transform: uppercase;
-	letter-spacing: -0.07em;
+	transition:
+		outline-color 0.18s ease-in-out,
+		padding 0.18s ease-in-out;
+	display: inline-block;
+	outline: 1px dashed rgba(255, 255, 255, 0);
 }
-
-.nav-collapsable .router-link-active,
-.nav-collapsable .router-link:hover {
-	background-color: cornsilk;
-	color: black;
+.nav-collapsable a:hover,
+.nav-collapsable a.active {
+	outline-color: rgba(255, 255, 255, 0.5);
+	padding-left: 0.5em;
+	padding-right: 0.7em;
+}
+.nav-collapsable a.active {
+	outline-color: rgb(255, 255, 255);
 }
 
 #navIcons {
@@ -68,34 +80,29 @@
 #navIcons button {
 	border: 0;
 	outline: 0;
-	background: rgba(255, 255, 255, 0.5);
-	transition: 0.15s background-color ease-in-out;
+	background: transparent;
+	outline: 1px dashed rgba(255, 255, 255, 0);
+	transition: outline 0.18s ease-in-out;
 	border-radius: 50%;
 	width: 2rem;
 	height: 2rem;
 	margin: 0.25rem;
+	overflow: hidden;
 }
 
-#navIcons .zoekIcon {
-	height: 1rem;
-	width: 1rem;
-	display: block;
+#nav-icon-loep-stroke {
+	fill: none;
+	stroke: #ffffff;
+	stroke-width: 17.2237;
 }
-
 #navIcons button:hover {
-	background: #fff;
+	outline-color: rgba(255, 255, 255, 0.5);
 }
-
+#navIcons button.expanded {
+	outline-color: rgb(255, 255, 255);
+}
 #navIcons div button {
 	margin-left: 0;
-}
-
-.nav-collapsable.expanded {
-	background-color: hsl(28, 100%, 86%, 90%);
-}
-
-.light-mode .nav-collapsable.expanded {
-	background-color: hsla(28, 100%, 93%, 0.97);
 }
 
 .nav-collapsable.collapsed {
@@ -105,28 +112,27 @@
 	padding: 0;
 }
 
-.nav-collapsable.collapsed li {
-	opacity: 0;
-}
-
-.nav-collapsable.expanded li,
-.nav-collapsable.collapsed li {
-	opacity: 1;
-}
-
 #nav1 {
 	text-align: right;
 }
 
-.zoekIcon,
-.profileIcon {
+#nav-icon-loep,
+#nav-icon-profile {
 	margin: 0 auto;
 	width: 1rem;
 	height: 1rem;
 	position: relative;
 }
 
-#navIcons .toggleZoekNav,
-#navIcons .toggleNavProfile {
-	background-color: rgba(255, 255, 255, .5)
+#nav-icon-profile-path,
+#nav-icon-loep-path {
+	fill: white;
+}
+
+#navIcons .alt {
+	position: absolute;
+	text-indent: 10em;
+	@media screen and (max-width: 479.98px) {
+		display: none;
+	}
 }
