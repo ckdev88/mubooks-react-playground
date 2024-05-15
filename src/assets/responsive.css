@@ -1,27 +1,29 @@
-@media screen and (max-width: 600px) {
+@media screen and (min-height: 600px) {
 	#header {
-		background-color: #b73581;
-		padding-left: 1rem;
-		padding-right: 3rem;
-		left: -0.5rem;
-		min-width: calc(100% + 0.5rem);
+		padding-left: 0;
+		padding-right: 0;
 	}
-
-	.nav-collapsable {
-		left: 0;
+	#nav1 {
+		padding-right: 0.75rem;
+	}
+	#navIcons {
+		width: calc(100vw - 1rem);
+	}
+	.nav-collapsable a {
+		padding-right: 0;
 	}
 }
 
 @media screen and (max-width: 600px) and (min-width: 320px) {
-	#root {
-		margin: 0 auto;
-		max-width: calc(100vw - 1rem);
-	}
-}
-
-@media screen and (min-width: 601px) {
 	#navIcons {
-		width: calc(100% - 1rem);
+		padding-left: 0;
+		width: calc(100vw - 1.5rem);
+	}
+	#nav1 {
+		padding-right: 1.5rem;
+	}
+	.nav-collapsable a {
+		padding: 0.1em 0 0.1em 0.2em;
 	}
 }
 
@@ -29,24 +31,13 @@
 	#root {
 		min-width: auto;
 	}
-
-	#header {
-		padding-left: 0.5rem;
-	}
-
 	#navIcons {
-		width: auto;
 		min-width: 0;
+		width: 100%;
 	}
-
-	#nav1 {
-		text-align: left !important;
-	}
-
 	.nav-collapsable {
 		padding-left: 0.25rem;
 	}
-
 	.nav-collapsable.expanded {
 		width: 100%;
 	}

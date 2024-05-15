@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
@@ -103,8 +102,6 @@ const NavWrapper = () => {
 					className={nav0Expanded ? 'expanded nav-collapsable' : 'collapsed nav-collapsable'}
 					aria-expanded={nav0Expanded ? 'true' : 'false'}
 				>
-					<br />
-
 					<ul>
 						<li>
 							<NavLink to={'/dashboard'} onClick={toggleNav0}>

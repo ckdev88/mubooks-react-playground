@@ -63,11 +63,12 @@ img {
 	display: none;
 	position: fixed;
 	top: 0;
-	width: calc(100% - 2rem);
 	box-sizing: border-box;
 	height: 3rem;
 	padding-top: 0.25rem;
 	box-sizing: border-box;
+	background-color: #b73581;
+	width: 100vw;
 }
 
 .loggedin #header {
@@ -80,6 +81,9 @@ img {
 	padding: 1rem 0.25rem;
 	margin-left: auto;
 	margin-right: auto;
+}
+#main,
+#header {
 	max-width: calc(100% - 1rem);
 }
 
@@ -205,9 +209,7 @@ main button:disabled:hover,
 main button:disabled:active,
 main button:disabled:focus,
 input[type='submit']:disabled,
-input[type='submit']:disabled:hover
-/* input[type='submit']:active, */
-/* input[type='submit']:focus */ {
+input[type='submit']:disabled:hover {
 	border-color: transparent;
 	background-color: hsl(325, 25%, 76%);
 }
