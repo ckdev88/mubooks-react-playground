@@ -61,6 +61,8 @@
 		margin 0.18s ease-in-out;
 	display: inline-block;
 	outline: 1px dashed rgba(255, 255, 255, 0);
+	border-radius: 0.3rem;
+	margin-bottom: 0.2rem;
 }
 .nav-collapsable a:hover,
 .nav-collapsable a.active {
