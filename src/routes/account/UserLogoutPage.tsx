@@ -7,22 +7,22 @@ export default function UserLogoutPage() {
 	const { setUserIsLoggedIn } = useContext(AppContext)
 	const navigate = useNavigate()
 
-	async function dologout() {
-		await supabase.auth
-			.signOut()
-			.then(() => {
-				localStorage.clear()
-				setUserIsLoggedIn(false)
-			})
-			.finally(() => {
-				setTimeout(() => {
-					navigate('/account/login')
-				}, 1000)
-			})
-	}
 	useEffect(() => {
-		dologout()
-	}, [])
+		const doLogout = async () => {
+			await supabase.auth
+				.signOut()
+				.then(() => {
+					localStorage.clear()
+					setUserIsLoggedIn(false)
+				})
+				.finally(() => {
+					setTimeout(() => {
+						navigate('/account/login')
+					}, 1000)
+				})
+		}
+		doLogout()
+	}, [setUserIsLoggedIn, navigate])
 
 	return (
 		<>
