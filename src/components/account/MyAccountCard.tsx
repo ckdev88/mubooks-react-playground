@@ -25,7 +25,7 @@ export default function MyAccountCard() {
 			<main>
 				<dl>
 					<dt>Screen name</dt>
-					<dd>{username}</dd>
+					<dd>{username ? username : '-'}</dd>
 					<dt>Email address</dt>
 					<dd>{usermail}</dd>
 					<dt>Password</dt>
