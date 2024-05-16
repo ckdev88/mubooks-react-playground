@@ -38,12 +38,15 @@ main button.alt,
 
 .btn-text,
 .btn-text:active,
-.btn-text:focus {
+.btn-text:focus,
+.btn-icon,
+.btn-icon:active,
+.btn-icon:focus{
 	background: none;
 	color: #0d99ff;
 }
 
-.btn-text {
+.btn-text,.btn-icon {
 	display: inline-block;
 	border: 0;
 	cursor: pointer;
@@ -92,7 +95,7 @@ main button.alt,
 	height: unset;
 	overflow: auto;
 }
-.btn-text {
+.btn-text,.btn-icon {
 	margin-bottom: 0;
 }
 .btn-calendar {
