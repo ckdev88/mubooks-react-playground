@@ -13,7 +13,7 @@ export default function SavedBooksPage() {
 
 	return (
 		<>
-			<h1>My Books</h1>
+			<h1>My Books <sub>My books which are in whatever list: {savedbooks.length}</sub></h1>
 			<p>
 				An overview of my saved books, this includes books that are favorited, read and finished, the wishlist
 				and the book currently reading.

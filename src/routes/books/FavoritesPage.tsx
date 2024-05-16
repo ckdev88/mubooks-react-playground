@@ -25,7 +25,7 @@ const FavoritesPage = () => {
 	return (
 		<>
 			<h1>
-				Favorites <sub>My beloved, adored, hottest favorite books.</sub>
+				Favorites <sub>My beloved, adored, hottest favorite books: {booksFiltered.length}</sub>
 			</h1>
 
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books marked as favorite yet.</h4>

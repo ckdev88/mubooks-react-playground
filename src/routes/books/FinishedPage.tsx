@@ -27,7 +27,7 @@ const FinishedPage = () => {
 		<>
 			<h1>
 				Finished books
-				<sub>Books I finished reading.</sub>
+				<sub>Books I finished reading: {booksFiltered.length}</sub>
 			</h1>
 			<p>Have any favorites? Add them to your favorites from here.</p>
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>Not finished any book yet.</h4>

@@ -27,7 +27,7 @@ const WishlistPage = () => {
 		<>
 			<h1>
 				Mu Wishlist
-				<sub>All the books I will read read soon.</sub>
+				<sub>All the books I will read read soon: {booksFiltered.length}</sub>
 			</h1>
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books on mu wishlist yet.</h4>
 			<p>

@@ -27,7 +27,7 @@ const ReadingPage = () => {
 	return (
 		<>
 			<h1>What I'm reading now
-			<sub>This can later be used to see for how long you enjoyed reading this book.</sub></h1>
+			<sub>This can later be used to see for how long you enjoyed reading this book: {booksFiltered.length}</sub></h1>
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>Currently not reading anything.</h4>
 			<p>
 				Want to add a book to your reading list?<br />
