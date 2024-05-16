@@ -40,7 +40,6 @@ const LoginCard = () => {
 				}
 			})
 			.catch(() => setError('Something unexpected happened, try again later.'))
-			.finally(() => console.log('Logged in!'))
 	}
 
 	const { recover, signup } = useCardRotate()

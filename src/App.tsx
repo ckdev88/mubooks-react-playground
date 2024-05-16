@@ -96,9 +96,9 @@ const App = () => {
 						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
 						<Route path="/account/logout" Component={UserLogoutPage} />
 						<Route path="/auth/confirm" Component={AuthConfirm} />
+						<Route path="/account/new" Component={CheckMailNewAccountPage} />
 						{userIsLoggedIn && (
 							<>
-								<Route path="/account/new" Component={CheckMailNewAccountPage} />
 								<Route path="/account/profile" Component={UserProfilePage} />
 								<Route path="/account/*" Component={UserLoginPage} />
 								<Route path="/dashboard" Component={DashboardPage} />

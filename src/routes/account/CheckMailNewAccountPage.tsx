@@ -11,7 +11,7 @@ const CheckMailNewAccountPage = () => {
 		<>
 			<h1>Check your email</h1>
 			<p>
-				You should receive an email on <strong><u>{recipientAddress}</u></strong> containing a link to verify your account, click it.
+				You should receive an email on <strong><u>{recipientAddress}</u></strong> containing a link to confirm your account, click it.
 			</p>
 		</>
 	)
