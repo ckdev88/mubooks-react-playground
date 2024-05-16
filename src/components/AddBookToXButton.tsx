@@ -24,6 +24,8 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			number_of_pages_median: book.number_of_pages_median,
 			title: book.title,
 			title_short: book.title_short,
+			rate_stars: 0,
+			rate_spice: 0,
 		})
 		return JSON.stringify(myBooks)
 	}
@@ -51,7 +53,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			const a = new Date(UNIX_timestamp)
 			const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 			const year = a.getFullYear()
-			const monthNum = a.getMonth() +1
+			const monthNum = a.getMonth() + 1
 			const month = months[monthNum]
 			const dateNum = a.getDate()
 			let returnvalue: string
@@ -62,10 +64,10 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			switch (outputFormat) {
 				case 'input':
 					returnvalue = year + '-' + monthPadded + '-' + datePadded
-					break;
+					break
 				case 'human':
 					returnvalue = dateNum + ' ' + month + ' ' + year
-					break;
+					break
 				default:
 					returnvalue = year + '-' + monthPadded + '-' + datePadded
 					break
@@ -74,7 +76,6 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		}
 		return ''
 	}
-
 
 	function AddBookToX(book: Book, targetList: BookList) {
 		let myBooks: Books

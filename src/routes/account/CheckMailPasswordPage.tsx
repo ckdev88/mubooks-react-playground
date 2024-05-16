@@ -1,4 +1,3 @@
-// TODO: design & copywrite confirmation email
 // TODO: design & copywrite password reset email
 // TODO: check global state of auth
 

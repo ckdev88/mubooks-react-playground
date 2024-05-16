@@ -31,6 +31,7 @@ type User = {
 type BookList = 0 | 1 | 2 | 3 | 4
 
 type CoverSize = undefined | 'S' | 'M' | 'L'
+type Scale5 = 0 | 1 | 2 | 3 | 4 | 5
 
 interface LoginFormInput {
 	login_email: { value: string }
@@ -50,7 +51,7 @@ type BookData = [
 		cover: string
 		img?: string
 		title_short?: string
-	}
+	},
 ]
 interface Book {
 	author_key?: [string]
@@ -73,10 +74,13 @@ interface Book {
 	title_short: string
 	date_reading?: string
 	date_finished?: string
+	rate_stars?: Scale5
+	rate_spice?: Scale5
+	fav_quote?: string
 }
 
 type Results = [Book]
-interface Books extends Array<Book> { }
+interface Books extends Array<Book> {}
 
 interface BookObject {
 	book: Book

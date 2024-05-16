@@ -15,7 +15,7 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 				}
 			})
 		}
-		return <BookSummary book={book} key={book.id} />
+		return <BookSummary book={book} key={book.id} page={page}/>
 	})
 }
 export default BooksOverviewPage

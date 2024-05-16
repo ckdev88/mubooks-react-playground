@@ -14,7 +14,7 @@ export default function WishlistItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} />
+				return <BookSummary book={book} key={book.id} page='wishlistpage' />
 			})
 		}
 		return (

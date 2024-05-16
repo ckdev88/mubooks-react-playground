@@ -222,13 +222,19 @@
 	background-image: url('/img/icon-remove.png');
 }
 
-/* .book-summary .marks span { */
-/* 	display: inline-block; */
-/* 	line-height: 1; */
-/* 	width: 1.5rem; */
-/* 	height: auto; */
-/* 	text-align: center; */
-/* } */
+.book-summary .icon-star {
+	background-image: url('/img/icon-star.svg');
+}
+
+.book-summary .icon-star.active {
+	font-weight: bold;
+	color: hotpink;
+}
+.book-summary .icon-spice.active {
+	font-weight: bold;
+	color: hotpink;
+}
+
 .book-summary .rating {
 	text-align: center;
 	margin-bottom: 1rem;

@@ -8,8 +8,9 @@ import { debounce, openCalendarPopUp } from '../Helpers'
 import { getBookCover } from '../Helpers'
 import { supabase } from '../../utils/supabase'
 import { useContext, useState } from 'react'
+import RateStarsButton from './RateStars'
 
-const BookSummary = ({ book }: BookObject) => {
+const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
@@ -140,12 +141,15 @@ const BookSummary = ({ book }: BookObject) => {
 					</div>
 				</header>
 				<main>
+					<div className='reviews'>
+						{(page==='finishedpage' || page ==='favoritespage') && RateStarsButton(book)}
+					</div>
 					<div className="marks">
 						{/* TODO: build further on new feature; highlight saved books in search view */}
 						{!book.list && AddBookToXButton(book, 1)}
-						{book.list === 1 && AddBookToXButton(book, 2)}
-						{book.list === 2 && AddBookToXButton(book, 3)}
-						{book.list === 3 && AddBookToXButton(book, 4)}
+						{(book.list === 1 || page === 'searchpage') && AddBookToXButton(book, 2)}
+						{(book.list === 2 || page === 'searchpage') && AddBookToXButton(book, 3)}
+						{(book.list === 3 || page === 'searchpage') && AddBookToXButton(book, 4)}
 						{book.list === 1 && RemoveBookFromXButton(book, 1)}
 						{book.list === 2 && RemoveBookFromXButton(book, 2)}
 						{book.list === 3 && RemoveBookFromXButton(book, 3)}

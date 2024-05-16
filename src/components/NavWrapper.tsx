@@ -80,9 +80,9 @@ const NavWrapper = () => {
 								<g
 									id="nav-icon-profile-group"
 									stroke="none"
-									stroke-width="1"
+									strokeWidth="1"
 									fill="none"
-									fill-rule="evenodd"
+									fillRule="evenodd"
 								>
 									<g transform="translate(-140.000000, -2159.000000)" fill="#000000">
 										<g id="icon-profile" transform="translate(56.000000, 160.000000)">
