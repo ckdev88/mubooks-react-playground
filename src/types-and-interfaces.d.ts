@@ -72,8 +72,8 @@ interface Book {
 	number_of_pages_median: number
 	title: string
 	title_short: string
-	date_reading?: string
-	date_finished?: string
+	date_reading?: number
+	date_finished?: number
 	rate_stars?: Scale5
 	rate_spice?: Scale5
 	fav_quote?: string

@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import getListName from '../functions/getListName'
+import convertDate from '../helpers/convertDate'
 
 const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
@@ -11,12 +12,19 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		else book.title_short = book.title
 		let myBooks = JSON.parse(userMyBooks as string)
 
+const date_now = Number(convertDate(Date.now(),'digit'))
+		let date_reading: number = 0
+		if (targetList > 1) date_reading = date_now
+		let date_finished: number = 0
+		if (targetList > 2) date_finished = date_now
 		if (myBooks === null) myBooks = []
 		myBooks.push({
 			author_key: book.author_key,
 			author_name: book.author_name,
 			cover: book.cover,
 			cover_edition_key: book.cover_edition_key,
+			date_reading: date_reading,
+			date_finished: date_finished,
 			list: list,
 			first_publish_year: book.first_publish_year,
 			id: book.id,
@@ -48,7 +56,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 	}
 
 	// TODO: move this function to generic helper location
-	function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'input' | 'normal'): string {
+	function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'input' | 'digit'): string {
 		if (UNIX_timestamp !== undefined) {
 			const a = new Date(UNIX_timestamp)
 			const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -56,23 +64,18 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			const monthNum = a.getMonth() + 1
 			const month = months[monthNum]
 			const dateNum = a.getDate()
-			let returnvalue: string
 			let datePadded: string | number = dateNum
 			let monthPadded: string | number = monthNum
-			if (Number(datePadded) < 9) datePadded = '0' + dateNum.toString()
-			if (Number(monthPadded) < 9) monthPadded = '0' + monthNum.toString()
+			if (datePadded < 9) datePadded = '0' + dateNum.toString()
+			if (monthPadded < 9) monthPadded = '0' + monthNum.toString()
 			switch (outputFormat) {
 				case 'input':
-					returnvalue = year + '-' + monthPadded + '-' + datePadded
-					break
+					return year + '-' + monthPadded + '-' + datePadded
 				case 'human':
-					returnvalue = dateNum + ' ' + month + ' ' + year
-					break
-				default:
-					returnvalue = year + '-' + monthPadded + '-' + datePadded
-					break
+					return dateNum + ' ' + month + ' ' + year
+				case 'digit':
+					return year + '' + monthPadded + '' + datePadded
 			}
-			return returnvalue
 		}
 		return ''
 	}
@@ -87,8 +90,8 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			if (myBooks[i].id === book.id) {
 				bookIsSaved = true
 				myBooks[i].list = targetList
-				if (targetList === 2) myBooks[i].date_reading = timestampConverter(Date.now(), 'input')
-				if (targetList === 3) myBooks[i].date_finished = timestampConverter(Date.now(), 'input')
+				if (targetList === 2) myBooks[i].date_reading = Number(timestampConverter(Date.now(), 'digit'))
+				if (targetList === 3) myBooks[i].date_finished = Number(timestampConverter(Date.now(), 'digit'))
 			}
 		}
 

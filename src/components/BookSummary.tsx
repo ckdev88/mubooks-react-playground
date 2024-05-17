@@ -55,11 +55,13 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	function modifyDateReading(field: 'date_reading' | 'date_finished') {
 		if (document.getElementById(field + book.id) === null) return
 		const inputfield: string = field + book.id
-		const newValue: string = (document.getElementById(inputfield) as HTMLInputElement).value
-		changeDates(field, newValue)
+		console.log('inputfield', inputfield)
+		const newDateArr = (document.getElementById(inputfield) as HTMLInputElement).value.split('-')
+		const newDate = parseInt(newDateArr[0] + newDateArr[1] + newDateArr[2], 10)
+		changeDates(field, newDate)
 	}
 
-	function changeDates(fieldName: string, fieldVal: string) {
+	function changeDates(fieldName: string, fieldVal: number) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = JSON.parse(userMyBooks as string)
@@ -93,9 +95,11 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 							{book.title_short} <sup>({book.first_publish_year})</sup>
 							<sub>{BookAuthorList(book)}</sub>
 						</h2>
-						{book.number_of_pages_median && <>{book.number_of_pages_median} pages</>}
+						{book.number_of_pages_median && page !== 'finishedpage' && page !== 'favoritespage' && (
+							<>{book.number_of_pages_median} pages</>
+						)}
 
-						{book.list > 1 && book.date_reading !== undefined && (
+						{(book.list > 1 && page !=='searchpage') && (
 							<div style={{ paddingTop: '.5em' }}>
 								<em>
 									Started:&nbsp;&nbsp;&nbsp;
@@ -103,7 +107,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 										className="btn-calendar btn-text"
 										onClick={() => openCalendarPopUp('date_reading' + book.id)}
 									>
-										{convertDate(book.date_reading, 'human')}
+										{book.date_reading && convertDate(book.date_reading, 'human')}
 									</button>
 								</em>
 								<input
@@ -116,7 +120,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 								/>
 							</div>
 						)}
-						{book.list > 2 && book.date_finished !== undefined && (
+						{(book.list > 2 && page!=='searchpage') && (
 							<div>
 								<em>
 									Finished:&nbsp;&nbsp;
@@ -124,7 +128,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 										className="btn-calendar btn-text"
 										onClick={() => openCalendarPopUp('date_finished' + book.id)}
 									>
-										{convertDate(book.date_finished, 'human')}
+										{book.date_finished && convertDate(book.date_finished, 'human')}
 									</button>
 								</em>
 
@@ -134,21 +138,21 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 									name={'date_finished' + book.id}
 									type="date"
 									className="calendar-hidden"
-									onChange={debounce(() => modifyDateReading('date_finished'), 500)}
+									onChange={debounce(() => modifyDateReading('date_finished'), 1000)}
 								/>
 							</div>
 						)}
 					</div>
 				</header>
 				<main>
-					<div className='reviews'>
-						{(page==='finishedpage' || page ==='favoritespage') && RateStarsButton(book)}
+					<div className="reviews">
+						{(page === 'finishedpage' || page === 'favoritespage') && RateStarsButton(book)}
 					</div>
 					<div className="marks">
 						{/* TODO: build further on new feature; highlight saved books in search view */}
 						{!book.list && AddBookToXButton(book, 1)}
 						{(book.list === 1 || page === 'searchpage') && AddBookToXButton(book, 2)}
-						{(book.list === 2 || page === 'searchpage') && AddBookToXButton(book, 3)}
+						{(book.list === 2 || (page === 'searchpage' && book.list!==3 && book.list!==4)) && AddBookToXButton(book, 3)}
 						{(book.list === 3 || page === 'searchpage') && AddBookToXButton(book, 4)}
 						{book.list === 1 && RemoveBookFromXButton(book, 1)}
 						{book.list === 2 && RemoveBookFromXButton(book, 2)}
