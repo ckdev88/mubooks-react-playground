@@ -1,3 +1,6 @@
+// TODO: Add to reading in searchpage
+// TODO: searchpage: te lange titel gooit zooitje op nieuwe regel
+// TODO: sometimes date_started gets 0 value on adding, reproduction same as succesfull ones
 import './functions/miscEventListeners.ts'
 import AddBookPage from './routes/books/AddBookPage'
 import AuthConfirm from './routes/auth/Confirm.tsx'
