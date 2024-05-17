@@ -8,7 +8,7 @@ export default function FinishedItems() {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
 	const booksParsed: Books = JSON.parse(userMyBooks)
-	const booksarr = booksParsed.filter((book: Book) => book.list === 3 || book.list === 4)
+	let booksarr = booksParsed.filter((book: Book) => book.list === 3 || book.list === 4)
 	if (booksarr.length > 0) hasbooks = true
 
 	function DeckCovers(booksarr: Books) {
@@ -17,10 +17,11 @@ export default function FinishedItems() {
 				return <BookSummary book={book} key={book.id} page='finisheditemspage' />
 			})
 		}
+		booksarr.sort((a,b)=>Number(b.date_finished) - Number(a.date_finished))
 		return (
 			<Link to="/finished">
 				<div className="deck-container">
-					{booksarr.slice(-6).map((book: Book, index: number) => {
+					{booksarr.slice(0,6).map((book: Book, index: number) => {
 						return (
 							<article
 								className="book-cover"

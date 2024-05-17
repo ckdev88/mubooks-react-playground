@@ -17,6 +17,7 @@ const FinishedPage = () => {
 		if (typeof books !== 'object') books = JSON.parse(books)
 
 		booksFiltered = books.filter((book) => book.list === 3 || book.list === 4)
+		booksFiltered.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false
