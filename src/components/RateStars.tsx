@@ -9,6 +9,7 @@ const RateStarsButton = (book: Book) => {
 	async function MyBooksUpdate(myBooksNew: string) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
+		// TODO: move updateUser data to seperate table
 		await supabase.auth
 			.updateUser({
 				data: { MyBooks: myBooksNew },
