@@ -99,7 +99,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 							<>{book.number_of_pages_median} pages</>
 						)}
 
-						{(book.list > 1 && page !=='searchpage') && (
+						{book.list > 1 && page !== 'searchpage' && (
 							<div style={{ paddingTop: '.5em' }}>
 								<em>
 									Started:&nbsp;&nbsp;&nbsp;
@@ -120,7 +120,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 								/>
 							</div>
 						)}
-						{(book.list > 2 && page!=='searchpage') && (
+						{book.list > 2 && page !== 'searchpage' && (
 							<div>
 								<em>
 									Finished:&nbsp;&nbsp;
@@ -151,8 +151,8 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 					<div className="marks">
 						{/* TODO: build further on new feature; highlight saved books in search view */}
 						{!book.list && AddBookToXButton(book, 1)}
-						{(book.list === 1 || page === 'searchpage') && AddBookToXButton(book, 2)}
-						{(book.list === 2 || (page === 'searchpage' && book.list!==3 && book.list!==4)) && AddBookToXButton(book, 3)}
+						{(book.list === 1 || (page === 'searchpage' && book.list < 2)) && AddBookToXButton(book, 2)}
+						{(book.list === 2 || (page === 'searchpage' && book.list < 3)) && AddBookToXButton(book, 3)}
 						{(book.list === 3 || page === 'searchpage') && AddBookToXButton(book, 4)}
 						{book.list === 1 && RemoveBookFromXButton(book, 1)}
 						{book.list === 2 && RemoveBookFromXButton(book, 2)}
