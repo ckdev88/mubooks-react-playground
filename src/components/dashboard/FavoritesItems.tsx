@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../App'
 import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
-import { getBookCover } from '../../Helpers'
+import { getBookCover, shuffleArray } from '../../Helpers'
 
 export default function FavoritesItems() {
 	const { userMyBooks } = useContext(AppContext)
@@ -14,9 +14,10 @@ export default function FavoritesItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} page='favoriteitemspage' />
+				return <BookSummary book={book} key={book.id} page="favoriteitemspage" />
 			})
 		}
+		shuffleArray(booksarr)
 		return (
 			<Link to="/favorites">
 				<div className="deck-container">
