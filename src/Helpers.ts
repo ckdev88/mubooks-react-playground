@@ -21,9 +21,9 @@ function getBookCover(url: string, size: CoverSize) {
 }
 
 function debounce<T extends (...args: []) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
-	let timeoutId: NodeJS.Timeout 
+	let timeoutId: NodeJS.Timeout
 	return function (this: object) {
-		const context = this || window 
+		const context = this || window
 		clearTimeout(timeoutId)
 		timeoutId = setTimeout(() => func.apply(context), delay)
 	}
@@ -40,10 +40,10 @@ function openCalendarPopUp(dateFieldId: string): void {
 	}
 }
 
-function shuffleArray(array: any) {
+function shuffleArray(array:any[]) {
 	let currentIndex = array.length
 	while (currentIndex != 0) {
-		let randomIndex = Math.floor(Math.random() * currentIndex)
+		const randomIndex = Math.floor(Math.random() * currentIndex)
 		currentIndex--
 		;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
 	}

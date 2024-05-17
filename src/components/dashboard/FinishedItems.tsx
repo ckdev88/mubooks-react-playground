@@ -8,7 +8,7 @@ export default function FinishedItems() {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
 	const booksParsed: Books = JSON.parse(userMyBooks)
-	let booksarr = booksParsed.filter((book: Book) => book.list === 3 || book.list === 4)
+	const booksarr = booksParsed.filter((book: Book) => book.list === 3 || book.list === 4)
 	if (booksarr.length > 0) hasbooks = true
 
 	function DeckCovers(booksarr: Books) {
