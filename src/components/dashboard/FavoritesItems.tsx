@@ -7,8 +7,7 @@ import { getBookCover, shuffleArray } from '../../Helpers'
 export default function FavoritesItems() {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
-	const booksParsed: Books = JSON.parse(userMyBooks)
-	const booksarr = booksParsed.filter((book: Book) => book.list === 4)
+	const booksarr = userMyBooks.filter((book: Book) => book.list === 4)
 	if (booksarr.length > 0) hasbooks = true
 
 	function DeckCovers(booksarr: Books) {

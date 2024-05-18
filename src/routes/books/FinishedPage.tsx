@@ -7,16 +7,10 @@ const FinishedPage = () => {
 	const { userMyBooks } = useContext(AppContext)
 
 	let hasbooks = false
-	let books: Books
 	let booksFiltered: Books = []
 
-	if (localStorage.getItem('MyBooks') === 'undefined') {
-		books = []
-	} else {
-		books = JSON.parse(userMyBooks as string)
-		if (typeof books !== 'object') books = JSON.parse(books)
-
-		booksFiltered = books.filter((book) => book.list === 3 || book.list === 4)
+	if (localStorage.getItem('MyBooks') !== undefined) {
+		booksFiltered = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
 		booksFiltered.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true

@@ -7,16 +7,10 @@ const WishlistPage = () => {
 	const { userMyBooks } = useContext(AppContext)
 
 	let hasbooks = false
-	let books: Books
 	let booksFiltered: Books = []
 
-	if (localStorage.getItem('MyBooks') === 'undefined') {
-		books = []
-	} else {
-		books = JSON.parse(userMyBooks as string)
-		if (typeof books !== 'object') books = JSON.parse(books)
-
-		booksFiltered = books.filter((book) => book.list === 1)
+	if (localStorage.getItem('MyBooks') !== 'undefined') {
+		booksFiltered = userMyBooks.filter((book:Book) => book.list === 1)
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false

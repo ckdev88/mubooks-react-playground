@@ -1,7 +1,9 @@
 // TODO: Add to reading in searchpage
 // TODO: searchpage: te lange titel gooit zooitje op nieuwe regel
 // TODO: sometimes date_started gets 0 value on adding, reproduction same as succesfull ones
+import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
+import { useEffect } from 'react'
 import AddBookPage from './routes/books/AddBookPage'
 import AuthConfirm from './routes/auth/Confirm.tsx'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
@@ -30,26 +32,45 @@ const App = () => {
 	if (localStorage.getItem(localStorageKey)) userIsLoggedInInitVal = true
 	else userIsLoggedInInitVal = false
 
-	// add persistency to userMyBooks state throughout page refreshes
-	const csMyBooks = () => {
-		// TODO: this loads multi (unnecessary) times on page load, to fix, but low prio
-		let localMyBooks: string
-		if (localStorage.getItem(localStorageKey) !== null) {
-			localMyBooks = JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.MyBooks
-			if (localMyBooks) return localMyBooks.toString()
-		}
-		return '[]'
-	}
-	const userMyBooksInitVal: string = csMyBooks()
-	// /add persistency to userMyBooks state throughout page refreshes
-
 	const [username, setUsername] = useState<string>('')
 	const [usermail, setUsermail] = useState<string>('')
-	const [userMyBooks, setUserMyBooks] = useState(userMyBooksInitVal)
 	const [userid, setUserid] = useState<string>('')
+	const [userMyBooks, setUserMyBooks] = useState<[]>([])
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
+
+	// add persistency to userMyBooks state throughout page refreshes
+
+	const csMyBooks = async () => {
+		// TODO: test amounts of load
+		// let localMyBooks: string
+		if (localStorage.getItem(localStorageKey) !== null) {
+			if (checkUserMyBooks() === true) {
+				// console.log('leaving setUserMyBooks alone...')
+			} else {
+				const { data, error } = await supabase.from('user_entries').select('json')
+				if (error) console.log('error:', error)
+				else {
+					if (data) {
+						const booksdata: [] = data[0].json
+						setUserMyBooks(booksdata)
+					}
+					return '[]'
+				}
+			}
+		}
+	}
+
+	useEffect(() => {
+		csMyBooks()
+	}, [])
+
+	function checkUserMyBooks(): boolean {
+		if (userMyBooks.length > 0) return true
+		return false
+	}
+	// /add persistency to userMyBooks state throughout page refreshes
 
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
@@ -80,6 +101,7 @@ const App = () => {
 					usermail,
 					setUsermail,
 					userid,
+					setUserid,
 					userMyBooks,
 					setUserMyBooks,
 					userIsLoggedIn,

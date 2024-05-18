@@ -7,8 +7,8 @@ export default function SavedBooksPage() {
 	const { userMyBooks } = useContext(AppContext)
 	let savedbooks: Books
 	let hasBooks: boolean = false
-	if (userMyBooks === '') savedbooks = []
-	else savedbooks = JSON.parse(userMyBooks as string)
+	if (userMyBooks === undefined) savedbooks = []
+	else savedbooks = userMyBooks
 	if (savedbooks.length > 0) hasBooks = true
 
 	return (

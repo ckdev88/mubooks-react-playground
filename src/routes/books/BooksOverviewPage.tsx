@@ -5,7 +5,7 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 	const { userMyBooks } = useContext(AppContext)
 
 	// TODO: build further on new feature; highlight saved books in search view
-	const savedArr: Books = JSON.parse(userMyBooks as string)
+	const savedArr: Books = userMyBooks
 
 	return books.map((book) => {
 		if (page === 'searchpage') {

@@ -11,7 +11,7 @@ import { useContext, useState } from 'react'
 import RateStarsButton from './RateStars'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
+	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)

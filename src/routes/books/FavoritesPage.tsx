@@ -5,17 +5,10 @@ import { Link } from 'react-router-dom'
 
 const FavoritesPage = () => {
 	const { userMyBooks } = useContext(AppContext)
-
 	let hasbooks = false
-	let books: Books
 	let booksFiltered: Books = []
-
-	if (localStorage.getItem('MyBooks') === 'undefined') {
-		books = []
-	} else {
-		books = JSON.parse(userMyBooks as string)
-		if (typeof books !== 'object') books = JSON.parse(books)
-		booksFiltered = books.filter((book) => book.list === 4)
+	if (localStorage.getItem('MyBooks') !== undefined) {
+		booksFiltered = userMyBooks.filter((book: Book) => book.list === 4)
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false
@@ -25,7 +18,7 @@ const FavoritesPage = () => {
 	return (
 		<>
 			<h1>
-				Favorites <sub>My beloved, adored, hottest favorite books: {booksFiltered.length}</sub>
+				Favorites <sub>My beloved and adored books: {booksFiltered.length}</sub>
 			</h1>
 
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books marked as favorite yet.</h4>

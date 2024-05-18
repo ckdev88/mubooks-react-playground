@@ -5,8 +5,8 @@ interface AppContextType {
 	setUsermail(usermail: string): void
 	userid: string
 	setUserid(userid: string): void
-	userMyBooks: string
-	setUserMyBooks(userMyBooks: string): void
+	userMyBooks: Books
+	setUserMyBooks(userMyBooks: []): void
 	userIsLoggedIn: boolean
 	setUserIsLoggedIn(userIsLoggedIn: boolean): void
 	popupNotification: string
