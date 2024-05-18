@@ -46,6 +46,7 @@ const App = () => {
 	const [username, setUsername] = useState<string>('')
 	const [usermail, setUsermail] = useState<string>('')
 	const [userMyBooks, setUserMyBooks] = useState(userMyBooksInitVal)
+	const [userid, setUserid] = useState<string>('')
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
@@ -53,6 +54,10 @@ const App = () => {
 	if (username === '') {
 		if (localStorage.getItem(localStorageKey))
 			setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
+	}
+	if (userid === '') {
+		if (localStorage.getItem(localStorageKey))
+			setUserid(JSON.parse(localStorage.getItem(localStorageKey) as string).user.id)
 	}
 
 	if (userIsLoggedIn) document.getElementsByTagName('html')[0].classList.add('loggedin')
@@ -74,6 +79,7 @@ const App = () => {
 					setUsername,
 					usermail,
 					setUsermail,
+					userid,
 					userMyBooks,
 					setUserMyBooks,
 					userIsLoggedIn,
