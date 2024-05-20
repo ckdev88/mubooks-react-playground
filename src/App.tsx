@@ -24,6 +24,7 @@ import WishlistPage from './routes/books/WishlistPage'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
+import LoadLibrary from './routes/books/LoadLibrary.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -35,51 +36,37 @@ const App = () => {
 	const [username, setUsername] = useState<string>('')
 	const [usermail, setUsermail] = useState<string>('')
 	const [userid, setUserid] = useState<string>('')
-	const [userMyBooks, setUserMyBooks] = useState<[]>([])
+	const [userMyBooks, setUserMyBooks] = useState<Books>([])
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
+	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 
 	// add persistency to userMyBooks state throughout page refreshes
 
 	const csMyBooks = async () => {
 		// TODO: test amounts of load
-		// let localMyBooks: string
-		if (localStorage.getItem(localStorageKey) !== null) {
-			if (checkUserMyBooks() === true) {
-				// console.log('leaving setUserMyBooks alone...')
-			} else {
-				const { data, error } = await supabase.from('user_entries').select('json')
-				if (error) console.log('error:', error)
-				else {
-					if (data) {
-						const booksdata: [] = data[0].json
-						setUserMyBooks(booksdata)
-					}
-					return '[]'
-				}
-			}
+		let booksArr: Books
+		const res = await supabase.from('user_entries').select('json')
+		if (res.data) {
+			setInitialMyBooksSet(true)
+			booksArr = res.data[0].json
+			setUserMyBooks(booksArr)
+			return booksArr
 		}
 	}
 
 	useEffect(() => {
-		csMyBooks()
-	}, [])
+		if (userMyBooks.length < 1) csMyBooks()
+	}, [initialMyBooksSet])
 
-	function checkUserMyBooks(): boolean {
-		if (userMyBooks.length > 0) return true
-		return false
-	}
 	// /add persistency to userMyBooks state throughout page refreshes
 
-	if (username === '') {
-		if (localStorage.getItem(localStorageKey))
-			setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
-	}
-	if (userid === '') {
-		if (localStorage.getItem(localStorageKey))
-			setUserid(JSON.parse(localStorage.getItem(localStorageKey) as string).user.id)
-	}
+	if (username === '' && localStorage.getItem(localStorageKey))
+		setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
+
+	if (userid === '' && localStorage.getItem(localStorageKey))
+		setUserid(JSON.parse(localStorage.getItem(localStorageKey) as string).user.id)
 
 	if (userIsLoggedIn) document.getElementsByTagName('html')[0].classList.add('loggedin')
 	else document.getElementsByTagName('html')[0].classList.remove('loggedin')
@@ -141,6 +128,7 @@ const App = () => {
 								<Route path="/finished" Component={FinishedPage} />
 								<Route path="/favorites" Component={FavoritesPage} />
 								<Route path="/clear-my-books" Component={ClearMyBooks} />
+								<Route path="/loadlibrary" Component={LoadLibrary} />
 							</>
 						)}
 					</Routes>

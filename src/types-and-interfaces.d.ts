@@ -6,7 +6,7 @@ interface AppContextType {
 	userid: string
 	setUserid(userid: string): void
 	userMyBooks: Books
-	setUserMyBooks(userMyBooks: []): void
+	setUserMyBooks(userMyBooks: Books): void
 	userIsLoggedIn: boolean
 	setUserIsLoggedIn(userIsLoggedIn: boolean): void
 	popupNotification: string
@@ -65,8 +65,8 @@ interface Book {
 	id: Id
 	img?: string
 	index?: number
-	isbn0: string
-	isbn1: string
+	isbn0?: string
+	isbn1?: string
 	isbn?: [string]
 	key?: [string]
 	/** 1: Wishlist | 2: Reading | 3: Finished | 4: Favorite (+Finished) */
