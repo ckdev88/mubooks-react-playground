@@ -7,10 +7,10 @@ import convertDate from '../helpers/convertDate'
 const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
-	function MyBooksAdd(book: Book, list = book.list): string {
+	function MyBooksAdd(book: Book, list = book.list): Books {
 		if (book.title.length > 55) book.title_short = book.title.slice(0, 55) + '...'
 		else book.title_short = book.title
-		let myBooks = JSON.parse(userMyBooks as string)
+		let myBooks = userMyBooks
 
 const date_now = Number(convertDate(Date.now(),'digit'))
 		let date_reading: number = 0
@@ -35,11 +35,11 @@ const date_now = Number(convertDate(Date.now(),'digit'))
 			rate_stars: 0,
 			rate_spice: 0,
 		})
-		return JSON.stringify(myBooks)
+		return myBooks
 	}
 
 	// TODO: move this function to generic helper location
-	async function MyBooksUpdate(myBooksNew: string) {
+	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
 		await supabase.auth
@@ -83,7 +83,7 @@ const date_now = Number(convertDate(Date.now(),'digit'))
 	function AddBookToX(book: Book, targetList: BookList) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
-		else myBooks = JSON.parse(userMyBooks as string)
+		else myBooks = userMyBooks
 
 		let bookIsSaved = false
 		for (let i = 0; i < myBooks.length; i++) {
@@ -95,15 +95,15 @@ const date_now = Number(convertDate(Date.now(),'digit'))
 			}
 		}
 
-		let myBooksNew: string
+		let myBooksNew: Books
 		if (bookIsSaved === false) myBooksNew = MyBooksAdd(book, targetList)
-		else myBooksNew = JSON.stringify(myBooks)
+		else myBooksNew = myBooks
 		MyBooksUpdate(myBooksNew)
 		return myBooksNew
 	}
 
 	function AddBookToXButtonAct() {
-		const newArr: string = AddBookToX(book, targetList)
+		const newArr: Books = AddBookToX(book, targetList)
 		setUserMyBooks(newArr)
 	}
 

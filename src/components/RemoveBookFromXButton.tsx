@@ -9,7 +9,7 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 	const RemoveBookFromX = (book: Book) => {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
-		else myBooks = JSON.parse(userMyBooks as string)
+		else myBooks = userMyBooks
 
 		if (book.list === 4) {
 			for (let i = 0; i < myBooks.length; i++) {
@@ -29,17 +29,17 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 			}
 			myBooks.splice(removeIndex, 1)
 		}
-		const myBooksNew: string = JSON.stringify(myBooks)
+		const myBooksNew: Books = myBooks
 		MyBooksUpdate(myBooksNew)
 		return myBooksNew
 	}
 
 	function RemoveBookFromXButtonAct() {
-		const newArr: string = RemoveBookFromX(book)
+		const newArr: Books = RemoveBookFromX(book)
 		setUserMyBooks(newArr)
 	}
 
-	async function MyBooksUpdate(myBooksNew: string) {
+	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
 		await supabase.auth

@@ -1,9 +1,12 @@
 import { supabase } from '../../utils/supabase'
+import { AppContext } from '../App'
+import { useContext } from 'react'
 
 const MyBooksAdd = async (book: Book, list = book.list) => {
+	const { userMyBooks } = useContext(AppContext)
 	if (book.title.length > 55) book.title_short = book.title.slice(0, 55) + '...'
 	else book.title_short = book.title
-	let myBooks = JSON.parse(localStorage.getItem('MyBooks') as string)
+	let myBooks = userMyBooks
 
 	if (myBooks === null) myBooks = []
 	myBooks.push({
@@ -20,8 +23,8 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 		title_short: book.title_short,
 	})
 
-	MyBooksUpdate(JSON.stringify(myBooks))
-	return JSON.stringify(myBooks)
+	MyBooksUpdate(myBooks)
+	return myBooks
 }
 
 const MyBooksUpdate = async (myBooksNew: string) => {

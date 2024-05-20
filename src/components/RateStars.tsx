@@ -6,7 +6,7 @@ const RateStarsButton = (book: Book) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
 	// TODO: move this function to generic helper location
-	async function MyBooksUpdate(myBooksNew: string) {
+	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
 		// TODO: move updateUser data to seperate table
@@ -25,8 +25,8 @@ const RateStarsButton = (book: Book) => {
 
 	function RateStars(book: Book, type: 'rate_stars' | 'rate_spice', rating: Scale5) {
 		let myBooks: Books
-		if (userMyBooks === undefined) myBooks = []
-		else myBooks = JSON.parse(userMyBooks as string)
+		if (userMyBooks !== undefined) myBooks = userMyBooks
+		else myBooks = []
 
 		for (let i = 0; i < myBooks.length; i++) {
 			if (myBooks[i].id === book.id) {
@@ -36,13 +36,13 @@ const RateStarsButton = (book: Book) => {
 			}
 		}
 
-		const myBooksNew: string = JSON.stringify(myBooks) as string
+		const myBooksNew: Books = myBooks
 		MyBooksUpdate(myBooksNew)
 		return myBooksNew
 	}
 
 	function RateStarsAct(type: 'rate_stars' | 'rate_spice', amount: Scale5) {
-		const newArr: string = RateStars(book, type, amount)
+		const newArr: Books = RateStars(book, type, amount)
 		setUserMyBooks(newArr)
 		console.log('book', book.rate_spice, book.rate_stars)
 	}

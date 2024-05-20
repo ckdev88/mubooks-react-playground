@@ -36,7 +36,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 		}
 	}
 
-	async function MyBooksUpdate(myBooksNew: string) {
+	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
 		await supabase.auth
@@ -64,14 +64,14 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	function changeDates(fieldName: string, fieldVal: number) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
-		else myBooks = JSON.parse(userMyBooks as string)
+		else myBooks = userMyBooks
 		for (let i = 0; i < myBooks.length; i++) {
 			if (myBooks[i].id === book.id) {
 				if (fieldName === 'date_reading') myBooks[i].date_reading = fieldVal
 				if (fieldName === 'date_finished') myBooks[i].date_finished = fieldVal
 			}
 		}
-		const myBooksNew: string = JSON.stringify(myBooks)
+		const myBooksNew = myBooks
 		MyBooksUpdate(myBooksNew)
 	}
 

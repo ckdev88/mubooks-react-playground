@@ -36,7 +36,7 @@ const LoginCard = () => {
 					setUsername(res.data.user?.user_metadata.screenname)
 					setUsermail(res.data.user?.user_metadata.email)
 					if (res.data.user?.user_metadata.MyBooks) setUserMyBooks(res.data.user.user_metadata.MyBooks)
-					navigate('/dashboard')
+					navigate('/loadlibrary')
 				}
 			})
 			.catch(() => setError('Something unexpected happened, try again later.'))

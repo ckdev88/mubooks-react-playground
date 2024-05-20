@@ -19,7 +19,6 @@ type User = {
 	email: string
 	password: string
 	screenname?: string
-	MyBooks?: string
 }
 
 /**
