@@ -69,7 +69,7 @@ const LoginCard = () => {
 						Forgot password
 					</button>
 					<button className="btn-text ta-right wauto-md nowrap" onClick={signup}>
-						<span className='dnone diblock-md'>New here?&nbsp;</span>Join now
+						<span className="dnone diblock-md">New here?&nbsp;</span>Join now
 					</button>
 				</footer>
 			</article>

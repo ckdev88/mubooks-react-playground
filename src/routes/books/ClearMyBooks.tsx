@@ -5,7 +5,7 @@ import { MyBooksUpdate } from "../../helpers/MyBooksHelpers"
 const ClearMyBooks = () => {
 	const { setUserMyBooks } = useContext(AppContext)
 	function clearbooks() { // for user_metadata based MyBooks... get rid of all this when this becomes obsolete
-		MyBooksUpdate('[]')
+		MyBooksUpdate([])
 		setUserMyBooks([])
 	}
 	return (
