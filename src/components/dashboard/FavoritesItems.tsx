@@ -16,7 +16,7 @@ export default function FavoritesItems() {
 				return <BookSummary book={book} key={book.id} page="favoriteitemspage" />
 			})
 		}
-		shuffleArray(booksarr)
+		shuffleArray(booksarr as [])
 		return (
 			<Link to="/favorites">
 				<div className="deck-container">
