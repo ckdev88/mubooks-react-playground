@@ -1,26 +1,21 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
 
-async function getUserinfo() {
-	const {
-		data: { user },
-	} = await supabase.auth.getUser()
-	return user
-}
-const userinfo = await getUserinfo()
-
 export default function MyAccountCard() {
 	const { change } = useCardRotate()
 	const { username, usermail, setUsermail } = useContext(AppContext)
 
-	// refresh usermail state using the one saved in localStorage
-
-	useEffect(() => {
-		if (usermail === undefined && userinfo?.email !== undefined) setUsermail(userinfo.email)
-	}, [])
+	async function resetUsermail() {
+		if (usermail !== undefined && usermail !== '') return
+		const {
+			data: { user },
+		} = await supabase.auth.getUser()
+		if (user) setUsermail(String(user?.email))
+	}
+	resetUsermail()
 
 	return (
 		<div className="card">
