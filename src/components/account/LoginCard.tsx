@@ -8,6 +8,7 @@ const LoginCard = () => {
 	const navigate = useNavigate()
 	const { setUserIsLoggedIn, setUsername, setUsermail } = useContext(AppContext)
 	const [error, setError] = useState('')
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	// TODO: either user of remove useAuthUserLogin(user) references
 
@@ -21,6 +22,7 @@ const LoginCard = () => {
 
 	async function processLoginForm(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
+		setIsLoading(true)
 		const user: User = {
 			email: event.currentTarget.login_email.value,
 			password: event.currentTarget.login_password.value,
@@ -30,6 +32,7 @@ const LoginCard = () => {
 				if (res.error !== null) {
 					setError(res.error.message)
 					setUserIsLoggedIn(false)
+					setIsLoading(false)
 				} else {
 					setError('')
 					setUserIsLoggedIn(true)
@@ -61,7 +64,9 @@ const LoginCard = () => {
 							<input type="password" id="login_password" name="login_password" />
 						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-						<input type="submit" value="Log in" />
+						<button type="submit" value="Log in" disabled={isLoading}>
+							{isLoading ? 'Loading...' : 'Log in'}
+						</button>
 					</form>
 				</main>
 				<footer>
