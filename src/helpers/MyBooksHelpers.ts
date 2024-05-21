@@ -27,10 +27,28 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 	return myBooks
 }
 
-const MyBooksUpdate = async (myBooksNew: string) => {
-	await supabase.auth.updateUser({
-		data: { MyBooks: myBooksNew },
-	})
+async function MyBooksInsertFirst(): Promise<void> {
+	const { userid } = useContext(AppContext)
+	const { error } = await supabase
+		.from('user_entries')
+		.insert([{ json: '[]', user_id: userid }])
+		.select()
+	if (error) console.log(error.message)
+	return
 }
 
-export { MyBooksAdd, MyBooksUpdate }
+async function MyBooksUpdate(myBooksNew: Books) {
+	const { setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
+	let msg: string
+	setUserMyBooks(myBooksNew)
+
+	const { error } = await supabase.from('user_entries').update({ json: myBooksNew }).eq('user_id', userid).select()
+	if (error) {
+		msg = 'Error, data was not changed'
+		console.log('error:', error)
+	} else msg = 'Updated Mu Books.'
+
+	setPopupNotification(msg)
+}
+
+export { MyBooksAdd, MyBooksUpdate, MyBooksInsertFirst }

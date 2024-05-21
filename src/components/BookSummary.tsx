@@ -39,17 +39,18 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		await supabase.auth
-			.updateUser({
-				data: { MyBooks: myBooksNew },
-			})
-			.then(() => {
-				msg = 'Changed the date.'
-			})
-			.catch(() => {
-				msg = 'Something went wrong, Mu Books are not updated.'
-			})
-			.finally(() => setPopupNotification(msg))
+
+		const { error } = await supabase
+			.from('user_entries')
+			.update({ json: myBooksNew })
+			.eq('user_id', userid)
+			.select()
+		if (error) {
+			msg = 'Error, date was not changed'
+			console.log('error:', error)
+		} else msg = 'Changed the date.'
+
+		setPopupNotification(msg)
 	}
 
 	function modifyDateReading(field: 'date_reading' | 'date_finished') {

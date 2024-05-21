@@ -5,7 +5,7 @@ import getListName from '../functions/getListName'
 import convertDate from '../helpers/convertDate'
 
 const AddBookToXButton = (book: Book, targetList: BookList) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
+	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
 	function MyBooksAdd(book: Book, list = book.list): Books {
 		if (book.title.length > 55) book.title_short = book.title.slice(0, 55) + '...'
@@ -42,17 +42,14 @@ const date_now = Number(convertDate(Date.now(),'digit'))
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		await supabase.auth
-			.updateUser({
-				data: { MyBooks: myBooksNew },
-			})
-			.then(() => {
-				msg = 'Added ' + book.title_short + ' to ' + getListName(targetList)
-			})
-			.catch(() => {
-				msg = 'Something went wrong, Mu Books are not updated.'
-			})
-			.finally(() => setPopupNotification(msg))
+		const { error } = await supabase
+			.from('user_entries')
+			.update({ json: myBooksNew, testdata: 'updated from AddBookToXButton' })
+			.eq('user_id', userid)
+			.select('*')
+		if (error) msg = error.message
+		else msg = 'Added ' + book.title_short + ' to ' + getListName(targetList)
+		setPopupNotification(msg)
 	}
 
 	// TODO: move this function to generic helper location

@@ -4,9 +4,9 @@ import getListName from '../functions/getListName'
 import { supabase } from '../../utils/supabase'
 
 const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
+	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
-	const RemoveBookFromX = (book: Book) => {
+	function RemoveBookFromX(book: Book) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = userMyBooks
@@ -42,17 +42,15 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		await supabase.auth
-			.updateUser({
-				data: { MyBooks: myBooksNew },
-			})
-			.then(() => {
-				msg = 'Removed ' + book.title_short + ' from ' + getListName(targetList)
-			})
-			.catch(() => {
-				msg = 'Something went wrong, Mu Books are not updated.'
-			})
-			.finally(() => setPopupNotification(msg))
+		const { error } = await supabase
+			.from('user_entries')
+			.update({ json: myBooksNew, testdata: 'updated from RemoveBookFromXButton' })
+			.eq('user_id', userid)
+			.select('*')
+		if (error) msg = error.message
+		else msg = 'Removed ' + book.title_short + ' from ' + getListName(targetList)
+
+		setPopupNotification(msg)
 	}
 
 	// TODO: use favorite-star instead of icon-remove on different spot

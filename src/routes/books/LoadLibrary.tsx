@@ -33,7 +33,7 @@ const LoadLibrary = () => {
 	}
 
 	useEffect(() => {
-		MyBooksInsertFirst().then(() => getEntries())
+		MyBooksInsertFirstCheck().then(() => getEntries())
 	}, [])
 
 	return (
