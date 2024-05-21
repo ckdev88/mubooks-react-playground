@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 const LoginCard = () => {
 	const navigate = useNavigate()
-	const { setUserIsLoggedIn, setUsername, setUsermail, setUserMyBooks } = useContext(AppContext)
+	const { setUserIsLoggedIn, setUsername, setUsermail } = useContext(AppContext)
 	const [error, setError] = useState('')
 
 	// TODO: either user of remove useAuthUserLogin(user) references
@@ -35,7 +35,6 @@ const LoginCard = () => {
 					setUserIsLoggedIn(true)
 					setUsername(res.data.user?.user_metadata.screenname)
 					setUsermail(res.data.user?.user_metadata.email)
-					if (res.data.user?.user_metadata.MyBooks) setUserMyBooks(res.data.user.user_metadata.MyBooks)
 					navigate('/loadlibrary')
 				}
 			})

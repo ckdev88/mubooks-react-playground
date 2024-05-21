@@ -43,9 +43,7 @@ const App = () => {
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 
 	// add persistency to userMyBooks state throughout page refreshes
-
 	const csMyBooks = async () => {
-		// TODO: test amounts of load
 		let booksArr: Books
 		const res = await supabase.from('user_entries').select('json')
 		if (res.data) {
@@ -57,9 +55,8 @@ const App = () => {
 	}
 
 	useEffect(() => {
-		if (userMyBooks.length < 1) csMyBooks()
+		if (userIsLoggedIn === true && userMyBooks.length < 1) csMyBooks()
 	}, [initialMyBooksSet])
-
 	// /add persistency to userMyBooks state throughout page refreshes
 
 	if (username === '' && localStorage.getItem(localStorageKey))
