@@ -32,7 +32,7 @@ export default function MyAccountEditCard() {
 			})
 			if (error) console.log('Error updating user:', error)
 			else {
-				console.log('bdata', data)
+				console.log('data after updateSbUser in MyAccountEditCard', data)
 				afterSbUpdate(form_username, form_usermail)
 			}
 		}
