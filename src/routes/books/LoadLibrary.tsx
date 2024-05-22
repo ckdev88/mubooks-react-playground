@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { supabase } from '../../../utils/supabase'
 import { AppContext } from '../../App'
 import { useNavigate } from 'react-router-dom'
@@ -9,22 +9,29 @@ const LoadLibrary = () => {
 	if (localStorage.getItem(localStorageKey) === null) navigate('/account/login')
 
 	const { setUserMyBooks, userid } = useContext(AppContext)
+	const [isReady, setIsReady] = useState(false)
 
-	async function MyBooksInsertFirst(): Promise<void> {
+	const MyBooksInsertFirst = async (): Promise<void> => {
 		const { error } = await supabase
 			.from('user_entries')
 			.insert([{ json: [], user_id: userid, testdata: 'nieuwe user' }])
 			.select('*')
 		if (error) console.log('error after login:', error.message)
-		return
+		getEntries()
 	}
 
-	async function MyBooksInsertFirstCheck(): Promise<void> {
-		const { data } = await supabase.from('user_entries').select('json').eq('user_id', userid)
-		if (data && data.length < 1) MyBooksInsertFirst()
+	const MyBooksInsertFirstCheck = async (): Promise<void> => {
+		await supabase
+			.from('user_entries')
+			.select('json')
+			.eq('user_id', userid)
+			.then((res) => {
+				if (res.data && res.data.length < 1) MyBooksInsertFirst()
+				else getEntries()
+			})
 	}
 
-	async function getEntries() {
+	const getEntries = async () => {
 		await supabase
 			.from('user_entries')
 			.select('json')
@@ -32,12 +39,14 @@ const LoadLibrary = () => {
 			.then((res) => {
 				if (res.data && res.data[0].json) setUserMyBooks(res.data[0].json)
 			})
-			.then(() => navigate('/dashboard'))
+			.then(() => setIsReady(true))
 	}
 
+	MyBooksInsertFirstCheck()
+
 	useEffect(() => {
-		MyBooksInsertFirstCheck().then(() => getEntries())
-	}, [])
+		if (isReady) navigate('/dashboard')
+	}, [isReady, navigate])
 
 	return (
 		<>
