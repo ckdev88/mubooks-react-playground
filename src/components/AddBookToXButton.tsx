@@ -12,12 +12,13 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		else book.title_short = book.title
 		let myBooks = userMyBooks
 
-const date_now = Number(convertDate(Date.now(),'digit'))
+		const date_now = Number(convertDate(Date.now(), 'digit'))
 		let date_reading: number = 0
 		if (targetList > 1) date_reading = date_now
 		let date_finished: number = 0
 		if (targetList > 2) date_finished = date_now
 		if (myBooks === null) myBooks = []
+		// TODO: isbn0 en isbn1 in type definitions .ts?
 		myBooks.push({
 			author_key: book.author_key,
 			author_name: book.author_name,

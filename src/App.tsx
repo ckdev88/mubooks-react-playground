@@ -56,7 +56,7 @@ const App = () => {
 
 	useEffect(() => {
 		if (userIsLoggedIn === true && userMyBooks.length < 1) csMyBooks()
-	}, [initialMyBooksSet])
+	}, [userIsLoggedIn, initialMyBooksSet, userMyBooks.length])
 	// /add persistency to userMyBooks state throughout page refreshes
 
 	if (username === '' && localStorage.getItem(localStorageKey))
