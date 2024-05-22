@@ -46,6 +46,7 @@ const LoginCard = () => {
 
 	const { recover, signup } = useCardRotate()
 
+	// TODO: improve highlighting of active fields on mobile
 	return (
 		<>
 			<article className="card" id="card-login">

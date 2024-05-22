@@ -1,3 +1,4 @@
+// TODO: add eraser for erasing ratings, some books don't need certain ratings
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'

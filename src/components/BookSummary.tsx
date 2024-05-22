@@ -1,3 +1,4 @@
+// TODO: add limit: started date is always before finished date
 import AddBookToXButton from './AddBookToXButton'
 import BookAuthorList from './BookAuthorList'
 import ReactMarkdown from 'react-markdown'
