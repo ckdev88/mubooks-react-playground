@@ -1,4 +1,3 @@
-// TODO: add eraser for erasing ratings, some books don't need certain ratings
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
@@ -44,6 +43,7 @@ const RateStarsButton = (book: Book) => {
 		console.log('book', book.rate_spice, book.rate_stars)
 	}
 
+	const iconClassNameEraser = 'icon icon-eraser'
 	const iconClassNameStar = 'icon icon-star'
 	const iconClassNameSpice = 'icon icon-spice'
 	if (book.rate_stars === undefined) book.rate_stars = 0
@@ -52,6 +52,9 @@ const RateStarsButton = (book: Book) => {
 	return (
 		<>
 			<div className="rate-stars">
+				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 0)}>
+					<span className={iconClassNameEraser}></span>
+				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 1)}>
 					<span className={iconClassNameStar + (book?.rate_stars > 0 ? ' active' : '')}>*</span>
 				</button>
@@ -69,6 +72,9 @@ const RateStarsButton = (book: Book) => {
 				</button>
 			</div>
 			<div className="rate-spice">
+				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 0)}>
+					<span className={iconClassNameEraser}></span>
+				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 1)}>
 					<span className={iconClassNameSpice + (book?.rate_spice > 0 ? ' active' : '')}>&</span>
 				</button>
