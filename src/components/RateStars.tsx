@@ -3,24 +3,20 @@ import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 
 const RateStarsButton = (book: Book) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
+	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 
 	// TODO: move this function to generic helper location
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		// TODO: move updateUser data to seperate table
-		await supabase.auth
-			.updateUser({
-				data: { MyBooks: myBooksNew },
-			})
-			.then(() => {
-				msg = 'Added rating for ' + book.title_short
-			})
-			.catch(() => {
-				msg = 'Something went wrong, Mu Books are not updated.'
-			})
-			.finally(() => setPopupNotification(msg))
+		const { error } = await supabase
+			.from('user_entries')
+			.update({ json: myBooksNew, testdata: 'updated from RateStars n Spice' })
+			.eq('user_id', userid)
+			.select('*')
+		if (error) msg = error.message
+		else msg = 'Added rating for ' + book.title_short
+		setPopupNotification(msg)
 	}
 
 	function RateStars(book: Book, type: 'rate_stars' | 'rate_spice', rating: Scale5) {
