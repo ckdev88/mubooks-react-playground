@@ -52,7 +52,7 @@ type BookData = [
 		cover: string
 		img?: string
 		title_short?: string
-	},
+	}
 ]
 interface Book {
 	author_key?: [string]
@@ -78,7 +78,9 @@ interface Book {
 	rate_stars?: Scale5
 	rate_spice?: Scale5
 	fav_quote?: string
+	tropes: BookTropes
 }
+type BookTropes = string[]
 
 type Results = [Book]
 interface Books extends Array<Book> {}

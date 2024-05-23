@@ -21,6 +21,7 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 		number_of_pages_median: book.number_of_pages_median,
 		title: book.title,
 		title_short: book.title_short,
+		tropes: []
 	})
 
 	MyBooksUpdate(myBooks)

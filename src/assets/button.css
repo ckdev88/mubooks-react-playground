@@ -58,9 +58,7 @@ main button.alt,
 	padding: 0;
 	text-align: left;
 	text-decoration: none;
-	transition:
-		text-decoration 0.2s ease-in-out,
-		color 0.2s ease-in-out;
+	transition: text-decoration 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .btn-text:hover {
@@ -126,4 +124,26 @@ main button.alt,
 .btn-calendar:focus::after,
 .btn-calendar:hover::after {
 	opacity: 1;
+}
+
+.btn-submit-inside-caret-right {
+	float: left;
+	content: ' ';
+	width: 1rem;
+	background-image: url('/img/cv-caret-medium.light.svg');
+	background-size: 1.4rem;
+	background-position-y: 10%;
+	background-position-x: center;
+	margin-top: 0.4rem;
+	transform: rotate(90deg);
+	background-color: pink;
+	border: 1px solid pink;
+	border-radius: 100%;
+	padding: 0.5rem;
+	margin-left: -1.5rem;
+}
+.btn-submit-inside-caret-right:hover,
+.btn-submit-inside-caret-right:focus,
+.btn-submit-inside-caret-right:active {
+	background-color: white;
 }

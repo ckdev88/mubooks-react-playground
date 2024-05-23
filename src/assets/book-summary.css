@@ -193,6 +193,48 @@
 .book-summary .icon-add {
 	background-image: url('/img/icon-add.svg');
 }
+.reviews .btn-text .icon-add,
+.reviews .btn-text .icon-minus {
+	background-image: none;
+	font-weight: bold;
+	display: inline-block;
+	padding-left: 0.1rem;
+	font-size: 1.2rem;
+	color: #000;
+	margin-right: 0.2rem;
+}
+.reviews .btn-text .icon-add {
+	content: '+';
+}
+.reviews .btn-text .icon-minus {
+	content: '-';
+}
+
+.reviews .icon-add::before,
+.reviews .icon-minus::before {
+	font-weight: bold;
+	display: block;
+	float: left;
+}
+.reviews .icon-add::before {
+	content: '+';
+}
+.reviews .icon-minus::before {
+	content: '-';
+}
+
+.tropes-form input {
+	float: left;
+	max-width: 60%;
+	padding: 0.3rem;
+	border-style: dashed;
+	border-width: 2px;
+	border-radius: 0.4rem;
+}
+.tropes-form input:focus,
+.tropes-form input:active {
+	border-style: solid;
+}
 
 .book-summary .icon-reading {
 	background-image: url('/img/icon-reading.png');
@@ -227,11 +269,25 @@
 	height: 16px;
 	opacity: 0.2;
 }
+.reviews {
+	margin-top: 0.75rem;
+}
 .reviews > div > button:first-child {
 	margin-right: 0.5rem;
 }
 .reviews .icon-eraser:hover {
 	opacity: 1;
+}
+.reviews .icon-add,
+.reviews .icon-minus {
+	display: inline-block;
+	margin-right: 0.2rem;
+}
+.reviews .icon-add {
+	content: '+';
+}
+.reviews .icon-minus {
+	content: '-';
 }
 .reviews .icon-star,
 .reviews .icon-spice {
@@ -270,6 +326,32 @@
 .reviews .icon-spice.active {
 	background-color: #c90000;
 }
+.tropes {
+	margin: 1rem 0 0;
+	padding: 0;
+	list-style-type: none;
+}
+.tropes .trope {
+	display: block;
+	float: left;
+	border-radius: 0.2rem;
+	background-color: #f1e0c6;
+	color: #df8506;
+	font-size: 0.8rem;
+	margin: 0 0.5rem 0.5rem 0;
+	padding: 0.2rem 0.4rem;
+}
+.trope .btn-x {
+	font-size: 0.6rem;
+	height: auto;
+	width: auto;
+	background-color: transparent;
+	color: #df8506;
+	padding: 0;
+	float: right;
+	margin: -0.2rem -0.2rem -0.2rem 0.2rem;
+}
+
 .book-summary .rating {
 	text-align: center;
 	margin-bottom: 1rem;
@@ -277,12 +359,6 @@
 
 .book-summary .rating h3 {
 	margin-top: 0.5rem;
-}
-
-.book-summary .tropes {
-	padding-bottom: 1rem;
-	border-bottom: 1px solid #666;
-	margin-bottom: 1rem;
 }
 
 .book-summary .tropes h3 {

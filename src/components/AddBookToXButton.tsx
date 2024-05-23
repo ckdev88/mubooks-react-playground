@@ -35,6 +35,7 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			title_short: book.title_short,
 			rate_stars: 0,
 			rate_spice: 0,
+			tropes: [],
 		})
 		return myBooks
 	}

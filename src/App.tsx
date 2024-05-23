@@ -1,6 +1,11 @@
 // TODO: Add to reading in searchpage
 // TODO: searchpage: te lange titel gooit zooitje op nieuwe regel
 // TODO: sometimes date_started gets 0 value on adding, reproduction same as succesfull ones
+// TODO: being able to add charteristics per book, like:
+// - tropes
+// - favorite quote
+// - started/finished (present)
+// - review text
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'

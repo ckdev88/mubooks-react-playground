@@ -10,6 +10,7 @@ import { getBookCover } from '../Helpers'
 import { supabase } from '../../utils/supabase'
 import { useContext, useState } from 'react'
 import RateStarsButton from './RateStars'
+import ReviewTropes from './ReviewTropes'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
@@ -148,6 +149,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 				</header>
 				<main>
 					<div className="reviews">
+						{(page === 'finishedpage' || page === 'favoritespage') && ReviewTropes(book, book.tropes)}
 						{(page === 'finishedpage' || page === 'favoritespage') && RateStarsButton(book)}
 					</div>
 					<div className="marks">
