@@ -99,7 +99,7 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 				<span className={showTropesForm ? 'icon icon-minus' : 'icon icon-add'}></span> Add tropes
 			</button>
 			{showTropesForm && (
-				<form className="tropes-form clr" onSubmit={processTropeAddForm}>
+				<form className="single-small-form clr" onSubmit={processTropeAddForm}>
 					<input type="text" name="trope_add" id={'trope_add_' + book.id} />
 					<button className="btn-submit-inside-caret-right"></button>
 				</form>

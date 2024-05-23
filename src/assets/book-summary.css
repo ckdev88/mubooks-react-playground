@@ -222,10 +222,10 @@
 .reviews .icon-minus::before {
 	content: '-';
 }
-.tropes-form {
+.single-small-form {
 	margin-top: 0.25rem;
 }
-.tropes-form input {
+.single-small-form input {
 	float: left;
 	max-width: 60%;
 	padding: 0.3rem;
@@ -233,8 +233,8 @@
 	border-width: 2px;
 	border-radius: 0.4rem;
 }
-.tropes-form input:focus,
-.tropes-form input:active {
+.single-small-form input:focus,
+.single-small-form input:active {
 	border-style: solid;
 }
 
