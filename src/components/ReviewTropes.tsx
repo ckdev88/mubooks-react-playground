@@ -17,7 +17,6 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		if (bookTropes === undefined) return
-		if (bookTropes.length < 1) return
 		return (
 			<ul className="tropes clr">
 				{bookTropes.map((trope, index) => (
@@ -100,12 +99,9 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 	return (
 		<>
 			{TropesList(bookTropes, book.id)}
-			<button className="btn-text" onClick={() => setShowTropesForm(!showTropesForm)}>
-				<span className={showTropesForm ? 'icon icon-minus' : 'icon icon-add'}></span> Add tropes
-			</button>
 			{showTropesForm && (
 				<form className="single-small-form clr" onSubmit={processTropeAddForm}>
-					<input type="text" name="trope_add" id={'trope_add_' + book.id} />
+					<input type="text" name="trope_add" id={'trope_add_' + book.id} placeholder="Add a trope..." />
 					<button className="btn-submit-inside-caret-right"></button>
 				</form>
 			)}
