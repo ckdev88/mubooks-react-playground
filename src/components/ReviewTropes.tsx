@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useCallback } from 'react'
 import { AppContext } from '../App'
 import { cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
@@ -8,65 +8,61 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 
 	const [bookTropes, setBookTropes] = useState<BookTropes>(tropes)
 	const [showTropesForm, setShowTropesForm] = useState<boolean>(false)
+	const [isModding, setIsModding] = useState<boolean>(false)
+
+	function removeTrope(trope: string) {
+		setIsModding(true)
+		setBookTropes(bookTropes.filter((bt) => bt !== trope))
+	}
 
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		if (bookTropes === undefined) return
 		if (bookTropes.length < 1) return
-		else {
-			function removeTrope(trope: string) {
-				setBookTropes(bookTropes.filter((bt) => bt !== trope))
-				setPopupNotification('Removed trope: ' + trope)
-			}
-			return (
-				<ul className="tropes clr">
-					{bookTropes.map((trope, index) => (
-						<li className="trope" key={'trope' + bookid + index}>
-							{trope}
-							<button className="btn-x" onClick={() => removeTrope(trope)}>
-								x
-							</button>
-						</li>
-					))}
-				</ul>
-			)
-		}
+		return (
+			<ul className="tropes clr">
+				{bookTropes.map((trope, index) => (
+					<li className="trope" key={'trope' + bookid + index}>
+						{trope}
+						<button className="btn-x" onClick={() => removeTrope(trope)}>
+							x
+						</button>
+					</li>
+				))}
+			</ul>
+		)
 	}
 	// mod db
 	// TODO: move this function to generic helper location
-	async function MyBooksUpdate(myBooksNew: Books) {
-		let msg: string
-		setUserMyBooks(myBooksNew)
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew, testdata: 'updated from review: Tropes' })
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Updated tropes.'
-		setPopupNotification(msg)
-	}
+	const updateMyBooksCallback = useCallback(
+		async function updateMyBooks(myBooksNew: Books) {
+			let msg: string
+			setUserMyBooks(myBooksNew)
+			const { error } = await supabase
+				.from('user_entries')
+				.update({ json: myBooksNew, testdata: 'updated from review: Tropes' })
+				.eq('user_id', userid)
+				.select('*')
+			if (error) msg = error.message
+			else msg = 'Updated tropes.'
+			setPopupNotification(msg)
+		},
+		[setUserMyBooks, setPopupNotification, userid]
+	)
 
-	function EditTropes() {
-		let myBooks: Books
-		if (userMyBooks !== undefined) myBooks = userMyBooks
-		else myBooks = []
+	const updateTropesCallback = useCallback(
+		async function updateTropes() {
+			if (userMyBooks.length < 1) return
 
-		for (let i = 0; i < myBooks.length; i++) {
-			if (myBooks[i].id === book.id) {
-				myBooks[i].tropes = bookTropes
-				break
+			for (let i = 0; i < userMyBooks.length; i++) {
+				if (userMyBooks[i].id === book.id) {
+					userMyBooks[i].tropes = bookTropes
+					break
+				}
 			}
-		}
-
-		const myBooksNew: Books = myBooks
-		MyBooksUpdate(myBooksNew)
-		return myBooksNew
-	}
-
-	function EditTropesAct() {
-		const newArr: Books = EditTropes()
-		setUserMyBooks(newArr)
-	}
+			updateMyBooksCallback(userMyBooks)
+		},
+		[userMyBooks, book.id, bookTropes, updateMyBooksCallback]
+	)
 	// /mod db
 
 	function processTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
@@ -74,22 +70,27 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 
 		const trope = cleanInput(e.currentTarget.trope_add.value, true)
 		if (trope !== undefined && trope.length > 2) {
+			setIsModding(true)
 			setBookTropes([...bookTropes, trope])
 			e.currentTarget.trope_add.value = ''
 			e.currentTarget.trope_add.focus()
-			setPopupNotification('Added trope: ' + trope)
 		}
 	}
 
 	useEffect(() => {
-		if (tropes !== bookTropes) EditTropesAct()
-	}, [bookTropes])
+		if (tropes !== bookTropes) {
+			if (isModding) {
+				updateTropesCallback()
+				setIsModding(false)
+			}
+		}
+	}, [tropes, isModding, setUserMyBooks, updateTropesCallback, book.id, bookTropes])
 
 	if (book.tropes === undefined) book.tropes = []
 
 	useEffect(() => {
 		if (showTropesForm === true) document.getElementById('trope_add_' + book.id)?.focus()
-	}, [showTropesForm])
+	}, [showTropesForm, book.id])
 
 	return (
 		<>
