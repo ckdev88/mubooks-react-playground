@@ -77,13 +77,11 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 			setBookTropes([...bookTropes, trope])
 			e.currentTarget.trope_add.value = ''
 			e.currentTarget.trope_add.focus()
-			// TODO: make trope into data of JSON/database/userMyBooks
 			setPopupNotification('Added trope: ' + trope)
 		}
 	}
 
 	useEffect(() => {
-		// TODO: trigger db update on bookTropes mod
 		if (tropes !== bookTropes) EditTropesAct()
 	}, [bookTropes])
 
