@@ -156,12 +156,6 @@
 	text-decoration: underline;
 }
 
-.book-summary .icon-remove img {
-	height: 0.8em;
-	width: auto;
-	display: inline-block;
-}
-
 .book-summary .mark {
 	font-size: 0.9rem;
 	line-height: 1.3;
@@ -172,62 +166,11 @@
 		line-height: 1em;
 	}
 }
-
-.book-summary .icon {
-	display: block;
-	clear: both;
-	float: left;
-	line-height: 1em;
-	height: 1.3rem;
-	width: 1em;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	text-align: center;
-}
-
-.book-summary .btn-text .icon {
-	margin: 0 0.35em 0 0;
-}
-/* TODO: icons should be svg, preferrably home-made, else unicode */
-.book-summary .icon-add {
-	background-image: url('/img/icon-add.svg');
-}
-.reviews .btn-text .icon-add,
-.reviews .btn-text .icon-minus {
-	background-image: none;
-	font-weight: bold;
-	display: inline-block;
-	padding-left: 0.1rem;
-	font-size: 1.2rem;
-	color: #000;
-	margin-right: 0.2rem;
-}
-.reviews .btn-text .icon-add {
-	content: '+';
-}
-.reviews .btn-text .icon-minus {
-	content: '-';
-}
-
-.reviews .icon-add::before,
-.reviews .icon-minus::before {
-	font-weight: bold;
-	display: block;
-	float: left;
-}
-.reviews .icon-add::before {
-	content: '+';
-}
-.reviews .icon-minus::before {
-	content: '-';
-}
 .single-small-form {
 	margin-top: 0.25rem;
 }
 .single-small-form input {
 	float: left;
-	max-width: 60%;
 	padding: 0.3rem;
 	border-style: dashed;
 	border-width: 2px;
@@ -238,120 +181,20 @@
 	border-style: solid;
 }
 
-.book-summary .icon-reading {
-	background-image: url('/img/icon-reading.png');
-}
-
-.book-summary .icon-read {
-	background-image: url('/img/icon-read.png');
-}
-
-.book-summary .icon-wishlist {
-	background-image: url('/img/icon-wishlist.png');
-}
-
-.book-summary .icon-finished {
-	background-image: url('/img/icon-finished.png');
-}
-
-.book-summary .icon-favorite {
-	background-image: url('/img/icon-favorites.png');
-}
-
-.book-summary .icon-hide {
-	background-image: url('/img/icon-hide.png');
-}
-
-.book-summary .icon-remove {
-	background-image: url('/img/icon-remove.png');
-}
-.book-summary .icon-eraser {
-	background-image: url('/img/icon-eraser.svg');
-	width: 16px;
-	height: 16px;
-	opacity: 0.2;
-}
-.reviews {
-	margin-top: 0.75rem;
-}
-.reviews > div > button:first-child {
-	margin-right: 0.5rem;
-}
-.reviews .icon-eraser:hover {
-	opacity: 1;
-}
-.reviews .icon-add,
-.reviews .icon-minus {
-	display: inline-block;
-	margin-right: 0.2rem;
-}
-.reviews .icon-add {
-	content: '+';
-}
-.reviews .icon-minus {
-	content: '-';
-}
-.reviews .icon-star,
-.reviews .icon-spice {
-	font-weight: normal;
-	background: transparent;
-	background-size: cover;
-	mask-border: 1px solid black;
-	mask-border-width: 1px;
-	mask-border-outset: -1px;
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-	color: transparent;
-	background-color: #ccc;
-	mask-size: cover;
-	transition: background-color 0.18s ease-in-out;
-}
-.reviews .icon-spice {
-	--svg-icon: url('data:image/svg+xml,\
-		<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">\
-		<path d="M330.67 263.12V173.4l-52.75-24.22C219.44 218.76 197.58 400 56 400a56 56 0 0 0 0 112c212.64 0 370.65-122.87 419.18-210.34l-37.05-38.54zm131.09-128.37C493.92 74.91 477.18 26.48 458.62 3a8 8 0 0 0-11.93-.59l-22.9 23a8.06 8.06 0 0 0-.89 10.23c6.86 10.36 17.05 35.1-1.4 72.32A142.85 142.85 0 0 0 364.34 96c-28 0-54 8.54-76.34 22.59l74.67 34.29v78.24h89.09L506.44 288c3.26-12.62 5.56-25.63 5.56-39.31a154 154 0 0 0-50.24-113.94z"/>\
-		</svg>');
-	mask-image: var(--svg-icon);
-}
-.reviews .icon-star {
-	--svg-icon: url('/img/icon-star.svg');
-	mask-image: var(--svg-icon);
-}
-.reviews .icon-star:hover,
-.reviews .icon-spice:hover {
-	background-color: #555;
-}
-.reviews .icon-star.active {
-	background-color: gold;
-}
-.reviews .icon-spice.active {
-	background-color: #c90000;
-}
 .tropes {
 	margin: 1rem 0 0;
 	padding: 0;
 	list-style-type: none;
 }
-.tropes .trope {
+.tropes li {
 	display: block;
 	float: left;
-	border-radius: 0.2rem;
-	background-color: #f1e0c6;
-	color: #df8506;
-	font-size: 0.8rem;
 	margin: 0 0.5rem 0.5rem 0;
 	padding: 0.2rem 0.4rem;
 }
-.trope .btn-x {
-	font-size: 0.6rem;
-	height: auto;
-	width: auto;
-	background-color: transparent;
-	color: #df8506;
+
+.tropes li.trope_add {
 	padding: 0;
-	float: right;
-	margin: -0.2rem -0.2rem -0.2rem 0.2rem;
 }
 
 .book-summary .rating {
@@ -369,11 +212,6 @@
 
 .book-summary .marks .favorites.active {
 	color: red;
-}
-
-.book-summary .marks .icon-favorites,
-.book-summary .marks .icon-read {
-	font-weight: 900;
 }
 
 .book-summary .marked {

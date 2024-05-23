@@ -21,13 +21,18 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 		return (
 			<ul className="tropes clr">
 				{bookTropes.map((trope, index) => (
-					<li className="trope" key={'trope' + bookid + index}>
+					<li className="trope badge" key={'trope' + bookid + index}>
 						{trope}
 						<button className="btn-x" onClick={() => removeTrope(trope)}>
 							x
 						</button>
 					</li>
 				))}
+				<li className="trope_add">
+					<button className="btn-sm" onClick={() => setShowTropesForm(!showTropesForm)}>
+						<span className={showTropesForm ? 'icon icon-minus' : 'icon icon-add'}></span> Add tropes
+					</button>
+				</li>
 			</ul>
 		)
 	}
