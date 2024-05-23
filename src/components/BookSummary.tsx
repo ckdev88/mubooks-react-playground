@@ -149,7 +149,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 				</header>
 				<main>
 					<div className="reviews">
-						{(page === 'finishedpage' || page === 'favoritespage') && ReviewTropes(book, book.tropes)}
+						{(page === 'finishedpage' || page === 'favoritespage') && ReviewTropes(book, book.review_tropes)}
 						{(page === 'finishedpage' || page === 'favoritespage') && RateStarsButton(book)}
 					</div>
 					<div className="marks">

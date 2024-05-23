@@ -55,7 +55,7 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
-					userMyBooks[i].tropes = bookTropes
+					userMyBooks[i].review_tropes = bookTropes
 					break
 				}
 			}
@@ -86,7 +86,7 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 		}
 	}, [tropes, isModding, setUserMyBooks, updateTropesCallback, book.id, bookTropes])
 
-	if (book.tropes === undefined) book.tropes = []
+	if (book.review_tropes === undefined) book.review_tropes = []
 
 	useEffect(() => {
 		if (showTropesForm === true) document.getElementById('trope_add_' + book.id)?.focus()

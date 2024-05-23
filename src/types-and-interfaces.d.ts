@@ -78,7 +78,7 @@ interface Book {
 	rate_stars?: Scale5
 	rate_spice?: Scale5
 	fav_quote?: string
-	tropes: BookTropes
+	review_tropes?: BookTropes
 }
 type BookTropes = string[]
 
