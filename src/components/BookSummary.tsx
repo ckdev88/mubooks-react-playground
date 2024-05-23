@@ -1,16 +1,17 @@
 // TODO: add limit: started date is always before finished date
-import AddBookToXButton from './AddBookToXButton'
-import BookAuthorList from './BookAuthorList'
-import ReactMarkdown from 'react-markdown'
-import RemoveBookFromXButton from './RemoveBookFromXButton'
-import convertDate from '../helpers/convertDate'
 import { AppContext } from '../App'
 import { debounce, openCalendarPopUp } from '../Helpers'
 import { getBookCover } from '../Helpers'
 import { supabase } from '../../utils/supabase'
 import { useContext, useState } from 'react'
+import AddBookToXButton from './AddBookToXButton'
+import BookAuthorList from './BookAuthorList'
 import RateStarsButton from './RateStars'
+import ReactMarkdown from 'react-markdown'
+import RemoveBookFromXButton from './RemoveBookFromXButton'
+import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
+import convertDate from '../helpers/convertDate'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
