@@ -182,6 +182,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 						<ReactMarkdown>{synopsis}</ReactMarkdown>
 					</div>
 				</div>
+				{(page === 'finishedpage' || page === 'favoritespage') && ReviewText(book, book.review_text)}
 				<hr />
 			</footer>
 		</article>
