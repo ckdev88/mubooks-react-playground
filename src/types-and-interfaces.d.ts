@@ -75,11 +75,11 @@ interface Book {
 	title_short: string
 	date_reading?: number
 	date_finished?: number
-	rate_stars?: Scale5
-	rate_spice?: Scale5
+	rate_stars: Scale5
+	rate_spice: Scale5
 	fav_quote?: string
-	review_tropes?: BookTropes
-	review_text?: string
+	review_tropes: BookTropes
+	review_text: string
 }
 type BookTropes = string[]
 

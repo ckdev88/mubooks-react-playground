@@ -213,17 +213,8 @@
 .book-summary .marks .favorites.active {
 	color: red;
 }
-
 .book-summary .marked {
 	color: hsl(325, 55%, 46%);
 	font-weight: bold;
 }
 
-.single-small-form.transparent input {
-	background: none;
-	padding-left: 0;
-	border-color: transparent;
-}
-.single-small-form.transparent button {
-	visibility: hidden;
-}

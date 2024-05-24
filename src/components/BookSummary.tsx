@@ -149,10 +149,6 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 					</div>
 				</header>
 				<main>
-					<div className="reviews">
-						{(page === 'finishedpage' || page === 'favoritespage') && ReviewTropes(book, book.review_tropes)}
-						{(page === 'finishedpage' || page === 'favoritespage') && RateStarsButton(book)}
-					</div>
 					<div className="marks">
 						{/* TODO: build further on new feature; highlight saved books in search view */}
 						{!book.list && AddBookToXButton(book, 1)}
@@ -172,6 +168,12 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 							{!isLoading && !isShowingSynopsis && 'Read synopsis'}
 							{!isLoading && isShowingSynopsis && 'Hide synopsis'}
 						</button>
+					</div>
+					<div className="reviews">
+						{(page === 'finishedpage' || page === 'favoritespage') &&
+							book.review_tropes &&
+							ReviewTropes(book, book?.review_tropes)}
+						{(page === 'finishedpage' || page === 'favoritespage') && RateStarsButton(book)}
 					</div>
 				</main>
 			</div>

@@ -19,10 +19,12 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 		id: book.id,
 		img: book.img,
 		number_of_pages_median: book.number_of_pages_median,
+		rate_stars: 0,
+		rate_spice: 0,
 		title: book.title,
 		title_short: book.title_short,
 		review_tropes: [],
-		review_text: '',
+		review_text: ''
 	})
 
 	MyBooksUpdate(myBooks)
