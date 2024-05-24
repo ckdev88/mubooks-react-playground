@@ -1,8 +1,6 @@
 // TODO: add limit: started date is always before finished date
-import { AppContext } from '../App'
 import { getBookCover } from '../Helpers'
-import { supabase } from '../../utils/supabase'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import AddBookToXButton from './AddBookToXButton'
 import BookAuthorList from './BookAuthorList'
 import BookStartedFinished from './BookStartedFinished'

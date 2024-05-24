@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { debounce, openCalendarPopUp } from '../Helpers'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
@@ -16,6 +16,8 @@ const BookStartedFinished = ({
 	list: Book['list']
 }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
+	const [dateStarted, setDateStarted] = useState<Book['date_reading']>(date_started)
+	const [dateFinished, setDateFinished] = useState<Book['date_finished']>(date_finished)
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
@@ -32,6 +34,9 @@ const BookStartedFinished = ({
 	}
 
 	function changeDates(fieldName: string, fieldVal: number) {
+		if (fieldName === 'date_reading') setDateStarted(fieldVal)
+		else if (fieldName === 'date_finished') setDateFinished(fieldVal)
+
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = userMyBooks
@@ -48,7 +53,6 @@ const BookStartedFinished = ({
 	function modifyDateReading(field: 'date_reading' | 'date_finished') {
 		if (document.getElementById(field + bookid) === null) return
 		const inputfield: string = field + bookid
-		console.log('inputfield', inputfield)
 		const newDateArr = (document.getElementById(inputfield) as HTMLInputElement).value.split('-')
 		const newDate = parseInt(newDateArr[0] + newDateArr[1] + newDateArr[2], 10)
 		changeDates(field, newDate)
@@ -63,7 +67,7 @@ const BookStartedFinished = ({
 						className="btn-calendar btn-text"
 						onClick={() => openCalendarPopUp('date_reading' + bookid)}
 					>
-						{date_started && convertDate(date_started, 'human')}
+						{dateStarted && convertDate(dateStarted, 'human')}
 					</button>
 				</em>
 				<input
@@ -72,7 +76,7 @@ const BookStartedFinished = ({
 					name={'date_reading' + bookid}
 					type="date"
 					className="calendar-hidden"
-					onChange={debounce(() => modifyDateReading('date_reading'), 500)}
+					onChange={debounce(() => modifyDateReading('date_reading'), 100)}
 				/>
 			</div>
 
@@ -84,7 +88,7 @@ const BookStartedFinished = ({
 							className="btn-calendar btn-text"
 							onClick={() => openCalendarPopUp('date_finished' + bookid)}
 						>
-							{date_finished && convertDate(date_finished, 'human')}
+							{dateFinished && convertDate(dateFinished, 'human')}
 						</button>
 					</em>
 					<input
