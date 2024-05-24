@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 
-const RateStarsButton = (book: Book) => {
+const ReviewRating = (book: Book) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 
 	// TODO: move this function to generic helper location
@@ -94,4 +94,4 @@ const RateStarsButton = (book: Book) => {
 		</>
 	)
 }
-export default RateStarsButton
+export default ReviewRating
