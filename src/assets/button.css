@@ -137,12 +137,17 @@ main button.alt,
 
 .btn-sm {
 	height: 1.4rem;
-	line-height: 1rem;
+	line-height: .9rem;
 	font-size: 0.8rem;
 	border-radius: 0.2rem;
 	border-color: #b73581;
 	background-color: #b73581;
 	padding: 0.2rem 0.4rem;
+}
+.btn-sm.active {
+	background-color: transparent;
+	border-color: transparent;
+	color: #b73581;
 }
 .btn-sm .icon {
 	display: inline-block;

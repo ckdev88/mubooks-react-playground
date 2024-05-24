@@ -28,8 +28,11 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 					</li>
 				))}
 				<li className="trope_add">
-					<button className="btn-sm mb0" onClick={() => setShowTropesForm(!showTropesForm)}>
-						<span className={showTropesForm ? 'icon icon-minus' : 'icon icon-add'}></span> Add tropes
+					<button
+						className={showTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
+						onClick={() => setShowTropesForm(!showTropesForm)}
+					>
+						{showTropesForm ? 'Adding tropes...' : 'Add tropes'}
 					</button>
 				</li>
 			</ul>
