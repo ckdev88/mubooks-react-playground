@@ -11,7 +11,6 @@ import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
