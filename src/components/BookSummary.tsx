@@ -1,17 +1,16 @@
 // TODO: add limit: started date is always before finished date
 import { AppContext } from '../App'
-import { debounce, openCalendarPopUp } from '../Helpers'
 import { getBookCover } from '../Helpers'
 import { supabase } from '../../utils/supabase'
 import { useContext, useState } from 'react'
 import AddBookToXButton from './AddBookToXButton'
 import BookAuthorList from './BookAuthorList'
+import BookStartedFinished from './BookStartedFinished'
 import ReactMarkdown from 'react-markdown'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
 import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
-import convertDate from '../helpers/convertDate'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
@@ -39,46 +38,6 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 		}
 	}
 
-	async function MyBooksUpdate(myBooksNew: Books) {
-		let msg: string
-		setUserMyBooks(myBooksNew)
-
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew })
-			.eq('user_id', userid)
-			.select()
-		if (error) {
-			msg = 'Error, date was not changed'
-			console.log('error:', error)
-		} else msg = 'Changed the date.'
-
-		setPopupNotification(msg)
-	}
-
-	function modifyDateReading(field: 'date_reading' | 'date_finished') {
-		if (document.getElementById(field + book.id) === null) return
-		const inputfield: string = field + book.id
-		console.log('inputfield', inputfield)
-		const newDateArr = (document.getElementById(inputfield) as HTMLInputElement).value.split('-')
-		const newDate = parseInt(newDateArr[0] + newDateArr[1] + newDateArr[2], 10)
-		changeDates(field, newDate)
-	}
-
-	function changeDates(fieldName: string, fieldVal: number) {
-		let myBooks: Books
-		if (userMyBooks === undefined) myBooks = []
-		else myBooks = userMyBooks
-		for (let i = 0; i < myBooks.length; i++) {
-			if (myBooks[i].id === book.id) {
-				if (fieldName === 'date_reading') myBooks[i].date_reading = fieldVal
-				if (fieldName === 'date_finished') myBooks[i].date_finished = fieldVal
-			}
-		}
-		const myBooksNew = myBooks
-		MyBooksUpdate(myBooksNew)
-	}
-
 	return (
 		// TODO: add className for when marked as saved in search results
 		<article className="book-summary">
@@ -104,47 +63,12 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 						)}
 
 						{book.list > 1 && page !== 'searchpage' && (
-							<div style={{ paddingTop: '.5em' }}>
-								<em>
-									Started:&nbsp;&nbsp;&nbsp;
-									<button
-										className="btn-calendar btn-text"
-										onClick={() => openCalendarPopUp('date_reading' + book.id)}
-									>
-										{book.date_reading && convertDate(book.date_reading, 'human')}
-									</button>
-								</em>
-								<input
-									tabIndex={-1}
-									id={'date_reading' + book.id}
-									name={'date_reading' + book.id}
-									type="date"
-									className="calendar-hidden"
-									onChange={debounce(() => modifyDateReading('date_reading'), 500)}
-								/>
-							</div>
-						)}
-						{book.list > 2 && page !== 'searchpage' && (
-							<div>
-								<em>
-									Finished:&nbsp;&nbsp;
-									<button
-										className="btn-calendar btn-text"
-										onClick={() => openCalendarPopUp('date_finished' + book.id)}
-									>
-										{book.date_finished && convertDate(book.date_finished, 'human')}
-									</button>
-								</em>
-
-								<input
-									tabIndex={-1}
-									id={'date_finished' + book.id}
-									name={'date_finished' + book.id}
-									type="date"
-									className="calendar-hidden"
-									onChange={debounce(() => modifyDateReading('date_finished'), 1000)}
-								/>
-							</div>
+							<BookStartedFinished
+								date_started={book.date_reading}
+								date_finished={book.date_finished}
+								bookid={book.id}
+								list={book.list}
+							/>
 						)}
 					</div>
 				</header>
