@@ -24,7 +24,8 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 		title: book.title,
 		title_short: book.title_short,
 		review_tropes: [],
-		review_text: ''
+		review_text: '',
+		review_fav_quote: '',
 	})
 
 	MyBooksUpdate(myBooks)

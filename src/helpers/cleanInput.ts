@@ -1,5 +1,6 @@
 // TODO: this can be made faster by assigning the uppercase ASCII code, for ultimate optimization
 function cleanInput(input: string, capfirst: boolean = false): string {
+	if (input.length < 1) return ''
 	input.trim()
 	let returnvalue: string
 	if (capfirst) returnvalue = input[0].toUpperCase() + input.slice(1)

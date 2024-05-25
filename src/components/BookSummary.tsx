@@ -9,6 +9,7 @@ import RemoveBookFromXButton from './RemoveBookFromXButton'
 import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
+import ReviewQuote from './ReviewQuote'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -91,6 +92,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 			</div>
 			<footer>
 				{(page === 'finishedpage' || page === 'favoritespage') && ReviewText(book, book.review_text)}
+				{(page === 'finishedpage' || page === 'favoritespage') && ReviewQuote(book,book.review_fav_quote)}
 				{page !== 'finishedpage' && page !== 'favoritespage' && (
 					<>
 						<button

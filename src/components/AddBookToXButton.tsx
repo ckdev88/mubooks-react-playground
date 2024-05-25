@@ -36,7 +36,8 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 			rate_stars: 0,
 			rate_spice: 0,
 			review_tropes: [],
-			review_text: ''
+			review_text: '',
+			review_fav_quote: '',
 		})
 		return myBooks
 	}

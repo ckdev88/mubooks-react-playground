@@ -1,6 +1,4 @@
 // TODO: Add to reading in searchpage
-// TODO: being able to add charteristics per book, like:
-// - favorite quote
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
