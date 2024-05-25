@@ -55,7 +55,7 @@ const ReviewRating = (book: Book) => {
 	if (book.rate_spice === undefined) book.rate_spice = 0
 
 	return (
-		<>
+		<div className="review-rates">
 			<div className="rate-stars">
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 0)}>
 					<span className={iconClassNameEraser}></span>
@@ -96,7 +96,7 @@ const ReviewRating = (book: Book) => {
 					<span className={iconClassNameSpice + (reviewSpice > 4 ? ' active' : '')}>&</span>
 				</button>
 			</div>
-		</>
+		</div>
 	)
 }
 export default ReviewRating

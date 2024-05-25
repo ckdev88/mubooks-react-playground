@@ -50,24 +50,15 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 			</aside>
 			<div className="article-main">
 				<header>
-					<div className="in-short">
-						<h2>
-							{book.title_short} <sup>({book.first_publish_year})</sup>
-							<sub>{BookAuthorList(book)}</sub>
-						</h2>
+					<h2>
+						{book.title_short} <sup>({book.first_publish_year})</sup>
+						<sub>{BookAuthorList(book)}</sub>
+					</h2>
+					<p className="pt0 mt0">
 						{book.number_of_pages_median && page !== 'finishedpage' && page !== 'favoritespage' && (
 							<>{book.number_of_pages_median} pages</>
 						)}
-
-						{book.list > 1 && page !== 'searchpage' && (
-							<BookStartedFinished
-								date_started={book.date_reading}
-								date_finished={book.date_finished}
-								bookid={book.id}
-								list={book.list}
-							/>
-						)}
-					</div>
+					</p>
 				</header>
 				<main>
 					<div className="reviews">
@@ -76,6 +67,14 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 							ReviewTropes(book, book?.review_tropes)}
 						{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
 					</div>
+					{book.list > 1 && page !== 'searchpage' && (
+						<BookStartedFinished
+							date_started={book.date_reading}
+							date_finished={book.date_finished}
+							bookid={book.id}
+							list={book.list}
+						/>
+					)}
 					<div className="marks">
 						{/* TODO: build further on new feature; highlight saved books in search view */}
 						{!book.list && AddBookToXButton(book, 1)}
@@ -87,25 +86,30 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 						{book.list === 2 && RemoveBookFromXButton(book, 2)}
 						{book.list === 3 && RemoveBookFromXButton(book, 3)}
 						{book.list === 4 && RemoveBookFromXButton(book, 4)}
-						<button
-							className={isShowingSynopsis ? 'btn-text caret-toggle active' : 'btn-text caret-toggle'}
-							onClick={toggleSynopsis}
-						>
-							{isLoading && 'Loading...'}
-							{!isLoading && !isShowingSynopsis && 'Read synopsis'}
-							{!isLoading && isShowingSynopsis && 'Hide synopsis'}
-						</button>
 					</div>
 				</main>
 			</div>
 			<footer>
-				<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-					<div className="synopsis">
-						<h3>Synopsis</h3>
-						<ReactMarkdown>{synopsis}</ReactMarkdown>
-					</div>
-				</div>
 				{(page === 'finishedpage' || page === 'favoritespage') && ReviewText(book, book.review_text)}
+				{page !== 'finishedpage' && page !== 'favoritespage' && (
+					<>
+						<button
+							className={
+								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
+							}
+							onClick={toggleSynopsis}
+						>
+							{isLoading && 'Loading...'}
+							{!isLoading && !isShowingSynopsis && 'Synopsis'}
+							{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
+						</button>
+						<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
+							<div className="synopsis">
+								<ReactMarkdown>{synopsis}</ReactMarkdown>
+							</div>
+						</div>
+					</>
+				)}
 				<hr />
 			</footer>
 		</article>

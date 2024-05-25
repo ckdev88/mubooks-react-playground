@@ -65,9 +65,26 @@ main button.alt,
 	transform: scaleY(-1);
 	margin-right: 0.35em;
 }
+.btn-text.caret-right-toggle::after {
+	content: ' ';
+	display: inline-block;
+	width: 1em;
+	background-image: url('/img/cv-caret-medium.light.svg');
+	background-size: 1.5em;
+	height: 1em;
+	background-position-y: 30%;
+	background-position-x: center;
+	transform: scaleY(-1);
+	margin-left: 0.35em;
+}
 
 .synopsisWrapper[aria-expanded='true'] .caret-toggle::before,
 .caret-toggle.active::before {
+	background-position-y: top;
+	transform: scaleY(1);
+}
+.caret-right-toggle::after,
+.caret-right-toggle.active::after{
 	background-position-y: top;
 	transform: scaleY(1);
 }
