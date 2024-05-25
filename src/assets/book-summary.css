@@ -224,7 +224,7 @@
 .book-summary .book-started-finished {
 	font-size: 0.9rem;
 }
-.book-summary .quote {
+.book-summary .quote:has(main) {
 	border: 2px dashed rgba(0, 0, 0, 0.1);
 	text-align: center;
 }

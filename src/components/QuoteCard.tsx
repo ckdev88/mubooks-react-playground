@@ -531,8 +531,10 @@ const QuoteCard = () => {
 	return (
 		<>
 			<article className="quote">
-				<main>{ randomQuote.quote }</main>
-				<footer>{ randomQuote.book }, { randomQuote.author }</footer>
+				<main>{randomQuote.quote}</main>
+				<footer>
+					{randomQuote.book}, {randomQuote.author}
+				</footer>
 			</article>
 		</>
 	)

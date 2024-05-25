@@ -98,30 +98,25 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 			<footer>
 				{(page === 'finishedpage' || page === 'favoritespage') && ReviewText(book, book.review_text)}
 				{(page === 'finishedpage' || page === 'favoritespage') && ReviewQuote(book, book.review_fav_quote)}
-				{page !== 'finishedpage' &&
-					page !== 'favoritespage' &&
-					page !==
-						'quotedbookspage' && (
-							<>
-								<button
-									className={
-										isShowingSynopsis
-											? 'btn-text caret-right-toggle active'
-											: 'btn-text caret-right-toggle'
-									}
-									onClick={toggleSynopsis}
-								>
-									{isLoading && 'Loading...'}
-									{!isLoading && !isShowingSynopsis && 'Synopsis'}
-									{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
-								</button>
-								<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-									<div className="synopsis">
-										<ReactMarkdown>{synopsis}</ReactMarkdown>
-									</div>
-								</div>
-							</>
-						)}
+				{page !== 'finishedpage' && page !== 'favoritespage' && page !== 'quotedbookspage' && (
+					<>
+						<button
+							className={
+								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
+							}
+							onClick={toggleSynopsis}
+						>
+							{isLoading && 'Loading...'}
+							{!isLoading && !isShowingSynopsis && 'Synopsis'}
+							{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
+						</button>
+						<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
+							<div className="synopsis">
+								<ReactMarkdown>{synopsis}</ReactMarkdown>
+							</div>
+						</div>
+					</>
+				)}
 				<hr />
 			</footer>
 		</article>

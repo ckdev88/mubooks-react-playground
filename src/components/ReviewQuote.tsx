@@ -14,16 +14,16 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 		e.preventDefault()
 		const value = cleanInput(e.currentTarget.review_fav_quote.value.trim(), true)
 		if (value !== undefined && value.length > 2) {
-			setIsModding(true)
 			setReviewFavQuote(value)
 			setShowForm(false)
 			setShowReviewFavQuote(true)
+			setIsModding(false)
 		}
 	}
 	useEffect(() => {
 		if (book.review_fav_quote === undefined || book.review_fav_quote.length < 1) setShowForm(true)
-		else setShowReviewFavQuote(true)
-	}, [book.review_fav_quote])
+		else if (reviewFavQuote !== '') setShowReviewFavQuote(true)
+	}, [book.review_fav_quote, reviewFavQuote])
 
 	// mod db
 	// TODO: move this function to generic helper location
@@ -53,21 +53,21 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 				}
 			}
 			updateMyBooksCallback(userMyBooks)
+			setIsModding(false)
 		},
 		[userMyBooks, book.id, reviewFavQuote, updateMyBooksCallback]
 	)
 	// /mod db
 	useEffect(() => {
 		if (review_fav_quote !== reviewFavQuote) {
-			if (isModding) {
-				updateReviewTextCallback()
-				setIsModding(false)
-			}
+			updateReviewTextCallback()
+			setIsModding(false)
 		}
 	}, [isModding, setUserMyBooks, updateReviewTextCallback, book.id, review_fav_quote, reviewFavQuote])
 
 	const activateForm = () => {
 		setShowForm(true)
+		setIsModding(true)
 		setShowReviewFavQuote(false)
 	}
 
@@ -92,7 +92,9 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 					<button className="btn-submit-inside-caret-right"></button>
 				</form>
 			)}
-			{showReviewFavQuote && <main onClick={activateForm}>{reviewFavQuote}</main>}
+			{!isModding && reviewFavQuote && Number(reviewFavQuote.length) > 0 && (
+				<main onClick={() => activateForm()}>{reviewFavQuote}</main>
+			)}
 		</div>
 	)
 }
