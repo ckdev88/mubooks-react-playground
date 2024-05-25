@@ -198,7 +198,6 @@
 .book-summary .rating h3 {
 	margin-top: 0.5rem;
 }
-
 .book-summary .tropes h3 {
 	padding-bottom: 0;
 }
@@ -226,24 +225,10 @@
 	font-size: 0.9rem;
 }
 .book-summary .quote {
-	font-size: 1em;
-	position: relative;
 	border: 2px dashed rgba(0, 0, 0, 0.1);
 	text-align: center;
 }
-.book-summary .quote-content {
-	font-size: 0.9em;
+.book-summary .quote main {
+	font-size: 0.9rem;
 	margin: 0.75rem;
-}
-
-.book-summary .quote-content::before,
-.book-summary .quote-content::after {
-	display: inline-block;
-	vertical-align: super;
-	content: '"';
-	font-size: 0.8em;
-}
-.book-summary .quote-content::after {
-	position: absolute;
-	bottom: 0.2em;
 }

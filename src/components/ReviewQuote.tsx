@@ -92,11 +92,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 					<button className="btn-submit-inside-caret-right"></button>
 				</form>
 			)}
-			{showReviewFavQuote && (
-				<div onClick={activateForm} className="quote-content">
-					{reviewFavQuote}
-				</div>
-			)}
+			{showReviewFavQuote && <main onClick={activateForm}>{reviewFavQuote}</main>}
 		</div>
 	)
 }
