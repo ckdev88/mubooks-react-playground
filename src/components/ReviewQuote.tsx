@@ -7,7 +7,6 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
 	const [reviewFavQuote, setReviewFavQuote] = useState<Book['review_fav_quote']>(book.review_fav_quote)
 	const [showForm, setShowForm] = useState<boolean>(false)
-	const [showReviewFavQuote, setShowReviewFavQuote] = useState<boolean>(true)
 	const [isModding, setIsModding] = useState<boolean>(false)
 
 	function processForm(e: React.FormEvent<HTMLFormElement>) {
@@ -16,13 +15,11 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 		if (value !== undefined && value.length > 2) {
 			setReviewFavQuote(value)
 			setShowForm(false)
-			setShowReviewFavQuote(true)
 			setIsModding(false)
 		}
 	}
 	useEffect(() => {
 		if (book.review_fav_quote === undefined || book.review_fav_quote.length < 1) setShowForm(true)
-		else if (reviewFavQuote !== '') setShowReviewFavQuote(true)
 	}, [book.review_fav_quote, reviewFavQuote])
 
 	// mod db
@@ -68,7 +65,6 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	const activateForm = () => {
 		setShowForm(true)
 		setIsModding(true)
-		setShowReviewFavQuote(false)
 	}
 
 	useEffect(() => {
