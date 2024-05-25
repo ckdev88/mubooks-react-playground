@@ -11,6 +11,7 @@ import DashboardPage from './routes/account/DashboardPage'
 import FavoritesPage from './routes/books/FavoritesPage'
 import FinishedPage from './routes/books/FinishedPage'
 import NavWrapper from './components/NavWrapper'
+import QuotedPage from './routes/books/QuotedPage.tsx'
 import ReadingPage from './routes/books/ReadingPage'
 import RootPage from './routes/RootPage'
 import SavedBooksPage from './routes/books/SavedBooksPage'
@@ -122,6 +123,7 @@ const App = () => {
 								<Route path="/reading" Component={ReadingPage} />
 								<Route path="/finished" Component={FinishedPage} />
 								<Route path="/favorites" Component={FavoritesPage} />
+								<Route path="/quoted-books" Component={QuotedPage} />
 								<Route path="/clear-my-books" Component={ClearMyBooks} />
 								<Route path="/loadlibrary" Component={LoadLibrary} />
 							</>
