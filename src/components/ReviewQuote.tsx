@@ -72,7 +72,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	}
 
 	useEffect(() => {
-		if (showForm) {
+		if (isModding) {
 			document.getElementById('review_fav_quote' + book.id)?.focus()
 			if (reviewFavQuote !== undefined)
 				document.getElementById('review_fav_quote' + book.id)?.setAttribute('value', reviewFavQuote)
@@ -92,9 +92,11 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 						/>
 						<button className="btn-submit-inside-caret-right"></button>
 					</form>
-					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
-						Cancel
-					</button>
+					{reviewFavQuote && (
+						<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
+							Cancel
+						</button>
+					)}
 				</>
 			)}
 

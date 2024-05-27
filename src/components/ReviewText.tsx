@@ -67,6 +67,7 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 
 	const activateForm = () => {
 		setShowForm(true)
+		setIsModding(true)
 		setShowReviewText(false)
 	}
 
@@ -76,7 +77,7 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 		setShowForm(false)
 	}
 	useEffect(() => {
-		if (showForm) {
+		if (isModding) {
 			document.getElementById('review_text' + book.id)?.focus()
 			if (reviewText !== undefined)
 				document.getElementById('review_text' + book.id)?.setAttribute('value', reviewText)
@@ -96,9 +97,11 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 						/>
 						<button type="submit" className="btn-submit-inside-caret-right"></button>
 					</form>
-					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
-						Cancel
-					</button>
+					{reviewText && (
+						<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
+							Cancel
+						</button>
+					)}
 				</>
 			)}
 			{showReviewText && <div onClick={activateForm}>{reviewText}</div>}
