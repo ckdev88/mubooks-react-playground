@@ -84,7 +84,7 @@ main button.alt,
 	transform: scaleY(1);
 }
 .caret-right-toggle::after,
-.caret-right-toggle.active::after{
+.caret-right-toggle.active::after {
 	background-position-y: top;
 	transform: scaleY(1);
 }
@@ -154,7 +154,7 @@ main button.alt,
 
 .btn-sm {
 	height: 1.4rem;
-	line-height: .9rem;
+	line-height: 0.9rem;
 	font-size: 0.8rem;
 	border-radius: 0.2rem;
 	border-color: #b73581;
@@ -230,7 +230,6 @@ main button.alt,
 .btn-text .icon {
 	margin-right: 0.35em;
 }
-/* TODO: icons should be svg, preferrably home-made, else unicode */
 .icon-add {
 	background-image: url('/img/icon-add.svg');
 }
