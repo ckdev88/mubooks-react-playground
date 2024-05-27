@@ -66,6 +66,10 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 		setShowForm(true)
 		setIsModding(true)
 	}
+	const cancelSubmit = (): void => {
+		setIsModding(false)
+		setShowForm(false)
+	}
 
 	useEffect(() => {
 		if (showForm) {
@@ -78,16 +82,22 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	return (
 		<div className="review-text quote">
 			{showForm && (
-				<form className="single-small-form clr" onSubmit={processForm}>
-					<input
-						name="review_fav_quote"
-						id={'review_fav_quote' + book.id}
-						type="text"
-						placeholder="Add your favorite quote..."
-					/>
-					<button className="btn-submit-inside-caret-right"></button>
-				</form>
+				<>
+					<form className="single-small-form clr" onSubmit={processForm}>
+						<input
+							name="review_fav_quote"
+							id={'review_fav_quote' + book.id}
+							type="text"
+							placeholder="Add your favorite quote..."
+						/>
+						<button className="btn-submit-inside-caret-right"></button>
+					</form>
+					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
+						Cancel
+					</button>
+				</>
 			)}
+
 			{!isModding && reviewFavQuote && Number(reviewFavQuote.length) > 0 && (
 				<main onClick={() => activateForm()}>{reviewFavQuote}</main>
 			)}

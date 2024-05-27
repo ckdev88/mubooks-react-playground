@@ -174,11 +174,10 @@
 .single-small-form + .btn-text {
 	margin-top: -0.2em;
 	display: block;
-	font-size: 0.8em;
+	font-size: 0.8rem;
 	padding-left: calc(2px + 0.3rem);
 	padding-right: calc(2px + 0.3rem);
 }
-
 .tropes {
 	padding: 0;
 	list-style-type: none;
