@@ -1,4 +1,3 @@
-// TODO: Add to reading in searchpage
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
