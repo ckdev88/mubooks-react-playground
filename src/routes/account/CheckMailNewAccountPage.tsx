@@ -1,6 +1,4 @@
 // TODO: design & copywrite confirmation email
-// TODO: check global state of auth
-
 import { useContext } from "react"
 import { AppContext } from "../../App"
 
