@@ -171,6 +171,13 @@
 .single-small-form input:active {
 	border-style: solid;
 }
+.single-small-form + .btn-text {
+	margin-top: -0.2em;
+	display: block;
+	font-size: 0.8em;
+	padding-left: calc(2px + 0.3rem);
+	padding-right: calc(2px + 0.3rem);
+}
 
 .tropes {
 	padding: 0;

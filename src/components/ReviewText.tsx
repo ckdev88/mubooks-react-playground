@@ -70,6 +70,11 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 		setShowReviewText(false)
 	}
 
+	const cancelSubmit = (): void => {
+		setIsModding(false)
+		setShowReviewText(true)
+		setShowForm(false)
+	}
 	useEffect(() => {
 		if (showForm) {
 			document.getElementById('review_text' + book.id)?.focus()
@@ -81,10 +86,20 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 	return (
 		<div className="review-text">
 			{showForm && (
-				<form className="single-small-form clr" onSubmit={processForm}>
-					<input name="review_text" id={'review_text' + book.id} type="text" placeholder="Add a review..." />
-					<button className="btn-submit-inside-caret-right"></button>
-				</form>
+				<>
+					<form className="single-small-form clr" onSubmit={processForm}>
+						<input
+							name="review_text"
+							id={'review_text' + book.id}
+							type="text"
+							placeholder="Add a review..."
+						/>
+						<button type="submit" className="btn-submit-inside-caret-right"></button>
+					</form>
+					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
+						Cancel
+					</button>
+				</>
 			)}
 			{showReviewText && <div onClick={activateForm}>{reviewText}</div>}
 		</div>
