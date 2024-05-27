@@ -27,14 +27,16 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 						</button>
 					</li>
 				))}
-				<li className="trope_add">
-					<button
-						className={showTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
-						onClick={() => setShowTropesForm(!showTropesForm)}
-					>
-						{showTropesForm ? 'Adding tropes...' : 'Add tropes'}
-					</button>
-				</li>
+				{!showTropesForm && (
+					<li className="trope_add">
+						<button
+							className={showTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
+							onClick={() => setShowTropesForm(!showTropesForm)}
+						>
+							Add tropes
+						</button>
+					</li>
+				)}
 			</ul>
 		)
 	}
@@ -99,14 +101,24 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 		if (showTropesForm === true) document.getElementById('trope_add_' + book.id)?.focus()
 	}, [showTropesForm, book.id])
 
+	const cancelSubmit = (): void => {
+		setShowTropesForm(false)
+		setIsModding(false)
+	}
+
 	return (
 		<>
 			{TropesList(bookTropes, book.id)}
 			{showTropesForm && (
-				<form className="single-small-form clr" onSubmit={processTropeAddForm}>
-					<input type="text" name="trope_add" id={'trope_add_' + book.id} placeholder="Add a trope..." />
-					<button className="btn-submit-inside-caret-right"></button>
-				</form>
+				<>
+					<form className="single-small-form clr" onSubmit={processTropeAddForm}>
+						<input type="text" name="trope_add" id={'trope_add_' + book.id} placeholder="Add a trope..." />
+						<button className="btn-submit-inside-caret-right"></button>
+					</form>
+					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
+						Cancel
+					</button>
+				</>
 			)}
 		</>
 	)
