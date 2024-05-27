@@ -15,6 +15,11 @@ interface AppContextType {
 	setPopupNotificationShow(popupNotificationShow: boolean): void
 }
 
+type Quote = {
+	quote: string
+	authors: string
+	title: string
+}
 type User = {
 	email: string
 	password: string
