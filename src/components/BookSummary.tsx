@@ -54,7 +54,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 			<div className="article-main">
 				<header>
 					<h2>
-						{book.title_short} <sup>({book.first_publish_year})</sup>
+						{book.title_short} {book.first_publish_year && <sup>({book.first_publish_year})</sup>}
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
 					{page === 'quotedbookspage' && ReviewQuote(book, book.review_fav_quote)}
