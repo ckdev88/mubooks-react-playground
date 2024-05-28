@@ -13,6 +13,7 @@ import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
 import convertDate from '../helpers/convertDate'
+import { Link } from 'react-router-dom'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -40,8 +41,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	}
 
 	return (
-		// TODO: add className for when marked as saved in search results
-		<article className="book-summary">
+		<article className={book.list && book.list > 0 ? 'book-summary saved' : 'book-summary'}>
 			<aside className="cover">
 				<img
 					src={
@@ -86,13 +86,18 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 							{page === 'searchpage' && (
 								<div className="status">
 									{book.list > 0 && (
-										// TODO: add links to book in certain list
+										// DOING: add links to book in certain list
+										// TODO: colorize the links a bit nicer and more distinctive, don't know how much yet though.
 										<strong>
 											<i>
-												{book.list === 1 && <>Already on my wishlist.</>}
+												{book.list === 1 && (
+													<>
+														Already on my <Link to="/wishlist">wishlist</Link>.
+													</>
+												)}
 												{book.list === 2 && (
 													<>
-														Reading
+														<Link to="/reading">Reading</Link>
 														{book.date_reading && (
 															<> since {convertDate(book.date_reading, 'human')}</>
 														)}
@@ -101,9 +106,14 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 												)}
 												{(book.list === 3 || book.list === 4) && (
 													<>
-														Finished
+														<Link to="/finished">Finished</Link>
 														{book.date_finished && (
 															<> on {convertDate(book.date_finished, 'human')}</>
+														)}
+														{book.list === 4 && (
+															<>
+																&nbsp;and <Link to="/favorites">favorited</Link>
+															</>
 														)}
 														.
 													</>
