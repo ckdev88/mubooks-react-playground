@@ -77,7 +77,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 			if (reviewFavQuote !== undefined)
 				document.getElementById('review_fav_quote' + book.id)?.setAttribute('value', reviewFavQuote)
 		}
-	}, [showForm, reviewFavQuote, book.id])
+	}, [showForm, reviewFavQuote, book.id, isModding])
 
 	return (
 		<div className="review-text quote">

@@ -82,7 +82,7 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 			if (reviewText !== undefined)
 				document.getElementById('review_text' + book.id)?.setAttribute('value', reviewText)
 		}
-	}, [showForm, reviewText, book.id])
+	}, [showForm, reviewText, book.id, isModding])
 
 	return (
 		<div className="review-text">

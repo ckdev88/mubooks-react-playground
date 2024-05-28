@@ -28,7 +28,7 @@ export default function SignupCard() {
 		if (signup.error) setError(signup.error.message)
 		else {
 			setUsermail(user.email)
-			navigate(`/account/new?addr=${user.email}`) // TODO: beetje unsafe dit, beter via sessie of api
+			navigate(`/account/new?addr=${user.email}`)
 		}
 	}
 
