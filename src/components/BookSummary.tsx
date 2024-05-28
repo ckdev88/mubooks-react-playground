@@ -12,6 +12,7 @@ import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
+import convertDate from '../helpers/convertDate'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -81,20 +82,51 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 						/>
 					)}
 					{page !== 'quotedbookspage' && (
-						<div className="marks">
-							{/* TODO: build further on new feature; highlight saved books in search view */}
-							{!book.list && AddBookToXButton(book, 1)}
-							{(book.list === 1 || (page === 'searchpage' && (book.list < 2 || !book.list))) &&
-								AddBookToXButton(book, 2)}
-							{(book.list === 2 || (page === 'searchpage' && book.list !== 3 && book.list !== 4)) &&
-								AddBookToXButton(book, 3)}
-							{(book.list === 3 || (page === 'searchpage' && book.list !== 4)) &&
-								AddBookToXButton(book, 4)}
-							{book.list === 1 && RemoveBookFromXButton(book, 1)}
-							{book.list === 2 && RemoveBookFromXButton(book, 2)}
-							{book.list === 3 && RemoveBookFromXButton(book, 3)}
-							{book.list === 4 && RemoveBookFromXButton(book, 4)}
-						</div>
+						<>
+							{page === 'searchpage' && (
+								<div className="status">
+									{book.list > 0 && (
+										// TODO: add links to book in certain list
+										<strong>
+											<i>
+												{book.list === 1 && <>Already on my wishlist.</>}
+												{book.list === 2 && (
+													<>
+														Reading
+														{book.date_reading && (
+															<> since {convertDate(book.date_reading, 'human')}</>
+														)}
+														.
+													</>
+												)}
+												{(book.list === 3 || book.list === 4) && (
+													<>
+														Finished
+														{book.date_finished && (
+															<> on {convertDate(book.date_finished, 'human')}</>
+														)}
+														.
+													</>
+												)}
+											</i>
+										</strong>
+									)}
+								</div>
+							)}
+							<div className="marks">
+								{!book.list && AddBookToXButton(book, 1)}
+								{(book.list === 1 || (page === 'searchpage' && (book.list < 2 || !book.list))) &&
+									AddBookToXButton(book, 2)}
+								{(book.list === 2 || (page === 'searchpage' && book.list !== 3 && book.list !== 4)) &&
+									AddBookToXButton(book, 3)}
+								{(book.list === 3 || (page === 'searchpage' && book.list !== 4)) &&
+									AddBookToXButton(book, 4)}
+								{book.list === 1 && RemoveBookFromXButton(book, 1)}
+								{book.list === 2 && RemoveBookFromXButton(book, 2)}
+								{book.list === 3 && RemoveBookFromXButton(book, 3)}
+								{book.list === 4 && RemoveBookFromXButton(book, 4)}
+							</div>
+						</>
 					)}
 				</main>
 			</div>
