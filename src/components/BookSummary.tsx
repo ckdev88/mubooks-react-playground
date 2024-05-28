@@ -41,7 +41,9 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	}
 
 	return (
-		<article className={book.list && book.list > 0 ? 'book-summary saved' : 'book-summary'}>
+		<article
+			className={book.list && book.list > 0 && page === 'searchpage' ? 'book-summary saved' : 'book-summary'}
+		>
 			<aside className="cover">
 				<img
 					src={
@@ -88,38 +90,36 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 									{book.list > 0 && (
 										// DOING: add links to book in certain list
 										// TODO: colorize the links a bit nicer and more distinctive, don't know how much yet though.
-										<strong>
-											<i>
-												{book.list === 1 && (
-													<>
-														Already on my <Link to="/wishlist">wishlist</Link>.
-													</>
-												)}
-												{book.list === 2 && (
-													<>
-														<Link to="/reading">Reading</Link>
-														{book.date_reading && (
-															<> since {convertDate(book.date_reading, 'human')}</>
-														)}
-														.
-													</>
-												)}
-												{(book.list === 3 || book.list === 4) && (
-													<>
-														<Link to="/finished">Finished</Link>
-														{book.date_finished && (
-															<> on {convertDate(book.date_finished, 'human')}</>
-														)}
-														{book.list === 4 && (
-															<>
-																&nbsp;and <Link to="/favorites">favorited</Link>
-															</>
-														)}
-														.
-													</>
-												)}
-											</i>
-										</strong>
+										<em>
+											{book.list === 1 && (
+												<>
+													Already on my <Link to="/wishlist">wishlist</Link>.
+												</>
+											)}
+											{book.list === 2 && (
+												<>
+													<Link to="/reading">Reading</Link>
+													{book.date_reading && (
+														<> since {convertDate(book.date_reading, 'human')}</>
+													)}
+													.
+												</>
+											)}
+											{(book.list === 3 || book.list === 4) && (
+												<>
+													<Link to="/finished">Finished</Link>
+													{book.date_finished && (
+														<> on {convertDate(book.date_finished, 'human')}</>
+													)}
+													{book.list === 4 && (
+														<>
+															&nbsp;and <Link to="/favorites">favorited</Link>
+														</>
+													)}
+													.
+												</>
+											)}
+										</em>
 									)}
 								</div>
 							)}
