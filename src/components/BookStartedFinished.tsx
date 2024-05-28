@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { debounce, openCalendarPopUp } from '../Helpers'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
@@ -57,6 +57,20 @@ const BookStartedFinished = ({
 		const newDate = parseInt(newDateArr[0] + newDateArr[1] + newDateArr[2], 10)
 		changeDates(field, newDate)
 	}
+	useEffect(() => {
+		if (dateStarted) {
+			;(document.getElementById('date_reading' + bookid) as HTMLInputElement).value = convertDate(
+				dateStarted,
+				'input'
+			)
+		}
+		if (dateFinished) {
+			;(document.getElementById('date_finished' + bookid) as HTMLInputElement).value = convertDate(
+				dateFinished,
+				'input'
+			)
+		}
+	}, [dateStarted, dateFinished])
 
 	return (
 		<div className="book-started-finished">

@@ -30,8 +30,8 @@ export default function convertDate(dateToConvert: number | string, outputFormat
 	}
 	let dayNumPadded: string | number = dayNum
 	let monthNumPadded: string | number = monthNum
-	if (Number(dayNumPadded) < 9) dayNumPadded = '0' + dayNum.toString()
-	if (Number(monthNumPadded) < 9) monthNumPadded = '0' + monthNum.toString()
+	if (Number(dayNumPadded) < 10) dayNumPadded = '0' + dayNum.toString()
+	if (Number(monthNumPadded) < 10) monthNumPadded = '0' + monthNum.toString()
 	switch (outputFormat) {
 		case 'human':
 			return dayNum + ' ' + monthName + ' ' + year
