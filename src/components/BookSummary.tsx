@@ -88,8 +88,6 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 							{page === 'searchpage' && (
 								<div className="status">
 									{book.list > 0 && (
-										// DOING: add links to book in certain list
-										// TODO: colorize the links a bit nicer and more distinctive, don't know how much yet though.
 										<em>
 											{book.list === 1 && (
 												<>
