@@ -1,12 +1,16 @@
-// TODO: this can be made faster by assigning the uppercase ASCII code, for ultimate optimization
 function cleanInput(input: string, capfirst: boolean = false): string {
 	if (input.length < 1) return ''
 	input.trim()
 	let returnvalue: string
-	if (capfirst) returnvalue = input[0].toUpperCase() + input.slice(1)
-	else returnvalue = input
+
+	let charc0 = input.charCodeAt(0)
+	if (capfirst && charc0 > 96 && charc0 < 123) {
+		charc0 -= 32
+		returnvalue = String.fromCharCode(charc0) + input.slice(1)
+	} else returnvalue = input
 	return returnvalue
 }
+
 function cleanAnchor(input: string): string {
 	if (input.length < 1) return ''
 	let returnvalue = ''
