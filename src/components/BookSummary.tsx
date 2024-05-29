@@ -13,7 +13,7 @@ import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
 import convertDate from '../helpers/convertDate'
-import { Link } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -40,9 +40,13 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 		}
 	}
 
+	// TODO: simplify by converting/trimming all chars which arent alphanumeric
+	const bookAnchor: string = encodeURIComponent(book.title_short + '-' + book.id)
+
 	return (
 		<article
 			className={book.list && book.list > 0 && page === 'searchpage' ? 'book-summary saved' : 'book-summary'}
+			id={bookAnchor}
 		>
 			<aside className="cover">
 				<img
@@ -91,12 +95,12 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 										<em>
 											{book.list === 1 && (
 												<>
-													Already on my <Link to="/wishlist">wishlist</Link>.
+													Already on my <Link to={'/wishlist#' + bookAnchor}>wishlist</Link>.
 												</>
 											)}
 											{book.list === 2 && (
 												<>
-													<Link to="/reading">Reading</Link>
+													<Link to={'/reading#' + bookAnchor}>Reading</Link>
 													{book.date_reading && (
 														<> since {convertDate(book.date_reading, 'human')}</>
 													)}
@@ -105,13 +109,14 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 											)}
 											{(book.list === 3 || book.list === 4) && (
 												<>
-													<Link to="/finished">Finished</Link>
+													<Link to={'/finished#' + bookAnchor}>Finished</Link>
 													{book.date_finished && (
 														<> on {convertDate(book.date_finished, 'human')}</>
 													)}
 													{book.list === 4 && (
 														<>
-															&nbsp;and <Link to="/favorites">favorited</Link>
+															&nbsp;and{' '}
+															<Link to={'/favorites' + bookAnchor}>favorited</Link>
 														</>
 													)}
 													.
