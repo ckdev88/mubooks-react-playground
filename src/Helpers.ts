@@ -40,7 +40,7 @@ function openCalendarPopUp(dateFieldId: string): void {
 	}
 }
 
-function shuffleArray(array:[]) {
+function shuffleArray(array: []) {
 	let currentIndex = array.length
 	while (currentIndex > 0) {
 		const randomIndex = Math.floor(Math.random() * currentIndex)
