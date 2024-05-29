@@ -14,6 +14,7 @@ import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
+import { cleanAnchor } from '../helpers/cleanInput'
 
 const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -41,7 +42,8 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	}
 
 	// TODO: simplify by converting/trimming all chars which arent alphanumeric
-	const bookAnchor: string = encodeURIComponent(book.title_short + '-' + book.id)
+	// const bookAnchor: string = encodeURIComponent(book.title_short + '-' + book.id)
+	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 
 	return (
 		<article
@@ -116,7 +118,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 													{book.list === 4 && (
 														<>
 															&nbsp;and{' '}
-															<Link to={'/favorites' + bookAnchor}>favorited</Link>
+															<Link to={'/favorites#' + bookAnchor}>favorited</Link>
 														</>
 													)}
 													.
