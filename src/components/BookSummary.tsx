@@ -41,8 +41,6 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 		}
 	}
 
-	// TODO: simplify by converting/trimming all chars which arent alphanumeric
-	// const bookAnchor: string = encodeURIComponent(book.title_short + '-' + book.id)
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 
 	return (
