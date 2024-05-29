@@ -1,3 +1,5 @@
+// TODO: add versioning to check when user is running non-updated version, if yes, refresh the relevant stuffs
+// TODO: add feature: quick onpress-search to quickly jump to book in own library
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
