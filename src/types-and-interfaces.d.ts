@@ -46,8 +46,6 @@ interface LoginFormInput {
 type BookData = [
 	{
 		id: Id
-		isbn0: string
-		isbn1: string
 		index?: number
 		title: string
 		author_name: [string]
@@ -69,9 +67,7 @@ interface Book {
 	id: Id
 	img?: string
 	index?: number
-	isbn0?: string
-	isbn1?: string
-	isbn?: [string]
+	isbn?: string[]
 	key?: [string]
 	/** 1: Wishlist | 2: Reading | 3: Finished | 4: Favorite (+Finished) */
 	list: BookList

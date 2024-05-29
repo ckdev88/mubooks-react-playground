@@ -18,26 +18,26 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		let date_finished: number = 0
 		if (targetList > 2) date_finished = date_now
 		if (myBooks === null) myBooks = []
-		// TODO: isbn0 en isbn1 in type definitions .ts? -> zie SearchPage, lijkt enkel daarvoor te zijn, in ontwikkeling
+
 		myBooks.push({
 			author_key: book.author_key,
 			author_name: book.author_name,
 			cover: book.cover,
 			cover_edition_key: book.cover_edition_key,
-			date_reading: date_reading,
 			date_finished: date_finished,
-			list: list,
+			date_reading: date_reading,
 			first_publish_year: book.first_publish_year,
 			id: book.id,
 			img: book.img,
+			list: list,
 			number_of_pages_median: book.number_of_pages_median,
+			rate_spice: 0,
+			rate_stars: 0,
+			review_fav_quote: '',
+			review_text: '',
+			review_tropes: [],
 			title: book.title,
 			title_short: book.title_short,
-			rate_stars: 0,
-			rate_spice: 0,
-			review_tropes: [],
-			review_text: '',
-			review_fav_quote: '',
 		})
 		return myBooks
 	}

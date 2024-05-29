@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { isUrl, getOlCover } from '../../Helpers'
-
 /*
 const explore = reactive({
 	api: 'http://openlibrary.org/search.json',
@@ -47,7 +46,7 @@ const AddBookPage = () => {
 				'https://openlibrary.org/search.json?q=' +
 					search_term +
 					'&mode=everything&limit=8&fields=' +
-					searchfields,
+					searchfields
 			)
 			await wacht
 				.json()
@@ -57,20 +56,13 @@ const AddBookPage = () => {
 							r.author_key !== undefined &&
 							r.edition_key !== undefined &&
 							r.isbn !== undefined &&
-							r.cover_edition_key !== undefined,
-					),
+							r.cover_edition_key !== undefined
+					)
 				)
 				.then((filtered) => {
 					for (let i = 0; i < filtered.length; i++) {
 						filtered[i].id = filtered[i].edition_key.slice(0, 1).toString()
 						filtered[i].title_short = filtered[i].title.slice(0, 45).toString()
-						if (filtered[i].isbn.length > 0) {
-							filtered[i].isbn0 = filtered[i].isbn.slice(0, 1).toString()
-							filtered[i].isbn1 = filtered[i].isbn.slice(-1).toString()
-						} else {
-							filtered[i].isbn0 = ''
-							filtered[i].isbn1 = ''
-						}
 						filtered[i].cover = getOlCover(filtered[i].cover_edition_key)
 					}
 					filtered.length > 30
