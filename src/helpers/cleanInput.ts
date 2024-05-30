@@ -1,6 +1,6 @@
 function cleanInput(input: string, capfirst: boolean = false): string {
-	if (input.length < 1) return ''
 	input.trim()
+	if (input.length < 1) return ''
 	let returnvalue: string
 
 	let charc0 = input.charCodeAt(0)

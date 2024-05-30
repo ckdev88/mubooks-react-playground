@@ -12,7 +12,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	function processForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		const value = cleanInput(e.currentTarget.review_fav_quote.value.trim(), true)
-		if (value !== undefined && value.length > 2) {
+		if (value !== undefined) {
 			setReviewFavQuote(value)
 			setShowForm(false)
 			setIsModding(false)
@@ -41,8 +41,6 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	)
 	const updateReviewTextCallback = useCallback(
 		async function updateReviewText() {
-			if (userMyBooks.length < 1) return
-
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
 					userMyBooks[i].review_fav_quote = reviewFavQuote

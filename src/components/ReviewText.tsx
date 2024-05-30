@@ -13,7 +13,7 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 	function processForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		const value = cleanInput(e.currentTarget.review_text.value.trim(), true)
-		if (value !== undefined && value.length > 2) {
+		if (value !== undefined) {
 			setIsModding(true)
 			setReviewText(value)
 			setShowForm(false)
@@ -43,8 +43,6 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 	)
 	const updateReviewTextCallback = useCallback(
 		async function updateReviewText() {
-			if (userMyBooks.length < 1) return
-
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
 					userMyBooks[i].review_text = reviewText
