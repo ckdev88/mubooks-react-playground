@@ -17,17 +17,25 @@
 	font-size: 0.9rem;
 	z-index: 11;
 }
-
 #popupNotification.hide {
 	bottom: -4rem;
 }
-#notification-bar-offline {
-	font-size: 0.8rem;
-	background-color: rgba(255, 0, 0, 0.2);
-	text-shadow:1px 1px 0 white;
-	color: black;
-	font-weight:bold;
+#popupNotificationOffline {
+	/* background-color: rgba(255, 255, 250, 0.9); for dark theme later*/
+	/* color: #0f0f0f;  for dark theme later*/
 	border-radius: 0.5rem;
-	text-align:center;
-	padding:1rem
+	color: #fff;
+	background: #14141ef2;
+	box-shadow: 0 0 1rem #00000080;
+	display: block;
+	padding: 0.5rem;
+	height: auto;
+	width: 80vw;
+	left: calc(10vw - 0.5rem);
+	position: fixed;
+	bottom: 5rem;
+	transition: bottom 0.1s ease-in-out;
+	text-align: center;
+	font-size: 0.9rem;
+	z-index: 11;
 }

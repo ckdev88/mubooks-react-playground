@@ -90,7 +90,7 @@ const App = () => {
 		let ret: string
 		if (popupNotification) ret = popupNotification
 		else ret = ''
-		setTimeout(() => setPopupNotification(''), 1000)
+		setTimeout(() => setPopupNotification(''), 500)
 		return <>{ret}</>
 	}
 
@@ -123,10 +123,12 @@ const App = () => {
 					</header>
 				)}
 				<main id="main" className="textwrapper">
-					{!isOnline && <div id="notification-bar-offline">You're offline. Some things might not work.</div>}
+					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
+					{popupNotification!=='' &&
 					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
 						{popupNotification && <>{popper()}</>}
 					</div>
+					}
 					<Routes>
 						<Route path="/*" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
