@@ -13,6 +13,7 @@ interface AppContextType {
 	setPopupNotification(popupNotification: string): void
 	popupNotificationShow: boolean
 	setPopupNotificationShow(popupNotificationShow: boolean): void
+	todaysDateInput: string
 }
 
 type Quote = {

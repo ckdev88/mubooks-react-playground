@@ -41,3 +41,29 @@ export default function convertDate(dateToConvert: number | string, outputFormat
 			return year + '-' + monthNumPadded + '-' + dayNumPadded
 	}
 }
+
+function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'input' | 'digit'): string {
+	if (UNIX_timestamp !== undefined) {
+		const a = new Date(UNIX_timestamp)
+		const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		const year = a.getFullYear()
+		const monthNum = a.getMonth() + 1
+		const month = months[monthNum]
+		const dateNum = a.getDate()
+		let datePadded: string | number = dateNum
+		let monthPadded: string | number = monthNum
+		if (datePadded < 9) datePadded = '0' + dateNum.toString()
+		if (monthPadded < 9) monthPadded = '0' + monthNum.toString()
+		switch (outputFormat) {
+			case 'input':
+				return year + '-' + monthPadded + '-' + datePadded
+			case 'human':
+				return dateNum + ' ' + month + ' ' + year
+			case 'digit':
+				return year + '' + monthPadded + '' + datePadded
+		}
+	}
+	return ''
+}
+
+export { convertDate, timestampConverter }

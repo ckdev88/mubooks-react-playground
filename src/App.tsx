@@ -25,8 +25,11 @@ import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import LoadLibrary from './routes/books/LoadLibrary.tsx'
+import { timestampConverter } from './helpers/convertDate.ts'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
+
+const todaysDateInput = timestampConverter(Date.now(), 'input')
 
 const App = () => {
 	let userIsLoggedInInitVal: boolean
@@ -94,6 +97,7 @@ const App = () => {
 					setPopupNotification,
 					popupNotificationShow,
 					setPopupNotificationShow,
+					todaysDateInput,
 				}}
 			>
 				{userIsLoggedIn && (

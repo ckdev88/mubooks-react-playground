@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { debounce, openCalendarPopUp } from '../Helpers'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
-import convertDate from '../helpers/convertDate'
+import { convertDate } from '../helpers/convertDate'
 
 const BookStartedFinished = ({
 	date_started,
@@ -15,7 +15,7 @@ const BookStartedFinished = ({
 	bookid: Book['id']
 	list: Book['list']
 }) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
+	const { userMyBooks, setUserMyBooks, setPopupNotification, userid, todaysDateInput } = useContext(AppContext)
 	const [dateStarted, setDateStarted] = useState<Book['date_reading']>(date_started)
 	const [dateFinished, setDateFinished] = useState<Book['date_finished']>(date_finished)
 	async function MyBooksUpdate(myBooksNew: Books) {
@@ -87,6 +87,7 @@ const BookStartedFinished = ({
 					id={'date_reading' + bookid}
 					name={'date_reading' + bookid}
 					type="date"
+					max={todaysDateInput}
 					className="calendar-hidden"
 					onChange={debounce(() => modifyDateReading('date_reading'), 100)}
 				/>
@@ -108,6 +109,7 @@ const BookStartedFinished = ({
 						id={'date_finished' + bookid}
 						name={'date_finished' + bookid}
 						type="date"
+						max={todaysDateInput}
 						className="calendar-hidden"
 						onChange={debounce(() => modifyDateReading('date_finished'), 1000)}
 					/>

@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import getListName from '../functions/getListName'
-import convertDate from '../helpers/convertDate'
+import { convertDate, timestampConverter } from '../helpers/convertDate'
 
 const AddBookToXButton = (book: Book, targetList: BookList) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
@@ -54,31 +54,6 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 		if (error) msg = error.message
 		else msg = 'Added ' + book.title_short + ' to ' + getListName(targetList)
 		setPopupNotification(msg)
-	}
-
-	// TODO: move this function to generic helper location
-	function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'input' | 'digit'): string {
-		if (UNIX_timestamp !== undefined) {
-			const a = new Date(UNIX_timestamp)
-			const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-			const year = a.getFullYear()
-			const monthNum = a.getMonth() + 1
-			const month = months[monthNum]
-			const dateNum = a.getDate()
-			let datePadded: string | number = dateNum
-			let monthPadded: string | number = monthNum
-			if (datePadded < 9) datePadded = '0' + dateNum.toString()
-			if (monthPadded < 9) monthPadded = '0' + monthNum.toString()
-			switch (outputFormat) {
-				case 'input':
-					return year + '-' + monthPadded + '-' + datePadded
-				case 'human':
-					return dateNum + ' ' + month + ' ' + year
-				case 'digit':
-					return year + '' + monthPadded + '' + datePadded
-			}
-		}
-		return ''
 	}
 
 	function AddBookToX(book: Book, targetList: BookList) {
