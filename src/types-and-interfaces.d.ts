@@ -1,18 +1,18 @@
 interface AppContextType {
 	username: string
-	setUsername(username: string): void
+	setUsername(username: username): void
 	usermail: string
-	setUsermail(usermail: string): void
+	setUsermail(usermail: username): void
 	userid: string
-	setUserid(userid: string): void
+	setUserid(userid: userid): void
 	userMyBooks: Books
 	setUserMyBooks(userMyBooks: Books): void
 	userIsLoggedIn: boolean
-	setUserIsLoggedIn(userIsLoggedIn: boolean): void
+	setUserIsLoggedIn(userIsLoggedIn: userIsLoggedIn): void
 	popupNotification: string
-	setPopupNotification(popupNotification: string): void
+	setPopupNotification(popupNotification: popupNotification): void
 	popupNotificationShow: boolean
-	setPopupNotificationShow(popupNotificationShow: boolean): void
+	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
 	navTitle: string
 	setNavTitle(navTitle: navTitle): void
