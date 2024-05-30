@@ -1,4 +1,3 @@
-// TODO: add handler for when user is offline, thus cannot be logged out, maybe centralize?
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
