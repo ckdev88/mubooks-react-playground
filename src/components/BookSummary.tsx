@@ -1,6 +1,3 @@
-// TODO: add limit: started date cant be later than today < today +1
-// TODO: add limit: finished date < today +1
-// TODO: add requirement: started < finished date
 import { getBookCover } from '../Helpers'
 import { useState } from 'react'
 import AddBookToXButton from './AddBookToXButton'

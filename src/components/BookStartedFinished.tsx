@@ -109,6 +109,7 @@ const BookStartedFinished = ({
 						id={'date_finished' + bookid}
 						name={'date_finished' + bookid}
 						type="date"
+						min={date_started && convertDate(date_started, 'input')}
 						max={todaysDateInput}
 						className="calendar-hidden"
 						onChange={debounce(() => modifyDateReading('date_finished'), 1000)}
