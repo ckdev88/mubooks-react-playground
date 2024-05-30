@@ -7,15 +7,17 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
 	const [reviewFavQuote, setReviewFavQuote] = useState<Book['review_fav_quote']>(book.review_fav_quote)
 	const [showForm, setShowForm] = useState<boolean>(false)
+	const [showReviewFavQuote, setShowReviewFavQuote] = useState<boolean>(false)
 	const [isModding, setIsModding] = useState<boolean>(false)
 
 	function processForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		const value = cleanInput(e.currentTarget.review_fav_quote.value.trim(), true)
 		if (value !== undefined) {
+			setIsModding(true)
 			setReviewFavQuote(value)
 			setShowForm(false)
-			setIsModding(false)
+			setShowReviewFavQuote(true)
 		}
 	}
 	useEffect(() => {
@@ -48,24 +50,28 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 				}
 			}
 			updateMyBooksCallback(userMyBooks)
-			setIsModding(false)
 		},
 		[userMyBooks, book.id, reviewFavQuote, updateMyBooksCallback]
 	)
 	// /mod db
 	useEffect(() => {
 		if (review_fav_quote !== reviewFavQuote) {
-			updateReviewTextCallback()
-			setIsModding(false)
+			if (isModding) {
+				updateReviewTextCallback()
+				setIsModding(false)
+			}
 		}
 	}, [isModding, setUserMyBooks, updateReviewTextCallback, book.id, review_fav_quote, reviewFavQuote])
 
 	const activateForm = () => {
 		setShowForm(true)
 		setIsModding(true)
+		setShowReviewFavQuote(false)
 	}
+
 	const cancelSubmit = (): void => {
 		setIsModding(false)
+		setShowReviewFavQuote(true)
 		setShowForm(false)
 	}
 
@@ -88,7 +94,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 							type="text"
 							placeholder="Add your favorite quote..."
 						/>
-						<button className="btn-submit-inside-caret-right"></button>
+						<button type="submit" className="btn-submit-inside-caret-right"></button>
 					</form>
 					{reviewFavQuote && (
 						<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
@@ -98,9 +104,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 				</>
 			)}
 
-			{!isModding && reviewFavQuote && Number(reviewFavQuote.length) > 0 && (
-				<main onClick={() => activateForm()}>{reviewFavQuote}</main>
-			)}
+			{showReviewFavQuote && <div onClick={activateForm}>{reviewFavQuote}</div>}
 		</div>
 	)
 }
