@@ -44,6 +44,7 @@ const App = () => {
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
+	const [navTitle, setNavTitle] = useState<string>('')
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const csMyBooks = async () => {
@@ -83,21 +84,23 @@ const App = () => {
 		<>
 			<AppContext.Provider
 				value={{
-					username,
-					setUsername,
-					usermail,
-					setUsermail,
-					userid,
-					setUserid,
-					userMyBooks,
-					setUserMyBooks,
-					userIsLoggedIn,
-					setUserIsLoggedIn,
+					navTitle,
 					popupNotification,
-					setPopupNotification,
 					popupNotificationShow,
+					setNavTitle,
+					setPopupNotification,
 					setPopupNotificationShow,
+					setUserIsLoggedIn,
+					setUserMyBooks,
+					setUserid,
+					setUsermail,
+					setUsername,
 					todaysDateInput,
+					userIsLoggedIn,
+					userMyBooks,
+					userid,
+					usermail,
+					username,
 				}}
 			>
 				{userIsLoggedIn && (

@@ -1,10 +1,16 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
+const pageTitle = 'Favorites'
+
 const FavoritesPage = () => {
-	const { userMyBooks } = useContext(AppContext)
+	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
+
 	let hasbooks = false
 	let booksFiltered: Books = []
 	if (localStorage.getItem('MyBooks') !== undefined) {
@@ -18,7 +24,7 @@ const FavoritesPage = () => {
 	return (
 		<>
 			<h1>
-				Favorites <sub>My beloved and adored books: {booksFiltered.length}</sub>
+				{pageTitle} <sub>My beloved and adored books: {booksFiltered.length}</sub>
 			</h1>
 
 			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>No books marked as favorite yet.</h4>

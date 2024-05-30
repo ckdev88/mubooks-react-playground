@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { isUrl, getOlCover } from '../../Helpers'
+import { AppContext } from '../../App'
 /*
 const explore = reactive({
 	api: 'http://openlibrary.org/search.json',
@@ -27,7 +28,14 @@ async function fetchBook() {
 }
 */
 
+const pageTitle = 'Add a book'
+
 const AddBookPage = () => {
+	const { setNavTitle } = useContext(AppContext)
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
+
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
 	const [searchResults, setSearchResults] = useState<Books>([])
 	const [resultsWarning, setResultsWarning] = useState<string>('')
@@ -134,7 +142,7 @@ const AddBookPage = () => {
 					}
 				})}
 			</div>
-			<h1>Add a book</h1>
+			<h1>{pageTitle}</h1>
 			<form onSubmit={processAbForm}>
 				<fieldset>
 					<label htmlFor="abIsbn">ISBN</label>

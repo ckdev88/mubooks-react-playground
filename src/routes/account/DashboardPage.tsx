@@ -9,8 +9,13 @@ import { AppContext } from '../../App'
 import { localStorageKey } from '../../../utils/supabase'
 import { useNavigate } from 'react-router-dom'
 
+const pageTitle = 'Mu Dashboard'
 export default function DashboardPage() {
-	const { username } = useContext(AppContext)
+	const { username, setNavTitle } = useContext(AppContext)
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
+
 	const navigate = useNavigate()
 	useEffect(() => {
 		if (localStorage.getItem(localStorageKey) === null) {

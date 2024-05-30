@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from 'react-router-dom'
 
 const NavWrapper = () => {
 	const navigate = useNavigate()
-	const { userIsLoggedIn } = useContext(AppContext)
+	const { userIsLoggedIn, navTitle } = useContext(AppContext)
 
 	const [nav0Expanded, setNav0Expanded] = useState(false)
 
@@ -33,6 +33,7 @@ const NavWrapper = () => {
 							<div className="burgerbar bar3"></div>
 						</div>
 					</button>
+					<h1 id="navTitle">{navTitle}</h1>
 					<div style={{ display: 'flex', alignContent: 'center' }}>
 						<button className="toggleZoekNav" onClick={() => goSearch()}>
 							<span className="alt">Search</span>

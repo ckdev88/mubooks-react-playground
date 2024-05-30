@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import BooksOverviewPage from './BooksOverviewPage'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 
+const pageTitle = 'Mu Quotes'
+
 const QuotedPage = () => {
-	const { userMyBooks } = useContext(AppContext)
+	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
+
 	let quotedbooks: Books
 	let hasBooks: boolean = false
 	if (userMyBooks === undefined) quotedbooks = []
@@ -18,7 +24,7 @@ const QuotedPage = () => {
 	return (
 		<>
 			<h1>
-				My Quotes <sub>My books with quotes to remember: {quotedbooks.length}</sub>
+				{pageTitle} <sub>My books with quotes to remember: {quotedbooks.length}</sub>
 			</h1>
 			<div className={hasBooks === true ? 'dnone' : 'dblock'}>
 				<h4>No books added yet, find them and add them.</h4>

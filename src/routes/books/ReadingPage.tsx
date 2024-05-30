@@ -1,10 +1,14 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
 const ReadingPage = () => {
-	const { userMyBooks } = useContext(AppContext)
+	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	const pageTitle = 'Mu Reading'
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
 
 	let hasbooks = false
 	let booksFiltered: Books = []

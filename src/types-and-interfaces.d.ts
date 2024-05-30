@@ -14,6 +14,8 @@ interface AppContextType {
 	popupNotificationShow: boolean
 	setPopupNotificationShow(popupNotificationShow: boolean): void
 	todaysDateInput: string
+	navTitle: string
+	setNavTitle(navTitle: navTitle): void
 }
 
 type Quote = {

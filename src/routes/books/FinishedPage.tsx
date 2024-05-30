@@ -1,11 +1,14 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
 const FinishedPage = () => {
-	const { userMyBooks } = useContext(AppContext)
-
+	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	const pageTitle = 'Finished books'
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
 	let hasbooks = false
 	let booksFiltered: Books = []
 
@@ -21,7 +24,7 @@ const FinishedPage = () => {
 	return (
 		<>
 			<h1>
-				Finished books
+				{pageTitle}
 				<sub>Books I finished reading: {booksFiltered.length}</sub>
 			</h1>
 			<p>Have any favorites? Add them to your favorites from here.</p>
