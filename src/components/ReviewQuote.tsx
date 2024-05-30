@@ -20,7 +20,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	}
 	useEffect(() => {
 		if (book.review_fav_quote === undefined || book.review_fav_quote.length < 1) setShowForm(true)
-	}, [book.review_fav_quote, reviewFavQuote])
+	}, [book.review_fav_quote])
 
 	// mod db
 	// TODO: move this function to generic helper location
