@@ -58,6 +58,20 @@ const App = () => {
 		}
 	}
 
+	// online state checker & notifier
+	const [isOnline, setIsOnline] = useState(navigator.onLine)
+	useEffect(() => {
+		const handleStatusChange = () => setIsOnline(navigator.onLine)
+
+		window.addEventListener('online', handleStatusChange)
+		window.addEventListener('offline', handleStatusChange)
+		return () => {
+			window.removeEventListener('online', handleStatusChange)
+			window.removeEventListener('offline', handleStatusChange)
+		}
+	}, [isOnline])
+	// /online state checker & notifier
+
 	useEffect(() => {
 		if (userIsLoggedIn === true && userMyBooks.length < 1) csMyBooks()
 	}, [userIsLoggedIn, initialMyBooksSet, userMyBooks.length])
@@ -109,6 +123,7 @@ const App = () => {
 					</header>
 				)}
 				<main id="main" className="textwrapper">
+					{!isOnline && <div id="notification-bar-offline">You're offline. Some things might not work.</div>}
 					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
 						{popupNotification && <>{popper()}</>}
 					</div>

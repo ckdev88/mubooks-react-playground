@@ -10,8 +10,6 @@ const LoginCard = () => {
 	const [error, setError] = useState('')
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	// TODO: either user of remove useAuthUserLogin(user) references
-
 	const UserLogin = async (user: User) => {
 		const { data, error } = await supabase.auth.signInWithPassword({
 			email: user.email,

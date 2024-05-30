@@ -5,7 +5,7 @@ import { supabase } from '../../utils/supabase'
 
 const ReviewText = (book: Book, review_text: Book['review_text']) => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
-	const [reviewText, setReviewText] = useState<string>(book.review_text)
+	const [reviewText, setReviewText] = useState<Book['review_text']>(book.review_text)
 	const [showForm, setShowForm] = useState<boolean>(false)
 	const [showReviewText, setShowReviewText] = useState<boolean>(true)
 	const [isModding, setIsModding] = useState<boolean>(false)
@@ -74,6 +74,7 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 		setShowReviewText(true)
 		setShowForm(false)
 	}
+
 	useEffect(() => {
 		if (isModding) {
 			document.getElementById('review_text' + book.id)?.focus()
