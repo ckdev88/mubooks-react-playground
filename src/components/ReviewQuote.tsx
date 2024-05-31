@@ -7,7 +7,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
 	const [reviewFavQuote, setReviewFavQuote] = useState<Book['review_fav_quote']>(book.review_fav_quote)
 	const [showForm, setShowForm] = useState<boolean>(false)
-	const [showReviewFavQuote, setShowReviewFavQuote] = useState<boolean>(false)
+	const [showReviewFavQuote, setShowReviewFavQuote] = useState<boolean>(true)
 	const [isModding, setIsModding] = useState<boolean>(false)
 
 	function processForm(e: React.FormEvent<HTMLFormElement>) {
@@ -41,8 +41,8 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 		},
 		[setUserMyBooks, setPopupNotification, userid]
 	)
-	const updateReviewTextCallback = useCallback(
-		async function updateReviewText() {
+	const updateReviewQuoteCallback = useCallback(
+		async function updateReviewQuote() {
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
 					userMyBooks[i].review_fav_quote = reviewFavQuote
@@ -57,11 +57,11 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 	useEffect(() => {
 		if (review_fav_quote !== reviewFavQuote) {
 			if (isModding) {
-				updateReviewTextCallback()
+				updateReviewQuoteCallback()
 				setIsModding(false)
 			}
 		}
-	}, [isModding, setUserMyBooks, updateReviewTextCallback, book.id, review_fav_quote, reviewFavQuote])
+	}, [isModding, setUserMyBooks, updateReviewQuoteCallback, book.id, review_fav_quote, reviewFavQuote])
 
 	const activateForm = () => {
 		setShowForm(true)

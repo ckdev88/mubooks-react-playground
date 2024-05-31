@@ -15,9 +15,7 @@ const QuotedPage = () => {
 	let hasBooks: boolean = false
 	if (userMyBooks === undefined) quotedbooks = []
 	if (userMyBooks.length > 0) {
-		quotedbooks = userMyBooks.filter(
-			(book) => book.review_fav_quote && book.review_fav_quote !== '' && book.rate_spice === 5
-		)
+		quotedbooks = userMyBooks.filter((book) => book.review_fav_quote && book.review_fav_quote !== '')
 		if (quotedbooks.length > 0) hasBooks = true
 	} else quotedbooks = []
 
