@@ -125,7 +125,7 @@ const NavWrapper = () => {
 					<ul>
 						<li>
 							<NavLink to={'/account/profile'} onClick={toggleNav0}>
-							{ /*
+								{/*
 								 <svg
 									width="800px"
 									height="800px"
@@ -151,7 +151,7 @@ const NavWrapper = () => {
 										</g>
 									</g>
 								</svg>&nbsp;
-							   */ }
+							   */}
 								Profile
 							</NavLink>
 						</li>

@@ -5,6 +5,7 @@ import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
 import AddBookPage from './routes/books/AddBookPage'
 import AuthConfirm from './routes/auth/Confirm.tsx'
+import ResetPasswordPage from './routes/auth/ResetPasswordPage.tsx'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
 import ClearMyBooks from './routes/books/ClearMyBooks'
@@ -26,6 +27,7 @@ import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import LoadLibrary from './routes/books/LoadLibrary.tsx'
 import { timestampConverter } from './helpers/convertDate.ts'
+import ResetP from './routes/auth/ResetP.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -124,17 +126,19 @@ const App = () => {
 				)}
 				<main id="main" className="textwrapper">
 					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
-					{popupNotification!=='' &&
-					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
-						{popupNotification && <>{popper()}</>}
-					</div>
-					}
+					{popupNotification !== '' && (
+						<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
+							{popupNotification && <>{popper()}</>}
+						</div>
+					)}
 					<Routes>
 						<Route path="/*" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
 						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
 						<Route path="/account/logout" Component={UserLogoutPage} />
 						<Route path="/auth/confirm" Component={AuthConfirm} />
+						<Route path="/auth/resetpassword" Component={ResetPasswordPage} />
+						<Route path="/auth/resetp" Component={ResetP} />
 						<Route path="/account/new" Component={CheckMailNewAccountPage} />
 						{userIsLoggedIn && (
 							<>

@@ -15,6 +15,7 @@ const RootPage = () => {
 		setUserIsLoggedIn(true)
 	}
 
+	// TODO: cause not being able to fix resetpassword page?
 	let navigateTo: string = '/account/login'
 	if (loggedin) navigateTo = '/dashboard'
 

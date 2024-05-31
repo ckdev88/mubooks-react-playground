@@ -1,4 +1,4 @@
-// TODO: design & copywrite password reset email
+// DOING: design & copywrite password reset email
 // TODO: check global state of auth
 
 import { useContext } from 'react'
