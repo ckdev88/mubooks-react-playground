@@ -6,7 +6,7 @@ export default function Reading() {
 		<>
 			<article className="adder">
 				<Link to="/reading">
-					<header>
+					<header className="adder-header">
 						What I'm reading now <span>›</span>
 					</header>
 				</Link>

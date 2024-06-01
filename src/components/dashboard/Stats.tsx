@@ -2,7 +2,7 @@ export default function Stats() {
 	return (
 		<>
 			<article className="adder">
-				<header>
+				<header className="adder-header">
 					Mu Stats<span>›</span>
 				</header>
 				<main>

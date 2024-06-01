@@ -26,6 +26,7 @@ import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import LoadLibrary from './routes/books/LoadLibrary.tsx'
 import { timestampConverter } from './helpers/convertDate.ts'
+import { cleanAnchor } from './helpers/cleanInput.ts'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -93,6 +94,7 @@ const App = () => {
 		setTimeout(() => setPopupNotification(''), 500)
 		return <>{ret}</>
 	}
+	const mainClassName = 'main-' + cleanAnchor(location.hash, false)
 
 	return (
 		<>
@@ -122,13 +124,13 @@ const App = () => {
 						<NavWrapper />
 					</header>
 				)}
-				<main id="main" className="textwrapper">
+				<main id="main" className={mainClassName + ' textwrapper'}>
 					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
-					{popupNotification!=='' &&
-					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
-						{popupNotification && <>{popper()}</>}
-					</div>
-					}
+					{popupNotification !== '' && (
+						<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
+							{popupNotification && <>{popper()}</>}
+						</div>
+					)}
 					<Routes>
 						<Route path="/*" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />

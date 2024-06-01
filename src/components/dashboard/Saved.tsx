@@ -6,7 +6,7 @@ export default function Saved() {
 		<>
 			<article className="adder">
 				<Link to="/saved-books">
-					<header>
+					<header className="adder-header">
 						All of Mu Books<span>›</span>
 					</header>
 				</Link>

@@ -2,9 +2,8 @@
 	margin-bottom: 1rem;
 }
 
-.adder header {
+.adder-header {
 	font-family: 'Merriweather', 'serif';
-	font-size: 1.3rem;
 	font-weight: normal;
 	display: flex;
 	justify-content: space-between;

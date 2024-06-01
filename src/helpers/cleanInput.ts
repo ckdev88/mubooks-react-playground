@@ -11,7 +11,7 @@ function cleanInput(input: string, capfirst: boolean = false): string {
 	return returnvalue
 }
 
-function cleanAnchor(input: string): string {
+function cleanAnchor(input: string, dashes: boolean = true): string {
 	if (input.length < 1) return ''
 	let returnvalue = ''
 
@@ -19,8 +19,9 @@ function cleanAnchor(input: string): string {
 	for (let i = 0; i < input.length; i++) {
 		c = input.charCodeAt(i)
 		// change to hyphen if not part of alphanumerical ... 48=0, 57=9, 65=A, 90=Z, 97=a, 122=z
-		if (c < 48 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122) returnvalue += '-'
-		else returnvalue += input[i]
+		if (c < 48 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122) {
+			if (dashes) returnvalue += '-'
+		} else returnvalue += input[i]
 	}
 	return returnvalue
 }
