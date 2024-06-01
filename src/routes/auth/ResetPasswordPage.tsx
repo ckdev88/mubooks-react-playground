@@ -15,16 +15,13 @@ const ResetPasswordPage = () => {
 	useEffect(() => {
 		async function verifyTokenHash() {
 			const token = getUrlParamVal(window.location.href, 'token')
-
 			console.log('token_hash:', token)
 			const type = getUrlParamVal(window.location.href, 'type')
 			console.log('type:', type)
 			const email = getUrlParamVal(window.location.href, 'email')
 			console.log('email:', email)
 			if (type === 'recovery' && token !== null) {
-				const { data, error } = await supabase.auth.signInWithOtp({
-					email: email,
-				})
+				const { data, error } = await supabase.auth.signInWithOtp({ email: email })
 				if (error) {
 					setError(error.message)
 					console.log('error:', error.message, error.code, error.name, error.name)
