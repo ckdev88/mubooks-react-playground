@@ -1,16 +1,21 @@
 .quote {
 	font-style: italic;
 	text-align: center;
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	margin: 3rem auto;
 	width: 100%;
 	box-sizing: border-box;
 }
-.quote main::before {
+.main-dashboard .quote {
+	font-size: 1.3rem;
+}
+.quote main::before,
+.quote div::before {
 	display: inline-block;
 	content: '“';
 }
-.quote main::after {
+.quote main::after,
+.quote div::after {
 	display: inline-block;
 	content: '”';
 }
