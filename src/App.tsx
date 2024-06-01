@@ -91,7 +91,7 @@ const App = () => {
 		let ret: string
 		if (popupNotification) ret = popupNotification
 		else ret = ''
-		setTimeout(() => setPopupNotification(''), 500)
+		setTimeout(() => setPopupNotification(''), 1000)
 		return <>{ret}</>
 	}
 	const mainClassName = 'main-' + cleanAnchor(location.hash, false)
