@@ -104,7 +104,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 				</>
 			)}
 
-			{showReviewFavQuote && <div onClick={activateForm}>{reviewFavQuote}</div>}
+			{showReviewFavQuote && reviewFavQuote!=='' && <div onClick={activateForm}>{reviewFavQuote}</div>}
 		</div>
 	)
 }
