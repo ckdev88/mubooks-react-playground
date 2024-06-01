@@ -63,10 +63,6 @@ img {
 	display: none;
 	position: fixed;
 	top: 0;
-	box-sizing: border-box;
-	height: 3rem;
-	padding-top: 0.25rem;
-	box-sizing: border-box;
 	background-color: #b73581;
 	width: 100vw;
 }
@@ -82,16 +78,16 @@ img {
 #main {
 	position: relative;
 	z-index: 1;
-	padding: 1rem 0.25rem;
 	margin-left: auto;
 	margin-right: auto;
 }
 #main,
 #header {
-	max-width: calc(100% - 1.5rem);
+	padding: 0.25rem .5rem ;
+	box-sizing: border-box;
 }
 .main-dashboard#main {
-	max-width: calc(100% - 0.5rem);
+	max-width: 100%;
 }
 .loggedin #main {
 	padding-top: 4rem;

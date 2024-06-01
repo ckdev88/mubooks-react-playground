@@ -94,8 +94,8 @@
 
 @media screen and (max-width: 380px) {
 	.book-summary aside {
-		width: 6rem;
-		min-width: 6rem;
+		width: 5rem;
+		min-width: 5rem;
 	}
 }
 
