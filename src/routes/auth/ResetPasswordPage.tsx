@@ -77,41 +77,46 @@ const ResetPasswordPage = () => {
 	} else
 		return (
 			<>
-				<div className="card">
-					<header>
-						Reset your password
-						<sub>Fill in your new password twice and submit to activate it</sub>
-					</header>
+				<h1 id="welcome">
+					<img id="welcome-logo-img" src="img/logo.svg" alt="" /> MuBooks
+				</h1>
+				<div>
+					<div className="card">
+						<header>
+							Reset your password
+							<sub>Fill in your new password twice and submit to activate it</sub>
+						</header>
 
-					<main>
-						<form onSubmit={handleSubmit}>
-							<label htmlFor="account_password">
-								<div className="description">New password</div>
-								<input
-									type="password"
-									id="account_password"
-									name="account_password"
-									defaultValue=""
-									required
-								/>
-							</label>
-							<label htmlFor="account_password">
-								<div className="description">New password again</div>
-								<input
-									type="password"
-									id="account_password_again"
-									name="account_password_again"
-									defaultValue=""
-									required
-								/>
-							</label>
-							<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-							<button>Save new password and login</button>
-						</form>
-					</main>
-					<footer>
-						<Link to="/account/login">Login without changing password.</Link>
-					</footer>
+						<main>
+							<form onSubmit={handleSubmit}>
+								<label htmlFor="account_password">
+									<div className="description">New password</div>
+									<input
+										type="password"
+										id="account_password"
+										name="account_password"
+										defaultValue=""
+										required
+									/>
+								</label>
+								<label htmlFor="account_password">
+									<div className="description">New password again</div>
+									<input
+										type="password"
+										id="account_password_again"
+										name="account_password_again"
+										defaultValue=""
+										required
+									/>
+								</label>
+								<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
+								<button>Save new password and login</button>
+							</form>
+						</main>
+						<footer>
+							<Link to="/account/login">Login without changing password.</Link>
+						</footer>
+					</div>
 				</div>
 				{/*
 					 <h1>Reset your password</h1>
