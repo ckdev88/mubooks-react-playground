@@ -6,7 +6,7 @@ export default function Finished() {
 		<>
 			<article className="adder">
 				<Link to="/finished">
-					<header>
+					<header className="adder-header">
 						Mu Finished books<span>›</span>
 					</header>
 				</Link>

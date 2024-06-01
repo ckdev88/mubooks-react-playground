@@ -88,9 +88,11 @@ img {
 }
 #main,
 #header {
-	max-width: calc(100% - 1rem);
+	max-width: calc(100% - 1.5rem);
 }
-
+.main-dashboard#main {
+	max-width: calc(100% - 0.5rem);
+}
 .loggedin #main {
 	padding-top: 4rem;
 }

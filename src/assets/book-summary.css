@@ -74,10 +74,13 @@
 
 .book-summary .article-main {
 	float: left;
-	max-width: calc(100vw - 10rem);
+	max-width: calc(100vw - 11rem);
 	@media screen and (max-width: 380px) {
 		max-width: calc(100vw - 8rem);
 	}
+}
+.deck .book-summary .article-main {
+	max-width: calc(100vw - 10.5rem);
 }
 
 .book-summary .article-main button.modify {

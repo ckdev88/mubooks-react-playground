@@ -19,7 +19,8 @@ export default function DashboardPage() {
 	const navigate = useNavigate()
 	useEffect(() => {
 		if (localStorage.getItem(localStorageKey) === null) {
-			navigate('/account/login')
+			// tijdelijk uit
+			// navigate('/account/login')
 		}
 	}, [navigate])
 
