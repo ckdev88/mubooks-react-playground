@@ -2,14 +2,14 @@
 	margin-bottom: 1rem;
 }
 
-.adder header {
+.adder-header {
 	font-family: 'Merriweather', 'serif';
 	font-size: 1.3rem;
 	font-weight: normal;
 	display: flex;
 	justify-content: space-between;
 	letter-spacing: -0.04em;
-	padding: 0.5rem;
+	padding: 0.75rem 0.25rem;
 }
 
 .adder a {
@@ -35,15 +35,26 @@
 
 .adder main.toadd {
 	display: flex;
-	line-height: 1.5em;
+	line-height: 2em;
 	justify-content: left;
 	display: flex;
 	align-items: center;
+	font-size:.9rem;
 }
+.adder  button.btn-icon{
+	display:block;}
 
 .adder .toadd:hover,
 .adder .deck:has(a):hover {
 	background-color: white;
+}
+.adder .deck:has(a) {
+	background: transparent;
+	border-radius: 0.5rem;
+	transition: background-color 0.2s ease-in-out;
+}
+.adder .deck:has(a):hover {
+	background: white;
 }
 
 .adder aside {
@@ -73,20 +84,24 @@
 	position: relative;
 }
 
-.adder .deck .book-summary {
+.deck .book-summary {
 	padding-bottom: 0;
 }
 
-.adder .deck .book-summary header {
-	padding: 0;
-}
-
-.adder .deck .book-summary hr {
+.deck .book-summary hr {
 	display: none;
 }
 
 .deck-container {
 	padding-top: 0.125rem;
+}
+.deck-container {
+	margin-left: -0.25rem;
+	padding: 0.25rem;
+	border-radius: 0.5rem;
+}
+.deck-container:hover {
+	background: white;
 }
 
 .deck::after,

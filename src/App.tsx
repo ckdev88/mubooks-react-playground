@@ -1,6 +1,5 @@
-// TODO: Add to reading in searchpage
-// TODO: searchpage: te lange titel gooit zooitje op nieuwe regel
-// TODO: sometimes date_started gets 0 value on adding, reproduction same as succesfull ones
+// TODO: add versioning to check when user is running non-updated version, if yes, refresh the relevant stuffs
+// TODO: add feature: quick onpress-search to quickly jump to book in own library
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
@@ -13,6 +12,7 @@ import DashboardPage from './routes/account/DashboardPage'
 import FavoritesPage from './routes/books/FavoritesPage'
 import FinishedPage from './routes/books/FinishedPage'
 import NavWrapper from './components/NavWrapper'
+import QuotedPage from './routes/books/QuotedPage.tsx'
 import ReadingPage from './routes/books/ReadingPage'
 import RootPage from './routes/RootPage'
 import SavedBooksPage from './routes/books/SavedBooksPage'
@@ -25,8 +25,12 @@ import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import LoadLibrary from './routes/books/LoadLibrary.tsx'
+import { timestampConverter } from './helpers/convertDate.ts'
+import { cleanAnchor } from './helpers/cleanInput.ts'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
+
+const todaysDateInput = timestampConverter(Date.now(), 'input')
 
 const App = () => {
 	let userIsLoggedInInitVal: boolean
@@ -41,6 +45,7 @@ const App = () => {
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
+	const [navTitle, setNavTitle] = useState<string>('')
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const csMyBooks = async () => {
@@ -53,6 +58,20 @@ const App = () => {
 			return booksArr
 		}
 	}
+
+	// online state checker & notifier
+	const [isOnline, setIsOnline] = useState(navigator.onLine)
+	useEffect(() => {
+		const handleStatusChange = () => setIsOnline(navigator.onLine)
+
+		window.addEventListener('online', handleStatusChange)
+		window.addEventListener('offline', handleStatusChange)
+		return () => {
+			window.removeEventListener('online', handleStatusChange)
+			window.removeEventListener('offline', handleStatusChange)
+		}
+	}, [isOnline])
+	// /online state checker & notifier
 
 	useEffect(() => {
 		if (userIsLoggedIn === true && userMyBooks.length < 1) csMyBooks()
@@ -72,28 +91,32 @@ const App = () => {
 		let ret: string
 		if (popupNotification) ret = popupNotification
 		else ret = ''
-		setTimeout(() => setPopupNotification(''), 1000)
+		setTimeout(() => setPopupNotification(''), 500)
 		return <>{ret}</>
 	}
+	const mainClassName = 'main-' + cleanAnchor(location.hash, false)
 
 	return (
 		<>
 			<AppContext.Provider
 				value={{
-					username,
-					setUsername,
-					usermail,
-					setUsermail,
-					userid,
-					setUserid,
-					userMyBooks,
-					setUserMyBooks,
-					userIsLoggedIn,
-					setUserIsLoggedIn,
+					navTitle,
 					popupNotification,
-					setPopupNotification,
 					popupNotificationShow,
+					setNavTitle,
+					setPopupNotification,
 					setPopupNotificationShow,
+					setUserIsLoggedIn,
+					setUserMyBooks,
+					setUserid,
+					setUsermail,
+					setUsername,
+					todaysDateInput,
+					userIsLoggedIn,
+					userMyBooks,
+					userid,
+					usermail,
+					username,
 				}}
 			>
 				{userIsLoggedIn && (
@@ -101,10 +124,13 @@ const App = () => {
 						<NavWrapper />
 					</header>
 				)}
-				<main id="main" className="textwrapper">
-					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
-						{popupNotification && <>{popper()}</>}
-					</div>
+				<main id="main" className={mainClassName + ' textwrapper'}>
+					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
+					{popupNotification !== '' && (
+						<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
+							{popupNotification && <>{popper()}</>}
+						</div>
+					)}
 					<Routes>
 						<Route path="/*" Component={RootPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
@@ -124,6 +150,7 @@ const App = () => {
 								<Route path="/reading" Component={ReadingPage} />
 								<Route path="/finished" Component={FinishedPage} />
 								<Route path="/favorites" Component={FavoritesPage} />
+								<Route path="/quoted-books" Component={QuotedPage} />
 								<Route path="/clear-my-books" Component={ClearMyBooks} />
 								<Route path="/loadlibrary" Component={LoadLibrary} />
 							</>

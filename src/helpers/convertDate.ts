@@ -1,4 +1,3 @@
-// TODO: move this function to generic helper location
 export default function convertDate(dateToConvert: number | string, outputFormat: 'human' | 'input' | 'digit'): string {
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 	let a
@@ -30,8 +29,8 @@ export default function convertDate(dateToConvert: number | string, outputFormat
 	}
 	let dayNumPadded: string | number = dayNum
 	let monthNumPadded: string | number = monthNum
-	if (Number(dayNumPadded) < 9) dayNumPadded = '0' + dayNum.toString()
-	if (Number(monthNumPadded) < 9) monthNumPadded = '0' + monthNum.toString()
+	if (Number(dayNumPadded) < 10) dayNumPadded = '0' + dayNum.toString()
+	if (Number(monthNumPadded) < 10) monthNumPadded = '0' + monthNum.toString()
 	switch (outputFormat) {
 		case 'human':
 			return dayNum + ' ' + monthName + ' ' + year
@@ -41,3 +40,29 @@ export default function convertDate(dateToConvert: number | string, outputFormat
 			return year + '-' + monthNumPadded + '-' + dayNumPadded
 	}
 }
+
+function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'input' | 'digit'): string {
+	if (UNIX_timestamp !== undefined) {
+		const a = new Date(UNIX_timestamp)
+		const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		const year = a.getFullYear()
+		const monthNum = a.getMonth() + 1
+		const month = months[monthNum]
+		const dateNum = a.getDate()
+		let datePadded: string | number = dateNum
+		let monthPadded: string | number = monthNum
+		if (datePadded < 9) datePadded = '0' + dateNum.toString()
+		if (monthPadded < 9) monthPadded = '0' + monthNum.toString()
+		switch (outputFormat) {
+			case 'input':
+				return year + '-' + monthPadded + '-' + datePadded
+			case 'human':
+				return dateNum + ' ' + month + ' ' + year
+			case 'digit':
+				return year + '' + monthPadded + '' + datePadded
+		}
+	}
+	return ''
+}
+
+export { convertDate, timestampConverter }

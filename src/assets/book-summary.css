@@ -16,9 +16,7 @@
 }
 
 .book-summary {
-	transition:
-		padding 0.18s linear,
-		background-color 0.18s linear;
+	transition: padding 0.18s linear, background-color 0.18s linear;
 }
 
 .book-summary .calendar-hidden {
@@ -26,10 +24,6 @@
 	width: 0;
 	height: 0;
 	opacity: 0;
-}
-
-.book-summary .in-short {
-	font-size: 0.9rem;
 }
 
 .search .book-summary.saved {
@@ -52,11 +46,6 @@
 
 .search .book-summary.saved hr {
 	display: none;
-}
-
-.book-summary header {
-	display: flex;
-	justify-content: left;
 }
 
 .book-summary h2 {
@@ -85,7 +74,13 @@
 
 .book-summary .article-main {
 	float: left;
-	max-width: calc(100vw - 10rem);
+	max-width: calc(100vw - 11rem);
+	@media screen and (max-width: 380px) {
+		max-width: calc(100vw - 8rem);
+	}
+}
+.deck .book-summary .article-main {
+	max-width: calc(100vw - 10.5rem);
 }
 
 .book-summary .article-main button.modify {
@@ -99,8 +94,8 @@
 
 @media screen and (max-width: 380px) {
 	.book-summary aside {
-		width: 6rem;
-		min-width: 6rem;
+		width: 5rem;
+		min-width: 5rem;
 	}
 }
 
@@ -148,22 +143,24 @@
 	display: inline-block;
 }
 
-.book-summary .marks {
-	margin: 1rem 0;
-}
-
 .book-summary h3 {
 	margin-bottom: 0.25rem;
 	font-size: 1rem;
 	text-decoration: underline;
 }
 
-.book-summary .icon-remove img {
-	height: 0.8em;
-	width: auto;
-	display: inline-block;
+.book-summary .status em {
+	font-size: 0.9rem;
+	font-weight: bold;
 }
-
+.book-summary .status a {
+	color: inherit;
+}
+.book-summary .status a:hover,
+.book-summary .status a:focus,
+.book-summary .status a:active {
+	color: #b73581;
+}
 .book-summary .mark {
 	font-size: 0.9rem;
 	line-height: 1.3;
@@ -174,92 +171,45 @@
 		line-height: 1em;
 	}
 }
-
-.book-summary .icon {
-	display: block;
-	clear: both;
+.single-small-form {
+	margin-top: 0.25rem;
+}
+.single-small-form input {
 	float: left;
-	line-height: 1em;
-	height: 1.3rem;
-	width: 1em;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	text-align: center;
+	padding: 0.3rem 1.8rem 0.3rem 0.3rem;
+	border-style: dashed;
+	border-width: 2px;
+	border-radius: 0.4rem;
+	margin-bottom: 0;
+}
+.single-small-form input:focus,
+.single-small-form input:active {
+	border-style: solid;
+}
+.single-small-form + .btn-text {
+	margin-top: -0.2em;
+	display: block;
+	font-size: 0.8rem;
+	padding-left: calc(2px + 0.3rem);
+	padding-right: calc(2px + 0.3rem);
+}
+.tropes {
+	padding: 0;
+	list-style-type: none;
+}
+.tropes li {
+	display: block;
+	float: left;
+	margin: 0 0.5rem 0.5rem 0;
+	padding: 0.2rem 0.4rem;
 }
 
-.book-summary .btn-text .icon {
-	margin: 0 0.35em 0 0;
-}
-/* TODO: icons should be svg, preferrably home-made, else unicode */
-.book-summary .icon-add {
-	background-image: url('/img/icon-add.svg');
+.tropes li.trope_add {
+	padding: 0;
 }
 
-.book-summary .icon-reading {
-	background-image: url('/img/icon-reading.png');
-}
-
-.book-summary .icon-read {
-	background-image: url('/img/icon-read.png');
-}
-
-.book-summary .icon-wishlist {
-	background-image: url('/img/icon-wishlist.png');
-}
-
-.book-summary .icon-finished {
-	background-image: url('/img/icon-finished.png');
-}
-
-.book-summary .icon-favorite {
-	background-image: url('/img/icon-favorites.png');
-}
-
-.book-summary .icon-hide {
-	background-image: url('/img/icon-hide.png');
-}
-
-.book-summary .icon-remove {
-	background-image: url('/img/icon-remove.png');
-}
-
-.book-summary .icon-star,
-.book-summary .icon-spice {
-	font-weight: normal;
-	background: transparent;
-	background-size: cover;
-	mask-border: 1px solid black;
-	mask-border-width: 1px;
-	mask-border-outset: -1px;
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-	color: transparent;
-	background-color: #999;
-	mask-size: cover;
-	transition: background-color 0.18s ease-in-out;
-}
-.book-summary .icon-spice {
-	--svg-icon: url('data:image/svg+xml,\
-		<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">\
-		<path d="M330.67 263.12V173.4l-52.75-24.22C219.44 218.76 197.58 400 56 400a56 56 0 0 0 0 112c212.64 0 370.65-122.87 419.18-210.34l-37.05-38.54zm131.09-128.37C493.92 74.91 477.18 26.48 458.62 3a8 8 0 0 0-11.93-.59l-22.9 23a8.06 8.06 0 0 0-.89 10.23c6.86 10.36 17.05 35.1-1.4 72.32A142.85 142.85 0 0 0 364.34 96c-28 0-54 8.54-76.34 22.59l74.67 34.29v78.24h89.09L506.44 288c3.26-12.62 5.56-25.63 5.56-39.31a154 154 0 0 0-50.24-113.94z"/>\
-		</svg>');
-	mask-image: var(--svg-icon);
-}
-.book-summary .icon-star {
-	--svg-icon: url('/img/icon-star.svg');
-	mask-image: var(--svg-icon);
-}
-.book-summary .icon-star:hover,
-.book-summary .icon-spice:hover {
-	background-color: #555;
-}
-.book-summary .icon-star.active {
-	background-color: gold;
-}
-.book-summary .icon-spice.active {
-	background-color: #c90000;
+.book-summary .review-rates {
+	margin-top: 0.25rem;
 }
 .book-summary .rating {
 	text-align: center;
@@ -269,13 +219,6 @@
 .book-summary .rating h3 {
 	margin-top: 0.5rem;
 }
-
-.book-summary .tropes {
-	padding-bottom: 1rem;
-	border-bottom: 1px solid #666;
-	margin-bottom: 1rem;
-}
-
 .book-summary .tropes h3 {
 	padding-bottom: 0;
 }
@@ -283,13 +226,30 @@
 .book-summary .marks .favorites.active {
 	color: red;
 }
-
-.book-summary .marks .icon-favorites,
-.book-summary .marks .icon-read {
-	font-weight: 900;
-}
-
 .book-summary .marked {
 	color: hsl(325, 55%, 46%);
 	font-weight: bold;
+}
+.book-summary .tropes,
+.book-summary .marks,
+.book-summary .book-started-finished,
+.book-summary .review-text {
+	margin-top: 0.75rem;
+}
+.book-summary .article-main {
+	margin-bottom: 0.75rem;
+}
+.book-summary .review-text {
+	margin-bottom: 0.25rem;
+}
+.book-summary .book-started-finished {
+	font-size: 0.9rem;
+}
+.book-summary .quote:has(main) {
+	border: 2px dashed rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+.book-summary .quote main {
+	font-size: 0.9rem;
+	margin: 0.75rem;
 }

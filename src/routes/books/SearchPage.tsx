@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
+import { AppContext } from '../../App'
+
+const pageTitle = 'Search'
 
 const SearchPage = () => {
 	const [resultsMessage, setResultsMessage] = useState<string>('')
@@ -9,9 +12,12 @@ const SearchPage = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	const [loading, setLoading] = useState(false)
 
+	const { setNavTitle } = useContext(AppContext)
+
 	useEffect(() => {
+		setNavTitle(pageTitle)
 		document.getElementById('search_term')?.focus()
-	}, [])
+	}, [setNavTitle])
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
@@ -27,7 +33,7 @@ const SearchPage = () => {
 				'https://openlibrary.org/search.json?q=' +
 					search_term +
 					'&mode=everything&limit=30&fields=' +
-					searchfields,
+					searchfields
 			)
 				.then((response) => response.json())
 				.then((json) =>
@@ -37,22 +43,14 @@ const SearchPage = () => {
 							r.edition_key !== undefined &&
 							r.key !== undefined &&
 							r.isbn !== undefined &&
-							r.cover_edition_key !== undefined,
-					),
+							r.cover_edition_key !== undefined
+					)
 				)
 				.then((filtered) => {
 					setResultCount(filtered.length)
 					for (let i = 0; i < filtered.length; i++) {
-						// filtered[i].id = filtered[i].edition_key.slice(0, 1).toString()
 						filtered[i].id = filtered[i].key.toString().replace('/works/', '')
 						filtered[i].title_short = filtered[i].title.slice(0, 45).toString()
-						if (filtered[i].isbn.length > 0) {
-							filtered[i].isbn0 = filtered[i].isbn.slice(0, 1).toString()
-							filtered[i].isbn1 = filtered[i].isbn.slice(-1).toString()
-						} else {
-							filtered[i].isbn0 = ''
-							filtered[i].isbn1 = ''
-						}
 						filtered[i].cover = getOlCover(filtered[i].cover_edition_key)
 					}
 					filtered.length > 30
@@ -71,7 +69,7 @@ const SearchPage = () => {
 	return (
 		<>
 			<h1>
-				Search
+				{pageTitle}
 				<sub>Find the book you want to add.</sub>
 			</h1>
 			<form onSubmit={processSearchForm}>

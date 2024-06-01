@@ -1,20 +1,28 @@
 interface AppContextType {
 	username: string
-	setUsername(username: string): void
+	setUsername(username: username): void
 	usermail: string
-	setUsermail(usermail: string): void
+	setUsermail(usermail: username): void
 	userid: string
-	setUserid(userid: string): void
+	setUserid(userid: userid): void
 	userMyBooks: Books
 	setUserMyBooks(userMyBooks: Books): void
 	userIsLoggedIn: boolean
-	setUserIsLoggedIn(userIsLoggedIn: boolean): void
+	setUserIsLoggedIn(userIsLoggedIn: userIsLoggedIn): void
 	popupNotification: string
-	setPopupNotification(popupNotification: string): void
+	setPopupNotification(popupNotification: popupNotification): void
 	popupNotificationShow: boolean
-	setPopupNotificationShow(popupNotificationShow: boolean): void
+	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
+	todaysDateInput: string
+	navTitle: string
+	setNavTitle(navTitle: navTitle): void
 }
 
+type Quote = {
+	quote: string
+	authors: string
+	title: string
+}
 type User = {
 	email: string
 	password: string
@@ -41,8 +49,6 @@ interface LoginFormInput {
 type BookData = [
 	{
 		id: Id
-		isbn0: string
-		isbn1: string
 		index?: number
 		title: string
 		author_name: [string]
@@ -52,7 +58,7 @@ type BookData = [
 		cover: string
 		img?: string
 		title_short?: string
-	},
+	}
 ]
 interface Book {
 	author_key?: [string]
@@ -64,9 +70,7 @@ interface Book {
 	id: Id
 	img?: string
 	index?: number
-	isbn0?: string
-	isbn1?: string
-	isbn?: [string]
+	isbn?: string[]
 	key?: [string]
 	/** 1: Wishlist | 2: Reading | 3: Finished | 4: Favorite (+Finished) */
 	list: BookList
@@ -75,10 +79,13 @@ interface Book {
 	title_short: string
 	date_reading?: number
 	date_finished?: number
-	rate_stars?: Scale5
-	rate_spice?: Scale5
-	fav_quote?: string
+	rate_stars: Scale5
+	rate_spice: Scale5
+	review_tropes: BookTropes
+	review_text: string
+	review_fav_quote: string
 }
+type BookTropes = string[]
 
 type Results = [Book]
 interface Books extends Array<Book> {}

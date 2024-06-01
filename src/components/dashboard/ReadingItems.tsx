@@ -13,7 +13,7 @@ export default function ReadingItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} page='readingitemspage' />
+				return <BookSummary book={book} key={book.id} page="readingitemspage" />
 			})
 		}
 		return (
@@ -43,7 +43,7 @@ export default function ReadingItems() {
 								<img src="img/plus-icon.svg" />
 							</button>
 						</aside>
-						If you're already reading a book, let's add it here.
+						Already reading a book? Let's add it here.
 					</main>
 				</Link>
 			)}

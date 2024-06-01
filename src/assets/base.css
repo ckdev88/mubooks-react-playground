@@ -63,10 +63,6 @@ img {
 	display: none;
 	position: fixed;
 	top: 0;
-	box-sizing: border-box;
-	height: 3rem;
-	padding-top: 0.25rem;
-	box-sizing: border-box;
 	background-color: #b73581;
 	width: 100vw;
 }
@@ -82,15 +78,17 @@ img {
 #main {
 	position: relative;
 	z-index: 1;
-	padding: 1rem 0.25rem;
 	margin-left: auto;
 	margin-right: auto;
 }
 #main,
 #header {
-	max-width: calc(100% - 1rem);
+	padding: 0.25rem .5rem ;
+	box-sizing: border-box;
 }
-
+.main-dashboard#main {
+	max-width: 100%;
+}
 .loggedin #main {
 	padding-top: 4rem;
 }
@@ -118,17 +116,15 @@ label .description {
 	border-radius: 0.2rem;
 	font-size: 0.8rem;
 	color: rgba(0, 0, 0, 50%);
-	transition:
-		0.18s background-color ease-in-out,
-		0.18s color ease-in-out,
+	transition: 0.18s font-weight ease-in-out, 0.18s background-color ease-in-out, 0.18s color ease-in-out,
 		0.18s margin-left ease-in-out;
 }
-label:has(input:active) .description,
-label:has(input:focus) .description {
+
+label:focus-within .description {
 	color: hsl(325, 55%, 46%);
 	font-weight: bold;
-	margin-left: 0.7rem;
 }
+
 input[type='text'],
 input[type='url'],
 input[type='password'],
@@ -156,10 +152,7 @@ main button,
 input[type='submit'] {
 	margin-bottom: 0.75rem;
 	border-color: hsl(325, 55%, 90%);
-	transition:
-		0.18s outline ease-in-out,
-		0.18s border-color ease-in-out,
-		0.18s box-shadow ease-in-out,
+	transition: 0.18s outline ease-in-out, 0.18s border-color ease-in-out, 0.18s box-shadow ease-in-out,
 		0.18s border ease-in-out;
 }
 input[type='text']:focus,

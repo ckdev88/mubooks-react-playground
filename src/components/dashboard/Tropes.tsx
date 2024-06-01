@@ -2,7 +2,7 @@ export default function Tropes() {
 	return (
 		<>
 			<article className="adder">
-				<header>
+				<header className="adder-header">
 					Mu Tropes<span>›</span>
 				</header>
 				<main>

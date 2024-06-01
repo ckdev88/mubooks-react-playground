@@ -1,13 +1,30 @@
 .m0 {
 	margin: 0;
 }
-
+.mb0 {
+	margin-bottom: 0;
+}
 .mr1 {
 	margin-right: 1rem;
+}
+.mt0 {
+	margin-top: 0;
+}
+.mt075 {
+	margin-top: 0.75rem;
+}
+.mt1 {
+	margin-top: 1rem;
 }
 
 .p0 {
 	padding: 0;
+}
+.pt0 {
+	padding-top: 0;
+}
+.pb0 {
+	padding-bottom: 0;
 }
 
 .red {

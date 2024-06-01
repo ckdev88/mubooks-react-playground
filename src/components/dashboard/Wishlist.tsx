@@ -6,7 +6,7 @@ export default function Wishlist() {
 		<>
 			<article className="adder">
 				<Link to="/wishlist">
-					<header>
+				<header className="adder-header">
 						Mu Wishlist<span>›</span>
 					</header>
 				</Link>

@@ -40,7 +40,7 @@ function openCalendarPopUp(dateFieldId: string): void {
 	}
 }
 
-function shuffleArray(array:[]) {
+function shuffleArray(array: []) {
 	let currentIndex = array.length
 	while (currentIndex > 0) {
 		const randomIndex = Math.floor(Math.random() * currentIndex)
@@ -49,4 +49,12 @@ function shuffleArray(array:[]) {
 	}
 }
 
-export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray }
+function getUrlParamVal(url: string, key: string): string {
+	const urlArr = url.split(/['?','&']/)
+	for (let i = 0; i < urlArr.length; i++) {
+		if (urlArr[i].slice(0, key.length) === key) return urlArr[i].split('=')[1]
+	}
+	return ''
+}
+
+export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal }

@@ -1,10 +1,12 @@
-// TODO: add eraser for erasing ratings, some books don't need certain ratings
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 
-const RateStarsButton = (book: Book) => {
+const ReviewRating = (book: Book) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
+
+	const [reviewStars, setReviewStars] = useState(book.rate_stars)
+	const [reviewSpice, setReviewSpice] = useState(book.rate_spice)
 
 	// TODO: move this function to generic helper location
 	async function MyBooksUpdate(myBooksNew: Books) {
@@ -39,53 +41,62 @@ const RateStarsButton = (book: Book) => {
 	}
 
 	function RateStarsAct(type: 'rate_stars' | 'rate_spice', amount: Scale5) {
+		if (type === 'rate_stars') setReviewStars(amount)
+		if (type === 'rate_spice') setReviewSpice(amount)
+
 		const newArr: Books = RateStars(book, type, amount)
 		setUserMyBooks(newArr)
-		console.log('book', book.rate_spice, book.rate_stars)
 	}
 
+	const iconClassNameEraser = 'icon icon-eraser'
 	const iconClassNameStar = 'icon icon-star'
 	const iconClassNameSpice = 'icon icon-spice'
 	if (book.rate_stars === undefined) book.rate_stars = 0
 	if (book.rate_spice === undefined) book.rate_spice = 0
 
 	return (
-		<>
+		<div className="review-rates">
 			<div className="rate-stars">
+				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 0)}>
+					<span className={iconClassNameEraser}></span>
+				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 1)}>
-					<span className={iconClassNameStar + (book?.rate_stars > 0 ? ' active' : '')}>*</span>
+					<span className={iconClassNameStar + (reviewStars > 0 ? ' active' : '')}>*</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 2)}>
-					<span className={iconClassNameStar + (book?.rate_stars > 1 ? ' active' : '')}>*</span>
+					<span className={iconClassNameStar + (reviewStars > 1 ? ' active' : '')}>*</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 3)}>
-					<span className={iconClassNameStar + (book?.rate_stars > 2 ? ' active' : '')}>*</span>
+					<span className={iconClassNameStar + (reviewStars > 2 ? ' active' : '')}>*</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 4)}>
-					<span className={iconClassNameStar + (book?.rate_stars > 3 ? ' active' : '')}>*</span>
+					<span className={iconClassNameStar + (reviewStars > 3 ? ' active' : '')}>*</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_stars', 5)}>
-					<span className={iconClassNameStar + (book?.rate_stars > 4 ? ' active' : '')}>*</span>
+					<span className={iconClassNameStar + (reviewStars > 4 ? ' active' : '')}>*</span>
 				</button>
 			</div>
 			<div className="rate-spice">
+				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 0)}>
+					<span className={iconClassNameEraser}></span>
+				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 1)}>
-					<span className={iconClassNameSpice + (book?.rate_spice > 0 ? ' active' : '')}>&</span>
+					<span className={iconClassNameSpice + (reviewSpice > 0 ? ' active' : '')}>&</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 2)}>
-					<span className={iconClassNameSpice + (book?.rate_spice > 1 ? ' active' : '')}>&</span>
+					<span className={iconClassNameSpice + (reviewSpice > 1 ? ' active' : '')}>&</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 3)}>
-					<span className={iconClassNameSpice + (book?.rate_spice > 2 ? ' active' : '')}>&</span>
+					<span className={iconClassNameSpice + (reviewSpice > 2 ? ' active' : '')}>&</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 4)}>
-					<span className={iconClassNameSpice + (book?.rate_spice > 3 ? ' active' : '')}>&</span>
+					<span className={iconClassNameSpice + (reviewSpice > 3 ? ' active' : '')}>&</span>
 				</button>
 				<button className="btn-icon" onClick={() => RateStarsAct('rate_spice', 5)}>
-					<span className={iconClassNameSpice + (book?.rate_spice > 4 ? ' active' : '')}>&</span>
+					<span className={iconClassNameSpice + (reviewSpice > 4 ? ' active' : '')}>&</span>
 				</button>
 			</div>
-		</>
+		</div>
 	)
 }
-export default RateStarsButton
+export default ReviewRating

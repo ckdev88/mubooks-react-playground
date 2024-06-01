@@ -6,7 +6,7 @@ export default function Favorites() {
 		<>
 			<article className="adder">
 				<Link to="/favorites">
-					<header>
+					<header className="adder-header">
 						Mu Favorites<span>›</span>
 					</header>
 				</Link>

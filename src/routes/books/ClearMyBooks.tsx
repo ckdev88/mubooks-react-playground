@@ -1,10 +1,16 @@
-import { useContext } from "react"
-import { AppContext } from "../../App"
-import { MyBooksUpdate } from "../../helpers/MyBooksHelpers"
+import { useContext, useEffect } from 'react'
+import { AppContext } from '../../App'
+import { MyBooksUpdate } from '../../helpers/MyBooksHelpers'
 
+const pageTitle = 'Clear all saved books'
 const ClearMyBooks = () => {
-	const { setUserMyBooks } = useContext(AppContext)
-	function clearbooks() { // for user_metadata based MyBooks... get rid of all this when this becomes obsolete
+	const { setUserMyBooks, setNavTitle } = useContext(AppContext)
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
+
+	function clearbooks() {
+		// for user_metadata based MyBooks... get rid of all this when this becomes obsolete
 		MyBooksUpdate([])
 		setUserMyBooks([])
 	}
