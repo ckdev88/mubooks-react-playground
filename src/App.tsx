@@ -47,6 +47,7 @@ const App = () => {
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 	const [navTitle, setNavTitle] = useState<string>('')
+	const [localBookFilter, setLocalBookFilter] = useState<string>('')
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const csMyBooks = async () => {
@@ -104,6 +105,8 @@ const App = () => {
 					navTitle,
 					popupNotification,
 					popupNotificationShow,
+					localBookFilter,
+					setLocalBookFilter,
 					setNavTitle,
 					setPopupNotification,
 					setPopupNotificationShow,

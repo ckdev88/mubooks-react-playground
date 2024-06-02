@@ -9,6 +9,7 @@ const RecoverCard = () => {
 	const [error, setError] = useState('')
 	const navigate = useNavigate()
 	const { login } = useCardRotate()
+	const [isLoading, setIsLoading] = useState(false)
 
 	function processRecoverForm(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
@@ -18,11 +19,13 @@ const RecoverCard = () => {
 
 	async function recoverAccount(email: string) {
 		console.log('recovering..')
+		setIsLoading(true)
 		const { error } = await supabase.auth.resetPasswordForEmail(email)
 		if (error) setError(error.message)
 		else {
 			console.log('redirecting to /account/forgotpassword...')
 			setUsermail(email)
+			setIsLoading(false)
 			navigate('/account/forgotpassword')
 		}
 	}
@@ -43,7 +46,9 @@ const RecoverCard = () => {
 						</label>
 						<p>We'll send a link to this email address if it matches an existing account.</p>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-						<button type="submit">Send me a password reset link</button>
+						<button type="submit" disabled={isLoading}>
+							Send me a password reset link
+						</button>
 					</form>
 				</main>
 				<footer>

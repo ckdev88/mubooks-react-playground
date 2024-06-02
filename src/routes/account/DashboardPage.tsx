@@ -26,7 +26,7 @@ export default function DashboardPage() {
 
 	return (
 		<>
-			<div className="textwrapper">
+			<div>
 				<h1>
 					Hi, {username}
 					<sub>MuBOOKS is your reading journal.</sub>

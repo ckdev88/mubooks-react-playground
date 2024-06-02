@@ -42,7 +42,6 @@ const SearchPage = () => {
 							r.author_key !== undefined &&
 							r.edition_key !== undefined &&
 							r.key !== undefined &&
-							r.isbn !== undefined &&
 							r.cover_edition_key !== undefined
 					)
 				)
