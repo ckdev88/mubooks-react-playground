@@ -16,6 +16,8 @@ interface AppContextType {
 	todaysDateInput: string
 	navTitle: string
 	setNavTitle(navTitle: navTitle): void
+	localBookFilter: string
+	setLocalBookFilter(localBookFilter: localBookFilter): void
 }
 
 type Quote = {

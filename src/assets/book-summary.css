@@ -171,6 +171,9 @@
 		line-height: 1em;
 	}
 }
+#booksoverview-filter-sort {
+	padding-bottom: 1rem;
+}
 .single-small-form {
 	margin-top: 0.25rem;
 }
@@ -182,6 +185,9 @@
 	border-radius: 0.4rem;
 	margin-bottom: 0;
 }
+#booksoverview-filter-sort .single-small-form input {
+	float: none;
+}
 .single-small-form input:focus,
 .single-small-form input:active {
 	border-style: solid;
@@ -192,6 +198,9 @@
 	font-size: 0.8rem;
 	padding-left: calc(2px + 0.3rem);
 	padding-right: calc(2px + 0.3rem);
+}
+#booksoverview-filter-sort .single-small-form + .btn-text {
+	margin-top: 0.2rem;
 }
 .tropes {
 	padding: 0;

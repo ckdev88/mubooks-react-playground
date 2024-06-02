@@ -4,7 +4,7 @@ import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
 const ReadingPage = () => {
-	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
 	const pageTitle = 'Mu Reading'
 	useEffect(() => {
 		setNavTitle(pageTitle)
@@ -14,7 +14,12 @@ const ReadingPage = () => {
 	let booksFiltered: Books = []
 
 	if (userMyBooks !== undefined) {
-		booksFiltered = userMyBooks.filter((book: Book) => book.list === 2)
+		if (localBookFilter !== '' && localBookFilter.length > 0)
+			booksFiltered = userMyBooks.filter(
+				(book: Book) => book.list === 2 && book.title_short.toLowerCase().includes(localBookFilter)
+			)
+		else booksFiltered = userMyBooks.filter((book: Book) => book.list === 2)
+
 		if (booksFiltered !== undefined) {
 			if (booksFiltered.length > 0) hasbooks = true
 			else hasbooks = false
@@ -26,17 +31,35 @@ const ReadingPage = () => {
 			<h1>
 				What I'm reading now
 				<sub>
-					This can later be used to see for how long you enjoyed reading this book: {booksFiltered.length}
+					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
+						<>
+							Results for <i>{localBookFilter}</i> : {booksFiltered.length}
+						</>
+					) : localBookFilter.length > 0 && booksFiltered.length === 0 ? (
+						<>
+							No book titles found for <i>{localBookFilter}.</i>
+						</>
+					) : (
+						<>
+							Currently enjoying book(s):
+							{booksFiltered.length}
+						</>
+					)}
 				</sub>
 			</h1>
-			<h4 className={hasbooks === true ? 'dnone' : 'dblock'}>Currently not reading anything.</h4>
-			<p>
-				Want to add a book to your reading list?
-				<br />
-				<Link to="/wishlist">View your wishlist</Link> or <Link to="/search">Search</Link> to add a book.
-				<br />
-				<br />
-			</p>
+			{!hasbooks && localBookFilter === '' && (
+				<>
+					<h4>Currently not reading anything.</h4>
+					<p>
+						Want to add a book to your reading list?
+						<br />
+						<Link to="/wishlist">View your wishlist</Link> or <Link to="/search">Search</Link> to add a
+						book.
+						<br />
+						<br />
+					</p>
+				</>
+			)}
 			<BooksOverviewPage books={booksFiltered} page="readingpage" />
 		</>
 	)
