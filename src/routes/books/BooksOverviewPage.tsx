@@ -8,7 +8,7 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 
 	return (
 		<>
-			<BooksOverviewFilterSort />
+			{page !== 'searchpage' && <BooksOverviewFilterSort />}
 			{books.map((book) => {
 				if (page === 'searchpage') {
 					savedArr.find((savedbook) => {
