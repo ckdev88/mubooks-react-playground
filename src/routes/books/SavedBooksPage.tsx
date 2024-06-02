@@ -3,35 +3,60 @@ import BooksOverviewPage from './BooksOverviewPage'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 
-	const pageTitle = 'Saved books'
+const pageTitle = 'Saved books'
 
 export default function SavedBooksPage() {
-	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
 	setNavTitle(pageTitle)
-	let savedbooks: Books
-	let hasBooks: boolean = false
-	if (userMyBooks === undefined) savedbooks = []
-	else savedbooks = userMyBooks
-	if (savedbooks.length > 0) hasBooks = true
+	let hasbooks: boolean = false
+	let booksFiltered: Books = []
+	if (localStorage.getItem('MyBooks') !== undefined) {
+		if (localBookFilter !== '' && localBookFilter.length > 0)
+			booksFiltered = userMyBooks.filter((book: Book) =>
+				book.title_short.toLowerCase().includes(localBookFilter.toLowerCase())
+			)
+		else booksFiltered = userMyBooks
+		if (booksFiltered !== undefined) {
+			if (booksFiltered.length > 0) hasbooks = true
+			else hasbooks = false
+		}
+	}
 
 	return (
 		<>
 			<h1>
-				My Books <sub>My books which are in whatever list: {savedbooks.length}</sub>
+				My Books
+				<sub>
+					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
+						<>
+							Results for <i>{localBookFilter}</i> : {booksFiltered.length}
+						</>
+					) : localBookFilter.length > 0 && booksFiltered.length === 0 ? (
+						<>
+							No book titles found for <i>{localBookFilter}.</i>
+						</>
+					) : (
+						<> My books which are in whatever list: {booksFiltered.length} </>
+					)}
+				</sub>
 			</h1>
-			<p>
-				An overview of my saved books, this includes books that are favorited, read and finished, the wishlist
-				and the book currently reading.
-			</p>
-			<div className={hasBooks === true ? 'dnone' : 'dblock'}>
-				<h4>No books added yet, find them and add them.</h4>
-				<p>
-					<Link to={'/search'} className="wauto">
-						Search
-					</Link>
-				</p>
-			</div>
-			<BooksOverviewPage books={savedbooks} page="savedbookspage" />
+			{!hasbooks && localBookFilter === '' && (
+				<>
+					<p>
+						An overview of my saved books, this includes books that are favorited, read and finished, the
+						wishlist and the book currently reading.
+					</p>
+					<div>
+						<h4>No books added yet, find them and add them.</h4>
+						<p>
+							<Link to={'/search'} className="wauto">
+								Search
+							</Link>
+						</p>
+					</div>
+				</>
+			)}
+			<BooksOverviewPage books={booksFiltered} page="savedbookspage" />
 		</>
 	)
 }

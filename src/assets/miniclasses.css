@@ -26,7 +26,9 @@
 .pb0 {
 	padding-bottom: 0;
 }
-
+.pb1 {
+	padding-bottom: 1rem;
+}
 .red {
 	color: red;
 }
@@ -84,4 +86,8 @@ sub {
 
 sup {
 	font-size: 0.7em;
+}
+.flnone,
+input.flnone {
+	float: none;
 }
