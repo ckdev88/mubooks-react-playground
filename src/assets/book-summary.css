@@ -75,7 +75,7 @@
 .book-summary .article-main {
 	float: left;
 	max-width: calc(100vw - 11rem);
-	@media screen and (max-width: 380px) {
+	@media screen and (max-width: 379.98px) {
 		max-width: calc(100vw - 8rem);
 	}
 }
@@ -91,8 +91,14 @@
 	width: 7rem;
 	min-width: 7rem;
 }
+@media screen and (max-width: 399.98px) {
+	.book-summary aside {
+		width: 6rem;
+		min-width: 6rem;
+	}
+}
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 379.98px) {
 	.book-summary aside {
 		width: 5rem;
 		min-width: 5rem;
@@ -101,18 +107,6 @@
 
 .book-summary footer {
 	clear: both;
-}
-
-@media screen and (max-width: 320px) {
-	.book-summary h2 {
-		font-size: 1.4rem;
-	}
-
-	.book-summary .cover {
-		max-width: 8rem;
-		min-width: 8rem;
-		width: 8rem;
-	}
 }
 
 .book-summary .cover img {
@@ -166,7 +160,7 @@
 	line-height: 1.3;
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 379.98px) {
 	.book-summary .mark {
 		line-height: 1em;
 	}
