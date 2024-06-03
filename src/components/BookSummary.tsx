@@ -146,6 +146,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 				{(page === 'finishedpage' || page === 'favoritespage') && ReviewQuote(book, book.review_fav_quote)}
 				{page !== 'finishedpage' && page !== 'favoritespage' && page !== 'quotedbookspage' && (
 					<>
+						{page === 'searchpage' && book.subject && SearchTropes(book.id, book.subject)}
 						<button
 							className={
 								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
@@ -161,7 +162,6 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 								<ReactMarkdown>{synopsis}</ReactMarkdown>
 							</div>
 						</div>
-						{page === 'searchpage' && book.subject && SearchTropes(book.id, book.subject)}
 					</>
 				)}
 				<hr />
