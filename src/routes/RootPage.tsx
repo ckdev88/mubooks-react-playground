@@ -16,14 +16,20 @@ const RootPage = () => {
 	}
 
 	// TODO: cause not being able to fix resetpassword page?
+	console.log('zijn we hier?')
 	let navigateTo: string = '/account/login'
 	if (loggedin) navigateTo = '/dashboard'
 
 	useEffect(() => {
 		if (loggedin) {
+			console.log('effect logged in in RootPage')
 			setUsermail(userInLs.user.email)
 			navigate(navigateTo)
-		} else navigate(navigateTo)
+		} else{
+			console.log('effect logged in else in RootPage')
+			console.log('wacht even...')
+		   	// navigate(navigateTo)
+		}
 	}, [loggedin, navigateTo, navigate, setUsermail, userInLs])
 
 	return (

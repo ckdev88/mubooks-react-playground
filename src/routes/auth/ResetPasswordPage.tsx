@@ -13,27 +13,29 @@ const ResetPasswordPage = () => {
 	// confirm user before enable to change password
 	const [loading, setLoading] = useState(true)
 	useEffect(() => {
-		async function verifyTokenHash() {
-			const token = getUrlParamVal(window.location.href, 'token')
-			console.log('token_hash:', token)
-			const type = getUrlParamVal(window.location.href, 'type')
-			console.log('type:', type)
-			const email = getUrlParamVal(window.location.href, 'email')
-			console.log('email:', email)
-			if (type === 'recovery' && token !== null) {
-				const { data, error } = await supabase.auth.signInWithOtp({ email: email })
-				if (error) {
-					setError(error.message)
-					console.log('error:', error.message, error.code, error.name, error.name)
-				} else {
-					console.log('elsie, we mogen door!')
-					// Store the session in local storage or cookies
-					localStorage.setItem('supabaseSession', JSON.stringify(data.session))
+		if (loading) {
+			async function verifyTokenHash() {
+				const token = getUrlParamVal(window.location.href, 'token')
+				console.log('token_hash:', token)
+				const type = getUrlParamVal(window.location.href, 'type')
+				console.log('type:', type)
+				const email = getUrlParamVal(window.location.href, 'email')
+				console.log('email:', email)
+				if (type === 'recovery' && token !== null) {
+					const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
+					if (error) {
+						setError(error.message)
+						console.log('error:', error.message)
+					} else {
+						console.log('elsie, we mogen door!')
+						// Store the session in local storage or cookies
+						localStorage.setItem('supabaseSession', JSON.stringify(data.session))
+					}
+					setLoading(false)
 				}
-				setLoading(false)
 			}
+			verifyTokenHash()
 		}
-		verifyTokenHash()
 	}, [])
 	// /confirm user before enable to change password
 
