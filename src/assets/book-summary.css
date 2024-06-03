@@ -207,7 +207,8 @@
 	padding: 0.2rem 0.4rem;
 }
 
-.tropes li.trope_add {
+.tropes li.trope_add,
+.tropes li.trope_more {
 	padding: 0;
 }
 
