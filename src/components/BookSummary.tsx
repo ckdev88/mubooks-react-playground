@@ -9,6 +9,7 @@ import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
+import SearchTropes from './SearchTropes'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
@@ -160,6 +161,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 								<ReactMarkdown>{synopsis}</ReactMarkdown>
 							</div>
 						</div>
+						{page === 'searchpage' && book.subject && SearchTropes(book.id, book.subject)}
 					</>
 				)}
 				<hr />
