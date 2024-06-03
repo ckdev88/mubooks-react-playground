@@ -71,9 +71,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 				</header>
 				<main>
 					<div className="reviews">
-						{(page === 'finishedpage' || page === 'favoritespage') &&
-							book.review_tropes &&
-							ReviewTropes(book, book?.review_tropes)}
+						{page !== 'searchpage' && book.review_tropes && ReviewTropes(book, book?.review_tropes)}
 						{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
 					</div>
 					{book.list > 1 && page !== 'searchpage' && page !== 'quotedbookspage' && (
