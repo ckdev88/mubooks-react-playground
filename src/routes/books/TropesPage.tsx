@@ -6,12 +6,11 @@ const TropesPage = () => {
 	const { userMyBooks } = useContext(AppContext)
 	const [activeTrope, setActiveTrope] = useState<string>('')
 	const [tropeBooks, setTropeBooks] = useState<Books>([])
-	let tropesSet = new Set<string>()
+	const tropesSet = new Set<string>()
 	userMyBooks.map((book) => {
 		if (book.review_tropes) book.review_tropes.map((reviewtrope) => tropesSet.add(reviewtrope))
 	})
-	let tropesArr
-	tropesArr = Array.from(tropesSet)
+	const tropesArr = Array.from(tropesSet)
 
 	function activateTrope(trope: string) {
 		const tropeBooksFiltered = userMyBooks.filter(
