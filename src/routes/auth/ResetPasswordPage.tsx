@@ -4,6 +4,9 @@ import { useState, useEffect, useContext } from 'react'
 import { getUrlParamVal } from '../../Helpers'
 import { AppContext } from '../../App'
 
+/*
+https://ckdev88.github.io/mubooks/#/auth/resetpassword
+*/
 const ResetPasswordPage = () => {
 	const { setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 	const navigate = useNavigate()

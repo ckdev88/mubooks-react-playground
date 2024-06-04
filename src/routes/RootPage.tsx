@@ -5,11 +5,12 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 
 const RootPage = () => {
-	const { setUsermail, setUserIsLoggedIn } = useContext(AppContext)
+	const { setUsermail, setUserIsLoggedIn, userIsLoggedIn } = useContext(AppContext)
 	let loggedin: boolean = false
 	const navigate = useNavigate()
 
 	const userInLs = JSON.parse(localStorage.getItem(localStorageKey) as string)
+	console.log('userInLs:',userInLs)
 	if (userInLs?.user?.aud === 'authenticated') {
 		loggedin = true
 		setUserIsLoggedIn(true)
@@ -25,10 +26,14 @@ const RootPage = () => {
 			console.log('effect logged in in RootPage')
 			setUsermail(userInLs.user.email)
 			navigate(navigateTo)
-		} else{
+		} else {
+			if (userIsLoggedIn) {
+				console.log('we zijn logged in zegt userIsLoggedIn')
+				setUserIsLoggedIn(true)
+			} else console.log('oh toch niet')
 			console.log('effect logged in else in RootPage')
 			console.log('wacht even...')
-		   	// navigate(navigateTo)
+			// navigate(navigateTo)
 		}
 	}, [loggedin, navigateTo, navigate, setUsermail, userInLs])
 
@@ -37,7 +42,8 @@ const RootPage = () => {
 			<main id="main" className="textwrapper">
 				<div className="textwrapper">
 					Redirecting to wherever you should be right now... <br />
-					<Link to={navigateTo}>Click here</Link> if you're not redirected automatically.
+					<Link to={navigateTo}>Click here</Link> if you're not redirected automatically. or{' '}
+					<a href="https://ckdev88.github.io/mubooks/#/dashboard">dashboard</a>
 				</div>
 			</main>
 		</>
