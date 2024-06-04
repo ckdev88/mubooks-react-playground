@@ -28,7 +28,7 @@ const SearchPage = () => {
 			setLoading(true)
 			setResultsMessage('')
 			const searchfields: string =
-				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median'
+				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median,subject'
 			await fetch(
 				'https://openlibrary.org/search.json?q=' +
 					search_term +
@@ -58,7 +58,7 @@ const SearchPage = () => {
 					setSearchTerm(search_term)
 					return filtered
 				})
-				.then((result) => setSearchResults(result))
+				.then((result) => {setSearchResults(result);})
 				.catch((error) => setResultsMessage('error ' + error))
 				.finally(() => setLoading(false))
 		} else if (search_term.length === 0) setResultsMessage(search_term)

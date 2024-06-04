@@ -73,8 +73,8 @@ const BookStartedFinished = ({
 	return (
 		<div className="book-started-finished">
 			<div>
-				<em>
-					Started:&nbsp;&nbsp;
+				<em className="btn-text">
+					<span className="icon icon-reading"></span>
 					<button
 						className="btn-calendar btn-text"
 						onClick={() => openCalendarPopUp('date_reading' + bookid)}
@@ -82,6 +82,7 @@ const BookStartedFinished = ({
 						{dateStarted && convertDate(dateStarted, 'human')}
 					</button>
 				</em>
+
 				<input
 					tabIndex={-1}
 					id={'date_reading' + bookid}
@@ -91,31 +92,31 @@ const BookStartedFinished = ({
 					className="calendar-hidden"
 					onChange={debounce(() => modifyDateReading('date_reading'), 100)}
 				/>
-			</div>
 
-			{list > 2 && (
-				<div>
-					<em>
-						Finished:&nbsp;&nbsp;
-						<button
-							className="btn-calendar btn-text"
-							onClick={() => openCalendarPopUp('date_finished' + bookid)}
-						>
-							{dateFinished && convertDate(dateFinished, 'human')}
-						</button>
-					</em>
-					<input
-						tabIndex={-1}
-						id={'date_finished' + bookid}
-						name={'date_finished' + bookid}
-						type="date"
-						min={date_started && convertDate(date_started, 'input')}
-						max={todaysDateInput}
-						className="calendar-hidden"
-						onChange={debounce(() => modifyDateReading('date_finished'), 1000)}
-					/>
-				</div>
-			)}
+				{list > 2 && (
+					<>
+						<em className="btn-text">
+							<span className="icon icon-finished"></span>
+							<button
+								className="btn-calendar btn-text"
+								onClick={() => openCalendarPopUp('date_finished' + bookid)}
+							>
+								{dateFinished && convertDate(dateFinished, 'human')}
+							</button>
+						</em>
+						<input
+							tabIndex={-1}
+							id={'date_finished' + bookid}
+							name={'date_finished' + bookid}
+							type="date"
+							min={date_started && convertDate(date_started, 'input')}
+							max={todaysDateInput}
+							className="calendar-hidden"
+							onChange={debounce(() => modifyDateReading('date_finished'), 1000)}
+						/>
+					</>
+				)}
+			</div>
 		</div>
 	)
 }

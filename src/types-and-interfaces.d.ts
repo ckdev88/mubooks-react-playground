@@ -86,6 +86,8 @@ interface Book {
 	review_tropes: BookTropes
 	review_text: string
 	review_fav_quote: string
+	search_tropes?: BookTropes
+	subject?: BookTropes
 }
 type BookTropes = string[]
 

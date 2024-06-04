@@ -33,7 +33,7 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 							className={showTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
 							onClick={() => setShowTropesForm(!showTropesForm)}
 						>
-							Add tropes
+							{bookTropes.length > 0 ? <>+</> : <>Add tropes</>}
 						</button>
 					</li>
 				)}

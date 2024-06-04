@@ -9,6 +9,7 @@ import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
 import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
+import SearchTropes from './SearchTropes'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
@@ -54,6 +55,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 					}
 					alt=""
 				/>
+						{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
 			</aside>
 			<div className="article-main">
 				<header>
@@ -74,7 +76,6 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 						{(page === 'finishedpage' || page === 'favoritespage') &&
 							book.review_tropes &&
 							ReviewTropes(book, book?.review_tropes)}
-						{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
 					</div>
 					{book.list > 1 && page !== 'searchpage' && page !== 'quotedbookspage' && (
 						<BookStartedFinished
@@ -145,6 +146,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 				{(page === 'finishedpage' || page === 'favoritespage') && ReviewQuote(book, book.review_fav_quote)}
 				{page !== 'finishedpage' && page !== 'favoritespage' && page !== 'quotedbookspage' && (
 					<>
+						{page === 'searchpage' && book.subject && SearchTropes(book.id, book.subject)}
 						<button
 							className={
 								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
