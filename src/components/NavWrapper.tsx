@@ -108,9 +108,11 @@ const NavWrapper = () => {
 						<li>
 							<NavLink to={'/quoted-books'} onClick={toggleNav0}>
 								Quoted
+							</NavLink>
+						</li>
 						<li>
 							<NavLink to={'/tropes'} onClick={toggleNav0}>
-								MuTropes
+								Tropes
 							</NavLink>
 						</li>
 						<li>
@@ -128,7 +130,7 @@ const NavWrapper = () => {
 					<ul>
 						<li>
 							<NavLink to={'/account/profile'} onClick={toggleNav0}>
-							{ /*
+								{/*
 								 <svg
 									width="800px"
 									height="800px"
@@ -154,7 +156,7 @@ const NavWrapper = () => {
 										</g>
 									</g>
 								</svg>&nbsp;
-							   */ }
+							   */}
 								Profile
 							</NavLink>
 						</li>

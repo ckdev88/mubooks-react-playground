@@ -98,7 +98,6 @@
 	}
 }
 
-
 .book-summary footer {
 	clear: both;
 }
@@ -208,6 +207,13 @@
 
 .book-summary .review-rates {
 	margin-top: 0.25rem;
+}
+.review-rates > div {
+	width: 6rem;
+	display: block;
+	margin: 0 auto;
+	padding-right: 0.1rem;
+	margin-top: 0.5rem;
 }
 .book-summary .rating {
 	text-align: center;
