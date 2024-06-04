@@ -55,6 +55,7 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 					}
 					alt=""
 				/>
+						{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
 			</aside>
 			<div className="article-main">
 				<header>

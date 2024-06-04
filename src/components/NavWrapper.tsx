@@ -108,6 +108,9 @@ const NavWrapper = () => {
 						<li>
 							<NavLink to={'/quoted-books'} onClick={toggleNav0}>
 								Quoted
+						<li>
+							<NavLink to={'/tropes'} onClick={toggleNav0}>
+								MuTropes
 							</NavLink>
 						</li>
 						<li>
