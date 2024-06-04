@@ -1,9 +1,13 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { AppContext } from '../../App'
 import { cleanIndexKey } from '../../helpers/cleanInput'
 import BooksOverviewPage from './BooksOverviewPage'
+const pageTitle = 'Tropes'
 const TropesPage = () => {
-	const { userMyBooks } = useContext(AppContext)
+	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
 	const [activeTrope, setActiveTrope] = useState<string>('')
 	const [tropeBooks, setTropeBooks] = useState<Books>([])
 	const tropesSet = new Set<string>()
@@ -35,9 +39,11 @@ const TropesPage = () => {
 			</ul>
 			{tropeBooks.length > 0 && (
 				<>
+					<br />
 					<h2>
-						My Books for <em>{activeTrope}</em> :
+						My Books for <em>{activeTrope}</em>
 					</h2>
+					<br />
 					<BooksOverviewPage books={tropeBooks} page="tropespage" />
 				</>
 			)}
