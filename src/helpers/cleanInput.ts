@@ -25,4 +25,18 @@ function cleanAnchor(input: string, dashes: boolean = true): string {
 	}
 	return returnvalue
 }
-export { cleanInput, cleanAnchor }
+
+function cleanIndexKey(input: string, index: number): string {
+	let returnvalue = ''
+	let c
+	for (let i = 0; i < input.length; i++) {
+		c = input.charCodeAt(i)
+		if ((c > 47 && c < 58) || (c > 64 && c < 91) || (c > 90 && c < 97) || (c > 96 && c < 123))
+			returnvalue += input[i]
+	}
+	returnvalue += index
+
+	return returnvalue
+}
+
+export { cleanInput, cleanAnchor, cleanIndexKey }
