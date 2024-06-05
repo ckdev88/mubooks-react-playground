@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useCallback } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { AppContext } from '../../App'
 import { cleanIndexKey, cleanInput } from '../../helpers/cleanInput'
 import BooksOverviewPage from './BooksOverviewPage'
@@ -53,6 +53,7 @@ const TropesPage = () => {
 		setActiveTrope(trope)
 	}
 	const [isModding, setIsModding] = useState(false)
+	console.log(isModding)
 	async function removeTrope(trope: string, liked: boolean) {
 		setIsModding(true)
 		if (liked === true) {
