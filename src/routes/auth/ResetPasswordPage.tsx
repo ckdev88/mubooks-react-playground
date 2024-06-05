@@ -31,13 +31,14 @@ const ResetPasswordPage = () => {
 						console.log('error:', error.message)
 					} else {
 						console.log('elsie, we mogen door!')
-						// Store the session in local storage or cookies
 						localStorage.setItem('supabaseSession', JSON.stringify(data.session))
 					}
 					setLoading(false)
 				}
 			}
 			verifyTokenHash()
+			console.log('verifyTokenHash done, result?')
+			setLoading(false)
 		}
 	}, [])
 	// /confirm user before enable to change password
@@ -50,6 +51,8 @@ const ResetPasswordPage = () => {
 			navigate('/account/login')
 		}, 1000)
 	}
+
+	// resetpassword
 
 	const updateSbUser = async (form_userpass: string) => {
 		const { data, error } = await supabase.auth.updateUser({
