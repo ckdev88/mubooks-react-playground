@@ -19,6 +19,7 @@ function cleanAnchor(input: string, dashes: boolean = true): string {
 	for (let i = 0; i < input.length; i++) {
 		c = input.charCodeAt(i)
 		// change to hyphen if not part of alphanumerical ... 48=0, 57=9, 65=A, 90=Z, 97=a, 122=z
+		if (input[i] === '?') break
 		if (c < 48 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122) {
 			if (dashes) returnvalue += '-'
 		} else returnvalue += input[i]
@@ -39,4 +40,22 @@ function cleanIndexKey(input: string, index: number): string {
 	return returnvalue
 }
 
-export { cleanInput, cleanAnchor, cleanIndexKey }
+function cleanSigns(sin: string) {
+	let signs = [';', '/', '?', ':', '@', '&', '=', '+', '$', ',', '#']
+	let out: string = ''
+	let dospace: boolean = false
+	for (let i = 0; i < sin.length; i++) {
+		dospace = false
+		for (let j = 0; j < signs.length; j++) {
+			if (sin[i] === signs[j]) {
+				dospace = true
+				break
+			}
+		}
+		if (dospace) out += ' '
+		else out += sin[i]
+	}
+	return out
+}
+
+export { cleanInput, cleanAnchor, cleanIndexKey, cleanSigns }

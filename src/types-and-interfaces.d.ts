@@ -11,6 +11,8 @@ interface AppContextType {
 	setUserIsLoggedIn(userIsLoggedIn: userIsLoggedIn): void
 	popupNotification: string
 	setPopupNotification(popupNotification: popupNotification): void
+	formNotification: string
+	setFormNotification(formNotification: formNotification): void
 	popupNotificationShow: boolean
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
@@ -48,6 +50,7 @@ interface LoginFormInput {
 	login_email: { value: string }
 	login_password: { value: string }
 }
+
 type BookData = [
 	{
 		id: Id
@@ -104,3 +107,9 @@ interface IdObject {
 	id: Id
 }
 type Id = string
+
+interface ApiError {
+	error?: string
+	error_code?: string
+	error_description?: string
+}

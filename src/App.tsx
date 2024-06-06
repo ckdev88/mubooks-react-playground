@@ -5,10 +5,12 @@ import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
 import AddBookPage from './routes/books/AddBookPage'
 import AuthConfirm from './routes/auth/Confirm.tsx'
+import ResetPasswordPage from './routes/auth/ResetPasswordPage.tsx'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
 import ClearMyBooks from './routes/books/ClearMyBooks'
 import DashboardPage from './routes/account/DashboardPage'
+import ErrorPage from './routes/ErrorPage'
 import FavoritesPage from './routes/books/FavoritesPage'
 import FinishedPage from './routes/books/FinishedPage'
 import NavWrapper from './components/NavWrapper'
@@ -45,6 +47,7 @@ const App = () => {
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
+	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 	const [navTitle, setNavTitle] = useState<string>('')
 	const [localBookFilter, setLocalBookFilter] = useState<string>('')
@@ -102,10 +105,12 @@ const App = () => {
 		<>
 			<AppContext.Provider
 				value={{
+					formNotification,
 					navTitle,
 					popupNotification,
 					popupNotificationShow,
 					localBookFilter,
+					setFormNotification,
 					setLocalBookFilter,
 					setNavTitle,
 					setPopupNotification,
@@ -137,10 +142,12 @@ const App = () => {
 					)}
 					<Routes>
 						<Route path="/*" Component={RootPage} />
+						<Route path="/error" Component={ErrorPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
 						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
 						<Route path="/account/logout" Component={UserLogoutPage} />
 						<Route path="/auth/confirm" Component={AuthConfirm} />
+						<Route path="/auth/resetpassword" Component={ResetPasswordPage} />
 						<Route path="/account/new" Component={CheckMailNewAccountPage} />
 						{userIsLoggedIn && (
 							<>
