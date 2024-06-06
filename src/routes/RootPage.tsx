@@ -6,10 +6,29 @@ import { AppContext } from '../App'
 import { getUrlParamVal } from '../Helpers'
 
 const RootPage = () => {
+	const checkApiError = (): boolean => {
+		if (getUrlParamVal(url, 'error', true)) return true
+		return false
+	}
+	const apiErrors = (): ApiError => {
+		let apiErr: ApiError = {
+			error: getUrlParamVal(url, 'error', true),
+			error_code: getUrlParamVal(url, 'error_code', true),
+			error_description: getUrlParamVal(url, 'error_description', true),
+		}
+		return apiErr
+	}
 	const { setUsermail, setUserIsLoggedIn, userIsLoggedIn } = useContext(AppContext)
 	let loggedin: boolean = false
 	const navigate = useNavigate()
 
+	if (!checkApiError()) {
+		navigateTo = '/account/login'
+		if (loggedin) navigateTo = '/dashboard'
+		if (getUrlParamVal(url, 'type') === 'recovery') navigateTo = '/auth/resetpassword'
+	} else {
+		navigateTo = '/error?error_description=' + apiErrors().error_description
+	}
 	const userInLs = JSON.parse(localStorage.getItem(localStorageKey) as string)
 	console.log('userInLs:', userInLs)
 	console.log('localStorageKey', localStorageKey)
