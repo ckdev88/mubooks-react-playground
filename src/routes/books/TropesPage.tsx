@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import { AppContext } from '../../App'
 import { cleanIndexKey, cleanInput } from '../../helpers/cleanInput'
 import BooksOverviewPage from './BooksOverviewPage'
+import TropesInMyBooks from '../../components/TropesInMyBooks'
 import { supabase } from '../../../utils/supabase'
 
 const pageTitle = 'Tropes'
@@ -239,25 +240,7 @@ const TropesPage = () => {
 				)}
 			</div>
 			<hr />
-			<h2>Tropes in my Books</h2>
-			<ul className="tropes clr">
-				{tropesArr.map((trope, index) => (
-					<li key={cleanIndexKey(trope, index)} className="trope_add">
-						<button className="btn-txt btn-sm mb0" onClick={() => showTropeBooks(trope)}>
-							{trope}
-						</button>
-					</li>
-				))}
-			</ul>
-			{tropeBooks.length > 0 && (
-				<>
-					<h2>
-						My Books for <em>{activeTrope}</em>
-					</h2>
-					<br />
-					<BooksOverviewPage books={tropeBooks} page="tropespage" />
-				</>
-			)}
+			<TropesInMyBooks />
 		</>
 	)
 }
