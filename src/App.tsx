@@ -47,6 +47,7 @@ const App = () => {
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
+	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 	const [navTitle, setNavTitle] = useState<string>('')
 	const [localBookFilter, setLocalBookFilter] = useState<string>('')
@@ -108,10 +109,12 @@ const App = () => {
 		<>
 			<AppContext.Provider
 				value={{
+					formNotification,
 					navTitle,
 					popupNotification,
 					popupNotificationShow,
 					localBookFilter,
+					setFormNotification,
 					setLocalBookFilter,
 					setNavTitle,
 					setPopupNotification,

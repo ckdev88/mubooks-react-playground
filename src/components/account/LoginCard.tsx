@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom'
 
 const LoginCard = () => {
 	const navigate = useNavigate()
-	const { setUserIsLoggedIn, setUsername, setUsermail } = useContext(AppContext)
+	const { setUserIsLoggedIn, setUsername, setUsermail, formNotification, setFormNotification } =
+		useContext(AppContext)
 	const [error, setError] = useState('')
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -34,6 +35,7 @@ const LoginCard = () => {
 				} else {
 					setError('')
 					setUserIsLoggedIn(true)
+					setFormNotification('')
 					setUsername(res.data.user?.user_metadata.screenname)
 					setUsermail(res.data.user?.user_metadata.email)
 					navigate('/loadlibrary')
@@ -52,6 +54,7 @@ const LoginCard = () => {
 						Log in
 						<sub>to continue</sub>
 					</header>
+					<em className="form-notification">{formNotification}</em>
 					<form onSubmit={processLoginForm}>
 						<label htmlFor="login_email">
 							<div className="description">Email address</div>

@@ -11,6 +11,10 @@
 	margin-bottom: 1rem;
 	width: 100%;
 }
+.card .form-notification {
+	margin-bottom: 1rem;
+	display: block;
+}
 
 .card footer {
 	display: flex;

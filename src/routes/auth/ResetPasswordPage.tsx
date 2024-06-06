@@ -8,7 +8,7 @@ import { AppContext } from '../../App'
 https://ckdev88.github.io/mubooks/#/auth/resetpassword
 */
 const ResetPasswordPage = () => {
-	const { setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
+	const { setPopupNotification, setPopupNotificationShow,setFormNotification } = useContext(AppContext)
 	const navigate = useNavigate()
 	console.log('arrived in ResetPasswordPage')
 	const [error, setError] = useState('')
@@ -44,7 +44,9 @@ const ResetPasswordPage = () => {
 	// /confirm user before enable to change password
 
 	function afterSbUpdate() {
-		console.log('updated, naar de login page om in te loggen met nieuwe password')
+		console.log
+			setFormNotification('Your password was updated, use it to log in.')
+
 		setTimeout(() => {
 			setPopupNotification('')
 			setPopupNotificationShow(false)

@@ -11,6 +11,8 @@ interface AppContextType {
 	setUserIsLoggedIn(userIsLoggedIn: userIsLoggedIn): void
 	popupNotification: string
 	setPopupNotification(popupNotification: popupNotification): void
+	formNotification: string
+	setFormNotification(formNotification: formNotification): void
 	popupNotificationShow: boolean
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
