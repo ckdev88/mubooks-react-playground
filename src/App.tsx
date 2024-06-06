@@ -101,10 +101,6 @@ const App = () => {
 	}
 	const mainClassName = 'main-' + cleanAnchor(location.hash, false)
 
-	useEffect(() => {
-		console.log('app localstorageding...')
-		console.log(JSON.parse(localStorage.getItem(localStorageKey) as string))
-	}, [])
 	return (
 		<>
 			<AppContext.Provider

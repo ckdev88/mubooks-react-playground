@@ -10,7 +10,6 @@ https://ckdev88.github.io/mubooks/#/auth/resetpassword
 const ResetPasswordPage = () => {
 	const { setPopupNotification, setPopupNotificationShow,setFormNotification } = useContext(AppContext)
 	const navigate = useNavigate()
-	console.log('arrived in ResetPasswordPage')
 	const [error, setError] = useState('')
 
 	// confirm user before enable to change password
@@ -19,25 +18,19 @@ const ResetPasswordPage = () => {
 		if (loading) {
 			async function verifyTokenHash() {
 				const token = getUrlParamVal(window.location.href, 'token')
-				console.log('token_hash:', token)
 				const type = getUrlParamVal(window.location.href, 'type')
-				console.log('type:', type)
 				const email = getUrlParamVal(window.location.href, 'email')
-				console.log('email:', email)
 				if (type === 'recovery' && token !== null) {
 					const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
 					if (error) {
 						setError(error.message)
-						console.log('error:', error.message)
 					} else {
-						console.log('elsie, we mogen door!')
 						localStorage.setItem('supabaseSession', JSON.stringify(data.session))
 					}
 					setLoading(false)
 				}
 			}
 			verifyTokenHash()
-			console.log('verifyTokenHash done, result?')
 			setLoading(false)
 		}
 	}, [])
@@ -73,7 +66,6 @@ const ResetPasswordPage = () => {
 		e.preventDefault()
 		console.log(e.currentTarget.account_password.value)
 		if (e.currentTarget.account_password.value === e.currentTarget.account_password_again.value) {
-			console.log('goed!')
 			const form_userpass: string = e.currentTarget.account_password.value.trim()
 			updateSbUser(form_userpass)
 		} else setError('Passwords do not match, try again')

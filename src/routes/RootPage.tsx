@@ -60,7 +60,6 @@ const RootPage = () => {
 			<main id="main" className="textwrapper">
 				<div className="textwrapper">
 					Redirecting to wherever you should be right now... <br />
-					<Link to={navigateTo}>Click here</Link> if you're not redirected automatically. or{' '}
 					<a href="https://ckdev88.github.io/mubooks/#/dashboard">dashboard</a>
 					<br />
 					<Link to="/auth/resetpassword">password reset page</Link>

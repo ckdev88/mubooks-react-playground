@@ -66,7 +66,7 @@ const LoginCard = () => {
 						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button type="submit" value="Log in" disabled={isLoading}>
-							{isLoading ? 'Loading...' : 'Log in'}
+							{isLoading ? 'Logging in...' : 'Log in'}
 						</button>
 					</form>
 				</main>

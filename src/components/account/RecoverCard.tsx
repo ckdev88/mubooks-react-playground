@@ -18,12 +18,10 @@ const RecoverCard = () => {
 	}
 
 	async function recoverAccount(email: string) {
-		console.log('recovering..')
 		setIsLoading(true)
 		const { error } = await supabase.auth.resetPasswordForEmail(email)
 		if (error) setError(error.message)
 		else {
-			console.log('redirecting to /account/forgotpassword...')
 			setUsermail(email)
 			setIsLoading(false)
 			navigate('/account/forgotpassword')
@@ -47,7 +45,7 @@ const RecoverCard = () => {
 						<p>We'll send a link to this email address if it matches an existing account.</p>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button type="submit" disabled={isLoading}>
-							Send me a password reset link
+							{isLoading ? 'Sending...' : 'Send me a password reset link'}
 						</button>
 					</form>
 				</main>
