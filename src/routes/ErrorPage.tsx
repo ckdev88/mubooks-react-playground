@@ -15,7 +15,7 @@ const ErrorPage = () => {
 
 	let errormessage: string = ''
 	if (getUrlParamVal(url, 'error_description')) {
-		let errormsg = getUrlParamVal(url, 'error_description')
+		const errormsg = getUrlParamVal(url, 'error_description')
 		errormessage = cleanSigns(errormsg)
 	}
 

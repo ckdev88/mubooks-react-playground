@@ -1,4 +1,5 @@
 // TODO: add remove method
+// TODO: collapse 'add a trope'-from on page load and tropes length > 0
 import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'

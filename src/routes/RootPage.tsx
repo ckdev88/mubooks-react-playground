@@ -15,7 +15,7 @@ const RootPage = () => {
 		return false
 	}
 	const apiErrors = (): ApiError => {
-		let apiErr: ApiError = {
+		const apiErr: ApiError = {
 			error: getUrlParamVal(url, 'error', true),
 			error_code: getUrlParamVal(url, 'error_code', true),
 			error_description: getUrlParamVal(url, 'error_description', true),
