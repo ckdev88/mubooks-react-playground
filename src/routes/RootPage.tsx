@@ -4,8 +4,12 @@ import { localStorageKey } from '../../utils/supabase'
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import { getUrlParamVal } from '../Helpers'
+import { supabase } from '../../utils/supabase'
 
 const RootPage = () => {
+	let navigateTo: string
+	const url: string = window.location.href
+
 	const checkApiError = (): boolean => {
 		if (getUrlParamVal(url, 'error', true)) return true
 		return false
@@ -18,6 +22,22 @@ const RootPage = () => {
 		}
 		return apiErr
 	}
+
+	async function loginwithtoken() {
+		const accessToken = getUrlParamVal(url, 'access_token', true)
+		const refreshToken = getUrlParamVal(url, 'refresh_token', true)
+
+		const { error } = await supabase.auth.setSession({
+			// data,error
+			access_token: accessToken,
+			refresh_token: refreshToken,
+		})
+		if (error) {
+			console.log('Error logging in with token:', error.message)
+		}
+	}
+	loginwithtoken()
+
 	const { setUsermail, setUserIsLoggedIn, userIsLoggedIn } = useContext(AppContext)
 	let loggedin: boolean = false
 	const navigate = useNavigate()
@@ -29,50 +49,29 @@ const RootPage = () => {
 	} else {
 		navigateTo = '/error?error_description=' + apiErrors().error_description
 	}
+
 	const userInLs = JSON.parse(localStorage.getItem(localStorageKey) as string)
-	console.log('userInLs:', userInLs)
-	console.log('localStorageKey', localStorageKey)
+
 	if (userInLs?.user?.aud === 'authenticated') {
 		loggedin = true
 		setUserIsLoggedIn(true)
 	}
 
-	// TODO: cause not being able to fix resetpassword page?
-	console.log('zijn we hier?')
-	let navigateTo: string = '/account/login'
-
-	if (loggedin) {
-		if (getUrlParamVal(window.location.href, 'type') === 'recover') navigateTo = '/auth/resetpassword'
-		navigateTo = '/dashboard'
-	}
 
 	useEffect(() => {
-		const userInLs2 = JSON.parse(localStorage.getItem(localStorageKey) as string)
-		console.log('userInLs2:', userInLs2)
-		console.log('localStorageKey', localStorageKey)
-
 		if (loggedin) {
-			console.log('effect logged in in RootPage')
 			setUsermail(userInLs.user.email)
 			navigate(navigateTo)
 		} else {
 			if (userIsLoggedIn) {
-				console.log('we zijn logged in zegt userIsLoggedIn')
 				setUserIsLoggedIn(true)
-			} else console.log('oh toch niet')
-			console.log('effect logged in else in RootPage')
-			console.log('wacht even...')
+			} 
 			setTimeout(() => {
-				console.log('windowlochref', window.location.href)
-				const userInLs2 = JSON.parse(localStorage.getItem(localStorageKey) as string)
-				console.log('userInLs233:', userInLs2)
-				console.log('localStorageKey', localStorageKey)
-				if (getUrlParamVal(window.location.href, 'type') === 'recover') navigateTo = '/auth/resetpassword'
-				console.log('en then navigate to ', navigateTo)
+				if (getUrlParamVal(url, 'type') === 'recover') navigateTo = '/auth/resetpassword'
 			}, 1500)
-			// navigate(navigateTo)
+			navigate(navigateTo)
 		}
-	}, [loggedin, navigateTo, navigate, setUsermail, userInLs])
+	}, [loggedin, navigate, setUsermail, userInLs])
 
 	return (
 		<>

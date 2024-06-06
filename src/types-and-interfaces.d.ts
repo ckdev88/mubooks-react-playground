@@ -107,6 +107,7 @@ interface IdObject {
 	id: Id
 }
 type Id = string
+
 interface ApiError {
 	error?: string
 	error_code?: string

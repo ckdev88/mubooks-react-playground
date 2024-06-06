@@ -8,14 +8,17 @@ import { AppContext } from '../../App'
 https://ckdev88.github.io/mubooks/#/auth/resetpassword
 */
 const ResetPasswordPage = () => {
-	const { setPopupNotification, setPopupNotificationShow,setFormNotification } = useContext(AppContext)
+	const { setPopupNotification, setPopupNotificationShow, setFormNotification } = useContext(AppContext)
 	const navigate = useNavigate()
 	const [error, setError] = useState('')
+
+	// TODO: use popupmessenge for notice to login with new password after submit...
 
 	// confirm user before enable to change password
 	const [loading, setLoading] = useState(true)
 	useEffect(() => {
 		if (loading) {
+			// TODO: check of verifyTokenHash echt nodig is
 			async function verifyTokenHash() {
 				const token = getUrlParamVal(window.location.href, 'token')
 				const type = getUrlParamVal(window.location.href, 'type')
@@ -37,8 +40,7 @@ const ResetPasswordPage = () => {
 	// /confirm user before enable to change password
 
 	function afterSbUpdate() {
-		console.log
-			setFormNotification('Your password was updated, use it to log in.')
+		setFormNotification('Your password was updated, use it to log in.')
 
 		setTimeout(() => {
 			setPopupNotification('')
