@@ -49,8 +49,10 @@ function shuffleArray(array: []) {
 	}
 }
 
-function getUrlParamVal(url: string, key: string): string {
-	const urlArr = url.split(/['?','&']/)
+function getUrlParamVal(url: string, key: string, hash: boolean = false): string {
+	let urlArr: string[]
+	if (hash) urlArr = url.split(/['#','?','&']/)
+	else urlArr = url.split(/['?','&']/)
 	for (let i = 0; i < urlArr.length; i++) {
 		if (urlArr[i].slice(0, key.length) === key) return urlArr[i].split('=')[1]
 	}
