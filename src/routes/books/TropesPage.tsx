@@ -15,14 +15,11 @@ const TropesPage = () => {
 	const tropesDb = async () => {
 		const res = await supabase.from('user_entries').select('tropes_like,tropes_dislike')
 		if (res.data) {
-			console.log('resdata', res.data)
-			setLikedTropes(res.data[0].tropes_like)
-			setDislikedTropes(res.data[0].tropes_dislike)
+			if (res.data[0].tropes_like === 'null') setLikedTropes('')
+			else setLikedTropes(res.data[0].tropes_like)
 
-			// setInitialMyBooksSet(true)
-			// booksArr = res.data[0].json
-			// setUserMyBooks(booksArr)
-			// return booksArr
+			if (res.data[0].tropes_dislike === 'null') setDislikedTropes('')
+			else setDislikedTropes(res.data[0].tropes_dislike)
 		}
 	}
 
@@ -73,7 +70,8 @@ const TropesPage = () => {
 			if (error) msg = error.message
 			else msg = 'Updated liked tropes.'
 			setPopupNotification(msg)
-		} else {
+		}
+		if (liked === false) {
 			setDislikedTropes(
 				dislikedTropes
 					.split(',')
@@ -91,15 +89,13 @@ const TropesPage = () => {
 			setPopupNotification(msg)
 		}
 	}
-async	function processLikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
+	async function processLikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 
 		let tropeLiked: string
 		if (e.currentTarget.trope_add_liked.value !== undefined) {
-			console.log('liked')
 			setIsModding(true)
 			tropeLiked = cleanInput(e.currentTarget.trope_add_liked.value, false)
-			console.log('tropeliked', tropeLiked)
 			setLikedTropes(likedTropes + ',' + tropeLiked) // set or array with unique check would be nicer
 			e.currentTarget.trope_add_liked.value = ''
 			e.currentTarget.trope_add_liked.focus()
@@ -156,28 +152,35 @@ async	function processLikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 		if (!dislikedTropes) setShowDislikedTropesForm(true)
 	}, [likedTropes, dislikedTropes])
 	const TropesList = ({ tropes, liked }: { tropes: string; liked: string }) => {
-		console.log('tropes', tropes)
 		if (tropes === undefined) return
 		return (
 			<ul className="tropes clr mb0">
 				{tropes.split(',').map((trope, index) => (
 					<li className="trope badge" key={cleanIndexKey(trope, index)}>
 						{trope}
-						<button className="btn-x" onClick={() => removeTrope(trope, true)}>
-							x
-						</button>
+						{liked === 'liked' && (
+							<button className="btn-x" onClick={() => removeTrope(trope, true)}>
+								X
+							</button>
+						)}
+						{liked === 'disliked' && (
+							<button className="btn-x" onClick={() => removeTrope(trope, false)}>
+								x
+							</button>
+						)}
 					</li>
 				))}
 				{!showLikedTropesForm && (
 					<li className="trope_add">
-						{liked === 'liked' ? (
+						{liked === 'liked' && (
 							<button
 								className={showLikedTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
 								onClick={() => setShowLikedTropesForm(!showLikedTropesForm)}
 							>
 								{tropes.length > 0 ? <>+</> : <>Add tropes</>}
 							</button>
-						) : (
+						)}
+						{liked === 'disliked' && (
 							<button
 								className={showDislikedTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
 								onClick={() => setShowDislikedTropesForm(!showDislikedTropesForm)}
@@ -203,7 +206,7 @@ async	function processLikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 							<input
 								type="text"
 								name="trope_add_liked"
-								id={'trope_add_liked'}
+								id="trope_add_liked"
 								placeholder="Add a trope..."
 							/>
 							<button className="btn-submit-inside-caret-right"></button>
@@ -224,7 +227,7 @@ async	function processLikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 							<input
 								type="text"
 								name="trope_add_disliked"
-								id={'trope_add_disliked'}
+								id="trope_add_disliked"
 								placeholder="Add a trope..."
 							/>
 							<button className="btn-submit-inside-caret-right"></button>
