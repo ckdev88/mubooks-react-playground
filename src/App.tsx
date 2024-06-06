@@ -10,6 +10,7 @@ import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
 import ClearMyBooks from './routes/books/ClearMyBooks'
 import DashboardPage from './routes/account/DashboardPage'
+import ErrorPage from './routes/ErrorPage'
 import FavoritesPage from './routes/books/FavoritesPage'
 import FinishedPage from './routes/books/FinishedPage'
 import NavWrapper from './components/NavWrapper'
@@ -142,6 +143,7 @@ const App = () => {
 					)}
 					<Routes>
 						<Route path="/*" Component={RootPage} />
+						<Route path="/error" Component={ErrorPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
 						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
 						<Route path="/account/logout" Component={UserLogoutPage} />
