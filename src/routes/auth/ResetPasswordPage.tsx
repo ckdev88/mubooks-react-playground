@@ -16,23 +16,24 @@ const ResetPasswordPage = () => {
 
 	// confirm user before enable to change password
 	const [loading, setLoading] = useState(true)
+
+	async function verifyTokenHash() {
+		const token = getUrlParamVal(window.location.href, 'token')
+		const type = getUrlParamVal(window.location.href, 'type')
+		const email = getUrlParamVal(window.location.href, 'email')
+		if (type === 'recovery' && token !== null) {
+			const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
+			if (error) {
+				setError(error.message)
+			} else {
+				localStorage.setItem('supabaseSession', JSON.stringify(data.session))
+			}
+			setLoading(false)
+		}
+	}
 	useEffect(() => {
 		if (loading) {
 			// TODO: check of verifyTokenHash echt nodig is
-			async function verifyTokenHash() {
-				const token = getUrlParamVal(window.location.href, 'token')
-				const type = getUrlParamVal(window.location.href, 'type')
-				const email = getUrlParamVal(window.location.href, 'email')
-				if (type === 'recovery' && token !== null) {
-					const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
-					if (error) {
-						setError(error.message)
-					} else {
-						localStorage.setItem('supabaseSession', JSON.stringify(data.session))
-					}
-					setLoading(false)
-				}
-			}
 			verifyTokenHash()
 			setLoading(false)
 		}

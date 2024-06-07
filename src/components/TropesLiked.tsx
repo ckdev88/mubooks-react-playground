@@ -1,4 +1,4 @@
-// TODO: add remove method
+// TODO: merge with TropesDisliked.tsx
 import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
@@ -45,21 +45,40 @@ const TropesLiked = () => {
 		}
 	}
 
+	async function processRemoveTrope(trope: string) {
+		let msg: string
+		const { error } = await supabase
+			.from('user_entries')
+			.update({
+				tropes_liked: likedTropes.filter((trp) => trp !== trope),
+				testdata: 'updated from tropes: remove liked trope',
+			})
+			.eq('user_id', userid)
+			.select('*')
+		if (error) msg = error.message
+		else msg = 'Updated liked tropes.'
+		setPopupNotification(msg)
+	}
+
+	function removeTrope(trope: string) {
+		setLikedTropes(likedTropes.filter((trp) => trp !== trope))
+		processRemoveTrope(trope)
+	}
+
 	const cancelSubmit = (): void => {
 		console.log('cancel')
 		setShowLikedTropesForm(false)
 	}
-	useEffect(() => {
-		if (likedTropes.length === 0) setShowLikedTropesForm(true)
-	}, [likedTropes])
 
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
-		if (tropes === undefined) return
 		return (
 			<ul className="tropes clr mb0">
 				{tropes.map((trope, index) => (
 					<li className="trope badge" key={cleanIndexKey(trope, index)}>
 						{trope}
+						<button className="btn-x" onClick={() => removeTrope(trope)}>
+							x
+						</button>
 					</li>
 				))}
 				<li className="trope_add">
@@ -77,7 +96,7 @@ const TropesLiked = () => {
 		<>
 			<h2>Like</h2>
 			<div>
-				{likedTropes && likedTropes.length > 0 && <TropesList tropes={likedTropes} />}
+				<TropesList tropes={likedTropes} />
 				{showLikedTropesForm && (
 					<>
 						<form className="single-small-form clr" onSubmit={processLikedTropeAddForm}>

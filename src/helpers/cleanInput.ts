@@ -41,7 +41,7 @@ function cleanIndexKey(input: string, index: number): string {
 }
 
 function cleanSigns(sin: string) {
-	let signs = [';', '/', '?', ':', '@', '&', '=', '+', '$', ',', '#']
+	const signs = [';', '/', '?', ':', '@', '&', '=', '+', '$', ',', '#']
 	let out: string = ''
 	let dospace: boolean = false
 	for (let i = 0; i < sin.length; i++) {
