@@ -135,6 +135,10 @@
 	height: 1rem;
 	position: relative;
 }
+#nav-icon-loep,
+.burger {
+	margin-top: 0.25rem;
+}
 
 #nav-icon-profile-path,
 #nav-icon-loep-path {
