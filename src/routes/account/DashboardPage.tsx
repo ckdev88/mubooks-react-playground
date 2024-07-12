@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 const pageTitle = 'Mu Dashboard'
 export default function DashboardPage() {
-	const { username, setNavTitle } = useContext(AppContext)
+	const { setNavTitle } = useContext(AppContext)
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
@@ -26,12 +26,6 @@ export default function DashboardPage() {
 
 	return (
 		<>
-			<div>
-				<h1>
-					Hi, {username}
-					<sub>MuBOOKS is your reading journal.</sub>
-				</h1>
-			</div>
 			<QuoteCard />
 			<Reading />
 			<Wishlist />
