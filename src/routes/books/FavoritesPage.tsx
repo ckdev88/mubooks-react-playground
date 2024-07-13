@@ -21,8 +21,10 @@ const FavoritesPage = () => {
 			)
 		else booksFiltered = userMyBooks.filter((book: Book) => book.list === 4)
 		if (booksFiltered !== undefined) {
-			if (booksFiltered.length > 0) hasbooks = true
-			else hasbooks = false
+			if (booksFiltered.length > 0) {
+				booksFiltered.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
+				hasbooks = true
+			} else hasbooks = false
 		}
 	}
 
