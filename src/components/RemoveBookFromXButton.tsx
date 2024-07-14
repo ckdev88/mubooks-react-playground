@@ -3,7 +3,7 @@ import { AppContext } from '../App'
 import getListName from '../functions/getListName'
 import { supabase } from '../../utils/supabase'
 
-const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
+const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: Boolean = false) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
 	function RemoveBookFromX(book: Book) {
@@ -54,6 +54,8 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 	}
 
 	// TODO: use favorite-star instead of icon-remove on different spot
+	if (icon && targetList===4) return <span className="icon-heart active" onClick={RemoveBookFromXButtonAct}></span>
+
 	return (
 		<div className="mark">
 			<button className="btn-text" onClick={RemoveBookFromXButtonAct}>

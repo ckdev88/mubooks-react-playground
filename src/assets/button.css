@@ -329,3 +329,49 @@ main button.alt,
 .btn-icon .icon-spice.active {
 	background-color: #c90000;
 }
+.icon-heart {
+	font-size: 1.25rem;
+	cursor: pointer;
+	transform: rotate(45deg);
+}
+.icon-heart,
+.icon-heart::before,
+.icon-heart::after {
+	width: 0.625rem;
+	height: 0.625rem;
+	position: absolute;
+	content: '';
+	display: block;
+	background-color: #ccc;
+	transition: background ease-in-out 0.3s;
+}
+
+.icon-heart::before {
+	margin-left: -0.25em;
+	border-top-left-radius: 50%;
+	border-bottom-left-radius: 50%;
+}
+.icon-heart::after {
+	margin-right: -0.25em;
+	margin-top: -0.25em;
+	border-top-right-radius: 50%;
+	border-top-left-radius: 50%;
+}
+.icon-heart.active {
+	animation: icon-heart-popup 0.3s linear;
+}
+
+.icon-heart.active,
+.icon-heart.active::before,
+.icon-heart.active::after {
+	background-color: red;
+}
+@keyframes icon-heart-popup {
+	50% {
+		transform: rotate(45deg) scale(1.3);
+	}
+	100% {
+		transform: rotate(45deg) scale(1);
+	}
+}
+

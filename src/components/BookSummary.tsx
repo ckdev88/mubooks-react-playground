@@ -55,14 +55,20 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 					}
 					alt=""
 				/>
-						{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
+				{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
 			</aside>
 			<div className="article-main">
-				<header>
+				<header style={{ position: 'relative', width: '100%' }}>
 					<h2>
 						{book.title_short} {book.first_publish_year && <sup>({book.first_publish_year})</sup>}
 						<sub>{BookAuthorList(book)}</sub>
+						{book.list === 4 ? (
+							<>{RemoveBookFromXButton(book, book.list, true)}</>
+						) : (
+							<>{AddBookToXButton(book, 4, true)}</>
+						)}
 					</h2>
+
 					{page === 'quotedbookspage' && ReviewQuote(book, book.review_fav_quote)}
 					<p className="pt0 mt0">
 						{book.number_of_pages_median &&
