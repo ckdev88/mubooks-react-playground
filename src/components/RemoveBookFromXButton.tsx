@@ -3,7 +3,7 @@ import { AppContext } from '../App'
 import getListName from '../functions/getListName'
 import { supabase } from '../../utils/supabase'
 
-const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: Boolean = false) => {
+const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean = false) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
 	function RemoveBookFromX(book: Book) {
