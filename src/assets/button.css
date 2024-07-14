@@ -78,6 +78,12 @@ main button.alt,
 	margin-left: 0.35em;
 }
 
+.icon-dots::before {
+	color: #333;
+	content: '...';
+	letter-spacing: -0.02rem;
+}
+
 .synopsisWrapper[aria-expanded='true'] .caret-toggle::before,
 .caret-toggle.active::before {
 	background-position-y: top;
@@ -374,4 +380,3 @@ main button.alt,
 		transform: rotate(45deg) scale(1);
 	}
 }
-

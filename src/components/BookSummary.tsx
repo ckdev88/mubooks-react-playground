@@ -19,6 +19,8 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
+	const [showHiddenMarks, setShowHiddenMarks] = useState<boolean>(false)
+
 	async function toggleSynopsis() {
 		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
 		else {
@@ -130,19 +132,25 @@ const BookSummary = ({ book, page }: { book: Book; page: string }) => {
 									)}
 								</div>
 							)}
-							<div className="marks">
-								{!book.list && AddBookToXButton(book, 1)}
-								{(book.list === 1 || (page === 'searchpage' && (book.list < 2 || !book.list))) &&
-									AddBookToXButton(book, 2)}
-								{(book.list === 2 || (page === 'searchpage' && book.list !== 3 && book.list !== 4)) &&
-									AddBookToXButton(book, 3)}
-								{(book.list === 3 || (page === 'searchpage' && book.list !== 4)) &&
-									AddBookToXButton(book, 4)}
-								{book.list === 1 && RemoveBookFromXButton(book, 1)}
-								{book.list === 2 && RemoveBookFromXButton(book, 2)}
-								{book.list === 3 && RemoveBookFromXButton(book, 3)}
-								{book.list === 4 && RemoveBookFromXButton(book, 4)}
-							</div>
+							<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
+								<span className="icon icon-dots"></span>
+							</button>
+							{showHiddenMarks && (
+								<div className="marks">
+									{!book.list && AddBookToXButton(book, 1)}
+									{(book.list === 1 || (page === 'searchpage' && (book.list < 2 || !book.list))) &&
+										AddBookToXButton(book, 2)}
+									{(book.list === 2 ||
+										(page === 'searchpage' && book.list !== 3 && book.list !== 4)) &&
+										AddBookToXButton(book, 3)}
+									{(book.list === 3 || (page === 'searchpage' && book.list !== 4)) &&
+										AddBookToXButton(book, 4)}
+									{book.list === 1 && RemoveBookFromXButton(book, 1)}
+									{book.list === 2 && RemoveBookFromXButton(book, 2)}
+									{(book.list === 3 || book.list === 4) && RemoveBookFromXButton(book, 3)}
+									{book.list === 4 && RemoveBookFromXButton(book, 4)}
+								</div>
+							)}
 						</>
 					)}
 				</main>
