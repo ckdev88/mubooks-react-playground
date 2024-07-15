@@ -18,6 +18,14 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean =
 					break
 				}
 			}
+		} else if (book.list === 3) {
+			for (let i = 0; i < myBooks.length; i++) {
+				if (myBooks[i].id === book.id) {
+					myBooks[i].list = 2
+					myBooks[i].date_finished = undefined
+					break
+				}
+			}
 		} else {
 			let removeIndex = 0
 			for (let i = 0; i < myBooks.length; i++) {
