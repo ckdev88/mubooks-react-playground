@@ -61,11 +61,14 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
-					{book.list === 4 ? (
+				{currentPage !=='search' ?
+					book.list === 4 ? (
 						<>{RemoveBookFromXButton(book, book.list, true)}</>
 					) : (
 						book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
-					)}
+					)
+					:''
+				}
 					<h2>
 						{book.title_short}{' '}
 						{book.first_publish_year && currentPage === 'search' && <sup>({book.first_publish_year})</sup>}

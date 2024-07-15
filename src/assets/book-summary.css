@@ -69,17 +69,16 @@
 .book-summary aside {
 	width: 9rem;
 	height: auto;
-	margin: 0 1rem 1rem 0;
+	margin: 0 .75rem .75rem 0;
 	min-width: 9rem;
 	float: left;
 }
 
 .book-summary .article-main {
 	float: left;
-	width: calc(100% - 8rem);
-	max-width: calc(100vw - 8rem);
+	max-width: calc(100vw - 7.25rem);
 	@media screen and (max-width: 379.98px) {
-		max-width: calc(100vw - 8rem);
+		max-width: calc(100vw - 7.75rem);
 	}
 }
 .book-summary .article-main .icon-heart {
