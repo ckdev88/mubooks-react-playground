@@ -61,16 +61,16 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
+					{book.list === 4 ? (
+						<>{RemoveBookFromXButton(book, book.list, true)}</>
+					) : (
+						book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
+					)}
 					<h2>
-						{book.title_short} {book.first_publish_year && <sup>({book.first_publish_year})</sup>}
+						{book.title_short}{' '}
+						{book.first_publish_year && currentPage === 'search' && <sup>({book.first_publish_year})</sup>}
 						<sub>{BookAuthorList(book)}</sub>
-						{book.list === 4 ? (
-							<>{RemoveBookFromXButton(book, book.list, true)}</>
-						) : (
-							book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
-						)}
 					</h2>
-
 					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
 					<p className="pt0 mt0">
 						{book.number_of_pages_median &&
@@ -132,7 +132,6 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									)}
 								</div>
 							)}
-							<pre>currentPage:{currentPage}</pre>
 							{currentPage !== 'reading' && (
 								<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
 									<span className="icon icon-dots"></span>

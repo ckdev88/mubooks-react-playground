@@ -339,6 +339,7 @@ main button.alt,
 	font-size: 1.25rem;
 	cursor: pointer;
 	transform: rotate(45deg);
+	margin-right: 0.3125rem;
 }
 .icon-heart,
 .icon-heart::before,
