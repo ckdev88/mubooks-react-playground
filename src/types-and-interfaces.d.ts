@@ -22,7 +22,27 @@ interface AppContextType {
 	setLocalBookFilter(localBookFilter: localBookFilter): void
 }
 
-type Page = 'dashboard' | 'searchpage' | 'add-book' | 'wishlist' | 'reading' | 'finishedpage' | 'favoritespage' | 'saved-books' | 'quotedbookspage' | 'tropes' | 'account-profile'
+type Page =
+	| undefined
+	| 'home'
+	| 'dashboard'
+	| 'search'
+	| 'addbook'
+	| 'wishlist'
+	| 'reading'
+	| 'finished'
+	| 'favorites'
+	| 'savedbooks'
+	| 'quotedbooks'
+	| 'tropes'
+	| 'account-profile'
+	| 'savedbookspage'
+	| 'saveditemspage'
+	| 'finisheditemspage'
+	| 'favoriteitemspage'
+	| 'readingitemspage'
+	| 'quotedbooks'
+	| 'profile'
 
 type Quote = {
 	quote: string

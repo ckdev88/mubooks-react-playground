@@ -3,7 +3,7 @@ import { cleanIndexKey } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import BooksOverviewPage from '../routes/books/BooksOverviewPage'
 
-const TropesInMyBooks = () => {
+const TropesInMyBooks = ({ page }: { page: Page }) => {
 	const { userMyBooks } = useContext(AppContext)
 	const [activeTrope, setActiveTrope] = useState<string>('')
 	const [tropeBooks, setTropeBooks] = useState<Books>([])
@@ -41,7 +41,7 @@ const TropesInMyBooks = () => {
 						My Books for <em>{activeTrope}</em>
 					</h2>
 					<br />
-					<BooksOverviewPage books={tropeBooks} page="tropespage" />
+					<BooksOverviewPage books={tropeBooks} page={page} />
 				</>
 			)}
 		</>

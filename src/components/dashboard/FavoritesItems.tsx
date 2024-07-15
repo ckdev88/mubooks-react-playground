@@ -4,7 +4,7 @@ import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
 import { getBookCover, shuffleArray } from '../../Helpers'
 
-export default function FavoritesItems() {
+export default function FavoritesItems({ page }: { page: Page }) {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
 	const booksarr = userMyBooks.filter((book: Book) => book.list === 4)
@@ -13,7 +13,7 @@ export default function FavoritesItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} page="favoriteitemspage" />
+				return <BookSummary book={book} currentPage={page} key={book.id} />
 			})
 		}
 		shuffleArray(booksarr as [])

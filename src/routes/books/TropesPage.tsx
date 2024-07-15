@@ -5,6 +5,8 @@ import TropesLiked from '../../components/TropesLiked'
 import TropesDisliked from '../../components/TropesDisliked'
 
 const pageTitle = 'Tropes'
+const currentPage = 'tropes'
+
 const TropesPage = () => {
 	const { setNavTitle } = useContext(AppContext)
 	useEffect(() => {
@@ -17,7 +19,8 @@ const TropesPage = () => {
 			<TropesLiked />
 			<TropesDisliked />
 			<hr />
-			<TropesInMyBooks />
+
+			<TropesInMyBooks page={currentPage} />
 		</>
 	)
 }

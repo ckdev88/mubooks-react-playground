@@ -2,15 +2,15 @@ import { useContext } from 'react'
 import BookSummary from '../../components/BookSummary'
 import { AppContext } from '../../App'
 import BooksOverviewFilterSort from '../../components/BooksOverviewFilterSort'
-const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
+const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 	const { userMyBooks } = useContext(AppContext)
 	const savedArr: Books = userMyBooks
 
 	return (
 		<>
-			{page !== 'searchpage' && page !== 'tropespage' && <BooksOverviewFilterSort />}
+			{page !== 'search' && page !== 'tropes' && <BooksOverviewFilterSort />}
 			{books.map((book) => {
-				if (page === 'searchpage') {
+				if (page === 'search') {
 					savedArr.find((savedbook) => {
 						if (savedbook.id === book.id) {
 							book.list = savedbook.list
@@ -19,7 +19,7 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: string }) => {
 						}
 					})
 				}
-				return <BookSummary book={book} key={book.id} page={page} />
+				return <BookSummary book={book} key={book.id} currentPage={page} />
 			})}
 		</>
 	)

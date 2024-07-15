@@ -125,7 +125,7 @@ const App = () => {
 					userMyBooks,
 					userid,
 					usermail,
-					username,
+					username
 				}}
 			>
 				{userIsLoggedIn && (

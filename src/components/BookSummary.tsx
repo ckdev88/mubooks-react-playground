@@ -14,13 +14,12 @@ import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 
-const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
+const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const [showHiddenMarks, setShowHiddenMarks] = useState<boolean>(false)
-
 
 	async function toggleSynopsis() {
 		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
@@ -44,10 +43,9 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 
-
 	return (
 		<article
-			className={book.list && book.list > 0 && page === 'searchpage' ? 'book-summary saved' : 'book-summary'}
+			className={book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'}
 			id={bookAnchor}
 		>
 			<aside className="cover">
@@ -59,7 +57,7 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 					}
 					alt=""
 				/>
-				{(page === 'finishedpage' || page === 'favoritespage') && ReviewRating(book)}
+				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewRating(book)}
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
@@ -69,27 +67,25 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 						{book.list === 4 ? (
 							<>{RemoveBookFromXButton(book, book.list, true)}</>
 						) : (
-						(book.list === 3) && (
-							<>{AddBookToXButton(book, 4, true)}</>
-						)
+							book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
 						)}
 					</h2>
 
-					{page === 'quotedbookspage' && ReviewQuote(book, book.review_fav_quote)}
+					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
 					<p className="pt0 mt0">
 						{book.number_of_pages_median &&
-							page !== 'finishedpage' &&
-							page !== 'favoritespage' &&
-							page !== 'quotedbookspage' && <>{book.number_of_pages_median} pages</>}
+							currentPage !== 'finished' &&
+							currentPage !== 'favorites' &&
+							currentPage !== 'quotedbooks' && <>{book.number_of_pages_median} pages</>}
 					</p>
 				</header>
 				<main>
 					<div className="reviews">
-						{(page === 'finishedpage' || page === 'favoritespage') &&
+						{(currentPage === 'finished' || currentPage === 'favorites') &&
 							book.review_tropes &&
 							ReviewTropes(book, book?.review_tropes)}
 					</div>
-					{book.list > 1 && page !== 'searchpage' && page !== 'quotedbookspage' && (
+					{book.list > 1 && currentPage !== 'search' && currentPage !== 'quotedbooks' && (
 						<BookStartedFinished
 							date_started={book.date_reading}
 							date_finished={book.date_finished}
@@ -97,9 +93,9 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 							list={book.list}
 						/>
 					)}
-					{page !== 'quotedbookspage' && (
+					{currentPage !== 'quotedbooks' && (
 						<>
-							{page === 'searchpage' && (
+							{currentPage === 'search' && (
 								<div className="status">
 									{book.list > 0 && (
 										<em>
@@ -136,18 +132,21 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 									)}
 								</div>
 							)}
-							<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
-								<span className="icon icon-dots"></span>
-							</button>
-							{showHiddenMarks && (
+							<pre>currentPage:{currentPage}</pre>
+							{currentPage !== 'reading' && (
+								<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
+									<span className="icon icon-dots"></span>
+								</button>
+							)}
+							{(showHiddenMarks || currentPage === 'reading') && (
 								<div className="marks">
 									{!book.list && AddBookToXButton(book, 1)}
-									{(book.list === 1 || (page === 'searchpage' && (book.list < 2 || !book.list))) &&
+									{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
 										AddBookToXButton(book, 2)}
 									{(book.list === 2 ||
-										(page === 'searchpage' && book.list !== 3 && book.list !== 4)) &&
+										(currentPage === 'search' && book.list !== 3 && book.list !== 4)) &&
 										AddBookToXButton(book, 3)}
-									{(book.list === 3 || (page === 'searchpage' && book.list !== 4)) &&
+									{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) &&
 										AddBookToXButton(book, 4)}
 									{book.list === 1 && RemoveBookFromXButton(book, 1)}
 									{book.list === 2 && RemoveBookFromXButton(book, 2)}
@@ -160,11 +159,12 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 				</main>
 			</div>
 			<footer>
-				{(page === 'finishedpage' || page === 'favoritespage') && ReviewText(book, book.review_text)}
-				{(page === 'finishedpage' || page === 'favoritespage') && ReviewQuote(book, book.review_fav_quote)}
-				{page !== 'finishedpage' && page !== 'favoritespage' && page !== 'quotedbookspage' && (
+				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewText(book, book.review_text)}
+				{(currentPage === 'finished' || currentPage === 'favorites') &&
+					ReviewQuote(book, book.review_fav_quote)}
+				{currentPage !== 'finished' && currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
 					<>
-						{page === 'searchpage' && book.subject && SearchTropes(book.id, book.subject)}
+						{currentPage === 'search' && book.subject && SearchTropes(book.id, book.subject)}
 						<button
 							className={
 								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'

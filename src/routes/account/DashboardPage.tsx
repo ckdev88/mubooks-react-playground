@@ -10,8 +10,11 @@ import { localStorageKey } from '../../../utils/supabase'
 import { useNavigate } from 'react-router-dom'
 
 const pageTitle = 'Mu Dashboard'
+const currentPage = 'dashboard'
+
 export default function DashboardPage() {
 	const { setNavTitle } = useContext(AppContext)
+
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
@@ -28,7 +31,7 @@ export default function DashboardPage() {
 		<>
 			<QuoteCard />
 			<Reading />
-			<Wishlist />
+			<Wishlist page={currentPage} />
 			<Favorites />
 			<Finished />
 			<Saved />

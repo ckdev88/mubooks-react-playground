@@ -4,9 +4,11 @@ import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
 const pageTitle = 'Mu Wishlist'
+const currentPage = 'wishlist'
 
 const WishlistPage = () => {
 	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
+
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
@@ -55,7 +57,7 @@ const WishlistPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page="wishlistpage" />
+			<BooksOverviewPage books={booksFiltered} page={currentPage} />
 		</>
 	)
 }

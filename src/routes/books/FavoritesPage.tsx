@@ -4,9 +4,11 @@ import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
 const pageTitle = 'Favorites'
+const currentPage = 'favorites'
 
 const FavoritesPage = () => {
 	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
+
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
@@ -57,7 +59,7 @@ const FavoritesPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page="favoritespage" />
+			<BooksOverviewPage books={booksFiltered} page={currentPage} />
 		</>
 	)
 }

@@ -3,9 +3,12 @@ import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
+const pageTitle = 'Mu books'
+const currentPage = 'reading'
+
 const ReadingPage = () => {
 	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
-	const pageTitle = 'Mu Reading'
+
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
@@ -60,7 +63,7 @@ const ReadingPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page="readingpage" />
+			<BooksOverviewPage books={booksFiltered} page={currentPage} />
 		</>
 	)
 }

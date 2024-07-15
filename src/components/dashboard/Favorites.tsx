@@ -10,7 +10,7 @@ export default function Favorites() {
 						Mu Favorites<span>›</span>
 					</header>
 				</Link>
-				<FavoritesItems />
+				<FavoritesItems page='dashboard' />
 			</article>
 		</>
 	)

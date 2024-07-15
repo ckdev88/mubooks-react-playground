@@ -4,12 +4,15 @@ import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
 const pageTitle = 'Finished books'
+const currentPage = 'finished'
 
 const FinishedPage = () => {
 	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
+
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
+
 	let hasbooks = false
 	let booksFiltered: Books = []
 
@@ -60,7 +63,7 @@ const FinishedPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page="finishedpage" />
+			<BooksOverviewPage books={booksFiltered} page={currentPage} />
 		</>
 	)
 }

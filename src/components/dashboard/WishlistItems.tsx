@@ -4,7 +4,7 @@ import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
 import { getBookCover } from '../../Helpers'
 
-export default function WishlistItems() {
+export default function WishlistItems({ page }: { page: Page }) {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks: boolean = false
 	const booksarr = userMyBooks.filter((book: Book) => book.list === 1)
@@ -13,7 +13,7 @@ export default function WishlistItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} page='wishlistpage' />
+				return <BookSummary book={book} key={book.id} currentPage={page} />
 			})
 		}
 		return (
