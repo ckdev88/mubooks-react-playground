@@ -81,6 +81,8 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 			if (reviewFavQuote !== undefined)
 				document.getElementById('review_fav_quote' + book.id)?.setAttribute('value', reviewFavQuote)
 		}
+		if (reviewFavQuote && reviewFavQuote !== '') setShowReviewFavQuote(true)
+		else setShowReviewFavQuote(false)
 	}, [showForm, reviewFavQuote, book.id, isModding])
 
 	return (
@@ -104,7 +106,7 @@ const ReviewQuote = (book: Book, review_fav_quote: Book['review_fav_quote']) => 
 				</>
 			)}
 
-			{showReviewFavQuote && reviewFavQuote!=='' && <div onClick={activateForm}>{reviewFavQuote}</div>}
+			{showReviewFavQuote && <div onClick={activateForm}>{reviewFavQuote}</div>}
 		</div>
 	)
 }
