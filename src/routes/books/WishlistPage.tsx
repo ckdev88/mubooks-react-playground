@@ -40,7 +40,7 @@ const WishlistPage = () => {
 							No book titles found for <i>{localBookFilter}.</i>
 						</>
 					) : (
-						<> All the books I will read read soon: {booksFiltered.length}</>
+						<> All the books I will read soon: {booksFiltered.length}</>
 					)}
 				</sub>
 			</h1>
