@@ -23,11 +23,8 @@ interface AppContextType {
 }
 
 type Page =
-	| undefined
-	| 'home'
 	| 'dashboard'
 	| 'search'
-	| 'addbook'
 	| 'wishlist'
 	| 'reading'
 	| 'finished'
@@ -35,12 +32,6 @@ type Page =
 	| 'savedbooks'
 	| 'quotedbooks'
 	| 'tropes'
-	| 'account-profile'
-	| 'savedbookspage'
-	| 'saveditemspage'
-	| 'finisheditemspage'
-	| 'favoriteitemspage'
-	| 'readingitemspage'
 	| 'quotedbooks'
 	| 'profile'
 
