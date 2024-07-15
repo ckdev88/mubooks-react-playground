@@ -14,12 +14,13 @@ import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 
-const BookSummary = ({ book, page }: { book: Book; page: string }) => {
+const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const [showHiddenMarks, setShowHiddenMarks] = useState<boolean>(false)
+
 
 	async function toggleSynopsis() {
 		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
