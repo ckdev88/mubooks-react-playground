@@ -44,6 +44,7 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 
+
 	return (
 		<article
 			className={book.list && book.list > 0 && page === 'searchpage' ? 'book-summary saved' : 'book-summary'}
@@ -68,7 +69,9 @@ const BookSummary = ({ book, page }: { book: Book; page: Page }) => {
 						{book.list === 4 ? (
 							<>{RemoveBookFromXButton(book, book.list, true)}</>
 						) : (
+						(book.list === 3) && (
 							<>{AddBookToXButton(book, 4, true)}</>
+						)
 						)}
 					</h2>
 
