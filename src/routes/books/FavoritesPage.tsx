@@ -45,7 +45,7 @@ const FavoritesPage = () => {
 							No book titles found for <i>{localBookFilter}.</i>
 						</>
 					) : (
-						<>My beloved and adored books: {booksFiltered.length}</>
+						<>Beloved and adored books: {booksFiltered.length}</>
 					)}
 				</sub>
 			</h1>
