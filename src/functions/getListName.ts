@@ -4,7 +4,7 @@ const getListName = (listId: BookList): string => {
 	else if (listId === 3) return 'finished'
 	else if (listId === 4) return 'favorite'
 	else {
-		console.error('hmmm, something is wrong here.')
+		console.error('No list name? There must be something wrong...')
 		return 'none'
 	}
 }
