@@ -1,4 +1,3 @@
-// TODO: merge with TropesDisliked.tsx
 import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
@@ -14,6 +13,7 @@ const TropesLiked = () => {
 			setLikedTropes(res.data[0].tropes_liked)
 		}
 	}
+
 	useEffect(() => {
 		tropesDb()
 	}, [setNavTitle])
@@ -66,7 +66,6 @@ const TropesLiked = () => {
 	}
 
 	const cancelSubmit = (): void => {
-		console.log('cancel')
 		setShowLikedTropesForm(false)
 	}
 

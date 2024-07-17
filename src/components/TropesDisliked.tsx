@@ -1,4 +1,3 @@
-// TODO: merge with TropesLiked.tsx
 import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
@@ -67,7 +66,6 @@ const TropesDisliked = () => {
 	}
 
 	const cancelSubmit = (): void => {
-		console.log('cancel')
 		setShowLikedDislikedTropesForm(false)
 	}
 
