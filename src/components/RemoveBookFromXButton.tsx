@@ -47,6 +47,7 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean =
 		setUserMyBooks(newArr)
 	}
 
+	// TODO: move this function to generic helper location
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
