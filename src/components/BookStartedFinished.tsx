@@ -43,7 +43,10 @@ const BookStartedFinished = ({
 		for (let i = 0; i < myBooks.length; i++) {
 			if (myBooks[i].id === bookid) {
 				if (fieldName === 'date_reading') myBooks[i].date_reading = fieldVal
-				if (fieldName === 'date_finished') myBooks[i].date_finished = fieldVal
+				if (fieldName === 'date_finished') {
+					myBooks[i].date_finished = fieldVal
+					if (myBooks[i].date_finished === null && myBooks[i].list > 2) myBooks[i].list = 2
+				}
 			}
 		}
 		const myBooksNew = myBooks

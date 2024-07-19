@@ -4,9 +4,11 @@ import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 
 const pageTitle = 'Mu Quotes'
+const currentPage = 'quotedbooks'
 
 const QuotedPage = () => {
 	const { userMyBooks, setNavTitle } = useContext(AppContext)
+
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
@@ -32,7 +34,7 @@ const QuotedPage = () => {
 					</Link>
 				</p>
 			</div>
-			<BooksOverviewPage books={quotedbooks} page="quotedbookspage" />
+			<BooksOverviewPage books={quotedbooks} page={currentPage} />
 		</>
 	)
 }

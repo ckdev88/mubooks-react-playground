@@ -47,13 +47,14 @@
 .search .book-summary.saved hr {
 	display: none;
 }
-
 .book-summary h2 {
 	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
 	font-size: 1.3em;
 }
-
+.book-summary .icon-heart + h2 {
+	padding-right: 1.25rem;
+}
 .book-summary h2 sub {
 	font-size: 0.8em;
 	font-weight: normal;
@@ -67,18 +68,34 @@
 .book-summary aside {
 	width: 9rem;
 	height: auto;
-	margin: 0 1rem 1rem 0;
+	margin: 0 0.75rem 0.75rem 0;
 	min-width: 9rem;
 	float: left;
 }
 
 .book-summary .article-main {
 	float: left;
-	max-width: calc(100vw - 11rem);
+	max-width: calc(100vw - 9.75rem);
+	width: calc(100vw - 7.75rem);
+	@media screen and (max-width: 414px) {
+		max-width: calc(100vw - 8.75rem);
+	}
+	@media screen and (max-width: 399.98px) {
+		max-width: calc(100vw - 7.75rem);
+	}
 	@media screen and (max-width: 379.98px) {
-		max-width: calc(100vw - 8rem);
+		width: calc(100vw - 6.75rem);
+		max-width: calc(100vw - 7.75rem);
 	}
 }
+.book-summary .article-main .icon-heart {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: red;
+	margin-top: 0.375em;
+}
+
 .deck .book-summary .article-main {
 	max-width: calc(100vw - 10.5rem);
 }

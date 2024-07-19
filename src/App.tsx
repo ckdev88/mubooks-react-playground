@@ -101,6 +101,10 @@ const App = () => {
 	}
 	const mainClassName = 'main-' + cleanAnchor(location.hash, false)
 
+	useEffect(() => {
+		document.title = navTitle
+	}, [navTitle])
+
 	return (
 		<>
 			<AppContext.Provider

@@ -4,6 +4,7 @@ import { getOlCover } from '../../Helpers'
 import { AppContext } from '../../App'
 
 const pageTitle = 'Search'
+const currentPage = 'search'
 
 const SearchPage = () => {
 	const [resultsMessage, setResultsMessage] = useState<string>('')
@@ -58,7 +59,9 @@ const SearchPage = () => {
 					setSearchTerm(search_term)
 					return filtered
 				})
-				.then((result) => {setSearchResults(result);})
+				.then((result) => {
+					setSearchResults(result)
+				})
 				.catch((error) => setResultsMessage('error ' + error))
 				.finally(() => setLoading(false))
 		} else if (search_term.length === 0) setResultsMessage(search_term)
@@ -86,7 +89,7 @@ const SearchPage = () => {
 						{resultCount > 1 || resultCount === 0 ? 'books' : 'book'} found for <em>"{searchTerm}"</em>
 						<sub className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</sub>
 					</h2>
-					<BooksOverviewPage books={searchResults} page="searchpage" />
+					<BooksOverviewPage books={searchResults} page={currentPage} />
 				</div>
 			</div>
 		</>

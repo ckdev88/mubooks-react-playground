@@ -22,6 +22,19 @@ interface AppContextType {
 	setLocalBookFilter(localBookFilter: localBookFilter): void
 }
 
+type Page =
+	| 'dashboard'
+	| 'search'
+	| 'wishlist'
+	| 'reading'
+	| 'finished'
+	| 'favorites'
+	| 'savedbooks'
+	| 'quotedbooks'
+	| 'tropes'
+	| 'quotedbooks'
+	| 'profile'
+
 type Quote = {
 	quote: string
 	authors: string

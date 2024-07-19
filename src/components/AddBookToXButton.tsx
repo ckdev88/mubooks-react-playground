@@ -1,10 +1,10 @@
-import { useContext } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import getListName from '../functions/getListName'
 import { convertDate, timestampConverter } from '../helpers/convertDate'
+import { useContext } from 'react'
 
-const AddBookToXButton = (book: Book, targetList: BookList) => {
+const AddBookToXButton = (book: Book, targetList: BookList, icon: boolean = false) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
 	function MyBooksAdd(book: Book, list = book.list): Books {
@@ -84,6 +84,9 @@ const AddBookToXButton = (book: Book, targetList: BookList) => {
 	}
 
 	const iconClassName = 'icon icon-' + getListName(targetList)
+
+	if (icon && targetList === 4) return <span className="icon-heart inactive" onClick={AddBookToXButtonAct}></span>
+
 	return (
 		<div className="mark">
 			<button className="btn-text" onClick={AddBookToXButtonAct}>

@@ -10,7 +10,7 @@ export default function Finished() {
 						Mu Finished books<span>›</span>
 					</header>
 				</Link>
-				<FinishedItems />
+				<FinishedItems page='dashboard' />
 			</article>
 		</>
 	)

@@ -3,7 +3,7 @@ import { AppContext } from '../App'
 import getListName from '../functions/getListName'
 import { supabase } from '../../utils/supabase'
 
-const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
+const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean = false) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
 	function RemoveBookFromX(book: Book) {
@@ -15,6 +15,14 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 			for (let i = 0; i < myBooks.length; i++) {
 				if (myBooks[i].id === book.id) {
 					myBooks[i].list = 3
+					break
+				}
+			}
+		} else if (book.list === 3) {
+			for (let i = 0; i < myBooks.length; i++) {
+				if (myBooks[i].id === book.id) {
+					myBooks[i].list = 2
+					myBooks[i].date_finished = undefined
 					break
 				}
 			}
@@ -39,6 +47,7 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 		setUserMyBooks(newArr)
 	}
 
+	// TODO: move this function to generic helper location
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
@@ -54,6 +63,8 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList) => {
 	}
 
 	// TODO: use favorite-star instead of icon-remove on different spot
+	if (icon && targetList === 4) return <span className="icon-heart active" onClick={RemoveBookFromXButtonAct}></span>
+
 	return (
 		<div className="mark">
 			<button className="btn-text" onClick={RemoveBookFromXButtonAct}>
