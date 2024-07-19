@@ -16,7 +16,7 @@
 		width: auto;
 	}
 	.book-summary .article-main {
-		max-width: calc(98vw - 9.75rem);
+		max-width: calc(100% - 7.75rem);
 	}
 }
 
