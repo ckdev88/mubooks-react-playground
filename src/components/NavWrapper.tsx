@@ -116,6 +116,11 @@ const NavWrapper = () => {
 							</NavLink>
 						</li>
 						<li>
+							<NavLink to={'/statistics'} onClick={toggleNav0}>
+								Statistics
+							</NavLink>
+						</li>
+						<li>
 							<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
 								Clear My Books
 							</NavLink>

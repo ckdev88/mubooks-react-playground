@@ -19,6 +19,7 @@ import ReadingPage from './routes/books/ReadingPage'
 import RootPage from './routes/RootPage'
 import SavedBooksPage from './routes/books/SavedBooksPage'
 import SearchPage from './routes/books/SearchPage'
+import StatisticsPage from './routes/books/StatisticsPage.tsx'
 import TropesPage from './routes/books/TropesPage'
 import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
@@ -167,6 +168,7 @@ const App = () => {
 								<Route path="/favorites" Component={FavoritesPage} />
 								<Route path="/quoted-books" Component={QuotedPage} />
 								<Route path="/tropes" Component={TropesPage} />
+								<Route path="/statistics" Component={StatisticsPage} />
 								<Route path="/clear-my-books" Component={ClearMyBooks} />
 								<Route path="/loadlibrary" Component={LoadLibrary} />
 							</>
