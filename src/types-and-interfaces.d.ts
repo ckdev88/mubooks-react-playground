@@ -126,3 +126,5 @@ interface ApiError {
 	error_code?: string
 	error_description?: string
 }
+
+type StatsAmountTypes = 'books' | 'pages' | 'daysperbook'
