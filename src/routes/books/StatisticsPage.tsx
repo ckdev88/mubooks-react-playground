@@ -17,6 +17,7 @@ const StatisticsPage = () => {
 	const getAmount = (year: number, type: StatsAmountTypes): number => {
 		let amount = 0
 		let amountBooks = 0
+		let amountPages = 0
 		const triggerYearStart = year * 10000
 		const triggerYearEnd = triggerYearStart + 10000
 
@@ -28,8 +29,11 @@ const StatisticsPage = () => {
 			) {
 				if (type === 'books' || type === 'daysperbook') amountBooks += 1
 				if (type !== 'books') {
-					if (type === 'pages' && typeof userMyBooks[i].number_of_pages_median === 'number')
-						amount += userMyBooks[i].number_of_pages_median
+					if (
+						(type === 'pages' || type === 'pagesperday') &&
+						typeof userMyBooks[i].number_of_pages_median === 'number'
+					)
+						amountPages += userMyBooks[i].number_of_pages_median
 					else if (type === 'pages' && userMyBooks[i].number_of_pages_median === undefined) {
 						// TODO: books that have no amount of pages to them can't be counted ...
 						// console.log('nope', userMyBooks[i].cover_edition_key)
@@ -37,11 +41,17 @@ const StatisticsPage = () => {
 				}
 			}
 		}
-		if (type === 'daysperbook') {
+
+		if (type === 'books') amount = amountBooks
+		else if (type === 'pages') amount = amountPages
+		else if (type === 'daysperbook') {
 			if (year === currentYear) amount = Math.floor(currentYearDayNr / amountBooks)
 			else amount = Math.floor(365 / amountBooks)
+		} else if (type === 'pagesperday') {
+			if (year === currentYear) amount = Math.floor(amountPages / currentYearDayNr)
+			else amount = Math.floor(amountPages / 365)
 		}
-		if (type === 'books') amount = amountBooks
+
 		return amount
 	}
 	return (
@@ -51,6 +61,7 @@ const StatisticsPage = () => {
 			<h3>Books finished: {getAmount(currentYear, 'books')}</h3>
 			<h3>Pages finished: {getAmount(currentYear, 'pages')}</h3>
 			<h3>Average days per book: {getAmount(currentYear, 'daysperbook')}</h3>
+			<h3>Average pages per day: {getAmount(currentYear, 'pagesperday')}</h3>
 			<p>coming soon</p>
 			<h3>Reading speed in books and pages</h3>
 			<p>coming soon</p>
@@ -62,6 +73,7 @@ const StatisticsPage = () => {
 					<h3>Books finished: {getAmount(currentYear - 1, 'books')}</h3>
 					<h3>Pages finished: {getAmount(currentYear - 1, 'pages')}</h3>
 					<h3>Average days per book: {getAmount(currentYear - 1, 'daysperbook')}</h3>
+					<h3>Average pages per day: {getAmount(currentYear - 1, 'pagesperday')}</h3>
 				</>
 			) : (
 				<>Nada</>
@@ -73,6 +85,7 @@ const StatisticsPage = () => {
 					<h3>Books finished: {getAmount(currentYear - 2, 'books')}</h3>
 					<h3>Pages finished: {getAmount(currentYear - 2, 'pages')}</h3>
 					<h3>Average days per book: {getAmount(currentYear - 2, 'daysperbook')}</h3>
+					<h3>Average pages per day: {getAmount(currentYear - 2, 'pagesperday')}</h3>
 				</>
 			) : (
 				<>Nada</>
@@ -84,6 +97,7 @@ const StatisticsPage = () => {
 					<h3>Books finished: {getAmount(currentYear - 3, 'books')}</h3>
 					<h3>Pages finished: {getAmount(currentYear - 3, 'pages')}</h3>
 					<h3>Average days per book: {getAmount(currentYear - 3, 'daysperbook')}</h3>
+					<h3>Average pages per day: {getAmount(currentYear - 3, 'pagesperday')}</h3>
 				</>
 			) : (
 				<>Nada</>
@@ -95,6 +109,7 @@ const StatisticsPage = () => {
 					<h3>Books finished: {getAmount(currentYear - 4, 'books')}</h3>
 					<h3>Pages finished: {getAmount(currentYear - 4, 'pages')}</h3>
 					<h3>Average days per book: {getAmount(currentYear - 4, 'daysperbook')}</h3>
+					<h3>Average pages per day: {getAmount(currentYear - 4, 'pagesperday')}</h3>
 				</>
 			) : (
 				<>Nada</>
@@ -106,6 +121,7 @@ const StatisticsPage = () => {
 					<h3>Books finished: {getAmount(currentYear - 5, 'books')}</h3>
 					<h3>Pages finished: {getAmount(currentYear - 5, 'pages')}</h3>
 					<h3>Average days per book: {getAmount(currentYear - 5, 'daysperbook')}</h3>
+					<h3>Average pages per day: {getAmount(currentYear - 5, 'pagesperday')}</h3>
 				</>
 			) : (
 				<>Nada</>

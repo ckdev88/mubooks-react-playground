@@ -127,4 +127,4 @@ interface ApiError {
 	error_description?: string
 }
 
-type StatsAmountTypes = 'books' | 'pages' | 'daysperbook'
+type StatsAmountTypes = 'books' | 'pages' | 'daysperbook' | 'pagesperday'
