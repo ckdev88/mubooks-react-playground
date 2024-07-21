@@ -7,7 +7,7 @@ const currentYear = now.getFullYear()
 const currentYearStartDayNr: Date = new Date(currentYear, 0, 0)
 const oneDay = 1000 * 60 * 60 * 24
 const currentYearDayNr: number = Math.floor((Number(now) - Number(currentYearStartDayNr)) / oneDay)
-let oldestFinishedDate:number = currentYear * 10000
+let oldestFinishedDate: number | undefined
 
 const StatisticsPage = () => {
 	const { userMyBooks, setNavTitle } = useContext(AppContext)
@@ -15,15 +15,16 @@ const StatisticsPage = () => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
 
-	const getOldestDate = ():number => {
+	const getOldestFinishedDate = (): number => {
 		for (let i = 0; i < userMyBooks.length; i++) {
-			if (userMyBooks[i].date_finished > 0 && Number(userMyBooks[i].date_finished) < oldestFinishedDate) {
-				oldestFinishedDate = userMyBooks[i].date_finished
-				console.log('new oldestFinishedDate',oldestFinishedDate)
-			}
+			oldestFinishedDate = userMyBooks[i].date_finished
 		}
+
+		oldestFinishedDate = Number(oldestFinishedDate)
+		if (oldestFinishedDate === 0) return 0
 		return oldestFinishedDate
 	}
+	oldestFinishedDate = getOldestFinishedDate()
 
 	const getAmount = (year: number, type: StatsAmountTypes): number => {
 		let amount = 0
@@ -67,6 +68,7 @@ const StatisticsPage = () => {
 	}
 	return (
 		<>
+			{oldestFinishedDate > 0 && <>First finished book date: {oldestFinishedDate}</>}
 			<h1>Mu Statistics</h1>
 			<h2>{currentYear}</h2>
 			Books finished: {getAmount(currentYear, 'books')}<br/>
