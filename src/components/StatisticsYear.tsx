@@ -31,8 +31,7 @@ const StatisticsYear = (year: number) => {
 					)
 						amountPages += userMyBooks[i].number_of_pages_median
 					else if (type === 'pages' && userMyBooks[i].number_of_pages_median === undefined) {
-						// TODO: books that have no amount of pages to them can't be counted ...
-						// console.log('nope', userMyBooks[i].cover_edition_key)
+						console.log('book not having pages:', userMyBooks[i].cover_edition_key)
 					}
 				}
 			}
@@ -50,18 +49,18 @@ const StatisticsYear = (year: number) => {
 
 		return amount
 	}
-
-	return (
-		<>
-			<h2>{year}.</h2>
-			Books finished: {getAmount(year, 'books')}
-			<br />
-			Pages finished: {getAmount(year, 'pages')}
-			<br />
-			Average days per book: {getAmount(year, 'daysperbook')}
-			<br />
-			Average pages per day: {getAmount(year, 'pagesperday')}
-		</>
-	)
+	if (getAmount(year, 'books') > 0)
+		return (
+			<>
+				<h2>{year}.</h2>
+				Books finished: {getAmount(year, 'books')}
+				<br />
+				Pages finished: {getAmount(year, 'pages')}
+				<br />
+				Average days per book: {getAmount(year, 'daysperbook')}
+				<br />
+				Average pages per day: {getAmount(year, 'pagesperday')}
+			</>
+		)
 }
 export default StatisticsYear
