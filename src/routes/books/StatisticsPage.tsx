@@ -6,13 +6,24 @@ const now: Date = new Date()
 const currentYear = now.getFullYear()
 const currentYearStartDayNr: Date = new Date(currentYear, 0, 0)
 const oneDay = 1000 * 60 * 60 * 24
-var currentYearDayNr: number = Math.floor((Number(now) - Number(currentYearStartDayNr)) / oneDay)
+const currentYearDayNr: number = Math.floor((Number(now) - Number(currentYearStartDayNr)) / oneDay)
+let oldestFinishedDate:number = currentYear * 10000
 
 const StatisticsPage = () => {
 	const { userMyBooks, setNavTitle } = useContext(AppContext)
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
+
+	const getOldestDate = ():number => {
+		for (let i = 0; i < userMyBooks.length; i++) {
+			if (userMyBooks[i].date_finished > 0 && Number(userMyBooks[i].date_finished) < oldestFinishedDate) {
+				oldestFinishedDate = userMyBooks[i].date_finished
+				console.log('new oldestFinishedDate',oldestFinishedDate)
+			}
+		}
+		return oldestFinishedDate
+	}
 
 	const getAmount = (year: number, type: StatsAmountTypes): number => {
 		let amount = 0

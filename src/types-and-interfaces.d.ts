@@ -96,7 +96,7 @@ interface Book {
 	title: string
 	title_short: string
 	date_reading?: number
-	date_finished?: number
+	date_finished: number
 	rate_stars: Scale5
 	rate_spice: Scale5
 	review_tropes: BookTropes
