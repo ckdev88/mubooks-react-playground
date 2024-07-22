@@ -28,7 +28,9 @@ const StatisticsPage = () => {
 	oldestFinishedDate = getOldestFinishedDate()
 	oldestFinishedYear = Math.floor(oldestFinishedDate / 10000)
 
-	for (let i = currentYear; i > oldestFinishedYear - 1; i--) contents.push(StatisticsYear(i))
+	for (let i = currentYear; i > oldestFinishedYear - 1; i--) {
+		contents.push(StatisticsYear(i))
+	}
 
 	return (
 		<>

@@ -32,7 +32,9 @@
 .red {
 	color: red;
 }
-
+.wauto {
+	width: auto;
+}
 .wauto-md {
 	@media screen and (min-width: 480px) {
 		width: auto;
@@ -90,4 +92,7 @@ sup {
 .flnone,
 input.flnone {
 	float: none;
+}
+.d-inline {
+	display: inline;
 }

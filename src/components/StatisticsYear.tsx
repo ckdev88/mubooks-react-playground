@@ -1,15 +1,21 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AppContext } from '../App'
+import BooksWithoutPagesList from './BooksWithoutPagesList'
 
 const now: Date = new Date()
 const currentYear = now.getFullYear()
 const currentYearStartDayNr: Date = new Date(currentYear, 0, 0)
 const oneDay = 1000 * 60 * 60 * 24
 const currentYearDayNr: number = Math.floor((Number(now) - Number(currentYearStartDayNr)) / oneDay)
+let amountBooksWithoutPages = 0
+let booksWithoutPages: string[] = []
 
 const StatisticsYear = (year: number) => {
 	const { userMyBooks } = useContext(AppContext)
+	const [showToggle, setShowToggle] = useState(false)
 
+	amountBooksWithoutPages = 0
+	booksWithoutPages = []
 	const getAmount = (year: number, type: StatsAmountTypes): number => {
 		let amount = 0
 		let amountBooks = 0
@@ -31,7 +37,8 @@ const StatisticsYear = (year: number) => {
 					)
 						amountPages += userMyBooks[i].number_of_pages_median
 					else if (type === 'pages' && userMyBooks[i].number_of_pages_median === undefined) {
-						console.log('book not having pages:', userMyBooks[i].cover_edition_key)
+						amountBooksWithoutPages++
+						booksWithoutPages.push(userMyBooks[i].title_short)
 					}
 				}
 			}
@@ -49,18 +56,34 @@ const StatisticsYear = (year: number) => {
 
 		return amount
 	}
+
+	const divkey = 'StatisticsYear' + year
+
 	if (getAmount(year, 'books') > 0)
 		return (
-			<>
+			<div key={divkey}>
 				<h2>{year}.</h2>
 				Books finished: {getAmount(year, 'books')}
 				<br />
 				Pages finished: {getAmount(year, 'pages')}
+				{amountBooksWithoutPages > 0 && <small>*</small>}
 				<br />
 				Average days per book: {getAmount(year, 'daysperbook')}
 				<br />
 				Average pages per day: {getAmount(year, 'pagesperday')}
-			</>
+				{amountBooksWithoutPages > 0 && <small>*</small>}
+				<br />
+				{amountBooksWithoutPages > 0 && (
+					<i>
+						<br />* Books without pages defined{' '}
+						<button className="btn-text btn-dots wauto" onClick={() => setShowToggle(!showToggle)}>
+							{' '}
+							...{' '}
+						</button>
+						{showToggle && <>{BooksWithoutPagesList(booksWithoutPages)}</>}
+					</i>
+				)}
+			</div>
 		)
 }
 export default StatisticsYear
