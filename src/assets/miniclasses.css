@@ -96,3 +96,9 @@ input.flnone {
 .d-inline {
 	display: inline;
 }
+.d-iblock {
+	display: inline-block;
+}
+.italic {
+	font-style: italic;
+}

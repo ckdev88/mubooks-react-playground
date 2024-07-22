@@ -75,10 +75,15 @@ const StatisticsYear = (year: number) => {
 				<br />
 				{amountBooksWithoutPages > 0 && (
 					<i>
-						<br />* Books without pages defined{' '}
-						<button className="btn-text btn-dots wauto" onClick={() => setShowToggle(!showToggle)}>
-							{' '}
-							...{' '}
+						<button
+							onClick={() => setShowToggle(!showToggle)}
+							className={
+								showToggle
+									? 'btn-text caret-right-toggle italic d-iblock wauto active'
+									: 'btn-text caret-right-toggle italic d-iblock wauto'
+							}
+						>
+							* Books without pages defined{' '}
 						</button>
 						{showToggle && <>{BooksWithoutPagesList(booksWithoutPages)}</>}
 					</i>
