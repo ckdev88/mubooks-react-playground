@@ -78,17 +78,21 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					</h2>
 					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
 					<div className="pt0 mt0">
-						<div className={!book.number_of_pages_median && currentPage !== 'search' ? 'dblock' : 'dnone'}>
-							<>{BookAddPages(book)}</>
+						<div className={!book.number_of_pages_median && currentPage !== 'search' ? '' : 'dnone'}>
+							{BookAddPages(book)}
 						</div>
 						<div className={book.number_of_pages_median > 0 ? 'dblock' : ''}>
 							{book.number_of_pages_median &&
 								currentPage !== 'finished' &&
 								currentPage !== 'favorites' &&
-								currentPage !== 'quotedbooks' && <>{book.number_of_pages_median} pages</>}
-							<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
-								{BookModifyPages(book)}
-							</span>
+								currentPage !== 'quotedbooks' && (
+									<>
+										{book.number_of_pages_median} pages
+										<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
+											{BookModifyPages(book)}
+										</span>
+									</>
+								)}
 						</div>
 					</div>
 				</header>
