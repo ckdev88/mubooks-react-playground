@@ -140,22 +140,20 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									<span className="icon icon-dots"></span>
 								</button>
 							)}
-							{(showHiddenMarks || currentPage === 'reading') && (
-								<div className="marks">
-									{!book.list && AddBookToXButton(book, 1)}
-									{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
-										AddBookToXButton(book, 2)}
-									{(book.list === 2 ||
-										(currentPage === 'search' && book.list !== 3 && book.list !== 4)) &&
-										AddBookToXButton(book, 3)}
-									{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) &&
-										AddBookToXButton(book, 4)}
-									{book.list === 1 && RemoveBookFromXButton(book, 1)}
-									{book.list === 2 && RemoveBookFromXButton(book, 2)}
-									{(book.list === 3 || book.list === 4) && RemoveBookFromXButton(book, 3)}
-									{book.list === 4 && RemoveBookFromXButton(book, 4)}
-								</div>
-							)}
+							<div className={showHiddenMarks || currentPage === 'reading' ? 'marks dblock' : 'marks dnone'}>
+								{!book.list && AddBookToXButton(book, 1)}
+								{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
+									AddBookToXButton(book, 2)}
+								{(book.list === 2 ||
+									(currentPage === 'search' && book.list !== 3 && book.list !== 4)) &&
+									AddBookToXButton(book, 3)}
+								{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) &&
+									AddBookToXButton(book, 4)}
+								{book.list === 1 && RemoveBookFromXButton(book, 1)}
+								{book.list === 2 && RemoveBookFromXButton(book, 2)}
+								{(book.list === 3 || book.list === 4) && RemoveBookFromXButton(book, 3)}
+								{book.list === 4 && RemoveBookFromXButton(book, 4)}
+							</div>
 						</>
 					)}
 				</main>
