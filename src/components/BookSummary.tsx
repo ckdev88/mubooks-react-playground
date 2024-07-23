@@ -145,7 +145,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									)}
 								</div>
 							)}
-							{currentPage !== 'reading' && (
+							{currentPage !== 'reading' && currentPage!=='dashboard' && (
 								<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
 									<span className="icon icon-dots"></span>
 								</button>
