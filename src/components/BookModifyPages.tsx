@@ -2,10 +2,10 @@ import { useContext, useEffect, useState, useCallback } from 'react'
 import { supabase } from '../../utils/supabase'
 import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
-const BookAddPages = (book: Book) => {
+const BookModifyPages = (book: Book) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState(false)
-	const inputid = 'addPagesToBookId' + book.id
+	const inputid = 'modifyPagesToBookId' + book.id
 
 	const [bookPages, setBookPages] = useState<number>(book.number_of_pages_median)
 	const [isModding, setIsModding] = useState<boolean>(false)
@@ -18,12 +18,12 @@ const BookAddPages = (book: Book) => {
 		// console.log('hi')
 		const { error } = await supabase
 			.from('user_entries')
-			.update({ json: myBooksNew, testdata: 'updated from book summary: Add pages' })
+			.update({ json: myBooksNew, testdata: 'updated from book summary: Modify pages' })
 			.eq('user_id', userid)
 			.select('*')
-			if (error) msg = error.message
-			else msg = 'Updated pages.'
-			setPopupNotification(msg)
+		if (error) msg = error.message
+		else msg = 'Updated pages.'
+		setPopupNotification(msg)
 	}
 
 	const updatePagesCallback = useCallback(
@@ -44,7 +44,7 @@ const BookAddPages = (book: Book) => {
 		[userMyBooks, book.id, bookPages, updateMyBooks]
 	)
 
-	function processPagesAddForm(e: React.FormEvent<HTMLFormElement>) {
+	function processPagesModifyForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 
 		let newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
@@ -60,19 +60,21 @@ const BookAddPages = (book: Book) => {
 			if (isModding) {
 				updatePagesCallback()
 				setIsModding(false)
+				setShowForm(false)
 			}
 		}
 	}, [showForm, bookPages, isModding, updatePagesCallback])
 
 	return (
-		<div>
+		<>
+			&nbsp;
 			<button className="btn-text" onClick={() => setShowForm(!showForm)}>
-				... pages
+				...
 			</button>
-			<form className={showForm ? 'dblock' : 'dnone'} onSubmit={processPagesAddForm}>
+			<form className={showForm ? 'dblock' : 'dnone'} onSubmit={processPagesModifyForm}>
 				<input type="number" id={inputid} name="pagesAmount" />
 			</form>
-		</div>
+		</>
 	)
 }
-export default BookAddPages
+export default BookModifyPages

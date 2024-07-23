@@ -14,6 +14,7 @@ import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 import BookAddPages from './BookAddPages'
+import BookModifyPages from './BookModifyPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -85,6 +86,9 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 								currentPage !== 'finished' &&
 								currentPage !== 'favorites' &&
 								currentPage !== 'quotedbooks' && <>{book.number_of_pages_median} pages</>}
+							<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
+								{BookModifyPages(book)}
+							</span>
 						</div>
 					</div>
 				</header>
