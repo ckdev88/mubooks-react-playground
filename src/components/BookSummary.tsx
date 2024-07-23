@@ -13,6 +13,7 @@ import SearchTropes from './SearchTropes'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
+import BookAddPages from './BookAddPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -75,12 +76,17 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
 					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
-					<p className="pt0 mt0">
-						{book.number_of_pages_median &&
-							currentPage !== 'finished' &&
-							currentPage !== 'favorites' &&
-							currentPage !== 'quotedbooks' && <>{book.number_of_pages_median} pages</>}
-					</p>
+					<div className="pt0 mt0">
+						<div className={!book.number_of_pages_median && currentPage !== 'search' ? 'dblock' : 'dnone'}>
+							<>{BookAddPages(book)}</>
+						</div>
+						<div className={book.number_of_pages_median > 0 ? 'dblock' : ''}>
+							{book.number_of_pages_median &&
+								currentPage !== 'finished' &&
+								currentPage !== 'favorites' &&
+								currentPage !== 'quotedbooks' && <>{book.number_of_pages_median} pages</>}
+						</div>
+					</div>
 				</header>
 				<main>
 					<div className="reviews">
@@ -140,7 +146,11 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									<span className="icon icon-dots"></span>
 								</button>
 							)}
-							<div className={showHiddenMarks || currentPage === 'reading' ? 'marks dblock' : 'marks dnone'}>
+							<div
+								className={
+									showHiddenMarks || currentPage === 'reading' ? 'marks dblock' : 'marks dnone'
+								}
+							>
 								{!book.list && AddBookToXButton(book, 1)}
 								{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
 									AddBookToXButton(book, 2)}
