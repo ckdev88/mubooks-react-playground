@@ -5,8 +5,8 @@ import StatisticsYear from '../../components/StatisticsYear'
 const pageTitle = 'Mu Statistics'
 const now: Date = new Date()
 const currentYear = now.getFullYear()
-let oldestFinishedDate: number | undefined
-let oldestFinishedYear: number
+let oldestFinishedDate: number = currentYear * 10000
+let oldestFinishedYear: number = currentYear
 
 const StatisticsPage = () => {
 	const { userMyBooks, setNavTitle } = useContext(AppContext)
@@ -18,19 +18,16 @@ const StatisticsPage = () => {
 
 	const getOldestFinishedDate = (): number => {
 		for (let i = 0; i < userMyBooks.length; i++) {
-			oldestFinishedDate = userMyBooks[i].date_finished
+			if (Number(userMyBooks[i].date_finished) > 0 && Number(userMyBooks[i].date_finished) < oldestFinishedDate)
+				oldestFinishedDate = Number(userMyBooks[i].date_finished)
 		}
-
-		oldestFinishedDate = Number(oldestFinishedDate)
-		if (oldestFinishedDate === 0) return 0
 		return oldestFinishedDate
 	}
+
 	oldestFinishedDate = getOldestFinishedDate()
 	oldestFinishedYear = Math.floor(oldestFinishedDate / 10000)
 
-	for (let i = currentYear; i > oldestFinishedYear - 1; i--) {
-		contents.push(StatisticsYear(i))
-	}
+	for (let i = currentYear; i > oldestFinishedYear - 1; i--) contents.push(StatisticsYear(i))
 
 	return (
 		<>
