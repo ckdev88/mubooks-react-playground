@@ -84,7 +84,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 							{BookAddPages(book)}
 						</div>
 						<div className={book.number_of_pages_median > 0 ? 'diblock' : ''}>
-							{book.number_of_pages_median &&
+							{
 								currentPage !== 'finished' &&
 								currentPage !== 'favorites' &&
 								currentPage !== 'quotedbooks' && (

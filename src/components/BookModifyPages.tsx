@@ -32,10 +32,8 @@ const BookModifyPages = (book: Book) => {
 
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
-					if (bookPages !== userMyBooks[i].number_of_pages_median) {
-						// console.log('changing pages of book', userMyBooks[i].title_short, 'to amount', bookPages)
+					if (bookPages !== userMyBooks[i].number_of_pages_median)
 						userMyBooks[i].number_of_pages_median = bookPages
-					}
 					break
 				}
 			}
