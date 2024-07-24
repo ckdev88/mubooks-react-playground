@@ -30,6 +30,7 @@ async function getOlPagesMedian(id: string) {
 		.then((json) => json.docs[0].number_of_pages_median)
 	return ret
 }
+
 function debounce<T extends (...args: []) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
 	let timeoutId: NodeJS.Timeout
 	return function (this: object) {
@@ -69,4 +70,4 @@ function getUrlParamVal(url: string, key: string, hash: boolean = false): string
 	return ''
 }
 
-export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal }
+export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal, getOlPagesMedian }
