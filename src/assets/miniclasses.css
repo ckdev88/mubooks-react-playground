@@ -96,7 +96,18 @@ input.flnone {
 .d-inline {
 	display: inline;
 }
-.d-iblock {
+.dblock {
+	display: block;
+}
+.dnone {
+	display: none;
+}
+.diblock-md {
+	@media screen and (min-width: 480px) {
+		display: inline-block;
+	}
+}
+.diblock {
 	display: inline-block;
 }
 .italic {
