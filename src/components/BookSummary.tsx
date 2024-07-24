@@ -15,6 +15,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 import BookAddPages from './BookAddPages'
 import BookModifyPages from './BookModifyPages'
+import BookFetchPages from './BookFetchPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -78,10 +79,11 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					</h2>
 					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
 					<div className="pt0 mt0">
-						<div className={!book.number_of_pages_median && currentPage !== 'search' ? '' : 'dnone'}>
+
+						<div className={!book.number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'}>
 							{BookAddPages(book)}
 						</div>
-						<div className={book.number_of_pages_median > 0 ? 'dblock' : ''}>
+						<div className={book.number_of_pages_median > 0 ? 'diblock' : ''}>
 							{book.number_of_pages_median &&
 								currentPage !== 'finished' &&
 								currentPage !== 'favorites' &&
@@ -94,6 +96,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									</>
 								)}
 						</div>
+						<div className="diblock ml-1">{BookFetchPages(book)}</div>
 					</div>
 				</header>
 				<main>
@@ -149,7 +152,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									)}
 								</div>
 							)}
-							{currentPage !== 'reading' && currentPage!=='dashboard' && (
+							{currentPage !== 'reading' && currentPage !== 'dashboard' && (
 								<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
 									<span className="icon icon-dots"></span>
 								</button>
