@@ -15,7 +15,6 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 import BookAddPages from './BookAddPages'
 import BookModifyPages from './BookModifyPages'
-import BookFetchPages from './BookFetchPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -43,9 +42,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 				.finally(() => setIsLoading(false))
 		}
 	}
-
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
-
 	return (
 		<article
 			className={book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'}
@@ -64,40 +61,39 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
-				{currentPage !=='search' ?
-					book.list === 4 ? (
-						<>{RemoveBookFromXButton(book, book.list, true)}</>
+					{currentPage !== 'search' ? (
+						book.list === 4 ? (
+							<>{RemoveBookFromXButton(book, book.list, true)}</>
+						) : (
+							book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
+						)
 					) : (
-						book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
-					)
-					:''
-				}
+						''
+					)}
 					<h2>
 						{book.title_short}{' '}
 						{book.first_publish_year && currentPage === 'search' && <sup>({book.first_publish_year})</sup>}
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
-					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
-					<div className="pt0 mt0">
 
-						<div className={!book.number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'}>
-							{BookAddPages(book)}
+					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
+					{currentPage !== 'finished' && currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
+						<div className="pt0 mt0">
+							<div
+								className={
+									!book.number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'
+								}
+							>
+								{BookAddPages(book)}
+							</div>
+							<span className={book.number_of_pages_median === 0 ? 'dnone' : 'diblock'}>
+								{book.number_of_pages_median} pages
+							</span>
+							<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
+								{BookModifyPages(book)}
+							</span>
 						</div>
-						<div className={book.number_of_pages_median > 0 ? 'diblock' : ''}>
-							{
-								currentPage !== 'finished' &&
-								currentPage !== 'favorites' &&
-								currentPage !== 'quotedbooks' && (
-									<>
-										{book.number_of_pages_median} pages
-										<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
-											{BookModifyPages(book)}
-										</span>
-									</>
-								)}
-						</div>
-						<div className="diblock ml-1">{BookFetchPages(book)}</div>
-					</div>
+					)}
 				</header>
 				<main>
 					<div className="reviews">

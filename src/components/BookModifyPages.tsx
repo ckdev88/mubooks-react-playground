@@ -45,10 +45,13 @@ const BookModifyPages = (book: Book) => {
 	function processPagesModifyForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 
-		let newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
-		if (newvalue !== undefined && newvalue > 0) {
-			setIsModding(true)
-			setBookPages(newvalue)
+		if (cleanInput(e.currentTarget.pagesAmount.value) === '') console.log('change nothing')
+		else {
+			let newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
+			if (newvalue !== undefined && newvalue > -1) {
+				setIsModding(true)
+				setBookPages(newvalue)
+			}
 		}
 	}
 
@@ -61,7 +64,7 @@ const BookModifyPages = (book: Book) => {
 				setShowForm(false)
 			}
 		}
-	}, [showForm, bookPages, isModding, updatePagesCallback])
+	}, [showForm, bookPages, isModding, updatePagesCallback, book])
 
 	return (
 		<>
@@ -69,9 +72,12 @@ const BookModifyPages = (book: Book) => {
 			<button className="btn-text" onClick={() => setShowForm(!showForm)}>
 				...
 			</button>
-			<form className={showForm ? 'dblock' : 'dnone'} onSubmit={processPagesModifyForm}>
-				<input type="number" id={inputid} name="pagesAmount" />
-			</form>
+			<div className={showForm ? 'dblock' : 'dnone'}>
+				<form onSubmit={processPagesModifyForm} className="single-small-form wm6 diblock">
+					<input type="number" id={inputid} name="pagesAmount" defaultValue={book.number_of_pages_median} />
+					<button type="submit" className="btn-submit-inside-caret-right"></button>
+				</form>
+			</div>
 		</>
 	)
 }

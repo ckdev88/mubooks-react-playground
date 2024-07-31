@@ -2,6 +2,9 @@ import { useContext, useEffect, useState, useCallback } from 'react'
 import { supabase } from '../../utils/supabase'
 import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
+
+import BookFetchPages from './BookFetchPages'
+
 const BookAddPages = (book: Book) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState(false)
@@ -15,15 +18,14 @@ const BookAddPages = (book: Book) => {
 		// console.log(myBooksNew)
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		// console.log('hi')
 		const { error } = await supabase
 			.from('user_entries')
 			.update({ json: myBooksNew, testdata: 'updated from book summary: Add pages' })
 			.eq('user_id', userid)
 			.select('*')
-			if (error) msg = error.message
-			else msg = 'Updated pages.'
-			setPopupNotification(msg)
+		if (error) msg = error.message
+		else msg = 'Updated pages.'
+		setPopupNotification(msg)
 	}
 
 	const updatePagesCallback = useCallback(
@@ -65,14 +67,22 @@ const BookAddPages = (book: Book) => {
 	}, [showForm, bookPages, isModding, updatePagesCallback])
 
 	return (
-		<div>
+		<>
 			<button className="btn-text" onClick={() => setShowForm(!showForm)}>
-				... pages
+				__ pages
 			</button>
-			<form className={showForm ? 'dblock' : 'dnone'} onSubmit={processPagesAddForm}>
-				<input type="number" id={inputid} name="pagesAmount" />
-			</form>
-		</div>
+			{showForm ? (
+				<div className={showForm ? 'dblock' : 'dnone'}>
+					<BookFetchPages book={book} />
+					<form onSubmit={processPagesAddForm} className="single-small-form wm6 diblock">
+						<input type="number" id={inputid} name="pagesAmount" />
+						<button type="submit" className="btn-submit-inside-caret-right"></button>
+					</form>
+				</div>
+			) : (
+				<></>
+			)}
+		</>
 	)
 }
 export default BookAddPages

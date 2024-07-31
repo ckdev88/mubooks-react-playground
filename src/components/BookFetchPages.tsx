@@ -3,34 +3,14 @@ import { supabase } from '../../utils/supabase'
 import { AppContext } from '../App'
 import { getOlPagesMedian } from '../Helpers'
 
-const BookFetchPages = (book: Book) => {
+const BookFetchPages = ({ book }: { book: Book }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
-	const [refreshing, setRefreshing] = useState(false)
-	const [isShowingPages, setIsShowingPages] = useState(false)
+	const [onLoad, setOnLoad] = useState(true)
 
-	const [originalAmountPages, setOriginalAmountPages] = useState()
+	const [originalNumberOfPagesMedian, setOriginalNumberOfPagesMedian] = useState<number>(0)
 	const [bookPages, setBookPages] = useState<number>(book.number_of_pages_median)
-	const [isModding, setIsModding] = useState<boolean>(false)
-	const [isChangingBookPages, setIsChangingBookPages] = useState<number>(0)
-
-	async function toggleRefreshPages() {
-		if (isShowingPages) setIsShowingPages(!isShowingPages)
-		else {
-			setIsModding(true)
-			await fetch('https://openlibrary.org/works/' + book.id + '.json')
-				.then((res) => res.json())
-				.then((json) => json.number_of_pages?.value)
-				.then((pages) => {
-					setIsShowingPages(true)
-					if (pages !== undefined) setBookPages(pages)
-				})
-				.catch((err) => {
-					console.log('error', err)
-				})
-				.finally(() => setIsModding(false))
-		}
-		setRefreshing(false)
-	}
+	const [newBookPages, setNewBookPages] = useState<number>(0)
+	const [pushOrigin, setPushOrigin] = useState<boolean>(false)
 
 	// TODO: move this function to generic helper location
 	async function updateMyBooks(myBooksNew: Books) {
@@ -38,7 +18,7 @@ const BookFetchPages = (book: Book) => {
 		setUserMyBooks(myBooksNew)
 		const { error } = await supabase
 			.from('user_entries')
-			.update({ json: myBooksNew, testdata: 'updated from book summary: Add pages' })
+			.update({ json: myBooksNew, testdata: 'updated from book summary: Fetch pages' })
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message
@@ -46,30 +26,22 @@ const BookFetchPages = (book: Book) => {
 		setPopupNotification(msg)
 	}
 
-	useEffect(() => {
-		if (isChangingBookPages > 0) {
-			setBookPages(isChangingBookPages)
-
-			updatePagesCallback()
-			setIsChangingBookPages(0)
-		}
-	}, [isChangingBookPages])
-
 	const updatePagesCallback = useCallback(
 		async function updatePages() {
 			if (userMyBooks.length < 1) return
+			const newBookPages = originalNumberOfPagesMedian
 
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
-					if (isChangingBookPages !== userMyBooks[i].number_of_pages_median) {
-						userMyBooks[i].number_of_pages_median = isChangingBookPages
+					if (newBookPages !== userMyBooks[i].number_of_pages_median && newBookPages > 0) {
+						userMyBooks[i].number_of_pages_median = newBookPages
 					}
 					break
 				}
 			}
-			updateMyBooks(userMyBooks).then(() => setIsChangingBookPages(0))
+			updateMyBooks(userMyBooks)
 		},
-		[userMyBooks, book.id, bookPages, isChangingBookPages, updateMyBooks]
+		[userMyBooks, book.id, bookPages, newBookPages, updateMyBooks]
 	)
 
 	const getOrgPagesMed = async () => {
@@ -78,35 +50,29 @@ const BookFetchPages = (book: Book) => {
 	}
 
 	useEffect(() => {
-		if (refreshing) {
-			getOrgPagesMed().then((res) => setOriginalAmountPages(res))
-			setRefreshing(!refreshing)
+		if (onLoad) {
+			// on load to populate 'guess'-number
+			getOrgPagesMed().then((res: number) => {
+				setOriginalNumberOfPagesMedian(res)
+			})
+			setOnLoad(!onLoad)
 		}
-		if (bookPages !== book.number_of_pages_median) {
-			if (isModding) {
+		if (pushOrigin) {
+			if (originalNumberOfPagesMedian > 0) {
+				setNewBookPages(originalNumberOfPagesMedian)
+				setBookPages(originalNumberOfPagesMedian)
 				updatePagesCallback()
-				setIsModding(false)
+				setPushOrigin(false)
 			}
 		}
-	}, [refreshing, bookPages, isModding, updatePagesCallback, toggleRefreshPages])
-
-	function changeBookPages(numpages: number) {
-		setIsChangingBookPages(numpages)
-	}
+	}, [onLoad, originalNumberOfPagesMedian, pushOrigin])
 
 	return (
-		<div className="diblock ml1">
-			&nbsp;
-			{originalAmountPages ? (
-				<button className="btn-text" onClick={() => changeBookPages(originalAmountPages)}>
-					use {originalAmountPages} pages
-				</button>
-			) : (
-				<button className="btn-text" onClick={() => setRefreshing(!refreshing)}>
-					guess
-				</button>
+		<>
+			{originalNumberOfPagesMedian > 0 && (
+					<button className="btn-text fright mt05 ml05" onClick={() => setPushOrigin(true)}> guess: {originalNumberOfPagesMedian} </button>
 			)}
-		</div>
+		</>
 	)
 }
 export default BookFetchPages

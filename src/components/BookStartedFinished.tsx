@@ -22,10 +22,10 @@ const BookStartedFinished = ({
 		let msg: string
 		setUserMyBooks(myBooksNew)
 		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew })
-			.eq('user_id', userid)
-			.select()
+		.from('user_entries')
+		.update({ json: myBooksNew })
+		.eq('user_id', userid)
+		.select()
 		if (error) {
 			msg = 'Error, date was not changed'
 			console.log('error:', error)
