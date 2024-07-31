@@ -12,10 +12,8 @@ const BookModifyPages = (book: Book) => {
 
 	// TODO: move this function to generic helper location
 	async function updateMyBooks(myBooksNew: Books) {
-		// console.log(myBooksNew)
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		// console.log('hi')
 		const { error } = await supabase
 			.from('user_entries')
 			.update({ json: myBooksNew, testdata: 'updated from book summary: Modify pages' })
@@ -47,7 +45,7 @@ const BookModifyPages = (book: Book) => {
 
 		if (cleanInput(e.currentTarget.pagesAmount.value) === '') console.log('change nothing')
 		else {
-			let newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
+			const newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
 			if (newvalue !== undefined && newvalue > -1) {
 				setIsModding(true)
 				setBookPages(newvalue)

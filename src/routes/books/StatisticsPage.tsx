@@ -1,3 +1,4 @@
+// TODO: create graphs when all data is available
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import StatisticsYear from '../../components/StatisticsYear'

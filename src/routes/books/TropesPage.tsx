@@ -1,3 +1,5 @@
+// TODO: auto hide all tropes from books
+// TODO: liked tropes get different colors from disliked tropes
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import TropesInMyBooks from '../../components/TropesInMyBooks'

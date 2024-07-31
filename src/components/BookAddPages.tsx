@@ -15,7 +15,6 @@ const BookAddPages = (book: Book) => {
 
 	// TODO: move this function to generic helper location
 	async function updateMyBooks(myBooksNew: Books) {
-		// console.log(myBooksNew)
 		let msg: string
 		setUserMyBooks(myBooksNew)
 		const { error } = await supabase
@@ -49,7 +48,7 @@ const BookAddPages = (book: Book) => {
 	function processPagesAddForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 
-		let newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
+		const newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
 		if (newvalue !== undefined && newvalue > 0) {
 			setIsModding(true)
 			setBookPages(newvalue)
@@ -64,7 +63,7 @@ const BookAddPages = (book: Book) => {
 				setIsModding(false)
 			}
 		}
-	}, [showForm, bookPages, isModding, updatePagesCallback])
+	}, [showForm, bookPages, isModding, updatePagesCallback, book.number_of_pages_median, inputid])
 
 	return (
 		<>
