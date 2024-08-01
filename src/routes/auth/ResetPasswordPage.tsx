@@ -37,7 +37,7 @@ const ResetPasswordPage = () => {
 			verifyTokenHash()
 			setLoading(false)
 		}
-	}, [])
+	}, [loading])
 	// /confirm user before enable to change password
 
 	function afterSbUpdate() {
