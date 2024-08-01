@@ -1,5 +1,5 @@
-import { Link, useNavigate, useCallback } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useCallback } from 'react'
 import { localStorageKey } from '../../utils/supabase'
 import { useContext } from 'react'
 import { AppContext } from '../App'
@@ -78,7 +78,16 @@ const RootPage = () => {
 			}, 1500)
 			navigate(navigateTo)
 		}
-	}, [navigate, setUsermail, userInLs, apiErrorsCallback, checkApiErrorCallback, setUserIsLoggedIn, url, userIsLoggedIn])
+	}, [
+		navigate,
+		setUsermail,
+		userInLs,
+		apiErrorsCallback,
+		checkApiErrorCallback,
+		setUserIsLoggedIn,
+		url,
+		userIsLoggedIn,
+	])
 
 	return (
 		<>
