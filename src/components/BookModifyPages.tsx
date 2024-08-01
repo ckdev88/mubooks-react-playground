@@ -11,18 +11,21 @@ const BookModifyPages = (book: Book) => {
 	const [isModding, setIsModding] = useState<boolean>(false)
 
 	// TODO: move this function to generic helper location
-	async function updateMyBooks(myBooksNew: Books) {
-		let msg: string
-		setUserMyBooks(myBooksNew)
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew, testdata: 'updated from book summary: Modify pages' })
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Updated pages.'
-		setPopupNotification(msg)
-	}
+	const updateMyBooksCallback = useCallback(
+		async function updateMyBooks(myBooksNew: Books) {
+			let msg: string
+			setUserMyBooks(myBooksNew)
+			const { error } = await supabase
+				.from('user_entries')
+				.update({ json: myBooksNew, testdata: 'updated from book summary: Modify pages' })
+				.eq('user_id', userid)
+				.select('*')
+			if (error) msg = error.message
+			else msg = 'Updated pages.'
+			setPopupNotification(msg)
+		},
+		[setPopupNotification, setUserMyBooks, userid]
+	)
 
 	const updatePagesCallback = useCallback(
 		async function updatePages() {
@@ -35,9 +38,9 @@ const BookModifyPages = (book: Book) => {
 					break
 				}
 			}
-			updateMyBooks(userMyBooks)
+			updateMyBooksCallback(userMyBooks)
 		},
-		[userMyBooks, book.id, bookPages, updateMyBooks]
+		[userMyBooks, book.id, bookPages, updateMyBooksCallback]
 	)
 
 	function processPagesModifyForm(e: React.FormEvent<HTMLFormElement>) {
@@ -56,23 +59,38 @@ const BookModifyPages = (book: Book) => {
 	useEffect(() => {
 		if (showForm) document.getElementById(inputid)?.focus()
 		if (bookPages !== book.number_of_pages_median) {
+			setBookPages(book.number_of_pages_median)
 			if (isModding) {
 				updatePagesCallback()
 				setIsModding(false)
 				setShowForm(false)
 			}
 		}
-	}, [showForm, bookPages, isModding, updatePagesCallback, book])
+	}, [showForm, bookPages, isModding, updatePagesCallback, book, inputid])
 
 	return (
 		<>
 			&nbsp;
-			<button className="btn-text" onClick={() => setShowForm(!showForm)}>
-				...
+			<button className="btn-icon" onClick={() => setShowForm(!showForm)}>
+				<span className="icon icon-dots"></span>
 			</button>
+			{/*
+	 			<button className="btn-text" onClick={() => setShowForm(!showForm)}>
+					...
+				</button>
+		    */}
 			<div className={showForm ? 'dblock' : 'dnone'}>
 				<form onSubmit={processPagesModifyForm} className="single-small-form wm6 diblock">
-					<input type="number" id={inputid} name="pagesAmount" defaultValue={book.number_of_pages_median} />
+					{book.number_of_pages_median > 0 && (
+						<>
+							<input
+								type="number"
+								id={inputid}
+								name="pagesAmount"
+								defaultValue={book.number_of_pages_median}
+							/>
+						</>
+					)}
 					<button type="submit" className="btn-submit-inside-caret-right"></button>
 				</form>
 			</div>

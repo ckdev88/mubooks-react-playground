@@ -8,23 +8,24 @@ const BookFetchPages = ({ book }: { book: Book }) => {
 	const [onLoad, setOnLoad] = useState(true)
 
 	const [originalNumberOfPagesMedian, setOriginalNumberOfPagesMedian] = useState<number>(0)
-	const [bookPages, setBookPages] = useState<number>(book.number_of_pages_median)
-	const [newBookPages, setNewBookPages] = useState<number>(0)
 	const [pushOrigin, setPushOrigin] = useState<boolean>(false)
 
 	// TODO: move this function to generic helper location
-	async function updateMyBooks(myBooksNew: Books) {
-		let msg: string
-		setUserMyBooks(myBooksNew)
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew, testdata: 'updated from book summary: Fetch pages' })
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Updated pages.'
-		setPopupNotification(msg)
-	}
+	const updateMyBooksCallback = useCallback(
+		async function updateMyBooks(myBooksNew: Books) {
+			let msg: string
+			setUserMyBooks(myBooksNew)
+			const { error } = await supabase
+				.from('user_entries')
+				.update({ json: myBooksNew, testdata: 'updated from book summary: Fetch pages' })
+				.eq('user_id', userid)
+				.select('*')
+			if (error) msg = error.message
+			else msg = 'Updated pages.'
+			setPopupNotification(msg)
+		},
+		[setPopupNotification, setUserMyBooks, userid]
+	)
 
 	const updatePagesCallback = useCallback(
 		async function updatePages() {
@@ -39,17 +40,16 @@ const BookFetchPages = ({ book }: { book: Book }) => {
 					break
 				}
 			}
-			updateMyBooks(userMyBooks)
+			updateMyBooksCallback(userMyBooks)
 		},
-		[userMyBooks, book.id, bookPages, newBookPages, updateMyBooks]
+		[userMyBooks, book.id, updateMyBooksCallback, originalNumberOfPagesMedian]
 	)
 
-	const getOrgPagesMed = async () => {
-		const originalPagesMedian = await getOlPagesMedian(book.id)
-		return originalPagesMedian
-	}
-
 	useEffect(() => {
+		const getOrgPagesMed = async () => {
+			const originalPagesMedian = await getOlPagesMedian(book.id)
+			return originalPagesMedian
+		}
 		if (onLoad) {
 			// on load to populate 'guess'-number
 			getOrgPagesMed().then((res: number) => {
@@ -59,18 +59,19 @@ const BookFetchPages = ({ book }: { book: Book }) => {
 		}
 		if (pushOrigin) {
 			if (originalNumberOfPagesMedian > 0) {
-				setNewBookPages(originalNumberOfPagesMedian)
-				setBookPages(originalNumberOfPagesMedian)
 				updatePagesCallback()
 				setPushOrigin(false)
 			}
 		}
-	}, [onLoad, originalNumberOfPagesMedian, pushOrigin])
+	}, [onLoad, originalNumberOfPagesMedian, pushOrigin, book.id, updatePagesCallback])
 
 	return (
 		<>
 			{originalNumberOfPagesMedian > 0 && (
-					<button className="btn-text fright mt05 ml05" onClick={() => setPushOrigin(true)}> guess: {originalNumberOfPagesMedian} </button>
+				<button className="btn-text fright mt05 ml05" onClick={() => setPushOrigin(true)}>
+					{' '}
+					guess: {originalNumberOfPagesMedian}{' '}
+				</button>
 			)}
 		</>
 	)
