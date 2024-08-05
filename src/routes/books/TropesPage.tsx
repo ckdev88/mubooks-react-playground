@@ -1,6 +1,5 @@
-// TODO: auto hide all tropes from books
 // TODO: liked tropes get different colors from disliked tropes
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../App'
 import TropesInMyBooks from '../../components/TropesInMyBooks'
 import TropesLiked from '../../components/TropesLiked'
@@ -11,6 +10,8 @@ const currentPage = 'tropes'
 
 const TropesPage = () => {
 	const { setNavTitle } = useContext(AppContext)
+	const [showMore, setShowMore] = useState<boolean>(false)
+
 	useEffect(() => {
 		setNavTitle(pageTitle)
 	}, [setNavTitle])
@@ -20,9 +21,11 @@ const TropesPage = () => {
 			<h1>My Tropes</h1>
 			<TropesLiked />
 			<TropesDisliked />
-			<hr />
-
-			<TropesInMyBooks page={currentPage} />
+<hr />
+			<button className="btn btn-icon wauto" onClick={() => setShowMore(!showMore)}>
+				<span className="icon icon-dots"></span>
+			</button>
+			{showMore && <TropesInMyBooks page={currentPage} />}
 		</>
 	)
 }
