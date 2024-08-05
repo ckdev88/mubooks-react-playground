@@ -73,7 +73,7 @@ const TropesDisliked = () => {
 		return (
 			<ul className="tropes clr mb0">
 				{tropes.map((trope, index) => (
-					<li className="trope badge" key={cleanIndexKey(trope, index)}>
+					<li className="trope badge cred" key={cleanIndexKey(trope, index)}>
 						{trope}
 						<button className="btn-x" onClick={() => removeTrope(trope)}>
 							x

@@ -206,6 +206,14 @@ main button.alt,
 	background-color: #f1e0c6;
 	color: #df8506;
 }
+.badge.cgreen {
+	background-color: green;
+	color: white;
+}
+.badge.cred {
+	background-color: red;
+	color: white;
+}
 .badge .btn-x {
 	font-size: 0.6rem;
 	height: auto;
@@ -215,6 +223,11 @@ main button.alt,
 	padding: 0;
 	float: right;
 	margin: -0.2rem -0.2rem -0.2rem 0.2rem;
+}
+.badge.cgreen .btn-x,
+.badge.cred .btn-x {
+	color: white;
+	border-color: transparent;
 }
 
 .btn-text .icon,

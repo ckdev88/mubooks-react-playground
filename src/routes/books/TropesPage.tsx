@@ -1,4 +1,3 @@
-// TODO: liked tropes get different colors from disliked tropes
 import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../App'
 import TropesInMyBooks from '../../components/TropesInMyBooks'
