@@ -89,9 +89,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 							<span className={book.number_of_pages_median === 0 ? 'dnone' : 'diblock'}>
 								{book.number_of_pages_median} pages
 							</span>
-							<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
-								{BookModifyPages(book)}
-							</span>
+							{currentPage !== 'dashboard' && currentPage !== 'wishlist' && <> {BookModifyPages(book)}</>}
 						</div>
 					)}
 				</header>

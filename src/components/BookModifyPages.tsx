@@ -69,7 +69,7 @@ const BookModifyPages = (book: Book) => {
 	}, [showForm, bookPages, isModding, updatePagesCallback, book, inputid])
 
 	return (
-		<>
+		<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
 			&nbsp;
 			<button className="btn-icon" onClick={() => setShowForm(!showForm)}>
 				<span className="icon icon-dots"></span>
@@ -94,7 +94,7 @@ const BookModifyPages = (book: Book) => {
 					<button type="submit" className="btn-submit-inside-caret-right"></button>
 				</form>
 			</div>
-		</>
+		</span>
 	)
 }
 export default BookModifyPages
