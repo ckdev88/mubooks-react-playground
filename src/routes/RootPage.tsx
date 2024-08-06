@@ -55,7 +55,6 @@ const RootPage = () => {
 		if (userInLs?.user?.aud === 'authenticated') {
 			loggedin = true
 			setUserIsLoggedIn(true)
-			console.log(userInLs.user)
 		}
 		if (!checkApiErrorCallback()) {
 			if (loggedin) navigateTo = '/dashboard'
@@ -66,7 +65,6 @@ const RootPage = () => {
 		}
 		if (loggedin) {
 			setUsermail(userInLs.user.email)
-			console.log('loggedin jawel!')
 			navigate(navigateTo)
 		} else {
 			if (userIsLoggedIn) {
