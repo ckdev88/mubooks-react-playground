@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&display=swap');
 
+:root {
+	--lightgreen: #aff4c6;
+	--lightred: #ffc7c2;
+	--green: #0d8846;
+	--red: #f24822;
+}
+
 body {
 	font-size: 16px;
 	padding: 0;

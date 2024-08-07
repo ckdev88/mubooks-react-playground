@@ -207,12 +207,12 @@ main button.alt,
 	color: #df8506;
 }
 .badge.cgreen {
-	background-color: green;
-	color: white;
+	background-color: var(--lightgreen);
+	color: var(--green);
 }
 .badge.cred {
-	background-color: red;
-	color: white;
+	background-color: var(--lightred);
+	color: var(--red);
 }
 .badge .btn-x {
 	font-size: 0.6rem;
@@ -226,7 +226,7 @@ main button.alt,
 }
 .badge.cgreen .btn-x,
 .badge.cred .btn-x {
-	color: white;
+	color: inherit;
 	border-color: transparent;
 }
 
