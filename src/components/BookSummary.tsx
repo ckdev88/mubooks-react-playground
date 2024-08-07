@@ -13,6 +13,8 @@ import SearchTropes from './SearchTropes'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
+import BookAddPages from './BookAddPages'
+import BookModifyPages from './BookModifyPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -40,9 +42,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 				.finally(() => setIsLoading(false))
 		}
 	}
-
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
-
 	return (
 		<article
 			className={book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'}
@@ -61,26 +61,37 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
-				{currentPage !=='search' ?
-					book.list === 4 ? (
-						<>{RemoveBookFromXButton(book, book.list, true)}</>
+					{currentPage !== 'search' ? (
+						book.list === 4 ? (
+							<>{RemoveBookFromXButton(book, book.list, true)}</>
+						) : (
+							book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
+						)
 					) : (
-						book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
-					)
-					:''
-				}
+						''
+					)}
 					<h2>
 						{book.title_short}{' '}
 						{book.first_publish_year && currentPage === 'search' && <sup>({book.first_publish_year})</sup>}
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
+
 					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
-					<p className="pt0 mt0">
-						{book.number_of_pages_median &&
-							currentPage !== 'finished' &&
-							currentPage !== 'favorites' &&
-							currentPage !== 'quotedbooks' && <>{book.number_of_pages_median} pages</>}
-					</p>
+					{currentPage !== 'finished' && currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
+						<div className="pt0 mt0">
+							<div
+								className={
+									!book.number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'
+								}
+							>
+								{BookAddPages(book)}
+							</div>
+							<span className={book.number_of_pages_median === 0 ? 'dnone' : 'diblock'}>
+								{book.number_of_pages_median} pages
+							</span>
+							{currentPage !== 'dashboard' && currentPage !== 'wishlist' && <> {BookModifyPages(book)}</>}
+						</div>
+					)}
 				</header>
 				<main>
 					<div className="reviews">
@@ -135,27 +146,29 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									)}
 								</div>
 							)}
-							{currentPage !== 'reading' && (
+							{currentPage !== 'reading' && currentPage !== 'dashboard' && (
 								<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
 									<span className="icon icon-dots"></span>
 								</button>
 							)}
-							{(showHiddenMarks || currentPage === 'reading') && (
-								<div className="marks">
-									{!book.list && AddBookToXButton(book, 1)}
-									{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
-										AddBookToXButton(book, 2)}
-									{(book.list === 2 ||
-										(currentPage === 'search' && book.list !== 3 && book.list !== 4)) &&
-										AddBookToXButton(book, 3)}
-									{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) &&
-										AddBookToXButton(book, 4)}
-									{book.list === 1 && RemoveBookFromXButton(book, 1)}
-									{book.list === 2 && RemoveBookFromXButton(book, 2)}
-									{(book.list === 3 || book.list === 4) && RemoveBookFromXButton(book, 3)}
-									{book.list === 4 && RemoveBookFromXButton(book, 4)}
-								</div>
-							)}
+							<div
+								className={
+									showHiddenMarks || currentPage === 'reading' ? 'marks dblock' : 'marks dnone'
+								}
+							>
+								{!book.list && AddBookToXButton(book, 1)}
+								{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
+									AddBookToXButton(book, 2)}
+								{(book.list === 2 ||
+									(currentPage === 'search' && book.list !== 3 && book.list !== 4)) &&
+									AddBookToXButton(book, 3)}
+								{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) &&
+									AddBookToXButton(book, 4)}
+								{book.list === 1 && RemoveBookFromXButton(book, 1)}
+								{book.list === 2 && RemoveBookFromXButton(book, 2)}
+								{(book.list === 3 || book.list === 4) && RemoveBookFromXButton(book, 3)}
+								{book.list === 4 && RemoveBookFromXButton(book, 4)}
+							</div>
 						</>
 					)}
 				</main>

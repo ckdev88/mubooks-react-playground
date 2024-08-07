@@ -67,18 +67,6 @@ html:not(.loggedin) h1 {
 	font-weight: bold;
 }
 
-.dblock {
-	display: block;
-}
-
-.dnone {
-	display: none;
-}
-.diblock-md {
-	@media screen and (min-width: 480px) {
-		display: inline-block;
-	}
-}
 
 .textwrapper {
 	padding-left: 0.5rem;

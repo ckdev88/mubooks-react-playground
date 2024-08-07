@@ -1,3 +1,4 @@
+// TODO: make this form interact with openlibrary.org to help append to their database
 import { useState, useContext, useEffect } from 'react'
 import { isUrl, getOlCover } from '../../Helpers'
 import { AppContext } from '../../App'

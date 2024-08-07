@@ -1,14 +1,11 @@
 .m0 {
 	margin: 0;
 }
-.mb0 {
-	margin-bottom: 0;
-}
-.mr1 {
-	margin-right: 1rem;
-}
 .mt0 {
 	margin-top: 0;
+}
+.mt05 {
+	margin-top: 0.5rem;
 }
 .mt075 {
 	margin-top: 0.75rem;
@@ -16,7 +13,15 @@
 .mt1 {
 	margin-top: 1rem;
 }
-
+.mb0 {
+	margin-bottom: 0;
+}
+.mr1 {
+	margin-right: 1rem;
+}
+.ml05 {
+	margin-left: 0.5rem;
+}
 .p0 {
 	padding: 0;
 }
@@ -96,9 +101,27 @@ input.flnone {
 .d-inline {
 	display: inline;
 }
-.d-iblock {
+.dblock {
+	display: block;
+}
+.dnone,
+input[type='submit'].dnone {
+	display: none;
+}
+.diblock-md {
+	@media screen and (min-width: 480px) {
+		display: inline-block;
+	}
+}
+.diblock {
 	display: inline-block;
 }
 .italic {
 	font-style: italic;
+}
+.wm6 {
+	max-width: 6rem;
+}
+.fright {
+	float: right;
 }

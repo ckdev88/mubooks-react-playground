@@ -35,7 +35,7 @@ const ErrorPage = () => {
 		setTimeout(() => {
 			navigate('/account/login')
 		}, 5000)
-	}, [])
+	}, [navigate])
 	return (
 		<>
 			<h1>Error</h1>

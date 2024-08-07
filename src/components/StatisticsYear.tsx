@@ -79,8 +79,8 @@ const StatisticsYear = (year: number) => {
 							onClick={() => setShowToggle(!showToggle)}
 							className={
 								showToggle
-									? 'btn-text caret-right-toggle italic d-iblock wauto active'
-									: 'btn-text caret-right-toggle italic d-iblock wauto'
+									? 'btn-text caret-right-toggle italic diblock wauto active'
+									: 'btn-text caret-right-toggle italic diblock wauto'
 							}
 						>
 							* Books without pages defined{' '}

@@ -20,6 +20,17 @@ function getBookCover(url: string, size: CoverSize) {
 	return url
 }
 
+async function getOlPagesMedian(id: string) {
+	const ret = await fetch(
+		'https://openlibrary.org/search.json?q=/works/' +
+			id +
+			'&mode=number_of_pages_median&fields=number_of_pages_median&limit=1'
+	)
+		.then((res) => res.json())
+		.then((json) => json.docs[0].number_of_pages_median)
+	return ret
+}
+
 function debounce<T extends (...args: []) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
 	let timeoutId: NodeJS.Timeout
 	return function (this: object) {
@@ -59,4 +70,4 @@ function getUrlParamVal(url: string, key: string, hash: boolean = false): string
 	return ''
 }
 
-export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal }
+export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal, getOlPagesMedian }

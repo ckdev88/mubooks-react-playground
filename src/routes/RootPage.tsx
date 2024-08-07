@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import { localStorageKey } from '../../utils/supabase'
 import { useContext } from 'react'
 import { AppContext } from '../App'
@@ -7,21 +7,27 @@ import { getUrlParamVal } from '../Helpers'
 import { supabase } from '../../utils/supabase'
 
 const RootPage = () => {
-	let navigateTo: string
 	const url: string = window.location.href
 
-	const checkApiError = (): boolean => {
-		if (getUrlParamVal(url, 'error', true)) return true
-		return false
-	}
-	const apiErrors = (): ApiError => {
-		const apiErr: ApiError = {
-			error: getUrlParamVal(url, 'error', true),
-			error_code: getUrlParamVal(url, 'error_code', true),
-			error_description: getUrlParamVal(url, 'error_description', true),
-		}
-		return apiErr
-	}
+	const checkApiErrorCallback = useCallback(
+		function checkApiError(): boolean {
+			if (getUrlParamVal(url, 'error', true)) return true
+			return false
+		},
+		[url]
+	)
+
+	const apiErrorsCallback = useCallback(
+		function apiErrors(): ApiError {
+			const apiErr: ApiError = {
+				error: getUrlParamVal(url, 'error', true),
+				error_code: getUrlParamVal(url, 'error_code', true),
+				error_description: getUrlParamVal(url, 'error_description', true),
+			}
+			return apiErr
+		},
+		[url]
+	)
 
 	async function loginwithtoken() {
 		const accessToken = getUrlParamVal(url, 'access_token', true)
@@ -39,39 +45,47 @@ const RootPage = () => {
 	loginwithtoken()
 
 	const { setUsermail, setUserIsLoggedIn, userIsLoggedIn } = useContext(AppContext)
-	let loggedin: boolean = false
 	const navigate = useNavigate()
-
-	if (!checkApiError()) {
-		navigateTo = '/account/login'
-		if (loggedin) navigateTo = '/dashboard'
-		if (getUrlParamVal(url, 'type') === 'recovery') navigateTo = '/auth/resetpassword'
-	} else {
-		navigateTo = '/error?error_description=' + apiErrors().error_description
-	}
 
 	const userInLs = JSON.parse(localStorage.getItem(localStorageKey) as string)
 
-	if (userInLs?.user?.aud === 'authenticated') {
-		loggedin = true
-		setUserIsLoggedIn(true)
-	}
-
-
 	useEffect(() => {
+		let navigateTo: string
+		let loggedin: boolean = false
+		if (userInLs?.user?.aud === 'authenticated') {
+			loggedin = true
+			setUserIsLoggedIn(true)
+		}
+		if (!checkApiErrorCallback()) {
+			if (loggedin) navigateTo = '/dashboard'
+			else navigateTo = '/account/login'
+			if (getUrlParamVal(url, 'type') === 'recovery') navigateTo = '/auth/resetpassword'
+		} else {
+			navigateTo = '/error?error_description=' + apiErrorsCallback().error_description
+		}
 		if (loggedin) {
 			setUsermail(userInLs.user.email)
 			navigate(navigateTo)
 		} else {
 			if (userIsLoggedIn) {
+				console.log('userIsLoggedIn jazekers')
 				setUserIsLoggedIn(true)
-			} 
+			}
 			setTimeout(() => {
 				if (getUrlParamVal(url, 'type') === 'recover') navigateTo = '/auth/resetpassword'
 			}, 1500)
 			navigate(navigateTo)
 		}
-	}, [loggedin, navigate, setUsermail, userInLs])
+	}, [
+		navigate,
+		setUsermail,
+		userInLs,
+		apiErrorsCallback,
+		checkApiErrorCallback,
+		setUserIsLoggedIn,
+		url,
+		userIsLoggedIn,
+	])
 
 	return (
 		<>

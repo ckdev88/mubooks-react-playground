@@ -76,11 +76,6 @@ const NavWrapper = () => {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to={'/add-book'} onClick={toggleNav0}>
-								Add book
-							</NavLink>
-						</li>
-						<li>
 							<NavLink to={'/wishlist'} onClick={toggleNav0}>
 								Wishlist
 							</NavLink>
