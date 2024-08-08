@@ -177,26 +177,32 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewText(book, book.review_text)}
 				{(currentPage === 'finished' || currentPage === 'favorites') &&
 					ReviewQuote(book, book.review_fav_quote)}
-				{currentPage !== 'finished' && currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
-					<>
-						{currentPage === 'search' && book.subject && SearchTropes(book.id, book.subject)}
-						<button
-							className={
-								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
-							}
-							onClick={toggleSynopsis}
-						>
-							{isLoading && 'Loading...'}
-							{!isLoading && !isShowingSynopsis && 'Synopsis'}
-							{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
-						</button>
-						<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-							<div className="synopsis">
-								<ReactMarkdown>{synopsis}</ReactMarkdown>
+				{currentPage !== 'finished' &&
+					currentPage !== 'favorites' &&
+					currentPage !== 'quotedbooks' &&
+					currentPage !== 'dashboard' && (
+						<>
+							{currentPage === 'search' && book.subject && SearchTropes(book.id, book.subject)}
+							<button
+								className={
+									isShowingSynopsis
+										? 'btn-text caret-right-toggle active'
+										: 'btn-text caret-right-toggle'
+								}
+								onClick={toggleSynopsis}
+							>
+								{isLoading && 'Loading...'}
+								{!isLoading && !isShowingSynopsis && 'Synopsis'}
+								{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
+							</button>
+							<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
+								<div className="synopsis">
+									<br />
+									<ReactMarkdown>{synopsis}</ReactMarkdown>
+								</div>
 							</div>
-						</div>
-					</>
-				)}
+						</>
+					)}
 				<hr />
 			</footer>
 		</article>
