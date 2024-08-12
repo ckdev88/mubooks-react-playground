@@ -5,7 +5,7 @@ import { useState, useContext } from 'react'
 import { AppContext } from '../../App'
 
 const RecoverCard = () => {
-	const { setUsermail } = useContext(AppContext)
+	const { setUsermail, userIsLoggedIn } = useContext(AppContext)
 	const [error, setError] = useState('')
 	const navigate = useNavigate()
 	const { login } = useCardRotate()
@@ -24,7 +24,8 @@ const RecoverCard = () => {
 		else {
 			setUsermail(email)
 			setIsLoading(false)
-			navigate('/account/forgotpassword')
+			if (userIsLoggedIn) navigate('/dashboard')
+			else navigate('/account/forgotpassword')
 		}
 	}
 

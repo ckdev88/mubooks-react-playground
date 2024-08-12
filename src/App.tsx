@@ -149,10 +149,14 @@ const App = () => {
 						<Route path="/*" Component={RootPage} />
 						<Route path="/error" Component={ErrorPage} />
 						<Route path="/account/login" Component={UserLoginPage} />
-						<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
 						<Route path="/account/logout" Component={UserLogoutPage} />
 						<Route path="/auth/confirm" Component={AuthConfirm} />
-						<Route path="/auth/resetpassword" Component={ResetPasswordPage} />
+						{!userIsLoggedIn && (
+							<>
+								<Route path="/auth/resetpassword" Component={ResetPasswordPage} />
+								<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
+							</>
+						)}
 						<Route path="/account/new" Component={CheckMailNewAccountPage} />
 						{userIsLoggedIn && (
 							<>
