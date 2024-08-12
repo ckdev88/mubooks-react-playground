@@ -6,9 +6,6 @@ import { AppContext } from '../../App'
 
 const pageTitle = 'Reset password page'
 
-/*
-https://ckdev88.github.io/mubooks/#/auth/resetpassword
-*/
 const ResetPasswordPage = () => {
 	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow, setNavTitle } = useContext(AppContext)
 
@@ -19,7 +16,6 @@ const ResetPasswordPage = () => {
 	const navigate = useNavigate()
 	const [error, setError] = useState('')
 
-	// TODO: smoothen popupmessage for notice to login with new password after submit
 	if (userIsLoggedIn) navigate('/dashboard')
 
 	const [loading, setLoading] = useState(true)
@@ -47,14 +43,9 @@ const ResetPasswordPage = () => {
 			setLoading(false)
 		}
 	}, [loading])
-	// /confirm user before enable to change password
 
 	function afterSbUpdate() {
-		setTimeout(() => {
-			setPopupNotification('')
-			setPopupNotificationShow(false)
-			navigate('/dashboard')
-		}, 3000)
+		setTimeout(() => navigate('/dashboard'), 1000)
 	}
 
 	// resetpassword
@@ -64,9 +55,9 @@ const ResetPasswordPage = () => {
 		})
 		if (error) setError(error.message)
 		else {
-			setPopupNotification('Password updated, logging in...')
+			setPopupNotification('Password updated...')
 			setPopupNotificationShow(true)
-			afterSbUpdate()
+			setTimeout(() => afterSbUpdate(), 800)
 		}
 	}
 
@@ -78,10 +69,8 @@ const ResetPasswordPage = () => {
 		} else setError('Passwords do not match, try again')
 	}
 
-	// TODO: if token has expired or is invalid, leave out the form prompting for new password (2x), show button to request new password reset link instead.
-	if (loading) {
-		return <p>Loading...</p>
-	} else {
+	if (loading) return <p>Loading...</p>
+	else {
 		return (
 			<>
 				<h1 id="welcome">
