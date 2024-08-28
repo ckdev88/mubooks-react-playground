@@ -32,7 +32,7 @@ async function getOlPagesMedian(id: string) {
 }
 
 function debounce<T extends (...args: []) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
-	let timeoutId: NodeJS.Timeout
+	let timeoutId: NodeJS.Timer
 	return function (this: object) {
 		const context = this || window
 		clearTimeout(timeoutId)
