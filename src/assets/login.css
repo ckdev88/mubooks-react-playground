@@ -37,9 +37,3 @@
 	position: relative;
 	box-sizing: border-box;
 }
-
-.card .recover-icon {
-	display: block;
-	width: auto;
-	float: right;
-}

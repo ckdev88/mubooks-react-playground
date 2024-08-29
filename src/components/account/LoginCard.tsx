@@ -51,8 +51,10 @@ const LoginCard = () => {
 			<article className="card" id="card-login">
 				<main>
 					<header>
-						Log in
-						<sub>to continue</sub>
+						<div>
+							Log in
+							<sub>to continue</sub>
+						</div>
 					</header>
 					<em className="form-notification">{formNotification}</em>
 					<form onSubmit={processLoginForm}>
@@ -74,7 +76,7 @@ const LoginCard = () => {
 					<button className="btn-text wauto-md nowrap" onClick={recover}>
 						Forgot password
 					</button>
-					<button className="btn-text ta-right wauto-md nowrap" onClick={signup}>
+					<button className="btn-text ta-right wauto-md nowrap diblock" onClick={signup}>
 						<span className="dnone diblock-md">New here?&nbsp;</span>Join now
 					</button>
 				</footer>

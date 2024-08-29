@@ -93,7 +93,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 						</div>
 					)}
 				</header>
-				<main>
+				<div className="summary-actions">
 					<div className="reviews">
 						{(currentPage === 'finished' || currentPage === 'favorites') &&
 							book.review_tropes &&
@@ -171,7 +171,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 							</div>
 						</>
 					)}
-				</main>
+				</div>
 			</div>
 			<footer>
 				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewText(book, book.review_text)}

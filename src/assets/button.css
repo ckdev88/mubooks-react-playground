@@ -41,7 +41,7 @@ main button.alt,
 	padding: 0;
 	text-align: left;
 	text-decoration: none;
-	transition: text-decoration 0.2s ease-in-out, color 0.2s ease-in-out;
+	transition: text-decoration 0.18s ease-in-out, color 0.18s ease-in-out;
 }
 .btn-text:hover {
 	text-decoration: underline;
@@ -127,20 +127,20 @@ main button.alt,
 	opacity: 1;
 }
 .btn-submit-inside-caret-right {
-	float: left;
-	content: ' ';
-	width: 1rem;
-	background-image: url('/img/cv-caret-medium.light.svg');
-	background-size: 1.4rem;
-	background-position-y: 10%;
-	background-position-x: center;
-	margin-top: 0.4rem;
-	transform: rotate(90deg);
 	background-color: pink;
-	border: 1px solid pink;
+	background-image: url('/img/cv-caret-medium.light.svg');
+	background-position-x: center;
+	background-position-y: 10%;
+	background-size: 1.4rem;
 	border-radius: 100%;
+	border: 1px solid pink;
+	content: ' ';
+	margin-top: 0.4rem;
 	padding: 0.5rem;
-	margin-left: -1.5rem;
+	position: absolute;
+	right: 1rem;
+	transform: rotate(90deg);
+	width: 1rem;
 }
 .btn-submit-inside-caret-right:hover,
 .btn-submit-inside-caret-right:focus,
@@ -174,25 +174,12 @@ main button.alt,
 .btn-sm .icon-minus::before {
 	content: '-';
 }
-.btn-text-sm {
-	background-color: #b73581;
-}
-.btn-text-sm .icon::before {
-	font-weight: bold;
-	display: block;
-	float: left;
-}
-.btn-text-sm .icon-add::before {
-	content: '+';
-}
-.btn-text-sm .icon-minus::before {
-	content: '-';
-}
 .badge {
 	font-size: 0.8rem;
 	border-radius: 0.2rem;
 	background-color: #f1e0c6;
 	color: #df8506;
+	position: relative;
 }
 .badge.cgreen {
 	background-color: var(--lightgreen);
@@ -203,25 +190,48 @@ main button.alt,
 	color: var(--red);
 }
 .badge .btn-x {
-	font-size: 0.6rem;
-	height: auto;
-	width: auto;
-	background-color: transparent;
-	color: #df8506;
-	padding: 0;
-	float: right;
-	margin: -0.2rem -0.2rem -0.2rem 0.2rem;
+	background-color: red;
+	border-radius: 50%;
+	box-sizing: content-box;
+	color: white;
+	font-size: 0.6em;
+	padding: 0 0 1px;
+	height: 1em;
+	height: 10px;
+	width: 11px;
+	line-height: 10px;
+	position: absolute;
+	right: -0.3rem;
+	top: -0.2rem;
+	transition: background-color 0.18s ease-in-out;
 }
-.badge.cgreen .btn-x,
+.badge.cgreen .btn-x {
+	background-color: var(--green);
+}
+.badge.cgreen .btn-x:hover {
+	border-color: var(--green);
+}
 .badge.cred .btn-x {
-	color: inherit;
-	border-color: transparent;
+	background-color: var(--red);
+}
+.badge.cred .btn-x:hover {
+	border-color: var(--red);
+}
+.badge .btn-x:hover,
+.badge.cgreen .btn-x:hover,
+.badge.cred .btn-x:hover {
+	outline: none;
+	background-color: white;
+	color: red;
+}
+.book-summary button.btn-text,
+.btn-text {
+	display: flex;
 }
 .btn-text .icon,
 .btn-icon .icon {
 	display: block;
 	clear: both;
-	float: left;
 	line-height: 1em;
 	height: 1.3rem;
 	width: 1em;

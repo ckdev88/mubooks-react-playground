@@ -20,7 +20,9 @@ export default function MyAccountCard() {
 	return (
 		<div className="card">
 			<header>
-				My account <sub>An overview of my profile</sub>
+				<div>
+					My account <sub>An overview of my profile</sub>
+				</div>
 			</header>
 			<main>
 				<dl>

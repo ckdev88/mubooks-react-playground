@@ -68,7 +68,7 @@ const BookFetchPages = ({ book }: { book: Book }) => {
 	return (
 		<>
 			{originalNumberOfPagesMedian > 0 && (
-				<button className="btn-text fright mt05 ml05" onClick={() => setPushOrigin(true)}>
+				<button className="btn-text mt05 ml05" onClick={() => setPushOrigin(true)}>
 					{' '}
 					guess: {originalNumberOfPagesMedian}{' '}
 				</button>

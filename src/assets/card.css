@@ -9,7 +9,14 @@
 	font-size: 1.4rem;
 	margin-bottom: 1rem;
 	width: 100%;
+	display:flex;
+	justify-content: space-between;
 }
+.card header div {
+	font-size: inherit;
+	margin: 0;
+}
+
 .card .form-notification {
 	margin-bottom: 1rem;
 	display: block;

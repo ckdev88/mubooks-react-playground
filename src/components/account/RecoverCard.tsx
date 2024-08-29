@@ -33,9 +33,11 @@ const RecoverCard = () => {
 		<>
 			<article className="card" id="card-recover">
 				<header>
+					<div>
+						Forgot your password?
+						<sub>Don't worry. Let's reset it.</sub>
+					</div>
 					<img src="/img/recover-icon.png" width="82" height="82" alt="" className="recover-icon" />
-					Forgot your password?
-					<sub>Don't worry. Let's reset it.</sub>
 				</header>
 				<main>
 					<form onSubmit={processRecoverForm}>
