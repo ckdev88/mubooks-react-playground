@@ -196,10 +196,9 @@ main button.alt,
 	color: white;
 	font-size: 0.6em;
 	padding: 0 0 1px;
-	height: 1em;
 	height: 10px;
 	width: 11px;
-	line-height: 10px;
+	line-height: 9px;
 	position: absolute;
 	right: -0.3rem;
 	top: -0.2rem;
