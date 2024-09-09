@@ -69,7 +69,7 @@ type BookData = [
 		id: Id
 		index?: number
 		title: string
-		author_name: [string]
+		author_name: string[]
 		number_of_pages_median: number
 		first_publish_year: number
 		cover_edition_key: string
@@ -79,17 +79,17 @@ type BookData = [
 	}
 ]
 interface Book {
-	author_key?: [string]
-	author_name: [string]
+	author_key?: string[]
+	author_name: string[]
 	cover: string
 	cover_edition_key: string
-	edition_key?: [string]
+	edition_key?: string[]
 	first_publish_year: string
 	id: Id
 	img?: string
 	index?: number
 	isbn?: string[]
-	key?: [string]
+	key?: string[]
 	/** 1: Wishlist | 2: Reading | 3: Finished | 4: Favorite (+Finished) */
 	list: BookList
 	number_of_pages_median: number
@@ -107,7 +107,7 @@ interface Book {
 }
 type BookTropes = string[]
 
-type Results = [Book]
+type Results = Book[]
 interface Books extends Array<Book> {}
 
 interface BookObject {
