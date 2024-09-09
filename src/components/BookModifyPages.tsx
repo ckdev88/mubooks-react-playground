@@ -72,7 +72,7 @@ const BookModifyPages = (book: Book) => {
 		<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
 			&nbsp;
 			<button className="btn-icon" onClick={() => setShowForm(!showForm)}>
-				<span className="icon icon-dots"></span>
+				<span className="icon icon-pencil"></span>
 			</button>
 			{/*
 	 			<button className="btn-text" onClick={() => setShowForm(!showForm)}>

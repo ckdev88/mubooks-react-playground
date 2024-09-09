@@ -291,6 +291,17 @@ main button.alt,
 	height: 16px;
 	opacity: 0.2;
 }
+.btn-icon .icon-pencil {
+	background-image: url('/img/icon-pencil.svg');
+	width: 12px;
+	height: 12px;
+	opacity: 0.2;
+	transition: opacity 0.18s ease-in-out;
+}
+.btn-icon:hover .icon-pencil {
+	opacity: 1;
+}
+
 .reviews {
 	margin-top: 0.75rem;
 }
