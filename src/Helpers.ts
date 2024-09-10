@@ -3,7 +3,7 @@ function isUrl(url: string) {
 	return false
 }
 
-function getOlCover(id: string, size: CoverSize = undefined) {
+function getOlCover(id: string, size: CoverSize = undefined): string {
 	let appendSize: string = ''
 	if (size) appendSize = '-' + size
 
@@ -11,7 +11,8 @@ function getOlCover(id: string, size: CoverSize = undefined) {
 	return 'https://covers.openlibrary.org/b/isbn/' + id + appendSize + '.jpg'
 }
 
-function getBookCover(url: string, size: CoverSize) {
+function getBookCover(url: string, size: CoverSize): string {
+	if (url === undefined) return './../public/img/save-books-icon.png'
 	let appendSize: string = ''
 	if (size) {
 		appendSize = '-' + size
@@ -20,7 +21,7 @@ function getBookCover(url: string, size: CoverSize) {
 	return url
 }
 
-async function getOlPagesMedian(id: string) {
+async function getOlPagesMedian(id: string): Promise<number> {
 	const ret = await fetch(
 		'https://openlibrary.org/search.json?q=/works/' +
 			id +

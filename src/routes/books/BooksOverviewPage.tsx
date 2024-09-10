@@ -19,7 +19,7 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 						}
 					})
 				}
-				return <BookSummary book={book} key={book.id} currentPage={page} />
+				return <BookSummary book={book} key={`BookSummary${book.id}`} currentPage={page} />
 			})}
 		</>
 	)

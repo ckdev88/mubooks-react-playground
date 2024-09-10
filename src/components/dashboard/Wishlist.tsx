@@ -1,7 +1,7 @@
 import WishlistItems from './WishlistItems'
 import { Link } from 'react-router-dom'
 
-export default function Wishlist({ page }: { page: Page }) {
+export default function Wishlist() {
 	return (
 		<>
 			<article className="adder">
@@ -10,7 +10,7 @@ export default function Wishlist({ page }: { page: Page }) {
 						Mu Wishlist<span>›</span>
 					</header>
 				</Link>
-				<WishlistItems page={page} />
+				<WishlistItems />
 			</article>
 		</>
 	)

@@ -5,7 +5,6 @@ import MyAccountEditCard from '../../components/account/MyAccountEditCard'
 import { AppContext } from '../../App'
 
 const pageTitle = 'Mu Profile'
-// const currentPage = 'profile'
 
 const UserProfilePage = () => {
 	const { setNavTitle } = useContext(AppContext)
