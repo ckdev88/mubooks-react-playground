@@ -95,6 +95,9 @@ sup {
 .dblock {
 	display: block;
 }
+.dflex {
+	display: flex;
+}
 .dnone,
 input[type='submit'].dnone {
 	display: none;
