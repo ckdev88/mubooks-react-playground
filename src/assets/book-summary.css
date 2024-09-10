@@ -215,7 +215,7 @@
 }
 .review-rates > div {
 	width: 6rem;
-	display: block;
+	display: flex;
 	margin: 0 auto;
 	padding-right: 0.1rem;
 	margin-top: 0.5rem;

@@ -288,9 +288,9 @@ main button.alt,
 .btn-icon .icon-eraser {
 	background-image: url('/img/icon-eraser.svg');
 	width: 16px;
-	height: 16px;
 	opacity: 0.2;
 }
+
 .btn-icon .icon-pencil {
 	background-image: url('/img/icon-pencil.svg');
 	width: 12px;
