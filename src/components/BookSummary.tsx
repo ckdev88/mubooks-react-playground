@@ -7,12 +7,12 @@ import ReactMarkdown from 'react-markdown'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
 import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
-import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
 import SearchTropes from './SearchTropes'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
+import SummaryReviews from './SummaryReviews'
 import BookPages from './BookPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
@@ -56,7 +56,14 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					}
 					alt=""
 				/>
-				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewRating(book)}
+				{(currentPage === 'finished' || currentPage === 'favorites') && (
+					<ReviewRating
+						book_id={book.id}
+						book_rate_stars={book.rate_stars}
+						book_rate_spice={book.rate_spice}
+						book_title_short={book.title_short}
+					/>
+				)}
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
@@ -109,11 +116,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					)}
 				</header>
 				<div className="summary-actions">
-					<div className="reviews">
-						{(currentPage === 'finished' || currentPage === 'favorites') &&
-							book.review_tropes &&
-							ReviewTropes(book, book?.review_tropes)}
-					</div>
+					<SummaryReviews currentPage={currentPage} book={book} />
 					{book.list > 1 && currentPage !== 'search' && currentPage !== 'quotedbooks' && (
 						<BookStartedFinished
 							date_started={book.date_reading}
@@ -282,15 +285,20 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 				</div>
 			</div>
 			<footer>
-				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewText(book, book.review_text)}
-				{(currentPage === 'finished' || currentPage === 'favorites') &&
-					ReviewQuote(book, book.review_fav_quote)}
+				{(currentPage === 'finished' || currentPage === 'favorites') && (
+					<ReviewText book_id={book.id} book_review_text={book.review_text} />
+				)}
+				{(currentPage === 'finished' || currentPage === 'favorites') && (
+					<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+				)}
 				{currentPage !== 'finished' &&
 					currentPage !== 'favorites' &&
 					currentPage !== 'quotedbooks' &&
 					currentPage !== 'dashboard' && (
 						<>
-							{currentPage === 'search' && book.subject && SearchTropes(book.id, book.subject)}
+							{currentPage === 'search' && book.subject && (
+								<SearchTropes book_id={book.id} tropes={book.subject} />
+							)}
 							<button
 								className={
 									isShowingSynopsis

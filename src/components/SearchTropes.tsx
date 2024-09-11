@@ -1,5 +1,5 @@
 import { useState } from 'react'
-const SearchTropes = (bookid: Id, tropes: BookTropes) => {
+const SearchTropes = ({ book_id, tropes }: { book_id: Book['id']; tropes: BookTropes }) => {
 	const [showMore, setShowMore] = useState(false)
 
 	function showMoreToggle() {
@@ -12,13 +12,13 @@ const SearchTropes = (bookid: Id, tropes: BookTropes) => {
 			{tropes.map((trope, index) => {
 				if (showMore) {
 					return (
-						<li className="trope badge" key={'trope' + bookid + index}>
+						<li className="trope badge" key={'trope' + book_id + index}>
 							{trope}
 						</li>
 					)
 				} else if (index < 5) {
 					return (
-						<li className="trope badge" key={'trope' + bookid + index}>
+						<li className="trope badge" key={'trope' + book_id + index}>
 							{trope}
 						</li>
 					)
