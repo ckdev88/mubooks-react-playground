@@ -2,6 +2,7 @@ import { useState, useCallback, useContext, useEffect } from 'react'
 import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
+import BtnInsideCaret from './ui/BtnInsideCaret'
 
 const ReviewQuote = ({
 	book_id,
@@ -102,7 +103,7 @@ const ReviewQuote = ({
 							type="text"
 							placeholder="Add your favorite quote..."
 						/>
-						<button type="submit" className="btn-submit-inside-caret-right"></button>
+						<BtnInsideCaret />
 					</form>
 					{reviewFavQuote && (
 						<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>

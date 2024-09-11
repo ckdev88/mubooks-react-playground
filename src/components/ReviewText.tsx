@@ -2,6 +2,7 @@ import { useState, useCallback, useContext, useEffect } from 'react'
 import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
+import BtnInsideCaret from './ui/BtnInsideCaret'
 
 const ReviewText = ({ book_id, book_review_text }: { book_id: Book['id']; book_review_text: Book['review_text'] }) => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
@@ -94,7 +95,7 @@ const ReviewText = ({ book_id, book_review_text }: { book_id: Book['id']; book_r
 							type="text"
 							placeholder="Add a review..."
 						/>
-						<button type="submit" className="btn-submit-inside-caret-right"></button>
+						<BtnInsideCaret />
 					</form>
 					{reviewText && (
 						<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>

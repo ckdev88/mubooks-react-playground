@@ -126,6 +126,7 @@ main button.alt,
 .btn-calendar:hover::after {
 	opacity: 1;
 }
+
 .btn-submit-inside-caret-right {
 	background-color: pink;
 	background-image: url('/img/cv-caret-medium.light.svg');
@@ -141,6 +142,7 @@ main button.alt,
 	width: 1rem;
 	transition: background-color 0.18s ease-in-out, border-color 0.18s ease-in-out;
 }
+
 .btn-submit-inside-caret-right:hover,
 .btn-submit-inside-caret-right:focus,
 .btn-submit-inside-caret-right:active {
@@ -149,6 +151,7 @@ main button.alt,
 	border-color: white;
 	box-shadow: none;
 }
+
 .btn-sm {
 	height: 1.4rem;
 	line-height: 0.9rem;

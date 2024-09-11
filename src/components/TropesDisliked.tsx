@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
+import BtnInsideCaret from './ui/BtnInsideCaret'
 
 const TropesDisliked = () => {
 	const { setNavTitle, setPopupNotification, userid } = useContext(AppContext)
@@ -105,7 +106,7 @@ const TropesDisliked = () => {
 								id="trope_add_disliked"
 								placeholder="Add a trope..."
 							/>
-							<button className="btn-submit-inside-caret-right"></button>
+							<BtnInsideCaret />
 						</form>
 						<button className="btn-text btn-text-cancel" onClick={() => cancelSubmit()}>
 							Cancel

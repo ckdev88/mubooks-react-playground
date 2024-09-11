@@ -4,6 +4,7 @@ import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 
 import BookFetchPages from './BookFetchPages'
+import BtnInsideCaret from './ui/BtnInsideCaret'
 
 const BookAddPages = ({
 	book_id,
@@ -88,7 +89,7 @@ const BookAddPages = ({
 							name="pagesAmount"
 							defaultValue={book_number_of_pages_median}
 						/>
-						<button type="submit" className="btn-submit-inside-caret-right"></button>
+						<BtnInsideCaret />
 					</form>
 				</div>
 			) : (

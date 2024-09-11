@@ -3,6 +3,7 @@ import { supabase } from '../../utils/supabase'
 import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import { IsModdingPagesContext } from './BookPages'
+import BtnInsideCaret from './ui/BtnInsideCaret'
 const BookModifyPages = ({
 	book_id,
 	book_number_of_pages_median,
@@ -106,7 +107,7 @@ const BookModifyPages = ({
 						name="pagesAmount"
 						defaultValue={book_number_of_pages_median > 0 ? book_number_of_pages_median : 0}
 					/>
-					<button type="submit" className="btn-submit-inside-caret-right"></button>
+					<BtnInsideCaret />
 				</form>
 			</div>
 			<button className="btn-icon" onClick={() => setShowForm(!showForm)}>
