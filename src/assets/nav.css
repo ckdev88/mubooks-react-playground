@@ -19,11 +19,6 @@
 	opacity: 1;
 }
 
-.nav-collapsable .history {
-	display: none;
-	/* hide for now */
-}
-
 .nav-collapsable.expanded {
 	width: 100%;
 	height: 100vh;
@@ -120,14 +115,6 @@
 	padding: 0;
 }
 
-#nav0 {
-	text-align: left;
-}
-#nav0 > ul + ul {
-	padding-top: 1rem;
-	margin-top: 1rem;
-	border-top: 1px dashed rgba(255, 255, 255, 0.5);
-}
 #nav-icon-loep,
 #nav-icon-profile {
 	margin: 0 auto;

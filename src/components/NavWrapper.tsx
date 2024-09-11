@@ -61,76 +61,63 @@ const NavWrapper = () => {
 				</nav>
 				<nav
 					id="nav0"
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'flex-start',
+						justifyItems: 'center',
+						alignContent: 'space-around',
+						alignItems: 'center',
+						gap: '.25rem',
+					}}
 					className={nav0Expanded ? 'expanded nav-collapsable' : 'collapsed nav-collapsable'}
 					aria-expanded={nav0Expanded ? 'true' : 'false'}
 				>
-					<ul>
-						<li>
-							<NavLink to={'/dashboard'} onClick={toggleNav0}>
-								Dashboard
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/search'} onClick={toggleNav0}>
-								Search
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/wishlist'} onClick={toggleNav0}>
-								Wishlist
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/reading'} onClick={toggleNav0}>
-								Reading
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/finished'} onClick={toggleNav0}>
-								Finished
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/favorites'} onClick={toggleNav0}>
-								Favorites
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/saved-books'} onClick={toggleNav0}>
-								Saved books
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/quoted-books'} onClick={toggleNav0}>
-								Quoted
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/tropes'} onClick={toggleNav0}>
-								Tropes
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/statistics'} onClick={toggleNav0}>
-								Statistics
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
-								Clear My Books
-							</NavLink>
-						</li>
-						<li>
-							<div className="history">
-								<button>&lt;</button>
-								<button>&gt;</button>
-							</div>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<NavLink to={'/account/profile'} onClick={toggleNav0}>
-								{/*
+					<NavLink to={'/dashboard'} onClick={toggleNav0}>
+						Dashboard
+					</NavLink>
+					<NavLink to={'/search'} onClick={toggleNav0}>
+						Search
+					</NavLink>
+					<NavLink to={'/wishlist'} onClick={toggleNav0}>
+						Wishlist
+					</NavLink>
+					<NavLink to={'/reading'} onClick={toggleNav0}>
+						Reading
+					</NavLink>
+					<NavLink to={'/finished'} onClick={toggleNav0}>
+						Finished
+					</NavLink>
+					<NavLink to={'/favorites'} onClick={toggleNav0}>
+						Favorites
+					</NavLink>
+					<NavLink to={'/saved-books'} onClick={toggleNav0}>
+						Saved books
+					</NavLink>
+					<NavLink to={'/quoted-books'} onClick={toggleNav0}>
+						Quoted
+					</NavLink>
+					<NavLink to={'/tropes'} onClick={toggleNav0}>
+						Tropes
+					</NavLink>
+					<NavLink to={'/statistics'} onClick={toggleNav0}>
+						Statistics
+					</NavLink>
+					<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
+						Clear My Books
+					</NavLink>
+					<hr
+						style={{
+							width: '80%',
+							borderWidth: '1px 0 0',
+							borderStyle: 'solid',
+							borderColor: 'rgba(255,255,255,.2)',
+							boxShadow: 'none',
+							height: '1px',
+						}}
+					/>
+					<NavLink to={'/account/profile'} onClick={toggleNav0}>
+						{/*
 								 <svg
 									width="800px"
 									height="800px"
@@ -157,15 +144,11 @@ const NavWrapper = () => {
 									</g>
 								</svg>&nbsp;
 							   */}
-								Profile
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/account/logout'} onClick={toggleNav0}>
-								Logout
-							</NavLink>
-						</li>
-					</ul>
+						Profile
+					</NavLink>
+					<NavLink to={'/account/logout'} onClick={toggleNav0}>
+						Logout
+					</NavLink>
 				</nav>
 			</div>
 		</>
