@@ -101,7 +101,9 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					<h2>
 						{book.title_short}{' '}
 						{book.first_publish_year && currentPage === 'search' && <sup>({book.first_publish_year})</sup>}
-						<sub>{BookAuthorList(book)}</sub>
+						<sub>
+							<BookAuthorList book_id={book.id} book_author_name={book.author_name} />
+						</sub>
 					</h2>
 
 					{currentPage === 'quotedbooks' && (
@@ -121,7 +123,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 						<BookStartedFinished
 							date_started={book.date_reading}
 							date_finished={book.date_finished}
-							bookid={book.id}
+							book_id={book.id}
 							list={book.list}
 						/>
 					)}
