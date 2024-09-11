@@ -3,24 +3,36 @@ import { AppContext } from '../App'
 import getListName from '../functions/getListName'
 import { supabase } from '../../utils/supabase'
 
-const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean = false) => {
+const RemoveBookFromXButton = ({
+	book_id,
+	book_list,
+	book_title_short,
+	targetList,
+	icon = false,
+}: {
+	book_id: Book['id']
+	book_list: Book['list']
+	book_title_short: Book['title_short']
+	targetList: BookList
+	icon: boolean
+}) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
-	function RemoveBookFromX(book: Book) {
+	function RemoveBookFromX(book_id: Book['id']) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = userMyBooks
 
-		if (book.list === 4) {
+		if (book_list === 4) {
 			for (let i = 0; i < myBooks.length; i++) {
-				if (myBooks[i].id === book.id) {
+				if (myBooks[i].id === book_id) {
 					myBooks[i].list = 3
 					break
 				}
 			}
-		} else if (book.list === 3) {
+		} else if (book_list === 3) {
 			for (let i = 0; i < myBooks.length; i++) {
-				if (myBooks[i].id === book.id) {
+				if (myBooks[i].id === book_id) {
 					myBooks[i].list = 2
 					myBooks[i].date_finished = undefined
 					break
@@ -29,8 +41,8 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean =
 		} else {
 			let removeIndex = 0
 			for (let i = 0; i < myBooks.length; i++) {
-				if (myBooks[i].id === book.id) {
-					book.list = 0
+				if (myBooks[i].id === book_id) {
+					book_list = 0
 					removeIndex = i
 					break
 				}
@@ -43,7 +55,7 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean =
 	}
 
 	function RemoveBookFromXButtonAct() {
-		const newArr: Books = RemoveBookFromX(book)
+		const newArr: Books = RemoveBookFromX(book_id)
 		setUserMyBooks(newArr)
 	}
 
@@ -57,7 +69,7 @@ const RemoveBookFromXButton = (book: Book, targetList: BookList, icon: boolean =
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message
-		else msg = 'Removed ' + book.title_short + ' from ' + getListName(targetList)
+		else msg = 'Removed ' + book_title_short + ' from ' + getListName(targetList)
 
 		setPopupNotification(msg)
 	}

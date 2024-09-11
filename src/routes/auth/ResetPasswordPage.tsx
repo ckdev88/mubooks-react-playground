@@ -4,17 +4,20 @@ import { useState, useEffect, useContext } from 'react'
 import { getUrlParamVal } from '../../Helpers'
 import { AppContext } from '../../App'
 
-/*
-https://ckdev88.github.io/mubooks/#/auth/resetpassword
-*/
+const pageTitle = 'Reset password page'
+
 const ResetPasswordPage = () => {
-	const { setPopupNotification, setPopupNotificationShow, setFormNotification } = useContext(AppContext)
+	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow, setNavTitle } = useContext(AppContext)
+
+	useEffect(() => {
+		setNavTitle(pageTitle)
+	}, [setNavTitle])
+
 	const navigate = useNavigate()
 	const [error, setError] = useState('')
 
-	// TODO: use popupmessenge for notice to login with new password after submit...
+	if (userIsLoggedIn) navigate('/dashboard')
 
-	// confirm user before enable to change password
 	const [loading, setLoading] = useState(true)
 
 	async function verifyTokenHash() {
@@ -33,49 +36,41 @@ const ResetPasswordPage = () => {
 	}
 	useEffect(() => {
 		if (loading) {
-			// TODO: check of verifyTokenHash echt nodig is
+			/* TODO: check of verifyTokenHash echt nodig is, lijkt namelijk alleen nodig bij iets als <a href="{{ .ConfirmationURL }}mubooks/#/auth/resetpassword?token={{.TokenHash}}&type=recovery"> Click here</a> to reset your password.</p>, waar we ook echt iets doen met de meegegeven properties... wat we nu niet doen volgens mij
+			 */
+			// "{{ .RedirectTo }}mubooks/#/auth/resetpassword?token={{ .Token }}&type=recovery&email={{ .Email }}" is een ander voorbeeld van een url die wellicht onnodig is.
 			verifyTokenHash()
 			setLoading(false)
 		}
 	}, [loading])
-	// /confirm user before enable to change password
 
 	function afterSbUpdate() {
-		setFormNotification('Your password was updated, use it to log in.')
-
-		setTimeout(() => {
-			setPopupNotification('')
-			setPopupNotificationShow(false)
-			navigate('/account/login')
-		}, 1000)
+		setTimeout(() => navigate('/dashboard'), 1000)
 	}
 
 	// resetpassword
 	const updateSbUser = async (form_userpass: string) => {
-		const { data, error } = await supabase.auth.updateUser({
+		const { error } = await supabase.auth.updateUser({
 			password: form_userpass,
 		})
-		if (error) console.log('Error updating user:', error)
+		if (error) setError(error.message)
 		else {
-			setPopupNotification('Password is re-set, you can now log in')
+			setPopupNotification('Password updated...')
 			setPopupNotificationShow(true)
-			console.log('adata', data)
-			afterSbUpdate()
+			setTimeout(() => afterSbUpdate(), 800)
 		}
 	}
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		console.log(e.currentTarget.account_password.value)
 		if (e.currentTarget.account_password.value === e.currentTarget.account_password_again.value) {
 			const form_userpass: string = e.currentTarget.account_password.value.trim()
 			updateSbUser(form_userpass)
 		} else setError('Passwords do not match, try again')
 	}
 
-	if (loading) {
-		return <p>Loading...</p>
-	} else
+	if (loading) return <p>Loading...</p>
+	else {
 		return (
 			<>
 				<h1 id="welcome">
@@ -87,7 +82,6 @@ const ResetPasswordPage = () => {
 							Reset your password
 							<sub>Fill in your new password twice and submit to activate it</sub>
 						</header>
-
 						<main>
 							<form onSubmit={handleSubmit}>
 								<label htmlFor="account_password">
@@ -125,5 +119,6 @@ const ResetPasswordPage = () => {
 			   */}
 			</>
 		)
+	}
 }
 export default ResetPasswordPage

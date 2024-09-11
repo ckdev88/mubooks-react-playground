@@ -2,11 +2,21 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 
-const ReviewRating = (book: Book) => {
+const ReviewRating = ({
+	book_id,
+	book_rate_stars,
+	book_rate_spice,
+	book_title_short,
+}: {
+	book_id: Book['id']
+	book_rate_stars: Book['rate_stars']
+	book_rate_spice: Book['rate_spice']
+	book_title_short: Book['title_short']
+}) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 
-	const [reviewStars, setReviewStars] = useState(book.rate_stars)
-	const [reviewSpice, setReviewSpice] = useState(book.rate_spice)
+	const [reviewStars, setReviewStars] = useState(book_rate_stars)
+	const [reviewSpice, setReviewSpice] = useState(book_rate_spice)
 
 	// TODO: move this function to generic helper location
 	async function MyBooksUpdate(myBooksNew: Books) {
@@ -18,17 +28,17 @@ const ReviewRating = (book: Book) => {
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message
-		else msg = 'Added rating for ' + book.title_short
+		else msg = 'Added rating for ' + book_title_short
 		setPopupNotification(msg)
 	}
 
-	function RateStars(book: Book, type: 'rate_stars' | 'rate_spice', rating: Scale5) {
+	function RateStars(book_id: Book['id'], type: 'rate_stars' | 'rate_spice', rating: Scale5) {
 		let myBooks: Books
 		if (userMyBooks !== undefined) myBooks = userMyBooks
 		else myBooks = []
 
 		for (let i = 0; i < myBooks.length; i++) {
-			if (myBooks[i].id === book.id) {
+			if (myBooks[i].id === book_id) {
 				if (type === 'rate_stars') myBooks[i].rate_stars = rating
 				if (type === 'rate_spice') myBooks[i].rate_spice = rating
 				break
@@ -44,15 +54,15 @@ const ReviewRating = (book: Book) => {
 		if (type === 'rate_stars') setReviewStars(amount)
 		if (type === 'rate_spice') setReviewSpice(amount)
 
-		const newArr: Books = RateStars(book, type, amount)
+		const newArr: Books = RateStars(book_id, type, amount)
 		setUserMyBooks(newArr)
 	}
 
 	const iconClassNameEraser = 'icon icon-eraser'
 	const iconClassNameStar = 'icon icon-star'
 	const iconClassNameSpice = 'icon icon-spice'
-	if (book.rate_stars === undefined) book.rate_stars = 0
-	if (book.rate_spice === undefined) book.rate_spice = 0
+	if (book_rate_stars === undefined) book_rate_stars = 0
+	if (book_rate_spice === undefined) book_rate_spice = 0
 
 	return (
 		<div className="review-rates">

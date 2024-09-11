@@ -46,13 +46,13 @@ function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'inp
 		const a = new Date(UNIX_timestamp)
 		const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 		const year = a.getFullYear()
-		const monthNum = a.getMonth() + 1
+		const monthNum = a.getMonth() + 1 // jan is 0, feb is 1, etc
 		const month = months[monthNum]
-		const dateNum = a.getDate()
+		const dateNum = a.getDate()  // 1st of the month is 1
 		let datePadded: string | number = dateNum
 		let monthPadded: string | number = monthNum
-		if (datePadded < 9) datePadded = '0' + dateNum.toString()
-		if (monthPadded < 9) monthPadded = '0' + monthNum.toString()
+		if (datePadded < 10) datePadded = '0' + dateNum.toString()
+		if (monthPadded < 10) monthPadded = '0' + monthNum.toString()
 		switch (outputFormat) {
 			case 'input':
 				return year + '-' + monthPadded + '-' + datePadded

@@ -70,11 +70,6 @@ form .error {
 	font-size: 0.8em;
 }
 
-label .sf {
-	float: right;
-	padding-left: 1em;
-}
-
 .ta-right {
 	text-align: right;
 }
@@ -94,15 +89,14 @@ sub {
 sup {
 	font-size: 0.7em;
 }
-.flnone,
-input.flnone {
-	float: none;
-}
 .d-inline {
 	display: inline;
 }
 .dblock {
 	display: block;
+}
+.dflex {
+	display: flex;
 }
 .dnone,
 input[type='submit'].dnone {
@@ -121,7 +115,4 @@ input[type='submit'].dnone {
 }
 .wm6 {
 	max-width: 6rem;
-}
-.fright {
-	float: right;
 }

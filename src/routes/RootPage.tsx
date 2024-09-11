@@ -1,3 +1,4 @@
+//TODO: when making an account on an emailaddress that already exists, send an email to that address, need to figure out text for that
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useCallback } from 'react'
 import { localStorageKey } from '../../utils/supabase'
@@ -6,33 +7,27 @@ import { AppContext } from '../App'
 import { getUrlParamVal } from '../Helpers'
 import { supabase } from '../../utils/supabase'
 
+const url: string = window.location.href
+const accessToken: string = getUrlParamVal(url, 'access_token', true)
+const refreshToken: string = getUrlParamVal(url, 'refresh_token', true)
+
 const RootPage = () => {
-	const url: string = window.location.href
+	const { setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
+	const checkApiErrorCallback = useCallback(function checkApiError(): boolean {
+		if (getUrlParamVal(url, 'error', true)) return true
+		return false
+	}, [])
 
-	const checkApiErrorCallback = useCallback(
-		function checkApiError(): boolean {
-			if (getUrlParamVal(url, 'error', true)) return true
-			return false
-		},
-		[url]
-	)
+	const apiErrorsCallback = useCallback(function apiErrors(): ApiError {
+		const apiErr: ApiError = {
+			error: getUrlParamVal(url, 'error', true),
+			error_code: getUrlParamVal(url, 'error_code', true),
+			error_description: getUrlParamVal(url, 'error_description', true),
+		}
+		return apiErr
+	}, [])
 
-	const apiErrorsCallback = useCallback(
-		function apiErrors(): ApiError {
-			const apiErr: ApiError = {
-				error: getUrlParamVal(url, 'error', true),
-				error_code: getUrlParamVal(url, 'error_code', true),
-				error_description: getUrlParamVal(url, 'error_description', true),
-			}
-			return apiErr
-		},
-		[url]
-	)
-
-	async function loginwithtoken() {
-		const accessToken = getUrlParamVal(url, 'access_token', true)
-		const refreshToken = getUrlParamVal(url, 'refresh_token', true)
-
+	async function loginwithtoken(accessToken: string, refreshToken: string) {
 		const { error } = await supabase.auth.setSession({
 			// data,error
 			access_token: accessToken,
@@ -42,7 +37,7 @@ const RootPage = () => {
 			console.log('Error logging in with token:', error.message)
 		}
 	}
-	loginwithtoken()
+	if (accessToken !== '' && refreshToken !== '') loginwithtoken(accessToken, refreshToken)
 
 	const { setUsermail, setUserIsLoggedIn, userIsLoggedIn } = useContext(AppContext)
 	const navigate = useNavigate()
@@ -58,19 +53,19 @@ const RootPage = () => {
 		}
 		if (!checkApiErrorCallback()) {
 			if (loggedin) navigateTo = '/dashboard'
-			else navigateTo = '/account/login'
-			if (getUrlParamVal(url, 'type') === 'recovery') navigateTo = '/auth/resetpassword'
-		} else {
-			navigateTo = '/error?error_description=' + apiErrorsCallback().error_description
-		}
+			else {
+				navigateTo = '/account/login'
+				if (getUrlParamVal(url, 'type') === 'recovery') navigateTo = '/auth/resetpassword'
+			}
+		} else navigateTo = '/error?error_description=' + apiErrorsCallback().error_description
+
 		if (loggedin) {
 			setUsermail(userInLs.user.email)
+			setPopupNotification('Logged in, redirecting')
+			setPopupNotificationShow(true)
 			navigate(navigateTo)
 		} else {
-			if (userIsLoggedIn) {
-				console.log('userIsLoggedIn jazekers')
-				setUserIsLoggedIn(true)
-			}
+			if (userIsLoggedIn) setUserIsLoggedIn(true)
 			setTimeout(() => {
 				if (getUrlParamVal(url, 'type') === 'recover') navigateTo = '/auth/resetpassword'
 			}, 1500)
@@ -83,8 +78,9 @@ const RootPage = () => {
 		apiErrorsCallback,
 		checkApiErrorCallback,
 		setUserIsLoggedIn,
-		url,
 		userIsLoggedIn,
+		setPopupNotification,
+		setPopupNotificationShow,
 	])
 
 	return (

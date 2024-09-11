@@ -13,7 +13,7 @@ export default function SavedItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} currentPage="dashboard" key={book.id} />
+				return <BookSummary book={book} currentPage="dashboard" key={`deck_saved_books${book.id}`} />
 			})
 		}
 		return (
@@ -21,7 +21,11 @@ export default function SavedItems() {
 				<div className="deck-container">
 					{booksarr.slice(-6).map((book: Book, index: number) => {
 						return (
-							<article className="book-cover" key={book.id} style={{ zIndex: 10 - index }}>
+							<article 
+							className="book-cover" 
+							key={`deck_saved_books${book.id}`} 
+							style={{ zIndex: `10 - ${index}` }}
+							>
 								<img src={getBookCover(book.cover, 'L')} />
 							</article>
 						)

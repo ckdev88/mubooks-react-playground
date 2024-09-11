@@ -2,20 +2,26 @@
 	margin: 1rem;
 	padding: 0.75rem;
 	background-color: #f4f1ea;
-	background-color: hsl(42, 31%, 97%);
-	/* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
+	background-color: hsl(42, 31%, 97%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
 }
 .card header {
 	font-weight: bold;
 	font-size: 1.4rem;
 	margin-bottom: 1rem;
 	width: 100%;
+	display:flex;
+	justify-content: space-between;
 }
+.card header div {
+	font-size: inherit;
+	margin: 0;
+}
+
 .card .form-notification {
 	margin-bottom: 1rem;
 	display: block;
+	font-size: 0.9em;
 }
-
 .card footer {
 	display: flex;
 	justify-content: space-between;
@@ -29,8 +35,7 @@
 	perspective: 500px;
 	margin: 0 auto;
 	background: #f4f1ea;
-	background: hsl(42, 31%, 91%);
-	/* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
+	background: hsl(42, 31%, 91%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
 	padding: 2px;
 	overflow: hidden;
 }

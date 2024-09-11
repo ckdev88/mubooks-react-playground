@@ -5,7 +5,7 @@ import { useState, useContext } from 'react'
 import { AppContext } from '../../App'
 
 const RecoverCard = () => {
-	const { setUsermail } = useContext(AppContext)
+	const { setUsermail, userIsLoggedIn } = useContext(AppContext)
 	const [error, setError] = useState('')
 	const navigate = useNavigate()
 	const { login } = useCardRotate()
@@ -24,7 +24,8 @@ const RecoverCard = () => {
 		else {
 			setUsermail(email)
 			setIsLoading(false)
-			navigate('/account/forgotpassword')
+			if (userIsLoggedIn) navigate('/dashboard')
+			else navigate('/account/forgotpassword')
 		}
 	}
 
@@ -32,9 +33,11 @@ const RecoverCard = () => {
 		<>
 			<article className="card" id="card-recover">
 				<header>
+					<div>
+						Forgot your password?
+						<sub>Don't worry. Let's reset it.</sub>
+					</div>
 					<img src="/img/recover-icon.png" width="82" height="82" alt="" className="recover-icon" />
-					Forgot your password?
-					<sub>Don't worry. Let's reset it.</sub>
 				</header>
 				<main>
 					<form onSubmit={processRecoverForm}>

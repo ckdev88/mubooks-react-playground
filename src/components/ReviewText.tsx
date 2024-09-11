@@ -3,9 +3,9 @@ import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 
-const ReviewText = (book: Book, review_text: Book['review_text']) => {
+const ReviewText = ({ book_id, book_review_text }: { book_id: Book['id']; book_review_text: Book['review_text'] }) => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
-	const [reviewText, setReviewText] = useState<Book['review_text']>(book.review_text)
+	const [reviewText, setReviewText] = useState<Book['review_text']>(book_review_text)
 	const [showForm, setShowForm] = useState<boolean>(false)
 	const [showReviewText, setShowReviewText] = useState<boolean>(true)
 	const [isModding, setIsModding] = useState<boolean>(false)
@@ -21,8 +21,8 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 		}
 	}
 	useEffect(() => {
-		if (book.review_text === undefined || book.review_text.length < 1) setShowForm(true)
-	}, [book.review_text])
+		if (book_review_text === undefined || book_review_text.length < 1) setShowForm(true)
+	}, [book_review_text])
 
 	// mod db
 	// TODO: move this function to generic helper location
@@ -44,24 +44,24 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 	const updateReviewTextCallback = useCallback(
 		async function updateReviewText() {
 			for (let i = 0; i < userMyBooks.length; i++) {
-				if (userMyBooks[i].id === book.id) {
+				if (userMyBooks[i].id === book_id) {
 					userMyBooks[i].review_text = reviewText
 					break
 				}
 			}
 			updateMyBooksCallback(userMyBooks)
 		},
-		[userMyBooks, book.id, reviewText, updateMyBooksCallback]
+		[userMyBooks, book_id, reviewText, updateMyBooksCallback]
 	)
 	// /mod db
 	useEffect(() => {
-		if (review_text !== reviewText) {
+		if (book_review_text !== reviewText) {
 			if (isModding) {
 				updateReviewTextCallback()
 				setIsModding(false)
 			}
 		}
-	}, [isModding, setUserMyBooks, updateReviewTextCallback, book.id, review_text, reviewText])
+	}, [isModding, setUserMyBooks, updateReviewTextCallback, book_id, book_review_text, reviewText])
 
 	const activateForm = () => {
 		setShowForm(true)
@@ -77,11 +77,11 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 
 	useEffect(() => {
 		if (isModding) {
-			document.getElementById('review_text' + book.id)?.focus()
+			document.getElementById('review_text' + book_id)?.focus()
 			if (reviewText !== undefined)
-				document.getElementById('review_text' + book.id)?.setAttribute('value', reviewText)
+				document.getElementById('review_text' + book_id)?.setAttribute('value', reviewText)
 		}
-	}, [showForm, reviewText, book.id, isModding])
+	}, [showForm, reviewText, book_id, isModding])
 
 	return (
 		<div className="review-text">
@@ -90,7 +90,7 @@ const ReviewText = (book: Book, review_text: Book['review_text']) => {
 					<form className="single-small-form clr" onSubmit={processForm}>
 						<input
 							name="review_text"
-							id={'review_text' + book.id}
+							id={'review_text' + book_id}
 							type="text"
 							placeholder="Add a review..."
 						/>

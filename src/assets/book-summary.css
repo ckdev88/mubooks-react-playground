@@ -9,14 +9,13 @@
 	list-style: none;
 	padding: 0 0 1rem;
 	margin: 0;
+	transition: padding 0.18s linear, background-color 0.18s linear;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .book-summary hr {
 	margin-top: 1rem;
-}
-
-.book-summary {
-	transition: padding 0.18s linear, background-color 0.18s linear;
 }
 
 .book-summary .calendar-hidden {
@@ -25,7 +24,9 @@
 	height: 0;
 	opacity: 0;
 }
-
+.book-summary .calendar-hidden + .btn-text {
+	margin-top: -1rem;
+}
 .search .book-summary.saved {
 	padding: 0.5rem;
 	background-color: hsl(325, 55%, 93%);
@@ -55,6 +56,7 @@
 .book-summary .icon-heart + h2 {
 	padding-right: 1.25rem;
 }
+
 .book-summary h2 sub {
 	font-size: 0.8em;
 	font-weight: normal;
@@ -70,24 +72,8 @@
 	height: auto;
 	margin: 0 0.75rem 0.75rem 0;
 	min-width: 9rem;
-	float: left;
 }
 
-.book-summary .article-main {
-	float: left;
-	max-width: calc(100vw - 9.75rem);
-	width: calc(100vw - 7.75rem);
-	@media screen and (max-width: 414px) {
-		max-width: calc(100vw - 8.75rem);
-	}
-	@media screen and (max-width: 399.98px) {
-		max-width: calc(100vw - 7.75rem);
-	}
-	@media screen and (max-width: 379.98px) {
-		width: calc(100vw - 6.75rem);
-		max-width: calc(100vw - 7.75rem);
-	}
-}
 .book-summary .article-main .icon-heart {
 	position: absolute;
 	top: 0;
@@ -103,25 +89,30 @@
 .book-summary .article-main button.modify {
 	margin-left: 0.5em;
 }
+.book-summary .cover,
+.book-summary .article-main {
+	flex: 1 1 30%;
+	@media screen and (max-width: 399.98px) {
+		flex: 1 1 30%;
+	}
+}
 
-.book-summary aside {
+.book-summary .cover {
 	width: 7rem;
 	min-width: 7rem;
-}
-@media screen and (max-width: 399.98px) {
-	.book-summary aside {
-		width: 6rem;
-		min-width: 6rem;
+	max-width: 8rem;
+	@media screen and (max-width: 399.98px) {
+		width: 100%;
+		min-width: 0;
+		max-width: 6rem; /* same width as review stars */
 	}
 }
 
 .book-summary footer {
-	clear: both;
+	flex-basis: 100%;
 }
 
 .book-summary .cover img {
-	display: block;
-	width: 100%;
 	height: auto;
 	max-width: 100%;
 	border-radius: 0.4rem;
@@ -179,18 +170,16 @@
 	padding-bottom: 1rem;
 }
 .single-small-form {
-	margin-top: 0.25rem;
+	margin: 0.25rem 0;
+	display: flex;
+	justify-content: space-between;
 }
 .single-small-form input {
-	float: left;
 	padding: 0.3rem 1.8rem 0.3rem 0.3rem;
 	border-style: dashed;
 	border-width: 2px;
 	border-radius: 0.4rem;
 	margin-bottom: 0;
-}
-#booksoverview-filter-sort .single-small-form input {
-	float: none;
 }
 .single-small-form input:focus,
 .single-small-form input:active {
@@ -211,9 +200,8 @@
 	list-style-type: none;
 }
 .tropes li {
-	display: block;
-	float: left;
-	margin: 0 0.25rem 0.25rem 0;
+	display: inline-block;
+	margin: 0 0.35rem 0.35rem 0;
 	padding: 0.2rem 0.4rem;
 }
 
@@ -227,7 +215,7 @@
 }
 .review-rates > div {
 	width: 6rem;
-	display: block;
+	display: flex;
 	margin: 0 auto;
 	padding-right: 0.1rem;
 	margin-top: 0.5rem;
@@ -259,6 +247,7 @@
 }
 .book-summary .article-main {
 	margin-bottom: 0.75rem;
+	width: 100%;
 }
 .book-summary .review-text {
 	margin-bottom: 0.25rem;

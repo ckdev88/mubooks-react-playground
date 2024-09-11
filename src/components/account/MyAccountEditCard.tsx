@@ -48,8 +48,10 @@ export default function MyAccountEditCard() {
 		<>
 			<div className="card">
 				<header>
-					Edit my account
-					<sub>Change your preferences</sub>
+					<div>
+						Edit my account
+						<sub>Change your preferences</sub>
+					</div>
 				</header>
 
 				<main>

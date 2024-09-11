@@ -2,13 +2,25 @@ import { useContext, useEffect, useState, useCallback } from 'react'
 import { supabase } from '../../utils/supabase'
 import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
-const BookModifyPages = (book: Book) => {
+import { IsModdingPagesContext } from './BookPages'
+const BookModifyPages = ({
+	book_id,
+	book_number_of_pages_median,
+}: {
+	book_id: Book['id']
+	book_number_of_pages_median: Book['number_of_pages_median']
+}) => {
+	const { setIsModdingPages } = useContext(IsModdingPagesContext)
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState(false)
-	const inputid = 'modifyPagesToBookId' + book.id
+	const inputid = 'modifyPagesToBookId' + book_id
 
-	const [bookPages, setBookPages] = useState<number>(book.number_of_pages_median)
+	const [bookPages, setBookPages] = useState<number>(book_number_of_pages_median)
 	const [isModding, setIsModding] = useState<boolean>(false)
+	useEffect(() => {
+		if (showForm) setIsModdingPages(true)
+		else setIsModdingPages(false)
+	}, [setIsModdingPages, showForm])
 
 	// TODO: move this function to generic helper location
 	const updateMyBooksCallback = useCallback(
@@ -32,7 +44,7 @@ const BookModifyPages = (book: Book) => {
 			if (userMyBooks.length < 1) return
 
 			for (let i = 0; i < userMyBooks.length; i++) {
-				if (userMyBooks[i].id === book.id) {
+				if (userMyBooks[i].id === book_id) {
 					if (bookPages !== userMyBooks[i].number_of_pages_median)
 						userMyBooks[i].number_of_pages_median = bookPages
 					break
@@ -40,7 +52,7 @@ const BookModifyPages = (book: Book) => {
 			}
 			updateMyBooksCallback(userMyBooks)
 		},
-		[userMyBooks, book.id, bookPages, updateMyBooksCallback]
+		[userMyBooks, book_id, bookPages, updateMyBooksCallback]
 	)
 
 	function processPagesModifyForm(e: React.FormEvent<HTMLFormElement>) {
@@ -58,42 +70,48 @@ const BookModifyPages = (book: Book) => {
 
 	useEffect(() => {
 		if (showForm) document.getElementById(inputid)?.focus()
-		if (bookPages !== book.number_of_pages_median) {
-			setBookPages(book.number_of_pages_median)
+		if (bookPages !== book_number_of_pages_median) {
+			setBookPages(book_number_of_pages_median)
 			if (isModding) {
 				updatePagesCallback()
-				setIsModding(false)
+				setIsModdingPages(false)
 				setShowForm(false)
 			}
 		}
-	}, [showForm, bookPages, isModding, updatePagesCallback, book, inputid])
+	}, [
+		showForm,
+		bookPages,
+		isModding,
+		updatePagesCallback,
+		book_id,
+		book_number_of_pages_median,
+		inputid,
+		setIsModdingPages,
+	])
 
 	return (
-		<span className={book.number_of_pages_median > 0 ? '' : 'dnone'}>
-			&nbsp;
-			<button className="btn-icon" onClick={() => setShowForm(!showForm)}>
-				<span className="icon icon-dots"></span>
-			</button>
-			{/*
-	 			<button className="btn-text" onClick={() => setShowForm(!showForm)}>
-					...
-				</button>
-		    */}
-			<div className={showForm ? 'dblock' : 'dnone'}>
-				<form onSubmit={processPagesModifyForm} className="single-small-form wm6 diblock">
-					{book.number_of_pages_median > 0 && (
-						<>
-							<input
-								type="number"
-								id={inputid}
-								name="pagesAmount"
-								defaultValue={book.number_of_pages_median}
-							/>
-						</>
-					)}
+		<span className={book_number_of_pages_median > 0 ? 'dflex' : 'dnone'} style={{ alignItems: 'center' }}>
+			<div
+				className={showForm ? 'dflex' : 'dnone'}
+				style={{ alignContent: 'center', alignItems: 'center', position: 'relative' }}
+			>
+				<form
+					onSubmit={processPagesModifyForm}
+					className="single-small-form wm6 "
+					style={{ marginRight: '.3rem' }}
+				>
+					<input
+						type="number"
+						id={inputid}
+						name="pagesAmount"
+						defaultValue={book_number_of_pages_median > 0 ? book_number_of_pages_median : 0}
+					/>
 					<button type="submit" className="btn-submit-inside-caret-right"></button>
 				</form>
 			</div>
+			<button className="btn-icon" onClick={() => setShowForm(!showForm)}>
+				<span className="icon icon-pencil"></span>
+			</button>
 		</span>
 	)
 }

@@ -9,7 +9,7 @@ const currentPage = 'tropes'
 
 const TropesPage = () => {
 	const { setNavTitle } = useContext(AppContext)
-	const [showMore, setShowMore] = useState<boolean>(false)
+	const [isShowingTropesInMyBooks, setIsShowingTropesInMyBooks] = useState<boolean>(false)
 
 	useEffect(() => {
 		setNavTitle(pageTitle)
@@ -20,11 +20,21 @@ const TropesPage = () => {
 			<h1>My Tropes</h1>
 			<TropesLiked />
 			<TropesDisliked />
-<hr />
-			<button className="btn btn-icon wauto" onClick={() => setShowMore(!showMore)}>
-				<span className="icon icon-dots"></span>
+			<br />
+			<hr />
+			<br />
+
+			<button
+				className={
+					isShowingTropesInMyBooks
+						? 'btn-text caret-right-toggle active wauto notext'
+						: 'btn-text caret-right-toggle wauto'
+				}
+				onClick={() => setIsShowingTropesInMyBooks(!isShowingTropesInMyBooks)}
+			>
+				{isShowingTropesInMyBooks ? '' : 'Show more'}
 			</button>
-			{showMore && <TropesInMyBooks page={currentPage} />}
+			{isShowingTropesInMyBooks && <TropesInMyBooks page={currentPage} />}
 		</>
 	)
 }

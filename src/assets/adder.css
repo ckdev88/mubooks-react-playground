@@ -39,10 +39,11 @@
 	justify-content: left;
 	display: flex;
 	align-items: center;
-	font-size:.9rem;
+	font-size: 0.9rem;
 }
-.adder  button.btn-icon{
-	display:block;}
+.adder button.btn-icon {
+	display: block;
+}
 
 .adder .toadd:hover,
 .adder .deck:has(a):hover {
@@ -51,7 +52,7 @@
 .adder .deck:has(a) {
 	background: transparent;
 	border-radius: 0.5rem;
-	transition: background-color 0.2s ease-in-out;
+	transition: background-color 0.18s ease-in-out;
 }
 .adder .deck:has(a):hover {
 	background: white;
@@ -114,7 +115,7 @@
 
 .deck-container .book-cover {
 	display: block;
-	float: left;
+	float: left; /* TODO: check if these floats work in native apps */
 	padding: 0;
 	border-radius: 0.5rem;
 	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);

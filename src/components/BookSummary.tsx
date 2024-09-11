@@ -7,14 +7,13 @@ import ReactMarkdown from 'react-markdown'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
 import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
-import ReviewTropes from './ReviewTropes'
 import ReviewQuote from './ReviewQuote'
 import SearchTropes from './SearchTropes'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
-import BookAddPages from './BookAddPages'
-import BookModifyPages from './BookModifyPages'
+import SummaryReviews from './SummaryReviews'
+import BookPages from './BookPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -57,15 +56,44 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					}
 					alt=""
 				/>
-				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewRating(book)}
+				{(currentPage === 'finished' || currentPage === 'favorites') && (
+					<ReviewRating
+						book_id={book.id}
+						book_rate_stars={book.rate_stars}
+						book_rate_spice={book.rate_spice}
+						book_title_short={book.title_short}
+					/>
+				)}
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
 					{currentPage !== 'search' ? (
 						book.list === 4 ? (
-							<>{RemoveBookFromXButton(book, book.list, true)}</>
+							<RemoveBookFromXButton
+								book_id={book.id}
+								book_title_short={book.title_short}
+								book_list={book.list}
+								targetList={book.list}
+								icon={true}
+							/>
 						) : (
-							book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
+							book.list === 3 && (
+								<AddBookToXButton
+									book_id={book.id}
+									book_list={book.list}
+									book_title={book.title}
+									book_title_short={book.title_short}
+									book_author_key={book.author_key}
+									book_author_name={book.author_name}
+									book_cover={book.cover}
+									book_cover_edition_key={book.cover_edition_key}
+									book_first_publish_year={book.first_publish_year}
+									book_img={book.img}
+									book_number_of_pages_median={book.number_of_pages_median}
+									targetList={4}
+									icon={true}
+								/>
+							)
 						)
 					) : (
 						''
@@ -73,37 +101,29 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					<h2>
 						{book.title_short}{' '}
 						{book.first_publish_year && currentPage === 'search' && <sup>({book.first_publish_year})</sup>}
-						<sub>{BookAuthorList(book)}</sub>
+						<sub>
+							<BookAuthorList book_id={book.id} book_author_name={book.author_name} />
+						</sub>
 					</h2>
 
-					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
-					{currentPage !== 'finished' && currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
-						<div className="pt0 mt0">
-							<div
-								className={
-									!book.number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'
-								}
-							>
-								{BookAddPages(book)}
-							</div>
-							<span className={book.number_of_pages_median === 0 ? 'dnone' : 'diblock'}>
-								{book.number_of_pages_median} pages
-							</span>
-							{currentPage !== 'dashboard' && currentPage !== 'wishlist' && <> {BookModifyPages(book)}</>}
-						</div>
+					{currentPage === 'quotedbooks' && (
+						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+					)}
+					{currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
+						<BookPages
+							book_id={book.id}
+							book_number_of_pages_median={book.number_of_pages_median}
+							currentPage={currentPage}
+						/>
 					)}
 				</header>
-				<main>
-					<div className="reviews">
-						{(currentPage === 'finished' || currentPage === 'favorites') &&
-							book.review_tropes &&
-							ReviewTropes(book, book?.review_tropes)}
-					</div>
+				<div className="summary-actions">
+					<SummaryReviews currentPage={currentPage} book={book} />
 					{book.list > 1 && currentPage !== 'search' && currentPage !== 'quotedbooks' && (
 						<BookStartedFinished
 							date_started={book.date_reading}
 							date_finished={book.date_finished}
-							bookid={book.id}
+							book_id={book.id}
 							list={book.list}
 						/>
 					)}
@@ -156,47 +176,151 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									showHiddenMarks || currentPage === 'reading' ? 'marks dblock' : 'marks dnone'
 								}
 							>
-								{!book.list && AddBookToXButton(book, 1)}
-								{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
-									AddBookToXButton(book, 2)}
+								{!book.list && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={1}
+										icon={true}
+									/>
+								)}
+								{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={2}
+										icon={true}
+									/>
+								)}
 								{(book.list === 2 ||
-									(currentPage === 'search' && book.list !== 3 && book.list !== 4)) &&
-									AddBookToXButton(book, 3)}
-								{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) &&
-									AddBookToXButton(book, 4)}
-								{book.list === 1 && RemoveBookFromXButton(book, 1)}
-								{book.list === 2 && RemoveBookFromXButton(book, 2)}
-								{(book.list === 3 || book.list === 4) && RemoveBookFromXButton(book, 3)}
-								{book.list === 4 && RemoveBookFromXButton(book, 4)}
+									(currentPage === 'search' && book.list !== 3 && book.list !== 4)) && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={3}
+										icon={true}
+									/>
+								)}
+								{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={4}
+										icon={true}
+									/>
+								)}
+								{book.list === 1 && (
+									<RemoveBookFromXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title_short={book.title_short}
+										targetList={1}
+										icon={true}
+									/>
+								)}
+								{book.list === 2 && (
+									<RemoveBookFromXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title_short={book.title_short}
+										targetList={book.list}
+										icon={true}
+									/>
+								)}
+								{(book.list === 3 || book.list === 4) && (
+									<RemoveBookFromXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title_short={book.title_short}
+										targetList={3}
+										icon={true}
+									/>
+								)}
+								{book.list === 4 && (
+									<RemoveBookFromXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title_short={book.title_short}
+										targetList={4}
+										icon={true}
+									/>
+								)}
 							</div>
 						</>
 					)}
-				</main>
+				</div>
 			</div>
 			<footer>
-				{(currentPage === 'finished' || currentPage === 'favorites') && ReviewText(book, book.review_text)}
-				{(currentPage === 'finished' || currentPage === 'favorites') &&
-					ReviewQuote(book, book.review_fav_quote)}
-				{currentPage !== 'finished' && currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
-					<>
-						{currentPage === 'search' && book.subject && SearchTropes(book.id, book.subject)}
-						<button
-							className={
-								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
-							}
-							onClick={toggleSynopsis}
-						>
-							{isLoading && 'Loading...'}
-							{!isLoading && !isShowingSynopsis && 'Synopsis'}
-							{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
-						</button>
-						<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-							<div className="synopsis">
-								<ReactMarkdown>{synopsis}</ReactMarkdown>
-							</div>
-						</div>
-					</>
+				{(currentPage === 'finished' || currentPage === 'favorites') && (
+					<ReviewText book_id={book.id} book_review_text={book.review_text} />
 				)}
+				{(currentPage === 'finished' || currentPage === 'favorites') && (
+					<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+				)}
+				{currentPage !== 'finished' &&
+					currentPage !== 'favorites' &&
+					currentPage !== 'quotedbooks' &&
+					currentPage !== 'dashboard' && (
+						<>
+							{currentPage === 'search' && book.subject && (
+								<SearchTropes book_id={book.id} tropes={book.subject} />
+							)}
+							<button
+								className={
+									isShowingSynopsis
+										? 'btn-text caret-right-toggle active'
+										: 'btn-text caret-right-toggle'
+								}
+								onClick={toggleSynopsis}
+							>
+								{isLoading && 'Loading...'}
+								{!isLoading && !isShowingSynopsis && 'Synopsis'}
+								{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
+							</button>
+							<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
+								<div className="synopsis">
+									<br />
+									<ReactMarkdown>{synopsis}</ReactMarkdown>
+								</div>
+							</div>
+						</>
+					)}
 				<hr />
 			</footer>
 		</article>

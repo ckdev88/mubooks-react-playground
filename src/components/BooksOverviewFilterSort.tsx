@@ -14,7 +14,7 @@ const BooksOverviewFilterSort = () => {
 
 	return (
 		<div id="booksoverview-filter-sort">
-			<form className="single-small-form ">
+			<form className="single-small-form">
 				<input
 					type="text"
 					onChange={updateLocalBookFilter}

@@ -1,13 +1,18 @@
-// DOING: design & copywrite password reset email
-// TODO: check global state of auth
-
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
+
+const pageTitle = 'Check Mail Password Page'
+// const currentPage = 'favorites'
 
 const CheckMailPasswordPage = () => {
-	const { usermail, userIsLoggedIn } = useContext(AppContext)
+	const { usermail, userIsLoggedIn, setNavTitle } = useContext(AppContext)
 	const recipientAddress = usermail
+
+	useEffect(() => {
+		setNavTitle(pageTitle)
+		if (userIsLoggedIn) redirect('/dashboard')
+	}, [setNavTitle, userIsLoggedIn])
 
 	if (usermail !== '' && !userIsLoggedIn) {
 		return (
@@ -32,7 +37,7 @@ const CheckMailPasswordPage = () => {
 				</p>
 			</>
 		)
-	} else
+	} else {
 		return (
 			<>
 				<h1>New here?</h1>
@@ -43,5 +48,6 @@ const CheckMailPasswordPage = () => {
 				</p>
 			</>
 		)
+	}
 }
 export default CheckMailPasswordPage

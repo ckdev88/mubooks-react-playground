@@ -3,7 +3,7 @@ import { supabase } from '../../utils/supabase'
 import { AppContext } from '../App'
 import { getOlPagesMedian } from '../Helpers'
 
-const BookFetchPages = ({ book }: { book: Book }) => {
+const BookFetchPages = ({ book_id }: { book_id: Book['id'] }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	const [onLoad, setOnLoad] = useState(true)
 
@@ -33,7 +33,7 @@ const BookFetchPages = ({ book }: { book: Book }) => {
 			const newBookPages = originalNumberOfPagesMedian
 
 			for (let i = 0; i < userMyBooks.length; i++) {
-				if (userMyBooks[i].id === book.id) {
+				if (userMyBooks[i].id === book_id) {
 					if (newBookPages !== userMyBooks[i].number_of_pages_median && newBookPages > 0) {
 						userMyBooks[i].number_of_pages_median = newBookPages
 					}
@@ -42,18 +42,18 @@ const BookFetchPages = ({ book }: { book: Book }) => {
 			}
 			updateMyBooksCallback(userMyBooks)
 		},
-		[userMyBooks, book.id, updateMyBooksCallback, originalNumberOfPagesMedian]
+		[userMyBooks, book_id, updateMyBooksCallback, originalNumberOfPagesMedian]
 	)
 
 	useEffect(() => {
-		const getOrgPagesMed = async () => {
-			const originalPagesMedian = await getOlPagesMedian(book.id)
+		const getOrgPagesMed = async (): Promise<number> => {
+			const originalPagesMedian = await getOlPagesMedian(book_id)
 			return originalPagesMedian
 		}
 		if (onLoad) {
 			// on load to populate 'guess'-number
-			getOrgPagesMed().then((res: number) => {
-				setOriginalNumberOfPagesMedian(res)
+			getOrgPagesMed().then((res) => {
+				if (res) setOriginalNumberOfPagesMedian(res)
 			})
 			setOnLoad(!onLoad)
 		}
@@ -63,12 +63,12 @@ const BookFetchPages = ({ book }: { book: Book }) => {
 				setPushOrigin(false)
 			}
 		}
-	}, [onLoad, originalNumberOfPagesMedian, pushOrigin, book.id, updatePagesCallback])
+	}, [onLoad, originalNumberOfPagesMedian, pushOrigin, book_id, updatePagesCallback])
 
 	return (
 		<>
 			{originalNumberOfPagesMedian > 0 && (
-				<button className="btn-text fright mt05 ml05" onClick={() => setPushOrigin(true)}>
+				<button className="btn-text mt05 ml05" onClick={() => setPushOrigin(true)}>
 					{' '}
 					guess: {originalNumberOfPagesMedian}{' '}
 				</button>
