@@ -4,12 +4,56 @@ import getListName from '../functions/getListName'
 import { convertDate, timestampConverter } from '../helpers/convertDate'
 import { useContext } from 'react'
 
-const AddBookToXButton = (book: Book, targetList: BookList, icon: boolean = false) => {
+const AddBookToXButton = ({
+	book_id,
+	book_list,
+	book_title,
+	book_title_short,
+	book_author_key,
+	book_author_name,
+	book_cover,
+	book_cover_edition_key,
+	book_first_publish_year,
+	book_img,
+	book_number_of_pages_median,
+	targetList,
+	icon = false,
+}: {
+	book_id: Book['id']
+	book_list: Book['list']
+	book_title: Book['title']
+	book_title_short: Book['title_short']
+	book_author_key: Book['author_key']
+	book_author_name: Book['author_name']
+	book_cover: Book['cover']
+	book_cover_edition_key: Book['cover_edition_key']
+	book_first_publish_year: Book['first_publish_year']
+	book_img: Book['img']
+	book_number_of_pages_median: Book['number_of_pages_median']
+	targetList: BookList
+	icon: boolean
+}) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
-	function MyBooksAdd(book: Book, list = book.list): Books {
-		if (book.title.length > 55) book.title_short = book.title.slice(0, 55) + '...'
-		else book.title_short = book.title
+	// TODO: deze wordt vaak geladen in lange lijst, data flow beperken wanneer niet wordt gebruikt?
+
+	const book = {
+		id: book_id,
+		list: book_list,
+		title: book_title,
+		title_short: book_title_short,
+		author_key: book_author_key,
+		author_name: book_author_name,
+		cover: book_cover,
+		cover_edition_key: book_cover_edition_key,
+		first_publish_year: book_first_publish_year,
+		img: book_img,
+		number_of_pages_median: book_number_of_pages_median,
+	}
+
+	function MyBooksAdd(list = book_list): Books {
+		if (book_title.length > 55) book_title_short = book_title.slice(0, 55) + '...'
+		else book_title_short = book_title
 		let myBooks = userMyBooks
 
 		const date_now = Number(convertDate(Date.now(), 'digit'))
@@ -20,24 +64,24 @@ const AddBookToXButton = (book: Book, targetList: BookList, icon: boolean = fals
 		if (myBooks === null) myBooks = []
 
 		myBooks.push({
-			author_key: book.author_key,
-			author_name: book.author_name,
-			cover: book.cover,
-			cover_edition_key: book.cover_edition_key,
+			author_key: book_author_key,
+			author_name: book_author_name,
+			cover: book_cover,
+			cover_edition_key: book_cover_edition_key,
 			date_finished: date_finished,
 			date_reading: date_reading,
-			first_publish_year: book.first_publish_year,
-			id: book.id,
+			first_publish_year: book_first_publish_year,
+			id: book_id,
 			img: book.img,
 			list: list,
-			number_of_pages_median: book.number_of_pages_median,
+			number_of_pages_median: book_number_of_pages_median,
 			rate_spice: 0,
 			rate_stars: 0,
 			review_fav_quote: '',
 			review_text: '',
 			review_tropes: [],
-			title: book.title,
-			title_short: book.title_short,
+			title: book_title,
+			title_short: book_title_short,
 		})
 		return myBooks
 	}
@@ -52,44 +96,47 @@ const AddBookToXButton = (book: Book, targetList: BookList, icon: boolean = fals
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message
-		else msg = 'Added ' + book.title_short + ' to ' + getListName(targetList)
+		else msg = 'Added ' + book_title_short + ' to ' + getListName(targetList)
 		setPopupNotification(msg)
 	}
 
-	function AddBookToX(book: Book, targetList: BookList) {
+	function AddBookToX(targetList: BookList) {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = userMyBooks
 
 		let bookIsSaved = false
 		for (let i = 0; i < myBooks.length; i++) {
-			if (myBooks[i].id === book.id) {
+			if (myBooks[i].id === book_id) {
 				bookIsSaved = true
 				myBooks[i].list = targetList
 				if (targetList === 2) myBooks[i].date_reading = Number(timestampConverter(Date.now(), 'digit'))
 				if (targetList === 3) myBooks[i].date_finished = Number(timestampConverter(Date.now(), 'digit'))
+				console.log('reading to add',myBooks[i].date_reading)
+				console.log('finished to add',myBooks[i].date_finished)
 			}
 		}
 
 		let myBooksNew: Books
-		if (bookIsSaved === false) myBooksNew = MyBooksAdd(book, targetList)
+		if (bookIsSaved === false) myBooksNew = MyBooksAdd(targetList)
 		else myBooksNew = myBooks
 		MyBooksUpdate(myBooksNew)
 		return myBooksNew
 	}
 
 	function AddBookToXButtonAct() {
-		const newArr: Books = AddBookToX(book, targetList)
+		const newArr: Books = AddBookToX(targetList)
 		setUserMyBooks(newArr)
 	}
 
 	const iconClassName = 'icon icon-' + getListName(targetList)
 
-	if (icon && targetList === 4) return <span className="icon-heart inactive" onClick={AddBookToXButtonAct}></span>
+	if (icon && targetList === 4)
+		return <span className="icon-heart inactive" onClick={() => AddBookToXButtonAct()}></span>
 
 	return (
 		<div className="mark">
-			<button className="btn-text" onClick={AddBookToXButtonAct}>
+			<button className="btn-text" onClick={() => AddBookToXButtonAct()}>
 				<span className={iconClassName}></span>Add to {getListName(targetList)}
 			</button>
 		</div>

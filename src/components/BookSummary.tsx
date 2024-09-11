@@ -63,9 +63,31 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 				<header style={{ position: 'relative', width: '100%' }}>
 					{currentPage !== 'search' ? (
 						book.list === 4 ? (
-							<>{RemoveBookFromXButton(book, book.list, true)}</>
+							<RemoveBookFromXButton
+								book_id={book.id}
+								book_title_short={book.title_short}
+								book_list={book.list}
+								targetList={book.list}
+								icon={true}
+							/>
 						) : (
-							book.list === 3 && <>{AddBookToXButton(book, 4, true)}</>
+							book.list === 3 && (
+								<AddBookToXButton
+									book_id={book.id}
+									book_list={book.list}
+									book_title={book.title}
+									book_title_short={book.title_short}
+									book_author_key={book.author_key}
+									book_author_name={book.author_name}
+									book_cover={book.cover}
+									book_cover_edition_key={book.cover_edition_key}
+									book_first_publish_year={book.first_publish_year}
+									book_img={book.img}
+									book_number_of_pages_median={book.number_of_pages_median}
+									targetList={4}
+									icon={true}
+								/>
+							)
 						)
 					) : (
 						''
@@ -156,18 +178,75 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									showHiddenMarks || currentPage === 'reading' ? 'marks dblock' : 'marks dnone'
 								}
 							>
-								{!book.list && AddBookToXButton(book, 1)}
-								{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) &&
-									AddBookToXButton(book, 2)}
+								{!book.list && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={1}
+										icon={true}
+									/>
+								)}
+								{(book.list === 1 || (currentPage === 'search' && (book.list < 2 || !book.list))) && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={2}
+										icon={true}
+									/>
+								)}
 								{(book.list === 2 ||
-									(currentPage === 'search' && book.list !== 3 && book.list !== 4)) &&
-									AddBookToXButton(book, 3)}
-								{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) &&
-									AddBookToXButton(book, 4)}
-								{book.list === 1 && RemoveBookFromXButton(book, 1)}
-								{book.list === 2 && RemoveBookFromXButton(book, 2)}
-								{(book.list === 3 || book.list === 4) && RemoveBookFromXButton(book, 3)}
-								{book.list === 4 && RemoveBookFromXButton(book, 4)}
+									(currentPage === 'search' && book.list !== 3 && book.list !== 4)) && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={3}
+										icon={true}
+									/>
+								)}
+								{(book.list === 3 || (currentPage === 'search' && book.list !== 4)) && (
+									<AddBookToXButton
+										book_id={book.id}
+										book_list={book.list}
+										book_title={book.title}
+										book_title_short={book.title_short}
+										book_author_key={book.author_key}
+										book_author_name={book.author_name}
+										book_cover={book.cover}
+										book_cover_edition_key={book.cover_edition_key}
+										book_first_publish_year={book.first_publish_year}
+										book_img={book.img}
+										book_number_of_pages_median={book.number_of_pages_median}
+										targetList={4}
+										icon={true}
+									/>
+								)}
 							</div>
 						</>
 					)}
