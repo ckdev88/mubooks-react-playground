@@ -42,17 +42,19 @@ const ReadingPage = () => {
 						<>
 							No book titles found for <i>{localBookFilter}.</i>
 						</>
-					) : (
+					) : booksFiltered.length > 0 ? (
 						<>
-							Currently enjoying book(s):
+							Currently enjoying book(s):&nbsp;
 							{booksFiltered.length}
 						</>
+					) : (
+						<>Nothing, at the moment.</>
 					)}
+					&nbsp;
 				</sub>
 			</h1>
 			{!hasbooks && localBookFilter === '' && (
 				<>
-					<h4>Currently not reading anything.</h4>
 					<p>
 						Want to add a book to your reading list?
 						<br />
