@@ -1,7 +1,6 @@
 import { getBookCover } from '../Helpers'
 import { useState } from 'react'
 import AddBookToXButton from './AddBookToXButton'
-import BookAuthorList from './BookAuthorList'
 import BookStartedFinished from './BookStartedFinished'
 import ReactMarkdown from 'react-markdown'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
@@ -14,6 +13,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 import SummaryReviews from './SummaryReviews'
 import BookPages from './BookPages'
+import BookSummaryTitle from './BookSummaryTitle'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -98,14 +98,14 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					) : (
 						''
 					)}
-					<h2>
-						{book.title_short}{' '}
-						{book.first_publish_year && currentPage === 'search' && <sup>({book.first_publish_year})</sup>}
-						<sub>
-							<BookAuthorList book_id={book.id} book_author_name={book.author_name} />
-						</sub>
-					</h2>
 
+					<BookSummaryTitle
+						book_title_short={book.title_short}
+						book_first_publish_year={book.first_publish_year}
+						currentPage={currentPage}
+						book_author_name={book.author_name}
+						book_id={book.id}
+					/>
 					{currentPage === 'quotedbooks' && (
 						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
 					)}
