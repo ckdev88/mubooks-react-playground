@@ -65,9 +65,8 @@ const NavWrapper = () => {
 						display: 'flex',
 						flexDirection: 'column',
 						justifyContent: 'flex-start',
-						justifyItems: 'center',
 						alignContent: 'space-around',
-						alignItems: 'center',
+						alignItems: 'flex-start',
 						gap: '.25rem',
 					}}
 					className={nav0Expanded ? 'expanded nav-collapsable' : 'collapsed nav-collapsable'}
