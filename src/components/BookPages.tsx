@@ -16,7 +16,7 @@ const BookPages = ({
 	const [isModdingPages, setIsModdingPages] = useState<boolean>(false)
 
 	return (
-		<div className="pt0 mt0" style={{ display: 'flex' }}>
+		<div  style={{ display: 'flex' }}>
 			<IsModdingPagesContext.Provider value={{ isModdingPages, setIsModdingPages }}>
 				{isModdingPages ? (
 					<div className={!book_number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'}>
