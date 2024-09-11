@@ -32,12 +32,15 @@ async function getOlPagesMedian(id: string): Promise<number> {
 	return ret
 }
 
-function debounce<T extends (...args: []) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
-	let timeoutId: NodeJS.Timer
-	return function (this: object) {
-		const context = this || window
-		clearTimeout(timeoutId)
-		timeoutId = setTimeout(() => func.apply(context), delay)
+const debounce = <T extends unknown[]>(callback: (...args: T) => void, delay: number) => {
+	let timeoutTimer: ReturnType<typeof setTimeout>
+
+	return (...args: T) => {
+		clearTimeout(timeoutTimer)
+
+		timeoutTimer = setTimeout(() => {
+			callback(...args)
+		}, delay)
 	}
 }
 
