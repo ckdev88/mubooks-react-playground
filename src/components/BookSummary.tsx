@@ -13,8 +13,7 @@ import SearchTropes from './SearchTropes'
 import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
-import BookAddPages from './BookAddPages'
-import BookModifyPages from './BookModifyPages'
+import BookPages from './BookPages'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
@@ -98,21 +97,15 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 						<sub>{BookAuthorList(book)}</sub>
 					</h2>
 
-					{currentPage === 'quotedbooks' && ReviewQuote(book, book.review_fav_quote)}
-					{currentPage !== 'finished' && currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
-						<div className="pt0 mt0">
-							<div
-								className={
-									!book.number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'
-								}
-							>
-								{BookAddPages(book)}
-							</div>
-							<span className={book.number_of_pages_median === 0 ? 'dnone' : 'diblock'}>
-								{book.number_of_pages_median} pages
-							</span>
-							{currentPage !== 'dashboard' && currentPage !== 'wishlist' && <> {BookModifyPages(book)}</>}
-						</div>
+					{currentPage === 'quotedbooks' && (
+						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+					)}
+					{currentPage !== 'favorites' && currentPage !== 'quotedbooks' && (
+						<BookPages
+							book_id={book.id}
+							book_number_of_pages_median={book.number_of_pages_median}
+							currentPage={currentPage}
+						/>
 					)}
 				</header>
 				<div className="summary-actions">

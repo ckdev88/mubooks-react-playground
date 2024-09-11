@@ -21,6 +21,10 @@ interface AppContextType {
 	localBookFilter: string
 	setLocalBookFilter(localBookFilter: localBookFilter): void
 }
+interface IsModdingPagesContextType {
+	isModdingPages: boolean
+	setIsModdingPages(isModdingPages: isModdingPages): void
+}
 
 type Page =
 	| 'dashboard'
