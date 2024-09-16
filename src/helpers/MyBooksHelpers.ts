@@ -32,7 +32,7 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 	return myBooks
 }
 
-async function MyBooksInsertFirst(): Promise<void> {
+const MyBooksInsertFirst = async (): Promise<void> => {
 	const { userid } = useContext(AppContext)
 	const { error } = await supabase
 		.from('user_entries')
@@ -42,7 +42,7 @@ async function MyBooksInsertFirst(): Promise<void> {
 	return
 }
 
-async function MyBooksUpdate(myBooksNew: Books) {
+const MyBooksUpdate = async (myBooksNew: Books): Promise<void> => {
 	const { setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	let msg: string
 	setUserMyBooks(myBooksNew)
