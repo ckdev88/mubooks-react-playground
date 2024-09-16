@@ -124,45 +124,54 @@ const AddToRemoveFromX = ({
 					/>
 				)}
 
-				{book.list === 1 && (
-					<RemoveBookFromXButton
-						book_id={book.id}
-						book_list={book.list}
-						book_title_short={book.title_short}
-						targetList={1}
-						icon={true}
-					/>
+				{currentPage !== 'dashboard' && (
+					<>
+						<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
+							<span className="icon icon-dots"></span>
+						</button>
+					</>
 				)}
+				<div className={showHiddenMarks ? 'marks' : 'marks dnone'}>
+					{book.list === 1 && (
+						<RemoveBookFromXButton
+							book_id={book.id}
+							book_list={book.list}
+							book_title_short={book.title_short}
+							targetList={1}
+							icon={true}
+						/>
+					)}
 
-				{book.list === 2 && (
-					<RemoveBookFromXButton
-						book_id={book.id}
-						book_list={book.list}
-						book_title_short={book.title_short}
-						targetList={book.list}
-						icon={true}
-					/>
-				)}
+					{book.list === 2 && (
+						<RemoveBookFromXButton
+							book_id={book.id}
+							book_list={book.list}
+							book_title_short={book.title_short}
+							targetList={book.list}
+							icon={true}
+						/>
+					)}
 
-				{(book.list === 3 || book.list === 4) && (
-					<RemoveBookFromXButton
-						book_id={book.id}
-						book_list={book.list}
-						book_title_short={book.title_short}
-						targetList={3}
-						icon={true}
-					/>
-				)}
+					{(book.list === 3 || book.list === 4) && (
+						<RemoveBookFromXButton
+							book_id={book.id}
+							book_list={book.list}
+							book_title_short={book.title_short}
+							targetList={3}
+							icon={true}
+						/>
+					)}
 
-				{book.list === 4 && (
-					<RemoveBookFromXButton
-						book_id={book.id}
-						book_list={book.list}
-						book_title_short={book.title_short}
-						targetList={4}
-						icon={true}
-					/>
-				)}
+					{book.list === 4 && (
+						<RemoveBookFromXButton
+							book_id={book.id}
+							book_list={book.list}
+							book_title_short={book.title_short}
+							targetList={4}
+							icon={true}
+						/>
+					)}
+				</div>
 
 				{
 					//  else {

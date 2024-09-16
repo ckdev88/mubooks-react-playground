@@ -18,7 +18,6 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [showHiddenMarks, setShowHiddenMarks] = useState<boolean>(false)
 
 	async function toggleSynopsis() {
 		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
@@ -136,18 +135,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									)}
 								</div>
 							)}
-							{currentPage !== 'reading' && currentPage !== 'dashboard' && (
-								<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
-									<span className="icon icon-dots"></span>
-								</button>
-							)}
-							<div
-								className={
-									showHiddenMarks || currentPage === 'reading' ? 'marks dblock' : 'marks dnone'
-								}
-							>
 								<AddToRemoveFromX book={book} currentPage={currentPage} limit={0} />
-							</div>
 						</>
 					)}
 				</div>
