@@ -61,17 +61,13 @@ const BookStartedFinished = ({
 		changeDates(field, newDate)
 	}
 	useEffect(() => {
-		if (dateStarted) {
-			(document.getElementById('date_reading' + book_id) as HTMLInputElement).value = convertDate(
-				dateStarted,
-				'input'
-			)
+		if (dateStarted && showStartedDate) {
+			const eleDateReading = document.getElementById('date_reading' + book_id) as HTMLInputElement | null
+			if (eleDateReading !== null) eleDateReading.value = convertDate(dateStarted, 'input')
 		}
-		if (dateFinished) {
-			(document.getElementById('date_finished' + book_id) as HTMLInputElement).value = convertDate(
-				dateFinished,
-				'input'
-			)
+		if (dateFinished && showFinishedDate) {
+			const eleDateFinished = document.getElementById('date_finished' + book_id) as HTMLInputElement | null
+			if (eleDateFinished !== null) eleDateFinished.value = convertDate(dateFinished, 'input')
 		}
 	}, [dateStarted, dateFinished, book_id])
 
