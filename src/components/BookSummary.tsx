@@ -18,7 +18,6 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
-
 	const [showHiddenMarks, setShowHiddenMarks] = useState<boolean>(false)
 
 	async function toggleSynopsis() {
