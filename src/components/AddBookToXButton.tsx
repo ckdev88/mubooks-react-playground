@@ -113,10 +113,8 @@ const AddBookToXButton = ({
 			if (myBooks[i].id === book_id) {
 				bookIsSaved = true
 				myBooks[i].list = targetList
-				if (targetList === 2) myBooks[i].date_reading = Number(timestampConverter(Date.now(), 'digit'))
-				if (targetList === 3) myBooks[i].date_finished = Number(timestampConverter(Date.now(), 'digit'))
-				console.log('reading to add',myBooks[i].date_reading)
-				console.log('finished to add',myBooks[i].date_finished)
+				if (targetList === 2) myBooks[i].date_reading = todaysDateDigit
+				if (targetList === 3) myBooks[i].date_finished = todaysDateDigit
 			}
 		}
 
