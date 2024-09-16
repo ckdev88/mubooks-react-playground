@@ -135,7 +135,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 									)}
 								</div>
 							)}
-								<AddToRemoveFromX book={book} currentPage={currentPage} limit={0} />
+							<AddToRemoveFromX book={book} currentPage={currentPage} limit={0} />
 						</>
 					)}
 				</div>

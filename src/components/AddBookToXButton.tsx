@@ -35,7 +35,7 @@ const AddBookToXButton = ({
 	icon: boolean
 	button_title?: string
 }) => {
-	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
+	const { userid, userMyBooks, setUserMyBooks, setPopupNotification, todaysDateDigit } = useContext(AppContext)
 
 	if (button_title === '') button_title = `Add to ${getListName(targetList)}`
 	// TODO: deze wordt vaak geladen in lange lijst, data flow beperken wanneer niet wordt gebruikt?
