@@ -35,6 +35,7 @@ import { cleanAnchor } from './helpers/cleanInput.ts'
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const todaysDateInput = timestampConverter(Date.now(), 'input')
+const todaysDateDigit = Number(timestampConverter(Date.now(), 'digit'))
 
 const App = () => {
 	let userIsLoggedInInitVal: boolean
@@ -126,6 +127,7 @@ const App = () => {
 					setUsermail,
 					setUsername,
 					todaysDateInput,
+					todaysDateDigit,
 					userIsLoggedIn,
 					userMyBooks,
 					userid,
