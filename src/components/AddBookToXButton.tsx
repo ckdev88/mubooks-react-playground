@@ -18,6 +18,7 @@ const AddBookToXButton = ({
 	book_number_of_pages_median,
 	targetList,
 	icon = false,
+	button_title = '',
 }: {
 	book_id: Book['id']
 	book_list: Book['list']
@@ -32,9 +33,11 @@ const AddBookToXButton = ({
 	book_number_of_pages_median: Book['number_of_pages_median']
 	targetList: BookList
 	icon: boolean
+	button_title?: string
 }) => {
 	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
 
+	if (button_title === '') button_title = `Add to ${getListName(targetList)}`
 	// TODO: deze wordt vaak geladen in lange lijst, data flow beperken wanneer niet wordt gebruikt?
 
 	const book = {
@@ -137,7 +140,8 @@ const AddBookToXButton = ({
 	return (
 		<div className="mark">
 			<button className="btn-text" onClick={() => AddBookToXButtonAct()}>
-				<span className={iconClassName}></span>Add to {getListName(targetList)}
+				<span className={iconClassName}></span>
+				{button_title}
 			</button>
 		</div>
 	)

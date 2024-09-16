@@ -82,6 +82,7 @@ const AddToRemoveFromX = ({
 						book_number_of_pages_median={book.number_of_pages_median}
 						targetList={2}
 						icon={true}
+						button_title="Start reading"
 					/>
 				)}
 
@@ -100,6 +101,7 @@ const AddToRemoveFromX = ({
 						book_number_of_pages_median={book.number_of_pages_median}
 						targetList={3}
 						icon={true}
+						button_title="Finish reading"
 					/>
 				)}
 
@@ -118,6 +120,7 @@ const AddToRemoveFromX = ({
 						book_number_of_pages_median={book.number_of_pages_median}
 						targetList={4}
 						icon={true}
+						button_title="Mark as favorite"
 					/>
 				)}
 
