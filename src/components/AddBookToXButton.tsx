@@ -1,7 +1,7 @@
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import getListName from '../functions/getListName'
-import { convertDate, timestampConverter } from '../helpers/convertDate'
+import { convertDate } from '../helpers/convertDate'
 import { useContext } from 'react'
 
 const AddBookToXButton = ({
