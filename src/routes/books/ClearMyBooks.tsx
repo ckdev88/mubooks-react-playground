@@ -1,23 +1,21 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../../App'
-import { MyBooksUpdate } from '../../helpers/MyBooksHelpers'
+// import { MyBooksUpdate } from '../../helpers/MyBooksHelpers'
+import { supabase } from '../../../utils/supabase'
 
-const pageTitle = 'Clear all saved books'
-const ClearMyBooks = () => {
-	const { setUserMyBooks, setNavTitle } = useContext(AppContext)
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
-
-	function clearbooks() {
-		// for user_metadata based MyBooks... get rid of all this when this becomes obsolete
-		MyBooksUpdate([])
+export default function ClearMyBooks() {
+	const { setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
+	async function clearbooksyes(): Promise<void> {
+		let msg: string
 		setUserMyBooks([])
+		const { error } = await supabase.from('user_entries').update({ json: [] }).eq('user_id', userid).select()
+		if (error) {
+			msg = 'Error, data was not changed'
+			console.log('error:', error)
+		} else msg = 'Updated Mu Books.'
+
+		setPopupNotification(msg)
 	}
-	return (
-		<>
-			<button onClick={clearbooks}>Clear my books</button>
-		</>
-	)
+
+	return <button onClick={() => clearbooksyes()}>Clear my books</button>
 }
-export default ClearMyBooks
