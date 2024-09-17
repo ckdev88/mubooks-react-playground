@@ -45,7 +45,12 @@ const BookStartedFinished = ({
 
 	function changeDates(fieldName: string, fieldVal: number) {
 		if (fieldName === 'date_reading') setDateStarted(fieldVal)
-		if (fieldName === 'date_finished') setDateFinished(fieldVal) // TODO: tweak: make else if
+		else if (fieldName === 'date_finished') {
+			if (isNaN(fieldVal)) {
+				setDateFinished(undefined)
+				list = 2
+			} else setDateFinished(fieldVal)
+		}
 
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
@@ -54,7 +59,7 @@ const BookStartedFinished = ({
 			if (myBooks[i].id === book_id) {
 				if (fieldName === 'date_reading') myBooks[i].date_reading = fieldVal
 				if (fieldName === 'date_finished') {
-					myBooks[i].date_finished = fieldVal
+					if (isNaN(fieldVal)) myBooks[i].date_finished = undefined
 					if (
 						(myBooks[i].date_finished === null ||
 							myBooks[i].date_finished === undefined ||
@@ -62,7 +67,8 @@ const BookStartedFinished = ({
 						myBooks[i].list > 2
 					) {
 						myBooks[i].list = 2
-					}
+						list = 2 // TOOD: make it more state based (test properly if better/ faster)
+					} else myBooks[i].date_finished = fieldVal
 				}
 			}
 		}
