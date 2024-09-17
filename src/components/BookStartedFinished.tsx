@@ -35,11 +35,7 @@ const BookStartedFinished = ({
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew })
-			.eq('user_id', userid)
-			.select()
+		const { error } = await supabase.from('user_entries').update({ json: myBooksNew }).eq('user_id', userid).select()
 		if (error) {
 			msg = 'Error, date was not changed'
 			console.log('error:', error)
@@ -119,10 +115,7 @@ const BookStartedFinished = ({
 					<>
 						<em className="btn-text">
 							<span className="icon icon-finished"></span>
-							<button
-								className="btn-calendar btn-text"
-								onClick={() => openCalendarPopUp('date_finished' + book_id)}
-							>
+							<button className="btn-calendar btn-text" onClick={() => openCalendarPopUp('date_finished' + book_id)}>
 								{date_finished && convertDate(date_finished, 'human')}
 							</button>
 						</em>
