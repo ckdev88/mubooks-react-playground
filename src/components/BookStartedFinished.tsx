@@ -95,26 +95,25 @@ const BookStartedFinished = ({
 	return (
 		<div className="book-started-finished">
 			<div>
-				<>
-					<em className="btn-text">
-						<span className="icon icon-reading"></span>
-						<button
-							className="btn-calendar btn-text"
-							onClick={() => openCalendarPopUp('date_reading' + book_id)}
-						>
-							{dateStarted && convertDate(dateStarted, 'human')}
-						</button>
-					</em>
-					<input
-						tabIndex={-1}
-						id={'date_reading' + book_id}
-						name={'date_reading' + book_id}
-						type="date"
-						max={todaysDateInput}
-						className="calendar-hidden"
-						onChange={debounce(() => modifyDateReading('date_reading'), 100)}
-					/>
-				</>
+				{date_finished === undefined && list < 3 && (
+					<>
+						<em className="btn-text">
+							<span className="icon icon-reading"></span>
+							<button className="btn-calendar btn-text" onClick={() => openCalendarPopUp('date_reading' + book_id)}>
+								{dateStarted && convertDate(dateStarted, 'human')}
+							</button>
+						</em>
+						<input
+							tabIndex={-1}
+							id={'date_reading' + book_id}
+							name={'date_reading' + book_id}
+							type="date"
+							max={todaysDateInput}
+							className="calendar-hidden"
+							onChange={debounce(() => modifyDateReading('date_reading'), 100)}
+						/>
+					</>
+				)}
 
 				{list > 2 && (
 					<>
