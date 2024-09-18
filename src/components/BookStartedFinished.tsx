@@ -97,7 +97,7 @@ const BookStartedFinished = ({
 	return (
 		<div className="book-started-finished">
 			<div>
-				{date_finished === undefined && list < 3 && (
+				{list === 2 && (
 					<>
 						<em className="btn-text">
 							<span className="icon icon-reading"></span>
