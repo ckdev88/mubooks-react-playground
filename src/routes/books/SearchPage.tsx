@@ -31,10 +31,7 @@ const SearchPage = () => {
 			const searchfields: string =
 				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median,subject'
 			await fetch(
-				'https://openlibrary.org/search.json?q=' +
-					search_term +
-					'&mode=everything&limit=30&fields=' +
-					searchfields
+				'https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=30&fields=' + searchfields
 			)
 				.then((response) => response.json())
 				.then((json) =>
@@ -85,7 +82,7 @@ const SearchPage = () => {
 			<div>
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>
 					<h2 className="resultsfound">
-						{resultCount > 30 ? 'Over 30' : resultCount}{' '}
+						{resultCount > 30 ? 'Over 30' : resultCount}
 						{resultCount > 1 || resultCount === 0 ? 'books' : 'book'} found for <em>"{searchTerm}"</em>
 						<sub className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</sub>
 					</h2>
