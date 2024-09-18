@@ -79,6 +79,7 @@ type BookData = [
 		first_publish_year: number
 		cover_edition_key: string
 		cover: string
+		cover_redir?: string
 		img?: string
 		title_short?: string
 	}
@@ -86,8 +87,9 @@ type BookData = [
 interface Book {
 	author_key?: string[]
 	author_name: string[]
-	cover: string
 	cover_edition_key: string
+	cover: string
+	cover_redir: string
 	edition_key?: string[]
 	first_publish_year: string
 	id: Id

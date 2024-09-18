@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../App'
 import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
-import { getBookCover } from '../../Helpers'
+import BookSummaryCover from '../BookSummaryCover'
 
 export default function SavedItems() {
 	const { userMyBooks } = useContext(AppContext)
@@ -26,7 +26,7 @@ export default function SavedItems() {
 							key={`deck_saved_books${book.id}`} 
 							style={{ zIndex: `10 - ${index}` }}
 							>
-								<img src={getBookCover(book.cover, 'L')} />
+								<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} book_id={book.id} />
 							</article>
 						)
 					})}

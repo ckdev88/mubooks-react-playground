@@ -1,4 +1,3 @@
-import { getBookCover } from '../Helpers'
 import { useState } from 'react'
 import AddToRemoveFromX from './AddToRemoveFromX'
 import BookStartedFinished from './BookStartedFinished'
@@ -14,6 +13,7 @@ import SummaryReviews from './SummaryReviews'
 import BookPages from './BookPages'
 import BookSummaryTitle from './BookSummaryTitle'
 
+import BookSummaryCover from './BookSummaryCover'
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
@@ -45,13 +45,8 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			id={bookAnchor}
 		>
 			<aside className="cover">
-				<img
-					src={
-						getBookCover(book.cover, 'M') !== undefined
-							? getBookCover(book.cover, 'M')
-							: 'img/coverless.png'
-					}
-					alt=""
+				<BookSummaryCover
+					book_cover={book.cover}
 				/>
 				{(currentPage === 'finished' || currentPage === 'favorites') && (
 					<ReviewRating

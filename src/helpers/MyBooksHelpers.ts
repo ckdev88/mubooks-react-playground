@@ -13,6 +13,7 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 		author_key: book.author_key,
 		author_name: book.author_name,
 		cover: book.cover,
+		cover_redir: book.cover_redir,
 		cover_edition_key: book.cover_edition_key,
 		list: list,
 		first_publish_year: book.first_publish_year,
