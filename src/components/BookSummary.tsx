@@ -64,9 +64,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			</aside>
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
-					{currentPage !== 'dashboard' && (
-						<AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />
-					)}
+					{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />}
 
 					<BookSummaryTitle
 						book_title_short={book.title_short}
@@ -110,22 +108,16 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 											{book.list === 2 && (
 												<>
 													<Link to={'/reading#' + bookAnchor}>Reading</Link>
-													{book.date_reading && (
-														<> since {convertDate(book.date_reading, 'human')}</>
-													)}
-													.
+													{book.date_reading && <> since {convertDate(book.date_reading, 'human')}</>}.
 												</>
 											)}
 											{(book.list === 3 || book.list === 4) && (
 												<>
 													<Link to={'/finished#' + bookAnchor}>Finished</Link>
-													{book.date_finished && (
-														<> on {convertDate(book.date_finished, 'human')}</>
-													)}
+													{book.date_finished && <> on {convertDate(book.date_finished, 'human')}</>}
 													{book.list === 4 && (
 														<>
-															&nbsp;and{' '}
-															<Link to={'/favorites#' + bookAnchor}>favorited</Link>
+															&nbsp;and <Link to={'/favorites#' + bookAnchor}>favorited</Link>
 														</>
 													)}
 													.
