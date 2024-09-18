@@ -83,7 +83,7 @@ const SearchPage = () => {
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>
 					<h2 className="resultsfound">
 						{resultCount > 30 ? 'Over 30' : resultCount}
-						{resultCount > 1 || resultCount === 0 ? 'books' : 'book'} found for <em>"{searchTerm}"</em>
+						{resultCount > 1 || resultCount === 0 ? ' books' : ' book'} found for <em>"{searchTerm}"</em>
 						<sub className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</sub>
 					</h2>
 					<BooksOverviewPage books={searchResults} page={currentPage} />
