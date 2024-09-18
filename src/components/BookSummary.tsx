@@ -152,15 +152,9 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					currentPage !== 'quotedbooks' &&
 					currentPage !== 'dashboard' && (
 						<>
-							{currentPage === 'search' && book.subject && (
-								<SearchTropes book_id={book.id} tropes={book.subject} />
-							)}
+							{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
 							<button
-								className={
-									isShowingSynopsis
-										? 'btn-text caret-right-toggle active'
-										: 'btn-text caret-right-toggle'
-								}
+								className={isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'}
 								onClick={toggleSynopsis}
 							>
 								{isLoading && 'Loading...'}
