@@ -23,7 +23,7 @@ export default function FavoritesItems({ page }: { page: Page }) {
 				<div className="deck-container">
 					{booksarr.slice(-6).map((book: Book, index: number) => {
 						return (
-							<article className="book-cover" key={book.id} style={{ zIndex: 10 - index }}>
+							<article className="book-cover" key={`deck_favorites_books${book.id}`} style={{ zIndex: 10 - index }}>
 								<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} book_id={book.id} />
 							</article>
 						)
