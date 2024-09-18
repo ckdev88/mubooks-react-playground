@@ -55,7 +55,7 @@ const App = () => {
 	const [localBookFilter, setLocalBookFilter] = useState<string>('')
 
 	// add persistency to userMyBooks state throughout page refreshes
-	const csMyBooks = async () => {
+	const persistentMyBooks = async () => {
 		let booksArr: Books
 		const res = await supabase.from('user_entries').select('json')
 		if (res.data) {
@@ -81,7 +81,7 @@ const App = () => {
 	// /online state checker & notifier
 
 	useEffect(() => {
-		if (userIsLoggedIn === true && userMyBooks.length < 1) csMyBooks()
+		if (userIsLoggedIn === true && userMyBooks.length < 1) persistentMyBooks()
 	}, [userIsLoggedIn, initialMyBooksSet, userMyBooks.length])
 	// /add persistency to userMyBooks state throughout page refreshes
 
