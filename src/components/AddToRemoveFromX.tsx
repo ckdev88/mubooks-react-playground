@@ -14,6 +14,7 @@ const AddToRemoveFromX = ({
 	// limit 01234, 0 = no limit, so do all, otherwise just 1 of 1234 (wishlist, reading, saved, favorited)
 	const [showHiddenMarks, setShowHiddenMarks] = useState<boolean>(false)
 
+	// TODO make button props way more generic to implement, only pass loads of params if book would be new
 	if (limit > 0) {
 		if (limit === 4 && book.list > 2) {
 			return (
@@ -41,6 +42,9 @@ const AddToRemoveFromX = ({
 							book_number_of_pages_median={book.number_of_pages_median}
 							targetList={limit}
 							icon={true}
+							book_rate_stars={book.rate_stars}
+							book_rate_spice={book.rate_spice}
+							book_review_fav_quote={book.review_fav_quote}
 						/>
 					)}
 				</>
@@ -64,6 +68,9 @@ const AddToRemoveFromX = ({
 						book_number_of_pages_median={book.number_of_pages_median}
 						targetList={1}
 						icon={true}
+						book_rate_stars={book.rate_stars}
+						book_rate_spice={book.rate_spice}
+						book_review_fav_quote={book.review_fav_quote}
 					/>
 				)}
 
@@ -83,6 +90,9 @@ const AddToRemoveFromX = ({
 						targetList={2}
 						icon={true}
 						button_title="Start reading"
+						book_rate_stars={book.rate_stars}
+						book_rate_spice={book.rate_spice}
+						book_review_fav_quote={book.review_fav_quote}
 					/>
 				)}
 
@@ -102,6 +112,9 @@ const AddToRemoveFromX = ({
 						targetList={3}
 						icon={true}
 						button_title="Finish reading"
+						book_rate_stars={book.rate_stars}
+						book_rate_spice={book.rate_spice}
+						book_review_fav_quote={book.review_fav_quote}
 					/>
 				)}
 
@@ -121,6 +134,9 @@ const AddToRemoveFromX = ({
 						targetList={4}
 						icon={true}
 						button_title="Mark as favorite"
+						book_rate_stars={book.rate_stars}
+						book_rate_spice={book.rate_spice}
+						book_review_fav_quote={book.review_fav_quote}
 					/>
 				)}
 

@@ -106,8 +106,8 @@ interface Book {
 	date_finished?: number
 	rate_stars: Scale5
 	rate_spice: Scale5
-	review_tropes: BookTropes
-	review_text: string
+	review_tropes?: BookTropes
+	review_text?: string
 	review_fav_quote: string
 	search_tropes?: BookTropes
 	subject?: BookTropes

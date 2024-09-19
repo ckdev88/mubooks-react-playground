@@ -23,7 +23,7 @@ const BookPages = ({
 						<BookAddPages book_id={book_id} book_number_of_pages_median={book_number_of_pages_median} />
 					</div>
 				) : (
-					<span className={book_number_of_pages_median > 0 ? 'diblock' : 'dnone'}>
+					<span className={book_number_of_pages_median && book_number_of_pages_median > 0 ? 'diblock' : 'dnone'}>
 						{book_number_of_pages_median} pages &nbsp;
 					</span>
 				)}

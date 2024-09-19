@@ -71,7 +71,7 @@ const BookModifyPages = ({
 
 	useEffect(() => {
 		if (showForm) document.getElementById(inputid)?.focus()
-		if (bookPages !== book_number_of_pages_median) {
+		if (book_number_of_pages_median !== undefined && bookPages !== book_number_of_pages_median) {
 			setBookPages(book_number_of_pages_median)
 			if (isModding) {
 				updatePagesCallback()
@@ -91,7 +91,10 @@ const BookModifyPages = ({
 	])
 
 	return (
-		<span className={book_number_of_pages_median > 0 ? 'dflex' : 'dnone'} style={{ alignItems: 'center' }}>
+		<span
+			className={book_number_of_pages_median !== undefined && book_number_of_pages_median > 0 ? 'dflex' : 'dnone'}
+			style={{ alignItems: 'center' }}
+		>
 			<div
 				className={showForm ? 'dflex' : 'dnone'}
 				style={{ alignContent: 'center', alignItems: 'center', position: 'relative' }}
