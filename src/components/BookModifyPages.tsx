@@ -46,8 +46,7 @@ const BookModifyPages = ({
 
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book_id) {
-					if (bookPages !== userMyBooks[i].number_of_pages_median)
-						userMyBooks[i].number_of_pages_median = bookPages
+					if (bookPages !== userMyBooks[i].number_of_pages_median) userMyBooks[i].number_of_pages_median = bookPages
 					break
 				}
 			}
@@ -99,11 +98,7 @@ const BookModifyPages = ({
 				className={showForm ? 'dflex' : 'dnone'}
 				style={{ alignContent: 'center', alignItems: 'center', position: 'relative' }}
 			>
-				<form
-					onSubmit={processPagesModifyForm}
-					className="single-small-form wm6 "
-					style={{ marginRight: '.3rem' }}
-				>
+				<form onSubmit={processPagesModifyForm} className="single-small-form wm6" style={{ marginRight: '.3rem' }}>
 					<input
 						type="number"
 						id={inputid}
