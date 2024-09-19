@@ -12,8 +12,8 @@ import { cleanAnchor } from '../helpers/cleanInput'
 import SummaryReviews from './SummaryReviews'
 import BookPages from './BookPages'
 import BookSummaryTitle from './BookSummaryTitle'
-
 import BookSummaryCover from './BookSummaryCover'
+
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const [synopsis, setSynopsis] = useState<string>('')
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
@@ -38,6 +38,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 				.finally(() => setIsLoading(false))
 		}
 	}
+
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 	return (
 		<article

@@ -103,7 +103,11 @@ const BookModifyPages = ({
 						type="number"
 						id={inputid}
 						name="pagesAmount"
-						defaultValue={book_number_of_pages_median > 0 ? book_number_of_pages_median : 0}
+						defaultValue={
+							book_number_of_pages_median !== undefined && book_number_of_pages_median > 0
+								? book_number_of_pages_median
+								: 0
+						}
 					/>
 					<BtnInsideCaret />
 				</form>
