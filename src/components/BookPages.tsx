@@ -14,24 +14,25 @@ const BookPages = ({
 	currentPage: string
 }) => {
 	const [isModdingPages, setIsModdingPages] = useState<boolean>(false)
+	const [numberOfPages, setNumberOfPages] = useState<number>(book_number_of_pages_median)
 
 	return (
-		<div style={{ display: 'flex' }}>
-			<IsModdingPagesContext.Provider value={{ isModdingPages, setIsModdingPages }}>
+		<IsModdingPagesContext.Provider value={{ isModdingPages, setIsModdingPages, numberOfPages, setNumberOfPages }}>
+			<div style={{ display: 'flex' }}>
 				{isModdingPages ? (
-					<div className={!book_number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'}>
-						<BookAddPages book_id={book_id} book_number_of_pages_median={book_number_of_pages_median} />
-					</div>
-				) : (
-					<span className={book_number_of_pages_median && book_number_of_pages_median > 0 ? 'diblock' : 'dnone'}>
-						{book_number_of_pages_median} pages &nbsp;
-					</span>
-				)}
-				{currentPage !== 'dashboard' && currentPage !== 'wishlist' && (
 					<BookModifyPages book_id={book_id} book_number_of_pages_median={book_number_of_pages_median} />
+				) : (
+					<>
+						<span className="diblock">
+							{book_number_of_pages_median === 0 || !book_number_of_pages_median ? '?' : numberOfPages} pages &nbsp;
+						</span>
+						<button className="diblock btn-icon" onClick={() => setIsModdingPages(!isModdingPages)}>
+							<span className="icon icon-pencil"></span>
+						</button>
+					</>
 				)}
-			</IsModdingPagesContext.Provider>
-		</div>
+			</div>
+		</IsModdingPagesContext.Provider>
 	)
 }
 export default BookPages
