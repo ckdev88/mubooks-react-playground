@@ -46,9 +46,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			id={bookAnchor}
 		>
 			<aside className="cover">
-				<BookSummaryCover
-					book_cover={book.cover}
-				/>
+				<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} book_id={book.id} />
 				{(currentPage === 'finished' || currentPage === 'favorites') && (
 					<ReviewRating
 						book_id={book.id}

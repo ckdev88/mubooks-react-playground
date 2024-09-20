@@ -9,6 +9,7 @@ const AddBookToXButton = ({
 	book_author_key,
 	book_author_name,
 	book_cover,
+	book_cover_redir,
 	book_cover_edition_key,
 	book_first_publish_year,
 	book_img,
@@ -27,6 +28,7 @@ const AddBookToXButton = ({
 	book_author_key: Book['author_key']
 	book_author_name: Book['author_name']
 	book_cover: Book['cover']
+	book_cover_redir?: Book['cover_redir']
 	book_cover_edition_key: Book['cover_edition_key']
 	book_first_publish_year: Book['first_publish_year']
 	book_img: Book['img']
@@ -48,6 +50,7 @@ const AddBookToXButton = ({
 		author_key: book_author_key,
 		author_name: book_author_name,
 		cover: book_cover,
+		cover_redir: book_cover_redir,
 		cover_edition_key: book_cover_edition_key,
 		first_publish_year: book_first_publish_year,
 		img: book_img,

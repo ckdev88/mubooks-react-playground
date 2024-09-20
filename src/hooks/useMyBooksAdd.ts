@@ -3,6 +3,7 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import getListName from '../functions/getListName'
+import { getBookCover } from '../Helpers'
 
 const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList }): [() => void, boolean] => {
 	const { setPopupNotification, userMyBooks, setUserMyBooks, userid, todaysDateDigit } = useContext(AppContext)
@@ -24,7 +25,12 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 		setIsLoading(false)
 	}
 
-	const runMyBooksAdd = (bookIsSaved: boolean) => {
+	const fetchBookCoverRedir = async (bookCoverM: Book['cover']): Promise<string> => {
+		const bookCoverSrcRedir: string = await fetch(bookCoverM).then((res) => res.url)
+		return bookCoverSrcRedir
+	}
+
+	const runMyBooksAdd = async (bookIsSaved: boolean): Promise<Books> => {
 		let newUserMyBooks = userMyBooks
 		if (bookIsSaved === false) {
 			let title_short: Book['title_short']
@@ -37,10 +43,14 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 			let date_finished: number = 0
 			if (targetList > 2) date_finished = date_now
 
+			const coverM = getBookCover(book.cover, 'M')
+			const bookCoverSrcRedir = await fetchBookCoverRedir(coverM)
+
 			const newBook: Book = {
 				author_key: book.author_key,
 				author_name: book.author_name,
 				cover: book.cover,
+				cover_redir: bookCoverSrcRedir,
 				cover_edition_key: book.cover_edition_key,
 				date_finished: date_finished,
 				date_reading: date_reading,
@@ -66,7 +76,7 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 		return newUserMyBooks
 	}
 
-	function AddBookToX(): void {
+	async function AddBookToX(): Promise<void> {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = userMyBooks
@@ -81,8 +91,8 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 				break
 			}
 		}
-		if (bookIsSaved === false) myBooks = runMyBooksAdd(bookIsSaved)
 		setUserMyBooks(myBooks)
+		if (bookIsSaved === false) myBooks = await runMyBooksAdd(bookIsSaved)
 		MyBooksUpdate(myBooks)
 	}
 

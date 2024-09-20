@@ -91,7 +91,7 @@ interface Book {
 	author_name: string[]
 	cover_edition_key: string
 	cover: string
-	cover_redir: string
+	cover_redir?: string
 	edition_key?: string[]
 	first_publish_year: string
 	id: Id
