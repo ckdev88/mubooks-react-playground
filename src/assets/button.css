@@ -43,6 +43,15 @@ main button.alt,
 	text-decoration: none;
 	transition: text-decoration 0.18s ease-in-out, color 0.18s ease-in-out;
 }
+.btn-text:disabled,
+.btn-text:disabled:hover {
+	background: transparent;
+	opacity: 0.5;
+	cursor: not-allowed;
+	outline: none;
+	box-shadow: none;
+	color: #000;
+}
 .btn-text:hover {
 	text-decoration: underline;
 	color: #000;
@@ -97,13 +106,16 @@ main button.alt,
 	height: unset;
 	overflow: auto;
 }
+
 .btn-text,
 .btn-icon {
 	margin-bottom: 0;
 }
+
 .btn-calendar {
 	font-style: inherit;
 }
+
 .btn-calendar::after {
 	display: inline-block;
 	height: 1em;
@@ -126,7 +138,6 @@ main button.alt,
 .btn-calendar:hover::after {
 	opacity: 1;
 }
-
 .btn-submit-inside-caret-right {
 	background-color: pink;
 	background-image: url('/img/cv-caret-medium.light.svg');
@@ -142,7 +153,6 @@ main button.alt,
 	width: 1rem;
 	transition: background-color 0.18s ease-in-out, border-color 0.18s ease-in-out;
 }
-
 .btn-submit-inside-caret-right:hover,
 .btn-submit-inside-caret-right:focus,
 .btn-submit-inside-caret-right:active {
@@ -151,7 +161,6 @@ main button.alt,
 	border-color: white;
 	box-shadow: none;
 }
-
 .btn-sm {
 	height: 1.4rem;
 	line-height: 0.9rem;
@@ -295,7 +304,6 @@ main button.alt,
 	width: 16px;
 	opacity: 0.2;
 }
-
 .btn-icon .icon-pencil {
 	background-image: url('/img/icon-pencil.svg');
 	width: 12px;
@@ -306,7 +314,6 @@ main button.alt,
 .btn-icon:hover .icon-pencil {
 	opacity: 1;
 }
-
 .reviews {
 	margin-top: 0.75rem;
 }
