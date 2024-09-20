@@ -83,12 +83,8 @@ const BookAddPages = ({
 				<div className={showForm ? 'dblock' : 'dnone'}>
 					<BookFetchPages book_id={book_id} />
 					<form onSubmit={processPagesAddForm} className="single-small-form wm6 diblock">
-						<input
-							type="number"
-							id={inputid}
-							name="pagesAmount"
-							defaultValue={book_number_of_pages_median}
-						/>
+						<input type="number" id={inputid} name="pagesAmount" defaultValue={book_number_of_pages_median} />
+						?
 						<BtnInsideCaret />
 					</form>
 				</div>

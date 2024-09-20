@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react'
-import BookAddPages from './BookAddPages'
 import BookModifyPages from './BookModifyPages'
 
 export const IsModdingPagesContext = createContext<IsModdingPagesContextType>({} as IsModdingPagesContextType)
@@ -7,7 +6,6 @@ export const IsModdingPagesContext = createContext<IsModdingPagesContextType>({}
 const BookPages = ({
 	book_id,
 	book_number_of_pages_median,
-	currentPage,
 }: {
 	book_id: Book['id']
 	book_number_of_pages_median: Book['number_of_pages_median']
