@@ -140,7 +140,7 @@ const AddToRemoveFromX = ({
 					/>
 				)}
 
-				{currentPage !== 'dashboard' && (
+				{currentPage !== 'dashboard' && currentPage !== 'search' && (
 					<>
 						<button className="btn-icon" onClick={() => setShowHiddenMarks(!showHiddenMarks)}>
 							<span className="icon icon-dots"></span>
