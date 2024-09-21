@@ -46,10 +46,13 @@ main button.alt,
 .btn-icon:active,
 .btn-icon:focus {
 	background: transparent;
-	opacity: 0.5;
-	cursor: not-allowed;
 	outline: none;
 	box-shadow: none;
+}
+.btn-text:disabled,
+.btn-text:disabled:hover {
+	opacity: 0.5;
+	cursor: not-allowed;
 	color: #000;
 }
 .btn-text:hover {
