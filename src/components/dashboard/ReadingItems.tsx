@@ -13,7 +13,7 @@ export default function ReadingItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} currentPage="dashboard" />
+				return <BookSummary book={book} key={book.id} currentPage="dashboard" refer="reading" />
 			})
 		}
 		return (
@@ -34,7 +34,7 @@ export default function ReadingItems() {
 	return (
 		<>
 			{hasbooks ? (
-				<main className="reading deck">{DeckCovers(booksarr)}</main>
+				<main className="reading">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/reading">
 					<main className="toadd">

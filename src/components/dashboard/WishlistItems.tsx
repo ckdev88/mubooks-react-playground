@@ -13,7 +13,7 @@ export default function WishlistItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} currentPage="wishlist" />
+				return <BookSummary book={book} key={book.id} currentPage="dashboard" refer="wishlist" />
 			})
 		}
 		return (
@@ -34,7 +34,7 @@ export default function WishlistItems() {
 	return (
 		<>
 			{hasbooks ? (
-				<main className="wishlist deck">{DeckCovers(booksarr)}</main>
+				<main className="wishlist">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/wishlist">
 					<main className="toadd">

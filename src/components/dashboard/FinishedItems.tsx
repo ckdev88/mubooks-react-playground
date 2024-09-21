@@ -13,7 +13,7 @@ export default function FinishedItems({ page }: { page: Page }) {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} currentPage={page} key={book.id} />
+				return <BookSummary book={book} currentPage={page} key={book.id} refer="finished" />
 			})
 		}
 		booksarr.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
@@ -35,7 +35,7 @@ export default function FinishedItems({ page }: { page: Page }) {
 	return (
 		<>
 			{hasbooks ? (
-				<main className="finished deck">{DeckCovers(booksarr)}</main>
+				<main className="finished">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/finished">
 					<main className="toadd">

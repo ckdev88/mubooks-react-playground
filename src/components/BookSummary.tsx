@@ -15,7 +15,7 @@ import BookSummaryTitle from './BookSummaryTitle'
 import BookSummaryCover from './BookSummaryCover'
 import useGetSynopsis from '../hooks/useGetSynopsis'
 
-const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
+const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Page; refer?: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
 	const pagesMedianPages: Page[] = ['search', 'reading']
 	const synopsis = useGetSynopsis(book.id, book.edition_key, synopsisPages, currentPage)
@@ -41,8 +41,8 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
 					{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />}
-					{currentPage === 'dashboard' ? (
-						<Link to="/reading">
+					{currentPage === 'dashboard' && refer!== undefined ? (
+						<Link to={`/${refer}`}>
 							<BookSummaryTitle
 								book_title_short={book.title_short}
 								book_first_publish_year={book.first_publish_year}

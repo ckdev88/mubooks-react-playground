@@ -13,7 +13,7 @@ export default function SavedItems() {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} currentPage="dashboard" key={`deck_saved_books${book.id}`} />
+				return <BookSummary book={book} currentPage="dashboard" key={`deck_saved_books${book.id}`} refer="savedbooks" />
 			})
 		}
 		return (

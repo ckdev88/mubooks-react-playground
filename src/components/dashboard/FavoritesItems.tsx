@@ -14,7 +14,7 @@ export default function FavoritesItems({ page }: { page: Page }) {
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} currentPage={page} key={book.id} />
+				return <BookSummary book={book} currentPage={page} key={book.id} refer='favorites' />
 			})
 		}
 		shuffleArray(booksarr as [])
@@ -36,7 +36,7 @@ export default function FavoritesItems({ page }: { page: Page }) {
 	return (
 		<>
 			{hasbooks ? (
-				<main className="favorites deck">{DeckCovers(booksarr)}</main>
+				<main className="favorites">{DeckCovers(booksarr)}</main>
 			) : (
 				<Link to="/favorites">
 					<main className="toadd">
