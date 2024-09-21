@@ -17,6 +17,7 @@ import useGetSynopsis from '../hooks/useGetSynopsis'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
+	const pagesMedianPages: Page[] = ['search', 'reading']
 	const synopsis = useGetSynopsis(book.id, book.edition_key, synopsisPages, currentPage)
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
@@ -51,17 +52,13 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					{currentPage === 'quotedbooks' && (
 						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
 					)}
-					{currentPage !== 'favorites' &&
-						currentPage!=='dashboard' &&
-						currentPage !== 'wishlist' &&
-						currentPage !== 'search' &&
-						currentPage !== 'quotedbooks' && (
-							<BookPages
-								book_id={book.id}
-								book_number_of_pages_median={book.number_of_pages_median}
-								currentPage={currentPage}
-							/>
-						)}
+					{pagesMedianPages.includes(currentPage) && (
+						<BookPages
+							book_id={book.id}
+							book_number_of_pages_median={book.number_of_pages_median}
+							currentPage={currentPage}
+						/>
+					)}
 				</header>
 				<div className="summary-actions">
 					<SummaryReviews currentPage={currentPage} book={book} />
