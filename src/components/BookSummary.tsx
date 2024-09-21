@@ -41,14 +41,25 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
 					{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />}
-
-					<BookSummaryTitle
-						book_title_short={book.title_short}
-						book_first_publish_year={book.first_publish_year}
-						currentPage={currentPage}
-						book_author_name={book.author_name}
-						book_id={book.id}
-					/>
+					{currentPage === 'dashboard' ? (
+						<Link to="/reading">
+							<BookSummaryTitle
+								book_title_short={book.title_short}
+								book_first_publish_year={book.first_publish_year}
+								currentPage={currentPage}
+								book_author_name={book.author_name}
+								book_id={book.id}
+							/>
+						</Link>
+					) : (
+						<BookSummaryTitle
+							book_title_short={book.title_short}
+							book_first_publish_year={book.first_publish_year}
+							currentPage={currentPage}
+							book_author_name={book.author_name}
+							book_id={book.id}
+						/>
+					)}
 					{currentPage === 'quotedbooks' && (
 						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
 					)}
