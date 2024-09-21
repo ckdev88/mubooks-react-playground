@@ -21,11 +21,7 @@ main button.alt,
 	width: auto;
 }
 .btn-text,
-.btn-text:active,
-.btn-text:focus,
-.btn-icon,
-.btn-icon:active,
-.btn-icon:focus {
+.btn-icon {
 	background: none;
 	color: #0d99ff;
 }
@@ -44,7 +40,11 @@ main button.alt,
 	transition: text-decoration 0.18s ease-in-out, color 0.18s ease-in-out;
 }
 .btn-text:disabled,
-.btn-text:disabled:hover {
+.btn-text:disabled:hover,
+.btn-text:active,
+.btn-text:focus,
+.btn-icon:active,
+.btn-icon:focus {
 	background: transparent;
 	opacity: 0.5;
 	cursor: not-allowed;

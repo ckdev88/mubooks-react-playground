@@ -95,7 +95,7 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 					{currentPage !== 'quotedbooks' && (
 						<>
 							{currentPage === 'search' && (
-								<div className="status">
+								<div className="status" style={{ marginBottom: '.5rem' }}>
 									{book.list > 0 && (
 										<em>
 											{book.list === 1 && (
