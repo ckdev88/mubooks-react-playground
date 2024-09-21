@@ -13,31 +13,12 @@ import SummaryReviews from './SummaryReviews'
 import BookPages from './BookPages'
 import BookSummaryTitle from './BookSummaryTitle'
 import BookSummaryCover from './BookSummaryCover'
+import useGetSynopsis from '../hooks/useGetSynopsis'
 
 const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) => {
-	const [synopsis, setSynopsis] = useState<string>('')
+	const synopsisPages: Page[] = ['search', 'wishlist']
+	const synopsis = useGetSynopsis(book.id, book.edition_key, synopsisPages, currentPage)
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-
-	async function toggleSynopsis() {
-		if (isShowingSynopsis) setIsShowingSynopsis(!isShowingSynopsis)
-		else {
-			setIsLoading(true)
-			await fetch('https://openlibrary.org/works/' + book.id + '.json')
-				.then((res) => res.json())
-				.then((json) => json.description?.value)
-				.then((synopsis) => {
-					setIsShowingSynopsis(true)
-					if (synopsis !== undefined) setSynopsis(synopsis)
-					else setSynopsis('No synopsis available yet.')
-				})
-				.catch((err) => {
-					setSynopsis('No synopsis available yet.')
-					console.log('error', err)
-				})
-				.finally(() => setIsLoading(false))
-		}
-	}
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 	return (
@@ -137,28 +118,30 @@ const BookSummary = ({ book, currentPage }: { book: Book; currentPage: Page }) =
 				{(currentPage === 'finished' || currentPage === 'favorites') && (
 					<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
 				)}
-				{currentPage !== 'finished' &&
-					currentPage !== 'favorites' &&
-					currentPage !== 'quotedbooks' &&
-					currentPage !== 'dashboard' && (
-						<>
-							{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
-							<button
-								className={isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'}
-								onClick={toggleSynopsis}
-							>
-								{isLoading && 'Loading...'}
-								{!isLoading && !isShowingSynopsis && 'Synopsis'}
-								{!isLoading && isShowingSynopsis && <b style={{ color: 'black' }}> Synopsis </b>}
-							</button>
-							<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-								<div className="synopsis">
-									<br />
-									<ReactMarkdown>{synopsis}</ReactMarkdown>
+				{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
+				{synopsisPages.includes(currentPage) && synopsis ? (
+					// TODO add synopsis to cache
+					<>
+						<button
+							className={isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'}
+							onClick={() => setIsShowingSynopsis(!isShowingSynopsis)}
+						>
+							Synopsis{' '}
+						</button>
+						{isShowingSynopsis && (
+							<>
+								<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
+									<div className="synopsis">
+										<ReactMarkdown>{synopsis}</ReactMarkdown>
+									</div>
 								</div>
-							</div>
-						</>
-					)}
+							</>
+						)}
+					</>
+				) : (
+					// TODO make link like 'no synopsis yet... write one?' and link to the OL page
+					<></>
+				)}
 				<hr />
 			</footer>
 		</article>
