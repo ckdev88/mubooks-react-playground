@@ -18,7 +18,8 @@ import useGetSynopsis from '../hooks/useGetSynopsis'
 const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Page; refer?: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
 	const pagesMedianPages: Page[] = ['search', 'reading']
-	const synopsis = useGetSynopsis(book.id, book.edition_key, synopsisPages, currentPage)
+
+	const synopsis = useGetSynopsis(book.id, book.cover_edition_key, synopsisPages, currentPage)
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)

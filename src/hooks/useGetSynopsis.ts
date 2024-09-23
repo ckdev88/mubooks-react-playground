@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 const useGetSynopsis = (
 	book_id: Book['id'],
-	book_edition_key: Book['edition_key'],
+	book_cover_edition_key: Book['cover_edition_key'],
 	synopsisPages: string[],
 	currentPage: string
 ): string => {
@@ -27,7 +27,7 @@ const useGetSynopsis = (
 				if (data.description && data.description.length > 2) setSynopsis(data.description)
 				else if (data.description?.value !== undefined && data.description?.value.length > 2)
 					setSynopsis(data.description.value)
-				else if (book_edition_key !== undefined) fetchSynopsis2(book_edition_key[0])
+				else if (book_cover_edition_key !== undefined) fetchSynopsis2(book_cover_edition_key)
 			})
 	}
 
