@@ -9,6 +9,30 @@ const useGetSynopsis = (
 
 	useEffect(
 		() => {
+			const fetchSynopsis = async (book_id: string): Promise<void> => {
+				const fetchSynopsisPromise = fetch('https://openlibrary.org/works/' + book_id + '.json')
+				fetchSynopsisPromise
+					.then((response) => {
+						if (!response.ok) throw new Error(`Error ${response.status}`)
+						return response.json()
+					})
+					.then((data) => {
+						if (data.description && data.description.length > 2) setSynopsis(data.description)
+						else if (data.description?.value !== undefined && data.description?.value.length > 2)
+							setSynopsis(data.description.value)
+						else if (book_cover_edition_key !== undefined) fetchSynopsis2(book_cover_edition_key)
+					})
+			}
+
+			const fetchSynopsis2 = async (book_id: string): Promise<void> => {
+				const fetchSynopsisPromise = fetch('https://openlibrary.org/books/' + book_id + '.json')
+				fetchSynopsisPromise
+					.then((response) => {
+						if (!response.ok) throw new Error(`Error ${response.status}`)
+						return response.json()
+					})
+					.then((data) => setSynopsis(data.description))
+			}
 			if (synopsisPages.includes(currentPage) === true) fetchSynopsis(book_id)
 		},
 		// TODO: line below should be properly fixed
@@ -16,30 +40,6 @@ const useGetSynopsis = (
 		[]
 	)
 
-	const fetchSynopsis = async (book_id: string) => {
-		const fetchSynopsisPromise = fetch('https://openlibrary.org/works/' + book_id + '.json')
-		fetchSynopsisPromise
-			.then((response) => {
-				if (!response.ok) throw new Error(`Error ${response.status}`)
-				return response.json()
-			})
-			.then((data) => {
-				if (data.description && data.description.length > 2) setSynopsis(data.description)
-				else if (data.description?.value !== undefined && data.description?.value.length > 2)
-					setSynopsis(data.description.value)
-				else if (book_cover_edition_key !== undefined) fetchSynopsis2(book_cover_edition_key)
-			})
-	}
-
-	const fetchSynopsis2 = async (book_id: string) => {
-		const fetchSynopsisPromise = fetch('https://openlibrary.org/books/' + book_id + '.json')
-		fetchSynopsisPromise
-			.then((response) => {
-				if (!response.ok) throw new Error(`Error ${response.status}`)
-				return response.json()
-			})
-			.then((data) => setSynopsis(data.description))
-	}
 	return synopsis
 }
 export default useGetSynopsis
