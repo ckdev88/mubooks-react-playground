@@ -40,15 +40,15 @@ export default function SignupCard() {
 					<form onSubmit={processSignupForm}>
 						<label htmlFor="screenname">
 							<div className="description">Screen name</div>
-							<input type="text" id="signup_screenname" name="screenname" />
+							<input type="text" id="signup_screenname" name="screenname" autoComplete="off" />
 						</label>
 						<label htmlFor="email">
 							<div className="description">Email address: *</div>
-							<input type="email" id="signup_email" name="email" required />
+							<input type="email" id="signup_email" name="email" required autoComplete="off" />
 						</label>
 						<label htmlFor="password">
 							<div className="description">Password: *</div>
-							<input type="password" id="signup_password" name="password" required />
+							<input type="password" id="signup_password" name="password" required autoComplete="off" />
 						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button>Create account</button>

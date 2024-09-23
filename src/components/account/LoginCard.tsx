@@ -60,11 +60,11 @@ const LoginCard = () => {
 					<form onSubmit={processLoginForm}>
 						<label htmlFor="login_email">
 							<div className="description">Email address</div>
-							<input type="email" id="login_email" name="login_email" required />
+							<input type="email" id="login_email" name="login_email" required autoComplete='username'/>
 						</label>
 						<label htmlFor="login_password">
 							<div className="description">Password</div>
-							<input type="password" id="login_password" name="login_password" />
+							<input type="password" id="login_password" name="login_password" autoComplete='current-password' />
 						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button type="submit" value="Log in" disabled={isLoading}>
