@@ -10,11 +10,11 @@ const BookModifyPages = ({
 	book_id: Book['id']
 	book_number_of_pages_median: Book['number_of_pages_median']
 }) => {
-	const { isModdingPages, setIsModdingPages,setNumberOfPages } = useContext(IsModdingPagesContext)
-	const [processPagesModifyForm, isModded,newNumberOfPages] = useChangePages(book_id,book_number_of_pages_median)
+	const { isModdingPages, setIsModdingPages, setNumberOfPages } = useContext(IsModdingPagesContext)
+	const [processPagesModifyForm, isModded, newNumberOfPages] = useChangePages(book_id, book_number_of_pages_median)
 
 	useEffect(() => {
-		if (isModded === true){
+		if (isModded === true) {
 			setIsModdingPages(false)
 			setNumberOfPages(newNumberOfPages)
 		}
