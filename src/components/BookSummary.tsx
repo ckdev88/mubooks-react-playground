@@ -82,10 +82,10 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			</div>
 			<footer>
 				{(currentPage === 'finished' || currentPage === 'favorites') && (
-					<ReviewText book_id={book.id} book_review_text={book.review_text} />
-				)}
-				{(currentPage === 'finished' || currentPage === 'favorites') && (
-					<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+					<>
+						<ReviewText book_id={book.id} book_review_text={book.review_text} />
+						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+					</>
 				)}
 				{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
 				{synopsisPages.includes(currentPage) && synopsis ? (
