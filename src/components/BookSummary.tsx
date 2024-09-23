@@ -2,7 +2,6 @@ import { useState } from 'react'
 import AddToRemoveFromX from './AddToRemoveFromX'
 import BookStartedFinished from './BookStartedFinished'
 import ReactMarkdown from 'react-markdown'
-import ReviewRating from './ReviewRating'
 import ReviewText from './ReviewText'
 import ReviewQuote from './ReviewQuote'
 import SearchTropes from './SearchTropes'
@@ -12,14 +11,15 @@ import { cleanAnchor } from '../helpers/cleanInput'
 import SummaryReviews from './SummaryReviews'
 import BookPages from './BookPages'
 import BookSummaryTitle from './BookSummaryTitle'
-import BookSummaryCover from './BookSummaryCover'
 import useGetSynopsis from '../hooks/useGetSynopsis'
+import BookSummaryAside from './BookSummaryAside'
 
 const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Page; refer?: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
 	const pagesMedianPages: Page[] = ['search', 'reading']
 
 	const synopsis = useGetSynopsis(book.id, book.cover_edition_key, synopsisPages, currentPage)
+
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
@@ -28,17 +28,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			className={book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'}
 			id={bookAnchor}
 		>
-			<aside className="cover">
-				<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} />
-				{(currentPage === 'finished' || currentPage === 'favorites') && (
-					<ReviewRating
-						book_id={book.id}
-						book_rate_stars={book.rate_stars}
-						book_rate_spice={book.rate_spice}
-						book_title_short={book.title_short}
-					/>
-				)}
-			</aside>
+			<BookSummaryAside book={book} currentPage={currentPage} />
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
 					{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />}
