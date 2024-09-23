@@ -22,7 +22,7 @@ export default function ReadingItems() {
 					{booksarr.slice(-6).map((book: Book, index: number) => {
 						return (
 							<article className="book-cover" key={`deck_reading_books${book.id}`} style={{ zIndex: 10 - index }}>
-								<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} book_id={book.id} />
+								<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} />
 							</article>
 						)
 					})}

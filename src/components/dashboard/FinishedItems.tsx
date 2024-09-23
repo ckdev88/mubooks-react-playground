@@ -23,7 +23,7 @@ export default function FinishedItems({ page }: { page: Page }) {
 					{booksarr.slice(0, 6).map((book: Book, index: number) => {
 						return (
 							<article className="book-cover" key={`deck_finished_books${book.id}`} style={{ zIndex: 10 - index }}>
-								<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} book_id={book.id} />
+								<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} />
 							</article>
 						)
 					})}

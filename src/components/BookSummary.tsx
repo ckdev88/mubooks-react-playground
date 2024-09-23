@@ -28,7 +28,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			id={bookAnchor}
 		>
 			<aside className="cover">
-				<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} book_id={book.id} />
+				<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} />
 				{(currentPage === 'finished' || currentPage === 'favorites') && (
 					<ReviewRating
 						book_id={book.id}
@@ -41,7 +41,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
 					{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />}
-					{currentPage === 'dashboard' && refer!== undefined ? (
+					{currentPage === 'dashboard' && refer !== undefined ? (
 						<Link to={`/${refer}`}>
 							<BookSummaryTitle
 								book_title_short={book.title_short}
