@@ -5,7 +5,6 @@ import ReactMarkdown from 'react-markdown'
 import ReviewText from './ReviewText'
 import ReviewQuote from './ReviewQuote'
 import SearchTropes from './SearchTropes'
-import convertDate from '../helpers/convertDate'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 import SummaryReviews from './SummaryReviews'
@@ -13,6 +12,7 @@ import BookPages from './BookPages'
 import BookSummaryTitle from './BookSummaryTitle'
 import useGetSynopsis from '../hooks/useGetSynopsis'
 import BookSummaryAside from './BookSummaryAside'
+import BookSummaryStatus from './BookSummaryStatus'
 
 const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Page; refer?: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
@@ -74,37 +74,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 					)}
 					{currentPage !== 'quotedbooks' && (
 						<>
-							{currentPage === 'search' && (
-								<div className="status" style={{ marginBottom: '.5rem' }}>
-									{book.list > 0 && (
-										<em>
-											{book.list === 1 && (
-												<>
-													Already on my <Link to={'/wishlist#' + bookAnchor}>wishlist</Link>.
-												</>
-											)}
-											{book.list === 2 && (
-												<>
-													<Link to={'/reading#' + bookAnchor}>Reading</Link>
-													{book.date_reading && <> since {convertDate(book.date_reading, 'human')}</>}.
-												</>
-											)}
-											{(book.list === 3 || book.list === 4) && (
-												<>
-													<Link to={'/finished#' + bookAnchor}>Finished</Link>
-													{book.date_finished && <> on {convertDate(book.date_finished, 'human')}</>}
-													{book.list === 4 && (
-														<>
-															&nbsp;and <Link to={'/favorites#' + bookAnchor}>favorited</Link>
-														</>
-													)}
-													.
-												</>
-											)}
-										</em>
-									)}
-								</div>
-							)}
+							{currentPage === 'search' && <BookSummaryStatus book={book} bookAnchor={bookAnchor} />}
 							<AddToRemoveFromX book={book} currentPage={currentPage} limit={0} />
 						</>
 					)}
