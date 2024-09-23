@@ -18,8 +18,8 @@ const BookModifyPages = ({
 			setIsModdingPages(false)
 			setNumberOfPages(newNumberOfPages)
 		}
-	}, [isModded, setIsModdingPages,newNumberOfPages])
-
+		// TODO:  decrease dependencies if possible, or use useCallback, or upgrade to react19
+	}, [isModded, setIsModdingPages, newNumberOfPages, setNumberOfPages])
 
 	return (
 		<span className="dflex" style={{ alignItems: 'center' }}>

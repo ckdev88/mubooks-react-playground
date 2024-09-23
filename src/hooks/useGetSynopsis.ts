@@ -7,9 +7,14 @@ const useGetSynopsis = (
 ): string => {
 	const [synopsis, setSynopsis] = useState<string>('')
 
-	useEffect(() => {
-		if (synopsisPages.includes(currentPage) === true) fetchSynopsis(book_id)
-	}, [])
+	useEffect(
+		() => {
+			if (synopsisPages.includes(currentPage) === true) fetchSynopsis(book_id)
+		},
+		// TODO: line below should be properly fixed
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
+	)
 
 	const fetchSynopsis = async (book_id: string) => {
 		const fetchSynopsisPromise = fetch('https://openlibrary.org/works/' + book_id + '.json')
@@ -35,7 +40,6 @@ const useGetSynopsis = (
 			})
 			.then((data) => setSynopsis(data.description))
 	}
-
 	return synopsis
 }
 export default useGetSynopsis
