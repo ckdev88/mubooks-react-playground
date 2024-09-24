@@ -3,12 +3,10 @@
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
-import AddBookPage from './routes/books/AddBookPage'
 import AuthConfirm from './routes/auth/Confirm.tsx'
 import ResetPasswordPage from './routes/auth/ResetPasswordPage.tsx'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
-import ClearMyBooks from './routes/books/ClearMyBooks'
 import DashboardPage from './routes/account/DashboardPage'
 import ErrorPage from './routes/ErrorPage'
 import FavoritesPage from './routes/books/FavoritesPage'
@@ -166,7 +164,9 @@ const App = () => {
 								<Route path="/account/*" Component={UserLoginPage} />
 								<Route path="/dashboard" Component={DashboardPage} />
 								<Route path="/search" Component={SearchPage} />
+								{ /*
 								<Route path="/add-book" Component={AddBookPage} />
+								*/ }
 								<Route path="/savedbooks" Component={SavedBooksPage} />
 								<Route path="/wishlist" Component={WishlistPage} />
 								<Route path="/reading" Component={ReadingPage} />
@@ -175,7 +175,9 @@ const App = () => {
 								<Route path="/quoted-books" Component={QuotedPage} />
 								<Route path="/tropes" Component={TropesPage} />
 								<Route path="/statistics" Component={StatisticsPage} />
+								{ /*
 								<Route path="/clear-my-books" Component={ClearMyBooks} />
+								*/ }
 								<Route path="/loadlibrary" Component={LoadLibrary} />
 							</>
 						)}
