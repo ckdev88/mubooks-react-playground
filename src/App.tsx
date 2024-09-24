@@ -136,7 +136,7 @@ const App = () => {
 				}}
 			>
 				{userIsLoggedIn && (
-					<header id="header">
+					<header id="header" className='shade'>
 						<NavWrapper />
 					</header>
 				)}
