@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import SavedItems from './SavedItems'
+import DashboardItems from './DashboardItems'
 
 export default function Saved() {
 	return (
@@ -10,7 +10,7 @@ export default function Saved() {
 						All of Mu Books<span>›</span>
 					</header>
 				</Link>
-				<SavedItems />
+				<DashboardItems page='savedbooks' noBooksText='Let&lsquo;s start saving books.' />
 			</article>
 		</>
 	)

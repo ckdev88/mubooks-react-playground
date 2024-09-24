@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import FinishedItems from './FinishedItems'
+import DashboardItems from './DashboardItems'
 
 export default function Finished() {
 	return (
@@ -10,7 +10,7 @@ export default function Finished() {
 						Mu Finished books<span>›</span>
 					</header>
 				</Link>
-				<FinishedItems page='dashboard' />
+				<DashboardItems page="finished" noBooksText="Books I finished reading." />
 			</article>
 		</>
 	)

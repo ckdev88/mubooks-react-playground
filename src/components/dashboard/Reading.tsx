@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import ReadingItems from './ReadingItems'
+import DashboardItems from './DashboardItems'
 
 export default function Reading() {
 	return (
@@ -10,7 +10,7 @@ export default function Reading() {
 						What I'm reading now <span>›</span>
 					</header>
 				</Link>
-				<ReadingItems />
+				<DashboardItems page="reading" noBooksText="Already reading a book? Let's add it here." />
 			</article>
 		</>
 	)

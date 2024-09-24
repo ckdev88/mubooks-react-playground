@@ -1,4 +1,4 @@
-import WishlistItems from './WishlistItems'
+import DashboardItems from './DashboardItems'
 import { Link } from 'react-router-dom'
 
 export default function Wishlist() {
@@ -10,7 +10,7 @@ export default function Wishlist() {
 						Mu Wishlist<span>›</span>
 					</header>
 				</Link>
-				<WishlistItems />
+				<DashboardItems page="wishlist" noBooksText="Next in line." />
 			</article>
 		</>
 	)

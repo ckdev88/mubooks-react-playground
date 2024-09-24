@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import FavoritesItems from './FavoritesItems'
+import DashboardItems from './DashboardItems'
 
 export default function Favorites() {
 	return (
@@ -10,7 +10,7 @@ export default function Favorites() {
 						Mu Favorites<span>›</span>
 					</header>
 				</Link>
-				<FavoritesItems page='dashboard' />
+				<DashboardItems page='favorites' noBooksText='Only the best ones here.' />
 			</article>
 		</>
 	)

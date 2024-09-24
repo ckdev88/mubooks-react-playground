@@ -167,7 +167,7 @@ const App = () => {
 								<Route path="/dashboard" Component={DashboardPage} />
 								<Route path="/search" Component={SearchPage} />
 								<Route path="/add-book" Component={AddBookPage} />
-								<Route path="/saved-books" Component={SavedBooksPage} />
+								<Route path="/savedbooks" Component={SavedBooksPage} />
 								<Route path="/wishlist" Component={WishlistPage} />
 								<Route path="/reading" Component={ReadingPage} />
 								<Route path="/finished" Component={FinishedPage} />
