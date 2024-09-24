@@ -11,7 +11,7 @@ const BookSummaryCover = ({
 	if (book_cover_redir !== undefined && book_cover_redir !== '') bookCover = book_cover_redir
 	else bookCover = getBookCover(book_cover, 'M')
 
-	return <img src={bookCover} alt="" />
+	return <img src={bookCover} alt="" className='cover shade' />
 }
 
 export default BookSummaryCover
