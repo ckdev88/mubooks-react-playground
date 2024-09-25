@@ -21,6 +21,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
+	if (currentPage === 'quotedbooks') refer = 'savedbooks#' + bookAnchor
 	return (
 		<article
 			className={book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'}
@@ -30,7 +31,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
 					{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />}
-					{currentPage === 'dashboard' && refer !== undefined ? (
+					{(currentPage === 'dashboard' || currentPage === 'quotedbooks') && refer !== undefined ? (
 						<Link to={`/${refer}`}>
 							<BookSummaryTitle
 								book_title_short={book.title_short}
