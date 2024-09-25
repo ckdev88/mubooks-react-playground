@@ -134,7 +134,7 @@ const App = () => {
 				}}
 			>
 				{userIsLoggedIn && (
-					<header id="header" className='shade'>
+					<header id="header" className="shade">
 						<NavWrapper />
 					</header>
 				)}
@@ -164,9 +164,9 @@ const App = () => {
 								<Route path="/account/*" Component={UserLoginPage} />
 								<Route path="/dashboard" Component={DashboardPage} />
 								<Route path="/search" Component={SearchPage} />
-								{ /*
+								{/*
 								<Route path="/add-book" Component={AddBookPage} />
-								*/ }
+								*/}
 								<Route path="/savedbooks" Component={SavedBooksPage} />
 								<Route path="/wishlist" Component={WishlistPage} />
 								<Route path="/reading" Component={ReadingPage} />
@@ -175,9 +175,9 @@ const App = () => {
 								<Route path="/quoted-books" Component={QuotedPage} />
 								<Route path="/tropes" Component={TropesPage} />
 								<Route path="/statistics" Component={StatisticsPage} />
-								{ /*
+								{/*
 								<Route path="/clear-my-books" Component={ClearMyBooks} />
-								*/ }
+								*/}
 								<Route path="/loadlibrary" Component={LoadLibrary} />
 							</>
 						)}

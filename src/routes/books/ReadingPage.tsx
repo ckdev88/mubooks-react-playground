@@ -47,8 +47,8 @@ const ReadingPage = () => {
 							Currently enjoying books:&nbsp;
 							{booksFiltered.length}
 						</>
-					) : booksFiltered.length <1 && (
-						<>Nothing, at the moment.</>
+					) : (
+						booksFiltered.length < 1 && <>Nothing, at the moment.</>
 					)}
 					&nbsp;
 				</sub>

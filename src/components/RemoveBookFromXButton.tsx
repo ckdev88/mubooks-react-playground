@@ -75,7 +75,8 @@ const RemoveBookFromXButton = ({
 	}
 
 	// TODO: use favorite-star instead of icon-remove on different spot
-	if (icon && targetList === 4) return <span className="icon-heart active" onClick={RemoveBookFromXButtonAct}></span>
+	if (icon && targetList === 4)
+		return <span className="icon-heart active" onClick={RemoveBookFromXButtonAct}></span>
 
 	return (
 		<div className="mark">

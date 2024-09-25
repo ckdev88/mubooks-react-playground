@@ -130,7 +130,10 @@ label .description {
 	border-radius: 0.2rem;
 	font-size: 0.8rem;
 	color: rgba(0, 0, 0, 50%);
-	transition: 0.18s font-weight ease-in-out, 0.18s background-color ease-in-out, 0.18s color ease-in-out,
+	transition:
+		0.18s font-weight ease-in-out,
+		0.18s background-color ease-in-out,
+		0.18s color ease-in-out,
 		0.18s margin-left ease-in-out;
 }
 
@@ -166,7 +169,10 @@ main button,
 input[type='submit'] {
 	margin-bottom: 0.75rem;
 	border-color: hsl(325, 55%, 90%);
-	transition: 0.18s outline ease-in-out, 0.18s border-color ease-in-out, 0.18s box-shadow ease-in-out,
+	transition:
+		0.18s outline ease-in-out,
+		0.18s border-color ease-in-out,
+		0.18s box-shadow ease-in-out,
 		0.18s border ease-in-out;
 }
 input[type='text']:focus,

@@ -11,7 +11,10 @@ const BookModifyPages = ({
 	book_number_of_pages_median: Book['number_of_pages_median']
 }) => {
 	const { isModdingPages, setIsModdingPages, setNumberOfPages } = useContext(IsModdingPagesContext)
-	const [processPagesModifyForm, isModded, newNumberOfPages] = useChangePages(book_id, book_number_of_pages_median)
+	const [processPagesModifyForm, isModded, newNumberOfPages] = useChangePages(
+		book_id,
+		book_number_of_pages_median
+	)
 
 	useEffect(() => {
 		if (isModded === true) {
@@ -24,7 +27,11 @@ const BookModifyPages = ({
 	return (
 		<span className="dflex" style={{ alignItems: 'center' }}>
 			<div className="dflex" style={{ alignContent: 'center', alignItems: 'center', position: 'relative' }}>
-				<form onSubmit={processPagesModifyForm} className="single-small-form wm6" style={{ marginRight: '.3rem' }}>
+				<form
+					onSubmit={processPagesModifyForm}
+					className="single-small-form wm6"
+					style={{ marginRight: '.3rem' }}
+				>
 					<input type="number" name="pagesAmount" defaultValue={book_number_of_pages_median} />
 					<BtnInsideCaret />
 				</form>

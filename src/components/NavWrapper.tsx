@@ -102,11 +102,11 @@ const NavWrapper = () => {
 					<NavLink to={'/statistics'} onClick={toggleNav0}>
 						Statistics
 					</NavLink>
-					{ /*
+					{/*
 					<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
 						Clear My Books
 					</NavLink>
-					*/ }
+					*/}
 					<hr
 						style={{
 							width: '80%',

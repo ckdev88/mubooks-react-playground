@@ -5,7 +5,7 @@ const useCardRotate = () => {
 		document.getElementById('cards-draaideur')?.classList.add('rotate')
 		if (cardSignup) cardSignup.style.display = 'none'
 		if (cardRecover) {
-		cardRecover.style.display = 'flex'
+			cardRecover.style.display = 'flex'
 			document.getElementById('recover_email')?.focus()
 		}
 	}

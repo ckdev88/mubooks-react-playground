@@ -31,7 +31,10 @@ const SearchPage = () => {
 			const searchfields: string =
 				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median,subject'
 			await fetch(
-				'https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=30&fields=' + searchfields
+				'https://openlibrary.org/search.json?q=' +
+					search_term +
+					'&mode=everything&limit=30&fields=' +
+					searchfields
 			)
 				.then((response) => response.json())
 				.then((json) =>

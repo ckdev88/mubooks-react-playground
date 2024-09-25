@@ -43,7 +43,7 @@ const RecoverCard = () => {
 					<form onSubmit={processRecoverForm}>
 						<label htmlFor="recover_email">
 							<div className="description">Email address: *</div>
-							<input type="email" id="recover_email" name="email" required autoComplete='email' />
+							<input type="email" id="recover_email" name="email" required autoComplete="email" />
 						</label>
 						<p>We'll send a link to this email address if it matches an existing account.</p>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>

@@ -84,7 +84,7 @@ type BookData = [
 		cover_redir?: string
 		img?: string
 		title_short?: string
-	}
+	},
 ]
 interface Book {
 	author_key?: string[]

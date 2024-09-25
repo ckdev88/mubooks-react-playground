@@ -6,7 +6,8 @@ import getListName from '../functions/getListName'
 import { getBookCover } from '../Helpers'
 
 const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList }): [() => void, boolean] => {
-	const { setPopupNotification, userMyBooks, setUserMyBooks, userid, todaysDateDigit } = useContext(AppContext)
+	const { setPopupNotification, userMyBooks, setUserMyBooks, userid, todaysDateDigit } =
+		useContext(AppContext)
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -16,7 +17,10 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 		setUserMyBooks(myBooksNew)
 		const { error } = await supabase
 			.from('user_entries')
-			.update({ json: myBooksNew, testdata: `Updated from AddBookToXButton to ${getListName(targetList)}` })
+			.update({
+				json: myBooksNew,
+				testdata: `Updated from AddBookToXButton to ${getListName(targetList)}`,
+			})
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message

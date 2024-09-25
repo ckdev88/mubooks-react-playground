@@ -4,7 +4,13 @@ import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 
-const ReviewText = ({ book_id, book_review_text }: { book_id: Book['id']; book_review_text: Book['review_text'] }) => {
+const ReviewText = ({
+	book_id,
+	book_review_text,
+}: {
+	book_id: Book['id']
+	book_review_text: Book['review_text']
+}) => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
 	const [reviewText, setReviewText] = useState<Book['review_text']>(book_review_text)
 	const [showForm, setShowForm] = useState<boolean>(false)

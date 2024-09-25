@@ -7,7 +7,8 @@ import { AppContext } from '../../App'
 const pageTitle = 'Reset password page'
 
 const ResetPasswordPage = () => {
-	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow, setNavTitle } = useContext(AppContext)
+	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow, setNavTitle } =
+		useContext(AppContext)
 
 	useEffect(() => {
 		setNavTitle(pageTitle)

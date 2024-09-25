@@ -19,7 +19,10 @@ const StatisticsPage = () => {
 
 	const getOldestFinishedDate = (): number => {
 		for (let i = 0; i < userMyBooks.length; i++) {
-			if (Number(userMyBooks[i].date_finished) > 0 && Number(userMyBooks[i].date_finished) < oldestFinishedDate)
+			if (
+				Number(userMyBooks[i].date_finished) > 0 &&
+				Number(userMyBooks[i].date_finished) < oldestFinishedDate
+			)
 				oldestFinishedDate = Number(userMyBooks[i].date_finished)
 		}
 		return oldestFinishedDate

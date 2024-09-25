@@ -9,7 +9,7 @@
 	font-size: 1.4rem;
 	margin-bottom: 1rem;
 	width: 100%;
-	display:flex;
+	display: flex;
 	justify-content: space-between;
 }
 .card header div {

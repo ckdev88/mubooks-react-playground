@@ -9,7 +9,9 @@
 	list-style: none;
 	padding: 0 0 1rem;
 	margin: 0;
-	transition: padding 0.18s linear, background-color 0.18s linear;
+	transition:
+		padding 0.18s linear,
+		background-color 0.18s linear;
 	display: flex;
 	flex-wrap: wrap;
 }

@@ -6,7 +6,7 @@ const useClearBooks = (): [() => void] => {
 	const { setUserMyBooks } = useContext(AppContext)
 	const clearnow = async (): Promise<void> => {
 		await MyBooksUpdate([])
-			.then(()=>setUserMyBooks([]))
+			.then(() => setUserMyBooks([]))
 			.finally(() => console.log('cleared'))
 		// setUserMyBooks([])
 		// console.log('clear!')

@@ -17,7 +17,9 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 	function showTropeBooks(trope: string) {
 		const tropeBooksFiltered = userMyBooks.filter(
 			(book: Book) =>
-				book.review_tropes !== undefined && book.review_tropes.length > 0 && book.review_tropes.includes(trope)
+				book.review_tropes !== undefined &&
+				book.review_tropes.length > 0 &&
+				book.review_tropes.includes(trope)
 		)
 		setTropeBooks(tropeBooksFiltered)
 		setActiveTrope(trope)
