@@ -51,9 +51,6 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 							book_id={book.id}
 						/>
 					)}
-					{currentPage === 'quotedbooks' && (
-						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
-					)}
 					{pagesMedianPages.includes(currentPage) && (
 						<BookPages
 							book_id={book.id}
@@ -81,15 +78,8 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 				</div>
 			</div>
 			<footer>
-				{(currentPage === 'finished' || currentPage === 'favorites') && (
-					<>
-						<ReviewText book_id={book.id} book_review_text={book.review_text} />
-						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
-					</>
-				)}
 				{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
 				{synopsisPages.includes(currentPage) && synopsis ? (
-					// TODO add synopsis to cache
 					<>
 						<button
 							className={isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'}

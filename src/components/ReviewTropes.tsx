@@ -4,7 +4,7 @@ import { cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 
-const ReviewTropes = (book: Book, tropes: BookTropes) => {
+const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 
 	const [bookTropes, setBookTropes] = useState<BookTropes>(tropes)

@@ -4,6 +4,7 @@ import BookSummary from '../BookSummary'
 import { Link } from 'react-router-dom'
 import { shuffleArray } from '../../Helpers'
 import BookSummaryCover from '../BookSummaryCover'
+import { cleanAnchor } from '../../helpers/cleanInput'
 
 const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: string }) => {
 	let book_list: Book['list']
@@ -31,7 +32,7 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 				return <BookSummary book={book} key={book.id} currentPage="dashboard" refer={page} />
 			})
 		}
-		if (page === 'favorites' || page ==='savedbooks') shuffleArray(booksarr as [])
+		if (page === 'favorites' || page === 'savedbooks') shuffleArray(booksarr as [])
 		if (page === 'finished') booksarr.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
 
 		let slicedArr = booksarr.slice(-6)
@@ -46,29 +47,30 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 
 		// TODO make link to more dynamic towards specific book in case of spread (maybe also when stack)
 		return (
-			<Link to={'/' + page}>
-				<div className={containerClasses}>
-					{slicedArr.map((book: Book, index: number) => {
-						let marginLeft: number = 0
-						if (index > 0 && booksarr.length > 3) marginLeft = -20.01
-						const marginLeftStyle: string = `${marginLeft}%`
-						let extraArticleClass: string = ''
-						if (booksarr.length > 3) extraArticleClass += ' fl'
-						if (booksarr.length < 6) extraArticleClass += ' shade'
-						const articleClassNames = `book-cover${extraArticleClass}`
+			<div className={containerClasses}>
+				{slicedArr.map((book: Book, index: number) => {
+					let marginLeft: number = 0
+					if (index > 0 && booksarr.length > 3) marginLeft = -20.01
+					const marginLeftStyle: string = `${marginLeft}%`
+					let extraArticleClass: string = ''
+					if (booksarr.length > 3) extraArticleClass += ' fl'
+					if (booksarr.length < 6) extraArticleClass += ' shade'
+					const articleClassNames = `book-cover${extraArticleClass}`
+					const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 
-						return (
-							<article
-								className={articleClassNames}
-								key={`deck_${page}_books${book.id}`}
-								style={{ zIndex: 10 - index, marginLeft: marginLeftStyle }}
-							>
+					return (
+						<article
+							className={articleClassNames}
+							key={`deck_${page}_books${book.id}`}
+							style={{ zIndex: 10 - index, marginLeft: marginLeftStyle }}
+						>
+							<Link to={'/' + page + '#' + bookAnchor}>
 								<BookSummaryCover book_cover={book.cover} book_cover_redir={book.cover_redir} />
-							</article>
-						)
-					})}
-				</div>
-			</Link>
+							</Link>
+						</article>
+					)
+				})}
+			</div>
 		)
 	}
 
