@@ -69,10 +69,10 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 						/>
 					)}
 					{currentPage !== 'quotedbooks' && (
-						<>
+						<div>
 							{currentPage === 'search' && <BookSummaryStatus book={book} bookAnchor={bookAnchor} />}
 							<AddToRemoveFromX book={book} currentPage={currentPage} limit={0} />
-						</>
+						</div>
 					)}
 				</div>
 			</div>
