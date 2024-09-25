@@ -47,8 +47,8 @@ const ReadingPage = () => {
 							Currently enjoying books:&nbsp;
 							{booksFiltered.length}
 						</>
-					) : (
-						booksFiltered.length < 1 && <>Nothing, at the moment.</>
+					) : booksFiltered.length <1 && (
+						<>Nothing, at the moment.</>
 					)}
 					&nbsp;
 				</sub>
@@ -58,8 +58,7 @@ const ReadingPage = () => {
 					<p>
 						Want to add a book to your reading list?
 						<br />
-						<Link to="/wishlist">View your wishlist</Link> or <Link to="/search">Search</Link> to add a
-						book.
+						<Link to="/wishlist">View your wishlist</Link> or <Link to="/search">Search</Link> to add a book.
 						<br />
 						<br />
 					</p>
