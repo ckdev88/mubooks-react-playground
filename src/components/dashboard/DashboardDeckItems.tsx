@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 import BookSummary from '../BookSummary'
-import { Link } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 import { shuffleArray } from '../../Helpers'
 import BookSummaryCover from '../BookSummaryCover'
 import { cleanAnchor } from '../../helpers/cleanInput'
