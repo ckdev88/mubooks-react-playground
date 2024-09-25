@@ -42,13 +42,13 @@ const ReadingPage = () => {
 						<>
 							No book titles found for <i>{localBookFilter}.</i>
 						</>
-					) : booksFiltered.length > 0 ? (
+					) : booksFiltered.length > 1 ? (
 						<>
-							Currently enjoying book(s):&nbsp;
+							Currently enjoying books:&nbsp;
 							{booksFiltered.length}
 						</>
 					) : (
-						<>Nothing, at the moment.</>
+						booksFiltered.length < 1 && <>Nothing, at the moment.</>
 					)}
 					&nbsp;
 				</sub>
