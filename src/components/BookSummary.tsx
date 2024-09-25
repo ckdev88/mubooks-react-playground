@@ -22,6 +22,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
 	if (currentPage === 'quotedbooks') refer = 'savedbooks#' + bookAnchor
+
 	return (
 		<article
 			className={
