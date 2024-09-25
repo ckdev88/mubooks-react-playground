@@ -17,7 +17,6 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 	const pagesMedianPages: Page[] = ['search', 'reading']
 
 	const synopsis = useGetSynopsis(book.id, book.cover_edition_key, synopsisPages, currentPage)
-
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
 	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
@@ -25,17 +24,13 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 
 	return (
 		<article
-			className={
-				book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'
-			}
+			className={book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'}
 			id={bookAnchor}
 		>
 			<BookSummaryAside book={book} currentPage={currentPage} />
 			<div className="article-main">
 				<header style={{ position: 'relative', width: '100%' }}>
-					{currentPage !== 'dashboard' && (
-						<AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />
-					)}
+					{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />}
 					{(currentPage === 'dashboard' || currentPage === 'quotedbooks') && refer !== undefined ? (
 						<Link to={`/${refer}`}>
 							<BookSummaryTitle
@@ -86,9 +81,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 				{synopsisPages.includes(currentPage) && synopsis ? (
 					<>
 						<button
-							className={
-								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
-							}
+							className={isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'}
 							onClick={() => setIsShowingSynopsis(!isShowingSynopsis)}
 						>
 							Synopsis{' '}
