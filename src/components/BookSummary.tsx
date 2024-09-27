@@ -11,6 +11,7 @@ import BookSummaryTitle from './BookSummaryTitle'
 import useGetSynopsis from '../hooks/useGetSynopsis'
 import BookSummaryAside from './BookSummaryAside'
 import BookSummaryStatus from './BookSummaryStatus'
+import ReviewQuote from './ReviewQuote'
 
 const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Page; refer?: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
@@ -81,6 +82,9 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 				</div>
 			</div>
 			<footer>
+				{(currentPage === 'finished' || currentPage === 'favorites') && (
+					<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+				)}
 				{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
 				{synopsisPages.includes(currentPage) && synopsis ? (
 					<>
