@@ -80,8 +80,10 @@ const ResetPasswordPage = () => {
 				<div>
 					<div className="card">
 						<header>
-							Reset your password
-							<sub>Fill in your new password twice and submit to activate it</sub>
+							<div>
+								Reset your password
+								<sub>Fill in your new password twice and submit to activate it</sub>
+							</div>
 						</header>
 						<main>
 							<form onSubmit={handleSubmit}>
