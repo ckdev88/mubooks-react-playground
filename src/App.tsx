@@ -172,7 +172,7 @@ const App = () => {
 								<Route path="/reading" Component={ReadingPage} />
 								<Route path="/finished" Component={FinishedPage} />
 								<Route path="/favorites" Component={FavoritesPage} />
-								<Route path="/quoted-books" Component={QuotedPage} />
+								<Route path="/quoted" Component={QuotedPage} />
 								<Route path="/tropes" Component={TropesPage} />
 								<Route path="/statistics" Component={StatisticsPage} />
 								{/*

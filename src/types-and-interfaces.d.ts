@@ -37,9 +37,8 @@ type Page =
 	| 'finished'
 	| 'favorites'
 	| 'savedbooks'
-	| 'quotedbooks'
+	| 'quoted'
 	| 'tropes'
-	| 'quotedbooks'
 	| 'profile'
 
 type Quote = {
