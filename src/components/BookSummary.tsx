@@ -20,7 +20,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 	const synopsis = useGetSynopsis(book.id, book.cover_edition_key, synopsisPages, currentPage)
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
-	const bookAnchor: string = cleanAnchor(book.title_short + '_' + book.id, false, true)
+	const bookAnchor: string = cleanAnchor(book.title_short)
 	if (currentPage === 'quoted') refer = 'savedbooks#' + bookAnchor
 
 	return (
@@ -31,7 +31,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 					: `book-summary ${currentPage}`
 			}
 		>
-			<span style={{ position: 'relative', marginTop: '-5rem' }} id={bookAnchor}></span>
+			<div style={{ position: 'relative', marginTop: '-5rem' }} id={bookAnchor}></div>
 			<BookSummaryAside book={book} currentPage={currentPage} />
 			<div className="article-main">
 				{currentPage !== 'quoted' && (

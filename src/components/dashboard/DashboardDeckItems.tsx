@@ -29,7 +29,7 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={book.id} currentPage="dashboard" refer={page} />
+				return <BookSummary book={book} key={`BookSummary${book.id}`} currentPage="dashboard" refer={page} />
 			})
 		}
 		if (page === 'favorites' || page === 'savedbooks') shuffleArray(booksarr as [])
@@ -56,7 +56,7 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 					if (booksarr.length > 3) extraArticleClass += ' fl'
 					if (booksarr.length < 6) extraArticleClass += ' shade'
 					const articleClassNames = `book-cover${extraArticleClass}`
-					const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
+					const bookAnchor: string = cleanAnchor(book.title_short)
 
 					return (
 						<article

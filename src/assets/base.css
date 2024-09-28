@@ -6,7 +6,9 @@
 	--green: #0d8846;
 	--red: #f24822;
 }
-
+html {
+	scroll-behavior: smooth;
+}
 body {
 	font-size: 16px;
 	padding: 0;
