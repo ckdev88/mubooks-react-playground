@@ -1,23 +1,22 @@
 .quote {
 	font-style: italic;
 	text-align: center;
-	font-size: 0.9rem;
-	margin: 3rem auto;
+	font-size: 1.4rem;
+	padding-right: 2rem;
+	padding-left: 2rem;
+	margin: 0.5rem auto;
 	width: 100%;
 	box-sizing: border-box;
 }
 .main-dashboard .quote {
-	font-size: 1.3rem;
+	font-size: 1rem;
+	margin: 0 0 1.5rem;
+	background-color: rgba(255, 255, 255, 0.4);
+	padding: 1rem;
 }
-.quote main::before,
-.quote div::before {
-	display: inline-block;
-	content: '“';
-}
-.quote main::after,
-.quote div::after {
-	display: inline-block;
-	content: '”';
+.main-dashboard#main.main-dashboard {
+	padding-left: 0;
+	padding-right: 0;
 }
 .quote footer {
 	margin-top: 0.7em;

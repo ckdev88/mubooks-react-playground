@@ -18,6 +18,24 @@
 	margin-top: 1rem;
 }
 
+.book-summary.quoted {
+	display: flex;
+	align-items: center;
+}
+.book-summary.quoted .review-text.quote {
+	font-size: 1.1rem;
+	padding-top: 0;
+}
+
+.book-summary.quoted .review-text.quote i {
+	font-size: 0.95rem;
+}
+.book-summary.quoted hr {
+	display: none;
+}
+.book-summary .aside {
+	margin-bottom: 0;
+}
 .book-summary .calendar-hidden {
 	overflow: hidden;
 	width: 0;
@@ -259,7 +277,7 @@
 	border: 2px dashed rgba(0, 0, 0, 0.1);
 	text-align: center;
 }
-.book-summary .quote main {
+.book-summary .review-text.quote {
 	font-size: 0.9rem;
 	margin: 0.75rem;
 }

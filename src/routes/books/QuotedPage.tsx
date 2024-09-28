@@ -4,7 +4,7 @@ import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 
 const pageTitle = 'Mu Quotes'
-const currentPage = 'quotedbooks'
+const currentPage = 'quoted'
 
 const QuotedPage = () => {
 	const { userMyBooks, setNavTitle } = useContext(AppContext)

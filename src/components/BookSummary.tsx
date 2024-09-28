@@ -20,8 +20,8 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 	const synopsis = useGetSynopsis(book.id, book.cover_edition_key, synopsisPages, currentPage)
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
-	const bookAnchor: string = cleanAnchor(book.title_short + '-' + book.id)
-	if (currentPage === 'quotedbooks') refer = 'savedbooks#' + bookAnchor
+	const bookAnchor: string = cleanAnchor(book.title_short + '_' + book.id, false, true)
+	if (currentPage === 'quoted') refer = 'savedbooks#' + bookAnchor
 
 	return (
 		<article
@@ -32,86 +32,102 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 		>
 			<BookSummaryAside book={book} currentPage={currentPage} />
 			<div className="article-main">
-				<header style={{ position: 'relative', width: '100%' }}>
-					{currentPage !== 'dashboard' && (
-						<AddToRemoveFromX book={book} currentPage={currentPage} limit={4} />
-					)}
-					{(currentPage === 'dashboard' || currentPage === 'quotedbooks') && refer !== undefined ? (
-						<Link to={`/${refer}`}>
+				{currentPage !== 'quoted' && (
+					<header style={{ position: 'relative', width: '100%' }}>
+						{currentPage !== 'dashboard' && (
+							<AddToRemoveFromX book={book} limit={4} currentPage={currentPage} />
+						)}
+						{currentPage === 'dashboard' && refer !== undefined ? (
+							<Link to={`/${refer}`}>
+								<BookSummaryTitle
+									book_title_short={book.title_short}
+									book_first_publish_year={book.first_publish_year}
+									book_author_name={book.author_name}
+									currentPage={currentPage}
+									book_id={book.id}
+								/>
+							</Link>
+						) : (
 							<BookSummaryTitle
 								book_title_short={book.title_short}
 								book_first_publish_year={book.first_publish_year}
-								currentPage={currentPage}
 								book_author_name={book.author_name}
+								currentPage={currentPage}
 								book_id={book.id}
 							/>
-						</Link>
-					) : (
+						)}
+						{pagesMedianPages.includes(currentPage) && (
+							<BookPages book_id={book.id} book_number_of_pages_median={book.number_of_pages_median} />
+						)}
+					</header>
+				)}
+				{currentPage === 'quoted' ? (
+					<div className="quoteblock">
+						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
 						<BookSummaryTitle
 							book_title_short={book.title_short}
 							book_first_publish_year={book.first_publish_year}
-							currentPage={currentPage}
 							book_author_name={book.author_name}
 							book_id={book.id}
-						/>
-					)}
-					{pagesMedianPages.includes(currentPage) && (
-						<BookPages
-							book_id={book.id}
-							book_number_of_pages_median={book.number_of_pages_median}
 							currentPage={currentPage}
+							style="quoted"
 						/>
-					)}
-				</header>
-				<div className="summary-actions">
-					<SummaryReviews currentPage={currentPage} book={book} />
-					{book.list > 1 && currentPage !== 'search' && currentPage !== 'quotedbooks' && (
-						<BookStartedFinished
-							date_started={book.date_reading}
-							date_finished={book.date_finished}
-							book_id={book.id}
-							list={book.list}
-						/>
-					)}
-					{currentPage !== 'quotedbooks' && (
+					</div>
+				) : (
+					<div className="summary-actions">
+						<SummaryReviews book={book} currentPage={currentPage} />
+						{book.list > 1 && currentPage !== 'search' && (
+							<BookStartedFinished
+								date_started={book.date_reading}
+								date_finished={book.date_finished}
+								book_id={book.id}
+								list={book.list}
+							/>
+						)}
 						<div>
 							{currentPage === 'search' && <BookSummaryStatus book={book} bookAnchor={bookAnchor} />}
-							<AddToRemoveFromX book={book} currentPage={currentPage} limit={0} />
+							<AddToRemoveFromX book={book} limit={0} currentPage={currentPage} />
 						</div>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
-			<footer>
-				{(currentPage === 'finished' || currentPage === 'favorites') && (
-					<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
-				)}
-				{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
-				{synopsisPages.includes(currentPage) && synopsis ? (
-					<>
-						<button
-							className={
-								isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
-							}
-							onClick={() => setIsShowingSynopsis(!isShowingSynopsis)}
-						>
-							Synopsis{' '}
-						</button>
-						{isShowingSynopsis && (
-							<>
-								<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-									<div className="synopsis">
-										<ReactMarkdown>{synopsis}</ReactMarkdown>
+			{currentPage !== 'dashboard' && (
+				<footer>
+					{(currentPage === 'finished' || currentPage === 'favorites' || currentPage === 'savedbooks') && (
+						<>
+							<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+						</>
+					)}
+					{currentPage === 'search' && book.subject && (
+						<SearchTropes book_id={book.id} tropes={book.subject} />
+					)}
+					{synopsisPages.includes(currentPage) && synopsis ? (
+						<div className="synopsis" style={{ marginTop: '.75rem' }}>
+							<button
+								className={
+									isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
+								}
+								onClick={() => setIsShowingSynopsis(!isShowingSynopsis)}
+							>
+								Synopsis{' '}
+							</button>
+							{isShowingSynopsis && (
+								<>
+									<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
+										<div className="synopsis">
+											<ReactMarkdown>{synopsis}</ReactMarkdown>
+										</div>
 									</div>
-								</div>
-							</>
-						)}
-					</>
-				) : (
-					// TODO make link like 'no synopsis yet... write one?' and link to the OL page
-					<></>
-				)}
-				<hr />
-			</footer>
+								</>
+							)}
+						</div>
+					) : (
+						// TODO make link like 'no synopsis yet... write one?' and link to the OL page
+						<></>
+					)}
+					<hr />
+				</footer>
+			)}
 		</article>
 	)
 }

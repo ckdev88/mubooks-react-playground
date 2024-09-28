@@ -113,7 +113,7 @@ const ReviewQuote = ({
 				</>
 			)}
 
-			{showReviewFavQuote && <div onClick={activateForm}>{reviewFavQuote}</div>}
+			{showReviewFavQuote && <div onClick={activateForm}>“{reviewFavQuote}”</div>}
 		</div>
 	)
 }
