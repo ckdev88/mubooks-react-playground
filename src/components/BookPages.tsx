@@ -9,7 +9,6 @@ const BookPages = ({
 }: {
 	book_id: Book['id']
 	book_number_of_pages_median: Book['number_of_pages_median']
-	currentPage: string
 }) => {
 	const [isModdingPages, setIsModdingPages] = useState<boolean>(false)
 	const [numberOfPages, setNumberOfPages] = useState<number>(book_number_of_pages_median)
@@ -18,7 +17,7 @@ const BookPages = ({
 		<IsModdingPagesContext.Provider
 			value={{ isModdingPages, setIsModdingPages, numberOfPages, setNumberOfPages }}
 		>
-			<div style={{ display: 'flex' }}>
+			<div style={{ display: 'flex', padding: '.5rem 0' }}>
 				{isModdingPages ? (
 					<BookModifyPages book_id={book_id} book_number_of_pages_median={book_number_of_pages_median} />
 				) : (

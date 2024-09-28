@@ -26,10 +26,12 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 	return (
 		<article
 			className={
-				book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : 'book-summary'
+				book.list && book.list > 0 && currentPage === 'search'
+					? 'book-summary saved'
+					: `book-summary ${currentPage}`
 			}
-			id={bookAnchor}
 		>
+			<span style={{ position: 'relative', marginTop: '-5rem' }} id={bookAnchor}></span>
 			<BookSummaryAside book={book} currentPage={currentPage} />
 			<div className="article-main">
 				{currentPage !== 'quoted' && (

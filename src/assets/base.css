@@ -104,7 +104,7 @@ img {
 	max-width: 100%;
 }
 .loggedin #main {
-	padding-top: 4rem;
+	padding-top: 3rem;
 }
 
 dl dd {
@@ -130,10 +130,7 @@ label .description {
 	border-radius: 0.2rem;
 	font-size: 0.8rem;
 	color: rgba(0, 0, 0, 50%);
-	transition:
-		0.18s font-weight ease-in-out,
-		0.18s background-color ease-in-out,
-		0.18s color ease-in-out,
+	transition: 0.18s font-weight ease-in-out, 0.18s background-color ease-in-out, 0.18s color ease-in-out,
 		0.18s margin-left ease-in-out;
 }
 
@@ -169,10 +166,7 @@ main button,
 input[type='submit'] {
 	margin-bottom: 0.75rem;
 	border-color: hsl(325, 55%, 90%);
-	transition:
-		0.18s outline ease-in-out,
-		0.18s border-color ease-in-out,
-		0.18s box-shadow ease-in-out,
+	transition: 0.18s outline ease-in-out, 0.18s border-color ease-in-out, 0.18s box-shadow ease-in-out,
 		0.18s border ease-in-out;
 }
 input[type='text']:focus,
@@ -238,9 +232,7 @@ a {
 hr {
 	border-width: 0 0 1px;
 	border-style: solid;
-	border-color: hsl(325, 65%, 90%);
+	border-color: rgba(255, 255, 255, 0.75);
 	height: 1px;
 	background-color: transparent;
-	height: 1px;
-	box-shadow: 0 1px 0 hsl(325, 65%, 20%);
 }

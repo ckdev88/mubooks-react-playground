@@ -37,9 +37,7 @@ main button.alt,
 	padding: 0;
 	text-align: left;
 	text-decoration: none;
-	transition:
-		text-decoration 0.18s ease-in-out,
-		color 0.18s ease-in-out;
+	transition: text-decoration 0.18s ease-in-out, color 0.18s ease-in-out;
 }
 .btn-text:disabled,
 .btn-text:disabled:hover,
@@ -106,6 +104,7 @@ main button.alt,
 .synopsisWrapper .synopsis {
 	height: 0;
 	overflow: hidden;
+	margin-top: 0.5rem;
 }
 .synopsisWrapper[aria-expanded='true'] .synopsis {
 	height: unset;
@@ -156,9 +155,7 @@ main button.alt,
 	padding: 0.5rem;
 	transform: rotate(90deg);
 	width: 1rem;
-	transition:
-		background-color 0.18s ease-in-out,
-		border-color 0.18s ease-in-out;
+	transition: background-color 0.18s ease-in-out, border-color 0.18s ease-in-out;
 }
 .btn-submit-inside-caret-right:hover,
 .btn-submit-inside-caret-right:focus,
@@ -320,9 +317,6 @@ main button.alt,
 }
 .btn-icon:hover .icon-pencil {
 	opacity: 1;
-}
-.reviews {
-	margin-top: 0.75rem;
 }
 .reviews > div > button:first-child {
 	margin-right: 0.5rem;

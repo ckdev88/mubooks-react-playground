@@ -13,9 +13,12 @@
 	display: flex;
 	flex-wrap: wrap;
 }
+.main-dashboard .book-summary {
+	padding-bottom: 0;
+}
 
 .book-summary hr {
-	margin-top: 1rem;
+	margin-top: 0.5rem;
 }
 
 .book-summary.quoted {
@@ -44,23 +47,6 @@
 }
 .book-summary .calendar-hidden + .btn-text {
 	margin-top: -1rem;
-}
-.search .book-summary.saved {
-	padding: 0.5rem;
-	background-color: hsl(325, 55%, 93%);
-	margin-bottom: 1rem;
-	border-radius: 0.5rem;
-	box-sizing: border-box;
-	border: 1px solid #ddd;
-}
-
-.book-summary.reading {
-	padding: 0.5rem;
-	background-color: hsl(325, 55%, 93%);
-	margin-bottom: 1rem;
-	border-radius: 0.5rem;
-	box-sizing: border-box;
-	border: 1px solid #ddd;
 }
 
 .search .book-summary.saved hr {
@@ -260,8 +246,8 @@
 .book-summary .tropes,
 .book-summary .marks,
 .book-summary .book-started-finished,
-.book-summary .review-text {
-	margin-top: 0.75rem;
+.book-summary .article-main .review-text {
+	padding-top: 0.5rem;
 }
 .book-summary .article-main {
 	margin-bottom: 0.75rem;
