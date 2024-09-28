@@ -11,7 +11,7 @@ function cleanInput(input: string, capfirst: boolean = false): string {
 	return returnvalue
 }
 
-function cleanAnchor(input: string, dashes: boolean = true): string {
+function cleanAnchor(input: string, dashes: boolean = true, snake: boolean = false): string {
 	if (input.length < 1) return ''
 	let returnvalue = ''
 
@@ -22,6 +22,7 @@ function cleanAnchor(input: string, dashes: boolean = true): string {
 		if (input[i] === '?') break
 		if (c < 48 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122) {
 			if (dashes) returnvalue += '-'
+			else if (snake) returnvalue += '_'
 		} else returnvalue += input[i]
 	}
 	return returnvalue
