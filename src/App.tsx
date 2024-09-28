@@ -28,7 +28,6 @@ import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import LoadLibrary from './routes/books/LoadLibrary.tsx'
 import { timestampConverter } from './helpers/convertDate.ts'
-import { cleanAnchor } from './helpers/cleanInput.ts'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 

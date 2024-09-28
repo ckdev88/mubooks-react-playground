@@ -22,6 +22,7 @@ interface AppContextType {
 	localBookFilter: string
 	setLocalBookFilter(localBookFilter: localBookFilter): void
 }
+
 interface IsModdingPagesContextType {
 	isModdingPages: boolean
 	setIsModdingPages(isModdingPages: isModdingPages): void
@@ -46,6 +47,7 @@ type Quote = {
 	authors: string
 	title: string
 }
+
 type User = {
 	email: string
 	password: string
@@ -83,7 +85,7 @@ type BookData = [
 		cover_redir?: string
 		img?: string
 		title_short?: string
-	},
+	}
 ]
 interface Book {
 	author_key?: string[]
