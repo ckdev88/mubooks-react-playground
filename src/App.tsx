@@ -99,7 +99,9 @@ const App = () => {
 		setTimeout(() => setPopupNotification(''), 1000)
 		return <>{ret}</>
 	}
-	const mainClassName = 'main-' + cleanAnchor(location.hash, false)
+	const currentPage: Page = location.pathname.slice(1) as Page
+
+	const mainClassName: string = 'main-' + currentPage
 
 	useEffect(() => {
 		document.title = navTitle
