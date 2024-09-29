@@ -6,13 +6,11 @@ import BtnInsideCaret from './ui/BtnInsideCaret'
 
 const TropesLiked = () => {
 	const { setNavTitle, setPopupNotification, userid } = useContext(AppContext)
-	const [showLikedTropesForm, setShowLikedTropesForm] = useState<boolean>(false)
+	const [showForm, setShowForm] = useState<boolean>(false)
 	const [likedTropes, setLikedTropes] = useState<BookTropes>([])
 	const tropesDb = async () => {
 		const res = await supabase.from('user_entries').select('tropes_liked')
-		if (res.data) {
-			setLikedTropes(res.data[0].tropes_liked)
-		}
+		if (res.data) setLikedTropes(res.data[0].tropes_liked)
 	}
 
 	useEffect(() => {
@@ -20,8 +18,8 @@ const TropesLiked = () => {
 	}, [setNavTitle])
 
 	useEffect(() => {
-		if (showLikedTropesForm === true) document.getElementById('trope_add_liked')?.focus()
-	}, [showLikedTropesForm])
+		if (showForm === true) document.getElementById('trope_add_liked')?.focus()
+	}, [showForm])
 
 	async function processLikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
@@ -67,7 +65,7 @@ const TropesLiked = () => {
 	}
 
 	const cancelSubmit = (): void => {
-		setShowLikedTropesForm(false)
+		setShowForm(false)
 	}
 
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
@@ -83,8 +81,8 @@ const TropesLiked = () => {
 				))}
 				<li className="trope_add">
 					<button
-						className={showLikedTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
-						onClick={() => setShowLikedTropesForm(!showLikedTropesForm)}
+						className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
+						onClick={() => setShowForm(!showForm)}
 					>
 						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
 					</button>
@@ -97,7 +95,7 @@ const TropesLiked = () => {
 			<h2>Like</h2>
 			<div>
 				<TropesList tropes={likedTropes} />
-				{showLikedTropesForm && (
+				{showForm && (
 					<>
 						<form className="single-small-form clr" onSubmit={processLikedTropeAddForm}>
 							<input type="text" name="trope_add_liked" id="trope_add_liked" placeholder="Add a trope..." />
