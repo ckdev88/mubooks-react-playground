@@ -113,7 +113,7 @@
 }
 
 .book-summary footer {
-	flex-basis: 100%;
+	flex-basis: calc(100% - 0.5rem);
 }
 
 .book-summary .cover {

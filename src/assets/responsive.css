@@ -43,7 +43,8 @@
 }
 
 @media screen and (max-width: 359.98px) {
-	#root {
+	#root,
+	.loggedin #header {
 		min-width: 320px;
 	}
 	#navIcons {
