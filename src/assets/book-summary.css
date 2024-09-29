@@ -203,6 +203,9 @@
 	padding: 0;
 	list-style-type: none;
 }
+.book-summary .tropes {
+	margin-top: 0;
+}
 .tropes li {
 	display: inline-block;
 	margin: 0 0.35rem 0.35rem 0;

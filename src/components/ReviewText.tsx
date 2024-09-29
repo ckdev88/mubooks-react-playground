@@ -4,13 +4,12 @@ import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 
-const ReviewText = ({
-	book_id,
-	book_review_text,
-}: {
+interface ReviewText {
 	book_id: Book['id']
 	book_review_text: Book['review_text']
-}) => {
+}
+
+const ReviewText = ({ book_id, book_review_text }: ReviewText) => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
 	const [reviewText, setReviewText] = useState<Book['review_text']>(book_review_text)
 	const [showForm, setShowForm] = useState<boolean>(false)
@@ -27,9 +26,6 @@ const ReviewText = ({
 			setShowReviewText(true)
 		}
 	}
-	useEffect(() => {
-		if (book_review_text === undefined || book_review_text.length < 1) setShowForm(true)
-	}, [book_review_text])
 
 	// mod db
 	// TODO: move this function to generic helper location
@@ -92,7 +88,7 @@ const ReviewText = ({
 
 	return (
 		<div className="review-text">
-			{showForm && (
+			{showForm ? (
 				<>
 					<form className="single-small-form clr" onSubmit={processForm}>
 						<input
@@ -103,13 +99,23 @@ const ReviewText = ({
 						/>
 						<BtnInsideCaret />
 					</form>
-					{reviewText && (
-						<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
-							Cancel
+					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
+						Cancel
+					</button>
+				</>
+			) : (
+				<>
+					{(reviewText === '' || reviewText === undefined) && (
+						<button
+							className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
+							onClick={() => setShowForm(!showForm)}
+						>
+							Add review
 						</button>
 					)}
 				</>
 			)}
+
 			{showReviewText && <div onClick={activateForm}>{reviewText}</div>}
 		</div>
 	)
