@@ -36,7 +36,7 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 		if (page === 'finished') booksarr.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
 
 		let slicedArr = booksarr.slice(-6)
-		if (page === 'finished') slicedArr = booksarr.slice(0, 6)
+		if (page === 'finished' || page === 'savedbooks') slicedArr = booksarr.slice(0, 6)
 
 		let containerClasses: string = 'deck-container'
 		if (booksarr.length < 4) containerClasses += ' spread shadeSub'
