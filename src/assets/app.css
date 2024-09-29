@@ -1,6 +1,12 @@
 #root {
 	min-height: 100vh;
 	box-sizing: border-box;
+	display: flex;
+	justify-content: space-around;
+	min-width: 300px;
+	overflow-x: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .light-mode body {
@@ -22,13 +28,6 @@
 	margin: 0 auto;
 	width: 100%;
 	min-width: 300px;
-}
-
-#root {
-	width: 100%;
-	margin: 0 auto;
-	min-width: 300px;
-	overflow-x: auto;
 }
 
 html:not(.loggedin) #root {

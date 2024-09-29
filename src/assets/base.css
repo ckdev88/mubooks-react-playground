@@ -78,10 +78,6 @@ img {
 
 .loggedin #header {
 	display: block;
-	@media screen and (min-width: 600px) {
-		margin-top: 0.4rem;
-		border-radius: 0.4rem;
-	}
 }
 
 #main {
@@ -106,7 +102,7 @@ img {
 	max-width: 100%;
 }
 .loggedin #main {
-	padding-top: 3rem;
+	padding-top: 4rem;
 }
 
 dl dd {
