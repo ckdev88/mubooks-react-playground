@@ -113,7 +113,7 @@
 }
 
 .book-summary footer {
-	flex-basis: calc(100% - 0.5rem);
+	width: 100%;
 }
 
 .book-summary .cover {
@@ -219,6 +219,7 @@
 
 .book-summary .review-rates {
 	margin-top: 0.25rem;
+	margin-bottom: 0.5rem;
 }
 .review-rates > div {
 	width: 6rem;
@@ -270,5 +271,5 @@
 }
 .book-summary .review-text.quote {
 	font-size: 0.9rem;
-	margin: 0.75rem;
+	margin: 0;
 }
