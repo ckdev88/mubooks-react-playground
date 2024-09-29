@@ -44,6 +44,7 @@ const ReviewText = ({ book_id, book_review_text }: ReviewText) => {
 		},
 		[setUserMyBooks, setPopupNotification, userid]
 	)
+
 	const updateReviewTextCallback = useCallback(
 		async function updateReviewText() {
 			for (let i = 0; i < userMyBooks.length; i++) {
@@ -56,6 +57,7 @@ const ReviewText = ({ book_id, book_review_text }: ReviewText) => {
 		},
 		[userMyBooks, book_id, reviewText, updateMyBooksCallback]
 	)
+
 	// /mod db
 	useEffect(() => {
 		if (book_review_text !== reviewText) {

@@ -27,9 +27,6 @@ const ReviewQuote = ({
 			setShowReviewFavQuote(true)
 		}
 	}
-	useEffect(() => {
-		if (book_review_fav_quote === undefined || book_review_fav_quote.length < 1) setShowForm(true)
-	}, [book_review_fav_quote])
 
 	// mod db
 	// TODO: move this function to generic helper location
@@ -88,13 +85,11 @@ const ReviewQuote = ({
 			if (reviewFavQuote !== undefined)
 				document.getElementById('review_fav_quote' + book_id)?.setAttribute('value', reviewFavQuote)
 		}
-		if (reviewFavQuote && reviewFavQuote !== '') setShowReviewFavQuote(true)
-		else setShowReviewFavQuote(false)
 	}, [showForm, reviewFavQuote, book_id, isModding])
 
 	return (
 		<div className="review-text quote">
-			{showForm && (
+			{showForm ? (
 				<>
 					<form className="single-small-form clr" onSubmit={processForm}>
 						<input
@@ -105,15 +100,24 @@ const ReviewQuote = ({
 						/>
 						<BtnInsideCaret />
 					</form>
-					{reviewFavQuote && (
-						<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
-							Cancel
+					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
+						Cancel
+					</button>
+				</>
+			) : (
+				<>
+					{(reviewFavQuote === '' || reviewFavQuote === undefined) && (
+						<button
+							className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
+							onClick={() => setShowForm(!showForm)}
+						>
+							Add Quote
 						</button>
 					)}
 				</>
 			)}
 
-			{showReviewFavQuote && <div onClick={activateForm}>“{reviewFavQuote}”</div>}
+			{showReviewFavQuote && reviewFavQuote && <div onClick={activateForm}>“{reviewFavQuote}”</div>}
 		</div>
 	)
 }
