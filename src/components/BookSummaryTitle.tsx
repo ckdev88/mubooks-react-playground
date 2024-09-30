@@ -16,7 +16,7 @@ const BookSummaryTitle = ({
 }) => {
 	if (style === 'quoted')
 		return (
-			<center>
+			<center style={{ fontSize: '.8em' }}>
 				<i>
 					<strong>
 						{book_title_short},&nbsp;

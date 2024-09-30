@@ -11,7 +11,7 @@ import BookSummaryTitle from './BookSummaryTitle'
 import useGetSynopsis from '../hooks/useGetSynopsis'
 import BookSummaryAside from './BookSummaryAside'
 import BookSummaryStatus from './BookSummaryStatus'
-import ReviewQuote from './ReviewQuote'
+import BookSummaryReview from './BookSummaryReview'
 
 const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Page; refer?: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
@@ -65,7 +65,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 				)}
 				{currentPage === 'quoted' ? (
 					<div className="quoteblock">
-						<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+						<BookSummaryReview book_id={book.id} review_val={book.review_fav_quote} review_type="quote" />
 						<BookSummaryTitle
 							book_title_short={book.title_short}
 							book_first_publish_year={book.first_publish_year}
@@ -97,7 +97,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 				<footer>
 					{(currentPage === 'finished' || currentPage === 'favorites' || currentPage === 'savedbooks') && (
 						<>
-							<ReviewQuote book_id={book.id} book_review_fav_quote={book.review_fav_quote} />
+							<BookSummaryReview book_id={book.id} review_val={book.review_fav_quote} review_type="quote" />
 						</>
 					)}
 					{currentPage === 'search' && book.subject && (
