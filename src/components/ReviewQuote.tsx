@@ -4,15 +4,13 @@ import { AppContext } from '../App'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 
-const ReviewQuote = ({
-	book_id,
-	book_review_fav_quote,
-}: {
+interface PropTypes {
 	book_id: Book['id']
 	book_review_fav_quote: Book['review_fav_quote']
-}) => {
+}
+const ReviewQuote = ({ book_id, book_review_fav_quote }: PropTypes) => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
-	const [reviewFavQuote, setReviewFavQuote] = useState<Book['review_fav_quote']>(book_review_fav_quote)
+	const [reviewQuote, setReviewQuote] = useState<Book['review_fav_quote']>(book_review_fav_quote)
 	const [showForm, setShowForm] = useState<boolean>(false)
 	const [showReviewFavQuote, setShowReviewFavQuote] = useState<boolean>(true)
 	const [isModding, setIsModding] = useState<boolean>(false)
@@ -22,13 +20,12 @@ const ReviewQuote = ({
 		const value = cleanInput(e.currentTarget.review_fav_quote.value.trim(), true)
 		if (value !== undefined) {
 			setIsModding(true)
-			setReviewFavQuote(value)
+			setReviewQuote(value)
 			setShowForm(false)
 			setShowReviewFavQuote(true)
 		}
 	}
 
-	// mod db
 	// TODO: move this function to generic helper location
 	const updateMyBooksCallback = useCallback(
 		async function updateMyBooks(myBooksNew: Books) {
@@ -36,7 +33,7 @@ const ReviewQuote = ({
 			setUserMyBooks(myBooksNew)
 			const { error } = await supabase
 				.from('user_entries')
-				.update({ json: myBooksNew, testdata: 'updated from review: favourite quote' })
+				.update({ json: myBooksNew, testdata: 'updated from review: quote' })
 				.eq('user_id', userid)
 				.select('*')
 			if (error) msg = error.message
@@ -45,27 +42,29 @@ const ReviewQuote = ({
 		},
 		[setUserMyBooks, setPopupNotification, userid]
 	)
+
 	const updateReviewQuoteCallback = useCallback(
 		async function updateReviewQuote() {
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book_id) {
-					userMyBooks[i].review_fav_quote = reviewFavQuote
+					userMyBooks[i].review_fav_quote = reviewQuote
 					break
 				}
 			}
 			updateMyBooksCallback(userMyBooks)
 		},
-		[userMyBooks, book_id, reviewFavQuote, updateMyBooksCallback]
+		[userMyBooks, book_id, reviewQuote, updateMyBooksCallback]
 	)
+
 	// /mod db
 	useEffect(() => {
-		if (book_review_fav_quote !== reviewFavQuote) {
+		if (book_review_fav_quote !== reviewQuote) {
 			if (isModding) {
 				updateReviewQuoteCallback()
 				setIsModding(false)
 			}
 		}
-	}, [isModding, setUserMyBooks, updateReviewQuoteCallback, book_id, book_review_fav_quote, reviewFavQuote])
+	}, [isModding, setUserMyBooks, updateReviewQuoteCallback, book_id, book_review_fav_quote, reviewQuote])
 
 	const activateForm = () => {
 		setShowForm(true)
@@ -82,10 +81,10 @@ const ReviewQuote = ({
 	useEffect(() => {
 		if (isModding) {
 			document.getElementById('review_fav_quote' + book_id)?.focus()
-			if (reviewFavQuote !== undefined)
-				document.getElementById('review_fav_quote' + book_id)?.setAttribute('value', reviewFavQuote)
+			if (reviewQuote !== undefined)
+				document.getElementById('review_fav_quote' + book_id)?.setAttribute('value', reviewQuote)
 		}
-	}, [showForm, reviewFavQuote, book_id, isModding])
+	}, [showForm, reviewQuote, book_id, isModding])
 
 	return (
 		<div className="review-text quote">
@@ -106,18 +105,18 @@ const ReviewQuote = ({
 				</>
 			) : (
 				<>
-					{(reviewFavQuote === '' || reviewFavQuote === undefined) && (
+					{(reviewQuote === '' || reviewQuote === undefined) && (
 						<button
 							className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
 							onClick={() => setShowForm(!showForm)}
 						>
-							Add Quote
+							+ Quote
 						</button>
 					)}
 				</>
 			)}
 
-			{showReviewFavQuote && reviewFavQuote && <div onClick={activateForm}>“{reviewFavQuote}”</div>}
+			{showReviewFavQuote && reviewQuote && <div onClick={activateForm}>“{reviewQuote}”</div>}
 		</div>
 	)
 }
