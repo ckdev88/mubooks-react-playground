@@ -7,14 +7,12 @@ const useChangePages = (
 	book_id: Book['id'],
 	book_number_of_pages_median: Book['number_of_pages_median']
 ): [(e: React.FormEvent<HTMLFormElement>) => void, boolean, number] => {
-	const { setPopupNotification, userMyBooks, userid } = useContext(AppContext)
+	const { userMyBooks } = useContext(AppContext)
 	const [isModded, setIsModded] = useState<boolean>(false)
 	const [newNumberOfPages, setNewNumberOfPages] = useState<number>(book_number_of_pages_median)
 	const msg: string = 'Updated pages amount'
 	const updateMyBooksDb = useMyBooksUpdateDb({
 		myBooksNew: userMyBooks,
-		userid,
-		setPopupNotification,
 		book_id,
 		msg,
 	})
