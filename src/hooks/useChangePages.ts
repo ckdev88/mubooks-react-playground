@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { AppContext } from '../App'
-import { supabase } from '../../utils/supabase'
+import useMyBooksUpdateDb from './useMyBooksUpdateDb'
 import { cleanInput } from '../helpers/cleanInput'
 
 const useChangePages = (
@@ -10,18 +10,14 @@ const useChangePages = (
 	const { setPopupNotification, userMyBooks, userid } = useContext(AppContext)
 	const [isModded, setIsModded] = useState<boolean>(false)
 	const [newNumberOfPages, setNewNumberOfPages] = useState<number>(book_number_of_pages_median)
-
-	async function MyBooksUpdate(myBooksNew: Books) {
-		let msg: string
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew, testdata: `Updated from BookModifyPages to ${book_id}` })
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Updates pages amount'
-		setPopupNotification(msg)
-	}
+	const msg: string = 'Updated pages amount'
+	const updateMyBooksDb = useMyBooksUpdateDb({
+		myBooksNew: userMyBooks,
+		userid,
+		setPopupNotification,
+		book_id,
+		msg,
+	})
 
 	function processPagesModifyForm(e: React.FormEvent<HTMLFormElement>): void {
 		e.preventDefault()
@@ -38,7 +34,7 @@ const useChangePages = (
 				break
 			}
 		}
-		MyBooksUpdate(myBooks)
+		updateMyBooksDb()
 		setIsModded(true)
 	}
 
