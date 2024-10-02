@@ -1,8 +1,8 @@
-import { useState, useCallback, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { cleanInput } from '../helpers/cleanInput'
 import { AppContext } from '../App'
-import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
+import useMyBooksUpdateDb from '../hooks/useMyBooksUpdateDb'
 
 interface PropTypes {
 	book_id: Book['id']
@@ -23,11 +23,14 @@ const BookSummaryReview = ({ book_id, review_val, review_type }: PropTypes) => {
 		addButtonTitle = 'Review'
 	}
 
-	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
+	const { userMyBooks, setUserMyBooks } = useContext(AppContext)
 	const [reviewVal, setReviewVal] = useState<Book['review_text'] | Book['review_fav_quote']>(review_val)
 	const [showForm, setShowForm] = useState<boolean>(false)
 	const [showReviewVal, setShowReviewVal] = useState<boolean>(true)
 	const [isModding, setIsModding] = useState<boolean>(false)
+
+	const msgReviewUpdated: string = 'Updated review ' + review_type
+	const updateMyBooksDb = useMyBooksUpdateDb({ myBooksNew: userMyBooks, book_id, msg: msgReviewUpdated })
 
 	function processForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
@@ -40,46 +43,26 @@ const BookSummaryReview = ({ book_id, review_val, review_type }: PropTypes) => {
 		}
 	}
 
-	// TODO: move this function to generic helper location
-	const updateMyBooksCallback = useCallback(
-		async function updateMyBooks(myBooksNew: Books) {
-			let msg: string
-			setUserMyBooks(myBooksNew)
-			const { error } = await supabase
-				.from('user_entries')
-				.update({ json: myBooksNew, testdata: 'updated from review: ' + review_type })
-				.eq('user_id', userid)
-				.select('*')
-			if (error) msg = error.message
-			else msg = 'Updated review.'
-			setPopupNotification(msg)
-		},
-		[setUserMyBooks, setPopupNotification, userid, review_type]
-	)
-
-	const updateReviewTextCallback = useCallback(
-		async function updateReviewText() {
-			for (let i = 0; i < userMyBooks.length; i++) {
-				if (userMyBooks[i].id === book_id) {
-					if (review_type === 'text') userMyBooks[i].review_text = reviewVal
-					else if (review_type === 'quote') userMyBooks[i].review_fav_quote = reviewVal
-					break
-				}
+	function updateReviewText() {
+		for (let i = 0; i < userMyBooks.length; i++) {
+			if (userMyBooks[i].id === book_id) {
+				if (review_type === 'text') userMyBooks[i].review_text = reviewVal
+				else if (review_type === 'quote') userMyBooks[i].review_fav_quote = reviewVal
+				break
 			}
-			updateMyBooksCallback(userMyBooks)
-		},
-		[userMyBooks, book_id, reviewVal, review_type, updateMyBooksCallback]
-	)
+		}
+		updateMyBooksDb()
+	}
 
 	// /mod db
 	useEffect(() => {
 		if (review_val !== reviewVal) {
 			if (isModding) {
-				updateReviewTextCallback()
+				updateReviewText()
 				setIsModding(false)
 			}
 		}
-	}, [isModding, setUserMyBooks, updateReviewTextCallback, book_id, review_val, reviewVal])
+	}, [isModding, setUserMyBooks, updateReviewText, book_id, review_val, reviewVal])
 
 	const activateForm = () => {
 		setShowForm(true)
