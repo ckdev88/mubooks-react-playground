@@ -17,7 +17,7 @@ const useChangePages = (
 		msg,
 	})
 
-	function processPagesModifyForm(e: React.FormEvent<HTMLFormElement>): void {
+	function processForm(e: React.FormEvent<HTMLFormElement>): void {
 		e.preventDefault()
 		const newvalue: number = Number(cleanInput(e.currentTarget.pagesAmount.value))
 		if (newvalue !== undefined && newvalue > -1) changePages(newvalue)
@@ -36,6 +36,6 @@ const useChangePages = (
 		setIsModded(true)
 	}
 
-	return [processPagesModifyForm, isModded, newNumberOfPages]
+	return [processForm, isModded, newNumberOfPages]
 }
 export default useChangePages

@@ -24,8 +24,8 @@ interface AppContextType {
 }
 
 interface IsModdingPagesContextType {
-	isModdingPages: boolean
-	setIsModdingPages(isModdingPages: isModdingPages): void
+	isModding: boolean
+	setIsModding(isModding: isModding): void
 	numberOfPages: number
 	setNumberOfPages(numberOfPages: numberOfPages): void
 }
