@@ -29,6 +29,13 @@ interface IsModdingPagesContextType {
 	numberOfPages: number
 	setNumberOfPages(numberOfPages: numberOfPages): void
 }
+interface IsModdingReviewContextType {
+	isModding: boolean
+	setIsModding(isModding: isModding): void
+	reviewText: Book['review_text']
+	setReviewText(reviewText: reviewText): void
+	review_type: 'text' | 'quote'
+}
 
 type Page =
 	| 'dashboard'
@@ -110,8 +117,8 @@ interface Book {
 	rate_stars: Scale5
 	rate_spice: Scale5
 	review_tropes?: BookTropes
-	review_text?: string
-	review_fav_quote?: string
+	review_text?: string | undefined
+	review_fav_quote?: Book['review_text']
 	search_tropes?: BookTropes
 	subject?: BookTropes
 }
