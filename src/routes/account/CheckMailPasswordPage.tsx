@@ -6,18 +6,17 @@ const pageTitle = 'Check Mail Password Page'
 // const currentPage = 'favorites'
 
 const CheckMailPasswordPage = () => {
-	const { usermail, userIsLoggedIn, setNavTitle } = useContext(AppContext)
+	const { usermail, userIsLoggedIn } = useContext(AppContext)
 	const recipientAddress = usermail
 
 	useEffect(() => {
-		setNavTitle(pageTitle)
 		if (userIsLoggedIn) redirect('/dashboard')
-	}, [setNavTitle, userIsLoggedIn])
+	}, [userIsLoggedIn])
 
 	if (usermail !== '' && !userIsLoggedIn) {
 		return (
 			<>
-				<h1>Check your email</h1>
+				<h1>{pageTitle}</h1>
 				<p>
 					<span>You should receive an email on</span>{' '}
 					<strong>

@@ -1,5 +1,5 @@
 // TODO: create graphs when all data is available
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../../App'
 import StatisticsYear from '../../components/StatisticsYear'
 
@@ -10,12 +10,8 @@ let oldestFinishedDate: number = currentYear * 10000
 let oldestFinishedYear: number = currentYear
 
 const StatisticsPage = () => {
-	const { userMyBooks, setNavTitle } = useContext(AppContext)
+	const { userMyBooks } = useContext(AppContext)
 	const contents = []
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
 
 	const getOldestFinishedDate = (): number => {
 		for (let i = 0; i < userMyBooks.length; i++) {
@@ -35,7 +31,7 @@ const StatisticsPage = () => {
 
 	return (
 		<>
-			<h1>Mu Statistics</h1>
+			<h1>{pageTitle}</h1>
 			{contents}
 		</>
 	)

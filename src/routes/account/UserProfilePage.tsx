@@ -1,18 +1,9 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import setDraaideurHeight from '../../functions/setDraaideurHeight'
 import MyAccountCard from '../../components/account/MyAccountCard'
 import MyAccountEditCard from '../../components/account/MyAccountEditCard'
-import { AppContext } from '../../App'
-
-const pageTitle = 'Mu Profile'
 
 const UserProfilePage = () => {
-	const { setNavTitle } = useContext(AppContext)
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
-
 	useEffect(() => {
 		setDraaideurHeight()
 	}, [])

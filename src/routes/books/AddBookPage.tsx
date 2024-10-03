@@ -1,7 +1,6 @@
 // TODO: make this form interact with openlibrary.org to help append to their database
-import { useState, useContext, useEffect } from 'react'
+import { useState } from 'react'
 import { isUrl, getOlCover } from '../../Helpers'
-import { AppContext } from '../../App'
 /*
 const explore = reactive({
 	api: 'http://openlibrary.org/search.json',
@@ -32,11 +31,6 @@ async function fetchBook() {
 const pageTitle = 'Add a book'
 
 const AddBookPage = () => {
-	const { setNavTitle } = useContext(AppContext)
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
-
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
 	const [searchResults, setSearchResults] = useState<Books>([])
 	const [resultsWarning, setResultsWarning] = useState<string>('')

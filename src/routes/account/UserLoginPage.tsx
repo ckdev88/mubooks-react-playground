@@ -6,16 +6,13 @@ import setDraaideurHeight from '../../functions/setDraaideurHeight'
 import { AppContext } from '../../App'
 import { useNavigate } from 'react-router-dom'
 
-const pageTitle = 'Log in'
-
 export default function UserLoginPage() {
 	const navigate = useNavigate()
-	const { userIsLoggedIn, setNavTitle } = useContext(AppContext)
+	const { userIsLoggedIn } = useContext(AppContext)
 
 	useEffect(() => {
-		setNavTitle(pageTitle)
 		if (userIsLoggedIn) navigate('/dashboard')
-	}, [setNavTitle, userIsLoggedIn, navigate])
+	}, [userIsLoggedIn, navigate])
 
 	useEffect(() => setDraaideurHeight(), [])
 	return (

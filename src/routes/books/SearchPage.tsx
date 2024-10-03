@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
-import { AppContext } from '../../App'
 
 const pageTitle = 'Search'
 const currentPage = 'search'
@@ -13,12 +12,9 @@ const SearchPage = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	const [loading, setLoading] = useState(false)
 
-	const { setNavTitle } = useContext(AppContext)
-
 	useEffect(() => {
-		setNavTitle(pageTitle)
 		document.getElementById('search_term')?.focus()
-	}, [setNavTitle])
+	}, [])
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()

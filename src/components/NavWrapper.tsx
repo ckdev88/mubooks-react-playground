@@ -2,19 +2,40 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
 
+const titleMap = new Map()
+titleMap.set('dashboard', 'Mu Dashboard')
+titleMap.set('search', 'Search')
+titleMap.set('wishlist', 'Mu Wishlist')
+titleMap.set('reading', 'Reading these')
+titleMap.set('finished', 'Mu finished books')
+titleMap.set('favorites', 'Mu favorite books')
+titleMap.set('savedbooks', 'All of mu books')
+titleMap.set('quoted', 'Mu favorite quotes')
+titleMap.set('tropes', 'Mu tropes')
+titleMap.set('statistics', 'Mu Stats')
+titleMap.set('account/profile', 'Mu profile')
+titleMap.set('account/login', 'Log in')
+titleMap.set('account/logout', 'Log out')
+titleMap.set('auth/confirm', 'Account confirmed')
+titleMap.set('addbook', 'Add a book')
+
 const NavWrapper = () => {
 	const navigate = useNavigate()
-	const { userIsLoggedIn, navTitle } = useContext(AppContext)
+	const { userIsLoggedIn } = useContext(AppContext)
 
 	const [nav0Expanded, setNav0Expanded] = useState(false)
 
 	function toggleNav0() {
 		setNav0Expanded(!nav0Expanded)
 	}
+
 	function goSearch() {
 		setNav0Expanded(false)
 		navigate('/search')
 	}
+
+	const navTitle = titleMap.get(location.pathname.slice(1))
+	document.title = navTitle
 
 	if (userIsLoggedIn === false) return <></>
 	return (

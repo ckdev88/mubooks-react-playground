@@ -1,26 +1,16 @@
-import { useContext, useEffect } from 'react'
 import QuoteCard from '../../components/QuoteCard'
-import { AppContext } from '../../App'
-import { localStorageKey } from '../../../utils/supabase'
-import { useNavigate } from 'react-router-dom'
+// import { localStorageKey } from '../../../utils/supabase'
+// import { useNavigate } from 'react-router-dom'
 import DashboardDeck from '../../components/dashboard/DashboardDeck'
 
-const pageTitle = 'Mu Dashboard'
-
 export default function DashboardPage() {
-	const { setNavTitle } = useContext(AppContext)
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
-
-	const navigate = useNavigate()
-	useEffect(() => {
-		if (localStorage.getItem(localStorageKey) === null) {
-			// tijdelijk uit
-			// navigate('/account/login')
-		}
-	}, [navigate])
+	// const navigate = useNavigate()
+	// useEffect(() => {
+	// 	if (localStorage.getItem(localStorageKey) === null) {
+	// 		// tijdelijk uit
+	// 		// navigate('/account/login')
+	// 	}
+	// }, [navigate])
 
 	return (
 		<>

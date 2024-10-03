@@ -4,15 +4,10 @@ import { useState, useEffect, useContext } from 'react'
 import { getUrlParamVal } from '../../Helpers'
 import { AppContext } from '../../App'
 
-const pageTitle = 'Reset password page'
+const pageTitle = 'Reset password'
 
 const ResetPasswordPage = () => {
-	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow, setNavTitle } =
-		useContext(AppContext)
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
+	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 
 	const navigate = useNavigate()
 	const [error, setError] = useState('')
@@ -27,11 +22,8 @@ const ResetPasswordPage = () => {
 		const email = getUrlParamVal(window.location.href, 'email')
 		if (type === 'recovery' && token !== null) {
 			const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
-			if (error) {
-				setError(error.message)
-			} else {
-				localStorage.setItem('supabaseSession', JSON.stringify(data.session))
-			}
+			if (error) setError(error.message)
+			else localStorage.setItem('supabaseSession', JSON.stringify(data.session))
 			setLoading(false)
 		}
 	}
@@ -75,7 +67,7 @@ const ResetPasswordPage = () => {
 		return (
 			<>
 				<h1 id="welcome">
-					<img id="welcome-logo-img" src="img/logo.svg" alt="" /> MuBooks
+					<img id="welcome-logo-img" src="img/logo.svg" alt="" /> {pageTitle}
 				</h1>
 				<div>
 					<div className="card">

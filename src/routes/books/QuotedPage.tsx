@@ -1,17 +1,13 @@
 import { Link } from 'react-router-dom'
 import BooksOverviewPage from './BooksOverviewPage'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../../App'
 
 const pageTitle = 'Mu Quotes'
 const currentPage = 'quoted'
 
 const QuotedPage = () => {
-	const { userMyBooks, setNavTitle } = useContext(AppContext)
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
+	const { userMyBooks } = useContext(AppContext)
 
 	let quotedbooks: Books
 	let hasBooks: boolean = false

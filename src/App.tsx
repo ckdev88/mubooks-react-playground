@@ -48,7 +48,6 @@ const App = () => {
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
-	const [navTitle, setNavTitle] = useState<string>('')
 	const [localBookFilter, setLocalBookFilter] = useState<string>('')
 
 	// add persistency to userMyBooks state throughout page refreshes
@@ -99,25 +98,18 @@ const App = () => {
 		return <>{ret}</>
 	}
 	const currentPage: Page = location.pathname.slice(1) as Page
-
 	const mainClassName: string = 'main-' + currentPage
-
-	useEffect(() => {
-		document.title = navTitle
-	}, [navTitle])
 
 	return (
 		<>
 			<AppContext.Provider
 				value={{
 					formNotification,
-					navTitle,
 					popupNotification,
 					popupNotificationShow,
 					localBookFilter,
 					setFormNotification,
 					setLocalBookFilter,
-					setNavTitle,
 					setPopupNotification,
 					setPopupNotificationShow,
 					setUserIsLoggedIn,

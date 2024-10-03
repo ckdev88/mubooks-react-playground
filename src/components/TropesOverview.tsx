@@ -5,7 +5,7 @@ import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 
 const TropesLiked = () => {
-	const { setNavTitle, setPopupNotification, userid } = useContext(AppContext)
+	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showLikedTropesForm, setShowLikedTropesForm] = useState<boolean>(false)
 	const [likedTropes, setLikedTropes] = useState<BookTropes>([])
 	const tropesDb = async () => {
@@ -17,7 +17,7 @@ const TropesLiked = () => {
 
 	useEffect(() => {
 		tropesDb()
-	}, [setNavTitle])
+	}, [])
 
 	useEffect(() => {
 		if (showLikedTropesForm === true) document.getElementById('trope_add_liked')?.focus()

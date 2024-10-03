@@ -17,8 +17,6 @@ interface AppContextType {
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
 	todaysDateDigit: number
-	navTitle: string
-	setNavTitle(navTitle: navTitle): void
 	localBookFilter: string
 	setLocalBookFilter(localBookFilter: localBookFilter): void
 }
