@@ -147,39 +147,39 @@ const App = () => {
 						</div>
 					)}
 					<Routes>
-						<Route path="/*" Component={RootPage} />
-						<Route path="/error" Component={ErrorPage} />
-						<Route path="/account/login" Component={UserLoginPage} />
-						<Route path="/account/logout" Component={UserLogoutPage} />
-						<Route path="/auth/confirm" Component={AuthConfirm} />
+						<Route path="/*" element={<RootPage />} />
+						<Route path="/error" element={<ErrorPage />} />
+						<Route path="/account/login" element={<UserLoginPage />} />
+						<Route path="/account/logout" element={<UserLogoutPage />} />
+						<Route path="/auth/confirm" element={<AuthConfirm />} />
 						{!userIsLoggedIn && (
 							<>
-								<Route path="/auth/resetpassword" Component={ResetPasswordPage} />
-								<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
+								<Route path="/auth/resetpassword" element={<ResetPasswordPage />} />
+								<Route path="/account/forgotpassword" element={<CheckMailPasswordPage />} />
 							</>
 						)}
-						<Route path="/account/new" Component={CheckMailNewAccountPage} />
+						<Route path="/account/new" element={<CheckMailNewAccountPage />} />
 						{userIsLoggedIn && (
 							<>
-								<Route path="/account/profile" Component={UserProfilePage} />
-								<Route path="/account/*" Component={UserLoginPage} />
-								<Route path="/dashboard" Component={DashboardPage} />
-								<Route path="/search" Component={SearchPage} />
+								<Route path="/account/profile" element={<UserProfilePage />} />
+								<Route path="/account/*" element={<UserLoginPage />} />
+								<Route path="/dashboard" element={<DashboardPage />} />
+								<Route path="/search" element={<SearchPage />} />
 								{/*
-								<Route path="/add-book" Component={AddBookPage} />
+								<Route path="/add-book" element={ <AddBookPage /> } />
 								*/}
-								<Route path="/savedbooks" Component={SavedBooksPage} />
-								<Route path="/wishlist" Component={WishlistPage} />
-								<Route path="/reading" Component={ReadingPage} />
-								<Route path="/finished" Component={FinishedPage} />
-								<Route path="/favorites" Component={FavoritesPage} />
-								<Route path="/quoted" Component={QuotedPage} />
-								<Route path="/tropes" Component={TropesPage} />
-								<Route path="/statistics" Component={StatisticsPage} />
+								<Route path="/savedbooks" element={<SavedBooksPage />} />
+								<Route path="/wishlist" element={<WishlistPage />} />
+								<Route path="/reading" element={<ReadingPage />} />
+								<Route path="/finished" element={<FinishedPage />} />
+								<Route path="/favorites" element={<FavoritesPage />} />
+								<Route path="/quoted" element={<QuotedPage />} />
+								<Route path="/tropes" element={<TropesPage />} />
+								<Route path="/statistics" element={<StatisticsPage />} />
 								{/*
-								<Route path="/clear-my-books" Component={ClearMyBooks} />
+								<Route path="/clear-my-books" element={ <ClearMyBooks /> } />
 								*/}
-								<Route path="/loadlibrary" Component={LoadLibrary} />
+								<Route path="/loadlibrary" element={<LoadLibrary />} />
 							</>
 						)}
 					</Routes>
