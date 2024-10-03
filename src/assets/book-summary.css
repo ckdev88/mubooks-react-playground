@@ -25,12 +25,16 @@
 	display: flex;
 	align-items: center;
 }
-.book-summary.quoted .review-text.quote {
+.quoteblock {
+	text-align: center;
+	font-style: italic;
+}
+.book-summary.quoted .review-text.review_fav_quote {
 	font-size: 1.1rem;
 	padding-top: 0;
 }
 
-.book-summary.quoted .review-text.quote i {
+.book-summary.quoted .review-text.review_fav_quote i {
 	font-size: 0.95rem;
 }
 .book-summary.quoted hr {
@@ -60,7 +64,6 @@
 .book-summary .icon-heart + h2 {
 	padding-right: 1.25rem;
 }
-
 .book-summary h2 sub {
 	font-size: 0.8em;
 	font-weight: normal;
@@ -269,7 +272,7 @@
 	border: 2px dashed rgba(0, 0, 0, 0.1);
 	text-align: center;
 }
-.book-summary .review-text.quote {
+.book-summary .review-text.review_fav_quote {
 	font-size: 0.9rem;
 	margin: 0;
 }
