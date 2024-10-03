@@ -1,4 +1,7 @@
-export default function convertDate(dateToConvert: number | string, outputFormat: 'human' | 'input' | 'digit'): string {
+export default function convertDate(
+	dateToConvert: number | string,
+	outputFormat: 'human' | 'input' | 'digit'
+): string {
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 	let a
 	let monthNum: number = 0
@@ -48,7 +51,7 @@ function timestampConverter(UNIX_timestamp: number, outputFormat: 'human' | 'inp
 		const year = a.getFullYear()
 		const monthNum = a.getMonth() + 1 // jan is 0, feb is 1, etc
 		const month = months[monthNum]
-		const dateNum = a.getDate()  // 1st of the month is 1
+		const dateNum = a.getDate() // 1st of the month is 1
 		let datePadded: string | number = dateNum
 		let monthPadded: string | number = monthNum
 		if (datePadded < 10) datePadded = '0' + dateNum.toString()

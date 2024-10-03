@@ -1,17 +1,13 @@
 import { Link } from 'react-router-dom'
 import BooksOverviewPage from './BooksOverviewPage'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../../App'
 
 const pageTitle = 'Saved books'
 const currentPage = 'savedbooks'
 
 export default function SavedBooksPage() {
-	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
+	const { userMyBooks, localBookFilter } = useContext(AppContext)
 
 	let hasbooks: boolean = false
 	let booksFiltered: Books = []
@@ -30,7 +26,7 @@ export default function SavedBooksPage() {
 	return (
 		<>
 			<h1>
-				My Books
+				{pageTitle}
 				<sub>
 					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
 						<>

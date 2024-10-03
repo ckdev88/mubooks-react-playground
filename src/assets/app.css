@@ -1,6 +1,12 @@
 #root {
 	min-height: 100vh;
 	box-sizing: border-box;
+	display: flex;
+	justify-content: space-around;
+	min-width: 300px;
+	overflow-x: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .light-mode body {
@@ -22,13 +28,6 @@
 	margin: 0 auto;
 	width: 100%;
 	min-width: 300px;
-}
-
-#root {
-	width: 100%;
-	margin: 0 auto;
-	min-width: 300px;
-	overflow-x: auto;
 }
 
 html:not(.loggedin) #root {
@@ -67,8 +66,14 @@ html:not(.loggedin) h1 {
 	font-weight: bold;
 }
 
-
 .textwrapper {
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
+}
+
+.shade {
+	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);
+}
+.shade-light {
+	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 15%);
 }

@@ -21,11 +21,7 @@ main button.alt,
 	width: auto;
 }
 .btn-text,
-.btn-text:active,
-.btn-text:focus,
-.btn-icon,
-.btn-icon:active,
-.btn-icon:focus {
+.btn-icon {
 	background: none;
 	color: #0d99ff;
 }
@@ -42,6 +38,22 @@ main button.alt,
 	text-align: left;
 	text-decoration: none;
 	transition: text-decoration 0.18s ease-in-out, color 0.18s ease-in-out;
+}
+.btn-text:disabled,
+.btn-text:disabled:hover,
+.btn-text:active,
+.btn-text:focus,
+.btn-icon:active,
+.btn-icon:focus {
+	background: transparent;
+	outline: none;
+	box-shadow: none;
+}
+.btn-text:disabled,
+.btn-text:disabled:hover {
+	opacity: 0.5;
+	cursor: not-allowed;
+	color: #000;
 }
 .btn-text:hover {
 	text-decoration: underline;
@@ -92,18 +104,22 @@ main button.alt,
 .synopsisWrapper .synopsis {
 	height: 0;
 	overflow: hidden;
+	margin-top: 0.5rem;
 }
 .synopsisWrapper[aria-expanded='true'] .synopsis {
 	height: unset;
 	overflow: auto;
 }
+
 .btn-text,
 .btn-icon {
 	margin-bottom: 0;
 }
+
 .btn-calendar {
 	font-style: inherit;
 }
+
 .btn-calendar::after {
 	display: inline-block;
 	height: 1em;
@@ -135,7 +151,7 @@ main button.alt,
 	border-radius: 100%;
 	border: 0.4rem solid white;
 	content: ' ';
-	margin: 0.1rem 0.3rem 0.1rem -1.9rem;
+	margin: 0.15rem 0.3rem 0.15rem -1.9rem;
 	padding: 0.5rem;
 	transform: rotate(90deg);
 	width: 1rem;
@@ -292,7 +308,6 @@ main button.alt,
 	width: 16px;
 	opacity: 0.2;
 }
-
 .btn-icon .icon-pencil {
 	background-image: url('/img/icon-pencil.svg');
 	width: 12px;
@@ -302,10 +317,6 @@ main button.alt,
 }
 .btn-icon:hover .icon-pencil {
 	opacity: 1;
-}
-
-.reviews {
-	margin-top: 0.75rem;
 }
 .reviews > div > button:first-child {
 	margin-right: 0.5rem;

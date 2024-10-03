@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
-import { AppContext } from '../../App'
 
 const pageTitle = 'Search'
 const currentPage = 'search'
@@ -13,16 +12,13 @@ const SearchPage = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	const [loading, setLoading] = useState(false)
 
-	const { setNavTitle } = useContext(AppContext)
-
 	useEffect(() => {
-		setNavTitle(pageTitle)
 		document.getElementById('search_term')?.focus()
-	}, [setNavTitle])
+	}, [])
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		const before = performance.now()
+		// const before = performance.now()
 		const search_term: string = e.currentTarget.search_term.value.trim()
 		// const search_author: string = e.currentTarget.search_term.value.trim()
 		if (search_term.length > 4) {
@@ -66,7 +62,7 @@ const SearchPage = () => {
 				.finally(() => setLoading(false))
 		} else if (search_term.length === 0) setResultsMessage(search_term)
 		else setResultsMessage('keep typing...')
-		console.log('search performed in:', performance.now() - before)
+		// console.log('search performed in:', performance.now() - before)
 	}
 	return (
 		<>
@@ -85,8 +81,8 @@ const SearchPage = () => {
 			<div>
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>
 					<h2 className="resultsfound">
-						{resultCount > 30 ? 'Over 30' : resultCount}{' '}
-						{resultCount > 1 || resultCount === 0 ? 'books' : 'book'} found for <em>"{searchTerm}"</em>
+						{resultCount > 30 ? 'Over 30' : resultCount}
+						{resultCount > 1 || resultCount === 0 ? ' books' : ' book'} found for <em>"{searchTerm}"</em>
 						<sub className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</sub>
 					</h2>
 					<BooksOverviewPage books={searchResults} page={currentPage} />

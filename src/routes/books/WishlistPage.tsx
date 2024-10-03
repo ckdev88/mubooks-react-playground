@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
@@ -7,11 +7,7 @@ const pageTitle = 'Mu Wishlist'
 const currentPage = 'wishlist'
 
 const WishlistPage = () => {
-	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
+	const { userMyBooks, localBookFilter } = useContext(AppContext)
 
 	let hasbooks = false
 	let booksFiltered: Books = []
@@ -52,7 +48,10 @@ const WishlistPage = () => {
 					<p>
 						Want to add a book to your wishlist?
 						<br />
-						<Link to="/search">Search</Link> or <Link to="/add-book">Add a book yourself</Link>.<br />
+						<Link to="/search">Search</Link> or <Link to="/add-book">Add a book yourself</Link>.
+						<br />
+						<br />
+						<Link to="/reading">See my reading list.</Link>
 						<br />
 					</p>
 				</>

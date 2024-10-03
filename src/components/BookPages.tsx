@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react'
-import BookAddPages from './BookAddPages'
 import BookModifyPages from './BookModifyPages'
 
 export const IsModdingPagesContext = createContext<IsModdingPagesContextType>({} as IsModdingPagesContextType)
@@ -7,31 +6,31 @@ export const IsModdingPagesContext = createContext<IsModdingPagesContextType>({}
 const BookPages = ({
 	book_id,
 	book_number_of_pages_median,
-	currentPage,
 }: {
 	book_id: Book['id']
 	book_number_of_pages_median: Book['number_of_pages_median']
-	currentPage: string
 }) => {
-	const [isModdingPages, setIsModdingPages] = useState<boolean>(false)
+	const [isModding, setIsModding] = useState<boolean>(false)
+	const [numberOfPages, setNumberOfPages] = useState<number>(book_number_of_pages_median)
 
 	return (
-		<div className="pt0 mt0" style={{ display: 'flex' }}>
-			<IsModdingPagesContext.Provider value={{ isModdingPages, setIsModdingPages }}>
-				{isModdingPages ? (
-					<div className={!book_number_of_pages_median && currentPage !== 'search' ? 'diblock' : 'dnone'}>
-						<BookAddPages book_id={book_id} book_number_of_pages_median={book_number_of_pages_median} />
-					</div>
-				) : (
-					<span className={book_number_of_pages_median > 0 ? 'diblock' : 'dnone'}>
-						{book_number_of_pages_median} pages &nbsp;
-					</span>
-				)}
-				{currentPage !== 'dashboard' && currentPage !== 'wishlist' && (
+		<IsModdingPagesContext.Provider value={{ isModding, setIsModding, numberOfPages, setNumberOfPages }}>
+			<div style={{ display: 'flex', padding: '.25rem 0' }}>
+				{isModding ? (
 					<BookModifyPages book_id={book_id} book_number_of_pages_median={book_number_of_pages_median} />
+				) : (
+					<>
+						<span className="diblock">
+							{book_number_of_pages_median === 0 || !book_number_of_pages_median ? '?' : numberOfPages} pages
+							&nbsp;
+						</span>
+						<button className="diblock btn-icon" onClick={() => setIsModding(!isModding)}>
+							<span className="icon icon-pencil"></span>
+						</button>
+					</>
 				)}
-			</IsModdingPagesContext.Provider>
-		</div>
+			</div>
+		</IsModdingPagesContext.Provider>
 	)
 }
 export default BookPages

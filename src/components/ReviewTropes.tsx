@@ -2,8 +2,9 @@ import { useState, useContext, useEffect, useCallback } from 'react'
 import { AppContext } from '../App'
 import { cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
+import BtnInsideCaret from './ui/BtnInsideCaret'
 
-const ReviewTropes = (book: Book, tropes: BookTropes) => {
+const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 
 	const [bookTropes, setBookTropes] = useState<BookTropes>(tropes)
@@ -61,7 +62,6 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 	const updateTropesCallback = useCallback(
 		async function updateTropes() {
 			if (userMyBooks.length < 1) return
-
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
 					userMyBooks[i].review_tropes = bookTropes
@@ -113,7 +113,7 @@ const ReviewTropes = (book: Book, tropes: BookTropes) => {
 				<>
 					<form className="single-small-form clr" onSubmit={processTropeAddForm}>
 						<input type="text" name="trope_add" id={'trope_add_' + book.id} placeholder="Add a trope..." />
-						<button className="btn-submit-inside-caret-right"></button>
+						<BtnInsideCaret />
 					</form>
 					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>
 						Cancel

@@ -2,19 +2,40 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
 
+const titleMap = new Map()
+titleMap.set('dashboard', 'Mu Dashboard')
+titleMap.set('search', 'Search')
+titleMap.set('wishlist', 'Mu Wishlist')
+titleMap.set('reading', 'Reading these')
+titleMap.set('finished', 'Mu finished books')
+titleMap.set('favorites', 'Mu favorite books')
+titleMap.set('savedbooks', 'All of mu books')
+titleMap.set('quoted', 'Mu favorite quotes')
+titleMap.set('tropes', 'Mu tropes')
+titleMap.set('statistics', 'Mu Stats')
+titleMap.set('account/profile', 'Mu profile')
+titleMap.set('account/login', 'Log in')
+titleMap.set('account/logout', 'Log out')
+titleMap.set('auth/confirm', 'Account confirmed')
+titleMap.set('addbook', 'Add a book')
+
 const NavWrapper = () => {
 	const navigate = useNavigate()
-	const { userIsLoggedIn, navTitle } = useContext(AppContext)
+	const { userIsLoggedIn } = useContext(AppContext)
 
 	const [nav0Expanded, setNav0Expanded] = useState(false)
 
 	function toggleNav0() {
 		setNav0Expanded(!nav0Expanded)
 	}
+
 	function goSearch() {
 		setNav0Expanded(false)
 		navigate('/search')
 	}
+
+	const navTitle = titleMap.get(location.pathname.slice(1))
+	document.title = navTitle
 
 	if (userIsLoggedIn === false) return <></>
 	return (
@@ -61,111 +82,68 @@ const NavWrapper = () => {
 				</nav>
 				<nav
 					id="nav0"
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'flex-start',
+						alignContent: 'space-around',
+						alignItems: 'flex-start',
+						gap: '.25rem',
+					}}
 					className={nav0Expanded ? 'expanded nav-collapsable' : 'collapsed nav-collapsable'}
 					aria-expanded={nav0Expanded ? 'true' : 'false'}
 				>
-					<ul>
-						<li>
-							<NavLink to={'/dashboard'} onClick={toggleNav0}>
-								Dashboard
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/search'} onClick={toggleNav0}>
-								Search
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/wishlist'} onClick={toggleNav0}>
-								Wishlist
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/reading'} onClick={toggleNav0}>
-								Reading
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/finished'} onClick={toggleNav0}>
-								Finished
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/favorites'} onClick={toggleNav0}>
-								Favorites
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/saved-books'} onClick={toggleNav0}>
-								Saved books
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/quoted-books'} onClick={toggleNav0}>
-								Quoted
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/tropes'} onClick={toggleNav0}>
-								Tropes
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/statistics'} onClick={toggleNav0}>
-								Statistics
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
-								Clear My Books
-							</NavLink>
-						</li>
-						<li>
-							<div className="history">
-								<button>&lt;</button>
-								<button>&gt;</button>
-							</div>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<NavLink to={'/account/profile'} onClick={toggleNav0}>
-								{/*
-								 <svg
-									width="800px"
-									height="800px"
-									viewBox="0 0 20 20"
-									version="1.1"
-									xmlns="http://www.w3.org/2000/svg"
-									id="nav-icon-profile"
-								>
-									<g
-										id="nav-icon-profile-group"
-										stroke="none"
-										strokeWidth="1"
-										fill="none"
-										fillRule="evenodd"
-									>
-										<g transform="translate(-140.000000, -2159.000000)" fill="#000000">
-											<g id="icon-profile" transform="translate(56.000000, 160.000000)">
-												<path
-													d="M100.562548,2016.99998 L87.4381713,2016.99998 C86.7317804,2016.99998 86.2101535,2016.30298 86.4765813,2015.66198 C87.7127655,2012.69798 90.6169306,2010.99998 93.9998492,2010.99998 C97.3837885,2010.99998 100.287954,2012.69798 101.524138,2015.66198 C101.790566,2016.30298 101.268939,2016.99998 100.562548,2016.99998 M89.9166645,2004.99998 C89.9166645,2002.79398 91.7489936,2000.99998 93.9998492,2000.99998 C96.2517256,2000.99998 98.0830339,2002.79398 98.0830339,2004.99998 C98.0830339,2007.20598 96.2517256,2008.99998 93.9998492,2008.99998 C91.7489936,2008.99998 89.9166645,2007.20598 89.9166645,2004.99998 M103.955674,2016.63598 C103.213556,2013.27698 100.892265,2010.79798 97.837022,2009.67298 C99.4560048,2008.39598 100.400241,2006.33098 100.053171,2004.06998 C99.6509769,2001.44698 97.4235996,1999.34798 94.7348224,1999.04198 C91.0232075,1998.61898 87.8750721,2001.44898 87.8750721,2004.99998 C87.8750721,2006.88998 88.7692896,2008.57398 90.1636971,2009.67298 C87.1074334,2010.79798 84.7871636,2013.27698 84.044024,2016.63598 C83.7745338,2017.85698 84.7789973,2018.99998 86.0539717,2018.99998 L101.945727,2018.99998 C103.221722,2018.99998 104.226185,2017.85698 103.955674,2016.63598"
-													id="nav-icon-profile-path"
-												></path>
-											</g>
-										</g>
-									</g>
-								</svg>&nbsp;
-							   */}
-								Profile
-							</NavLink>
-						</li>
-						<li>
-							<NavLink to={'/account/logout'} onClick={toggleNav0}>
-								Logout
-							</NavLink>
-						</li>
-					</ul>
+					<NavLink to={'/dashboard'} onClick={toggleNav0}>
+						Dashboard
+					</NavLink>
+					<NavLink to={'/search'} onClick={toggleNav0}>
+						Search
+					</NavLink>
+					<NavLink to={'/wishlist'} onClick={toggleNav0}>
+						Wishlist
+					</NavLink>
+					<NavLink to={'/reading'} onClick={toggleNav0}>
+						Reading
+					</NavLink>
+					<NavLink to={'/finished'} onClick={toggleNav0}>
+						Finished
+					</NavLink>
+					<NavLink to={'/favorites'} onClick={toggleNav0}>
+						Favorites
+					</NavLink>
+					<NavLink to={'/savedbooks'} onClick={toggleNav0}>
+						Saved books
+					</NavLink>
+					<NavLink to={'/quoted'} onClick={toggleNav0}>
+						Quoted
+					</NavLink>
+					<NavLink to={'/tropes'} onClick={toggleNav0}>
+						Tropes
+					</NavLink>
+					<NavLink to={'/statistics'} onClick={toggleNav0}>
+						Statistics
+					</NavLink>
+					{/*
+					<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
+						Clear My Books
+					</NavLink>
+					*/}
+					<hr
+						style={{
+							width: '80%',
+							borderWidth: '1px 0 0',
+							borderStyle: 'solid',
+							borderColor: 'rgba(255,255,255,.2)',
+							boxShadow: 'none',
+							height: '1px',
+						}}
+					/>
+					<NavLink to={'/account/profile'} onClick={toggleNav0}>
+						Profile
+					</NavLink>
+					<NavLink to={'/account/logout'} onClick={toggleNav0}>
+						Logout
+					</NavLink>
 				</nav>
 			</div>
 		</>

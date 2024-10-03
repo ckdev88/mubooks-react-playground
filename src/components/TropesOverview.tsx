@@ -2,9 +2,10 @@ import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
+import BtnInsideCaret from './ui/BtnInsideCaret'
 
 const TropesLiked = () => {
-	const { setNavTitle, setPopupNotification, userid } = useContext(AppContext)
+	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showLikedTropesForm, setShowLikedTropesForm] = useState<boolean>(false)
 	const [likedTropes, setLikedTropes] = useState<BookTropes>([])
 	const tropesDb = async () => {
@@ -16,7 +17,7 @@ const TropesLiked = () => {
 
 	useEffect(() => {
 		tropesDb()
-	}, [setNavTitle])
+	}, [])
 
 	useEffect(() => {
 		if (showLikedTropesForm === true) document.getElementById('trope_add_liked')?.focus()
@@ -99,13 +100,8 @@ const TropesLiked = () => {
 				{showLikedTropesForm && (
 					<>
 						<form className="single-small-form clr" onSubmit={processLikedTropeAddForm}>
-							<input
-								type="text"
-								name="trope_add_liked"
-								id="trope_add_liked"
-								placeholder="Add a trope..."
-							/>
-							<button className="btn-submit-inside-caret-right"></button>
+							<input type="text" name="trope_add_liked" id="trope_add_liked" placeholder="Add a trope..." />
+							<BtnInsideCaret />
 						</form>
 						<button className="btn-text btn-text-cancel" onClick={() => cancelSubmit()}>
 							Cancel

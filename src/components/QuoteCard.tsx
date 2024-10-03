@@ -11,6 +11,7 @@ const QuoteCard = () => {
 	const [quote, setQuote] = useState<Quote>()
 	useEffect(() => {
 		if (quotedBooks[indexnr] && quoteIsActive === false) {
+			if (quotedBooks[indexnr].review_fav_quote === undefined) quotedBooks[indexnr].review_fav_quote = ''
 			setQuote({
 				title: quotedBooks[indexnr].title,
 				quote: quotedBooks[indexnr].review_fav_quote,
@@ -23,8 +24,8 @@ const QuoteCard = () => {
 	return (
 		<>
 			{quote && (
-				<article className="quote">
-					<main>{quote.quote && quote.quote}</main>
+				<article className="quote shade-light">
+					<main>{quote.quote && `“${quote.quote}”`}</main>
 					<footer>
 						{quote.title}, {quote.authors}
 					</footer>

@@ -6,7 +6,9 @@
 	--green: #0d8846;
 	--red: #f24822;
 }
-
+html {
+	scroll-behavior: smooth;
+}
 body {
 	font-size: 16px;
 	padding: 0;
@@ -76,10 +78,6 @@ img {
 
 .loggedin #header {
 	display: block;
-	@media screen and (min-width: 600px) {
-		margin-top: 0.4rem;
-		border-radius: 0.4rem;
-	}
 }
 
 #main {
@@ -87,6 +85,7 @@ img {
 	z-index: 1;
 	margin-left: auto;
 	margin-right: auto;
+	width: 100%;
 }
 
 #main,
@@ -232,9 +231,7 @@ a {
 hr {
 	border-width: 0 0 1px;
 	border-style: solid;
-	border-color: hsl(325, 65%, 90%);
+	border-color: rgba(255, 255, 255, 0.75);
 	height: 1px;
 	background-color: transparent;
-	height: 1px;
-	box-shadow: 0 1px 0 hsl(325, 65%, 20%);
 }

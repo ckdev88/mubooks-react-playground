@@ -9,10 +9,11 @@
 	display: flex;
 	justify-content: space-between;
 	letter-spacing: -0.04em;
-	padding: 0.75rem 0.25rem;
+	padding: 0.75rem 0.5rem;
 }
 
-.adder a {
+.adder a,
+.book-summary header a {
 	text-decoration: none;
 	color: #000000;
 }
@@ -43,19 +44,6 @@
 }
 .adder button.btn-icon {
 	display: block;
-}
-
-.adder .toadd:hover,
-.adder .deck:has(a):hover {
-	background-color: white;
-}
-.adder .deck:has(a) {
-	background: transparent;
-	border-radius: 0.5rem;
-	transition: background-color 0.18s ease-in-out;
-}
-.adder .deck:has(a):hover {
-	background: white;
 }
 
 .adder aside {
@@ -94,40 +82,34 @@
 }
 
 .deck-container {
-	padding-top: 0.125rem;
-}
-.deck-container {
-	margin-left: -0.25rem;
-	padding: 0.25rem;
+	padding: 0;
 	border-radius: 0.5rem;
 }
-.deck-container:hover {
-	background: white;
-}
 
+.deck-container.spread {
+	display: flex;
+	margin-left: 0;
+	justify-items: center;
+	gap: 0.5rem;
+}
 .deck::after,
-.deck-container::after {
+.deck-container.stack::after {
 	content: ' ';
 	display: block;
 	clear: both;
-	height: 0.2vw;
+	height: 0;
 }
 
 .deck-container .book-cover {
 	display: block;
-	float: left; /* TODO: check if these floats work in native apps */
 	padding: 0;
 	border-radius: 0.5rem;
-	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);
 	width: calc(100% / 3);
 	aspect-ratio: 324/500;
 	box-sizing: border-box;
 	background: white;
 	position: relative;
-}
-
-.deck-container .book-cover + .book-cover {
-	margin-left: -20.1%;
+	border: 2px solid white;
 }
 
 .deck-container .book-cover img {
@@ -136,5 +118,5 @@
 	height: 100%;
 	border-radius: 0.5rem;
 	object-fit: cover;
-	border: 2px solid white;
+	box-shadow: none;
 }

@@ -19,11 +19,6 @@
 	opacity: 1;
 }
 
-.nav-collapsable .history {
-	display: none;
-	/* hide for now */
-}
-
 .nav-collapsable.expanded {
 	width: 100%;
 	height: 100vh;
@@ -55,7 +50,10 @@
 	text-decoration: none;
 	font-weight: bold;
 	text-transform: uppercase;
-	transition: outline-color 0.18s ease-in-out, padding 0.18s ease-in-out, margin 0.18s ease-in-out;
+	transition:
+		outline-color 0.18s ease-in-out,
+		padding 0.18s ease-in-out,
+		margin 0.18s ease-in-out;
 	display: inline-block;
 	outline: 1px dashed rgba(255, 255, 255, 0);
 	border-radius: 0.3rem;
@@ -120,14 +118,6 @@
 	padding: 0;
 }
 
-#nav0 {
-	text-align: left;
-}
-#nav0 > ul + ul {
-	padding-top: 1rem;
-	margin-top: 1rem;
-	border-top: 1px dashed rgba(255, 255, 255, 0.5);
-}
 #nav-icon-loep,
 #nav-icon-profile {
 	margin: 0 auto;

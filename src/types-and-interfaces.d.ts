@@ -16,14 +16,23 @@ interface AppContextType {
 	popupNotificationShow: boolean
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
-	navTitle: string
-	setNavTitle(navTitle: navTitle): void
+	todaysDateDigit: number
 	localBookFilter: string
 	setLocalBookFilter(localBookFilter: localBookFilter): void
 }
+
 interface IsModdingPagesContextType {
-	isModdingPages: boolean
-	setIsModdingPages(isModdingPages: isModdingPages): void
+	isModding: boolean
+	setIsModding(isModding: isModding): void
+	numberOfPages: number
+	setNumberOfPages(numberOfPages: numberOfPages): void
+}
+interface IsModdingReviewContextType {
+	isModding: boolean
+	setIsModding(isModding: isModding): void
+	reviewText: Book['review_text']
+	setReviewText(reviewText: reviewText): void
+	o_key: 'review_text' | 'review_fav_quote'
 }
 
 type Page =
@@ -34,9 +43,8 @@ type Page =
 	| 'finished'
 	| 'favorites'
 	| 'savedbooks'
-	| 'quotedbooks'
+	| 'quoted'
 	| 'tropes'
-	| 'quotedbooks'
 	| 'profile'
 
 type Quote = {
@@ -44,6 +52,7 @@ type Quote = {
 	authors: string
 	title: string
 }
+
 type User = {
 	email: string
 	password: string
@@ -78,6 +87,7 @@ type BookData = [
 		first_publish_year: number
 		cover_edition_key: string
 		cover: string
+		cover_redir?: string
 		img?: string
 		title_short?: string
 	}
@@ -85,8 +95,9 @@ type BookData = [
 interface Book {
 	author_key?: string[]
 	author_name: string[]
-	cover: string
 	cover_edition_key: string
+	cover: string
+	cover_redir?: string
 	edition_key?: string[]
 	first_publish_year: string
 	id: Id
@@ -103,9 +114,9 @@ interface Book {
 	date_finished?: number
 	rate_stars: Scale5
 	rate_spice: Scale5
-	review_tropes: BookTropes
-	review_text: string
-	review_fav_quote: string
+	review_tropes?: BookTropes
+	review_text?: string | undefined
+	review_fav_quote?: Book['review_text']
 	search_tropes?: BookTropes
 	subject?: BookTropes
 }

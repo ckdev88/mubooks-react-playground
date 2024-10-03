@@ -116,3 +116,9 @@ input[type='submit'].dnone {
 .wm6 {
 	max-width: 6rem;
 }
+.fl {
+	float: left;
+}
+.tcenter {
+	text-align: center;
+}

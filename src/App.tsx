@@ -3,12 +3,10 @@
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
-import AddBookPage from './routes/books/AddBookPage'
 import AuthConfirm from './routes/auth/Confirm.tsx'
 import ResetPasswordPage from './routes/auth/ResetPasswordPage.tsx'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
-import ClearMyBooks from './routes/books/ClearMyBooks'
 import DashboardPage from './routes/account/DashboardPage'
 import ErrorPage from './routes/ErrorPage'
 import FavoritesPage from './routes/books/FavoritesPage'
@@ -30,11 +28,11 @@ import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import LoadLibrary from './routes/books/LoadLibrary.tsx'
 import { timestampConverter } from './helpers/convertDate.ts'
-import { cleanAnchor } from './helpers/cleanInput.ts'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const todaysDateInput = timestampConverter(Date.now(), 'input')
+const todaysDateDigit = Number(timestampConverter(Date.now(), 'digit'))
 
 const App = () => {
 	let userIsLoggedInInitVal: boolean
@@ -50,11 +48,10 @@ const App = () => {
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
-	const [navTitle, setNavTitle] = useState<string>('')
 	const [localBookFilter, setLocalBookFilter] = useState<string>('')
 
 	// add persistency to userMyBooks state throughout page refreshes
-	const csMyBooks = async () => {
+	const persistentMyBooks = async () => {
 		let booksArr: Books
 		const res = await supabase.from('user_entries').select('json')
 		if (res.data) {
@@ -80,7 +77,7 @@ const App = () => {
 	// /online state checker & notifier
 
 	useEffect(() => {
-		if (userIsLoggedIn === true && userMyBooks.length < 1) csMyBooks()
+		if (userIsLoggedIn === true && userMyBooks.length < 1) persistentMyBooks()
 	}, [userIsLoggedIn, initialMyBooksSet, userMyBooks.length])
 	// /add persistency to userMyBooks state throughout page refreshes
 
@@ -100,24 +97,19 @@ const App = () => {
 		setTimeout(() => setPopupNotification(''), 1000)
 		return <>{ret}</>
 	}
-	const mainClassName = 'main-' + cleanAnchor(location.hash, false)
-
-	useEffect(() => {
-		document.title = navTitle
-	}, [navTitle])
+	const currentPage: Page = location.pathname.slice(1) as Page
+	const mainClassName: string = 'main-' + currentPage
 
 	return (
 		<>
 			<AppContext.Provider
 				value={{
 					formNotification,
-					navTitle,
 					popupNotification,
 					popupNotificationShow,
 					localBookFilter,
 					setFormNotification,
 					setLocalBookFilter,
-					setNavTitle,
 					setPopupNotification,
 					setPopupNotificationShow,
 					setUserIsLoggedIn,
@@ -126,6 +118,7 @@ const App = () => {
 					setUsermail,
 					setUsername,
 					todaysDateInput,
+					todaysDateDigit,
 					userIsLoggedIn,
 					userMyBooks,
 					userid,
@@ -134,7 +127,7 @@ const App = () => {
 				}}
 			>
 				{userIsLoggedIn && (
-					<header id="header">
+					<header id="header" className="shade">
 						<NavWrapper />
 					</header>
 				)}
@@ -146,35 +139,39 @@ const App = () => {
 						</div>
 					)}
 					<Routes>
-						<Route path="/*" Component={RootPage} />
-						<Route path="/error" Component={ErrorPage} />
-						<Route path="/account/login" Component={UserLoginPage} />
-						<Route path="/account/logout" Component={UserLogoutPage} />
-						<Route path="/auth/confirm" Component={AuthConfirm} />
+						<Route path="/*" element={<RootPage />} />
+						<Route path="/error" element={<ErrorPage />} />
+						<Route path="/account/login" element={<UserLoginPage />} />
+						<Route path="/account/logout" element={<UserLogoutPage />} />
+						<Route path="/auth/confirm" element={<AuthConfirm />} />
 						{!userIsLoggedIn && (
 							<>
-								<Route path="/auth/resetpassword" Component={ResetPasswordPage} />
-								<Route path="/account/forgotpassword" Component={CheckMailPasswordPage} />
+								<Route path="/auth/resetpassword" element={<ResetPasswordPage />} />
+								<Route path="/account/forgotpassword" element={<CheckMailPasswordPage />} />
 							</>
 						)}
-						<Route path="/account/new" Component={CheckMailNewAccountPage} />
+						<Route path="/account/new" element={<CheckMailNewAccountPage />} />
 						{userIsLoggedIn && (
 							<>
-								<Route path="/account/profile" Component={UserProfilePage} />
-								<Route path="/account/*" Component={UserLoginPage} />
-								<Route path="/dashboard" Component={DashboardPage} />
-								<Route path="/search" Component={SearchPage} />
-								<Route path="/add-book" Component={AddBookPage} />
-								<Route path="/saved-books" Component={SavedBooksPage} />
-								<Route path="/wishlist" Component={WishlistPage} />
-								<Route path="/reading" Component={ReadingPage} />
-								<Route path="/finished" Component={FinishedPage} />
-								<Route path="/favorites" Component={FavoritesPage} />
-								<Route path="/quoted-books" Component={QuotedPage} />
-								<Route path="/tropes" Component={TropesPage} />
-								<Route path="/statistics" Component={StatisticsPage} />
-								<Route path="/clear-my-books" Component={ClearMyBooks} />
-								<Route path="/loadlibrary" Component={LoadLibrary} />
+								<Route path="/account/profile" element={<UserProfilePage />} />
+								<Route path="/account/*" element={<UserLoginPage />} />
+								<Route path="/dashboard" element={<DashboardPage />} />
+								<Route path="/search" element={<SearchPage />} />
+								{/*
+								<Route path="/add-book" element={ <AddBookPage /> } />
+								*/}
+								<Route path="/savedbooks" element={<SavedBooksPage />} />
+								<Route path="/wishlist" element={<WishlistPage />} />
+								<Route path="/reading" element={<ReadingPage />} />
+								<Route path="/finished" element={<FinishedPage />} />
+								<Route path="/favorites" element={<FavoritesPage />} />
+								<Route path="/quoted" element={<QuotedPage />} />
+								<Route path="/tropes" element={<TropesPage />} />
+								<Route path="/statistics" element={<StatisticsPage />} />
+								{/*
+								<Route path="/clear-my-books" element={ <ClearMyBooks /> } />
+								*/}
+								<Route path="/loadlibrary" element={<LoadLibrary />} />
 							</>
 						)}
 					</Routes>

@@ -1,17 +1,13 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
-const pageTitle = 'Mu books'
+const pageTitle = `What I'm reading now`
 const currentPage = 'reading'
 
 const ReadingPage = () => {
-	const { userMyBooks, setNavTitle, localBookFilter } = useContext(AppContext)
-
-	useEffect(() => {
-		setNavTitle(pageTitle)
-	}, [setNavTitle])
+	const { userMyBooks, localBookFilter } = useContext(AppContext)
 
 	let hasbooks = false
 	let booksFiltered: Books = []
@@ -32,7 +28,7 @@ const ReadingPage = () => {
 	return (
 		<>
 			<h1>
-				What I'm reading now
+				{pageTitle}
 				<sub>
 					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
 						<>
@@ -42,22 +38,23 @@ const ReadingPage = () => {
 						<>
 							No book titles found for <i>{localBookFilter}.</i>
 						</>
-					) : (
+					) : booksFiltered.length > 1 ? (
 						<>
-							Currently enjoying book(s):
+							Currently enjoying books:&nbsp;
 							{booksFiltered.length}
 						</>
+					) : (
+						booksFiltered.length < 1 && <>Nothing, at the moment.</>
 					)}
+					&nbsp;
 				</sub>
 			</h1>
 			{!hasbooks && localBookFilter === '' && (
 				<>
-					<h4>Currently not reading anything.</h4>
 					<p>
 						Want to add a book to your reading list?
 						<br />
-						<Link to="/wishlist">View your wishlist</Link> or <Link to="/search">Search</Link> to add a
-						book.
+						<Link to="/wishlist">View your wishlist</Link> or <Link to="/search">Search</Link> to add a book.
 						<br />
 						<br />
 					</p>

@@ -13,6 +13,7 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 		author_key: book.author_key,
 		author_name: book.author_name,
 		cover: book.cover,
+		cover_redir: book.cover_redir,
 		cover_edition_key: book.cover_edition_key,
 		list: list,
 		first_publish_year: book.first_publish_year,
@@ -32,7 +33,7 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 	return myBooks
 }
 
-async function MyBooksInsertFirst(): Promise<void> {
+const MyBooksInsertFirst = async (): Promise<void> => {
 	const { userid } = useContext(AppContext)
 	const { error } = await supabase
 		.from('user_entries')
@@ -42,12 +43,16 @@ async function MyBooksInsertFirst(): Promise<void> {
 	return
 }
 
-async function MyBooksUpdate(myBooksNew: Books) {
+const MyBooksUpdate = async (myBooksNew: Books): Promise<void> => {
 	const { setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	let msg: string
 	setUserMyBooks(myBooksNew)
 
-	const { error } = await supabase.from('user_entries').update({ json: myBooksNew }).eq('user_id', userid).select()
+	const { error } = await supabase
+		.from('user_entries')
+		.update({ json: myBooksNew })
+		.eq('user_id', userid)
+		.select()
 	if (error) {
 		msg = 'Error, data was not changed'
 		console.log('error:', error)

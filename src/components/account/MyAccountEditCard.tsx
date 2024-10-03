@@ -63,15 +63,28 @@ export default function MyAccountEditCard() {
 								id="account_screenname"
 								name="account_screenname"
 								defaultValue={username}
+								autoComplete="off"
 							/>
 						</label>
 						<label htmlFor="account_email">
 							<div className="description">Email address</div>
-							<input type="email" id="account_email" name="account_email" defaultValue={usermail} />
+							<input
+								type="email"
+								id="account_email"
+								name="account_email"
+								defaultValue={usermail}
+								autoComplete="username"
+							/>
 						</label>
 						<label htmlFor="account_password">
 							<div className="description">Password (leave empty to keep current)</div>
-							<input type="password" id="account_password" name="account_password" defaultValue="" />
+							<input
+								type="password"
+								id="account_password"
+								name="account_password"
+								defaultValue=""
+								autoComplete="new-password"
+							/>
 						</label>
 						<button>Save and return</button>
 					</form>
