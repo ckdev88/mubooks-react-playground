@@ -34,7 +34,7 @@ interface IsModdingReviewContextType {
 	setIsModding(isModding: isModding): void
 	reviewText: Book['review_text']
 	setReviewText(reviewText: reviewText): void
-	review_type: 'text' | 'quote'
+	o_key: 'review_text' | 'review_fav_quote'
 }
 
 type Page =

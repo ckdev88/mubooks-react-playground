@@ -38,4 +38,5 @@ const useChangePages = (
 
 	return [processForm, isModded, newNumberOfPages]
 }
+
 export default useChangePages

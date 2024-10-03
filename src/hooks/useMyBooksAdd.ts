@@ -72,11 +72,7 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 				title_short: title_short,
 			}
 			newUserMyBooks.push(newBook)
-		} else {
-			// TODO this else conditional should never be called, so take it out
-			console.log('just need to update')
-			newUserMyBooks = userMyBooks
-		}
+		} else newUserMyBooks = userMyBooks // just update or keep intact.. not sure
 		return newUserMyBooks
 	}
 
@@ -100,7 +96,7 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 		MyBooksUpdate(myBooks)
 	}
 
-	function AddBookToXButtonAct(): void {
+	const AddBookToXButtonAct = (): void => {
 		AddBookToX()
 	}
 

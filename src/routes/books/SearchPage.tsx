@@ -22,7 +22,7 @@ const SearchPage = () => {
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		const before = performance.now()
+		// const before = performance.now()
 		const search_term: string = e.currentTarget.search_term.value.trim()
 		// const search_author: string = e.currentTarget.search_term.value.trim()
 		if (search_term.length > 4) {
@@ -66,7 +66,7 @@ const SearchPage = () => {
 				.finally(() => setLoading(false))
 		} else if (search_term.length === 0) setResultsMessage(search_term)
 		else setResultsMessage('keep typing...')
-		console.log('search performed in:', performance.now() - before)
+		// console.log('search performed in:', performance.now() - before)
 	}
 	return (
 		<>

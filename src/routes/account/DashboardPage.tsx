@@ -41,4 +41,4 @@ export default function DashboardPage() {
 		</>
 	)
 }
-/* <Tropes /> <Stats /> <Explore /> */
+/* <Tropes /> <Stats />  */

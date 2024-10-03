@@ -7,12 +7,12 @@ export const IsModdingReviewContext = createContext<IsModdingReviewContextType>(
 
 interface PropTypes {
 	book_id: Book['id']
-	review_type: 'text' | 'quote'
+	o_key: 'review_text' | 'review_fav_quote'
 	review_text: Book['review_text']
 }
-const BookSummaryReview = ({ book_id, review_type, review_text }: PropTypes) => {
+const BookSummaryReview = ({ book_id, o_key, review_text }: PropTypes) => {
 	let addButtonTitle: string
-	if (review_type === 'quote') addButtonTitle = 'Quote'
+	if (o_key === 'review_fav_quote') addButtonTitle = 'Quote'
 	else addButtonTitle = 'Review'
 
 	if (review_text === undefined) review_text = ''
@@ -20,18 +20,16 @@ const BookSummaryReview = ({ book_id, review_type, review_text }: PropTypes) => 
 	const [isModding, setIsModding] = useState<boolean>(false)
 
 	return (
-		<IsModdingReviewContext.Provider
-			value={{ isModding, setIsModding, reviewText, setReviewText, review_type }}
-		>
+		<IsModdingReviewContext.Provider value={{ isModding, setIsModding, reviewText, setReviewText, o_key }}>
 			<>
-				<div className={`review-text ${review_type}`}>
+				<div className={`review-text ${o_key}`}>
 					{isModding ? (
-						<BookModifyReview book_id={book_id} review_type={review_type} review_text={review_text} />
+						<BookModifyReview book_id={book_id} o_key={o_key} review_text={reviewText} />
 					) : (
 						<>
 							{reviewText && (
 								<div onClick={() => setIsModding(true)}>
-									{review_type === 'quote' ? <>{`“${reviewText}”`}</> : <>{reviewText}</>}
+									{o_key === 'review_fav_quote' ? <>{`“${reviewText}”`}</> : <>{reviewText}</>}
 								</div>
 							)}
 							{(reviewText === '' || reviewText === undefined) && isModding === false && (

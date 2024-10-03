@@ -33,9 +33,7 @@ const RootPage = () => {
 			access_token: accessToken,
 			refresh_token: refreshToken,
 		})
-		if (error) {
-			console.log('Error logging in with token:', error.message)
-		}
+		if (error) console.log('Error logging in with token:', error.message)
 	}
 	if (accessToken !== '' && refreshToken !== '') loginwithtoken(accessToken, refreshToken)
 
