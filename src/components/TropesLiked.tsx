@@ -27,7 +27,6 @@ const TropesLiked = () => {
 		if (e.currentTarget.trope_add_liked.value !== undefined) {
 			tropeLiked = cleanInput(e.currentTarget.trope_add_liked.value, false)
 			const newArr = [...likedTropes, tropeLiked]
-			setLikedTropes(newArr)
 			updateTropes(newArr)
 
 			e.currentTarget.trope_add_liked.value = ''
@@ -36,6 +35,7 @@ const TropesLiked = () => {
 	}
 
 	async function updateTropes(newArr: string[]) {
+		setLikedTropes(newArr)
 		let msg: string
 		const { error } = await supabase
 			.from('user_entries')
@@ -52,12 +52,7 @@ const TropesLiked = () => {
 
 	function removeTrope(trope: string) {
 		const newArr = likedTropes.filter((trp) => trp !== trope)
-		setLikedTropes(newArr)
 		updateTropes(newArr)
-	}
-
-	const cancelSubmit = (): void => {
-		setShowForm(false)
 	}
 
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
@@ -93,7 +88,7 @@ const TropesLiked = () => {
 							<input type="text" name="trope_add_liked" id="trope_add_liked" placeholder="Add a trope..." />
 							<BtnInsideCaret />
 						</form>
-						<button className="btn-text btn-text-cancel" onClick={() => cancelSubmit()}>
+						<button className="btn-text btn-text-cancel wauto" onClick={() => setShowForm(false)}>
 							Cancel
 						</button>
 					</>

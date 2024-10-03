@@ -62,7 +62,6 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const updateTropesCallback = useCallback(
 		async function updateTropes() {
 			if (userMyBooks.length < 1) return
-
 			for (let i = 0; i < userMyBooks.length; i++) {
 				if (userMyBooks[i].id === book.id) {
 					userMyBooks[i].review_tropes = bookTropes

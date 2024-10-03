@@ -29,7 +29,13 @@ const BookModifyReview = ({
 	return (
 		<>
 			<form className="single-small-form clr" onSubmit={processForm}>
-				<input name="review_text" type="text" placeholder={placeholder} defaultValue={review_text} />
+				<input
+					name="review_text"
+					type="text"
+					placeholder={placeholder}
+					defaultValue={review_text}
+					className={o_key === 'review_fav_quote' ? 'tcenter' : ''}
+				/>
 				<BtnInsideCaret />
 			</form>
 

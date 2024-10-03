@@ -37,6 +37,13 @@
 .book-summary.quoted .review-text.review_fav_quote i {
 	font-size: 0.95rem;
 }
+.book-summary .review-text {
+	font-size: 0.9rem;
+}
+.book-summary .review-text.review_text {
+	margin-bottom: 0.5rem;
+}
+
 .book-summary.quoted hr {
 	display: none;
 }
@@ -273,6 +280,5 @@
 	text-align: center;
 }
 .book-summary .review-text.review_fav_quote {
-	font-size: 0.9rem;
 	margin: 0;
 }

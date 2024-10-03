@@ -15,7 +15,7 @@ const BookPages = ({
 
 	return (
 		<IsModdingPagesContext.Provider value={{ isModding, setIsModding, numberOfPages, setNumberOfPages }}>
-			<div style={{ display: 'flex', padding: '.5rem 0' }}>
+			<div style={{ display: 'flex', padding: '.25rem 0' }}>
 				{isModding ? (
 					<BookModifyPages book_id={book_id} book_number_of_pages_median={book_number_of_pages_median} />
 				) : (

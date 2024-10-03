@@ -15,7 +15,8 @@ import BookSummaryReview from './BookSummaryReview'
 
 const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Page; refer?: Page }) => {
 	const synopsisPages: Page[] = ['search', 'wishlist']
-	const pagesMedianPages: Page[] = ['search', 'reading']
+	const pagesMedianPages: Page[] = ['search', 'reading', 'finished']
+	const pagesReviewQuotes: Page[] = ['finished', 'favorites', 'savedbooks']
 
 	const synopsis = useGetSynopsis(book.id, book.cover_edition_key, synopsisPages, currentPage)
 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
@@ -31,7 +32,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 					: `book-summary ${currentPage}`
 			}
 		>
-			<div style={{ position: 'relative', marginTop: '-5rem' }} id={bookAnchor}></div>
+			<div style={{ marginTop: '-4rem', position: 'absolute' }} id={bookAnchor}></div>
 			<BookSummaryAside book={book} currentPage={currentPage} />
 			<div className="article-main">
 				{currentPage !== 'quoted' && (
@@ -99,14 +100,12 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			</div>
 			{currentPage !== 'dashboard' && (
 				<footer>
-					{(currentPage === 'finished' || currentPage === 'favorites' || currentPage === 'savedbooks') && (
-						<>
-							<BookSummaryReview
-								book_id={book.id}
-								o_key="review_fav_quote"
-								review_text={book.review_fav_quote}
-							/>
-						</>
+					{pagesReviewQuotes.includes(currentPage) && (
+						<BookSummaryReview
+							book_id={book.id}
+							o_key="review_fav_quote"
+							review_text={book.review_fav_quote}
+						/>
 					)}
 					{currentPage === 'search' && book.subject && (
 						<SearchTropes book_id={book.id} tropes={book.subject} />
