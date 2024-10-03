@@ -16,24 +16,24 @@
 .main-dashboard .book-summary {
 	padding-bottom: 0;
 }
-
 .book-summary hr {
 	margin-top: 0.5rem;
 }
-
 .book-summary.quoted {
 	display: flex;
 	align-items: center;
 }
-.quoteblock {
-	text-align: center;
+.review_fav_quote {
 	font-style: italic;
+	text-align: center;
+}
+.quoteblock .review-text.review_fav_quote {
+	padding-bottom: 0.75em;
 }
 .book-summary.quoted .review-text.review_fav_quote {
 	font-size: 1.1rem;
 	padding-top: 0;
 }
-
 .book-summary.quoted .review-text.review_fav_quote i {
 	font-size: 0.95rem;
 }
