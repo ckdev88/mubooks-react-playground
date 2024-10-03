@@ -26,42 +26,34 @@ const TropesLiked = () => {
 		let tropeLiked: string
 		if (e.currentTarget.trope_add_liked.value !== undefined) {
 			tropeLiked = cleanInput(e.currentTarget.trope_add_liked.value, false)
-			setLikedTropes([...likedTropes, tropeLiked])
+			const newArr = [...likedTropes, tropeLiked]
+			setLikedTropes(newArr)
+			updateTropes(newArr)
+
 			e.currentTarget.trope_add_liked.value = ''
 			e.currentTarget.trope_add_liked.focus()
-			let msg: string
-			const { error } = await supabase
-				.from('user_entries')
-				.update({
-					tropes_liked: [...likedTropes, tropeLiked],
-					testdata: 'updated from tropes: Add liked trope',
-				})
-				.eq('user_id', userid)
-				.select('*')
-			if (error) msg = error.message
-			else msg = 'Updated liked tropes.'
-			setPopupNotification(msg)
 		}
 	}
 
-	async function processRemoveTrope(trope: string) {
+	async function updateTropes(newArr: string[]) {
 		let msg: string
 		const { error } = await supabase
 			.from('user_entries')
 			.update({
-				tropes_liked: likedTropes.filter((trp) => trp !== trope),
-				testdata: 'updated from tropes: remove liked trope',
+				tropes_liked: newArr,
+				testdata: 'updated tropes',
 			})
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message
-		else msg = 'Updated liked tropes.'
+		else msg = 'Updated tropes.'
 		setPopupNotification(msg)
 	}
 
 	function removeTrope(trope: string) {
-		setLikedTropes(likedTropes.filter((trp) => trp !== trope))
-		processRemoveTrope(trope)
+		const newArr = likedTropes.filter((trp) => trp !== trope)
+		setLikedTropes(newArr)
+		updateTropes(newArr)
 	}
 
 	const cancelSubmit = (): void => {
