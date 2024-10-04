@@ -56,7 +56,7 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 					if (booksarr.length > 3) extraArticleClass += ' fl'
 					if (booksarr.length < 6) extraArticleClass += ' shade'
 					const articleClassNames = `book-cover${extraArticleClass}`
-					const bookAnchor: string = cleanAnchor(book.title_short)
+					const bookAnchor: string = `${cleanAnchor(book.title_short)}_${book.id}`
 
 					return (
 						<article
