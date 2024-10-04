@@ -100,6 +100,7 @@ const App = () => {
 	const currentPage: Page = location.pathname.slice(1) as Page
 	const mainClassName: string = 'main-' + currentPage
 
+	// TODO: see <Context> as a provider, AppContext. Provider will be deprecated in future versions.
 	return (
 		<>
 			<AppContext.Provider

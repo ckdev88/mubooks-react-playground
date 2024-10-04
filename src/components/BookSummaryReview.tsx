@@ -19,6 +19,7 @@ const BookSummaryReview = ({ book_id, o_key, review_text }: PropTypes) => {
 	const [reviewText, setReviewText] = useState<string>(review_text)
 	const [isModding, setIsModding] = useState<boolean>(false)
 
+	// TODO check toekomst van Provider, soon deprecated?
 	return (
 		<IsModdingReviewContext.Provider value={{ isModding, setIsModding, reviewText, setReviewText, o_key }}>
 			<>
