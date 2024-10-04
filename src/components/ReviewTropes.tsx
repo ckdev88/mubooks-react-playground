@@ -8,9 +8,13 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 
 	const [bookTropes, setBookTropes] = useState<BookTropes>(tropes)
+	const [bookTropesLowercase, setBookTropesLowercase] = useState<BookTropes>([])
 	const [showTropesForm, setShowTropesForm] = useState<boolean>(false)
 	const [isModding, setIsModding] = useState<boolean>(false)
 
+	useEffect(() => {
+		setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
+	}, [bookTropes])
 	function removeTrope(trope: string) {
 		setIsModding(true)
 		setBookTropes(bookTropes.filter((bt) => bt !== trope))
@@ -78,7 +82,11 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 		e.preventDefault()
 
 		const trope = cleanInput(e.currentTarget.trope_add.value, true)
-		if (trope !== undefined && trope.length > 2) {
+		if (
+			trope !== undefined &&
+			trope.length > 2 &&
+			!bookTropesLowercase.includes(trope.toLowerCase())
+		) {
 			setIsModding(true)
 			setBookTropes([...bookTropes, trope])
 			e.currentTarget.trope_add.value = ''
