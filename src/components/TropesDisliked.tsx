@@ -3,16 +3,15 @@ import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
+import { TropesPageContext } from '../routes/books/TropesPage'
 
 const TropesDisliked = () => {
+	const { setLikedDislikedTropes, likedDislikedTropes } = useContext(TropesPageContext)
 	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showLikedDislikedTropesForm, setShowLikedDislikedTropesForm] = useState<boolean>(false)
-	const [likedDislikedTropes, setLikedDislikedTropes] = useState<BookTropes>([])
 	const tropesDb = async () => {
 		const res = await supabase.from('user_entries').select('tropes_disliked')
-		if (res.data) {
-			setLikedDislikedTropes(res.data[0].tropes_disliked)
-		}
+		if (res.data) setLikedDislikedTropes(res.data[0].tropes_disliked)
 	}
 
 	useEffect(() => {
@@ -29,22 +28,27 @@ const TropesDisliked = () => {
 		if (e.currentTarget.trope_add_disliked.value !== undefined) {
 			tropeLikedDisliked = cleanInput(e.currentTarget.trope_add_disliked.value, false)
 			if (tropeLikedDisliked.length < 2) return
-			setLikedDislikedTropes([...likedDislikedTropes, tropeLikedDisliked])
+			const newArr = [...likedDislikedTropes, tropeLikedDisliked]
+			updateTropes(newArr)
+
 			e.currentTarget.trope_add_disliked.value = ''
 			e.currentTarget.trope_add_disliked.focus()
-			let msg: string
-			const { error } = await supabase
-				.from('user_entries')
-				.update({
-					tropes_disliked: [...likedDislikedTropes, tropeLikedDisliked],
-					testdata: 'updated from tropes: Add liked trope',
-				})
-				.eq('user_id', userid)
-				.select('*')
-			if (error) msg = error.message
-			else msg = 'Updated liked tropes.'
-			setPopupNotification(msg)
 		}
+	}
+	async function updateTropes(newArr: string[]) {
+		setLikedDislikedTropes(newArr)
+		let msg: string
+		const { error } = await supabase
+			.from('user_entries')
+			.update({
+				tropes_disliked: newArr,
+				testdata: 'updated tropes',
+			})
+			.eq('user_id', userid)
+			.select('*')
+		if (error) msg = error.message
+		else msg = 'Updated tropes.'
+		setPopupNotification(msg)
 	}
 
 	async function processRemoveTrope(trope: string) {
