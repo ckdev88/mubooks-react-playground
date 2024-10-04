@@ -26,6 +26,7 @@ const TropesLiked = () => {
 		let tropeLiked: string
 		if (e.currentTarget.trope_add_liked.value !== undefined) {
 			tropeLiked = cleanInput(e.currentTarget.trope_add_liked.value, false)
+			if (tropeLiked.length < 2) return
 			const newArr = [...likedTropes, tropeLiked]
 			updateTropes(newArr)
 

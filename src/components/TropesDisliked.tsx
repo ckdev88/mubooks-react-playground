@@ -28,6 +28,7 @@ const TropesDisliked = () => {
 		let tropeLikedDisliked: string
 		if (e.currentTarget.trope_add_disliked.value !== undefined) {
 			tropeLikedDisliked = cleanInput(e.currentTarget.trope_add_disliked.value, false)
+			if (tropeLikedDisliked.length < 2) return
 			setLikedDislikedTropes([...likedDislikedTropes, tropeLikedDisliked])
 			e.currentTarget.trope_add_disliked.value = ''
 			e.currentTarget.trope_add_disliked.focus()
