@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { AppContext } from '../App'
-import { supabase } from '../../utils/supabase'
+import useMyBooksUpdateDb from '../hooks/useMyBooksUpdateDb'
 
 const ReviewRating = ({
 	book_id,
@@ -13,24 +13,17 @@ const ReviewRating = ({
 	book_rate_spice: Book['rate_spice']
 	book_title_short: Book['title_short']
 }) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
+	const { userMyBooks, setUserMyBooks } = useContext(AppContext)
 
 	const [reviewStars, setReviewStars] = useState(book_rate_stars)
 	const [reviewSpice, setReviewSpice] = useState(book_rate_spice)
 
-	// TODO: move this function to generic helper location
-	async function MyBooksUpdate(myBooksNew: Books) {
-		let msg: string
-		setUserMyBooks(myBooksNew)
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew, testdata: 'updated from RateStars n Spice' })
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Added rating for ' + book_title_short
-		setPopupNotification(msg)
-	}
+	const msg: string = 'Added rating for ' + book_title_short
+	const updateMyBooksDb = useMyBooksUpdateDb({
+		myBooksNew: userMyBooks,
+		book_id,
+		msg,
+	})
 
 	function RateStars(book_id: Book['id'], type: 'rate_stars' | 'rate_spice', rating: Scale5) {
 		let myBooks: Books
@@ -46,7 +39,8 @@ const ReviewRating = ({
 		}
 
 		const myBooksNew: Books = myBooks
-		MyBooksUpdate(myBooksNew)
+		setUserMyBooks(myBooksNew)
+		updateMyBooksDb()
 		return myBooksNew
 	}
 
