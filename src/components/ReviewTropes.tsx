@@ -88,7 +88,9 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 			!bookTropesLowercase.includes(trope.toLowerCase())
 		) {
 			setIsModding(true)
-			setBookTropes([...bookTropes, trope])
+			const newArr = [...bookTropes, trope]
+			newArr.sort((a, b) => a.localeCompare(b))
+			setBookTropes(newArr)
 			e.currentTarget.trope_add.value = ''
 			e.currentTarget.trope_add.focus()
 		}
@@ -120,7 +122,12 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 			{showTropesForm && (
 				<>
 					<form className="single-small-form clr" onSubmit={processTropeAddForm}>
-						<input type="text" name="trope_add" id={'trope_add_' + book.id} placeholder="Add a trope..." />
+						<input
+							type="text"
+							name="trope_add"
+							id={'trope_add_' + book.id}
+							placeholder="Add a trope..."
+						/>
 						<BtnInsideCaret />
 					</form>
 					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>

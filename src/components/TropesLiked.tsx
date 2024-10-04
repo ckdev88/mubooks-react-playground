@@ -97,7 +97,12 @@ const TropesLiked = () => {
 				{showForm && (
 					<>
 						<form className="single-small-form clr" onSubmit={processLikedTropeAddForm}>
-							<input type="text" name="trope_add_liked" id="trope_add_liked" placeholder="Add a trope..." />
+							<input
+								type="text"
+								name="trope_add_liked"
+								id="trope_add_liked"
+								placeholder="Add a trope..."
+							/>
 							<BtnInsideCaret />
 						</form>
 						<button className="btn-text btn-text-cancel wauto" onClick={() => setShowForm(false)}>
