@@ -6,12 +6,12 @@ import BtnInsideCaret from './ui/BtnInsideCaret'
 import { TropesPageContext } from '../routes/books/TropesPage'
 
 const TropesDisliked = () => {
-	const { setLikedDislikedTropes, likedDislikedTropes } = useContext(TropesPageContext)
+	const { setDislikedTropes, dislikedTropes } = useContext(TropesPageContext)
 	const { setPopupNotification, userid } = useContext(AppContext)
-	const [showLikedDislikedTropesForm, setShowLikedDislikedTropesForm] = useState<boolean>(false)
+	const [showDislikedTropesForm, setShowDislikedTropesForm] = useState<boolean>(false)
 	const tropesDb = async () => {
 		const res = await supabase.from('user_entries').select('tropes_disliked')
-		if (res.data) setLikedDislikedTropes(res.data[0].tropes_disliked)
+		if (res.data) setDislikedTropes(res.data[0].tropes_disliked)
 	}
 
 	useEffect(() => {
@@ -19,16 +19,16 @@ const TropesDisliked = () => {
 	}, [])
 
 	useEffect(() => {
-		if (showLikedDislikedTropesForm === true) document.getElementById('trope_add_disliked')?.focus()
-	}, [showLikedDislikedTropesForm])
+		if (showDislikedTropesForm === true) document.getElementById('trope_add_disliked')?.focus()
+	}, [showDislikedTropesForm])
 
-	async function processLikedDislikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
+	async function processDislikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		let tropeLikedDisliked: string
+		let tropeDisliked: string
 		if (e.currentTarget.trope_add_disliked.value !== undefined) {
-			tropeLikedDisliked = cleanInput(e.currentTarget.trope_add_disliked.value, false)
-			if (tropeLikedDisliked.length < 2) return
-			const newArr = [...likedDislikedTropes, tropeLikedDisliked]
+			tropeDisliked = cleanInput(e.currentTarget.trope_add_disliked.value, false)
+			if (tropeDisliked.length < 2) return
+			const newArr = [...dislikedTropes, tropeDisliked]
 			updateTropes(newArr)
 
 			e.currentTarget.trope_add_disliked.value = ''
@@ -36,7 +36,7 @@ const TropesDisliked = () => {
 		}
 	}
 	async function updateTropes(newArr: string[]) {
-		setLikedDislikedTropes(newArr)
+		setDislikedTropes(newArr)
 		let msg: string
 		const { error } = await supabase
 			.from('user_entries')
@@ -56,7 +56,7 @@ const TropesDisliked = () => {
 		const { error } = await supabase
 			.from('user_entries')
 			.update({
-				tropes_disliked: likedDislikedTropes.filter((trp) => trp !== trope),
+				tropes_disliked: dislikedTropes.filter((trp) => trp !== trope),
 				testdata: 'updated from tropes: remove disliked trope',
 			})
 			.eq('user_id', userid)
@@ -67,12 +67,12 @@ const TropesDisliked = () => {
 	}
 
 	function removeTrope(trope: string) {
-		setLikedDislikedTropes(likedDislikedTropes.filter((trp) => trp !== trope))
+		setDislikedTropes(dislikedTropes.filter((trp) => trp !== trope))
 		processRemoveTrope(trope)
 	}
 
 	const cancelSubmit = (): void => {
-		setShowLikedDislikedTropesForm(false)
+		setShowDislikedTropesForm(false)
 	}
 
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
@@ -88,8 +88,8 @@ const TropesDisliked = () => {
 				))}
 				<li className="trope_add">
 					<button
-						className={showLikedDislikedTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
-						onClick={() => setShowLikedDislikedTropesForm(!showLikedDislikedTropesForm)}
+						className={showDislikedTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
+						onClick={() => setShowDislikedTropesForm(!showDislikedTropesForm)}
 					>
 						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
 					</button>
@@ -101,10 +101,10 @@ const TropesDisliked = () => {
 		<>
 			<h2>Dislike</h2>
 			<div>
-				<TropesList tropes={likedDislikedTropes} />
-				{showLikedDislikedTropesForm && (
+				<TropesList tropes={dislikedTropes} />
+				{showDislikedTropesForm && (
 					<>
-						<form className="single-small-form clr" onSubmit={processLikedDislikedTropeAddForm}>
+						<form className="single-small-form clr" onSubmit={processDislikedTropeAddForm}>
 							<input
 								type="text"
 								name="trope_add_disliked"
