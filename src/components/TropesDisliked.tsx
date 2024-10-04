@@ -32,6 +32,7 @@ const TropesDisliked = () => {
 				return
 
 			const newArr = [...dislikedTropes, tropeDisliked]
+			newArr.sort((a, b) => a.localeCompare(b))
 			updateTropes(newArr)
 
 			e.currentTarget.trope_add_disliked.value = ''

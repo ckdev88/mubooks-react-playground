@@ -38,6 +38,7 @@ const TropesLiked = () => {
 			if (tropeLiked.length < 2 || likedTropesLowercase.includes(tropeLiked.toLowerCase())) return
 
 			const newArr = [...likedTropes, tropeLiked]
+			newArr.sort((a, b) => a.localeCompare(b))
 			updateTropes(newArr)
 
 			e.currentTarget.trope_add_liked.value = ''
