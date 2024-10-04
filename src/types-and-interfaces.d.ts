@@ -34,6 +34,14 @@ interface IsModdingReviewContextType {
 	setReviewText(reviewText: reviewText): void
 	o_key: 'review_text' | 'review_fav_quote'
 }
+interface TropesPageContextType {
+	likedTropes: BookTropes
+	setLikedTropes(likedTropes: likedTropes): void
+	dislikedTropes: BookTropes
+	setDislikedTropes(dislikedTropes: dislikedTropes): void
+	likedTropesLowercase: BookTropes
+	dislikedTropesLowercase: BookTropes
+}
 
 type Page =
 	| 'dashboard'

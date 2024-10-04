@@ -6,7 +6,8 @@ import BtnInsideCaret from './ui/BtnInsideCaret'
 import { TropesPageContext } from '../routes/books/TropesPage'
 
 const TropesDisliked = () => {
-	const { setDislikedTropes, dislikedTropes } = useContext(TropesPageContext)
+	const { setDislikedTropes, dislikedTropes, dislikedTropesLowercase } =
+		useContext(TropesPageContext)
 	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState<boolean>(false)
 	const tropesDb = async () => {
@@ -27,7 +28,9 @@ const TropesDisliked = () => {
 		let tropeDisliked: string
 		if (e.currentTarget.trope_add_disliked.value !== undefined) {
 			tropeDisliked = cleanInput(e.currentTarget.trope_add_disliked.value, false)
-			if (tropeDisliked.length < 2) return
+			if (tropeDisliked.length < 2 || dislikedTropesLowercase.includes(tropeDisliked.toLowerCase()))
+				return
+
 			const newArr = [...dislikedTropes, tropeDisliked]
 			updateTropes(newArr)
 

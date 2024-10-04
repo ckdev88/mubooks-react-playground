@@ -3,14 +3,22 @@ import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
+import { TropesPageContext } from '../routes/books/TropesPage'
 
 const TropesLiked = () => {
+	const { setLikedTropes, likedTropes, likedTropesLowercase } = useContext(TropesPageContext)
 	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState<boolean>(false)
-	const [likedTropes, setLikedTropes] = useState<BookTropes>([])
 	const tropesDb = async () => {
 		const res = await supabase.from('user_entries').select('tropes_liked')
-		if (res.data) setLikedTropes(res.data[0].tropes_liked)
+		if (res.data) {
+			const lt: BookTropes = res.data[0].tropes_liked
+			const ltSet = new Set<string>()
+			lt.map((t) => ltSet.add(t.trim().toLowerCase()))
+			console.log('ltSet:', ltSet)
+
+			setLikedTropes(res.data[0].tropes_liked)
+		}
 	}
 
 	useEffect(() => {
@@ -26,7 +34,9 @@ const TropesLiked = () => {
 		let tropeLiked: string
 		if (e.currentTarget.trope_add_liked.value !== undefined) {
 			tropeLiked = cleanInput(e.currentTarget.trope_add_liked.value, false)
-			if (tropeLiked.length < 2) return
+
+			if (tropeLiked.length < 2 || likedTropesLowercase.includes(tropeLiked.toLowerCase())) return
+
 			const newArr = [...likedTropes, tropeLiked]
 			updateTropes(newArr)
 
