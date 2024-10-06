@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react'
 import { useState, useContext, useEffect } from 'react'
 import { cleanIndexKey } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import BooksOverviewPage from '../routes/books/BooksOverviewPage'
 import { TropesPageContext } from '../routes/books/TropesPage'
+import { cleanAnchor } from '../helpers/cleanInput'
 
 const TropesInMyBooks = ({ page }: { page: Page }) => {
 	const { likedTropesLowercase, dislikedTropesLowercase } = useContext(TropesPageContext)
@@ -18,13 +18,6 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 	})
 	const tropesArr = Array.from(tropesSet).sort((a, b) => a.localeCompare(b))
 
-	useEffect(() => {
-		// TODO improve efficiency
-		const tropesListLower = tropesArr.map((trope) => trope.toLowerCase())
-		const tropesList = tropesListLower.sort((a, b) => a.localeCompare(b))
-		console.log(tropesList)
-	}, [tropesArr])
-
 	function showTropeBooks(trope: string) {
 		const tropeBooksFiltered = userMyBooks.filter(
 			(book: Book) =>
@@ -34,11 +27,14 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 		)
 		setTropeBooks(tropeBooksFiltered)
 		setActiveTrope(trope)
+		setTimeout(() => {
+			location.href = '#' + cleanAnchor(trope + '_books')
+		}, 200)
 	}
 
 	return (
 		<>
-			<h2>Tropes in my Books.</h2>
+			<h2>Tropes in my Books</h2>
 			<ul className="tropes clr">
 				{tropesArr.map((trope, index) => {
 					let cn: string = 'btn-sm mb0 badge'
@@ -55,8 +51,12 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 			</ul>
 			{tropeBooks.length > 0 && (
 				<>
-					<h2>
+					<h2 style={{ position: 'relative' }}>
 						My Books for <em>{activeTrope}</em>
+						<div
+							style={{ position: 'absolute', marginTop: '-4em' }}
+							id={cleanAnchor(activeTrope + '_' + 'books')}
+						></div>
 					</h2>
 					<br />
 					<BooksOverviewPage books={tropeBooks} page={page} />
