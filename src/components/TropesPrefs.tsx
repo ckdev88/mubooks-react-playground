@@ -39,8 +39,6 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 			document.getElementById('trope_add_disliked')?.focus()
 	}, [showForm])
 
-	// TODO merge this functionality with that of ./src/components/TropesDisliked.tsx
-
 	let tropesLowercase: BookTropes
 	let tropesArr: BookTropes
 	if (field === 'tropes_liked') {
@@ -57,28 +55,37 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		if (e.currentTarget.trope_add.value !== undefined) {
 			tropeToAdd = cleanInput(e.currentTarget.trope_add.value, false)
 			if (tropeToAdd.length < 2 || tropesLowercase.includes(tropeToAdd.toLowerCase())) return
+
+			if (field === 'tropes_liked' && dislikedTropesLowercase.includes(tropeToAdd.toLowerCase())) {
+				removeTrope(tropeToAdd, 'tropes_disliked')
+			} else if (field === 'tropes_disliked' && likedTropesLowercase.includes(tropeToAdd)) {
+				removeTrope(tropeToAdd, 'tropes_liked')
+			}
+
 			let newArr: BookTropes = []
 			newArr = [...tropesArr, tropeToAdd]
 			newArr.sort((a, b) => a.localeCompare(b))
-			updateTropes(newArr)
+			updateTropes(newArr, field)
 
 			e.currentTarget.trope_add.value = ''
 			e.currentTarget.trope_add.focus()
 		}
 	}
 
-	async function updateTropes(newArr: BookTropes) {
+	async function updateTropes(newArr: BookTropes, field: 'tropes_liked' | 'tropes_disliked') {
 		if (field === 'tropes_liked') setLikedTropes(newArr)
 		else if (field === 'tropes_disliked') setDislikedTropes(newArr)
 		const msg = await updateTropesDb(newArr, userid, field)
 		setPopupNotification(msg)
 	}
 
-	async function removeTrope(trope: string) {
+	async function removeTrope(trope: string, field: 'tropes_liked' | 'tropes_disliked') {
 		let newArr: BookTropes = []
-		if (field === 'tropes_liked') newArr = likedTropes.filter((t) => t !== trope)
-		if (field === 'tropes_disliked') newArr = dislikedTropes.filter((t) => t !== trope)
-		updateTropes(newArr)
+		if (field === 'tropes_liked')
+			newArr = likedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
+		if (field === 'tropes_disliked')
+			newArr = dislikedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
+		updateTropes(newArr, field)
 	}
 
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
@@ -90,7 +97,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 						key={cleanIndexKey(trope, index)}
 					>
 						{trope}
-						<button className="btn-x" onClick={() => removeTrope(trope)}>
+						<button className="btn-x" onClick={() => removeTrope(trope, field)}>
 							x
 						</button>
 					</li>
