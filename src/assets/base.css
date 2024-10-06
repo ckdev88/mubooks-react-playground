@@ -94,11 +94,6 @@ img {
 	box-sizing: border-box;
 }
 
-.main-dashboard#main {
-	max-width: calc(100% - 0.5rem);
-	box-sizing: border-box;
-	max-width: 100%;
-}
 .loggedin #main {
 	padding-top: 4rem;
 }

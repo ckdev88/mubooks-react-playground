@@ -95,8 +95,6 @@ const App = () => {
 		setTimeout(() => setPopupNotification(''), 1000)
 		return <>{ret}</>
 	}
-	const currentPage: Page = location.pathname.slice(1) as Page
-	const mainClassName: string = 'main-' + currentPage
 
 	// TODO: see <Context> as a provider, AppContext. Provider will be deprecated in future versions.
 	return (
@@ -130,7 +128,7 @@ const App = () => {
 						<NavWrapper />
 					</header>
 				)}
-				<main id="main" className={mainClassName + ' textwrapper'}>
+				<main id="main" className='main textwrapper'>
 					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
 					{popupNotification !== '' && (
 						<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>

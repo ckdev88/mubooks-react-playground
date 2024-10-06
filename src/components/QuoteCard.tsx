@@ -24,7 +24,7 @@ const QuoteCard = () => {
 	return (
 		<>
 			{quote && (
-				<article className="quote shade-light">
+				<article className="quote shade-light dashboard-quote">
 					<main>{quote.quote && `“${quote.quote}”`}</main>
 					<footer>
 						{quote.title}, {quote.authors}
