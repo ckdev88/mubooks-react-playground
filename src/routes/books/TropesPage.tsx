@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import TropesInMyBooks from '../../components/TropesInMyBooks'
-import TropesLiked from '../../components/TropesLiked'
-import TropesDisliked from '../../components/TropesDisliked'
+import TropesPrefs from '../../components/TropesPrefs'
 
 export const TropesPageContext = createContext<TropesPageContextType>({} as TropesPageContextType)
 
@@ -39,8 +38,8 @@ const TropesPage = () => {
 		>
 			<>
 				<h1>My Tropes</h1>
-				<TropesLiked />
-				<TropesDisliked />
+				<TropesPrefs field="tropes_liked" />
+				<TropesPrefs field="tropes_disliked" />
 				<br />
 				<hr />
 				<br />

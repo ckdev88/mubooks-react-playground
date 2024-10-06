@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { cleanIndexKey } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import BooksOverviewPage from '../routes/books/BooksOverviewPage'
