@@ -62,13 +62,12 @@
 .book-summary h2 {
 	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
-	font-size: 1.3em;
 }
 .book-summary .icon-heart + h2 {
 	padding-right: 1.25rem;
 }
 .book-summary h2 sub {
-	font-size: 0.8em;
+	font-size: 0.9em;
 	font-weight: normal;
 	display: block;
 }
