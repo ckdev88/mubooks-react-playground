@@ -54,15 +54,19 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		let tropeToAdd: string
 		if (e.currentTarget.trope_add.value !== undefined) {
 			tropeToAdd = cleanInput(e.currentTarget.trope_add.value, false)
-			if (tropeToAdd.length < 2 || tropesLowercase.includes(tropeToAdd.toLowerCase())) return
 
-			if (field === 'tropes_liked' && dislikedTropesLowercase.includes(tropeToAdd.toLowerCase())) {
-				removeTrope(tropeToAdd, 'tropes_disliked')
-			} else if (field === 'tropes_disliked' && likedTropesLowercase.includes(tropeToAdd)) {
-				removeTrope(tropeToAdd, 'tropes_liked')
+			if (tropeToAdd.length < 2) return
+
+			if (field === 'tropes_liked') {
+				if (dislikedTropesLowercase.includes(tropeToAdd.toLowerCase())) removeTrope(tropeToAdd, 'tropes_disliked')
+			} else if (field === 'tropes_disliked') {
+				if (likedTropesLowercase.includes(tropeToAdd)) removeTrope(tropeToAdd, 'tropes_liked')
 			}
+			const indexOfTropeToAdd = tropesLowercase.indexOf(tropeToAdd.toLowerCase())
+			if (indexOfTropeToAdd > -1) tropesArr.splice(indexOfTropeToAdd, 1)
 
 			let newArr: BookTropes = []
+
 			newArr = [...tropesArr, tropeToAdd]
 			newArr.sort((a, b) => a.localeCompare(b))
 			updateTropes(newArr, field)
@@ -81,10 +85,8 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 
 	async function removeTrope(trope: string, field: 'tropes_liked' | 'tropes_disliked') {
 		let newArr: BookTropes = []
-		if (field === 'tropes_liked')
-			newArr = likedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
-		if (field === 'tropes_disliked')
-			newArr = dislikedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
+		if (field === 'tropes_liked') newArr = likedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
+		if (field === 'tropes_disliked') newArr = dislikedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
 		updateTropes(newArr, field)
 	}
 
