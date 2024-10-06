@@ -7,7 +7,7 @@
 	box-sizing: border-box;
 }
 .main-dashboard .quote {
-	font-size: 1rem;
+	font-size: .9rem;
 	margin: -1rem 0 1.5rem;
 	background-color: rgba(255, 255, 255, 0.4);
 	padding: 1rem;
