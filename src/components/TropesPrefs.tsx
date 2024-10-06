@@ -33,10 +33,8 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 	}, [])
 
 	useEffect(() => {
-		if (field === 'tropes_liked' && showForm === true)
-			document.getElementById('trope_add_liked')?.focus()
-		if (field === 'tropes_disliked' && showForm === true)
-			document.getElementById('trope_add_disliked')?.focus()
+		if (field === 'tropes_liked' && showForm === true) document.getElementById('trope_add_liked')?.focus()
+		if (field === 'tropes_disliked' && showForm === true) document.getElementById('trope_add_disliked')?.focus()
 	}, [showForm])
 
 	let tropesLowercase: BookTropes
@@ -105,10 +103,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 					</li>
 				))}
 				<li className="trope_add">
-					<button
-						className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
-						onClick={() => setShowForm(!showForm)}
-					>
+					<button className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'} onClick={() => setShowForm(!showForm)}>
 						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
 					</button>
 				</li>
