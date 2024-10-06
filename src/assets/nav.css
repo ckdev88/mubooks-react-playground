@@ -12,7 +12,7 @@
 	transition: opacity 0.18s ease-in-out;
 	height: 2rem;
 	line-height: 2rem;
-	padding: 1rem 0.5rem;
+	padding-top: 1rem;
 	opacity: 0;
 }
 .nav-collapsable.expanded {
