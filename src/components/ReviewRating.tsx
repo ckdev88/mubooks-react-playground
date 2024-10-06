@@ -38,16 +38,14 @@ const ReviewRating = ({
 			}
 		}
 
-		const myBooksNew: Books = myBooks
-		setUserMyBooks(myBooksNew)
+		setUserMyBooks(myBooks)
 		updateMyBooksDb()
-		return myBooksNew
+		return myBooks
 	}
 
 	function RateStarsAct(type: 'rate_stars' | 'rate_spice', amount: Scale5) {
 		if (type === 'rate_stars') setReviewStars(amount)
 		if (type === 'rate_spice') setReviewSpice(amount)
-
 		const newArr: Books = RateStars(book_id, type, amount)
 		setUserMyBooks(newArr)
 	}
