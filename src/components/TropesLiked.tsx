@@ -11,12 +11,14 @@ const TropesLiked = () => {
 		useContext(TropesPageContext)
 	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState<boolean>(false)
+
 	const tropesDb = async () => {
 		const res = await supabase.from('user_entries').select('tropes_liked')
 		if (res.data) {
-			const lt: BookTropes = res.data[0].tropes_liked
-			const ltSet = new Set<string>()
-			lt.map((t) => ltSet.add(t.trim().toLowerCase()))
+			// TODO see if these commented lines are useful at all
+			// const lt: BookTropes = res.data[0].tropes_liked
+			// const ltSet = new Set<string>()
+			// lt.map((t) => ltSet.add(t.trim().toLowerCase()))
 			setLikedTropes(res.data[0].tropes_liked)
 		}
 	}
@@ -35,12 +37,11 @@ const TropesLiked = () => {
 		let tropeLiked: string
 		if (e.currentTarget.trope_add_liked.value !== undefined) {
 			tropeLiked = cleanInput(e.currentTarget.trope_add_liked.value, false)
-
 			if (tropeLiked.length < 2 || likedTropesLowercase.includes(tropeLiked.toLowerCase())) return
 
 			const newArr = [...likedTropes, tropeLiked]
 			newArr.sort((a, b) => a.localeCompare(b))
-			updateTropes(newArr,'tropes_liked')
+			updateTropes(newArr, 'tropes_liked')
 
 			e.currentTarget.trope_add_liked.value = ''
 			e.currentTarget.trope_add_liked.focus()
@@ -55,7 +56,7 @@ const TropesLiked = () => {
 	}
 
 	async function removeTrope(trope: string, field: 'tropes_liked' | 'tropes_disliked') {
-		const newArr = likedTropes.filter((trp) => trp !== trope)
+		const newArr = likedTropes.filter((t) => t !== trope)
 		updateTropes(newArr, field)
 	}
 

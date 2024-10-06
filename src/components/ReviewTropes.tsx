@@ -15,6 +15,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	useEffect(() => {
 		setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
 	}, [bookTropes])
+
 	function removeTrope(trope: string) {
 		setIsModding(true)
 		setBookTropes(bookTropes.filter((bt) => bt !== trope))
@@ -78,6 +79,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	)
 	// /mod db
 
+	// TODO:  <04-10-24> // merge with similar method(s)
 	function processTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 
