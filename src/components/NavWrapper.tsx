@@ -3,17 +3,17 @@ import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
 
 const titleMap = new Map()
-titleMap.set('dashboard', 'Mu Dashboard')
+titleMap.set('dashboard', 'Dashboard')
 titleMap.set('search', 'Search')
-titleMap.set('wishlist', 'Mu Wishlist')
-titleMap.set('reading', 'Reading these')
-titleMap.set('finished', 'Mu finished books')
-titleMap.set('favorites', 'Mu favorite books')
-titleMap.set('savedbooks', 'All of mu books')
-titleMap.set('quoted', 'Mu favorite quotes')
-titleMap.set('tropes', 'Mu tropes')
-titleMap.set('statistics', 'Mu Stats')
-titleMap.set('account/profile', 'Mu profile')
+titleMap.set('wishlist', 'Wishlist')
+titleMap.set('reading', 'Currently reading')
+titleMap.set('finished', 'Finished books')
+titleMap.set('favorites', 'Favorite books')
+titleMap.set('savedbooks', 'Saved books')
+titleMap.set('quoted', 'Favorite quotes')
+titleMap.set('tropes', 'Tropes')
+titleMap.set('statistics', 'Stats')
+titleMap.set('account/profile', 'Profile')
 titleMap.set('account/login', 'Log in')
 titleMap.set('account/logout', 'Log out')
 titleMap.set('auth/confirm', 'Account confirmed')
@@ -35,7 +35,7 @@ const NavWrapper = () => {
 	}
 
 	const navTitle = titleMap.get(location.pathname.slice(1))
-	document.title = navTitle
+	document.title = 'Mu '+navTitle
 
 	if (userIsLoggedIn === false) return <></>
 	return (

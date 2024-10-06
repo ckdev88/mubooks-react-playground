@@ -1,5 +1,5 @@
 function cleanInput(input: string, capfirst: boolean = false): string {
-	input.trim()
+	input = input.trim()
 	if (input.length < 1) return ''
 	let returnvalue: string
 

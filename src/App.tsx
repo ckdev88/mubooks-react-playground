@@ -1,5 +1,3 @@
-// TODO: add versioning to check when user is running non-updated version, if yes, refresh the relevant stuffs
-// TODO: add feature: quick onpress-search to quickly jump to book in own library
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
@@ -100,6 +98,7 @@ const App = () => {
 	const currentPage: Page = location.pathname.slice(1) as Page
 	const mainClassName: string = 'main-' + currentPage
 
+	// TODO: see <Context> as a provider, AppContext. Provider will be deprecated in future versions.
 	return (
 		<>
 			<AppContext.Provider

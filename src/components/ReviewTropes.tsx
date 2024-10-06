@@ -8,8 +8,13 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const { userMyBooks, setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 
 	const [bookTropes, setBookTropes] = useState<BookTropes>(tropes)
+	const [bookTropesLowercase, setBookTropesLowercase] = useState<BookTropes>([])
 	const [showTropesForm, setShowTropesForm] = useState<boolean>(false)
 	const [isModding, setIsModding] = useState<boolean>(false)
+
+	useEffect(() => {
+		setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
+	}, [bookTropes])
 
 	function removeTrope(trope: string) {
 		setIsModding(true)
@@ -74,13 +79,20 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	)
 	// /mod db
 
+	// TODO:  <04-10-24> // merge with similar method(s)
 	function processTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 
 		const trope = cleanInput(e.currentTarget.trope_add.value, true)
-		if (trope !== undefined && trope.length > 2) {
+		if (
+			trope !== undefined &&
+			trope.length > 2 &&
+			!bookTropesLowercase.includes(trope.toLowerCase())
+		) {
 			setIsModding(true)
-			setBookTropes([...bookTropes, trope])
+			const newArr = [...bookTropes, trope]
+			newArr.sort((a, b) => a.localeCompare(b))
+			setBookTropes(newArr)
 			e.currentTarget.trope_add.value = ''
 			e.currentTarget.trope_add.focus()
 		}
@@ -112,7 +124,12 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 			{showTropesForm && (
 				<>
 					<form className="single-small-form clr" onSubmit={processTropeAddForm}>
-						<input type="text" name="trope_add" id={'trope_add_' + book.id} placeholder="Add a trope..." />
+						<input
+							type="text"
+							name="trope_add"
+							id={'trope_add_' + book.id}
+							placeholder="Add a trope..."
+						/>
 						<BtnInsideCaret />
 					</form>
 					<button className="btn-text btn-text-cancel" onClick={cancelSubmit}>

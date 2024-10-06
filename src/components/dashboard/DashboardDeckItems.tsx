@@ -29,11 +29,19 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 	function DeckCovers(booksarr: Books) {
 		if (booksarr.length === 1) {
 			return booksarr.map((book: Book) => {
-				return <BookSummary book={book} key={`BookSummary${book.id}`} currentPage="dashboard" refer={page} />
+				return (
+					<BookSummary
+						book={book}
+						key={`BookSummary${book.id}`}
+						currentPage="dashboard"
+						refer={page}
+					/>
+				)
 			})
 		}
 		if (page === 'favorites' || page === 'savedbooks') shuffleArray(booksarr as [])
-		if (page === 'finished') booksarr.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
+		if (page === 'finished')
+			booksarr.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
 
 		let slicedArr = booksarr.slice(-6)
 		if (page === 'finished' || page === 'savedbooks') slicedArr = booksarr.slice(0, 6)
@@ -56,7 +64,7 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 					if (booksarr.length > 3) extraArticleClass += ' fl'
 					if (booksarr.length < 6) extraArticleClass += ' shade'
 					const articleClassNames = `book-cover${extraArticleClass}`
-					const bookAnchor: string = cleanAnchor(book.title_short)
+					const bookAnchor: string = `${cleanAnchor(book.title_short)}_${book.id}`
 
 					return (
 						<article
