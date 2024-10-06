@@ -4,9 +4,11 @@ import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 import { TropesPageContext } from '../routes/books/TropesPage'
+import updateTropesDb from '../functions/updateTropesDb'
 
 const TropesLiked = () => {
-	const { setLikedTropes, likedTropes, likedTropesLowercase } = useContext(TropesPageContext)
+	const { setLikedTropes, likedTropes, likedTropesLowercase, setDislikedTropes } =
+		useContext(TropesPageContext)
 	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState<boolean>(false)
 	const tropesDb = async () => {
@@ -15,8 +17,6 @@ const TropesLiked = () => {
 			const lt: BookTropes = res.data[0].tropes_liked
 			const ltSet = new Set<string>()
 			lt.map((t) => ltSet.add(t.trim().toLowerCase()))
-			console.log('ltSet:', ltSet)
-
 			setLikedTropes(res.data[0].tropes_liked)
 		}
 	}
@@ -29,6 +29,7 @@ const TropesLiked = () => {
 		if (showForm === true) document.getElementById('trope_add_liked')?.focus()
 	}, [showForm])
 
+	// TODO merge this functionality with that of ./src/components/TropesDisliked.tsx
 	async function processLikedTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		let tropeLiked: string
@@ -39,32 +40,23 @@ const TropesLiked = () => {
 
 			const newArr = [...likedTropes, tropeLiked]
 			newArr.sort((a, b) => a.localeCompare(b))
-			updateTropes(newArr)
+			updateTropes(newArr,'tropes_liked')
 
 			e.currentTarget.trope_add_liked.value = ''
 			e.currentTarget.trope_add_liked.focus()
 		}
 	}
 
-	async function updateTropes(newArr: string[]) {
-		setLikedTropes(newArr)
-		let msg: string
-		const { error } = await supabase
-			.from('user_entries')
-			.update({
-				tropes_liked: newArr,
-				testdata: 'updated tropes',
-			})
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Updated tropes.'
+	async function updateTropes(newArr: BookTropes, field: 'tropes_liked' | 'tropes_disliked') {
+		if (field === 'tropes_liked') setLikedTropes(newArr)
+		else if (field === 'tropes_disliked') setDislikedTropes(newArr)
+		const msg = await updateTropesDb(newArr, userid, field)
 		setPopupNotification(msg)
 	}
 
-	function removeTrope(trope: string) {
+	async function removeTrope(trope: string, field: 'tropes_liked' | 'tropes_disliked') {
 		const newArr = likedTropes.filter((trp) => trp !== trope)
-		updateTropes(newArr)
+		updateTropes(newArr, field)
 	}
 
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
@@ -73,7 +65,7 @@ const TropesLiked = () => {
 				{tropes.map((trope, index) => (
 					<li className="trope badge cgreen" key={cleanIndexKey(trope, index)}>
 						{trope}
-						<button className="btn-x" onClick={() => removeTrope(trope)}>
+						<button className="btn-x" onClick={() => removeTrope(trope, 'tropes_liked')}>
 							x
 						</button>
 					</li>
@@ -89,6 +81,7 @@ const TropesLiked = () => {
 			</ul>
 		)
 	}
+
 	return (
 		<>
 			<h2>Like</h2>
