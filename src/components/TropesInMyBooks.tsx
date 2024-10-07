@@ -13,18 +13,20 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 	const tropesSet = new Set<string>()
 
 	userMyBooks.map((book) => {
-		if (book.review_tropes)
-			book.review_tropes.map((reviewtrope) => tropesSet.add(reviewtrope.trim()))
+		if (book.review_tropes) book.review_tropes.map((reviewtrope) => tropesSet.add(reviewtrope.trim().toLowerCase()))
 	})
 	const tropesArr = Array.from(tropesSet).sort((a, b) => a.localeCompare(b))
 
 	function showTropeBooks(trope: string) {
-		const tropeBooksFiltered = userMyBooks.filter(
-			(book: Book) =>
-				book.review_tropes !== undefined &&
-				book.review_tropes.length > 0 &&
-				book.review_tropes.includes(trope)
-		)
+		const tropeBooksFiltered: Books = []
+		userMyBooks.map((b: Book) => {
+			if (b.review_tropes !== undefined && b.review_tropes.length > 0)
+				b.review_tropes.map((t: string) => {
+					if (trope === t.toLowerCase()) {
+						tropeBooksFiltered.push(b)
+					}
+				})
+		})
 		setTropeBooks(tropeBooksFiltered)
 		setActiveTrope(trope)
 		setTimeout(() => {
