@@ -12,7 +12,7 @@ const BookPages = ({
 }) => {
 	const [isModding, setIsModding] = useState<boolean>(false)
 	const [numberOfPages, setNumberOfPages] = useState<number>(book_number_of_pages_median)
-
+	
 	return (
 		<IsModdingPagesContext.Provider value={{ isModding, setIsModding, numberOfPages, setNumberOfPages }}>
 			<div style={{ display: 'flex', padding: '.25rem 0' }}>
@@ -21,8 +21,7 @@ const BookPages = ({
 				) : (
 					<>
 						<span className="diblock">
-							{book_number_of_pages_median === 0 || !book_number_of_pages_median ? '?' : numberOfPages} pages
-							&nbsp;
+							{book_number_of_pages_median === 0 || !book_number_of_pages_median ? '?' : numberOfPages} pages &nbsp;
 						</span>
 						<button className="diblock btn-icon" onClick={() => setIsModding(!isModding)}>
 							<span className="icon icon-pencil"></span>
