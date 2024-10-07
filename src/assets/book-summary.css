@@ -31,11 +31,7 @@
 	padding-bottom: 0.75em;
 }
 .book-summary.quoted .review-text.review_fav_quote {
-	font-size: 1.1rem;
 	padding-top: 0;
-}
-.book-summary.quoted .review-text.review_fav_quote i {
-	font-size: 0.95rem;
 }
 .book-summary .review-text {
 	font-size: 0.9rem;
@@ -66,13 +62,12 @@
 .book-summary h2 {
 	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
-	font-size: 1.3em;
 }
 .book-summary .icon-heart + h2 {
 	padding-right: 1.25rem;
 }
 .book-summary h2 sub {
-	font-size: 0.8em;
+	font-size: 0.9em;
 	font-weight: normal;
 	display: block;
 }
@@ -268,6 +263,9 @@
 	position: relative;
 	margin-bottom: 0.75rem;
 	width: 100%;
+}
+.book-summary.quoted .article-main {
+	margin-top: 0.75rem;
 }
 .book-summary .review-text {
 	margin-bottom: 0.25rem;

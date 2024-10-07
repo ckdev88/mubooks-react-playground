@@ -47,14 +47,10 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		tropesArr = dislikedTropes
 	}
 
-	async function processTropeAddForm(e: React.FormEvent<HTMLFormElement>) {
+	async function processForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		let tropeToAdd: string
-		if (e.currentTarget.trope_add.value !== undefined) {
-			tropeToAdd = cleanInput(e.currentTarget.trope_add.value, false)
-
-			if (tropeToAdd.length < 2) return
-
+		const tropeToAdd: string = cleanInput(e.currentTarget.trope_add.value, false)
+		if (tropeToAdd !== undefined && tropeToAdd.length > 2) {
 			if (field === 'tropes_liked') {
 				if (dislikedTropesLowercase.includes(tropeToAdd.toLowerCase())) removeTrope(tropeToAdd, 'tropes_disliked')
 			} else if (field === 'tropes_disliked') {
@@ -81,7 +77,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		setPopupNotification(msg)
 	}
 
-	async function removeTrope(trope: string, field: 'tropes_liked' | 'tropes_disliked') {
+	function removeTrope(trope: string, field: 'tropes_liked' | 'tropes_disliked') {
 		let newArr: BookTropes = []
 		if (field === 'tropes_liked') newArr = likedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
 		if (field === 'tropes_disliked') newArr = dislikedTropes.filter((t) => t.toLowerCase() !== trope.toLowerCase())
@@ -118,7 +114,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 				<TropesList tropes={field === 'tropes_liked' ? likedTropes : dislikedTropes} />
 				{showForm && (
 					<>
-						<form className="single-small-form clr" onSubmit={processTropeAddForm}>
+						<form className="single-small-form clr" onSubmit={processForm}>
 							<input
 								type="text"
 								name="trope_add"

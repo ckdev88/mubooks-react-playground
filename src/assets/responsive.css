@@ -19,7 +19,7 @@
 	.quote.shade-light {
 		box-shadow: none;
 	}
-	.main-dashboard .quote {
+	.dashboard-quote {
 		margin-top: 0;
 		background: transparent;
 	}

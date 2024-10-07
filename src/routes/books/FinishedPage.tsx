@@ -15,8 +15,7 @@ const FinishedPage = () => {
 	if (localStorage.getItem('MyBooks') !== undefined) {
 		if (localBookFilter !== '' && localBookFilter.length > 0)
 			booksFiltered = userMyBooks.filter(
-				(book: Book) =>
-					(book.list === 3 || book.list === 4) && book.title_short.toLowerCase().includes(localBookFilter)
+				(book: Book) => (book.list === 3 || book.list === 4) && book.title_short.toLowerCase().includes(localBookFilter)
 			)
 		else booksFiltered = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
 
