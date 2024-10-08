@@ -27,9 +27,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 	return (
 		<article
 			className={
-				book.list && book.list > 0 && currentPage === 'search'
-					? 'book-summary saved'
-					: `book-summary ${currentPage}`
+				book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : `book-summary ${currentPage}`
 			}
 		>
 			<div style={{ marginTop: '-4rem', position: 'absolute' }} id={bookAnchor}></div>
@@ -37,9 +35,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			<div className="article-main">
 				{currentPage !== 'quoted' && (
 					<header style={{ position: 'relative', width: '100%' }}>
-						{currentPage !== 'dashboard' && (
-							<AddToRemoveFromX book={book} limit={4} currentPage={currentPage} />
-						)}
+						{currentPage !== 'dashboard' && <AddToRemoveFromX book={book} limit={4} currentPage={currentPage} />}
 						{currentPage === 'dashboard' && refer !== undefined ? (
 							<Link to={`/${refer}`}>
 								<BookSummaryTitle
@@ -66,11 +62,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 				)}
 				{currentPage === 'quoted' ? (
 					<div className="quoteblock">
-						<BookSummaryReview
-							book_id={book.id}
-							o_key="review_fav_quote"
-							review_text={book.review_fav_quote}
-						/>
+						<BookSummaryReview book_id={book.id} o_key="review_fav_quote" review_text={book.review_fav_quote} />
 						<BookSummaryTitle
 							book_title_short={book.title_short}
 							book_first_publish_year={book.first_publish_year}
@@ -101,34 +93,25 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 			{currentPage !== 'dashboard' && (
 				<footer>
 					{pagesReviewQuotes.includes(currentPage) && (
-						<BookSummaryReview
-							book_id={book.id}
-							o_key="review_fav_quote"
-							review_text={book.review_fav_quote}
-						/>
+						<BookSummaryReview book_id={book.id} o_key="review_fav_quote" review_text={book.review_fav_quote} />
 					)}
-					{currentPage === 'search' && book.subject && (
-						<SearchTropes book_id={book.id} tropes={book.subject} />
-					)}
+					{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
 					{synopsisPages.includes(currentPage) && synopsis ? (
 						<div className="synopsis" style={{ marginTop: '.75rem' }}>
 							<button
-								className={
-									isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'
-								}
+								className={isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'}
 								onClick={() => setIsShowingSynopsis(!isShowingSynopsis)}
 							>
 								Synopsis{' '}
 							</button>
-							{isShowingSynopsis && (
-								<>
-									<div className="synopsisWrapper" aria-expanded={isShowingSynopsis}>
-										<div className="synopsis">
-											<ReactMarkdown>{synopsis}</ReactMarkdown>
-										</div>
-									</div>
-								</>
-							)}
+							<>
+								<div
+									className={isShowingSynopsis ? 'mt05 expandable expanded' : 'mt05 expandable collapsed'}
+									aria-expanded={isShowingSynopsis}
+								>
+									<ReactMarkdown>{synopsis}</ReactMarkdown>
+								</div>
+							</>
 						</div>
 					) : (
 						// TODO make link like 'no synopsis yet... write one?' and link to the OL page
