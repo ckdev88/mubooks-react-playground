@@ -31,10 +31,7 @@ const StatisticsYear = (year: number) => {
 			) {
 				if (type === 'books' || type === 'daysperbook') amountBooks += 1
 				if (type !== 'books') {
-					if (
-						(type === 'pages' || type === 'pagesperday') &&
-						typeof userMyBooks[i].number_of_pages_median === 'number'
-					)
+					if ((type === 'pages' || type === 'pagesperday') && typeof userMyBooks[i].number_of_pages_median === 'number')
 						amountPages += userMyBooks[i].number_of_pages_median
 					else if (type === 'pages' && userMyBooks[i].number_of_pages_median === undefined) {
 						amountBooksWithoutPages++
@@ -85,7 +82,9 @@ const StatisticsYear = (year: number) => {
 						>
 							* Books without pages defined{' '}
 						</button>
-						{showToggle && <>{BooksWithoutPagesList(booksWithoutPages)}</>}
+						<div className={showToggle ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showToggle}>
+							<BooksWithoutPagesList arr={booksWithoutPages} />
+						</div>
 					</i>
 				)}
 			</div>
