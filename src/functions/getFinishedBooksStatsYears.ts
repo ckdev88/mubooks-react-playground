@@ -1,6 +1,4 @@
 const getFinishedBooksStatsYears = (myBooksArr: Books): FinishedBooksStatsYears => {
-	console.log('input arr finisheddata:', myBooksArr, myBooksArr.length, typeof myBooksArr)
-
 	const now: Date = new Date()
 	const currentYear = now.getFullYear()
 	let oldest: number = currentYear * 10000
