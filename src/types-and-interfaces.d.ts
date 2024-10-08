@@ -151,3 +151,8 @@ interface ApiError {
 }
 
 type StatsAmountTypes = 'books' | 'pages' | 'daysperbook' | 'pagesperday'
+
+interface FinishedBooksStatsYears {
+	yearArr: number[]
+	oldest: number
+}

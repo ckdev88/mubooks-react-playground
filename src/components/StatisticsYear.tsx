@@ -1,5 +1,4 @@
-import { useContext, useState } from 'react'
-import { AppContext } from '../App'
+import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 
 const now: Date = new Date()
@@ -10,10 +9,8 @@ const currentYearDayNr: number = Math.floor((Number(now) - Number(currentYearSta
 let amountBooksWithoutPages = 0
 let booksWithoutPages: string[] = []
 
-const StatisticsYear = (year: number) => {
-	const { userMyBooks } = useContext(AppContext)
-	const [showToggle, setShowToggle] = useState(false)
-
+const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
+	const [showBooksWithoutPages, setBooksWithoutPages] = useState(false)
 	amountBooksWithoutPages = 0
 	booksWithoutPages = []
 	const getAmount = (year: number, type: StatsAmountTypes): number => {
@@ -23,19 +20,19 @@ const StatisticsYear = (year: number) => {
 		const triggerYearStart = year * 10000
 		const triggerYearEnd = triggerYearStart + 10000
 
-		for (let i = 0; i < userMyBooks.length; i++) {
-			if (userMyBooks[i].date_finished === undefined) continue
+		for (let i = 0; i < myBooksArr.length; i++) {
+			if (myBooksArr[i].date_finished === undefined) continue
 			if (
-				Number(userMyBooks[i].date_finished) > triggerYearStart &&
-				Number(userMyBooks[i].date_finished) < triggerYearEnd
+				Number(myBooksArr[i].date_finished) > triggerYearStart &&
+				Number(myBooksArr[i].date_finished) < triggerYearEnd
 			) {
 				if (type === 'books' || type === 'daysperbook') amountBooks += 1
 				if (type !== 'books') {
-					if ((type === 'pages' || type === 'pagesperday') && typeof userMyBooks[i].number_of_pages_median === 'number')
-						amountPages += userMyBooks[i].number_of_pages_median
-					else if (type === 'pages' && userMyBooks[i].number_of_pages_median === undefined) {
+					if ((type === 'pages' || type === 'pagesperday') && typeof myBooksArr[i].number_of_pages_median === 'number')
+						amountPages += myBooksArr[i].number_of_pages_median
+					else if (type === 'pages' && myBooksArr[i].number_of_pages_median === undefined) {
 						amountBooksWithoutPages++
-						booksWithoutPages.push(userMyBooks[i].title_short)
+						booksWithoutPages.push(myBooksArr[i].title_short)
 					}
 				}
 			}
@@ -54,12 +51,10 @@ const StatisticsYear = (year: number) => {
 		return amount
 	}
 
-	const divkey = 'StatisticsYear' + year
-
 	if (getAmount(year, 'books') > 0)
 		return (
-			<div key={divkey}>
-				<h2>{year}.</h2>
+			<div key={'StatisticsYear' + year}>
+				<h2>{year}</h2>
 				Books finished: {getAmount(year, 'books')}
 				<br />
 				Pages finished: {getAmount(year, 'pages')}
@@ -73,16 +68,19 @@ const StatisticsYear = (year: number) => {
 				{amountBooksWithoutPages > 0 && (
 					<i>
 						<button
-							onClick={() => setShowToggle(!showToggle)}
+							onClick={() => setBooksWithoutPages(!showBooksWithoutPages)}
 							className={
-								showToggle
+								showBooksWithoutPages
 									? 'btn-text caret-right-toggle italic diblock wauto active'
 									: 'btn-text caret-right-toggle italic diblock wauto'
 							}
 						>
 							* Books without pages defined{' '}
 						</button>
-						<div className={showToggle ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showToggle}>
+						<div
+							className={showBooksWithoutPages ? 'expandable expanded' : 'expandable collapsed'}
+							aria-expanded={showBooksWithoutPages}
+						>
 							<BooksWithoutPagesList arr={booksWithoutPages} />
 						</div>
 					</i>
