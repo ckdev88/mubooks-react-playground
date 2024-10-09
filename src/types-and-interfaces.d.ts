@@ -17,8 +17,8 @@ interface AppContextType {
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
 	todaysDateDigit: number
-	localBookFilter: string
-	setLocalBookFilter(localBookFilter: localBookFilter): void
+	bookFilter: string
+	setBookFilter(bookFilter: bookFilter): void
 }
 
 interface IsModdingPagesContextType {

@@ -7,15 +7,15 @@ const pageTitle = `What I'm reading now`
 const currentPage = 'reading'
 
 const ReadingPage = () => {
-	const { userMyBooks, localBookFilter } = useContext(AppContext)
+	const { userMyBooks, bookFilter } = useContext(AppContext)
 
 	let hasbooks = false
 	let booksFiltered: Books = []
 
 	if (userMyBooks !== undefined) {
-		if (localBookFilter !== '' && localBookFilter.length > 0)
+		if (bookFilter !== '' && bookFilter.length > 0)
 			booksFiltered = userMyBooks.filter(
-				(book: Book) => book.list === 2 && book.title_short.toLowerCase().includes(localBookFilter)
+				(book: Book) => book.list === 2 && book.title_short.toLowerCase().includes(bookFilter)
 			)
 		else booksFiltered = userMyBooks.filter((book: Book) => book.list === 2)
 
@@ -30,13 +30,13 @@ const ReadingPage = () => {
 			<h1>
 				{pageTitle}
 				<sub>
-					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
+					{bookFilter.length > 0 && booksFiltered.length > 0 ? (
 						<>
-							Results for <i>{localBookFilter}</i> : {booksFiltered.length}
+							Results for <i>{bookFilter}</i> : {booksFiltered.length}
 						</>
-					) : localBookFilter.length > 0 && booksFiltered.length === 0 ? (
+					) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
 						<>
-							No book titles found for <i>{localBookFilter}.</i>
+							No book titles found for <i>{bookFilter}.</i>
 						</>
 					) : booksFiltered.length > 1 ? (
 						<>
@@ -49,7 +49,7 @@ const ReadingPage = () => {
 					&nbsp;
 				</sub>
 			</h1>
-			{!hasbooks && localBookFilter === '' && (
+			{!hasbooks && bookFilter === '' && (
 				<>
 					<p>
 						Want to add a book to your reading list?

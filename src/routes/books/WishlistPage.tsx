@@ -7,21 +7,19 @@ const pageTitle = 'Mu Wishlist'
 const currentPage = 'wishlist'
 
 const WishlistPage = () => {
-	const { userMyBooks, localBookFilter } = useContext(AppContext)
+	const { userMyBooks, bookFilter } = useContext(AppContext)
 
 	let hasbooks = false
 	let booksFiltered: Books = []
 
-	if (localStorage.getItem('MyBooks') !== 'undefined') {
-		if (localBookFilter !== '' && localBookFilter.length > 0)
-			booksFiltered = userMyBooks.filter(
-				(book: Book) => book.list === 1 && book.title_short.toLowerCase().includes(localBookFilter)
-			)
-		else booksFiltered = userMyBooks.filter((book: Book) => book.list === 1)
-		if (booksFiltered !== undefined) {
-			if (booksFiltered.length > 0) hasbooks = true
-			else hasbooks = false
-		}
+	if (bookFilter !== '' && bookFilter.length > 0)
+		booksFiltered = userMyBooks.filter(
+			(book: Book) => book.list === 1 && book.title_short.toLowerCase().includes(bookFilter)
+		)
+	else booksFiltered = userMyBooks.filter((book: Book) => book.list === 1)
+	if (booksFiltered !== undefined) {
+		if (booksFiltered.length > 0) hasbooks = true
+		else hasbooks = false
 	}
 
 	return (
@@ -29,20 +27,20 @@ const WishlistPage = () => {
 			<h1>
 				{pageTitle}
 				<sub>
-					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
+					{bookFilter.length > 0 && booksFiltered.length > 0 ? (
 						<>
-							Results for <i>{localBookFilter}</i> : {booksFiltered.length}
+							Results for <i>{bookFilter}</i> : {booksFiltered.length}
 						</>
-					) : localBookFilter.length > 0 && booksFiltered.length === 0 ? (
+					) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
 						<>
-							No book titles found for <i>{localBookFilter}.</i>
+							No book titles found for <i>{bookFilter}.</i>
 						</>
 					) : (
 						<> All the books I will read soon: {booksFiltered.length}</>
 					)}
 				</sub>
 			</h1>
-			{!hasbooks && localBookFilter === '' && (
+			{!hasbooks && bookFilter === '' && (
 				<>
 					<h4>No books on mu wishlist yet.</h4>
 					<p>

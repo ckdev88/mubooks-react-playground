@@ -7,20 +7,18 @@ const pageTitle = 'Saved books'
 const currentPage = 'savedbooks'
 
 export default function SavedBooksPage() {
-	const { userMyBooks, localBookFilter } = useContext(AppContext)
+	const { userMyBooks, bookFilter } = useContext(AppContext)
 
 	let hasbooks: boolean = false
 	let booksFiltered: Books = []
-	if (localStorage.getItem('MyBooks') !== undefined) {
-		if (localBookFilter !== '' && localBookFilter.length > 0)
-			booksFiltered = userMyBooks.filter((book: Book) =>
-				book.title_short.toLowerCase().includes(localBookFilter.toLowerCase())
-			)
-		else booksFiltered = userMyBooks
-		if (booksFiltered !== undefined) {
-			if (booksFiltered.length > 0) hasbooks = true
-			else hasbooks = false
-		}
+	if (bookFilter !== '' && bookFilter.length > 0)
+		booksFiltered = userMyBooks.filter((book: Book) =>
+			book.title_short.toLowerCase().includes(bookFilter.toLowerCase())
+		)
+	else booksFiltered = userMyBooks
+	if (booksFiltered !== undefined) {
+		if (booksFiltered.length > 0) hasbooks = true
+		else hasbooks = false
 	}
 
 	return (
@@ -28,24 +26,24 @@ export default function SavedBooksPage() {
 			<h1>
 				{pageTitle}
 				<sub>
-					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
+					{bookFilter.length > 0 && booksFiltered.length > 0 ? (
 						<>
-							Results for <i>{localBookFilter}</i> : {booksFiltered.length}
+							Results for <i>{bookFilter}</i> : {booksFiltered.length}
 						</>
-					) : localBookFilter.length > 0 && booksFiltered.length === 0 ? (
+					) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
 						<>
-							No book titles found for <i>{localBookFilter}.</i>
+							No book titles found for <i>{bookFilter}.</i>
 						</>
 					) : (
 						<> My books which are in whatever list: {booksFiltered.length} </>
 					)}
 				</sub>
 			</h1>
-			{!hasbooks && localBookFilter === '' && (
+			{!hasbooks && bookFilter === '' && (
 				<>
 					<p>
-						An overview of my saved books, this includes books that are favorited, read and finished, the
-						wishlist and the book currently reading.
+						An overview of my saved books, this includes books that are favorited, read and finished, the wishlist and
+						the book currently reading.
 					</p>
 					<div>
 						<h4>No books added yet, find them and add them.</h4>

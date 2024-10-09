@@ -7,24 +7,23 @@ const pageTitle = 'Finished books'
 const currentPage = 'finished'
 
 const FinishedPage = () => {
-	const { userMyBooks, localBookFilter } = useContext(AppContext)
+	const { userMyBooks, bookFilter } = useContext(AppContext)
 
 	let hasbooks = false
-	let booksFiltered: Books = []
+	/** bf: Books Filtered */
+	let bf: Books = []
 
-	if (localStorage.getItem('MyBooks') !== undefined) {
-		if (localBookFilter !== '' && localBookFilter.length > 0)
-			booksFiltered = userMyBooks.filter(
-				(book: Book) => (book.list === 3 || book.list === 4) && book.title_short.toLowerCase().includes(localBookFilter)
-			)
-		else booksFiltered = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
+	if (bookFilter !== '' && bookFilter.length > 0)
+		bf = userMyBooks.filter(
+			(book: Book) => (book.list === 3 || book.list === 4) && book.title_short.toLowerCase().includes(bookFilter)
+		)
+	else bf = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
 
-		booksFiltered.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
+	bf.sort((a, b) => Number(b.date_finished) - Number(a.date_finished))
 
-		if (booksFiltered !== undefined) {
-			if (booksFiltered.length > 0) hasbooks = true
-			else hasbooks = false
-		}
+	if (bf !== undefined) {
+		if (bf.length > 0) hasbooks = true
+		else hasbooks = false
 	}
 
 	return (
@@ -32,20 +31,20 @@ const FinishedPage = () => {
 			<h1>
 				{pageTitle}
 				<sub>
-					{localBookFilter.length > 0 && booksFiltered.length > 0 ? (
+					{bookFilter.length > 0 && bf.length > 0 ? (
 						<>
-							Results for <i>{localBookFilter}</i> : {booksFiltered.length}
+							Results for <i>{bookFilter}</i> : {bf.length}
 						</>
-					) : localBookFilter.length > 0 && booksFiltered.length === 0 ? (
+					) : bookFilter.length > 0 && bf.length === 0 ? (
 						<>
-							No book titles found for <i>{localBookFilter}.</i>
+							No book titles found for <i>{bookFilter}.</i>
 						</>
 					) : (
-						<>Books I finished reading: {booksFiltered.length}</>
+						<>Books I finished reading: {bf.length}</>
 					)}
 				</sub>
 			</h1>
-			{!hasbooks && localBookFilter === '' && (
+			{!hasbooks && bookFilter === '' && (
 				<>
 					<p>Have any favorites? Add them to your favorites from here.</p>
 					<h4>Not finished any book yet.</h4>
@@ -58,7 +57,7 @@ const FinishedPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page={currentPage} />
+			<BooksOverviewPage books={bf} page={currentPage} />
 		</>
 	)
 }
