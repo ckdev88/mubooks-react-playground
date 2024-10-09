@@ -6,10 +6,11 @@ import BooksOverviewFilterSort from '../../components/BooksOverviewFilterSort'
 const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 	const { userMyBooks } = useContext(AppContext)
 	const savedArr: Books = userMyBooks
+	const fsPages: Page[] = ['wishlist', 'finished', 'favorites', 'savedbooks']
 
 	return (
 		<>
-			{page !== 'search' && page !== 'tropes' && <BooksOverviewFilterSort />}
+			{fsPages.includes(page) && <BooksOverviewFilterSort />}
 			{books.map((book) => {
 				if (page === 'search') {
 					savedArr.find((savedbook) => {
