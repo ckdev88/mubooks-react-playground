@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 interface UseMyBooksUpdateDbProps {
 	myBooksNew: Books
-	book_id: Book['id']
+	book_id: Book['id'] | null
 	msg: string
 }
 
@@ -13,7 +13,7 @@ const useMyBooksUpdateDb = ({ myBooksNew, book_id, msg }: UseMyBooksUpdateDbProp
 	const updateMyBooksDb = async (): Promise<void> => {
 		const { error } = await supabase
 			.from('user_entries')
-			.update({ json: myBooksNew, testdata: `${msg} for book: ${book_id}` })
+			.update({ json: myBooksNew, testdata: `${msg} ${book_id !== null && 'for book: ' + book_id}` })
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message

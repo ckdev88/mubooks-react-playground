@@ -46,7 +46,7 @@ const App = () => {
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
-	const [localBookFilter, setLocalBookFilter] = useState<string>('')
+	const [bookFilter, setBookFilter] = useState<string>('')
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -64,7 +64,6 @@ const App = () => {
 	const [isOnline, setIsOnline] = useState(navigator.onLine)
 	useEffect(() => {
 		const handleStatusChange = () => setIsOnline(navigator.onLine)
-
 		window.addEventListener('online', handleStatusChange)
 		window.addEventListener('offline', handleStatusChange)
 		return () => {
@@ -104,9 +103,9 @@ const App = () => {
 					formNotification,
 					popupNotification,
 					popupNotificationShow,
-					localBookFilter,
+					bookFilter,
 					setFormNotification,
-					setLocalBookFilter,
+					setBookFilter,
 					setPopupNotification,
 					setPopupNotificationShow,
 					setUserIsLoggedIn,
@@ -128,7 +127,7 @@ const App = () => {
 						<NavWrapper />
 					</header>
 				)}
-				<main id="main" className='main textwrapper'>
+				<main id="main" className="main textwrapper">
 					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
 					{popupNotification !== '' && (
 						<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>

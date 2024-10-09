@@ -1,15 +1,13 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../App'
 import useMyBooksUpdateDb from './useMyBooksUpdateDb'
 import { cleanInput } from '../helpers/cleanInput'
+import { IsModdingPagesContext } from '../components/BookPages'
 
-const useChangePages = (
-	book_id: Book['id'],
-	book_number_of_pages_median: Book['number_of_pages_median']
-): [(e: React.FormEvent<HTMLFormElement>) => void, boolean, number] => {
+const useChangePages = (book_id: Book['id']): [(e: React.FormEvent<HTMLFormElement>) => void] => {
 	const { userMyBooks } = useContext(AppContext)
-	const [isModded, setIsModded] = useState<boolean>(false)
-	const [newNumberOfPages, setNewNumberOfPages] = useState<number>(book_number_of_pages_median)
+	const {setIsModding, setNumberOfPages } = useContext(IsModdingPagesContext)
+
 	const msg: string = 'Updated pages amount'
 	const updateMyBooksDb = useMyBooksUpdateDb({
 		myBooksNew: userMyBooks,
@@ -28,15 +26,15 @@ const useChangePages = (
 		for (let i = 0; i < myBooks.length; i++) {
 			if (myBooks[i].id === book_id) {
 				myBooks[i].number_of_pages_median = numberPages
-				setNewNumberOfPages(numberPages)
+				setNumberOfPages(numberPages)
 				break
 			}
 		}
 		updateMyBooksDb()
-		setIsModded(true)
+		setIsModding(false)
 	}
 
-	return [processForm, isModded, newNumberOfPages]
+	return [processForm]
 }
 
 export default useChangePages

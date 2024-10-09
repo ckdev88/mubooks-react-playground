@@ -1,38 +1,29 @@
 // TODO: create graphs when all data is available
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../App'
+import getFinishedBooksStatsYears from '../../functions/getFinishedBooksStatsYears'
 import StatisticsYear from '../../components/StatisticsYear'
 
 const pageTitle = 'Mu Statistics'
-const now: Date = new Date()
-const currentYear = now.getFullYear()
-let oldestFinishedDate: number = currentYear * 10000
-let oldestFinishedYear: number = currentYear
 
 const StatisticsPage = () => {
 	const { userMyBooks } = useContext(AppContext)
-	const contents = []
-
-	const getOldestFinishedDate = (): number => {
-		for (let i = 0; i < userMyBooks.length; i++) {
-			if (
-				Number(userMyBooks[i].date_finished) > 0 &&
-				Number(userMyBooks[i].date_finished) < oldestFinishedDate
-			)
-				oldestFinishedDate = Number(userMyBooks[i].date_finished)
-		}
-		return oldestFinishedDate
-	}
-
-	oldestFinishedDate = getOldestFinishedDate()
-	oldestFinishedYear = Math.floor(oldestFinishedDate / 10000)
-
-	for (let i = currentYear; i > oldestFinishedYear - 1; i--) contents.push(StatisticsYear(i))
+	const [years, setYears] = useState<number[]>([])
+	useEffect(() => {
+		const { yearArr } = getFinishedBooksStatsYears(userMyBooks)
+		setYears(yearArr)
+	}, [userMyBooks])
 
 	return (
 		<>
 			<h1>{pageTitle}</h1>
-			{contents}
+
+			{years.map((y) => {
+				const filteredByYear = userMyBooks.filter(
+					(b) => b.date_finished !== undefined && Math.floor(b.date_finished / 10000) === y
+				)
+				return <StatisticsYear myBooksArr={filteredByYear} year={y} key={`statisticsPageYear${y}`} />
+			})}
 		</>
 	)
 }

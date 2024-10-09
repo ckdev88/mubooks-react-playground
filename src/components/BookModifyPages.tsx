@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { IsModdingPagesContext } from './BookPages'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 import useChangePages from '../hooks/useChangePages'
@@ -10,16 +10,8 @@ const BookModifyPages = ({
 	book_id: Book['id']
 	book_number_of_pages_median: Book['number_of_pages_median']
 }) => {
-	const { isModding, setIsModding, setNumberOfPages } = useContext(IsModdingPagesContext)
-	const [processForm, isModded, newNumberOfPages] = useChangePages(book_id, book_number_of_pages_median)
-
-	useEffect(() => {
-		if (isModded === true) {
-			setIsModding(false)
-			setNumberOfPages(newNumberOfPages)
-		}
-		// TODO:  decrease dependencies if possible, or use useCallback, or upgrade to react19
-	}, [isModded, setIsModding, newNumberOfPages, setNumberOfPages])
+	const { isModding, setIsModding } = useContext(IsModdingPagesContext)
+	const [processForm] = useChangePages(book_id)
 
 	return (
 		<span className="dflex" style={{ alignItems: 'center' }}>

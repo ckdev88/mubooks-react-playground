@@ -6,6 +6,7 @@ import { TropesPageContext } from '../routes/books/TropesPage'
 import { cleanAnchor } from '../helpers/cleanInput'
 
 const TropesInMyBooks = ({ page }: { page: Page }) => {
+	const [isShowingTropesInMyBooks, setIsShowingTropesInMyBooks] = useState<boolean>(true)
 	const { likedTropesLowercase, dislikedTropesLowercase } = useContext(TropesPageContext)
 	const { userMyBooks } = useContext(AppContext)
 	const [activeTrope, setActiveTrope] = useState<string>('')
@@ -35,9 +36,23 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 	}
 
 	return (
-		<>
-			<h2>Tropes in my Books</h2>
-			<ul className="tropes clr">
+		<div className="tropesInMyBooks">
+			<h2>
+				Tropes in my Books&nbsp;
+				<button
+					className={
+						isShowingTropesInMyBooks
+							? 'btn-text caret-right-toggle active wauto notext diblock'
+							: 'btn-text caret-right-toggle wauto notext diblock'
+					}
+					onClick={() => setIsShowingTropesInMyBooks(!isShowingTropesInMyBooks)}
+				></button>
+			</h2>
+
+			<ul
+				className={isShowingTropesInMyBooks ? 'tropes clr expandable expanded' : 'tropes clr expandable collapsed'}
+				aria-expanded={isShowingTropesInMyBooks}
+			>
 				{tropesArr.map((trope, index) => {
 					let cn: string = 'btn-sm mb0 badge'
 					if (likedTropesLowercase.includes(trope.toLowerCase())) cn += ' cgreen'
@@ -64,7 +79,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 					<BooksOverviewPage books={tropeBooks} page={page} />
 				</>
 			)}
-		</>
+		</div>
 	)
 }
 export default TropesInMyBooks

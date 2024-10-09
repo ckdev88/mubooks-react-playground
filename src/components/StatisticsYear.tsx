@@ -1,94 +1,80 @@
-import { useContext, useState } from 'react'
-import { AppContext } from '../App'
+import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 
 const now: Date = new Date()
-const currentYear = now.getFullYear()
-const currentYearStartDayNr: Date = new Date(currentYear, 0, 0)
+const curYear = now.getFullYear()
+const curYearStartDayNr: Date = new Date(curYear, 0, 0)
 const oneDay = 1000 * 60 * 60 * 24
-const currentYearDayNr: number = Math.floor((Number(now) - Number(currentYearStartDayNr)) / oneDay)
-let amountBooksWithoutPages = 0
-let booksWithoutPages: string[] = []
+const curYearDayNr: number = Math.floor((Number(now) - Number(curYearStartDayNr)) / oneDay)
 
-const StatisticsYear = (year: number) => {
-	const { userMyBooks } = useContext(AppContext)
-	const [showToggle, setShowToggle] = useState(false)
-
-	amountBooksWithoutPages = 0
-	booksWithoutPages = []
-	const getAmount = (year: number, type: StatsAmountTypes): number => {
-		let amount = 0
-		let amountBooks = 0
-		let amountPages = 0
-		const triggerYearStart = year * 10000
-		const triggerYearEnd = triggerYearStart + 10000
-
-		for (let i = 0; i < userMyBooks.length; i++) {
-			if (userMyBooks[i].date_finished === undefined) continue
-			if (
-				Number(userMyBooks[i].date_finished) > triggerYearStart &&
-				Number(userMyBooks[i].date_finished) < triggerYearEnd
-			) {
-				if (type === 'books' || type === 'daysperbook') amountBooks += 1
-				if (type !== 'books') {
-					if (
-						(type === 'pages' || type === 'pagesperday') &&
-						typeof userMyBooks[i].number_of_pages_median === 'number'
-					)
-						amountPages += userMyBooks[i].number_of_pages_median
-					else if (type === 'pages' && userMyBooks[i].number_of_pages_median === undefined) {
-						amountBooksWithoutPages++
-						booksWithoutPages.push(userMyBooks[i].title_short)
-					}
-				}
-			}
+const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number }): CountBookValues => {
+	let cbf: CountBookValues['cbf'] = 0
+	let cbwp: CountBookValues['cbwp'] = 0
+	let cpf: CountBookValues['cpf'] = 0
+	let adpb: CountBookValues['adpb'] = 0
+	let appd: CountBookValues['appd'] = 0
+	const bwp: BooksWithoutPages = []
+	myBooksArr.map((b) => {
+		if (b.date_finished !== undefined && Math.floor(b.date_finished / 10000) === year) {
+			cbf += 1
+			if (Number(b.number_of_pages_median) === 0 || b.number_of_pages_median === undefined) {
+				cbwp += 1
+				const pageless = { id: b.id, title_short: b.title_short }
+				bwp.push(pageless)
+			} else if (b.number_of_pages_median > 0) cpf += b.number_of_pages_median
 		}
-
-		if (type === 'books') amount = amountBooks
-		else if (type === 'pages') amount = amountPages
-		else if (type === 'daysperbook') {
-			if (year === currentYear) amount = Math.floor(currentYearDayNr / amountBooks)
-			else amount = Math.floor(365 / amountBooks)
-		} else if (type === 'pagesperday') {
-			if (year === currentYear) amount = Math.floor(amountPages / currentYearDayNr)
-			else amount = Math.floor(amountPages / 365)
-		}
-
-		return amount
+	})
+	if (year === curYear) {
+		adpb = Math.floor(curYearDayNr / cbf)
+		appd = Math.floor(cpf / curYearDayNr)
+	} else {
+		adpb = Math.floor(365 / cbf)
+		appd = Math.floor(cpf / 365)
 	}
 
-	const divkey = 'StatisticsYear' + year
-
-	if (getAmount(year, 'books') > 0)
-		return (
-			<div key={divkey}>
-				<h2>{year}.</h2>
-				Books finished: {getAmount(year, 'books')}
-				<br />
-				Pages finished: {getAmount(year, 'pages')}
-				{amountBooksWithoutPages > 0 && <small>*</small>}
-				<br />
-				Average days per book: {getAmount(year, 'daysperbook')}
-				<br />
-				Average pages per day: {getAmount(year, 'pagesperday')}
-				{amountBooksWithoutPages > 0 && <small>*</small>}
-				<br />
-				{amountBooksWithoutPages > 0 && (
-					<i>
-						<button
-							onClick={() => setShowToggle(!showToggle)}
-							className={
-								showToggle
-									? 'btn-text caret-right-toggle italic diblock wauto active'
-									: 'btn-text caret-right-toggle italic diblock wauto'
-							}
-						>
-							* Books without pages defined{' '}
-						</button>
-						{showToggle && <>{BooksWithoutPagesList(booksWithoutPages)}</>}
-					</i>
-				)}
-			</div>
-		)
+	return { cbf, cpf, cbwp, adpb, appd, bwp }
 }
+
+const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
+	const { cbf, cpf, cbwp, adpb, appd, bwp } = countBookValues({ myBooksArr, year })
+
+	const [showBWP, setShowBWP] = useState<boolean>(false)
+	return (
+		<>
+			<h2>{year}</h2>
+			Books finished: {cbf}
+			<br />
+			Pages read: {cpf}
+			{cbwp > 0 && <>*</>}
+			<br />
+			Average days per book: {adpb}
+			<br />
+			Average pages per day: {appd}
+			{cbwp > 0 && <>*</>}
+			<br />
+			{cbwp > 0 && (
+				<>
+					<button
+						onClick={() => setShowBWP(!showBWP)}
+						className={
+							showBWP
+								? 'btn-text caret-right-toggle italic diblock wauto active'
+								: 'btn-text caret-right-toggle italic diblock wauto'
+						}
+					>
+						* Books without pages defined{' '}
+					</button>
+					<ul
+						className={showBWP ? 'expandable expanded' : 'expandable collapsed'}
+						aria-expanded={showBWP}
+					>
+						<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
+					</ul>
+				</>
+			)}
+			<hr />
+		</>
+	)
+}
+
 export default StatisticsYear

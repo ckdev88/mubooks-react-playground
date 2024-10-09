@@ -7,7 +7,7 @@ async function updateEntriesDb(newArr: Books, userid: string): Promise<string> {
 		.from('user_entries')
 		.update({
 			json: newArr,
-			testdata: 'updated book specific tropes',
+			testdata: 'updated... some specific message will be built later',
 		})
 		.eq('user_id', userid)
 		.select('*')
