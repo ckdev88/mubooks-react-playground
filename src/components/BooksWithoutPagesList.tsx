@@ -1,8 +1,14 @@
+import { HashLink } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
-const BooksWithoutPagesList = ({arr}:{arr: string[]}) => {
-	return arr.map((bookTitle: string, index: number) => {
-		const key = 'Nopagesfor' + index + cleanAnchor(bookTitle)
-		return <li key={key}>{bookTitle}</li>
+const BooksWithoutPagesList = ({ bwp, year }: { bwp: BooksWithoutPages; year: number }) => {
+	return bwp.map((b) => {
+		const refer: string = 'finished' + `#${cleanAnchor(b.title_short)}_${b.id}`
+		return (
+			<li key={'bwp' + year + b.id}>
+				<HashLink to={`/${refer}`}>{b.title_short}</HashLink>
+				<br />
+			</li>
+		)
 	})
 }
 export default BooksWithoutPagesList

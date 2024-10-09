@@ -156,3 +156,22 @@ interface FinishedBooksStatsYears {
 	yearArr: number[]
 	oldest: number
 }
+type BooksWithoutPages = BookWithoutPages[]
+interface BookWithoutPages {
+	id: Book['id']
+	title_short: Book['title_short']
+}
+interface CountBookValues {
+	/** Count books finished */
+	cbf: number
+	/** Count Pages Finished */
+	cpf: number
+	/** Count Books Without Pages */
+	cbwp: number
+	/** Average Days Per Book */
+	adpb: number
+	/** Average Pages Per Day */
+	appd: number
+	/** Books Without Pages */
+	bwp: BooksWithoutPages
+}

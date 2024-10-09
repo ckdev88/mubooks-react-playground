@@ -7,12 +7,12 @@ main button.alt,
 .adder button.btn-icon {
 	background-color: white;
 	background-size: cover;
-	width: 2.5rem;
+	border-color: white;
 	height: 2.5rem;
-	padding: 0;
 	margin-right: 0.75rem;
 	overflow: hidden;
-	border-color: white;
+	padding: 0;
+	width: 2.5rem;
 }
 .adder button img {
 	box-sizing: border-box;
@@ -23,13 +23,10 @@ main button.alt,
 .btn-text,
 .btn-icon {
 	background: none;
-	color: #0d99ff;
-}
-.btn-text,
-.btn-icon {
-	display: inline-block;
 	border: 0;
+	color: #0d99ff;
 	cursor: pointer;
+	display: inline-block;
 	font-size: 1rem;
 	font-weight: normal;
 	height: 1.3rem;
@@ -60,28 +57,28 @@ main button.alt,
 	color: #000;
 }
 .btn-text.caret-toggle::before {
+	background-image: url('/img/cv-caret-medium.light.svg');
+	background-position-x: center;
+	background-position-y: 30%;
+	background-size: 1.5em;
 	content: ' ';
 	display: inline-block;
-	width: 1em;
-	background-image: url('/img/cv-caret-medium.light.svg');
-	background-size: 1.5em;
 	height: 1em;
-	background-position-y: 30%;
-	background-position-x: center;
-	transform: scaleY(-1);
 	margin-right: 0.35em;
+	transform: scaleY(-1);
+	width: 1em;
 }
 .btn-text.caret-right-toggle::after {
+	background-image: url('/img/cv-caret-medium.light.svg');
+	background-position-x: center;
+	background-position-y: 30%;
+	background-size: 1.5em;
 	content: ' ';
 	display: inline-block;
-	width: 1em;
-	background-image: url('/img/cv-caret-medium.light.svg');
-	background-size: 1.5em;
 	height: 1em;
-	background-position-y: 30%;
-	background-position-x: center;
-	transform: scaleY(-1);
 	margin-left: 0.35em;
+	transform: scaleY(-1);
+	width: 1em;
 }
 .btn-text.caret-right-toggle.notext::after {
 	margin-left: 0;
@@ -109,6 +106,17 @@ main button.alt,
 	height: auto;
 	opacity: 1;
 }
+ul.expandable {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+ul.expandable li {
+	font-size: 0.9rem;
+}
+ul.expandable-list a {
+	text-decoration: none;
+}
 .expandable.collapsed {
 	opacity: 0;
 	height: 0;
@@ -118,11 +126,9 @@ main button.alt,
 .btn-icon {
 	margin-bottom: 0;
 }
-
 .btn-calendar {
 	font-style: inherit;
 }
-
 .btn-calendar::after {
 	display: inline-block;
 	height: 1em;
