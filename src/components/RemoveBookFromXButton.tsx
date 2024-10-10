@@ -1,18 +1,16 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import getListName from '../functions/getListName'
-import { supabase } from '../../utils/supabase'
+import updateEntriesDb from '../functions/updateEntriesDb'
 
 const RemoveBookFromXButton = ({
 	book_id,
 	book_list,
-	book_title_short,
 	targetList,
 	icon = false,
 }: {
 	book_id: Book['id']
 	book_list: Book['list']
-	book_title_short: Book['title_short']
 	targetList: BookList
 	icon: boolean
 }) => {
@@ -57,20 +55,11 @@ const RemoveBookFromXButton = ({
 	function RemoveBookFromXButtonAct() {
 		const newArr: Books = RemoveBookFromX(book_id)
 		setUserMyBooks(newArr)
+		MyBooksUpdate(newArr)
 	}
 
-	// TODO: move this function to generic helper location
 	async function MyBooksUpdate(myBooksNew: Books) {
-		let msg: string
-		setUserMyBooks(myBooksNew)
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew, testdata: 'updated from RemoveBookFromXButton' })
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Removed ' + book_title_short + ' from ' + getListName(targetList)
-
+		const msg = await updateEntriesDb(myBooksNew,userid)
 		setPopupNotification(msg)
 	}
 

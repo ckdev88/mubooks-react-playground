@@ -22,7 +22,6 @@ const AddToRemoveFromX = ({
 					{book.list === limit ? (
 						<RemoveBookFromXButton
 							book_id={book.id}
-							book_title_short={book.title_short}
 							book_list={limit}
 							targetList={book.list}
 							icon={true}
@@ -152,7 +151,6 @@ const AddToRemoveFromX = ({
 						<RemoveBookFromXButton
 							book_id={book.id}
 							book_list={book.list}
-							book_title_short={book.title_short}
 							targetList={1}
 							icon={true}
 						/>
@@ -162,7 +160,6 @@ const AddToRemoveFromX = ({
 						<RemoveBookFromXButton
 							book_id={book.id}
 							book_list={book.list}
-							book_title_short={book.title_short}
 							targetList={book.list}
 							icon={true}
 						/>
@@ -172,7 +169,6 @@ const AddToRemoveFromX = ({
 						<RemoveBookFromXButton
 							book_id={book.id}
 							book_list={book.list}
-							book_title_short={book.title_short}
 							targetList={3}
 							icon={true}
 						/>
@@ -182,7 +178,6 @@ const AddToRemoveFromX = ({
 						<RemoveBookFromXButton
 							book_id={book.id}
 							book_list={book.list}
-							book_title_short={book.title_short}
 							targetList={4}
 							icon={true}
 						/>
