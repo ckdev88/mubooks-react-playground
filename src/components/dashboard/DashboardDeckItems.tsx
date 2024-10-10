@@ -53,7 +53,7 @@ const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: st
 			if (booksarr.length > 5) containerClasses += ' shade'
 		}
 
-		// TODO make link to more dynamic towards specific book in case of spread (maybe also when stack)
+		// TODO make link to move dynamic towards specific book in case of spread (maybe also when stack)
 		return (
 			<div className={containerClasses}>
 				{slicedArr.map((book: Book, index: number) => {
