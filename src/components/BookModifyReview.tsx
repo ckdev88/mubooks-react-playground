@@ -34,13 +34,12 @@ const BookModifyReview = ({
 					type="text"
 					placeholder={placeholder}
 					defaultValue={review_text}
-					className={o_key === 'review_fav_quote' ? 'tcenter' : ''}
 				/>
 				<BtnInsideCaret />
 			</form>
 
 			{isModding && (
-				<button className="btn-text btn-text-cancel" onClick={() => setIsModding(false)}>
+				<button className={o_key==='review_fav_quote' ?"btn-text btn-text-cancel flex-start" : "btn-text btn-text-cancel"} onClick={() => setIsModding(false)}>
 					Cancel
 				</button>
 			)}

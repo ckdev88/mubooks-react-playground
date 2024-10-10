@@ -278,5 +278,7 @@
 	text-align: center;
 }
 .book-summary .review-text.review_fav_quote {
+	display: flex;
+	flex-direction: column;
 	margin: 0;
 }
