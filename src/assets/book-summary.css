@@ -144,7 +144,6 @@
 
 .book-summary button {
 	width: auto;
-	display: inline-block;
 }
 
 .book-summary h3 {
@@ -197,9 +196,11 @@
 .single-small-form + .btn-text {
 	margin-top: -0.2em;
 	display: block;
+	width: auto;
 	font-size: 0.8rem;
 	padding-left: calc(2px + 0.3rem);
 	padding-right: calc(2px + 0.3rem);
+	align-self: flex-start;
 }
 #booksoverview-filter-sort .single-small-form + .btn-text {
 	margin-top: 0.2rem;

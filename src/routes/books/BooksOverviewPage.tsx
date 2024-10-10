@@ -12,9 +12,8 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 		<>
 			{fsPages.includes(page) && <BooksOverviewFilterSort />}
 			{books.map((book) => {
-				if (page === 'search') {
+				if (page === 'search') {  
 					savedArr.find((savedbook) => {
-						// TODO: looks superinefficient, see console.log(book.id)
 						if (savedbook.id === book.id) {
 							book.list = savedbook.list
 							book.date_reading = savedbook.date_reading
