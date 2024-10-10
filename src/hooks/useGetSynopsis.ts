@@ -10,7 +10,7 @@ const useGetSynopsis = (
 	useEffect(
 		() => {
 			const fetchSynopsis = async (book_id: string): Promise<void> => {
-				const fetchSynopsisPromise = fetch('https://openlibrary.org/works/' + book_id + '.json')
+				const fetchSynopsisPromise = fetch(`https://openlibrary.org/works/${book_id}.json`)
 				fetchSynopsisPromise
 					.then((response) => {
 						if (!response.ok) throw new Error(`Error ${response.status}`)
@@ -22,6 +22,9 @@ const useGetSynopsis = (
 							setSynopsis(data.description.value)
 						else if (book_cover_edition_key !== undefined) fetchSynopsis2(book_cover_edition_key)
 					})
+					.catch((error) => {
+						console.error('Failed to fetch synopsis:', error)
+					})
 			}
 
 			const fetchSynopsis2 = async (book_id: string): Promise<void> => {
@@ -32,11 +35,12 @@ const useGetSynopsis = (
 						return response.json()
 					})
 					.then((data) => setSynopsis(data.description))
+					.catch((error) => {
+						console.error('Failed to fetch synopsis 2:', error)
+					})
 			}
 			if (synopsisPages.includes(currentPage) === true) fetchSynopsis(book_id)
 		},
-		// TODO: line below should be properly fixed
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[]
 	)
 
