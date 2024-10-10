@@ -250,9 +250,10 @@ ul.expandable-list a {
 	background-color: white;
 	color: red;
 }
-.book-summary button.btn-text,
+.marks .btn-text,
 .btn-text {
 	display: flex;
+	width: auto;
 }
 .btn-text .icon,
 .btn-icon .icon {
@@ -312,26 +313,25 @@ ul.expandable-list a {
 .btn-text .icon-remove {
 	background-image: url('/img/icon-remove.png');
 }
+.btn-icon .icon-eraser, .btn-icon .icon-pencil {
+	opacity: 0.2;
+	transition: opacity 0.18s ease-in-out;
+}
+.btn-icon:hover .icon-pencil,
+.btn-icon:hover .icon-eraser {
+	opacity: 1;
+}
 .btn-icon .icon-eraser {
 	background-image: url('/img/icon-eraser.svg');
 	width: 16px;
-	opacity: 0.2;
 }
 .btn-icon .icon-pencil {
 	background-image: url('/img/icon-pencil.svg');
 	width: 12px;
 	height: 12px;
-	opacity: 0.2;
-	transition: opacity 0.18s ease-in-out;
-}
-.btn-icon:hover .icon-pencil {
-	opacity: 1;
 }
 .reviews > div > button:first-child {
 	margin-right: 0.5rem;
-}
-.btn-icon .icon-eraser:hover {
-	opacity: 1;
 }
 .btn-icon .icon-star,
 .btn-icon .icon-spice {

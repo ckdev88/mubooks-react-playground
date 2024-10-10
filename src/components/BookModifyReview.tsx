@@ -29,18 +29,15 @@ const BookModifyReview = ({
 	return (
 		<>
 			<form className="single-small-form clr" onSubmit={processForm}>
-				<input
-					name="review_text"
-					type="text"
-					placeholder={placeholder}
-					defaultValue={review_text}
-					className={o_key === 'review_fav_quote' ? 'tcenter' : ''}
-				/>
+				<input name="review_text" type="text" placeholder={placeholder} defaultValue={review_text} />
 				<BtnInsideCaret />
 			</form>
 
 			{isModding && (
-				<button className="btn-text btn-text-cancel" onClick={() => setIsModding(false)}>
+				<button
+					className={o_key === 'review_fav_quote' ? 'btn-text btn-text-cancel flex-start' : 'btn-text btn-text-cancel'}
+					onClick={() => setIsModding(false)}
+				>
 					Cancel
 				</button>
 			)}

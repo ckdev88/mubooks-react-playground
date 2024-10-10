@@ -22,6 +22,10 @@
 .ml05 {
 	margin-left: 0.5rem;
 }
+.mxauto {
+	margin-left: auto;
+	margin-right: auto;
+}
 .p0 {
 	padding: 0;
 }
@@ -121,4 +125,7 @@ input[type='submit'].dnone {
 }
 .tcenter {
 	text-align: center;
+}
+.flex-start {
+	align-self: flex-start;
 }
