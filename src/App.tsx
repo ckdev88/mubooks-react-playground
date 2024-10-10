@@ -95,85 +95,83 @@ const App = () => {
 		return <>{ret}</>
 	}
 
-	// TODO: see <Context> as a provider, AppContext. Provider will be deprecated in future versions.
+	// TODO when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
-		<>
-			<AppContext.Provider
-				value={{
-					formNotification,
-					popupNotification,
-					popupNotificationShow,
-					bookFilter,
-					setFormNotification,
-					setBookFilter,
-					setPopupNotification,
-					setPopupNotificationShow,
-					setUserIsLoggedIn,
-					setUserMyBooks,
-					setUserid,
-					setUsermail,
-					setUsername,
-					todaysDateInput,
-					todaysDateDigit,
-					userIsLoggedIn,
-					userMyBooks,
-					userid,
-					usermail,
-					username,
-				}}
-			>
-				{userIsLoggedIn && (
-					<header id="header" className="shade">
-						<NavWrapper />
-					</header>
+		<AppContext.Provider
+			value={{
+				formNotification,
+				popupNotification,
+				popupNotificationShow,
+				bookFilter,
+				setFormNotification,
+				setBookFilter,
+				setPopupNotification,
+				setPopupNotificationShow,
+				setUserIsLoggedIn,
+				setUserMyBooks,
+				setUserid,
+				setUsermail,
+				setUsername,
+				todaysDateInput,
+				todaysDateDigit,
+				userIsLoggedIn,
+				userMyBooks,
+				userid,
+				usermail,
+				username,
+			}}
+		>
+			{userIsLoggedIn && (
+				<header id="header" className="shade">
+					<NavWrapper />
+				</header>
+			)}
+			<main id="main" className="main textwrapper">
+				{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
+				{popupNotification !== '' && (
+					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
+						{popupNotification && <>{popper()}</>}
+					</div>
 				)}
-				<main id="main" className="main textwrapper">
-					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
-					{popupNotification !== '' && (
-						<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
-							{popupNotification && <>{popper()}</>}
-						</div>
+				<Routes>
+					<Route path="/*" element={<RootPage />} />
+					<Route path="/error" element={<ErrorPage />} />
+					<Route path="/account/login" element={<UserLoginPage />} />
+					<Route path="/account/logout" element={<UserLogoutPage />} />
+					<Route path="/auth/confirm" element={<AuthConfirm />} />
+					{!userIsLoggedIn && (
+						<>
+							<Route path="/auth/resetpassword" element={<ResetPasswordPage />} />
+							<Route path="/account/forgotpassword" element={<CheckMailPasswordPage />} />
+						</>
 					)}
-					<Routes>
-						<Route path="/*" element={<RootPage />} />
-						<Route path="/error" element={<ErrorPage />} />
-						<Route path="/account/login" element={<UserLoginPage />} />
-						<Route path="/account/logout" element={<UserLogoutPage />} />
-						<Route path="/auth/confirm" element={<AuthConfirm />} />
-						{!userIsLoggedIn && (
-							<>
-								<Route path="/auth/resetpassword" element={<ResetPasswordPage />} />
-								<Route path="/account/forgotpassword" element={<CheckMailPasswordPage />} />
-							</>
-						)}
-						<Route path="/account/new" element={<CheckMailNewAccountPage />} />
-						{userIsLoggedIn && (
-							<>
-								<Route path="/account/profile" element={<UserProfilePage />} />
-								<Route path="/account/*" element={<UserLoginPage />} />
-								<Route path="/dashboard" element={<DashboardPage />} />
-								<Route path="/search" element={<SearchPage />} />
-								{/*
+					<Route path="/account/new" element={<CheckMailNewAccountPage />} />
+					{userIsLoggedIn && (
+						<>
+							<Route path="/account/profile" element={<UserProfilePage />} />
+							<Route path="/account/*" element={<UserLoginPage />} />
+							<Route path="/dashboard" element={<DashboardPage />} />
+							<Route path="/search" element={<SearchPage />} />
+							{/*
 								<Route path="/add-book" element={ <AddBookPage /> } />
 								*/}
-								<Route path="/savedbooks" element={<SavedBooksPage />} />
-								<Route path="/wishlist" element={<WishlistPage />} />
-								<Route path="/reading" element={<ReadingPage />} />
-								<Route path="/finished" element={<FinishedPage />} />
-								<Route path="/favorites" element={<FavoritesPage />} />
-								<Route path="/quoted" element={<QuotedPage />} />
-								<Route path="/tropes" element={<TropesPage />} />
-								<Route path="/statistics" element={<StatisticsPage />} />
-								{/*
+							<Route path="/savedbooks" element={<SavedBooksPage />} />
+							<Route path="/wishlist" element={<WishlistPage />} />
+							<Route path="/reading" element={<ReadingPage />} />
+							<Route path="/finished" element={<FinishedPage />} />
+							<Route path="/favorites" element={<FavoritesPage />} />
+							<Route path="/quoted" element={<QuotedPage />} />
+							<Route path="/tropes" element={<TropesPage />} />
+							<Route path="/statistics" element={<StatisticsPage />} />
+							{/*
 								<Route path="/clear-my-books" element={ <ClearMyBooks /> } />
 								*/}
-								<Route path="/loadlibrary" element={<LoadLibrary />} />
-							</>
-						)}
-					</Routes>
-				</main>
-			</AppContext.Provider>
-		</>
+							<Route path="/loadlibrary" element={<LoadLibrary />} />
+						</>
+					)}
+				</Routes>
+			</main>
+		</AppContext.Provider>
 	)
 }
 export default App
