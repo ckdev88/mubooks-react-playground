@@ -12,7 +12,7 @@ function getOlCover(id: string, size: CoverSize = undefined): string {
 }
 
 function getBookCover(url: string, size: CoverSize): string {
-	if (url === '') return './../public/img/save-books-icon.png'
+	if (url === '') return './../img/save-books-icon.png'
 	let appendSize: string = ''
 	if (size) {
 		appendSize = '-' + size
