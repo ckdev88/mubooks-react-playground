@@ -5,6 +5,9 @@
 	--lightred: #ffc7c2;
 	--green: #0d8846;
 	--red: #f24822;
+	--darkbrown: #331611;
+	--lightbg: #f4f1ea;
+	--lightbginverted: #0b0e15;
 }
 html {
 	scroll-behavior: smooth;
@@ -13,8 +16,7 @@ body {
 	font-size: 16px;
 	padding: 0;
 	margin: 0;
-	background-color: black;
-	color: white;
+	background-color: var(--lightbg);
 }
 
 body,
@@ -24,9 +26,13 @@ textarea {
 	font-family: 'Merriweather', 'serif';
 }
 
-.light-mode body {
-	color: black;
-	background-color: lightgoldenrodyellow;
+.dark-mode body,
+.dark-mode .adder a {
+	color: var(--lightbg);
+}
+.dark-mode body,
+.dark-mode .adder {
+	background-color: var(--lightbginverted);
 }
 
 a {
@@ -51,11 +57,17 @@ h1 {
 	margin-bottom: 1rem;
 	font-size: 1.75rem;
 }
+.dark-mode h1 {
+	text-shadow: 2px 2px 0 black;
+}
 
 h2 {
 	margin-bottom: 0.5rem;
 	text-shadow: 1px 1px 0 white;
 	font-size: 1.2rem;
+}
+.dark-mode h2 {
+	text-shadow: 1px 1px 0 black;
 }
 
 pre {
@@ -178,19 +190,39 @@ input[type='submit']:active:hover {
 	border-color: hsl(325, 55%, 46%);
 	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);
 }
+.dark-mode input[type='text']:focus,
+.dark-mode input[type='url']:focus,
+.dark-mode input[type='password']:focus,
+.dark-mode input[type='number']:focus,
+.dark-mode input[type='email']:focus,
+.dark-mode textarea:focus,
+.dark-mode main button:hover,
+.dark-mode main button:active,
+.dark-mode main button:active:hover,
+.dark-mode input[type='submit']:hover,
+.dark-mode input[type='submit']:active,
+.dark-mode input[type='submit']:active:hover {
+	outline: 1px solid #b73581;
+	border-color: hsl(325, 55%, 54%);
+	box-shadow: 0 0 0.4rem rgba(255, 255, 255, 40%);
+	color: var(--lightbg);
+}
+.dark-mode main button {
+	color: var(--lightbg);
+}
 
 a,
 button,
 input[type='submit'] {
 	cursor: pointer;
-	transition: background-color 0.18s linear;
+	/* 	transition: background-color 0.18s linear; */
 }
 
 main button,
 input[type='submit'],
 input[type='submit']:hover {
 	background-color: hsl(325, 55%, 46%);
-	color: white;
+	color: var(--lightbg);
 	font-weight: bold;
 	text-align: center;
 	font-size: 1rem;

@@ -56,6 +56,9 @@ main button.alt,
 	text-decoration: underline;
 	color: #000;
 }
+.dark-mode .btn-text:hover {
+	color: #fff;
+}
 .btn-text.caret-toggle::before {
 	background-image: url('/img/cv-caret-medium.light.svg');
 	background-position-x: center;
@@ -87,6 +90,9 @@ main button.alt,
 	color: #333;
 	content: '...';
 	letter-spacing: -0.02rem;
+}
+.dark-mode .icon-dots::before {
+	color: #ccc;
 }
 .expandable.expanded .caret-toggle::before,
 .caret-toggle.active::before {
@@ -142,10 +148,13 @@ ul.expandable-list a {
 	background-repeat: no-repeat;
 	background-position: 100%;
 	max-width: 1em;
-	background-image: url('/img/calendar-icon.svg');
+	background-image: url('/img/icon-calendar.svg');
 	max-height: 1em;
 	opacity: 0;
 	transition: opacity 0.18s ease-in-out;
+}
+.dark-mode .btn-calendar::after {
+	background-image: url('/img/icon-calendar-white.svg');
 }
 .btn-calendar:focus::after,
 .btn-calendar:hover::after {
@@ -207,6 +216,9 @@ ul.expandable-list a {
 	background-color: #f1e0c6;
 	color: #df8506;
 	position: relative;
+}
+.dark-mode .badge {
+	background-color: #000000;
 }
 .badge.cgreen {
 	background-color: var(--lightgreen);
@@ -295,6 +307,9 @@ ul.expandable-list a {
 .btn-text .icon-reading {
 	background-image: url('/img/icon-reading.png');
 }
+.dark-mode .btn-text .icon-reading {
+	background-image: url('/img/icon-reading-white.png');
+}
 .btn-text .icon-read {
 	background-image: url('/img/icon-read.png');
 }
@@ -303,6 +318,9 @@ ul.expandable-list a {
 }
 .btn-text .icon-finished {
 	background-image: url('/img/icon-finished.png');
+}
+.dark-mode .btn-text .icon-finished {
+	background-image: url('/img/icon-finished-white.png');
 }
 .btn-text .icon-favorite {
 	background-image: url('/img/icon-favorites.png');
@@ -313,7 +331,11 @@ ul.expandable-list a {
 .btn-text .icon-remove {
 	background-image: url('/img/icon-remove.png');
 }
-.btn-icon .icon-eraser, .btn-icon .icon-pencil {
+.dark-mode .btn-text .icon-remove {
+	background-image: url('/img/icon-remove-white.png');
+}
+.btn-icon .icon-eraser,
+.btn-icon .icon-pencil {
 	opacity: 0.2;
 	transition: opacity 0.18s ease-in-out;
 }
@@ -325,10 +347,16 @@ ul.expandable-list a {
 	background-image: url('/img/icon-eraser.svg');
 	width: 16px;
 }
+.dark-mode .btn-icon .icon-eraser {
+	background-image: url('/img/icon-eraser-light.svg');
+}
 .btn-icon .icon-pencil {
 	background-image: url('/img/icon-pencil.svg');
 	width: 12px;
 	height: 12px;
+}
+.dark-mode .btn-icon .icon-pencil {
+	background-image: url('/img/icon-pencil-white.svg');
 }
 .reviews > div > button:first-child {
 	margin-right: 0.5rem;
