@@ -3,6 +3,7 @@ import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
 import BtnInsideCaret from './ui/BtnInsideCaret'
+import updateTropesDb from '../functions/updateTropesDb'
 
 const TropesLiked = () => {
 	const { setPopupNotification, userid } = useContext(AppContext)
@@ -28,42 +29,20 @@ const TropesLiked = () => {
 		let tropeLiked: string
 		if (e.currentTarget.trope_add_liked.value !== undefined) {
 			tropeLiked = cleanInput(e.currentTarget.trope_add_liked.value, false)
-			setLikedTropes([...likedTropes, tropeLiked])
+			const newArr = [...likedTropes, tropeLiked]
+			setLikedTropes(newArr)
 			e.currentTarget.trope_add_liked.value = ''
 			e.currentTarget.trope_add_liked.focus()
-			let msg: string
-			const { error } = await supabase
-				.from('user_entries')
-				.update({
-					tropes_liked: [...likedTropes, tropeLiked],
-					testdata: 'updated from tropes: Add liked trope',
-				})
-				.eq('user_id', userid)
-				.select('*')
-			if (error) msg = error.message
-			else msg = 'Updated liked tropes.'
+			const msg: string = await updateTropesDb(newArr, userid, 'tropes_liked')
 			setPopupNotification(msg)
 		}
 	}
 
-	async function processRemoveTrope(trope: string) {
-		let msg: string
-		const { error } = await supabase
-			.from('user_entries')
-			.update({
-				tropes_liked: likedTropes.filter((trp) => trp !== trope),
-				testdata: 'updated from tropes: remove liked trope',
-			})
-			.eq('user_id', userid)
-			.select('*')
-		if (error) msg = error.message
-		else msg = 'Updated liked tropes.'
+	async function removeTrope(trope: string) {
+		const newArr = likedTropes.filter((trp) => trp !== trope)
+		setLikedTropes(newArr)
+		const msg: string = await updateTropesDb(newArr, userid, 'tropes_liked')
 		setPopupNotification(msg)
-	}
-
-	function removeTrope(trope: string) {
-		setLikedTropes(likedTropes.filter((trp) => trp !== trope))
-		processRemoveTrope(trope)
 	}
 
 	const cancelSubmit = (): void => {
