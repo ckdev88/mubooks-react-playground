@@ -1,13 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&display=swap');
 
 :root {
+	--bg: #f4f1ea; /* hsl 42 31% 94% */
+	--cardbg: #faf8f5; /* hsl 42 31% 97% */
+	--draaideurbg: #efebe1; /*  hsl(42, 31%, 91%)  */
+
+	--bgdark: #0a1014; /* hsl: 204 33% 6% */
+	--cardbgdark: hsl(204, 33%, 9%); /* #0f181f; /* hsl: 204 33% 9% */
+	--draaideurbgdark: hsl(204, 33%, 3%);
+
+	--darkbrown: #331611;
+	--green: #0d8846;
 	--lightgreen: #aff4c6;
 	--lightred: #ffc7c2;
-	--green: #0d8846;
 	--red: #f24822;
-	--darkbrown: #331611;
-	--lightbg: #f4f1ea;
-	--lightbginverted: #0b0e15;
 }
 html {
 	scroll-behavior: smooth;
@@ -16,7 +22,7 @@ body {
 	font-size: 16px;
 	padding: 0;
 	margin: 0;
-	background-color: var(--lightbg);
+	background-color: var(--bg);
 }
 
 body,
@@ -25,14 +31,20 @@ button,
 textarea {
 	font-family: 'Merriweather', 'serif';
 }
+section {
+	margin-left: -0.5rem;
+	margin-right: -0.5rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
 
 .dark-mode body,
 .dark-mode .adder a {
-	color: var(--lightbg);
+	color: var(--bg);
 }
 .dark-mode body,
 .dark-mode .adder {
-	background-color: var(--lightbginverted);
+	background-color: var(--bgdark);
 }
 
 a {
@@ -206,14 +218,6 @@ input[type='submit']:active:hover {
 	border-color: hsl(325, 55%, 54%);
 	box-shadow: 0 0 0.4rem rgba(255, 255, 255, 40%);
 }
-.dark-mode main button:hover,
-.dark-mode main button:active,
-.dark-mode main button:active:hover,
-.dark-mode input[type='submit']:hover,
-.dark-mode input[type='submit']:active,
-.dark-mode input[type='submit']:active:hover {
-	color: var(--lightbg);
-}
 
 a,
 button,
@@ -223,10 +227,9 @@ input[type='submit'] {
 }
 
 main button,
-input[type='submit'],
-input[type='submit']:hover {
+input[type='submit']{
 	background-color: hsl(325, 55%, 46%);
-	color: var(--lightbg);
+	color: var(--bg);
 	font-weight: bold;
 	text-align: center;
 	font-size: 1rem;

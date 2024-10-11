@@ -1,8 +1,10 @@
 .card {
 	margin: 1rem;
 	padding: 0.75rem;
-	background-color: #f4f1ea;
-	background-color: hsl(42, 31%, 97%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
+	background-color: var(--cardbg);
+}
+.dark-mode .card {
+	background-color: var(--cardbgdark);
 }
 .card header {
 	font-weight: bold;
@@ -34,10 +36,12 @@
 .cards-draaideur {
 	perspective: 500px;
 	margin: 0 auto;
-	background: #f4f1ea;
-	background: hsl(42, 31%, 91%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
+	background:#efebe1; /* var(--draaideurbg); */
 	padding: 2px;
 	overflow: hidden;
+}
+.dark-mode .cards-draaideur {
+	background:hsl(204,33%,3%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
 }
 .cards-draaideur .card {
 	margin: 0;

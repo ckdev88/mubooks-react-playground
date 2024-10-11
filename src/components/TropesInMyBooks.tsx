@@ -36,7 +36,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 	}
 
 	return (
-		<div className="tropesInMyBooks">
+		<section className="tropesInMyBooks">
 			<h2>
 				Tropes in my Books&nbsp;
 				<button
@@ -79,7 +79,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 					<BooksOverviewPage books={tropeBooks} page={page} />
 				</>
 			)}
-		</div>
+		</section>
 	)
 }
 export default TropesInMyBooks

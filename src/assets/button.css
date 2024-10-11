@@ -55,8 +55,10 @@ main button.alt,
 .btn-text:hover {
 	text-decoration: underline;
 	color: #000;
+	border: none;
+	box-shadow: none;
 }
-.dark-mode .btn-text:hover {
+.dark-mode main button.btn-text:hover {
 	color: #fff;
 }
 .btn-text.caret-toggle::before {
@@ -218,7 +220,7 @@ ul.expandable-list a {
 	position: relative;
 }
 .dark-mode .badge {
-	background-color: #000000;
+	background-color: var(--cardbgdark);
 }
 .badge.cgreen {
 	background-color: var(--lightgreen);
@@ -232,10 +234,12 @@ ul.expandable-list a {
 	background-color: red;
 	border-radius: 50%;
 	box-sizing: content-box;
+	border: 0;
 	color: white;
 	font-size: 0.6em;
-	padding: 0 0 1px;
-	height: 10px;
+	padding: 0;
+	height: 11px;
+	line-height: 11px;
 	width: 11px;
 	line-height: 9px;
 	position: absolute;
