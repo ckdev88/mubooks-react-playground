@@ -219,14 +219,21 @@ ul.expandable-list a {
 	color: #df8506;
 	position: relative;
 }
+button.badge span {
+	color: #df8506;
+	font-weight: normal;
+}
 .dark-mode .badge {
 	background-color: var(--cardbgdark);
 }
-.badge.cgreen {
+.badge.cgreen,
+button.cgreen span {
 	background-color: var(--lightgreen);
 	color: var(--green);
 }
-.badge.cred {
+
+.badge.cred,
+button.cred span {
 	background-color: var(--lightred);
 	color: var(--red);
 }
@@ -442,4 +449,46 @@ ul.expandable-list a {
 	100% {
 		transform: rotate(45deg) scale(1);
 	}
+}
+
+#accessibility-darkmode {
+	margin-right: 0.2em;
+	height: 1.5rem;
+	width: 1.5rem;
+	background: none;
+	border: none;
+	position: relative;
+	transition: transform 0.18s linear;
+}
+#accessibility-darkmode:hover {
+	transform: rotate(20deg);
+}
+
+#accessibility-darkmode svg {
+	position: absolute;
+	transition: opacity 0.18s ease-in-out;
+}
+#accessibility-darkmode #sun-svg {
+	opacity: 1;
+	top: 0;
+	position: absolute;
+}
+#accessibility-darkmode #moon-svg {
+	opacity: 0;
+	position: absolute;
+}
+#accessibility-darkmode.active #sun-svg {
+	opacity: 0;
+}
+#accessibility-darkmode.active #moon-svg {
+	opacity: 1;
+}
+
+#accessibility-darkmode #sun-svg {
+	top: 0;
+	left: 0;
+}
+#accessibility-darkmode #moon-svg {
+	top: 0;
+	left: 0;
 }

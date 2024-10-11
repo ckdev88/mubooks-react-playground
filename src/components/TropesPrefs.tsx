@@ -100,7 +100,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 				))}
 				<li className="trope_add">
 					<button className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'} onClick={() => setShowForm(!showForm)}>
-						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
+						<span>{tropes.length > 0 ? <>+</> : <>Add tropes</>}</span>
 					</button>
 				</li>
 			</ul>

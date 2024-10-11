@@ -60,7 +60,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 					return (
 						<li key={cleanIndexKey(trope, index)} className="trope_add">
 							<button className={cn} onClick={() => showTropeBooks(trope)}>
-								{trope}
+								<span>{trope}</span>
 							</button>
 						</li>
 					)

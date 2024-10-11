@@ -31,11 +31,25 @@ button,
 textarea {
 	font-family: 'Merriweather', 'serif';
 }
-section {
-	margin-left: -0.5rem;
-	margin-right: -0.5rem;
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
+section.tropesInMyBooks {
+	margin-left: -0.35rem;
+	margin-right: -0.35rem;
+	padding-left: 0;
+	padding-right: 0;
+}
+section > h2,
+section > .book-summary {
+	margin-left: 0.35rem;
+	margin-right: 0.35rem;
+}
+
+section > ul.tropes {
+	padding: 0.35rem 0;
+}
+
+section > ul.tropes > li {
+	margin-left: 0.35rem;
+	margin-right: 0;
 }
 
 .dark-mode body,
@@ -100,6 +114,10 @@ img {
 	top: 0;
 	background-color: #b73581;
 	width: 100vw;
+}
+.dark-mode #header,
+.dark-mode .nav-collapsable {
+	background-color: hsl(325, 55%, 32%);
 }
 
 .loggedin #header {
@@ -227,12 +245,15 @@ input[type='submit'] {
 }
 
 main button,
-input[type='submit']{
+input[type='submit'] {
 	background-color: hsl(325, 55%, 46%);
+	font-size: 1rem;
+}
+main button span,input[type='submit']{
+
 	color: var(--bg);
 	font-weight: bold;
 	text-align: center;
-	font-size: 1rem;
 }
 
 main form button:hover,
