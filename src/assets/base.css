@@ -205,9 +205,13 @@ input[type='submit']:active:hover {
 	outline: 1px solid #b73581;
 	border-color: hsl(325, 55%, 54%);
 	box-shadow: 0 0 0.4rem rgba(255, 255, 255, 40%);
-	color: var(--lightbg);
 }
-.dark-mode main button {
+.dark-mode main button:hover,
+.dark-mode main button:active,
+.dark-mode main button:active:hover,
+.dark-mode input[type='submit']:hover,
+.dark-mode input[type='submit']:active,
+.dark-mode input[type='submit']:active:hover {
 	color: var(--lightbg);
 }
 
