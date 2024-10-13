@@ -19,7 +19,6 @@ const StatisticsPage = () => {
 	return (
 		<>
 			<h1>{pageTitle}</h1>
-
 			<h2>Books per year</h2>
 			{years.map((y) => {
 				const filteredByYear = userMyBooks.filter(
