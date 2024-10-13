@@ -48,6 +48,9 @@ const App = () => {
 	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 	const [bookFilter, setBookFilter] = useState<string>('')
+	const [darkTheme, setDarkTheme] = useState<boolean>(
+		document.getElementsByTagName('html')[0].classList.contains('dark-theme')
+	)
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -95,6 +98,12 @@ const App = () => {
 		setTimeout(() => setPopupNotification(''), 1000)
 		return <>{ret}</>
 	}
+	useEffect(() => {
+		const htmlNode = document.getElementsByTagName('html')[0]
+		if (darkTheme === true) {
+			if (!htmlNode.classList.contains('dark-mode')) htmlNode.classList.add('dark-mode')
+		} else htmlNode.classList.remove('dark-mode')
+	}, [darkTheme])
 
 	// TODO when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
@@ -120,6 +129,8 @@ const App = () => {
 				userid,
 				usermail,
 				username,
+				setDarkTheme,
+				darkTheme,
 			}}
 		>
 			{userIsLoggedIn && (

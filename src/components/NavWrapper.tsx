@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
 
@@ -21,17 +21,9 @@ titleMap.set('addbook', 'Add a book')
 
 const NavWrapper = () => {
 	const navigate = useNavigate()
-	const { userIsLoggedIn } = useContext(AppContext)
+	const { userIsLoggedIn, darkTheme, setDarkTheme } = useContext(AppContext)
 
 	const [nav0Expanded, setNav0Expanded] = useState(false)
-	const [darkTheme, setDarkTheme] = useState<boolean>(false)
-
-	useEffect(() => {
-		const htmlNode = document.getElementsByTagName('html')[0]
-		if (darkTheme === true) {
-			if (!htmlNode.classList.contains('dark-mode')) htmlNode.classList.add('dark-mode')
-		} else htmlNode.classList.remove('dark-mode')
-	}, [darkTheme])
 
 	function toggleNav0() {
 		setNav0Expanded(!nav0Expanded)
