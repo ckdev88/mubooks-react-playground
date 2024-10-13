@@ -12,12 +12,17 @@ const curYearStartDayNr: Date = new Date(curYear, 0, 0)
 const oneDay = 1000 * 60 * 60 * 24
 const curYearDayNr: number = Math.floor((Number(now) - Number(curYearStartDayNr)) / oneDay)
 
-const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number }): CountBookValues => {
-	let cbf: CountBookValues['cbf'] = 0
-	let cbwp: CountBookValues['cbwp'] = 0
-	let cpf: CountBookValues['cpf'] = 0
-	let adpb: CountBookValues['adpb'] = 0
-	let appd: CountBookValues['appd'] = 0
+const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
+	/** Count Books Finished */
+	let cbf: number = 0
+	/** Count Books Without Pages */
+	let cbwp: number = 0
+	/** Count Pages Finished */
+	let cpf: number = 0
+	/** Average Days Per Book */
+	let adpb: number = 0
+	/** Average Pages Per Day */
+	let appd: number = 0
 	const bwp: BooksWithoutPages = []
 	myBooksArr.map((b) => {
 		if (b.date_finished !== undefined && Math.floor(b.date_finished / 10000) === year) {
