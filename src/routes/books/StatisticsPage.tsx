@@ -13,17 +13,23 @@ const StatisticsPage = () => {
 	useEffect(() => {
 		const { yearArr } = getFinishedBooksStatsYears(userMyBooks)
 		setYears(yearArr)
+
 	}, [userMyBooks])
 
 	return (
 		<>
 			<h1>{pageTitle}</h1>
 
+			<h2>Books per year</h2>
 			{years.map((y) => {
 				const filteredByYear = userMyBooks.filter(
 					(b) => b.date_finished !== undefined && Math.floor(b.date_finished / 10000) === y
 				)
-				return <StatisticsYear myBooksArr={filteredByYear} year={y} key={`statisticsPageYear${y}`} />
+				return (
+					<>
+					<StatisticsYear myBooksArr={filteredByYear} year={y} key={`statisticsPageYear${y}`} />
+					</>
+				)
 			})}
 		</>
 	)

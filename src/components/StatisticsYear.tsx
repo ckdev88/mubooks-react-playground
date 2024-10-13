@@ -1,3 +1,8 @@
+// TODO: line-graph: show amount of books read per month; x: months of year, y: books
+// TODO: line-graph: show amount of pages read per month; x: months of year, y: pages
+// TODO: smoother line-graph: show amount of days to finish a book; x: days, y: number of books
+// TODO: circle-diagram showing the number of books per star rating
+// TODO: circle-diagram showing the number of books per spice rating
 import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 
