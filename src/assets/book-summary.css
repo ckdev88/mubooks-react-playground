@@ -210,8 +210,7 @@ form.single-small-form + .btn-text {
 }
 
 .book-summary .review-rates {
-	margin-top: 0.25rem;
-	margin-bottom: 0.5rem;
+	margin: 0.5rem 0;
 }
 .review-rates > div {
 	width: 6rem;
