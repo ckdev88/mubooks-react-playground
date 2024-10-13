@@ -23,11 +23,7 @@ export default function DashboardPage() {
 			<DashboardDeck page="wishlist" title="Mu Wishlist" noBooksText="Next in line." />
 			<DashboardDeck page="favorites" title="Mu Favorites" noBooksText="Only the best ones here" />
 			<DashboardDeck page="finished" title="Mu Finished books" noBooksText="Only the best ones here" />
-			<DashboardDeck
-				page="savedbooks"
-				title="All of Mu Books"
-				noBooksText="Let&lsquo;s start saving books."
-			/>
+			<DashboardDeck page="savedbooks" title="All of Mu Books" noBooksText="Let&lsquo;s start saving books." />
 		</>
 	)
 }

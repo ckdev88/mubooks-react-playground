@@ -1,8 +1,7 @@
 .card {
 	margin: 1rem;
 	padding: 0.75rem;
-	background-color: #f4f1ea;
-	background-color: hsl(42, 31%, 97%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
+	background-color: var(--cardbg);
 }
 .card header {
 	font-weight: bold;
@@ -34,8 +33,7 @@
 .cards-draaideur {
 	perspective: 500px;
 	margin: 0 auto;
-	background: #f4f1ea;
-	background: hsl(42, 31%, 91%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
+	background:var(--draaideurbg);
 	padding: 2px;
 	overflow: hidden;
 }

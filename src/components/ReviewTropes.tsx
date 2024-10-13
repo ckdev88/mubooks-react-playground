@@ -35,26 +35,24 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		if (bookTropes === undefined) return
 		return (
-			<ul className="tropes clr mb0">
+			<div className="tropes clr mb0">
 				{bookTropes.map((trope, index) => (
-					<li className="trope badge" key={'trope' + bookid + index}>
+					<div className="trope badge" key={'trope' + bookid + index}>
 						{trope}
 						<button className="btn-x" onClick={() => removeTrope(trope)}>
 							x
 						</button>
-					</li>
+					</div>
 				))}
 				{!showTropesForm && (
-					<li className="trope_add">
-						<button
-							className={showTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
-							onClick={() => setShowTropesForm(!showTropesForm)}
-						>
-							{bookTropes.length > 0 ? <>+</> : <>Add tropes</>}
-						</button>
-					</li>
+					<button
+						className={showTropesForm ? 'btn-sm mb0 active trope_add' : 'btn-sm mb0 trope_add'}
+						onClick={() => setShowTropesForm(!showTropesForm)}
+					>
+						{bookTropes.length > 0 ? <>+</> : <>Add tropes</>}
+					</button>
 				)}
-			</ul>
+			</div>
 		)
 	}
 

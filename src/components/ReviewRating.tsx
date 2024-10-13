@@ -19,6 +19,7 @@ const ReviewRating = ({
 	const [reviewSpice, setReviewSpice] = useState(book_rate_spice)
 
 	const msg: string = 'Added rating for ' + book_title_short
+	// TODO might be better to just refer to updateEntriesDb.ts: updateEntriesDb
 	const updateMyBooksDb = useMyBooksUpdateDb({
 		myBooksNew: userMyBooks,
 		book_id,

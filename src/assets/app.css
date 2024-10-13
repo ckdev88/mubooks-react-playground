@@ -66,14 +66,3 @@ html:not(.loggedin) h1 {
 	font-weight: bold;
 }
 
-.textwrapper {
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
-}
-
-.shade {
-	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);
-}
-.shade-light {
-	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 15%);
-}
