@@ -163,6 +163,11 @@ interface BookWithoutPages {
 	id: Book['id']
 	title_short: Book['title_short']
 }
+type BooksWithoutStars = BookWithoutStars[]
+interface BookWithoutStars {
+	id: Book['id']
+	title_short: Book['title_short']
+}
 // interface CountBookValues {
 // 	/** Count books finished */
 // 	cbf: number
