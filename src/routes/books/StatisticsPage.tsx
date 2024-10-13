@@ -14,7 +14,6 @@ const StatisticsPage = () => {
 	useEffect(() => {
 		const { yearArr } = getFinishedBooksStatsYears(userMyBooks)
 		setYears(yearArr)
-
 	}, [userMyBooks])
 
 	return (
