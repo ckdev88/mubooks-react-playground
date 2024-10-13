@@ -13,6 +13,7 @@
 	--draaideurbg: #efebe1; /*  hsl(42, 31%, 91%)  */
 
 	--bgdark: #0a1014; /* hsl: 204 33% 6% */
+	--accentbg:rgba(255,255,255,0.4); 
 
 	--badgebg: #f1e0c6;
 	--badgefg: #df8506;
@@ -51,6 +52,7 @@
 	--cardbg: hsl(204, 33%, 15%); /* #0f181f; /* hsl: 204 33% 9% */
 	--draaideurbg: hsl(204, 33%, 9%);
 	--badgebg: hsl(204, 33%, 15%);
+	--accentbg:rgba(0,0,0,.4);
 	--icon-wishlist: url('/img/icon-wishlist-white.png');
 	--icon-reading: url('/img/icon-reading-white.png');
 	--icon-finished: url('/img/icon-finished-white.png');

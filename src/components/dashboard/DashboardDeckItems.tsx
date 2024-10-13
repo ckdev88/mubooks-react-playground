@@ -8,7 +8,11 @@ import { cleanAnchor } from '../../helpers/cleanInput'
 
 const DashboardDeckItems = ({ page, noBooksText }: { page: Page; noBooksText: string }) => {
 	let book_list: Book['list']
+
+	const { userMyBooks, darkTheme } = useContext(AppContext)
+
 	let btnIconAdd: string = `img/icon-${page}.png`
+	if (darkTheme) btnIconAdd = `img/icon-${page}-white.png`
 	if (page === 'reading') {
 		book_list = 2
 		btnIconAdd = 'img/plus-icon.svg'
