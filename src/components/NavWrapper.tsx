@@ -120,12 +120,12 @@ const NavWrapper = () => {
 						Statistics
 					</NavLink>
 					{/*
-							*/ }
+					 */}
 					<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
 						Clear My Books
 					</NavLink>
 					{/*
-					*/}
+					 */}
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
 						<NavLink to={'/account/profile'} onClick={toggleNav0}>
 							Profile
