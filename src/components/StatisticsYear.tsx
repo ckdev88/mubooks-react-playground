@@ -86,25 +86,13 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<h2>{year}</h2>
 			Books finished: {cbf}
 			<br />
+			Average days per book: {adpb}
+			<br />
 			Pages read: {cpf}
 			{cbwp > 0 && <>*</>}
 			<br />
-			Average days per book: {adpb}
-			<br />
 			Average pages per day: {appd}
 			{cbwp > 0 && <>*</>}
-			<br />
-			Average stars per book: {astpb}
-			{cbwst > 0 && <>**</>}
-			<br />
-			{cstpb.map((st, index) => {
-				return (
-					<li key={index}>
-						{index + 1} stars: {st}
-					</li>
-				)
-			})}
-			<br />
 			{cbwp > 0 && (
 				<>
 					<button
@@ -122,6 +110,16 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					</ul>
 				</>
 			)}
+			Average stars per book: {astpb}
+			{cbwst > 0 && <>**</>}
+			<br />
+			{cstpb.map((st, index) => {
+				return (
+					<li key={index}>
+						{index + 1} stars: {st}
+					</li>
+				)
+			})}
 			{cbwst > 0 && (
 				<>
 					<button
