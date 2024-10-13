@@ -56,7 +56,7 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 				cstt += b.rate_stars
 				cstpb[b.rate_stars - 1] += 1
 			} else {
-				cbwst+=1
+				cbwst += 1
 				const starless = { id: b.id, title_short: b.title_short }
 				bwst.push(starless)
 			}
@@ -110,6 +110,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					</ul>
 				</>
 			)}
+			<br />
 			Average stars per book: {astpb}
 			{cbwst > 0 && <>**</>}
 			<br />
