@@ -1,0 +1,68 @@
+:root {
+	--bg: #f4f1ea; /* hsl 42 31% 94% */
+	--shadeboxcolor: #000000;
+	--shadetextcolor: #ffffff;
+	--text-primary: #121212;
+	--text-primary-dimmed: #333333;
+	--primary: #b73581; /* hsl(325, 55%, 46%)  */
+	--primary-darker: hsl(325, 55%, 39%);
+	--primary-darker2: #7e2559; /* hsl(325, 55%, 32%) */
+	--link: hsl(325, 55%, 46%);
+
+	--cardbg: #faf8f5; /* hsl 42 31% 97% */
+	--draaideurbg: #efebe1; /*  hsl(42, 31%, 91%)  */
+
+	--bgdark: #0a1014; /* hsl: 204 33% 6% */
+	--accentbg:rgba(255,255,255,0.4); 
+
+	--badgebg: #f1e0c6;
+	--badgefg: #df8506;
+	--disabled: #7e2559; /* hsl(325, 25%, 76%); */
+	--darkbrown: #331611;
+	--green: #0d8846;
+	--lightgreen: #aff4c6;
+	--lightred: #ffc7c2;
+	--red: #f24822;
+	--gray: #666;
+	--hr:rgba(0,0,0,.1);
+
+	--icon-wishlist: url('/img/icon-wishlist.png');
+	--icon-reading: url('/img/icon-reading.png');
+	--icon-finished: url('/img/icon-finished.png');
+	--icon-favorite: url('/img/icon-favorites.png');
+	--icon-remove: url('/img/icon-remove.png');
+	--icon-pencil:url('/img/icon-pencil.svg');
+	--icon-eraser:url('/img/icon-eraser.svg');
+	--icon-calendar:url('/img/icon-calendar.svg');
+
+	--shade-around: 0 0 0.4rem rgba(0, 0, 0, 25%);
+	--shade-around-subtle: 0 0 0.4rem rgba(0, 0, 0, 15%);
+
+}
+:root.dark-mode {
+	--bg: hsl(204, 33%, 12%);
+	--shadeboxcolor: white;
+	--shadetextcolor: black;
+	--text-primary: #ededed;
+	--text-primary-dimmed: #cccccc;
+	--primary: #7e2559; /* hsl(325,55,32%) */
+	--primary-darker: hsl(325, 55%, 25%);
+	--primary-darker2: #471532; /* hsl(325,55,18%) */
+	--link: hsl(325, 55%, 66%);
+	--cardbg: hsl(204, 33%, 15%); /* #0f181f; /* hsl: 204 33% 9% */
+	--draaideurbg: hsl(204, 33%, 9%);
+	--badgebg: hsl(204, 33%, 15%);
+	--accentbg:rgba(0,0,0,.4);
+	--icon-wishlist: url('/img/icon-wishlist-white.png');
+	--icon-reading: url('/img/icon-reading-white.png');
+	--icon-finished: url('/img/icon-finished-white.png');
+	--icon-favorite: url('/img/icon-favorites-white.png');
+	--icon-remove: url('/img/icon-remove-white.png');
+	--icon-pencil:url('/img/icon-pencil-white.svg');
+	--icon-eraser:url('/img/icon-eraser-light.svg');
+	--icon-calendar:url('/img/icon-calendar-white.svg');
+
+	--shade-around: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 25%);
+	--shade-around-subtle: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 15%);
+
+}

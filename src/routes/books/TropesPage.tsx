@@ -38,8 +38,6 @@ const TropesPage = () => {
 				<h1>My Tropes</h1>
 				<TropesPrefs field="tropes_liked" />
 				<TropesPrefs field="tropes_disliked" />
-				<br />
-				<hr />
 				<TropesInMyBooks page={currentPage} />
 			</>
 		</TropesPageContext.Provider>

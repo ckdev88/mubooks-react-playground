@@ -19,6 +19,8 @@ interface AppContextType {
 	todaysDateDigit: number
 	bookFilter: string
 	setBookFilter(bookFilter: bookFilter): void
+	darkTheme:boolean
+	setDarkTheme(darkTheme:darkTheme):void
 }
 
 interface IsModdingPagesContextType {

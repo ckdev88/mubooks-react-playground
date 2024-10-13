@@ -3,7 +3,6 @@
 }
 
 .adder-header {
-	font-family: 'Merriweather', 'serif';
 	font-size: 1.3rem;
 	font-weight: normal;
 	display: flex;
@@ -16,12 +15,9 @@
 .adder a,
 .book-summary header a {
 	text-decoration: none;
-	color: #000000;
 }
 
 .adder main {
-	border-radius: 0.3rem;
-	background-color: #f4f1ea;
 	padding: 0.5rem;
 }
 @media screen and (max-width: 480px) {
@@ -43,7 +39,7 @@
 	align-items: center;
 	font-size: 0.9rem;
 }
-.adder button.btn-icon {
+.adder .btn-icon {
 	display: block;
 }
 
@@ -76,10 +72,6 @@
 
 .deck .book-summary {
 	padding-bottom: 0;
-}
-
-.deck .book-summary hr {
-	display: none;
 }
 
 .deck-container {

@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&display=swap');
 
-:root {
-	--lightgreen: #aff4c6;
-	--lightred: #ffc7c2;
-	--green: #0d8846;
-	--red: #f24822;
-}
 html {
 	scroll-behavior: smooth;
 }
@@ -13,49 +7,64 @@ body {
 	font-size: 16px;
 	padding: 0;
 	margin: 0;
-	background-color: black;
-	color: white;
+	background-color: var(--bg);
+	color: var(--text-primary);
 }
 
-body,
-input,
-button,
-textarea {
-	font-family: 'Merriweather', 'serif';
+.section-badges,.reviews .tropes {
+	margin-left: -0.35rem;
+	margin-right: -0.35rem;
+	padding-left: 0;
+	padding-right: 0;
+}
+section > h2,
+section > .book-summary {
+	margin-left: 0.35rem;
+	margin-right: 0.35rem;
 }
 
-.light-mode body {
-	color: black;
-	background-color: lightgoldenrodyellow;
+section > ul.tropes {
+	padding: 0.35rem 0;
 }
 
+section > ul.tropes > li {
+	margin-left: 0.35rem;
+	margin-right: 0;
+}
 a {
-	color: black;
+	color: inherit;
 }
-
-a:hover {
-	color: black;
+.a-text:hover {
 	text-decoration: underline;
 }
 
 h1,
+h2,
+.adder-header,
+body,
+input,
+button,
+textarea,
+.resultsfound {
+	font-family: Merriweather, serif;
+}
+h1,
 h2 {
 	margin-top: 1rem;
 	padding: 0;
-	font-family: Merriweather, serif;
 	letter-spacing: -0.04em;
 }
 
 h1 {
-	text-shadow: 2px 2px 0 white;
+	text-shadow: 2px 2px 0 var(--shadetextcolor);
 	margin-bottom: 1rem;
-	font-size:1.75rem
+	font-size: 1.75rem;
 }
 
 h2 {
 	margin-bottom: 0.5rem;
-	text-shadow: 1px 1px 0 white;
-	font-size:1.2rem
+	text-shadow: 1px 1px 0 var(--shadetextcolor);
+	font-size: 1.2rem;
 }
 
 pre {
@@ -74,7 +83,7 @@ img {
 	display: none;
 	position: fixed;
 	top: 0;
-	background-color: #b73581;
+	background-color: var(--primary);
 	width: 100vw;
 }
 
@@ -122,110 +131,13 @@ label .description {
 	background-color: white;
 	border-radius: 0.2rem;
 	font-size: 0.8rem;
-	color: rgba(0, 0, 0, 50%);
+	color: var(--gray);
 	transition: 0.18s font-weight ease-in-out, 0.18s background-color ease-in-out, 0.18s color ease-in-out,
 		0.18s margin-left ease-in-out;
 }
 
 label:focus-within .description {
-	color: hsl(325, 55%, 46%);
+	color: var(--primary);
 	font-weight: bold;
 }
 
-input[type='text'],
-input[type='url'],
-input[type='password'],
-input[type='number'],
-input[type='email'],
-input[type='submit'],
-textarea,
-main button {
-	box-sizing: border-box;
-	width: 100%;
-	display: block;
-	padding: calc(0.75rem + 1px);
-	border-width: 1px;
-	border-style: solid;
-	border-radius: 0.2rem;
-}
-
-input[type='text'],
-input[type='url'],
-input[type='password'],
-input[type='number'],
-input[type='email'],
-textarea,
-main button,
-input[type='submit'] {
-	margin-bottom: 0.75rem;
-	border-color: hsl(325, 55%, 90%);
-	transition: 0.18s outline ease-in-out, 0.18s border-color ease-in-out, 0.18s box-shadow ease-in-out,
-		0.18s border ease-in-out;
-}
-input[type='text']:focus,
-input[type='url']:focus,
-input[type='password']:focus,
-input[type='number']:focus,
-input[type='email']:focus,
-textarea:focus,
-main button:hover,
-main button:active,
-main button:active:hover,
-input[type='submit']:hover,
-input[type='submit']:active,
-input[type='submit']:active:hover {
-	outline: 1px solid hsl(325, 55%, 46%);
-	border-color: hsl(325, 55%, 46%);
-	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 40%);
-}
-
-a,
-button,
-input[type='submit'] {
-	cursor: pointer;
-	transition: background-color 0.18s linear;
-}
-
-main button,
-input[type='submit'],
-input[type='submit']:hover {
-	background-color: hsl(325, 55%, 46%);
-	color: white;
-	font-weight: bold;
-	text-align: center;
-	font-size: 1rem;
-}
-
-main form button:hover,
-input[type='submit']:hover {
-	background-color: hsl(325, 60%, 41%);
-}
-
-main button:active,
-main button:focus,
-input[type='submit']:active,
-input[type='submit']:focus {
-	background-color: hsl(325, 65%, 36%);
-}
-
-main button:disabled,
-main button:disabled:hover,
-main button:disabled:active,
-main button:disabled:focus,
-input[type='submit']:disabled,
-input[type='submit']:disabled:hover {
-	border-color: transparent;
-	background-color: hsl(325, 25%, 76%);
-}
-
-a {
-	color: #0d99ff;
-}
-
-hr {
-	border-width: 0 0 1px;
-	border-style: solid;
-	border-color: rgba(255, 255, 255, 0.75);
-	height: 1px;
-	background-color: transparent;
-}

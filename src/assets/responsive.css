@@ -53,6 +53,7 @@
 	}
 	.nav-collapsable {
 		padding-left: 0.25rem;
+		padding-right: 0.25rem;
 	}
 	.nav-collapsable.expanded {
 		width: 100%;

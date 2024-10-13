@@ -51,7 +51,7 @@ export default function SignupCard() {
 							<input type="password" id="signup_password" name="password" required autoComplete="off" />
 						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-						<button>Create account</button>
+						<button className='btn-lg'>Create account</button>
 					</form>
 				</main>
 				<footer className="content-right">

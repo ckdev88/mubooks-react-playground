@@ -74,7 +74,7 @@ const TropesLiked = () => {
 	return (
 		<>
 			<h2>Like</h2>
-			<div>
+			<section className="likedTropes">
 				<TropesList tropes={likedTropes} />
 				{showLikedTropesForm && (
 					<>
@@ -87,7 +87,7 @@ const TropesLiked = () => {
 						</button>
 					</>
 				)}
-			</div>
+			</section>
 		</>
 	)
 }

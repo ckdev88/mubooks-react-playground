@@ -31,7 +31,7 @@ const BookSummaryReview = ({ book_id, o_key, review_text }: PropTypes) => {
 						)}
 						{(reviewText === '' || reviewText === undefined) && isModding === false && (
 							<button
-								className={o_key === 'review_fav_quote' ? 'btn-sm mb mxauto' : 'btn-sm mb0'}
+								className={o_key === 'review_fav_quote' ? 'btn-sm mb mxauto ml0' : 'btn-sm mb0 ml0'}
 								onClick={() => setIsModding(true)}
 							>
 								+ {addButtonTitle}
