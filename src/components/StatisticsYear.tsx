@@ -37,7 +37,7 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 
 const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
 	const { cbf, cpf, cbwp, adpb, appd, bwp } = countBookValues({ myBooksArr, year })
-
+	/** BWP = Books Without Pages */
 	const [showBWP, setShowBWP] = useState<boolean>(false)
 	return (
 		<>
@@ -64,15 +64,11 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					>
 						* Books without pages defined{' '}
 					</button>
-					<ul
-						className={showBWP ? 'expandable expanded' : 'expandable collapsed'}
-						aria-expanded={showBWP}
-					>
+					<ul className={showBWP ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showBWP}>
 						<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
 					</ul>
 				</>
 			)}
-			<hr />
 		</>
 	)
 }

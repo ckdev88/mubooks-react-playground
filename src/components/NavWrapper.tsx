@@ -128,25 +128,21 @@ const NavWrapper = () => {
 						Statistics
 					</NavLink>
 					{/*
+							*/ }
 					<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
 						Clear My Books
 					</NavLink>
+					{/*
 					*/}
-					<hr
-						style={{
-							width: '80%',
-							borderWidth: '1px 0 0',
-							borderStyle: 'solid',
-							borderColor: 'rgba(255,255,255,.2)',
-							boxShadow: 'none',
-							height: '1px',
-						}}
-					/>
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
 						<NavLink to={'/account/profile'} onClick={toggleNav0}>
 							Profile
 						</NavLink>
-						<button id="accessibility-darkmode" onClick={() => setDarkTheme(!darkTheme)} className="active">
+						<button
+							id="accessibility-darkmode"
+							onClick={() => setDarkTheme(!darkTheme)}
+							className={darkTheme ? 'active' : ''}
+						>
 							<svg
 								id="sun-svg"
 								width="25"

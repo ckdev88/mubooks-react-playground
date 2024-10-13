@@ -1,4 +1,5 @@
 // TODO: create graphs when all data is available
+// TODO: create placeholder for when no stats yet
 import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../App'
 import getFinishedBooksStatsYears from '../../functions/getFinishedBooksStatsYears'

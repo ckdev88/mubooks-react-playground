@@ -3,9 +3,6 @@
 	padding: 0.75rem;
 	background-color: var(--cardbg);
 }
-.dark-mode .card {
-	background-color: var(--cardbgdark);
-}
 .card header {
 	font-weight: bold;
 	font-size: 1.4rem;
@@ -36,12 +33,9 @@
 .cards-draaideur {
 	perspective: 500px;
 	margin: 0 auto;
-	background:#efebe1; /* var(--draaideurbg); */
+	background:var(--draaideurbg);
 	padding: 2px;
 	overflow: hidden;
-}
-.dark-mode .cards-draaideur {
-	background:hsl(204,33%,3%); /* basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
 }
 .cards-draaideur .card {
 	margin: 0;

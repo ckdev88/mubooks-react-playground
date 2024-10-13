@@ -21,6 +21,7 @@ import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
+import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
@@ -126,7 +127,7 @@ const App = () => {
 					<NavWrapper />
 				</header>
 			)}
-			<main id="main" className="main textwrapper">
+			<main id="main" className="main">
 				{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
 				{popupNotification !== '' && (
 					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
@@ -163,8 +164,9 @@ const App = () => {
 							<Route path="/quoted" element={<QuotedPage />} />
 							<Route path="/tropes" element={<TropesPage />} />
 							<Route path="/statistics" element={<StatisticsPage />} />
-							{/*
+							{/* */ }
 								<Route path="/clear-my-books" element={ <ClearMyBooks /> } />
+								{/*
 								*/}
 							<Route path="/loadlibrary" element={<LoadLibrary />} />
 						</>

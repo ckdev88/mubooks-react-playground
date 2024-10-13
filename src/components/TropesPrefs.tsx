@@ -86,9 +86,9 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
 		return (
-			<ul className="tropes clr mb0">
+			<div className="tropes clr mb0">
 				{tropes.map((trope, index) => (
-					<li
+					<div
 						className={field === 'tropes_liked' ? 'trope badge cgreen' : 'trope badge cred'}
 						key={cleanIndexKey(trope, index)}
 					>
@@ -96,21 +96,21 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 						<button className="btn-x" onClick={() => removeTrope(trope, field)}>
 							x
 						</button>
-					</li>
+					</div>
 				))}
 				<li className="trope_add">
 					<button className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'} onClick={() => setShowForm(!showForm)}>
-						<span>{tropes.length > 0 ? <>+</> : <>Add tropes</>}</span>
+						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
 					</button>
 				</li>
-			</ul>
+			</div>
 		)
 	}
 
 	return (
 		<>
 			<h2>{field === 'tropes_liked' ? 'Like' : 'Dislike'}</h2>
-			<div>
+			<section className='section-badges'>
 				<TropesList tropes={field === 'tropes_liked' ? likedTropes : dislikedTropes} />
 				{showForm && (
 					<>
@@ -128,7 +128,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 						</button>
 					</>
 				)}
-			</div>
+			</section>
 		</>
 	)
 }

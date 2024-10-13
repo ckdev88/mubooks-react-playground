@@ -26,7 +26,7 @@ const SearchTropes = ({ book_id, tropes }: { book_id: Book['id']; tropes: BookTr
 			})}
 			<li className="trope_more">
 				<button onClick={() => showMoreToggle()} className="btn-sm mb0">
-					<span>{showMore ? '<' : '...'}</span>
+					{showMore ? '<' : '...'}
 				</button>
 			</li>
 		</ul>

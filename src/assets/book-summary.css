@@ -1,6 +1,5 @@
 .resultsfound {
 	font-weight: normal;
-	font-family: 'merriweather', 'serif';
 	font-size: 1.3rem;
 	margin: 1.5em 0;
 }
@@ -8,16 +7,14 @@
 .book-summary {
 	list-style: none;
 	padding: 0 0 1rem;
-	margin: 0;
+	margin: 0 0 1rem;
 	transition: padding 0.18s linear, background-color 0.18s linear;
 	display: flex;
 	flex-wrap: wrap;
+	border-bottom: 1px solid var(--cardbg);
 }
 .main-dashboard .book-summary {
 	padding-bottom: 0;
-}
-.book-summary hr {
-	margin-top: 0.5rem;
 }
 .book-summary.quoted {
 	display: flex;
@@ -36,13 +33,7 @@
 .book-summary .review-text {
 	font-size: 0.9rem;
 }
-.book-summary .review-text.review_text {
-	margin-bottom: 0.5rem;
-}
 
-.book-summary.quoted hr {
-	display: none;
-}
 .book-summary .aside {
 	margin-bottom: 0;
 }
@@ -51,16 +42,13 @@
 	width: 0;
 	height: 0;
 	opacity: 0;
+	position: absolute;
 }
 .book-summary .calendar-hidden + .btn-text {
 	margin-top: -1rem;
 }
 
-.search .book-summary.saved hr {
-	display: none;
-}
 .book-summary h2 {
-	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
 }
 .book-summary .icon-heart + h2 {
@@ -177,23 +165,25 @@
 #booksoverview-filter-sort {
 	padding-bottom: 1rem;
 }
-.single-small-form {
+
+form.single-small-form {
 	margin: 0.25rem 0;
 	display: flex;
 	justify-content: space-between;
 }
-.single-small-form input {
+form.single-small-form input {
 	padding: 0.3rem 1.8rem 0.3rem 0.3rem;
 	border-style: dashed;
 	border-width: 2px;
 	border-radius: 0.4rem;
 	margin-bottom: 0;
+	width: 100%;
 }
-.single-small-form input:focus,
-.single-small-form input:active {
+form.single-small-form input:focus,
+form.single-small-form input:active {
 	border-style: solid;
 }
-.single-small-form + .btn-text {
+form.single-small-form + .btn-text {
 	margin-top: -0.2em;
 	display: block;
 	width: auto;
@@ -202,20 +192,16 @@
 	padding-right: calc(2px + 0.3rem);
 	align-self: flex-start;
 }
-#booksoverview-filter-sort .single-small-form + .btn-text {
+#booksoverview-filter-sort form.single-small-form + .btn-text {
 	margin-top: 0.2rem;
 }
+
 .tropes {
 	padding: 0;
 	list-style-type: none;
 }
 .book-summary .tropes {
 	margin-top: 0;
-}
-.tropes li {
-	display: inline-block;
-	margin: 0 0.35rem 0.35rem 0;
-	padding: 0.2rem 0.4rem;
 }
 
 .tropes li.trope_add,
@@ -251,7 +237,7 @@
 }
 
 .book-summary .marked {
-	color: hsl(325, 55%, 46%);
+	color: var(--primary);
 	font-weight: bold;
 }
 .book-summary .tropes,
@@ -267,9 +253,6 @@
 }
 .book-summary.quoted .article-main {
 	margin-top: 0.75rem;
-}
-.book-summary .review-text {
-	margin-bottom: 0.25rem;
 }
 .book-summary .book-started-finished {
 	font-size: 0.9rem;

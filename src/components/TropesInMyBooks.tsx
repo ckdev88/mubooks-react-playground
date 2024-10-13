@@ -36,7 +36,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 	}
 
 	return (
-		<section className="tropesInMyBooks">
+		<section className="section-badges">
 			<h2>
 				Tropes in my Books&nbsp;
 				<button
@@ -49,7 +49,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 				></button>
 			</h2>
 
-			<ul
+			<div
 				className={isShowingTropesInMyBooks ? 'tropes clr expandable expanded' : 'tropes clr expandable collapsed'}
 				aria-expanded={isShowingTropesInMyBooks}
 			>
@@ -58,14 +58,12 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 					if (likedTropesLowercase.includes(trope.toLowerCase())) cn += ' cgreen'
 					else if (dislikedTropesLowercase.includes(trope.toLowerCase())) cn += ' cred'
 					return (
-						<li key={cleanIndexKey(trope, index)} className="trope_add">
-							<button className={cn} onClick={() => showTropeBooks(trope)}>
-								<span>{trope}</span>
+							<button   key={cleanIndexKey(trope, index)} className={cn} onClick={() => showTropeBooks(trope)}>
+								{trope}
 							</button>
-						</li>
 					)
 				})}
-			</ul>
+			</div>
 			{tropeBooks.length > 0 && (
 				<>
 					<h2 style={{ position: 'relative' }}>

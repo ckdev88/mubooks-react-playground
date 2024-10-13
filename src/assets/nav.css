@@ -8,13 +8,13 @@
 .nav-collapsable {
 	top: 0;
 	width: calc(100vw - 0.5rem);
-	background-color: #b73581;
+	background-color: var(--primary);
 	transition: opacity 0.18s ease-in-out;
 	padding-top: 1rem;
 	opacity: 0;
-	font-size:.9rem;
-	line-height:2em;
-	height:2em;
+	font-size: 0.9rem;
+	line-height: 2em;
+	height: 2em;
 }
 .nav-collapsable.expanded {
 	opacity: 1;
@@ -51,10 +51,7 @@
 	text-decoration: none;
 	font-weight: bold;
 	text-transform: uppercase;
-	transition:
-		outline-color 0.18s ease-in-out,
-		padding 0.18s ease-in-out,
-		margin 0.18s ease-in-out;
+	transition: outline-color 0.18s ease-in-out, padding 0.18s ease-in-out, margin 0.18s ease-in-out;
 	display: inline-block;
 	outline: 1px dashed rgba(255, 255, 255, 0);
 	border-radius: 0.3rem;
@@ -102,11 +99,8 @@
 	stroke: #ffffff;
 	stroke-width: 17.2237;
 }
-#navIcons button:hover {
+#navIcons button:hover,#navIcons button.expanded  {
 	outline-color: rgba(255, 255, 255, 0.5);
-}
-#navIcons button.expanded {
-	outline-color: rgb(255, 255, 255);
 }
 #navIcons div button {
 	margin-left: 0;
@@ -151,5 +145,5 @@
 	font-weight: normal;
 	font-size: 1.3rem;
 	color: rgba(255, 255, 255, 0.9);
-	text-shadow: 1px 1px 0 hsl(325, 65%, 36%);
+	text-shadow: 1px 1px 0 var(--primary-darker2)
 }

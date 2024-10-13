@@ -86,7 +86,7 @@ const TropesLiked = () => {
 						className={showLikedTropesForm ? 'btn-sm mb0 active' : 'btn-sm mb0'}
 						onClick={() => setShowLikedTropesForm(!showLikedTropesForm)}
 					>
-						<span>{tropes.length > 0 ? <>+</> : <>Add tropes</>}</span>
+						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
 					</button>
 				</li>
 			</ul>
@@ -95,7 +95,7 @@ const TropesLiked = () => {
 	return (
 		<>
 			<h2>Like</h2>
-			<div>
+			<section className="likedTropes">
 				<TropesList tropes={likedTropes} />
 				{showLikedTropesForm && (
 					<>
@@ -108,7 +108,7 @@ const TropesLiked = () => {
 						</button>
 					</>
 				)}
-			</div>
+			</section>
 		</>
 	)
 }

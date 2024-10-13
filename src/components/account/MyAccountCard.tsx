@@ -33,10 +33,12 @@ export default function MyAccountCard() {
 					<dt>Password</dt>
 					<dd>******</dd>
 				</dl>
-				<button onClick={change}>change</button>
+				<button className='btn-lg' onClick={change}>
+					<span>change</span>
+				</button>
 			</main>
 			<footer>
-				<Link to="/dashboard">Back to dashboard</Link>
+				<Link className='a-text' to="/dashboard">Back to dashboard</Link>
 			</footer>
 		</div>
 	)
