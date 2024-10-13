@@ -23,6 +23,13 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 	let adpb: number = 0
 	/** Average Pages Per Day */
 	let appd: number = 0
+	/** Counted Books with STars */
+	let cbst: number = 0
+	/** Counted STars Total */
+	let cstt: number = 0
+	/** Average STars Per Book */
+	let astpb: number = 0
+
 	const bwp: BooksWithoutPages = []
 	myBooksArr.map((b) => {
 		if (b.date_finished !== undefined && Math.floor(b.date_finished / 10000) === year) {
@@ -32,6 +39,12 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 				const pageless = { id: b.id, title_short: b.title_short }
 				bwp.push(pageless)
 			} else if (b.number_of_pages_median > 0) cpf += b.number_of_pages_median
+
+			// get star stats
+			if (b.rate_stars > 0) {
+				cbst += 1
+				cstt += b.rate_stars
+			}
 		}
 	})
 	if (year === curYear) {
@@ -41,12 +54,13 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 		adpb = Math.floor(365 / cbf)
 		appd = Math.floor(cpf / 365)
 	}
+	astpb = Number((cstt / cbst).toFixed(1))
 
-	return { cbf, cpf, cbwp, adpb, appd, bwp }
+	return { cbf, cpf, cbwp, adpb, appd, astpb, bwp }
 }
 
 const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
-	const { cbf, cpf, cbwp, adpb, appd, bwp } = countBookValues({ myBooksArr, year })
+	const { cbf, cpf, cbwp, adpb, appd, astpb, bwp } = countBookValues({ myBooksArr, year })
 	/** BWP = Books Without Pages */
 	const [showBWP, setShowBWP] = useState<boolean>(false)
 	return (
@@ -61,6 +75,9 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<br />
 			Average pages per day: {appd}
 			{cbwp > 0 && <>*</>}
+			<br />
+			Average stars per book: {astpb}
+			<br />
 			<br />
 			{cbwp > 0 && (
 				<>
