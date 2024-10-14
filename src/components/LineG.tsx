@@ -1,11 +1,11 @@
 import Chart from 'react-google-charts'
 import { useContext } from 'react'
 import { AppContext } from '../App'
-export default function LineG({ data }: { data: number[] }) {
+export default function LineG({ data, subject }: { data: number[]; subject: string }) {
 	const { bodyBgColor, darkTheme } = useContext(AppContext)
 
 	const chartData = [
-		['Month', 'Books'],
+		['Month', subject],
 		['January', data[0]],
 		['February', data[1]],
 		['March', data[2]],

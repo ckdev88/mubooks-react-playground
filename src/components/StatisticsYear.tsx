@@ -24,6 +24,8 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 	let cbwp: number = 0
 	/** Count Pages Finished */
 	let cpf: number = 0
+	/** Count Pages Finished Monthly */
+	const cpfm: number[] = Array(12).fill(0)
 	/** Average Days Per Book */
 	let adpb: number = 0
 	/** Average Pages Per Day */
@@ -50,16 +52,22 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 	myBooksArr.map((b) => {
 		if (b.date_finished !== undefined && Math.floor(b.date_finished / 10000) === year) {
 			cbf += 1
-			// get monthly finished books
+
 			monthIndex = Math.floor((b.date_finished - year * 10000) / 100) - 1
+			// get monthly finished books
 			cbfm[monthIndex] += 1
 
 			// get pages
 			if (Number(b.number_of_pages_median) === 0 || b.number_of_pages_median === undefined) {
+				// pages count
 				cbwp += 1
 				const pageless = { id: b.id, title_short: b.title_short }
 				bwp.push(pageless)
-			} else if (b.number_of_pages_median > 0) cpf += b.number_of_pages_median
+			} else if (b.number_of_pages_median > 0) {
+				cpf += b.number_of_pages_median
+				// add up monthly finished pages
+				cpfm[monthIndex] += b.number_of_pages_median
+			}
 
 			// get star stats
 			if (b.rate_stars > 0) {
@@ -83,11 +91,14 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 	}
 	astpb = Number((cstt / cbst).toFixed(1))
 
-	return { cbf, cpf, cbfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst }
+	return { cbf, cpf, cbfm, cpfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst }
 }
 
 const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
-	const { cbf, cpf, cbfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst } = countBookValues({ myBooksArr, year })
+	const { cbf, cpf, cbfm, cpfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst } = countBookValues({
+		myBooksArr,
+		year,
+	})
 	/** BWP = Books Without Pages */
 	const [showBWP, setShowBWP] = useState<boolean>(false)
 	/** BWST = Books Without STars */
@@ -101,8 +112,8 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<br />
 			Books finished per month:
 			<br />
-			<LineG data={cbfm} />
-			<br/>
+			<LineG data={cbfm} subject="Books" />
+			<br />
 			Pages read: {cpf}
 			{cbwp > 0 && <>*</>}
 			<br />
@@ -127,8 +138,11 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					<br />
 				</>
 			)}
-			Average stars per book: {astpb}
+			Pages finished per month:
 			<br />
+			<LineG data={cpfm} subject="Pages" />
+			<br />
+			Average stars per book: {astpb}
 			{cbwst > 0 && <>**</>}
 			<br />
 			{/* --- in plaats hiervan PieG laten zien
