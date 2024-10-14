@@ -1,3 +1,4 @@
+// https://developers.google.com/chart/interactive/docs/gallery/piechart#options
 import Chart from 'react-google-charts'
 import { useContext } from 'react'
 import { AppContext } from '../App'
@@ -20,12 +21,12 @@ export default function PieG({ data }: { data: number[] }) {
 			options={{
 				backgroundColor: bodyBgColor,
 				legend: {
-					position: 'bottom',
 					textStyle: {
 						color: darkTheme ? 'white' : 'black',
 					},
 				},
-				chartArea: { left: 0, width: '95%' },
+				chartArea: { left: 0, width: '80%' },
+				fontSize: 14,
 			}}
 		/>
 	)
