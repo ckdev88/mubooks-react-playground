@@ -6,6 +6,7 @@
 import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 import BooksWithoutStarsList from './BooksWithoutStarsList'
+import PieG from './PieG'
 
 const now: Date = new Date()
 const curYear = now.getFullYear()
@@ -93,6 +94,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<br />
 			Average pages per day: {appd}
 			{cbwp > 0 && <>*</>}
+			<br />
 			{cbwp > 0 && (
 				<>
 					<button
@@ -108,19 +110,22 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					<ul className={showBWP ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showBWP}>
 						<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
 					</ul>
+					<br />
 				</>
 			)}
-			<br />
 			Average stars per book: {astpb}
 			{cbwst > 0 && <>**</>}
 			<br />
-			{cstpb.map((st, index) => {
+			{/* --- in plaats hiervan PieG laten zien
+				cstpb.map((st, index) => {
 				return (
 					<li key={index}>
 						{index + 1} stars: {st}
 					</li>
 				)
-			})}
+			})
+			*/}
+			<PieG data={cstpb} />
 			{cbwst > 0 && (
 				<>
 					<button

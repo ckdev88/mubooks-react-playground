@@ -21,6 +21,7 @@ interface AppContextType {
 	setBookFilter(bookFilter: bookFilter): void
 	darkTheme: boolean
 	setDarkTheme(darkTheme: darkTheme): void
+	bodyBgColor:string
 }
 
 interface IsModdingPagesContextType {

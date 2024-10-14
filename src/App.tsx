@@ -138,6 +138,7 @@ const App = () => {
 				username,
 				setDarkTheme,
 				darkTheme,
+				bodyBgColor
 			}}
 		>
 			{userIsLoggedIn && (
