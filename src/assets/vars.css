@@ -40,7 +40,7 @@
 
 }
 :root.dark-mode {
-	--bg: hsl(204, 33%, 12%);
+	--bg: hsl(204, 33%, 12%); /* #152129 */
 	--shadeboxcolor: white;
 	--shadetextcolor: black;
 	--text-primary: #ededed;
