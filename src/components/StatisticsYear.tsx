@@ -7,6 +7,7 @@ import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 import BooksWithoutStarsList from './BooksWithoutStarsList'
 import PieG from './PieG'
+import LineG from './LineG'
 
 const now: Date = new Date()
 const curYear = now.getFullYear()
@@ -17,6 +18,8 @@ const curYearDayNr: number = Math.floor((Number(now) - Number(curYearStartDayNr)
 const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
 	/** Count Books Finished */
 	let cbf: number = 0
+	/** Count Books Finished Monthly */
+	const cbfm: number[] = Array(12).fill(0)
 	/** Count Books Without Pages */
 	let cbwp: number = 0
 	/** Count Pages Finished */
@@ -41,10 +44,17 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 
 	const bwp: BooksWithoutPages = []
 	const bwst: BooksWithoutStars = []
+
+	let monthIndex: number = 0
+
 	myBooksArr.map((b) => {
 		if (b.date_finished !== undefined && Math.floor(b.date_finished / 10000) === year) {
 			cbf += 1
+			// get monthly finished books
+			monthIndex = Math.floor((b.date_finished - year * 10000) / 100) - 1
+			cbfm[monthIndex] += 1
 
+			// get pages
 			if (Number(b.number_of_pages_median) === 0 || b.number_of_pages_median === undefined) {
 				cbwp += 1
 				const pageless = { id: b.id, title_short: b.title_short }
@@ -73,11 +83,11 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 	}
 	astpb = Number((cstt / cbst).toFixed(1))
 
-	return { cbf, cpf, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst }
+	return { cbf, cpf, cbfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst }
 }
 
 const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
-	const { cbf, cpf, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst } = countBookValues({ myBooksArr, year })
+	const { cbf, cpf, cbfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst } = countBookValues({ myBooksArr, year })
 	/** BWP = Books Without Pages */
 	const [showBWP, setShowBWP] = useState<boolean>(false)
 	/** BWST = Books Without STars */
@@ -89,6 +99,10 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<br />
 			Average days per book: {adpb}
 			<br />
+			Books finished per month:
+			<br />
+			<LineG data={cbfm} />
+			<br/>
 			Pages read: {cpf}
 			{cbwp > 0 && <>*</>}
 			<br />
@@ -114,6 +128,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				</>
 			)}
 			Average stars per book: {astpb}
+			<br />
 			{cbwst > 0 && <>**</>}
 			<br />
 			{/* --- in plaats hiervan PieG laten zien
