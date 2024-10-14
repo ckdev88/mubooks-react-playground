@@ -7,7 +7,7 @@ import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 import BooksWithoutStarsList from './BooksWithoutStarsList'
 import PieG from './PieG'
-import LineG from './LineG'
+import LineG2 from './LineG2'
 
 const now: Date = new Date()
 const curYear = now.getFullYear()
@@ -103,6 +103,8 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	const [showBWP, setShowBWP] = useState<boolean>(false)
 	/** BWST = Books Without STars */
 	const [showBWST, setShowBWST] = useState<boolean>(false)
+	// TODO: move tmpSubjects into something a bit more durable
+	const tmpSubjects: string[] = ['Books', 'Pages']
 	return (
 		<>
 			<h2>{year}</h2>
@@ -110,15 +112,16 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<br />
 			Average days per book: {adpb}
 			<br />
-			Books finished per month:
-			<br />
-			<LineG data={cbfm} subject="Books" />
-			<br />
 			Pages read: {cpf}
 			{cbwp > 0 && <>*</>}
 			<br />
 			Average pages per day: {appd}
 			{cbwp > 0 && <>*</>}
+			<br />
+			<br />
+			<b>Books & pages finished per month:</b>
+			<LineG2 data={cbfm} data2={cpfm} subjects={tmpSubjects} />
+			<br />
 			<br />
 			{cbwp > 0 && (
 				<>
@@ -138,13 +141,8 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					<br />
 				</>
 			)}
-			Pages finished per month:
 			<br />
-			<LineG data={cpfm} subject="Pages" />
-			<br />
-			Average stars per book: {astpb}
-			{cbwst > 0 && <>**</>}
-			<br />
+			Average stars per book: {astpb} {cbwst > 0 && <>**</>}
 			{/* --- in plaats hiervan PieG laten zien
 				cstpb.map((st, index) => {
 				return (
@@ -154,6 +152,8 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				)
 			})
 			*/}
+			<br />
+			<b>How I rated my books in {year}</b>
 			<PieG data={cstpb} />
 			{cbwst > 0 && (
 				<>
@@ -165,7 +165,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 								: 'btn-text caret-right-toggle italic diblock wauto'
 						}
 					>
-						* Books without stars defined{' '}
+						** Books without stars defined{' '}
 					</button>
 					<ul className={showBWST ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showBWST}>
 						<BooksWithoutStarsList bwst={bwst} year={year} key={year} />

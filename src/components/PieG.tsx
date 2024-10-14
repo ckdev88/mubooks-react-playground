@@ -20,11 +20,12 @@ export default function PieG({ data }: { data: number[] }) {
 			options={{
 				backgroundColor: bodyBgColor,
 				legend: {
+					position: 'bottom',
 					textStyle: {
 						color: darkTheme ? 'white' : 'black',
-						fontSize: '14px',
 					},
 				},
+				chartArea: { left: 0, width: '95%' },
 			}}
 		/>
 	)
