@@ -132,9 +132,28 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	/** BWST = Books Without STars */
 	const [showBWST, setShowBWST] = useState<boolean>(false)
 	const [showMore, setShowMore] = useState<boolean>(false)
+	const [showCbfDetails, setShowCbfDetails] = useState<boolean>(false)
 	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
 	// TODO: move tmpSubjects into something a bit more durable
 	const tmpSubjects: string[] = ['Books', 'Pages']
+
+	const monthNames: string[] = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+	]
+	function getMonthName(i: number): string {
+		return monthNames[i]
+	}
 
 	return (
 		<section className="stats-year">
@@ -159,6 +178,20 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 						<ul className={showBWP ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showBWP}>
 							<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
 						</ul>
+					</>
+				)}
+				&nbsp;
+				<button onClick={() => setShowCbfDetails(!showCbfDetails)} className="btn-text diblock">
+					...
+				</button>
+				{showCbfDetails && (
+					<>
+						{cbfm.map((c, index) => (
+							<div key={`cbfm${year}${index}`}>
+								{getMonthName(index)}: {c}
+								<br />
+							</div>
+						))}
 					</>
 				)}
 			</article>
