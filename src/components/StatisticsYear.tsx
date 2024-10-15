@@ -131,39 +131,19 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	const [showBWP, setShowBWP] = useState<boolean>(false)
 	/** BWST = Books Without STars */
 	const [showBWST, setShowBWST] = useState<boolean>(false)
+	const [showMore, setShowMore] = useState<boolean>(false)
 	// TODO: move tmpSubjects into something a bit more durable
 	const tmpSubjects: string[] = ['Books', 'Pages']
 
 	return (
 		<>
-			<h2>{year}</h2>
-			Books finished: {cbf}
-			<br />
-			Average days per book: {adpb}
-			<br />
-			Pages read: {cpf}
-			{cbwp > 0 && <>*</>}
-			<br />
-			Average pages per day: {appd}
-			{cbwp > 0 && <>*</>}
-			<br />
-			<h4 className="mb0">Books & pages finished per month:</h4>
+			<h1>Your numbers for {year}</h1>
+			<h3 className="mb0">Books & pages per month</h3>
 			<LineG2 data={cbfm} data2={cpfm} subjects={tmpSubjects} />
-			<h4 className="mb0 mt0">Days per book</h4>
-			<LineG3 data={dpb} />
-			{/*
-				dpb.map((b, index) => {
-				return (
-					<>
-						{index} days - {b} books
-						<br />
-					</>
-				)
-			})
-			*/}
-			<br />
+			Books finished in {year}: <b>{cbf}</b>
 			{cbwp > 0 && (
 				<>
+					*<br />
 					<button
 						onClick={() => setShowBWP(!showBWP)}
 						className={
@@ -177,11 +157,22 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					<ul className={showBWP ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showBWP}>
 						<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
 					</ul>
-					<br />
 				</>
 			)}
+			<h3 className="mb0">Days per book</h3>
+			<LineG3 data={dpb} />
+			Average days to finish a book: <b>{adpb}</b>
+			{/*
+				dpb.map((b, index) => {
+				return (
+					<>
+						{index} days - {b} books
+						<br />
+					</>
+				)
+			})
+			*/}
 			<br />
-			Average stars per book: {astpb} {cbwst > 0 && <>**</>}
 			{/* --- in plaats hiervan PieG laten zien
 				cstpb.map((st, index) => {
 				return (
@@ -191,15 +182,17 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				)
 			})
 			*/}
-			<br />
 			{/*
 			 *	DPBer(dpb)
 			 *
 			 */}
-			<h4 className="mb0">How I rated my books in {year}</h4>
+			<h3 className="mb0">How I rated my books in {year}</h3>
 			<PieG data={cstpb} />
+			Average stars per book: <b>{astpb}</b>
 			{cbwst > 0 && (
 				<>
+					**
+					<br />
 					<button
 						onClick={() => setShowBWST(!showBWST)}
 						className={
@@ -216,6 +209,24 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				</>
 			)}
 			<br />
+			<br />
+			<button
+				onClick={() => setShowMore(!showMore)}
+				className={
+					showBWP
+						? 'btn-text caret-right-toggle diblock wauto active'
+						: 'btn-text caret-right-toggle diblock wauto'
+				}
+			>
+				Show more...
+			</button>
+			<div className={showMore ? 'expandable expanded' : 'expandable collapsed'}>
+				Pages read: {cpf}
+				<br />
+				Average pages per day: {appd}
+				<br />
+			</div>
+			<br/>
 			<hr style={{ borderColor: 'rgb(183, 53, 129)', borderWidth: '0 0 1px 0' }} />
 		</>
 	)
