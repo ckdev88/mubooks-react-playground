@@ -132,6 +132,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	/** BWST = Books Without STars */
 	const [showBWST, setShowBWST] = useState<boolean>(false)
 	const [showMore, setShowMore] = useState<boolean>(false)
+	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
 	// TODO: move tmpSubjects into something a bit more durable
 	const tmpSubjects: string[] = ['Books', 'Pages']
 
@@ -164,17 +165,23 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<article className="stats-item">
 				<h3 className="mb0">Days per book</h3>
 				<LineG3 data={dpb} />
-				Average days to finish a book: <b>{adpb}</b>
-				{/*
-				dpb.map((b, index) => {
-				return (
-				<>
-				{index} days - {b} books
-				<br />
-				</>
-				)
-				})
-				*/}
+				Average days to finish a book: <b>{adpb}</b>&nbsp;
+				<button className="btn-text diblock" onClick={() => setShowDpbDetails(!showDpbDetails)}>
+					...
+				</button>
+				{
+					// show the used data more verbosely
+					// TODO: show title_short of books, including hash link to /savedbooks
+					showDpbDetails &&
+						dpb.map((b, index) => {
+							return (
+								<div key={`adpb${year}${index}`}>
+									{index} days - {b} books
+									<br />
+								</div>
+							)
+						})
+				}
 				<br />
 				{/* --- in plaats hiervan PieG laten zien
 				cstpb.map((st, index) => {
