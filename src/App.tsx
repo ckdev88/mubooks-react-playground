@@ -32,6 +32,8 @@ export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const todaysDateInput = timestampConverter(Date.now(), 'input')
 const todaysDateDigit = Number(timestampConverter(Date.now(), 'digit'))
+const bgColorLight: string = '#f4f1ea'
+const bgColorDark: string = '#152129'
 
 const App = () => {
 	let userIsLoggedInInitVal: boolean
@@ -51,6 +53,7 @@ const App = () => {
 	const [darkTheme, setDarkTheme] = useState<boolean>(
 		document.getElementsByTagName('html')[0].classList.contains('dark-theme')
 	)
+	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -102,7 +105,11 @@ const App = () => {
 		const htmlNode = document.getElementsByTagName('html')[0]
 		if (darkTheme === true) {
 			if (!htmlNode.classList.contains('dark-mode')) htmlNode.classList.add('dark-mode')
-		} else htmlNode.classList.remove('dark-mode')
+			setBodyBgColor(bgColorDark)
+		} else {
+			htmlNode.classList.remove('dark-mode')
+			setBodyBgColor(bgColorLight)
+		}
 	}, [darkTheme])
 
 	// TODO when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
@@ -131,6 +138,7 @@ const App = () => {
 				username,
 				setDarkTheme,
 				darkTheme,
+				bodyBgColor
 			}}
 		>
 			{userIsLoggedIn && (

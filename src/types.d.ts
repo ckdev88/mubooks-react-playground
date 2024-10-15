@@ -19,8 +19,9 @@ interface AppContextType {
 	todaysDateDigit: number
 	bookFilter: string
 	setBookFilter(bookFilter: bookFilter): void
-	darkTheme:boolean
-	setDarkTheme(darkTheme:darkTheme):void
+	darkTheme: boolean
+	setDarkTheme(darkTheme: darkTheme): void
+	bodyBgColor:string
 }
 
 interface IsModdingPagesContextType {
@@ -163,17 +164,23 @@ interface BookWithoutPages {
 	id: Book['id']
 	title_short: Book['title_short']
 }
-interface CountBookValues {
-	/** Count books finished */
-	cbf: number
-	/** Count Pages Finished */
-	cpf: number
-	/** Count Books Without Pages */
-	cbwp: number
-	/** Average Days Per Book */
-	adpb: number
-	/** Average Pages Per Day */
-	appd: number
-	/** Books Without Pages */
-	bwp: BooksWithoutPages
+type BooksWithoutStars = BookWithoutStars[]
+interface BookWithoutStars {
+	id: Book['id']
+	title_short: Book['title_short']
 }
+// interface CountBookValues {
+// 	/** Count books finished */
+// 	cbf: number
+// 	/** Count Pages Finished */
+// 	cpf: number
+// 	/** Count Books Without Pages */
+// 	cbwp: number
+// 	/** Average Days Per Book */
+// 	adpb: number
+// 	/** Average Pages Per Day */
+// 	appd: number
+// 	/** Books Without Pages */
+// 	bwp: BooksWithoutPages
+// }
+
