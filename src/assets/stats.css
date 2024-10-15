@@ -1,0 +1,6 @@
+.stats-item {
+	padding-bottom: 1rem;
+}
+.stats-year {
+	border-bottom: 1px solid var(--hr);
+}
