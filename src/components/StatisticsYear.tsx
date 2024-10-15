@@ -8,6 +8,7 @@ import BooksWithoutPagesList from './BooksWithoutPagesList'
 import BooksWithoutStarsList from './BooksWithoutStarsList'
 import PieG from './PieG'
 import LineG2 from './LineG2'
+import LineG3 from './LineG3'
 
 const now: Date = new Date()
 const curYear = now.getFullYear()
@@ -28,6 +29,8 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 	const cpfm: number[] = Array(12).fill(0)
 	/** Average Days Per Book */
 	let adpb: number = 0
+	/** Days Per Book array where key is amount of days, value is amount of books */
+	const dpb: number[] = []
 	/** Average Pages Per Day */
 	let appd: number = 0
 	/** Counted Books with STars */
@@ -79,6 +82,31 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 				const starless = { id: b.id, title_short: b.title_short }
 				bwst.push(starless)
 			}
+
+			if (b.date_reading !== undefined) {
+				// get days per book
+				/** Date Reading .. leftover will be Day Reading */
+				let dr: number = b.date_reading
+				/** Date Reading Year */
+				const dry: number = Math.floor(dr / 10000)
+				dr -= dry * 10000
+				/** Date Reading Month */
+				const drm: number = Math.floor(dr / 100)
+				dr -= drm * 100
+				const date_reading_date = new Date(dry, drm, dr)
+				/** Date Finished .. leftover of dr will be Day Finished */
+				let df: number = b.date_finished
+				/** Date Finished Year */
+				const dfy: number = Math.floor(df / 10000)
+				df -= dfy * 10000
+				/** Date Finished Month */
+				const dfm: number = Math.floor(df / 100)
+				df -= dfm * 100
+				const date_finished_date: Date = new Date(dfy, dfm, df)
+				const date_difference: number = (date_finished_date.getTime() - date_reading_date.getTime()) / 1000 / 3600 / 24
+				if (dpb[date_difference] === undefined) dpb[date_difference] = 0
+				dpb[date_difference] = dpb[date_difference] + 1
+			}
 		}
 	})
 
@@ -91,11 +119,11 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 	}
 	astpb = Number((cstt / cbst).toFixed(1))
 
-	return { cbf, cpf, cbfm, cpfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst }
+	return { cbf, cpf, cbfm, cpfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst, dpb }
 }
 
 const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
-	const { cbf, cpf, cbfm, cpfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst } = countBookValues({
+	const { cbf, cpf, cbfm, cpfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst, dpb } = countBookValues({
 		myBooksArr,
 		year,
 	})
@@ -105,6 +133,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	const [showBWST, setShowBWST] = useState<boolean>(false)
 	// TODO: move tmpSubjects into something a bit more durable
 	const tmpSubjects: string[] = ['Books', 'Pages']
+
 	return (
 		<>
 			<h2>{year}</h2>
@@ -118,10 +147,20 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			Average pages per day: {appd}
 			{cbwp > 0 && <>*</>}
 			<br />
-			<br />
-			<b>Books & pages finished per month:</b>
+			<h4 className="mb0">Books & pages finished per month:</h4>
 			<LineG2 data={cbfm} data2={cpfm} subjects={tmpSubjects} />
-			<br />
+			<h4 className="mb0 mt0">Days per book</h4>
+			<LineG3 data={dpb} />
+			{/*
+				dpb.map((b, index) => {
+				return (
+					<>
+						{index} days - {b} books
+						<br />
+					</>
+				)
+			})
+			*/}
 			<br />
 			{cbwp > 0 && (
 				<>
@@ -153,7 +192,11 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			})
 			*/}
 			<br />
-			<b>How I rated my books in {year}</b>
+			{/*
+			 *	DPBer(dpb)
+			 *
+			 */}
+			<h4 className="mb0">How I rated my books in {year}</h4>
 			<PieG data={cstpb} />
 			{cbwst > 0 && (
 				<>
@@ -172,6 +215,8 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					</ul>
 				</>
 			)}
+			<br />
+			<hr style={{ borderColor: 'rgb(183, 53, 129)', borderWidth: '0 0 1px 0' }} />
 		</>
 	)
 }
