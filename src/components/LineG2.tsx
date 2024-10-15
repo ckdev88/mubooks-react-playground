@@ -2,15 +2,7 @@
 import Chart from 'react-google-charts'
 import { useContext } from 'react'
 import { AppContext } from '../App'
-export default function LineG2({
-	data,
-	data2,
-	subjects,
-}: {
-	data: number[]
-	data2: number[]
-	subjects: string[]
-}) {
+export default function LineG2({ data, data2, subjects }: { data: number[]; data2: number[]; subjects: string[] }) {
 	const { bodyBgColor, darkTheme } = useContext(AppContext)
 
 	const chartData = [
@@ -55,21 +47,21 @@ export default function LineG2({
 				},
 				hAxis: {
 					textStyle: { color: darkTheme ? 'white' : 'black' },
-					gridlines: {
-						count: 0,
-					},
+					// 			gridlines: {
+					// 				count: 0,
+					// 			},
 					showTextEvery: 3,
 				},
-				vAxis: {
-					gridlines: {
-						count: 0,
-					},
-				},
+				// 		vAxis: {
+				// 			gridlines: {
+				// 				count: 0,
+				// 			},
+				// 		},
 				series: {
 					0: { targetAxisIndex: 0 },
 					1: { targetAxisIndex: 1 },
 				},
-				chartArea: { left: 17, right: 30 },
+				chartArea: { left: 17, right: 40 },
 			}}
 		/>
 	)
