@@ -38,7 +38,7 @@ export default function LineG3({ data }: { data: number[] }) {
 					vAxis: {
 						title: 'Number of books',
 						titleTextStyle: { color: darkTheme ? 'white' : 'black' },
-						textStyle: { color: darkTheme ? 'pink' : '#dc3912' },
+						textStyle: { color: darkTheme ? 'white' : 'black' },
 					},
 					colors: ['#ff5f00'],
 					chartArea: { left: 40, right: 30 },
