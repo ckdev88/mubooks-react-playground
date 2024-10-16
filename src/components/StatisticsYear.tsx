@@ -127,13 +127,10 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 		myBooksArr,
 		year,
 	})
-	/** BWP = Books Without Pages */
-	const [showBWP, setShowBWP] = useState<boolean>(false)
-	/** BWST = Books Without STars */
-	const [showBWST, setShowBWST] = useState<boolean>(false)
-	const [showMore, setShowMore] = useState<boolean>(false)
 	const [showCbfDetails, setShowCbfDetails] = useState<boolean>(false)
 	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
+	const [showStpbDetails, setShowStpbDetails] = useState<boolean>(false)
+
 	// TODO: move tmpSubjects into something a bit more durable
 	const tmpSubjects: string[] = ['Books', 'Pages']
 
@@ -161,38 +158,30 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<article className="stats-item">
 				<h3 className="mb0">Books & pages per month</h3>
 				<LineG2 data={cbfm} data2={cpfm} subjects={tmpSubjects} />
-				Books finished in {year}: <b>{cbf}</b>
-				{cbwp > 0 && (
-					<>
-						*<br />
-						<button
-							onClick={() => setShowBWP(!showBWP)}
-							className={
-								showBWP
-									? 'btn-text caret-right-toggle italic diblock wauto active'
-									: 'btn-text caret-right-toggle italic diblock wauto'
-							}
-						>
-							* Books without pages defined{' '}
-						</button>
-						<ul className={showBWP ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showBWP}>
-							<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
-						</ul>
-					</>
-				)}
-				&nbsp;
+				Books finished in {year}: <b>{cbf}</b> {cbwp > 0 && <> * </>}{' '}
 				<button onClick={() => setShowCbfDetails(!showCbfDetails)} className="btn-text diblock">
 					...
 				</button>
 				{showCbfDetails && (
-					<>
+					<div className="mt05">
+						<div>
+							* Books without pages defined{' '}
+							<ul className="mt05">
+								<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
+							</ul>
+						</div>
 						{cbfm.map((c, index) => (
 							<div key={`cbfm${year}${index}`}>
 								{getMonthName(index)}: {c}
 								<br />
 							</div>
 						))}
-					</>
+						<br />
+						Pages read: {cpf}
+						<br />
+						Average pages per day: {appd}
+						<br />
+					</div>
 				)}
 			</article>
 			<article className="stats-item">
@@ -205,15 +194,18 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				{
 					// show the used data more verbosely
 					// TODO: show title_short of books, including hash link to /savedbooks
-					showDpbDetails &&
-						dpb.map((b, index) => {
-							return (
-								<div key={`adpb${year}${index}`}>
-									{index} days - {b} books
-									<br />
-								</div>
-							)
-						})
+					showDpbDetails && (
+						<div className="mt05">
+							{dpb.map((b, index) => {
+								return (
+									<div key={`adpb${year}${index}`}>
+										{index} {index === 1 ? 'day' : 'days'}: {b} {b === 1 ? `book` : `books`}
+										<br />
+									</div>
+								)
+							})}
+						</div>
+					)
 				}
 				<br />
 				{/* --- in plaats hiervan PieG laten zien
@@ -236,39 +228,32 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				Average stars per book: <b>{astpb}</b>
 				{cbwst > 0 && (
 					<>
-						**
-						<br />
-						<button
-							onClick={() => setShowBWST(!showBWST)}
-							className={
-								showBWP
-									? 'btn-text caret-right-toggle italic diblock wauto active'
-									: 'btn-text caret-right-toggle italic diblock wauto'
-							}
-						>
-							** Books without stars defined{' '}
+						*
+						<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
+							...
 						</button>
-						<ul className={showBWST ? 'expandable expanded' : 'expandable collapsed'} aria-expanded={showBWST}>
-							<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
-						</ul>
+						{showStpbDetails && (
+							<div className="mt05">
+								{bwst.length > 0 && (
+									<div>
+										* Books without stars defined:{' '}
+										<ul className="mt0">
+											<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
+										</ul>
+									</div>
+								)}
+								{cstpb.length > 0 &&
+									cstpb.map((b, index) => {
+										return (
+											<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
+												{index + 1} {index + 1 === 1 ? 'star' : 'stars'}: {b} {b === 1 ? 'book' : 'books'}
+											</div>
+										)
+									})}
+							</div>
+						)}
 					</>
 				)}
-				<br />
-				<br />
-				<button
-					onClick={() => setShowMore(!showMore)}
-					className={
-						showBWP ? 'btn-text caret-right-toggle diblock wauto active' : 'btn-text caret-right-toggle diblock wauto'
-					}
-				>
-					Show more...
-				</button>
-				<div className={showMore ? 'expandable expanded' : 'expandable collapsed'}>
-					Pages read: {cpf}
-					<br />
-					Average pages per day: {appd}
-					<br />
-				</div>
 			</article>
 		</section>
 	)
