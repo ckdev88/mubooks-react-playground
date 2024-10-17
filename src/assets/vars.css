@@ -4,7 +4,7 @@
 	--shadetextcolor: #ffffff;
 	--text-primary: #121212;
 	--text-primary-dimmed: #333333;
-	--primary: #b73581; /* hsl(325, 55%, 46%)  */
+	--primary:  hsl(325, 55%, 46%) ;
 	--primary-darker: hsl(325, 55%, 39%);
 	--primary-darker2: #7e2559; /* hsl(325, 55%, 32%) */
 	--link: hsl(325, 55%, 46%);
@@ -17,7 +17,7 @@
 
 	--badgebg: #f1e0c6;
 	--badgefg: #df8506;
-	--disabled: #7e2559; /* hsl(325, 25%, 76%); */
+	--disabled: hsla(325,35%,46%,.8);
 	--darkbrown: #331611;
 	--green: #0d8846;
 	--lightgreen: #aff4c6;
