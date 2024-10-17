@@ -25,7 +25,6 @@ import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
-import LoadLibrary from './routes/books/LoadLibrary.tsx'
 import { timestampConverter } from './helpers/convertDate.ts'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
@@ -47,7 +46,6 @@ const App = () => {
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
-	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 	const [bookFilter, setBookFilter] = useState<string>('')
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
@@ -119,11 +117,9 @@ const App = () => {
 	return (
 		<AppContext.Provider
 			value={{
-				formNotification,
 				popupNotification,
 				popupNotificationShow,
 				bookFilter,
-				setFormNotification,
 				setBookFilter,
 				setPopupNotification,
 				setPopupNotificationShow,
@@ -190,7 +186,6 @@ const App = () => {
 								<Route path="/clear-my-books" element={ <ClearMyBooks /> } />
 								{/*
 								*/}
-							<Route path="/loadlibrary" element={<LoadLibrary />} />
 						</>
 					)}
 				</Routes>

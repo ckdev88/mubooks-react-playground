@@ -2,11 +2,9 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
 import useCardRotate from '../../hooks/useCardRotate'
-import { useNavigate } from 'react-router-dom'
 
 const LoginCard = () => {
-	const navigate = useNavigate()
-	const { setUserIsLoggedIn, setUsername, setUsermail, formNotification, setFormNotification } = useContext(AppContext)
+	const { setUserIsLoggedIn, setUsername, setUsermail } = useContext(AppContext)
 	const [error, setError] = useState('')
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -30,18 +28,14 @@ const LoginCard = () => {
 				if (res.error !== null) {
 					setError(res.error.message)
 					setUserIsLoggedIn(false)
-					setIsLoading(false)
 				} else {
-					setError('')
 					setUserIsLoggedIn(true)
-					// TODO: error & formnotification would be nice if they could merge, and how about popupNotification ?
-					setFormNotification('')
 					setUsername(res.data.user?.user_metadata.screenname)
 					setUsermail(res.data.user?.user_metadata.email)
-					navigate('/loadlibrary')
 				}
 			})
 			.catch(() => setError('Something unexpected happened, try again later.'))
+			.finally(() => setIsLoading(false))
 	}
 
 	const { recover, signup } = useCardRotate()
@@ -56,7 +50,6 @@ const LoginCard = () => {
 							<sub>to continue</sub>
 						</div>
 					</header>
-					<em className="form-notification">{formNotification}</em>
 					<form onSubmit={processLoginForm}>
 						<div className={error !== '' ? 'notification error' : 'notification'}>{error}</div>
 						<label htmlFor="login_email">
@@ -67,7 +60,7 @@ const LoginCard = () => {
 							<div className="description">Password</div>
 							<input type="password" id="login_password" name="login_password" autoComplete="current-password" />
 						</label>
-						<button value="Log in" disabled={isLoading} className='btn-lg'>
+						<button value="Log in" disabled={isLoading} className="btn-lg">
 							{isLoading ? 'Logging in...' : 'Log in'}
 						</button>
 					</form>
