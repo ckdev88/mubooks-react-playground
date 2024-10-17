@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
+import updatePreferences from '../functions/updatePreferences'
 
 const titleMap = new Map()
 titleMap.set('dashboard', 'Dashboard')
@@ -132,7 +133,10 @@ const NavWrapper = () => {
 						</NavLink>
 						<button
 							id="accessibility-darkmode"
-							onClick={() => setDarkTheme(!darkTheme)}
+							onClick={() => {
+								setDarkTheme(!darkTheme)
+								updatePreferences(!darkTheme)
+							}}
 							className={darkTheme ? 'active' : ''}
 						>
 							<svg

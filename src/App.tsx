@@ -50,9 +50,7 @@ const App = () => {
 	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 	const [bookFilter, setBookFilter] = useState<string>('')
-	const [darkTheme, setDarkTheme] = useState<boolean>(
-		document.getElementsByTagName('html')[0].classList.contains('dark-theme')
-	)
+	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
 
 	// add persistency to userMyBooks state throughout page refreshes
@@ -87,6 +85,11 @@ const App = () => {
 
 	if (username === '' && localStorage.getItem(localStorageKey))
 		setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
+
+	if (darkTheme === undefined && localStorage.getItem(localStorageKey)) {
+		const dtInitVal=JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.darktheme
+		if(dtInitVal!==undefined)setDarkTheme(dtInitVal)
+	}
 
 	if (userid === '' && localStorage.getItem(localStorageKey))
 		setUserid(JSON.parse(localStorage.getItem(localStorageKey) as string).user.id)
@@ -138,7 +141,7 @@ const App = () => {
 				username,
 				setDarkTheme,
 				darkTheme,
-				bodyBgColor
+				bodyBgColor,
 			}}
 		>
 			{userIsLoggedIn && (

@@ -19,9 +19,9 @@ interface AppContextType {
 	todaysDateDigit: number
 	bookFilter: string
 	setBookFilter(bookFilter: bookFilter): void
-	darkTheme: boolean
+	darkTheme: undefined | boolean
 	setDarkTheme(darkTheme: darkTheme): void
-	bodyBgColor:string
+	bodyBgColor: string
 }
 
 interface IsModdingPagesContextType {
@@ -183,4 +183,3 @@ interface BookWithoutStars {
 // 	/** Books Without Pages */
 // 	bwp: BooksWithoutPages
 // }
-
