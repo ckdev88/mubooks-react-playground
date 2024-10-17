@@ -90,47 +90,66 @@ const NavWrapper = () => {
 					className={nav0Expanded ? 'expanded nav-collapsable' : 'collapsed nav-collapsable'}
 					aria-expanded={nav0Expanded ? 'true' : 'false'}
 				>
-					<NavLink to={'/dashboard'} onClick={toggleNav0}>
-						Dashboard
-					</NavLink>
-					<NavLink to={'/search'} onClick={toggleNav0}>
-						Search
-					</NavLink>
-					<NavLink to={'/wishlist'} onClick={toggleNav0}>
-						Wishlist
-					</NavLink>
-					<NavLink to={'/reading'} onClick={toggleNav0}>
-						Reading
-					</NavLink>
-					<NavLink to={'/finished'} onClick={toggleNav0}>
-						Finished
-					</NavLink>
-					<NavLink to={'/favorites'} onClick={toggleNav0}>
-						Favorites
-					</NavLink>
-					<NavLink to={'/savedbooks'} onClick={toggleNav0}>
-						Saved books
-					</NavLink>
-					<NavLink to={'/quoted'} onClick={toggleNav0}>
-						Quoted
-					</NavLink>
-					<NavLink to={'/tropes'} onClick={toggleNav0}>
-						Tropes
-					</NavLink>
-					<NavLink to={'/statistics'} onClick={toggleNav0}>
-						Statistics
-					</NavLink>
-					{/*
-					 */}
-					<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
-						Clear My Books
-					</NavLink>
-					{/*
-					 */}
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/dashboard'} onClick={toggleNav0}>
+							Dashboard
+						</NavLink>
+						<NavLink to={'/add-book'} onClick={toggleNav0}>
+							Add book
+						</NavLink>
+					</div>
+
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/wishlist'} onClick={toggleNav0}>
+							Wishlist
+						</NavLink>
+						<NavLink to={'/quoted'} onClick={toggleNav0}>
+							Quoted
+						</NavLink>
+					</div>
+
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/reading'} onClick={toggleNav0}>
+							Reading
+						</NavLink>
+						<NavLink to={'/tropes'} onClick={toggleNav0}>
+							Tropes
+						</NavLink>
+					</div>
+
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/finished'} onClick={toggleNav0}>
+							Finished
+						</NavLink>
+						<NavLink to={'/statistics'} onClick={toggleNav0}>
+							Statistics
+						</NavLink>
+					</div>
+
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/favorites'} onClick={toggleNav0}>
+							Favorites
+						</NavLink>
 						<NavLink to={'/account/profile'} onClick={toggleNav0}>
 							Profile
 						</NavLink>
+					</div>
+
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/savedbooks'} onClick={toggleNav0}>
+							Saved books
+						</NavLink>
+						<NavLink to={'/account/logout'} onClick={toggleNav0}>
+							Logout
+						</NavLink>
+					</div>
+					{/*
+					 */}
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
+							Clear My Books
+						</NavLink>
+
 						<button
 							id="accessibility-darkmode"
 							onClick={() => {
@@ -163,9 +182,8 @@ const NavWrapper = () => {
 							</svg>
 						</button>
 					</div>
-					<NavLink to={'/account/logout'} onClick={toggleNav0}>
-						Logout
-					</NavLink>
+					{/*
+					 */}
 				</nav>
 			</div>
 		</>

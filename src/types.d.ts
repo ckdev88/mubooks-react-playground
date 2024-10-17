@@ -45,16 +45,17 @@ interface TropesPageContextType {
 }
 
 type Page =
+	| 'addbook'
 	| 'dashboard'
-	| 'search'
-	| 'wishlist'
-	| 'reading'
-	| 'finished'
 	| 'favorites'
-	| 'savedbooks'
-	| 'quoted'
-	| 'tropes'
+	| 'finished'
 	| 'profile'
+	| 'quoted'
+	| 'reading'
+	| 'savedbooks'
+	| 'search'
+	| 'tropes'
+	| 'wishlist'
 
 type Quote = {
 	quote: string
