@@ -7,7 +7,6 @@ import { isUrl, getOlCover } from '../../Helpers'
 import { isUrl } from '../../Helpers'
 // TODO apply BookSummary-BookPages to keep uniformity ??
 // import BookPages from '../../components/BookPages'
-// import BookSummaryPreview from '../../components/BookSummaryPreview'
 import BookSummaryTitle from '../../components/BookSummaryTitle'
 // TODO apply BookSummary-Components to keep uniformity
 import { AppContext } from '../../App'
