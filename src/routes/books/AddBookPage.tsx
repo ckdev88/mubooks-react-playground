@@ -182,7 +182,9 @@ const [loading, setLoading] = useState<boolean>(false)
 					<input type="text" id="search_term" name="search_term" />
 					<div className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</div>
 					<div className={resultsWarning !== '' ? 'dblock' : 'dnone'}>{resultsWarning}</div>
-					<button disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
+					<button className="btn-lg" disabled={loading}>
+						{loading ? 'Searching...' : 'Search'}
+					</button>
 				</form>
 			</div>
 			*/}
