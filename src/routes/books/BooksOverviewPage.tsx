@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import BookSummary from '../../components/BookSummary'
 import { AppContext } from '../../App'
 import BooksOverviewFilterSort from '../../components/BooksOverviewFilterSort'
@@ -8,11 +8,21 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 	const savedArr: Books = userMyBooks
 	const fsPages: Page[] = ['wishlist', 'finished', 'favorites', 'savedbooks']
 
+	useEffect(() => {
+		if (window.location.hash !== undefined) {
+			setTimeout(() => {
+				// TODO: make less hacky
+				location.href = window.location.hash
+			}, 500)
+		}
+	}, []) 
+
 	return (
 		<>
 			{fsPages.includes(page) && <BooksOverviewFilterSort />}
+
 			{books.map((book) => {
-				if (page === 'search') {  
+				if (page === 'search') {
 					savedArr.find((savedbook) => {
 						if (savedbook.id === book.id) {
 							book.list = savedbook.list

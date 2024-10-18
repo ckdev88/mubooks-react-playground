@@ -11,6 +11,7 @@ import BookSummaryTitle from '../../components/BookSummaryTitle'
 // TODO apply BookSummary-Components to keep uniformity
 import { AppContext } from '../../App'
 import updateEntriesDb from '../../functions/updateEntriesDb'
+import { cleanAnchor } from '../../helpers/cleanInput'
 /*
 const explore = reactive({
 	api: 'http://openlibrary.org/search.json',
@@ -147,6 +148,7 @@ const [loading, setLoading] = useState<boolean>(false)
 		const list: Book['list'] = 1
 		const rate_stars: Book['rate_stars'] = 0
 		const rate_spice: Book['rate_spice'] = 0
+		const title_short = title.slice(0, 55)
 		const book = {
 			author_name: authorName,
 			cover: coverImg,
@@ -156,14 +158,20 @@ const [loading, setLoading] = useState<boolean>(false)
 			number_of_pages_median: numberOfPages,
 			review_tropes: tropes,
 			title: title,
-			title_short: title.slice(0, 55),
+			title_short: title_short,
 			cover_edition_key: '',
 			rate_stars: rate_stars,
 			rate_spice: rate_spice,
 		}
+
 		newArr.push(book)
 		setUserMyBooks(newArr)
 		const msg = await updateEntriesDb(newArr, userid)
+
+		const bookAnchor: string = `${cleanAnchor(title_short)}_${bookId}`
+		const linkto: string = '/wishlist#' + bookAnchor
+		location.href = linkto
+
 		setPopupNotification(msg)
 	}
 
