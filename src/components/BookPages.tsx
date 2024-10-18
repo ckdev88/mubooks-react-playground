@@ -12,7 +12,7 @@ const BookPages = ({
 }) => {
 	const [isModding, setIsModding] = useState<boolean>(false)
 	const [numberOfPages, setNumberOfPages] = useState<number>(book_number_of_pages_median)
-	
+
 	return (
 		<IsModdingPagesContext.Provider value={{ isModding, setIsModding, numberOfPages, setNumberOfPages }}>
 			<div style={{ display: 'flex', padding: '.25rem 0' }}>

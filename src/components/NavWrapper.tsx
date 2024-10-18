@@ -20,6 +20,7 @@ titleMap.set('account/logout', 'Log out')
 titleMap.set('auth/confirm', 'Account confirmed')
 titleMap.set('addbook', 'Add a book')
 
+
 const NavWrapper = () => {
 	const navigate = useNavigate()
 	const { userIsLoggedIn, darkTheme, setDarkTheme } = useContext(AppContext)
@@ -36,7 +37,7 @@ const NavWrapper = () => {
 	}
 
 	const navTitle = titleMap.get(location.pathname.slice(1))
-	document.title = 'Mu ' + navTitle
+	document.title = 'Mu: ' + navTitle
 
 	if (userIsLoggedIn === false) return <></>
 	return (
@@ -94,7 +95,7 @@ const NavWrapper = () => {
 						<NavLink to={'/dashboard'} onClick={toggleNav0}>
 							Dashboard
 						</NavLink>
-						<NavLink to={'/add-book'} onClick={toggleNav0}>
+						<NavLink to={'/addbook'} onClick={toggleNav0}>
 							Add book
 						</NavLink>
 					</div>

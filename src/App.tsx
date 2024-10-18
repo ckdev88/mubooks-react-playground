@@ -26,6 +26,7 @@ import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import { timestampConverter } from './helpers/convertDate.ts'
+import AddBookPage from './routes/books/AddBookPage.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -85,8 +86,8 @@ const App = () => {
 		setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
 
 	if (darkTheme === undefined && localStorage.getItem(localStorageKey)) {
-		const dtInitVal=JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.darktheme
-		if(dtInitVal!==undefined)setDarkTheme(dtInitVal)
+		const dtInitVal = JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.darktheme
+		if (dtInitVal !== undefined) setDarkTheme(dtInitVal)
 	}
 
 	if (userid === '' && localStorage.getItem(localStorageKey))
@@ -171,9 +172,7 @@ const App = () => {
 							<Route path="/account/*" element={<UserLoginPage />} />
 							<Route path="/dashboard" element={<DashboardPage />} />
 							<Route path="/search" element={<SearchPage />} />
-							{/*
-								<Route path="/add-book" element={ <AddBookPage /> } />
-								*/}
+							<Route path="/addbook" element={<AddBookPage />} />
 							<Route path="/savedbooks" element={<SavedBooksPage />} />
 							<Route path="/wishlist" element={<WishlistPage />} />
 							<Route path="/reading" element={<ReadingPage />} />
