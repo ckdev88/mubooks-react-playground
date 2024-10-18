@@ -1,6 +1,9 @@
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useState } from 'react'
+/* 
+Search is currently unavailable due to cunts that hacked archive.org	
 import { isUrl, getOlCover } from '../../Helpers'
+*/
 /*
 const explore = reactive({
 	api: 'http://openlibrary.org/search.json',
@@ -32,10 +35,14 @@ const pageTitle = 'Add a book'
 
 const AddBookPage = () => {
 	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
-	const [searchResults, setSearchResults] = useState<Books>([])
-	const [resultsWarning, setResultsWarning] = useState<string>('')
-	const [resultsMessage, setResultsMessage] = useState<string>('')
-	const [loading, setLoading] = useState<boolean>(false)
+
+	/*
+Search is currently unavailable due to cunts that hacked archive.org	
+
+const [searchResults, setSearchResults] = useState<Books>([])
+const [resultsWarning, setResultsWarning] = useState<string>('')
+const [resultsMessage, setResultsMessage] = useState<string>('')
+const [loading, setLoading] = useState<boolean>(false)
 
 	async function processSearchForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
@@ -46,10 +53,7 @@ const AddBookPage = () => {
 			const searchfields: string =
 				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median'
 			const wacht = await fetch(
-				'https://openlibrary.org/search.json?q=' +
-					search_term +
-					'&mode=everything&limit=8&fields=' +
-					searchfields
+				'https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=8&fields=' + searchfields
 			)
 			await wacht
 				.json()
@@ -78,6 +82,7 @@ const AddBookPage = () => {
 		} else if (search_term.length === 0) setResultsWarning(search_term.length)
 		else setResultsWarning('keep typing...')
 	}
+*/
 
 	// ab = abbreviation for Add Book
 	function processAbForm(e: React.FormEvent<HTMLFormElement>) {
@@ -97,6 +102,7 @@ const AddBookPage = () => {
 
 	return (
 		<>
+			{/*
 			<div className="booksearch">
 				<h1>Search book</h1>
 				<form onSubmit={processSearchForm}>
@@ -106,6 +112,9 @@ const AddBookPage = () => {
 					<button disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
 				</form>
 			</div>
+			*/}
+			{/*
+Search is currently unavailable due to cunts that hacked archive.org	
 			<div className="booksearchresults">
 				{searchResults.map((res, result_index) => {
 					if (res.id !== undefined) {
@@ -137,6 +146,7 @@ const AddBookPage = () => {
 					}
 				})}
 			</div>
+			*/}
 			<h1>{pageTitle}</h1>
 			<form onSubmit={processAbForm}>
 				<fieldset>
