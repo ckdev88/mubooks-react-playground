@@ -20,7 +20,6 @@ titleMap.set('account/logout', 'Log out')
 titleMap.set('auth/confirm', 'Account confirmed')
 titleMap.set('addbook', 'Add a book')
 
-
 const NavWrapper = () => {
 	const navigate = useNavigate()
 	const { userIsLoggedIn, darkTheme, setDarkTheme } = useContext(AppContext)
@@ -101,26 +100,8 @@ const NavWrapper = () => {
 					</div>
 
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-						<NavLink to={'/wishlist'} onClick={toggleNav0}>
-							Wishlist
-						</NavLink>
-						<NavLink to={'/quoted'} onClick={toggleNav0}>
-							Quoted
-						</NavLink>
-					</div>
-
-					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
 						<NavLink to={'/reading'} onClick={toggleNav0}>
 							Reading
-						</NavLink>
-						<NavLink to={'/tropes'} onClick={toggleNav0}>
-							Tropes
-						</NavLink>
-					</div>
-
-					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-						<NavLink to={'/finished'} onClick={toggleNav0}>
-							Finished
 						</NavLink>
 						<NavLink to={'/statistics'} onClick={toggleNav0}>
 							Statistics
@@ -128,8 +109,8 @@ const NavWrapper = () => {
 					</div>
 
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-						<NavLink to={'/favorites'} onClick={toggleNav0}>
-							Favorites
+						<NavLink to={'/wishlist'} onClick={toggleNav0}>
+							Wishlist
 						</NavLink>
 						<NavLink to={'/account/profile'} onClick={toggleNav0}>
 							Profile
@@ -137,20 +118,17 @@ const NavWrapper = () => {
 					</div>
 
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-						<NavLink to={'/savedbooks'} onClick={toggleNav0}>
-							Saved books
+						<NavLink to={'/favorites'} onClick={toggleNav0}>
+							Favorites
 						</NavLink>
 						<NavLink to={'/account/logout'} onClick={toggleNav0}>
 							Logout
 						</NavLink>
 					</div>
-					{/*
-					 */}
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-						<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
-							Clear My Books
+						<NavLink to={'/finished'} onClick={toggleNav0}>
+							Finished
 						</NavLink>
-
 						<button
 							id="accessibility-darkmode"
 							onClick={() => {
@@ -182,6 +160,30 @@ const NavWrapper = () => {
 								<path d="M10.3442 5.51C10.1639 6.15 10.0737 6.82 10.0737 7.5C10.0737 11.58 13.3996 14.9 17.4869 14.9C18.1681 14.9 18.8393 14.81 19.4804 14.63C18.4386 17.19 15.9141 19 12.9789 19C9.11202 19 5.96644 15.86 5.96644 12C5.96644 9.07 7.77966 6.55 10.3442 5.51ZM12.9789 3C8.00005 3 3.96289 7.03 3.96289 12C3.96289 16.97 8.00005 21 12.9789 21C17.9577 21 21.9949 16.97 21.9949 12C21.9949 11.54 21.9548 11.08 21.8947 10.64C20.9129 12.01 19.3101 12.9 17.4869 12.9C14.5016 12.9 12.0773 10.48 12.0773 7.5C12.0773 5.69 12.9689 4.08 14.3413 3.1C13.9005 3.04 13.4397 3 12.9789 3Z"></path>
 							</svg>
 						</button>
+					</div>
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/savedbooks'} onClick={toggleNav0}>
+							Saved books
+						</NavLink>
+					</div>
+					{/*
+					 */}
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}></div>
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/quoted'} onClick={toggleNav0}>
+							Quoted
+						</NavLink>
+					</div>
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+						<NavLink to={'/tropes'} onClick={toggleNav0}>
+							Tropes
+						</NavLink>
+					</div>
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}></div>
+					<div className="dnone-sm">
+						<NavLink to={'/clear-my-books'} onClick={toggleNav0}>
+							Clear My Books
+						</NavLink>
 					</div>
 					{/*
 					 */}
