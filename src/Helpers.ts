@@ -11,8 +11,14 @@ function getOlCover(id: string, size: CoverSize = undefined): string {
 	return 'https://covers.openlibrary.org/b/isbn/' + id + appendSize + '.jpg'
 }
 
-function getBookCover(url: string, size: CoverSize): string {
-	if (url === '') return './../img/save-books-icon.png'
+function getBookCover(url: string = '', size: CoverSize): string {
+	// TODO turn OLImages back on
+	const showOLImages = false
+
+	if ((url.includes('openlibrary') && showOLImages === false) || url === '') {
+		return './../img/save-books-icon.png'
+	}
+
 	let appendSize: string = ''
 	if (size) {
 		appendSize = '-' + size

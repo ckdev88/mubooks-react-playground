@@ -129,7 +129,6 @@ const [loading, setLoading] = useState<boolean>(false)
 		const newTropes: string[] = []
 		let tmptrope = ''
 		for (let i = 0; i < postedTropes.length; i++) {
-			console.log('*' + postedTropes[i] + '*')
 			tmptrope = postedTropes[i].trim()
 			if (tmptrope.length > 0) newTropes.push(tmptrope)
 		}
@@ -143,15 +142,20 @@ const [loading, setLoading] = useState<boolean>(false)
 	// ab = abbreviation for Add Book
 	async function processAbForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		setCoverImg(e.currentTarget.abCover.value.trim())
+		const tmpCoverImg=e.currentTarget.abCover.value.trim()
+		if(tmpCoverImg!=='') setCoverImg(e.currentTarget.abCover.value.trim())
+
 		const newArr = userMyBooks
 		const list: Book['list'] = 1
 		const rate_stars: Book['rate_stars'] = 0
 		const rate_spice: Book['rate_spice'] = 0
 		const title_short = title.slice(0, 55)
+		// TODO: cover_redir should be more dynamic, reacting to search of openlibrary, if ever resumed
+		// TODO: create image uploading to server, to replace hotlinking
 		const book = {
 			author_name: authorName,
 			cover: coverImg,
+			cover_redir: coverImg,
 			first_publish_year: firstPublishYear,
 			id: bookId,
 			list: list,
