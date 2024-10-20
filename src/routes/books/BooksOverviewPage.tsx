@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import BookSummary from '../../components/BookSummary'
 import { AppContext } from '../../App'
 import BooksOverviewFilterSort from '../../components/BooksOverviewFilterSort'
@@ -8,14 +8,15 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 	const savedArr: Books = userMyBooks
 	const fsPages: Page[] = ['wishlist', 'finished', 'favorites', 'savedbooks']
 
+	const [processedHash, setProcessedHash] = useState<boolean>(false)
 	useEffect(() => {
-		if (window.location.hash !== undefined) {
+		if (window.location.hash !== undefined && window.location.hash !== '' && processedHash === false) {
 			setTimeout(() => {
-				// TODO: make less hacky
 				location.href = window.location.hash
 			}, 500)
 		}
-	}, []) 
+		setProcessedHash(true)
+	}, [location])
 
 	return (
 		<>
