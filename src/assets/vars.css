@@ -1,10 +1,15 @@
+:root{
+	--lightbg: hsl(42, 31%, 94%); /*#f4f1ea  */
+	--darkbg: hsl(204, 33%, 12%); /* #152129 */
+}
 :root {
-	--bg: #f4f1ea; /* hsl 42 31% 94% */
+	--bg: var(--lightbg);
+	--bgInvert: var(--darkbg);
 	--shadeboxcolor: #000000;
 	--shadetextcolor: #ffffff;
 	--text-primary: #121212;
 	--text-primary-dimmed: #333333;
-	--primary:  hsl(325, 55%, 46%) ;
+	--primary: hsl(325, 55%, 46%) ;
 	--primary-darker: hsl(325, 55%, 39%);
 	--primary-darker2: #7e2559; /* hsl(325, 55%, 32%) */
 	--link: hsl(325, 55%, 46%);
@@ -13,7 +18,7 @@
 	--draaideurbg: #efebe1; /*  hsl(42, 31%, 91%)  */
 
 	--bgdark: #0a1014; /* hsl: 204 33% 6% */
-	--accentbg:rgba(255,255,255,0.4); 
+	--accentbg: rgba(255,255,255,0.4); 
 
 	--badgebg: #f1e0c6;
 	--badgefg: #df8506;
@@ -40,7 +45,8 @@
 
 }
 :root.dark-mode {
-	--bg: hsl(204, 33%, 12%); /* #152129 */
+	--bg: var(--darkbg);
+	--bgInvert: var(--lightbg);
 	--shadeboxcolor: white;
 	--shadetextcolor: black;
 	--text-primary: #ededed;
