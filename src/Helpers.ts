@@ -80,13 +80,4 @@ function getUrlParamVal(url: string, key: string, hash: boolean = false): string
 	return ''
 }
 
-export {
-	isUrl,
-	getOlCover,
-	getBookCover,
-	debounce,
-	openCalendarPopUp,
-	shuffleArray,
-	getUrlParamVal,
-	getOlPagesMedian,
-}
+export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal, getOlPagesMedian }

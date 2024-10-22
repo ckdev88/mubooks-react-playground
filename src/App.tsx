@@ -181,10 +181,9 @@ const App = () => {
 							<Route path="/quoted" element={<QuotedPage />} />
 							<Route path="/tropes" element={<TropesPage />} />
 							<Route path="/statistics" element={<StatisticsPage />} />
-							{/* */ }
-								<Route path="/clear-my-books" element={ <ClearMyBooks /> } />
-								{/*
-								*/}
+							{/* */}
+							<Route path="/clear-my-books" element={<ClearMyBooks />} />
+							{/* */}
 						</>
 					)}
 				</Routes>
