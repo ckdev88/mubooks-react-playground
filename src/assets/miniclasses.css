@@ -7,6 +7,9 @@
 .mt0 {
 	margin-top: 0;
 }
+.mt-05 {
+	margin-top: -0.5rem;
+}
 .mt05 {
 	margin-top: 0.5rem;
 }
@@ -129,6 +132,11 @@ input[type='submit'].dnone {
 .diblock-md {
 	@media screen and (min-width: 480px) {
 		display: inline-block;
+	}
+}
+.dnone-sm {
+	@media screen and (max-width: 479.98px) {
+		display: none;
 	}
 }
 .diblock {

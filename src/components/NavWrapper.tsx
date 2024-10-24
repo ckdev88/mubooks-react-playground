@@ -222,4 +222,16 @@ const NavWrapper = () => {
 		</>
 	)
 }
+/*
+Current layout:
+dashboard -- add book
+reading -- statistics
+wishlist -- profile
+favorites -- Logout
+finished
+Saved
+quoted
+tropes
+clear my books
+*/
 export default NavWrapper
