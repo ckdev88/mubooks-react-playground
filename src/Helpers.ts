@@ -12,10 +12,10 @@ function getOlCover(id: string, size: CoverSize = undefined): string {
 }
 
 function getBookCover(url: string = '', size: CoverSize): string {
-	// TODO turn OLImages back on
-	const showOLImages = false
+	// NOTE set showOLImages to false when archive/OpenLibrary is unavailable
+	const showOLImages = true
 
-	if ((url.includes('openlibrary') && showOLImages === false) || url === '') {
+	if ((url.includes('openlibrary') && !showOLImages) || url === '') {
 		return './../img/save-books-icon.png'
 	}
 

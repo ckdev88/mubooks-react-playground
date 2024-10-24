@@ -5,13 +5,13 @@ const useGetSynopsis = (
 	synopsisPages: string[],
 	currentPage: string
 ): string => {
-	// TODO turn synopsis back on when archive.org survives, line 9,14
-	const synoposisON = false // tmp when archive.org is down
+	// NOTE set synoposisON to false when archive/OpenLibrary is unavailable
+	const synoposisON = true
 
 	const [synopsis, setSynopsis] = useState<string>('')
 
 	useEffect(() => {
-		if (!synoposisON) return // tmp when archive.org is down
+		if (!synoposisON) return
 
 		const fetchSynopsis = async (book_id: string): Promise<void> => {
 			const fetchSynopsisPromise = fetch(`https://openlibrary.org/works/${book_id}.json`)
