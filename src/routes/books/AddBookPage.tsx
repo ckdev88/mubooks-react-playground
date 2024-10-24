@@ -43,7 +43,7 @@ const pageTitle: string = 'Add a book'
 
 const AddBookPage = () => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
-	const [coverImg, setCoverImg] = useState<string>('/img/coverless.png')
+	const [coverImg, setCoverImg] = useState<string>('')
 
 	/*
 Search is currently unavailable due to cunts that hacked archive.org	
@@ -93,12 +93,18 @@ const [loading, setLoading] = useState<boolean>(false)
 	}
 */
 
+	// for the preview
+	// 	const synopsis = 'nothing for now'
+	// 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
+
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
 	const [authorName, setAuthorName] = useState<Book['author_name']>(['']) // need to convert to string[]
 	const bookId: Book['id'] = Math.ceil(Math.random() * 10000000).toString() // need to somehow generate uniquely, or just on save
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
 	const [tropes, setTropes] = useState<string[]>([])
+	const [selectedImage, setSelectedImage] = useState<null | File>(null)
+	const [selectedImageType, setSelectedImageType] = useState<undefined | 'url' | 'upload'>(undefined)
 
 	function changeTitle(e: React.ChangeEvent<HTMLInputElement>) {
 		setTitle(e.currentTarget.value)
@@ -118,6 +124,7 @@ const [loading, setLoading] = useState<boolean>(false)
 		const num: number = Number(e.currentTarget.value)
 		setNumberOfPages(num)
 	}
+
 	function changeCover(e: React.ChangeEvent<HTMLInputElement>) {
 		const url = e.currentTarget.value
 		if (isUrl(url)) setCoverImg(e.currentTarget.value.trim())
@@ -142,8 +149,7 @@ const [loading, setLoading] = useState<boolean>(false)
 	// ab = abbreviation for Add Book
 	async function processAbForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		const tmpCoverImg=e.currentTarget.abCover.value.trim()
-		if(tmpCoverImg!=='') setCoverImg(e.currentTarget.abCover.value.trim())
+		const coverImgPosted: string = coverImg.trim()
 
 		const newArr = userMyBooks
 		const list: Book['list'] = 1
@@ -154,8 +160,8 @@ const [loading, setLoading] = useState<boolean>(false)
 		// TODO: create image uploading to server, to replace hotlinking
 		const book = {
 			author_name: authorName,
-			cover: coverImg,
-			cover_redir: coverImg,
+			cover: coverImgPosted,
+			cover_redir: coverImgPosted,
 			first_publish_year: firstPublishYear,
 			id: bookId,
 			list: list,
@@ -179,10 +185,20 @@ const [loading, setLoading] = useState<boolean>(false)
 		setPopupNotification(msg)
 	}
 
+	function resetFile() {
+		setSelectedImage(null)
+		setSelectedImageType(undefined)
+		setCoverImg('')
+		const fileImage = document.querySelector('.file')
+		if (fileImage !== null && 'value' in fileImage) fileImage.value = ''
+	}
 	const showCover = (
-		<>
-			<img src={coverImg} className="cover shade" />
-		</>
+		<div>
+			{coverImg !== '' && <img alt="" src={coverImg} className="cover shade" />}
+			{selectedImage !== null && (
+				<img alt="not found" src={URL.createObjectURL(selectedImage)} className="cover shade" />
+			)}
+		</div>
 	)
 
 	return (
@@ -247,22 +263,73 @@ Search is currently unavailable due to cunts that hacked archive.org
 						Author(s) <em className="sf">1 author per line</em>
 					</label>
 					<textarea name="abAuthors" id="abAuthors" onChange={changeAuthors} />
-					<label htmlFor="abCover">
-						Cover URL <em className="sf">starts with https://</em>
-					</label>
-					<input type="url" name="abCover" id="abCover" onChange={changeCover} />
-					<label htmlFor="abYearPublished">Year published</label>
-					<input type="number" name="abYearPublished" id="abYearPublished" onChange={changeFirstPublishYear} />{' '}
-					<label htmlFor="abPages">Pages</label>
-					<input type="number" name="abPages" id="abPages" onChange={changePages} />
+					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between' }}>
+						<div>
+							<label htmlFor="abYearPublished">Year published</label>
+							<input type="number" name="abYearPublished" id="abYearPublished" onChange={changeFirstPublishYear} />{' '}
+						</div>
+						<div>
+							<label htmlFor="abPages">Pages</label>
+							<input type="number" name="abPages" id="abPages" onChange={changePages} />
+						</div>
+					</div>
 					<label htmlFor="abTropes">
 						Tropes <em className="sf">one trope per line</em>
 					</label>
 					<textarea name="abTropes" id="abTropes" onChange={changeTropes}></textarea>
-					<button className="btn-lg">Add book to wishlist</button>
+					<label htmlFor="abCover">
+						<div>Cover</div>
+						{!selectedImageType && <em className="sf">Paste URL or press Choose File</em>}
+					</label>
+					{!selectedImage && (
+						<>
+							<input
+								type="url"
+								name="abCover"
+								id="abCover"
+								onChange={(event) => {
+									changeCover(event)
+									setSelectedImageType('url')
+								}}
+								value={coverImg ? coverImg : ''}
+							/>
+							{coverImg && (
+								<span className="btn-text-cancel btn-text sf mt-05 mb05" onClick={resetFile}>
+									cancel
+								</span>
+							)}
+						</>
+					)}
+					<div>
+						{(selectedImageType === 'upload' || selectedImageType === undefined) && (
+							<>
+								<input
+									type="file"
+									name="myImage"
+									// Event handler to capture file selection and update the state
+									onChange={(event) => {
+										if (event.target.files !== null) {
+											if (event.target.files[0]) setSelectedImage(event.target.files[0])
+											setSelectedImageType('upload')
+										}
+									}}
+									className="file"
+								/>
+							</>
+						)}
+						<div className="dnone">{selectedImage ? <>created blob: {URL.createObjectURL(selectedImage)} </> : ''}</div>
+						{selectedImage && (
+							<span className="btn-text-cancel btn-text sf mb05" onClick={resetFile}>
+								cancel
+							</span>
+						)}
+					</div>
 				</fieldset>
+				<hr />
+				<br />
+				<button className="btn-lg">Add book to wishlist</button>
 			</form>
-			{/* ---------------------------------------------------------------- */}
+
 			<h3>Preview</h3>
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
@@ -278,13 +345,16 @@ Search is currently unavailable due to cunts that hacked archive.org
 						{numberOfPages > 0 && <>{numberOfPages} pages</>}
 					</header>
 					<div className="tropes clr mb0 ml-035">
-						{tropes.map((t) => {
-							return <div className="trope badge">{t}</div>
+						{tropes.map((t, index) => {
+							return (
+								<div className="trope badge" key={`trope${index}`}>
+									{t}
+								</div>
+							)
 						})}
 					</div>
 				</article>
 			</article>
-			{/* ---------------------------------------------------------------- */}
 		</>
 	)
 }
