@@ -149,6 +149,7 @@ const [loading, setLoading] = useState<boolean>(false)
 	// ab = abbreviation for Add Book
 	async function processAbForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
+		// TODO: create possibility to upload the cover to the server
 		const coverImgPosted: string = coverImg.trim()
 
 		const newArr = userMyBooks
