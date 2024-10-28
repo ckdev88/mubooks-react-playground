@@ -1,3 +1,4 @@
+// TODO make tropes same UX as in BookSummary and TropesPage
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState } from 'react'
 import { isUrl } from '../../Helpers'
