@@ -99,11 +99,14 @@ const [loading, setLoading] = useState<boolean>(false)
 
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
-	const [authorName, setAuthorName] = useState<Book['author_name']>(['']) // need to convert to string[]
-	const bookId: Book['id'] = Math.ceil(Math.random() * 10000000).toString() // need to somehow generate uniquely, or just on save
+	const [authorName, setAuthorName] = useState<Book['author_name']>(['']) // TODO need to convert to string[]
+	const bookId: Book['id'] = Math.ceil(Math.random() * 10000000).toString() // TODO need to somehow generate uniquely, or just on save .... TODO 2: see how useful this actually is, timestamp is better and if it's better with connected to uploaded cover id/filename
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
 	const [tropes, setTropes] = useState<string[]>([])
 	const [selectedImage, setSelectedImage] = useState<null | File>(null)
+
+	// const [imagePath, setImagePath] = useState<string | null>(null) // TODO use or remove 1/2
+
 	const [selectedImageType, setSelectedImageType] = useState<undefined | 'url' | 'upload'>(undefined)
 
 	function changeTitle(e: React.ChangeEvent<HTMLInputElement>) {
@@ -146,17 +149,46 @@ const [loading, setLoading] = useState<boolean>(false)
 	}
 	// /for the preview
 
-	// ab = abbreviation for Add Book
-	async function processAbForm(e: React.FormEvent<HTMLFormElement>) {
+	const processAbForm = async (e: React.FormEvent<HTMLFormElement>) => {
+		// TODO: create possibility to upload the cover to the server
 		e.preventDefault()
-		const coverImgPosted: string = coverImg.trim()
+
+		let coverImgPosted: string = coverImg.trim() // coverImg = via url
+
+		if (selectedImage) {
+			const formData = new FormData()
+			formData.append('image', selectedImage)
+			formData.append('userid', userid)
+
+			try {
+				const response = await fetch('ProcessCover.php', {
+					method: 'POST',
+					body: formData,
+				})
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`)
+				}
+
+				const result = await response.json()
+				if (result.error) {
+					console.error(result.error)
+				} else {
+					// setImagePath(result.path) // TODO use or remove 2/2
+					if (result.path !== null) {
+						coverImgPosted = result.path // TODO improve efficiency & relation to imagePath state
+					} else console.error('Error uploading image: doin nothin')
+				}
+			} catch (error) {
+				console.error('Error uploading image:', error)
+			}
+		}
 
 		const newArr = userMyBooks
 		const list: Book['list'] = 1
 		const rate_stars: Book['rate_stars'] = 0
 		const rate_spice: Book['rate_spice'] = 0
 		const title_short = title.slice(0, 55)
-		// TODO: cover_redir should be more dynamic, reacting to search of openlibrary, if ever resumed
+		// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
 		// TODO: create image uploading to server, to replace hotlinking
 		const book = {
 			author_name: authorName,
@@ -185,6 +217,12 @@ const [loading, setLoading] = useState<boolean>(false)
 		setPopupNotification(msg)
 	}
 
+	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files && e.target.files[0]) {
+			setSelectedImage(e.target.files[0])
+		}
+	}
+
 	function resetFile() {
 		setSelectedImage(null)
 		setSelectedImageType(undefined)
@@ -195,9 +233,7 @@ const [loading, setLoading] = useState<boolean>(false)
 	const showCover = (
 		<div>
 			{coverImg !== '' && <img alt="" src={coverImg} className="cover shade" />}
-			{selectedImage !== null && (
-				<img alt="not found" src={URL.createObjectURL(selectedImage)} className="cover shade" />
-			)}
+			{selectedImage !== null && <img alt="" src={URL.createObjectURL(selectedImage)} className="cover shade" />}
 		</div>
 	)
 
@@ -279,7 +315,7 @@ Search is currently unavailable due to cunts that hacked archive.org
 					<textarea name="abTropes" id="abTropes" onChange={changeTropes}></textarea>
 					<label htmlFor="abCover">
 						<div>Cover</div>
-						{!selectedImageType && <em className="sf">Paste URL or press Choose File</em>}
+						{!selectedImage && <em className="sf">Paste URL or press Choose File</em>}
 					</label>
 					{!selectedImage && (
 						<>
@@ -301,21 +337,8 @@ Search is currently unavailable due to cunts that hacked archive.org
 						</>
 					)}
 					<div>
-						{(selectedImageType === 'upload' || selectedImageType === undefined) && (
-							<>
-								<input
-									type="file"
-									name="myImage"
-									// Event handler to capture file selection and update the state
-									onChange={(event) => {
-										if (event.target.files !== null) {
-											if (event.target.files[0]) setSelectedImage(event.target.files[0])
-											setSelectedImageType('upload')
-										}
-									}}
-									className="file"
-								/>
-							</>
+						{selectedImageType !== 'url' && (
+							<input type="file" accept="image/*" onChange={handleFileChange} name="myImage" className="file" />
 						)}
 						<div className="dnone">{selectedImage ? <>created blob: {URL.createObjectURL(selectedImage)} </> : ''}</div>
 						{selectedImage && (
@@ -327,7 +350,9 @@ Search is currently unavailable due to cunts that hacked archive.org
 				</fieldset>
 				<hr />
 				<br />
-				<button className="btn-lg">Add book to wishlist</button>
+				<button className="btn-lg" type="submit">
+					Add book to wishlist
+				</button>
 			</form>
 
 			<h3>Preview</h3>
