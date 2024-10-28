@@ -27,6 +27,7 @@ const useGetSynopsis = (
 					else if (book_cover_edition_key !== undefined) fetchSynopsis2(book_cover_edition_key)
 				})
 				.catch((error) => {
+					// NOTE: may also throw error when OL is simply unavailable, due to hack or something
 					console.error('Failed to fetch synopsis:', error)
 				})
 		}
