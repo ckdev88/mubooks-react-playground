@@ -38,6 +38,7 @@
 	--icon-remove: url('/img/icon-remove.png');
 	--icon-pencil:url('/img/icon-pencil.svg');
 	--icon-eraser:url('/img/icon-eraser.svg');
+	--icon-loep:url('/img/loep.svg');
 	--icon-calendar:url('/img/icon-calendar.svg');
 
 	--shade-around: 0 0 0.4rem rgba(0, 0, 0, 25%);
@@ -67,6 +68,7 @@
 	--icon-pencil:url('/img/icon-pencil-white.svg');
 	--icon-eraser:url('/img/icon-eraser-light.svg');
 	--icon-calendar:url('/img/icon-calendar-white.svg');
+	--icon-loep:url('/img/loep-wit.svg');
 
 	--shade-around: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 25%);
 	--shade-around-subtle: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 15%);
