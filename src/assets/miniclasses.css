@@ -22,6 +22,9 @@
 .mb0 {
 	margin-bottom: 0;
 }
+.mb0o {
+	margin-bottom: 0 !important;
+}
 .mb1 {
 	margin-bottom: 1rem;
 }
@@ -30,6 +33,9 @@
 }
 .ml0 {
 	margin-left: 0;
+}
+.mb035 {
+	margin-bottom: 0.35rem;
 }
 .ml035 {
 	margin-left: 0.35rem;
@@ -58,6 +64,9 @@
 }
 .pb1 {
 	padding-bottom: 1rem;
+}
+.pb035 {
+	padding-bottom: 0.35rem;
 }
 .red {
 	color: red;
