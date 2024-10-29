@@ -1,6 +1,6 @@
 // TODO make tropes same UX as in BookSummary and TropesPage
 // TODO: make this form interact with openlibrary.org to help append to their database
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
 // TODO apply BookSummary-BookPages to keep uniformity ??
 // import BookPages from '../../components/BookPages'
@@ -8,7 +8,7 @@ import BookSummaryTitle from '../../components/BookSummaryTitle'
 // TODO apply BookSummary-Components to keep uniformity
 import { AppContext } from '../../App'
 import updateEntriesDb from '../../functions/updateEntriesDb'
-import { cleanAnchor } from '../../helpers/cleanInput'
+import { cleanAnchor, cleanInput } from '../../helpers/cleanInput'
 
 const pageTitle: string = 'Add a book'
 
@@ -25,8 +25,12 @@ const AddBookPage = () => {
 	const [authorName, setAuthorName] = useState<Book['author_name']>(['']) // TODO need to convert to string[]
 	const bookId: Book['id'] = Math.ceil(Math.random() * 10000000).toString() // TODO need to somehow generate uniquely, or just on save .... TODO 2: see how useful this actually is, timestamp is better and if it's better with connected to uploaded cover id/filename
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
-	const [tropes, setTropes] = useState<string[]>([])
 	const [selectedImage, setSelectedImage] = useState<null | File>(null)
+	const [bookTropes, setBookTropes] = useState<BookTropes>([])
+	const [bookTropesLowercase, setBookTropesLowercase] = useState<BookTropes>([])
+	useEffect(() => {
+		setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
+	}, [bookTropes])
 
 	// const [imagePath, setImagePath] = useState<string | null>(null) // TODO use or remove 1/2
 
@@ -56,17 +60,6 @@ const AddBookPage = () => {
 		if (isUrl(url)) setCoverImg(e.currentTarget.value.trim())
 	}
 
-	// TODO run through cleaner method
-	function changeTropes(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-		const postedTropes: string[] = e.currentTarget.value.split('\n')
-		const newTropes: string[] = []
-		let tmptrope = ''
-		for (let i = 0; i < postedTropes.length; i++) {
-			tmptrope = postedTropes[i].trim()
-			if (tmptrope.length > 0) newTropes.push(tmptrope)
-		}
-		setTropes(newTropes)
-	}
 	function changeFirstPublishYear(e: React.ChangeEvent<HTMLInputElement>): void {
 		setFirstPublishYear(e.currentTarget.value)
 	}
@@ -121,7 +114,7 @@ const AddBookPage = () => {
 			id: bookId,
 			list: list,
 			number_of_pages_median: numberOfPages,
-			review_tropes: tropes,
+			review_tropes: bookTropes,
 			title: title,
 			title_short: title_short,
 			cover_edition_key: '',
@@ -160,15 +153,30 @@ const AddBookPage = () => {
 		</div>
 	)
 
+	const [tropeInputValue, setTropeInputValue] = useState<string>('')
+	const handleKeyPressTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.code === 'Enter') {
+			e.preventDefault()
+			if (tropeInputValue.trim()) {
+				const tropeToAdd: string = cleanInput(tropeInputValue.trim(), true)
+
+				if (tropeToAdd !== undefined && tropeToAdd.length > 2) {
+					const tropeIndex = bookTropesLowercase.indexOf(tropeToAdd.toLowerCase())
+					if (bookTropesLowercase.indexOf(tropeToAdd.toLowerCase()) > -1) bookTropes.splice(tropeIndex, 1)
+					const newArr: BookTropes = [...bookTropes, tropeToAdd]
+					newArr.sort((a, b) => a.localeCompare(b))
+					setBookTropes(newArr)
+					setTropeInputValue('')
+				}
+			}
+		}
+	}
+
 	return (
 		<>
 			<h1>{pageTitle}</h1>
 			<form onSubmit={processAbForm}>
 				<fieldset>
-					{/*
-					<label htmlFor="abIsbn">ISBN</label>
-					<input type="text" id="abIsbn" name="abIsbn" required />
-					*/}
 					<label htmlFor="abTitle">Title</label>
 					<input type="text" id="abTitle" name="abTitle" required onChange={changeTitle} />
 					<label htmlFor="abAuthors">
@@ -185,10 +193,26 @@ const AddBookPage = () => {
 							<input type="number" name="abPages" id="abPages" onChange={changePages} />
 						</div>
 					</div>
-					<label htmlFor="abTropes">
-						Tropes <em className="sf">one trope per line</em>
-					</label>
-					<textarea name="abTropes" id="abTropes" onChange={changeTropes}></textarea>
+					<label htmlFor="abTropeAdd">Tropes</label>
+					<div className="tropes clr mb0 ml-035">
+						{bookTropes.map((trope, index) => (
+							<div className="trope badge" key={'trope' + index}>
+								{trope}
+							</div>
+						))}
+					</div>
+					<div className="single-small-form clr">
+						<input
+							type="text"
+							id="abTropeAdd"
+							value={tropeInputValue}
+							onChange={(e) => setTropeInputValue(e.target.value)}
+							onKeyDown={handleKeyPressTrope}
+							placeholder="Add a trope..."
+						/>
+						<span className="btn-submit-inside-caret-right wauto"></span>
+					</div>
+					<br />
 					<label htmlFor="abCover">
 						<div>Cover</div>
 						{!selectedImage && <em className="sf">Paste URL or press Choose File</em>}
@@ -224,13 +248,11 @@ const AddBookPage = () => {
 						)}
 					</div>
 				</fieldset>
-				<hr />
 				<br />
 				<button className="btn-lg" type="submit">
 					Add book to wishlist
 				</button>
 			</form>
-
 			<h3>Preview</h3>
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
@@ -244,19 +266,19 @@ const AddBookPage = () => {
 							currentPage="wishlist"
 						/>
 						{numberOfPages > 0 && <>{numberOfPages} pages</>}
-					</header>
-					<div className="tropes clr mb0 ml-035">
-						{tropes.map((t, index) => {
-							return (
-								<div className="trope badge" key={`trope${index}`}>
-									{t}
+
+						<div className="tropes clr mb0 ml-035">
+							{bookTropes.map((trope, index) => (
+								<div className="trope badge" key={'trope' + index}>
+									{trope}
 								</div>
-							)
-						})}
-					</div>
+							))}
+						</div>
+					</header>
 				</article>
 			</article>
 		</>
 	)
 }
 export default AddBookPage
+// TODO article nested in article, and all in <header> ? works, but meh

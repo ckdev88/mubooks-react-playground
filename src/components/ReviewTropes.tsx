@@ -32,6 +32,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 		setPopupNotification(msg)
 	}
 
+	// TODO: used in many places as duplicate, refactor into 1 global method
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		if (bookTropes === undefined) return
 		return (

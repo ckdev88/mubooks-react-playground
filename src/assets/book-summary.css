@@ -166,12 +166,12 @@
 	padding-bottom: 1rem;
 }
 
-form.single-small-form {
+.single-small-form {
 	margin: 0.25rem 0;
 	display: flex;
 	justify-content: space-between;
 }
-form.single-small-form input {
+.single-small-form input[type='text'] {
 	padding: 0.3rem 1.8rem 0.3rem 0.3rem;
 	border-style: dashed;
 	border-width: 2px;
@@ -179,11 +179,11 @@ form.single-small-form input {
 	margin-bottom: 0;
 	width: 100%;
 }
-form.single-small-form input:focus,
-form.single-small-form input:active {
+.single-small-form input[type=text]:focus,
+.single-small-form input[type=text]:active {
 	border-style: solid;
 }
-form.single-small-form + .btn-text {
+.single-small-form + .btn-text {
 	margin-top: -0.2em;
 	display: block;
 	width: auto;
@@ -192,7 +192,7 @@ form.single-small-form + .btn-text {
 	padding-right: calc(2px + 0.3rem);
 	align-self: flex-start;
 }
-#booksoverview-filter-sort form.single-small-form + .btn-text {
+#booksoverview-filter-sort .single-small-form + .btn-text {
 	margin-top: 0.2rem;
 }
 

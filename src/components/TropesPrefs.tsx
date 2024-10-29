@@ -84,6 +84,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		updateTropes(newArr, field)
 	}
 
+	// TODO: used in many places as duplicate, refactor into 1 global method
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
 		return (
 			<div className="tropes clr mb0">
@@ -110,7 +111,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 	return (
 		<>
 			<h2>{field === 'tropes_liked' ? 'Like' : 'Dislike'}</h2>
-			<section className='section-badges'>
+			<section className="section-badges">
 				<TropesList tropes={field === 'tropes_liked' ? likedTropes : dislikedTropes} />
 				{showForm && (
 					<>
