@@ -22,10 +22,14 @@ const AddBookPage = () => {
 
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
-	const [authorName, setAuthorName] = useState<Book['author_name']>(['']) // TODO need to convert to string[]
 	const bookId: Book['id'] = Math.ceil(Math.random() * 10000000).toString() // TODO need to somehow generate uniquely, or just on save .... TODO 2: see how useful this actually is, timestamp is better and if it's better with connected to uploaded cover id/filename
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
 	const [selectedImage, setSelectedImage] = useState<null | File>(null)
+	const [bookAuthors, setBookAuthors] = useState<string[]>([])
+	const [bookAuthorsLowercase, setBookAuthorsLowercase] = useState<string[]>([])
+	useEffect(() => {
+		setBookAuthorsLowercase(bookAuthors.map((t) => t.toLowerCase()))
+	}, [bookAuthors])
 	const [bookTropes, setBookTropes] = useState<BookTropes>([])
 	const [bookTropesLowercase, setBookTropesLowercase] = useState<BookTropes>([])
 	useEffect(() => {
@@ -39,17 +43,7 @@ const AddBookPage = () => {
 	function changeTitle(e: React.ChangeEvent<HTMLInputElement>) {
 		setTitle(e.currentTarget.value)
 	}
-	// TODO run through cleaner method
-	function changeAuthors(e: React.ChangeEvent<HTMLTextAreaElement>) {
-		const postedAuthors: string[] = e.currentTarget.value.split('\n')
-		const newAuthors: string[] = []
-		let tmpAuthor = ''
-		for (let i = 0; i < postedAuthors.length; i++) {
-			tmpAuthor = postedAuthors[i].trim()
-			if (tmpAuthor.length > 0) newAuthors.push(tmpAuthor)
-		}
-		setAuthorName(newAuthors)
-	}
+
 	function changePages(e: React.ChangeEvent<HTMLInputElement>) {
 		const num: number = Number(e.currentTarget.value)
 		setNumberOfPages(num)
@@ -110,7 +104,7 @@ const AddBookPage = () => {
 		// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
 		// TODO: create image uploading to server, to replace hotlinking
 		const book = {
-			author_name: authorName,
+			author_name: bookAuthors,
 			cover: coverImgPosted,
 			cover_redir: coverImgPosted,
 			first_publish_year: firstPublishYear,
@@ -156,6 +150,21 @@ const AddBookPage = () => {
 		</div>
 	)
 
+	const [authorInputValue, setAuthorInputValue] = useState<string>('')
+	function addAuthor() {
+		if (authorInputValue.trim()) {
+			const authorToAdd: string = cleanInput(authorInputValue.trim(), true)
+			if (authorToAdd !== undefined && authorToAdd.length > 1) {
+				const authorIndex = bookAuthorsLowercase.indexOf(authorToAdd.toLowerCase())
+				if (bookAuthorsLowercase.indexOf(authorToAdd.toLowerCase()) > -1) bookTropes.splice(authorIndex, 1)
+				const newArr: string[] = [...bookAuthors, authorToAdd]
+				setBookAuthors(newArr)
+				setAuthorInputValue('')
+			}
+		}
+		document.getElementById('abAuthorAdd')?.focus()
+	}
+
 	const [tropeInputValue, setTropeInputValue] = useState<string>('')
 	function addTrope() {
 		if (tropeInputValue.trim()) {
@@ -171,6 +180,13 @@ const AddBookPage = () => {
 			}
 		}
 		document.getElementById('abTropeAdd')?.focus()
+	}
+	const handleKeyDownAuthor = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		e.stopPropagation() // TODO: check if useful since we also use preventDefault, faster like this?
+		if (e.key === 'Enter' || e.key === ',') {
+			e.preventDefault()
+			addAuthor()
+		}
 	}
 	const handleKeyDownTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		e.stopPropagation() // TODO: check if useful since we also use preventDefault, faster like this?
@@ -196,10 +212,24 @@ const AddBookPage = () => {
 						<div className="description">
 							Author(s){' '}
 							<em className="sf" style={{ opacity: '.5' }}>
-								... 1 author per line
+								... separate with comma (,) or hit Enter
 							</em>
 						</div>
-						<textarea name="abAuthors" id="abAuthors" onChange={changeAuthors} />
+						<div className="dflex ">
+							<input
+								type="text"
+								id="abAuthorAdd"
+								value={authorInputValue}
+								onChange={(e) => setAuthorInputValue(e.target.value)}
+								onKeyDown={handleKeyDownAuthor}
+								placeholder="Add an author..."
+							/>
+							<span
+								className="btn-submit-inside-caret-right wauto"
+								style={{ marginTop: '.75rem' }}
+								onClick={() => addAuthor()}
+							></span>
+						</div>
 					</label>
 					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between', gap: '1rem' }}>
 						<div>
@@ -220,7 +250,7 @@ const AddBookPage = () => {
 							</label>
 						</div>
 					</div>
-					<label htmlFor="abCover" className="dblock pb0" style={{marginBottom:'.75rem'}}>
+					<label htmlFor="abCover" className="dblock pb0" style={{ marginBottom: '.75rem' }}>
 						<div className="description">
 							Cover{' '}
 							{!selectedImage && (
@@ -310,7 +340,7 @@ const AddBookPage = () => {
 						<BookSummaryTitle
 							book_title_short={title}
 							book_first_publish_year={firstPublishYear}
-							book_author_name={authorName}
+							book_author_name={bookAuthors}
 							book_id={bookId}
 							currentPage="wishlist"
 						/>
