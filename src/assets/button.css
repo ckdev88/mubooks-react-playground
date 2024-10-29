@@ -284,6 +284,7 @@ ul.expandable-list a {
 	outline: none;
 	background-image: url('/img/cv-caret-medium.dark.svg');
 	border-color: white;
+	background-color:var(--primary);
 	box-shadow: none;
 }
 .btn-sm {

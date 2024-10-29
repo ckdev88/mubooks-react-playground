@@ -65,9 +65,12 @@ const AddBookPage = () => {
 	}
 	// /for the preview
 
+	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 	const processAbForm = async (e: React.FormEvent<HTMLFormElement>) => {
-		// TODO: create possibility to upload the cover to the server
+		// TODO: create possibility to upload hotlinked url of cover to the server
 		e.preventDefault()
+		// NOTE set to false when all is done if the redirect to wishlist is canceled
+		setIsSubmitting(true)
 
 		let coverImgPosted: string = coverImg.trim() // coverImg = via url
 
@@ -158,7 +161,7 @@ const AddBookPage = () => {
 		if (tropeInputValue.trim()) {
 			const tropeToAdd: string = cleanInput(tropeInputValue.trim(), true)
 
-			if (tropeToAdd !== undefined && tropeToAdd.length > 2) {
+			if (tropeToAdd !== undefined && tropeToAdd.length > 1) {
 				const tropeIndex = bookTropesLowercase.indexOf(tropeToAdd.toLowerCase())
 				if (bookTropesLowercase.indexOf(tropeToAdd.toLowerCase()) > -1) bookTropes.splice(tropeIndex, 1)
 				const newArr: BookTropes = [...bookTropes, tropeToAdd]
@@ -169,8 +172,9 @@ const AddBookPage = () => {
 		}
 		document.getElementById('abTropeAdd')?.focus()
 	}
-	const handleKeyPressTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.code === 'Enter') {
+	const handleKeyDownTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		e.stopPropagation() // TODO: check if useful since we also use preventDefault, faster like this?
+		if (e.key === 'Enter' || e.key === ',') {
 			e.preventDefault()
 			addTrope()
 		}
@@ -187,7 +191,7 @@ const AddBookPage = () => {
 						Author(s) <em className="sf">1 author per line</em>
 					</label>
 					<textarea name="abAuthors" id="abAuthors" onChange={changeAuthors} />
-					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between' }}>
+					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between', gap: '1rem' }}>
 						<div>
 							<label htmlFor="abYearPublished">Year published</label>
 							<input type="number" name="abYearPublished" id="abYearPublished" onChange={changeFirstPublishYear} />{' '}
@@ -240,13 +244,13 @@ const AddBookPage = () => {
 							</div>
 						))}
 					</div>
-					<div className="dflex">
+					<div className="dflex mt035">
 						<input
 							type="text"
 							id="abTropeAdd"
 							value={tropeInputValue}
 							onChange={(e) => setTropeInputValue(e.target.value)}
-							onKeyDown={handleKeyPressTrope}
+							onKeyDown={handleKeyDownTrope}
 							placeholder="Add a trope..."
 						/>
 						<span
@@ -257,7 +261,7 @@ const AddBookPage = () => {
 					</div>
 				</fieldset>
 				<br />
-				<button className="btn-lg" type="submit">
+				<button className="btn-lg" type="submit" disabled={isSubmitting}>
 					Add book to wishlist
 				</button>
 			</form>
