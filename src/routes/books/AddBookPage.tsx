@@ -182,90 +182,127 @@ const AddBookPage = () => {
 
 	return (
 		<>
-			<h1>{pageTitle}</h1>
+			<h1>
+				{pageTitle}
+				<sub>See preview and Add your book</sub>
+			</h1>
 			<form onSubmit={processAbForm}>
-				<fieldset>
-					<label htmlFor="abTitle">Title</label>
-					<input type="text" id="abTitle" name="abTitle" required onChange={changeTitle} />
-					<label htmlFor="abAuthors">
-						Author(s) <em className="sf">1 author per line</em>
+				<fieldset style={{ display: 'flex', flexDirection: 'column', gap: '.7rem' }}>
+					<label htmlFor="abTitle">
+						<div className="description">Title</div>
+						<input type="text" id="abTitle" name="abTitle" required onChange={changeTitle} />
 					</label>
-					<textarea name="abAuthors" id="abAuthors" onChange={changeAuthors} />
+					<label htmlFor="abAuthors">
+						<div className="description">
+							Author(s){' '}
+							<em className="sf" style={{ opacity: '.5' }}>
+								... 1 author per line
+							</em>
+						</div>
+						<textarea name="abAuthors" id="abAuthors" onChange={changeAuthors} />
+					</label>
 					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between', gap: '1rem' }}>
 						<div>
-							<label htmlFor="abYearPublished">Year published</label>
-							<input type="number" name="abYearPublished" id="abYearPublished" onChange={changeFirstPublishYear} />{' '}
+							<label htmlFor="abYearPublished">
+								<div className="description">Year published</div>
+								<input
+									type="number"
+									name="abYearPublished"
+									id="abYearPublished"
+									onChange={changeFirstPublishYear}
+								/>{' '}
+							</label>
 						</div>
 						<div>
-							<label htmlFor="abPages">Pages</label>
-							<input type="number" name="abPages" id="abPages" onChange={changePages} />
+							<label htmlFor="abPages">
+								<div className="description">Pages</div>
+								<input type="number" name="abPages" id="abPages" onChange={changePages} />
+							</label>
 						</div>
 					</div>
-					<label htmlFor="abCover">
-						<div>Cover</div>
-						{!selectedImage && <em className="sf">Paste URL or press Choose File</em>}
-					</label>
-					{!selectedImage && (
-						<>
-							<input
-								type="url"
-								name="abCover"
-								id="abCover"
-								onChange={(event) => {
-									changeCover(event)
-									setSelectedImageType('url')
-								}}
-								value={coverImg ? coverImg : ''}
-							/>
-							{coverImg && (
-								<span className="btn-text-cancel btn-text sf mt-05 mb05" onClick={resetFile}>
+					<label htmlFor="abCover" className="dblock pb0" style={{marginBottom:'.75rem'}}>
+						<div className="description">
+							Cover{' '}
+							{!selectedImage && (
+								<em className="sf" style={{ opacity: '.5' }}>
+									... paste URL or press Choose File
+								</em>
+							)}
+						</div>
+						{!selectedImage && (
+							<>
+								<input
+									type="url"
+									name="abCover"
+									id="abCover"
+									onChange={(event) => {
+										changeCover(event)
+										setSelectedImageType('url')
+									}}
+									value={coverImg ? coverImg : ''}
+									placeholder="Paste the URL here, or Choose File below..."
+									className={coverImg ? '' : 'mb0o'}
+								/>
+								{coverImg && (
+									<span className="btn-text-cancel btn-text sf mt-05 mb05" onClick={resetFile}>
+										cancel
+									</span>
+								)}
+							</>
+						)}
+						<div>
+							{selectedImageType !== 'url' && (
+								<>
+									<input
+										type="file"
+										accept="image/*"
+										onChange={handleFileChange}
+										name="myImage"
+										className={coverImg ? '' : 'mb0o'}
+									/>
+								</>
+							)}
+							<div className="dnone">
+								{selectedImage ? <>created blob: {URL.createObjectURL(selectedImage)} </> : ''}
+							</div>
+							{selectedImage && (
+								<span className="btn-text-cancel btn-text sf mb05" onClick={resetFile}>
 									cancel
 								</span>
 							)}
-						</>
-					)}
-					<div>
-						{selectedImageType !== 'url' && (
-							<input type="file" accept="image/*" onChange={handleFileChange} name="myImage" className="file" />
-						)}
-						<div className="dnone">{selectedImage ? <>created blob: {URL.createObjectURL(selectedImage)} </> : ''}</div>
-						{selectedImage && (
-							<span className="btn-text-cancel btn-text sf mb05" onClick={resetFile}>
-								cancel
-							</span>
-						)}
-					</div>
-					<br />
-					<label htmlFor="abTropeAdd">Tropes</label>
-					<div className="tropes clr mb0 ml-035">
-						{bookTropes.map((trope, index) => (
-							<div className="trope badge" key={'trope' + index}>
-								{trope}
-							</div>
-						))}
-					</div>
-					<div className="dflex mt035">
-						<input
-							type="text"
-							id="abTropeAdd"
-							value={tropeInputValue}
-							onChange={(e) => setTropeInputValue(e.target.value)}
-							onKeyDown={handleKeyDownTrope}
-							placeholder="Add a trope..."
-						/>
-						<span
-							className="btn-submit-inside-caret-right wauto"
-							style={{ marginTop: '.75rem' }}
-							onClick={() => addTrope()}
-						></span>
-					</div>
+						</div>
+					</label>
+					<label htmlFor="abTropeAdd" className="dblock pb035">
+						<div className="description">
+							{' '}
+							Tropes{' '}
+							<em className="sf" style={{ opacity: '.5' }}>
+								... shown again when finished reading
+							</em>
+						</div>
+						<div className="dflex ">
+							<input
+								type="text"
+								id="abTropeAdd"
+								value={tropeInputValue}
+								onChange={(e) => setTropeInputValue(e.target.value)}
+								onKeyDown={handleKeyDownTrope}
+								placeholder="Add a trope..."
+							/>
+							<span
+								className="btn-submit-inside-caret-right wauto"
+								style={{ marginTop: '.75rem' }}
+								onClick={() => addTrope()}
+							></span>
+						</div>
+					</label>
 				</fieldset>
-				<br />
 				<button className="btn-lg" type="submit" disabled={isSubmitting}>
 					Add book to wishlist
 				</button>
 			</form>
 			<h3>Preview</h3>
+			{!title && <>No data yet...</>}
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
 				<article className="main">
