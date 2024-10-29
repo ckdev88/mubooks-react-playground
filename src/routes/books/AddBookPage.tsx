@@ -154,21 +154,25 @@ const AddBookPage = () => {
 	)
 
 	const [tropeInputValue, setTropeInputValue] = useState<string>('')
+	function addTrope() {
+		if (tropeInputValue.trim()) {
+			const tropeToAdd: string = cleanInput(tropeInputValue.trim(), true)
+
+			if (tropeToAdd !== undefined && tropeToAdd.length > 2) {
+				const tropeIndex = bookTropesLowercase.indexOf(tropeToAdd.toLowerCase())
+				if (bookTropesLowercase.indexOf(tropeToAdd.toLowerCase()) > -1) bookTropes.splice(tropeIndex, 1)
+				const newArr: BookTropes = [...bookTropes, tropeToAdd]
+				newArr.sort((a, b) => a.localeCompare(b))
+				setBookTropes(newArr)
+				setTropeInputValue('')
+			}
+		}
+		document.getElementById('abTropeAdd')?.focus()
+	}
 	const handleKeyPressTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.code === 'Enter') {
 			e.preventDefault()
-			if (tropeInputValue.trim()) {
-				const tropeToAdd: string = cleanInput(tropeInputValue.trim(), true)
-
-				if (tropeToAdd !== undefined && tropeToAdd.length > 2) {
-					const tropeIndex = bookTropesLowercase.indexOf(tropeToAdd.toLowerCase())
-					if (bookTropesLowercase.indexOf(tropeToAdd.toLowerCase()) > -1) bookTropes.splice(tropeIndex, 1)
-					const newArr: BookTropes = [...bookTropes, tropeToAdd]
-					newArr.sort((a, b) => a.localeCompare(b))
-					setBookTropes(newArr)
-					setTropeInputValue('')
-				}
-			}
+			addTrope()
 		}
 	}
 
@@ -193,26 +197,6 @@ const AddBookPage = () => {
 							<input type="number" name="abPages" id="abPages" onChange={changePages} />
 						</div>
 					</div>
-					<label htmlFor="abTropeAdd">Tropes</label>
-					<div className="tropes clr mb0 ml-035">
-						{bookTropes.map((trope, index) => (
-							<div className="trope badge" key={'trope' + index}>
-								{trope}
-							</div>
-						))}
-					</div>
-					<div className="single-small-form clr">
-						<input
-							type="text"
-							id="abTropeAdd"
-							value={tropeInputValue}
-							onChange={(e) => setTropeInputValue(e.target.value)}
-							onKeyDown={handleKeyPressTrope}
-							placeholder="Add a trope..."
-						/>
-						<span className="btn-submit-inside-caret-right wauto"></span>
-					</div>
-					<br />
 					<label htmlFor="abCover">
 						<div>Cover</div>
 						{!selectedImage && <em className="sf">Paste URL or press Choose File</em>}
@@ -246,6 +230,30 @@ const AddBookPage = () => {
 								cancel
 							</span>
 						)}
+					</div>
+					<br />
+					<label htmlFor="abTropeAdd">Tropes</label>
+					<div className="tropes clr mb0 ml-035">
+						{bookTropes.map((trope, index) => (
+							<div className="trope badge" key={'trope' + index}>
+								{trope}
+							</div>
+						))}
+					</div>
+					<div className="dflex">
+						<input
+							type="text"
+							id="abTropeAdd"
+							value={tropeInputValue}
+							onChange={(e) => setTropeInputValue(e.target.value)}
+							onKeyDown={handleKeyPressTrope}
+							placeholder="Add a trope..."
+						/>
+						<span
+							className="btn-submit-inside-caret-right wauto"
+							style={{ marginTop: '.75rem' }}
+							onClick={() => addTrope()}
+						></span>
 					</div>
 				</fieldset>
 				<br />
