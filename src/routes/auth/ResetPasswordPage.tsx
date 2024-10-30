@@ -7,7 +7,7 @@ import { AppContext } from '../../App'
 const pageTitle = 'Reset password'
 
 const ResetPasswordPage = () => {
-	// TODO redirection suboptimal, comes from example url https://xxx.supabase.co/auth/v1/verify?token=xxx&type=recovery&redirect_to=https://mubooks.nl ... logs in automatically and arrives at dashboard page
+	// DOING redirection suboptimal, comes from example url https://xxx.supabase.co/auth/v1/verify?token=xxx&type=recovery&redirect_to=https://mubooks.nl ... logs in automatically and arrives at dashboard page
 	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 
 	const navigate = useNavigate()
