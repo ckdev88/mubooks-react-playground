@@ -1,9 +1,10 @@
-// TODO make tropes same UX as in BookSummary and TropesPage
+// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
+// TODO: create image uploading to server option, to replace hotlinking
+// TODO: make tropes same UX as in BookSummary and TropesPage
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
 // TODO apply BookSummary-BookPages to keep uniformity ??
-// import BookPages from '../../components/BookPages'
 import BookSummaryTitle from '../../components/BookSummaryTitle'
 // TODO apply BookSummary-Components to keep uniformity
 import { AppContext } from '../../App'
@@ -64,7 +65,6 @@ const AddBookPage = () => {
 
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 	const processAbForm = async (e: React.FormEvent<HTMLFormElement>) => {
-		// TODO: create possibility to upload hotlinked url of cover to the server
 		e.preventDefault()
 		// NOTE set to false when all is done if the redirect to wishlist is canceled
 		setIsSubmitting(true)
@@ -104,8 +104,6 @@ const AddBookPage = () => {
 		const rate_stars: Book['rate_stars'] = 0
 		const rate_spice: Book['rate_spice'] = 0
 		const title_short = title.slice(0, 55)
-		// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
-		// TODO: create image uploading to server, to replace hotlinking
 		const book = {
 			author_name: bookAuthors,
 			cover: coverImgPosted,
@@ -185,14 +183,12 @@ const AddBookPage = () => {
 		document.getElementById('abTropeAdd')?.focus()
 	}
 	const handleKeyDownAuthor = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		e.stopPropagation() // TODO: check if useful since we also use preventDefault, faster like this?
 		if (e.key === 'Enter' || e.key === ',') {
 			e.preventDefault()
 			addAuthor()
 		}
 	}
 	const handleKeyDownTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		e.stopPropagation() // TODO: check if useful since we also use preventDefault, faster like this?
 		if (e.key === 'Enter' || e.key === ',') {
 			e.preventDefault()
 			addTrope()
