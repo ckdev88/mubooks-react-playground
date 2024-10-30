@@ -164,12 +164,14 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				</button>
 				{showCbfDetails && (
 					<div className="mt05">
-						<div>
-							* Books without pages defined{' '}
-							<ul className="mt05">
-								<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
-							</ul>
-						</div>
+						{bwp.length > 0 && (
+							<div>
+								* Books without pages defined *{' '}
+								<ul className="mt05">
+									<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
+								</ul>
+							</div>
+						)}
 						{cbfm.map((c, index) => (
 							<div key={`cbfm${year}${index}`}>
 								{getMonthName(index)}: {c}
