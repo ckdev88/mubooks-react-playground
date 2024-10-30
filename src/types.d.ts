@@ -11,14 +11,15 @@ interface AppContextType {
 	setUserIsLoggedIn(userIsLoggedIn: userIsLoggedIn): void
 	popupNotification: string
 	setPopupNotification(popupNotification: popupNotification): void
-	formNotification: string
-	setFormNotification(formNotification: formNotification): void
 	popupNotificationShow: boolean
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
 	todaysDateDigit: number
 	bookFilter: string
 	setBookFilter(bookFilter: bookFilter): void
+	darkTheme: undefined | boolean
+	setDarkTheme(darkTheme: darkTheme): void
+	bodyBgColor: string
 }
 
 interface IsModdingPagesContextType {
@@ -44,16 +45,17 @@ interface TropesPageContextType {
 }
 
 type Page =
+	| 'addbook'
 	| 'dashboard'
-	| 'search'
-	| 'wishlist'
-	| 'reading'
-	| 'finished'
 	| 'favorites'
-	| 'savedbooks'
-	| 'quoted'
-	| 'tropes'
+	| 'finished'
 	| 'profile'
+	| 'quoted'
+	| 'reading'
+	| 'savedbooks'
+	| 'search'
+	| 'tropes'
+	| 'wishlist'
 
 type Quote = {
 	quote: string
@@ -161,17 +163,22 @@ interface BookWithoutPages {
 	id: Book['id']
 	title_short: Book['title_short']
 }
-interface CountBookValues {
-	/** Count books finished */
-	cbf: number
-	/** Count Pages Finished */
-	cpf: number
-	/** Count Books Without Pages */
-	cbwp: number
-	/** Average Days Per Book */
-	adpb: number
-	/** Average Pages Per Day */
-	appd: number
-	/** Books Without Pages */
-	bwp: BooksWithoutPages
+type BooksWithoutStars = BookWithoutStars[]
+interface BookWithoutStars {
+	id: Book['id']
+	title_short: Book['title_short']
 }
+// interface CountBookValues {
+// 	/** Count books finished */
+// 	cbf: number
+// 	/** Count Pages Finished */
+// 	cpf: number
+// 	/** Count Books Without Pages */
+// 	cbwp: number
+// 	/** Average Days Per Book */
+// 	adpb: number
+// 	/** Average Pages Per Day */
+// 	appd: number
+// 	/** Books Without Pages */
+// 	bwp: BooksWithoutPages
+// }

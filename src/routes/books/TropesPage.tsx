@@ -22,6 +22,7 @@ const TropesPage = () => {
 		setDislikedTropesLowercase(dislikedTropes.map((t) => t.toLowerCase()))
 	}, [dislikedTropes])
 
+	// TODO when react19 official is released & eslint is updated: refactor <TropesPageContext.Provider... to TropesPageContext...
 	return (
 		<TropesPageContext.Provider
 			value={{
@@ -37,8 +38,6 @@ const TropesPage = () => {
 				<h1>My Tropes</h1>
 				<TropesPrefs field="tropes_liked" />
 				<TropesPrefs field="tropes_disliked" />
-				<br/>
-				<hr />
 				<TropesInMyBooks page={currentPage} />
 			</>
 		</TropesPageContext.Provider>

@@ -7,10 +7,10 @@
 	box-sizing: border-box;
 }
 .dashboard-quote {
-	font-size: 0.9rem;
+	font-size: 1rem;
 	margin: -1rem -0.5rem 1.5rem;
 	width: calc(100% + 1rem);
-	background-color: rgba(255, 255, 255, 0.4);
+	background-color: var(--accentbg);
 	padding: 1rem;
 }
 .quote footer {

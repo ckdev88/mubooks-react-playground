@@ -3,8 +3,8 @@ import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
 
-const pageTitle = 'Favorites'
-const currentPage = 'favorites'
+const pageTitle: string = 'Favorites'
+const currentPage: Page = 'favorites'
 
 const FavoritesPage = () => {
 	const { userMyBooks, bookFilter } = useContext(AppContext)

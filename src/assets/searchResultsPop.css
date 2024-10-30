@@ -16,12 +16,6 @@
 	flex-grow: 3;
 }
 
-.booksearchresults .result .loep {
-	height: 16px;
-	width: 16px;
-	align-self: center;
-}
-
 .booksearchresults .result .text {
 	width: calc(100% - 24px);
 	align-content: center;

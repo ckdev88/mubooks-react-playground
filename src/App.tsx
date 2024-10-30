@@ -21,16 +21,19 @@ import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
+// import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
-import LoadLibrary from './routes/books/LoadLibrary.tsx'
 import { timestampConverter } from './helpers/convertDate.ts'
+import AddBookPage from './routes/books/AddBookPage.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 const todaysDateInput = timestampConverter(Date.now(), 'input')
 const todaysDateDigit = Number(timestampConverter(Date.now(), 'digit'))
+const bgColorLight: string = '#f4f1ea'
+const bgColorDark: string = '#152129'
 
 const App = () => {
 	let userIsLoggedInInitVal: boolean
@@ -44,9 +47,10 @@ const App = () => {
 	const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(userIsLoggedInInitVal)
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
-	const [formNotification, setFormNotification] = useState<string>('')
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
 	const [bookFilter, setBookFilter] = useState<string>('')
+	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
+	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -81,6 +85,11 @@ const App = () => {
 	if (username === '' && localStorage.getItem(localStorageKey))
 		setUsername(JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.screenname)
 
+	if (darkTheme === undefined && localStorage.getItem(localStorageKey)) {
+		const dtInitVal = JSON.parse(localStorage.getItem(localStorageKey) as string).user.user_metadata.darktheme
+		if (dtInitVal !== undefined) setDarkTheme(dtInitVal)
+	}
+
 	if (userid === '' && localStorage.getItem(localStorageKey))
 		setUserid(JSON.parse(localStorage.getItem(localStorageKey) as string).user.id)
 
@@ -94,86 +103,92 @@ const App = () => {
 		setTimeout(() => setPopupNotification(''), 1000)
 		return <>{ret}</>
 	}
+	useEffect(() => {
+		const htmlNode = document.getElementsByTagName('html')[0]
+		if (darkTheme === true) {
+			if (!htmlNode.classList.contains('dark-mode')) htmlNode.classList.add('dark-mode')
+			setBodyBgColor(bgColorDark)
+		} else {
+			htmlNode.classList.remove('dark-mode')
+			setBodyBgColor(bgColorLight)
+		}
+	}, [darkTheme])
 
-	// TODO: see <Context> as a provider, AppContext. Provider will be deprecated in future versions.
+	// TODO when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
-		<>
-			<AppContext.Provider
-				value={{
-					formNotification,
-					popupNotification,
-					popupNotificationShow,
-					bookFilter,
-					setFormNotification,
-					setBookFilter,
-					setPopupNotification,
-					setPopupNotificationShow,
-					setUserIsLoggedIn,
-					setUserMyBooks,
-					setUserid,
-					setUsermail,
-					setUsername,
-					todaysDateInput,
-					todaysDateDigit,
-					userIsLoggedIn,
-					userMyBooks,
-					userid,
-					usermail,
-					username,
-				}}
-			>
-				{userIsLoggedIn && (
-					<header id="header" className="shade">
-						<NavWrapper />
-					</header>
+		<AppContext.Provider
+			value={{
+				popupNotification,
+				popupNotificationShow,
+				bookFilter,
+				setBookFilter,
+				setPopupNotification,
+				setPopupNotificationShow,
+				setUserIsLoggedIn,
+				setUserMyBooks,
+				setUserid,
+				setUsermail,
+				setUsername,
+				todaysDateInput,
+				todaysDateDigit,
+				userIsLoggedIn,
+				userMyBooks,
+				userid,
+				usermail,
+				username,
+				setDarkTheme,
+				darkTheme,
+				bodyBgColor,
+			}}
+		>
+			{userIsLoggedIn && (
+				<header id="header" className="shade">
+					<NavWrapper />
+				</header>
+			)}
+			<main id="main" className="main">
+				{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
+				{popupNotification !== '' && (
+					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
+						{popupNotification && <>{popper()}</>}
+					</div>
 				)}
-				<main id="main" className="main textwrapper">
-					{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
-					{popupNotification !== '' && (
-						<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
-							{popupNotification && <>{popper()}</>}
-						</div>
+				<Routes>
+					<Route path="/*" element={<RootPage />} />
+					<Route path="/error" element={<ErrorPage />} />
+					<Route path="/account/login" element={<UserLoginPage />} />
+					<Route path="/account/logout" element={<UserLogoutPage />} />
+					<Route path="/auth/confirm" element={<AuthConfirm />} />
+					{!userIsLoggedIn && (
+						<>
+							<Route path="/auth/resetpassword" element={<ResetPasswordPage />} />
+							<Route path="/account/forgotpassword" element={<CheckMailPasswordPage />} />
+						</>
 					)}
-					<Routes>
-						<Route path="/*" element={<RootPage />} />
-						<Route path="/error" element={<ErrorPage />} />
-						<Route path="/account/login" element={<UserLoginPage />} />
-						<Route path="/account/logout" element={<UserLogoutPage />} />
-						<Route path="/auth/confirm" element={<AuthConfirm />} />
-						{!userIsLoggedIn && (
-							<>
-								<Route path="/auth/resetpassword" element={<ResetPasswordPage />} />
-								<Route path="/account/forgotpassword" element={<CheckMailPasswordPage />} />
-							</>
-						)}
-						<Route path="/account/new" element={<CheckMailNewAccountPage />} />
-						{userIsLoggedIn && (
-							<>
-								<Route path="/account/profile" element={<UserProfilePage />} />
-								<Route path="/account/*" element={<UserLoginPage />} />
-								<Route path="/dashboard" element={<DashboardPage />} />
-								<Route path="/search" element={<SearchPage />} />
-								{/*
-								<Route path="/add-book" element={ <AddBookPage /> } />
-								*/}
-								<Route path="/savedbooks" element={<SavedBooksPage />} />
-								<Route path="/wishlist" element={<WishlistPage />} />
-								<Route path="/reading" element={<ReadingPage />} />
-								<Route path="/finished" element={<FinishedPage />} />
-								<Route path="/favorites" element={<FavoritesPage />} />
-								<Route path="/quoted" element={<QuotedPage />} />
-								<Route path="/tropes" element={<TropesPage />} />
-								<Route path="/statistics" element={<StatisticsPage />} />
-								{/*
-								<Route path="/clear-my-books" element={ <ClearMyBooks /> } />
-								*/}
-								<Route path="/loadlibrary" element={<LoadLibrary />} />
-							</>
-						)}
-					</Routes>
-				</main>
-			</AppContext.Provider>
-		</>
+					<Route path="/account/new" element={<CheckMailNewAccountPage />} />
+					{userIsLoggedIn && (
+						<>
+							<Route path="/account/profile" element={<UserProfilePage />} />
+							<Route path="/account/*" element={<UserLoginPage />} />
+							<Route path="/dashboard" element={<DashboardPage />} />
+							<Route path="/search" element={<SearchPage />} />
+							<Route path="/addbook" element={<AddBookPage />} />
+							<Route path="/savedbooks" element={<SavedBooksPage />} />
+							<Route path="/wishlist" element={<WishlistPage />} />
+							<Route path="/reading" element={<ReadingPage />} />
+							<Route path="/finished" element={<FinishedPage />} />
+							<Route path="/favorites" element={<FavoritesPage />} />
+							<Route path="/quoted" element={<QuotedPage />} />
+							<Route path="/tropes" element={<TropesPage />} />
+							<Route path="/statistics" element={<StatisticsPage />} />
+							{/* 
+							<Route path="/clear-my-books" element={<ClearMyBooks />} />
+							*/}
+						</>
+					)}
+				</Routes>
+			</main>
+		</AppContext.Provider>
 	)
 }
 export default App

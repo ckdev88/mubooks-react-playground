@@ -11,32 +11,26 @@ interface Props {
 	list: Book['list']
 }
 const BookStartedFinished = ({ date_started, date_finished, book_id, list }: Props) => {
-	const { userMyBooks, setUserMyBooks, setPopupNotification, userid, todaysDateInput } =
-		useContext(AppContext)
+	const { userMyBooks, setUserMyBooks, setPopupNotification, userid, todaysDateInput } = useContext(AppContext)
 	const [dateStarted, setDateStarted] = useState<Book['date_reading']>(date_started)
 	const [dateFinished, setDateFinished] = useState<Book['date_finished']>(date_finished)
 	const [showStartedDate, setShowStartedDate] = useState<boolean>(false)
 	const [showFinishedDate, setShowFinishedDate] = useState<boolean>(false)
 
 	useEffect(() => {
-		if (date_finished === 0 || date_finished === undefined || date_finished === null) {
+		if (date_finished === 0) {
 			setShowStartedDate(true)
 			setShowFinishedDate(false)
 		} else {
 			setShowStartedDate(false)
 			setShowFinishedDate(true)
 		}
-		/* TODO: this needs some work, there might be (faulty) cases where dateFinished is falsy, but book.list is 3 or 4 */
 	}, [date_finished, userMyBooks, date_started, setShowStartedDate, setShowFinishedDate, dateFinished])
 
 	async function MyBooksUpdate(myBooksNew: Books) {
 		let msg: string
 		setUserMyBooks(myBooksNew)
-		const { error } = await supabase
-			.from('user_entries')
-			.update({ json: myBooksNew })
-			.eq('user_id', userid)
-			.select()
+		const { error } = await supabase.from('user_entries').update({ json: myBooksNew }).eq('user_id', userid).select()
 		if (error) {
 			msg = 'Error, date was not changed'
 			console.log('error:', error)
@@ -102,10 +96,7 @@ const BookStartedFinished = ({ date_started, date_finished, book_id, list }: Pro
 					<>
 						<em className="btn-text">
 							<span className="icon icon-reading"></span>
-							<button
-								className="btn-calendar btn-text"
-								onClick={() => openCalendarPopUp('date_reading' + book_id)}
-							>
+							<button className="btn-calendar btn-text" onClick={() => openCalendarPopUp('date_reading' + book_id)}>
 								{dateStarted && convertDate(dateStarted, 'human')}
 							</button>
 						</em>
@@ -125,10 +116,7 @@ const BookStartedFinished = ({ date_started, date_finished, book_id, list }: Pro
 					<>
 						<em className="btn-text">
 							<span className="icon icon-finished"></span>
-							<button
-								className="btn-calendar btn-text"
-								onClick={() => openCalendarPopUp('date_finished' + book_id)}
-							>
+							<button className="btn-calendar btn-text" onClick={() => openCalendarPopUp('date_finished' + book_id)}>
 								{date_finished && convertDate(date_finished, 'human')}
 							</button>
 						</em>

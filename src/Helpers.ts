@@ -11,8 +11,14 @@ function getOlCover(id: string, size: CoverSize = undefined): string {
 	return 'https://covers.openlibrary.org/b/isbn/' + id + appendSize + '.jpg'
 }
 
-function getBookCover(url: string, size: CoverSize): string {
-	if (url === undefined) return './../public/img/save-books-icon.png'
+function getBookCover(url: string = '', size: CoverSize): string {
+	// NOTE set showOLImages to false when archive/OpenLibrary is unavailable
+	const showOLImages = true
+
+	if ((url.includes('openlibrary') && !showOLImages) || url === '') {
+		return './../img/save-books-icon.png'
+	}
+
 	let appendSize: string = ''
 	if (size) {
 		appendSize = '-' + size
@@ -74,13 +80,4 @@ function getUrlParamVal(url: string, key: string, hash: boolean = false): string
 	return ''
 }
 
-export {
-	isUrl,
-	getOlCover,
-	getBookCover,
-	debounce,
-	openCalendarPopUp,
-	shuffleArray,
-	getUrlParamVal,
-	getOlPagesMedian,
-}
+export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal, getOlPagesMedian }

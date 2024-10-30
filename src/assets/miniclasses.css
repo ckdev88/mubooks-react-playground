@@ -1,8 +1,14 @@
 .m0 {
 	margin: 0;
 }
+.mt-1 {
+	margin-top: -1rem;
+}
 .mt0 {
 	margin-top: 0;
+}
+.mt-05 {
+	margin-top: -0.5rem;
 }
 .mt05 {
 	margin-top: 0.5rem;
@@ -16,11 +22,36 @@
 .mb0 {
 	margin-bottom: 0;
 }
+.mb0o {
+	margin-bottom: 0 !important;
+}
+.mb1 {
+	margin-bottom: 1rem;
+}
 .mr1 {
 	margin-right: 1rem;
 }
+.ml0 {
+	margin-left: 0;
+}
+.mb035 {
+	margin-bottom: 0.35rem;
+}
+.ml035 {
+	margin-left: 0.35rem;
+}
+.mt035 {
+	margin-top: 0.35rem;
+}
+.ml-035 {
+	margin-left: -0.35rem;
+}
 .ml05 {
 	margin-left: 0.5rem;
+}
+.mxauto {
+	margin-left: auto;
+	margin-right: auto;
 }
 .p0 {
 	padding: 0;
@@ -33,6 +64,9 @@
 }
 .pb1 {
 	padding-bottom: 1rem;
+}
+.pb035 {
+	padding-bottom: 0.35rem;
 }
 .red {
 	color: red;
@@ -52,8 +86,13 @@
 }
 
 form .error {
-	margin-bottom: 0.5em;
 	color: red;
+}
+form .notification {
+	font-size: 0.9em;
+	min-height: 0.9em;
+	padding-bottom: 1em;
+	font-style: italic;
 }
 
 .cl {
@@ -107,6 +146,11 @@ input[type='submit'].dnone {
 		display: inline-block;
 	}
 }
+.dnone-sm {
+	@media screen and (max-width: 479.98px) {
+		display: none;
+	}
+}
 .diblock {
 	display: inline-block;
 }
@@ -121,4 +165,20 @@ input[type='submit'].dnone {
 }
 .tcenter {
 	text-align: center;
+}
+.flex-start {
+	align-self: flex-start;
+}
+.flex-end {
+	align-self: flex-end;
+}
+
+.shade {
+	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 25%);
+}
+.shade-light {
+	box-shadow: 0 0 0.4rem rgba(0, 0, 0, 15%);
+}
+.cbadgefg {
+	color: var(--badgefg);
 }

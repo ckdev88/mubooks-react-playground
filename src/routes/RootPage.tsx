@@ -83,8 +83,8 @@ const RootPage = () => {
 
 	return (
 		<>
-			<main id="main" className="textwrapper">
-				<div className="textwrapper">
+			<main id="main">
+				<div>
 					Redirecting to wherever you should be right now... <br />
 					<a href="https://ckdev88.github.io/mubooks/#/dashboard">dashboard</a>
 					<br />

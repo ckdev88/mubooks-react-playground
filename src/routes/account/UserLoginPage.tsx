@@ -18,8 +18,9 @@ export default function UserLoginPage() {
 	return (
 		<>
 			<h1 id="welcome">
-				<img id="welcome-logo-img" src="img/logo.svg" alt="" /> MuBooks
+				<img id="welcome-logo-img" src="/img/logo.svg" alt="" /> MuBooks
 			</h1>
+			<i className="dblock tcenter cbadgefg mt-1 mb1">Alpha version</i>
 			<div id="cards-draaideur" className="cards-draaideur">
 				<div className="axis">
 					<LoginCard />
