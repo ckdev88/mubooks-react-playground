@@ -16,6 +16,11 @@ const AddBookPage = () => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
 	const [coverImg, setCoverImg] = useState<string>('')
 
+	useEffect(() => {
+		const firstField = document.getElementById('abTitle')
+		if (firstField) firstField.focus()
+	}, [])
+
 	// for the preview
 	// 	const synopsis = 'nothing for now'
 	// 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
