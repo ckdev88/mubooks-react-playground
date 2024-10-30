@@ -340,7 +340,7 @@ const AddBookPage = () => {
 			{!title && <>No data yet...</>}
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
-				<article className="main">
+				<div className="article-main">
 					<header>
 						<BookSummaryTitle
 							book_title_short={title}
@@ -359,10 +359,9 @@ const AddBookPage = () => {
 							))}
 						</div>
 					</header>
-				</article>
+				</div>
 			</article>
 		</>
 	)
 }
 export default AddBookPage
-// TODO article nested in article, and all in <header> ? works, but meh
