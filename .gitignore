@@ -26,4 +26,3 @@ dist-ssr
 data
 release.sh
 notes
-*.php

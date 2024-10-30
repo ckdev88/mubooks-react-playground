@@ -1,9 +1,10 @@
-// TODO make tropes same UX as in BookSummary and TropesPage
+// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
+// TODO: create image uploading to server option, to replace hotlinking
+// TODO: make tropes same UX as in BookSummary and TropesPage
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
 // TODO apply BookSummary-BookPages to keep uniformity ??
-// import BookPages from '../../components/BookPages'
 import BookSummaryTitle from '../../components/BookSummaryTitle'
 // TODO apply BookSummary-Components to keep uniformity
 import { AppContext } from '../../App'
@@ -16,13 +17,18 @@ const AddBookPage = () => {
 	const { userMyBooks, setUserMyBooks, userid, setPopupNotification } = useContext(AppContext)
 	const [coverImg, setCoverImg] = useState<string>('')
 
+	useEffect(() => {
+		const firstField = document.getElementById('abTitle')
+		if (firstField) firstField.focus()
+	}, [])
+
 	// for the preview
 	// 	const synopsis = 'nothing for now'
 	// 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
-	const bookId: Book['id'] = Math.ceil(Math.random() * 10000000).toString() // TODO need to somehow generate uniquely, or just on save .... TODO 2: see how useful this actually is, timestamp is better and if it's better with connected to uploaded cover id/filename
+	const bookId: Book['id'] = 'MU' + new Date().getTime().toString()
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
 	const [selectedImage, setSelectedImage] = useState<null | File>(null)
 	const [bookAuthors, setBookAuthors] = useState<string[]>([])
@@ -35,8 +41,6 @@ const AddBookPage = () => {
 	useEffect(() => {
 		setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
 	}, [bookTropes])
-
-	// const [imagePath, setImagePath] = useState<string | null>(null) // TODO use or remove 1/2
 
 	const [selectedImageType, setSelectedImageType] = useState<undefined | 'url' | 'upload'>(undefined)
 
@@ -61,7 +65,6 @@ const AddBookPage = () => {
 
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 	const processAbForm = async (e: React.FormEvent<HTMLFormElement>) => {
-		// TODO: create possibility to upload hotlinked url of cover to the server
 		e.preventDefault()
 		// NOTE set to false when all is done if the redirect to wishlist is canceled
 		setIsSubmitting(true)
@@ -72,6 +75,7 @@ const AddBookPage = () => {
 			const formData = new FormData()
 			formData.append('image', selectedImage)
 			formData.append('userid', userid)
+			formData.append('bookid', bookId)
 
 			try {
 				const response = await fetch('ProcessCover.php', {
@@ -86,9 +90,8 @@ const AddBookPage = () => {
 				if (result.error) {
 					console.error(result.error)
 				} else {
-					// setImagePath(result.path) // TODO use or remove 2/2
 					if (result.path !== null) {
-						coverImgPosted = result.path // TODO improve efficiency & relation to imagePath state
+						coverImgPosted = result.path
 					} else console.error('Error uploading image: doin nothin')
 				}
 			} catch (error) {
@@ -101,8 +104,6 @@ const AddBookPage = () => {
 		const rate_stars: Book['rate_stars'] = 0
 		const rate_spice: Book['rate_spice'] = 0
 		const title_short = title.slice(0, 55)
-		// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
-		// TODO: create image uploading to server, to replace hotlinking
 		const book = {
 			author_name: bookAuthors,
 			cover: coverImgPosted,
@@ -182,14 +183,12 @@ const AddBookPage = () => {
 		document.getElementById('abTropeAdd')?.focus()
 	}
 	const handleKeyDownAuthor = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		e.stopPropagation() // TODO: check if useful since we also use preventDefault, faster like this?
 		if (e.key === 'Enter' || e.key === ',') {
 			e.preventDefault()
 			addAuthor()
 		}
 	}
 	const handleKeyDownTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		e.stopPropagation() // TODO: check if useful since we also use preventDefault, faster like this?
 		if (e.key === 'Enter' || e.key === ',') {
 			e.preventDefault()
 			addTrope()
@@ -200,10 +199,10 @@ const AddBookPage = () => {
 		<>
 			<h1>
 				{pageTitle}
-				<sub>See preview and Add your book</sub>
+				<sub>See your preview below</sub>
 			</h1>
 			<form onSubmit={processAbForm}>
-				<fieldset style={{ display: 'flex', flexDirection: 'column', gap: '.7rem' }}>
+				<fieldset style={{ display: 'flex', flexDirection: 'column' }}>
 					<label htmlFor="abTitle">
 						<div className="description">Title</div>
 						<input type="text" id="abTitle" name="abTitle" required onChange={changeTitle} />
@@ -335,7 +334,7 @@ const AddBookPage = () => {
 			{!title && <>No data yet...</>}
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
-				<article className="main">
+				<div className="article-main">
 					<header>
 						<BookSummaryTitle
 							book_title_short={title}
@@ -354,10 +353,9 @@ const AddBookPage = () => {
 							))}
 						</div>
 					</header>
-				</article>
+				</div>
 			</article>
 		</>
 	)
 }
 export default AddBookPage
-// TODO article nested in article, and all in <header> ? works, but meh
