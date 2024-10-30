@@ -50,7 +50,7 @@ export default function MyAccountEditCard() {
 				<header>
 					<div>
 						Edit my account
-						<sub>Change your preferences</sub>
+						<sub>Change my preferences</sub>
 					</div>
 				</header>
 

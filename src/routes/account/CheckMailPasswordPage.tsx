@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import { Link, redirect } from 'react-router-dom'
 
-const pageTitle = 'Check Mail Password Page'
+const pageTitle = 'Check your mailbox'
 // const currentPage = 'favorites'
 
 const CheckMailPasswordPage = () => {
@@ -43,7 +43,7 @@ const CheckMailPasswordPage = () => {
 				<p>
 					Are you trying to reset your password or log in?
 					<br />
-					<Link to="/account/login">Click here to go to the login screen</Link>.
+					<Link to="/account/login">Click here to log in or join</Link>.
 				</p>
 			</>
 		)

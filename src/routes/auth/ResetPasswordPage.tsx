@@ -3,11 +3,9 @@ import { supabase } from '../../../utils/supabase'
 import { useState, useEffect, useContext } from 'react'
 import { getUrlParamVal } from '../../Helpers'
 import { AppContext } from '../../App'
-
-const pageTitle = 'Reset password'
+import HeaderBranding from '../../components/HeaderBranding'
 
 const ResetPasswordPage = () => {
-	// DOING redirection suboptimal, comes from example url https://xxx.supabase.co/auth/v1/verify?token=xxx&type=recovery&redirect_to=https://mubooks.nl ... logs in automatically and arrives at dashboard page
 	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
 
 	const navigate = useNavigate()
@@ -60,26 +58,25 @@ const ResetPasswordPage = () => {
 		if (e.currentTarget.account_password.value === e.currentTarget.account_password_again.value) {
 			const form_userpass: string = e.currentTarget.account_password.value.trim()
 			updateSbUser(form_userpass)
-		} else setError('Passwords do not match, try again')
+		} else setError('Passwords do not match, try again (63)')
 	}
 
 	if (loading) return <p>Loading...</p>
 	else {
 		return (
 			<>
-				<h1 id="welcome">
-					<img id="welcome-logo-img" src="img/logo.svg" alt="" /> {pageTitle}
-				</h1>
+				<HeaderBranding />
 				<div>
 					<div className="card">
 						<header>
 							<div>
 								Reset your password
-								<sub>Fill in your new password twice and submit to activate it</sub>
+								<sub>Fill in new password twice and activate it</sub>
 							</div>
 						</header>
 						<main>
 							<form onSubmit={handleSubmit}>
+								<div className={error !== '' ? 'notification error' : 'notification'}>{error}</div>
 								<label htmlFor="account_password">
 									<div className="description">New password</div>
 									<input
@@ -87,6 +84,7 @@ const ResetPasswordPage = () => {
 										id="account_password"
 										name="account_password"
 										defaultValue=""
+										autoComplete="new-password"
 										required
 									/>
 								</label>
@@ -97,11 +95,11 @@ const ResetPasswordPage = () => {
 										id="account_password_again"
 										name="account_password_again"
 										defaultValue=""
+										autoComplete="new-password"
 										required
 									/>
 								</label>
-								<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-								<button>Save new password and login</button>
+								<button className="btn-lg">Save new password and login</button>
 							</form>
 						</main>
 						<footer>
