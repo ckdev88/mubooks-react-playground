@@ -27,7 +27,7 @@ const AddBookPage = () => {
 
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
-	const bookId: Book['id'] = 'MU' + new Date().getTime().toString() // TODO: apply this bookid/timestamp to uploaded cover
+	const bookId: Book['id'] = 'MU' + new Date().getTime().toString() 
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
 	const [selectedImage, setSelectedImage] = useState<null | File>(null)
 	const [bookAuthors, setBookAuthors] = useState<string[]>([])
@@ -77,6 +77,7 @@ const AddBookPage = () => {
 			const formData = new FormData()
 			formData.append('image', selectedImage)
 			formData.append('userid', userid)
+			formData.append('bookid', bookId)
 
 			try {
 				const response = await fetch('ProcessCover.php', {
