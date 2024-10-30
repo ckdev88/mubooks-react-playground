@@ -27,7 +27,7 @@ const AddBookPage = () => {
 
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
-	const bookId: Book['id'] = Math.ceil(Math.random() * 10000000).toString() // TODO need to somehow generate uniquely, or just on save .... TODO 2: see how useful this actually is, timestamp is better and if it's better with connected to uploaded cover id/filename
+	const bookId: Book['id'] = 'MU' + new Date().getTime().toString() // TODO: apply this bookid/timestamp to uploaded cover
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
 	const [selectedImage, setSelectedImage] = useState<null | File>(null)
 	const [bookAuthors, setBookAuthors] = useState<string[]>([])
