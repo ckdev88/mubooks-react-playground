@@ -27,7 +27,7 @@ const AddBookPage = () => {
 
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
-	const bookId: Book['id'] = 'MU' + new Date().getTime().toString() 
+	const bookId: Book['id'] = 'MU' + new Date().getTime().toString()
 	const [numberOfPages, setNumberOfPages] = useState<Book['number_of_pages_median']>(0)
 	const [selectedImage, setSelectedImage] = useState<null | File>(null)
 	const [bookAuthors, setBookAuthors] = useState<string[]>([])
@@ -40,8 +40,6 @@ const AddBookPage = () => {
 	useEffect(() => {
 		setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
 	}, [bookTropes])
-
-	// const [imagePath, setImagePath] = useState<string | null>(null) // TODO use or remove 1/2
 
 	const [selectedImageType, setSelectedImageType] = useState<undefined | 'url' | 'upload'>(undefined)
 
@@ -92,9 +90,8 @@ const AddBookPage = () => {
 				if (result.error) {
 					console.error(result.error)
 				} else {
-					// setImagePath(result.path) // TODO use or remove 2/2
 					if (result.path !== null) {
-						coverImgPosted = result.path // TODO improve efficiency & relation to imagePath state
+						coverImgPosted = result.path
 					} else console.error('Error uploading image: doin nothin')
 				}
 			} catch (error) {
