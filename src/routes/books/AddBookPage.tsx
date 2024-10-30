@@ -200,10 +200,10 @@ const AddBookPage = () => {
 		<>
 			<h1>
 				{pageTitle}
-				<sub>See preview and Add your book</sub>
+				<sub>See your preview below</sub>
 			</h1>
 			<form onSubmit={processAbForm}>
-				<fieldset style={{ display: 'flex', flexDirection: 'column', gap: '.7rem' }}>
+				<fieldset style={{ display: 'flex', flexDirection: 'column' }}>
 					<label htmlFor="abTitle">
 						<div className="description">Title</div>
 						<input type="text" id="abTitle" name="abTitle" required onChange={changeTitle} />
