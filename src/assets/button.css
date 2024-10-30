@@ -276,6 +276,10 @@ ul.expandable-list a {
 	transition: background-color 0.18s ease-in-out, border-color 0.18s ease-in-out;
 	width: 1rem;
 }
+input[type='number'] + .btn-submit-inside-caret-right {
+	margin-top: 0.25rem;
+	margin-right: 0.25rem;
+}
 .btn-submit-inside-caret-right:hover,
 .btn-submit-inside-caret-right:focus,
 .btn-submit-inside-caret-right:active {
