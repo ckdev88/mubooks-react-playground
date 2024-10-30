@@ -14,6 +14,8 @@ const useGetSynopsis = (
 		if (!synoposisON) return
 
 		const fetchSynopsis = async (book_id: string): Promise<void> => {
+			if (book_id.slice(0, 2) !== 'OL') return
+
 			const fetchSynopsisPromise = fetch(`https://openlibrary.org/works/${book_id}.json`)
 			fetchSynopsisPromise
 				.then((response) => {
