@@ -5,6 +5,7 @@ import PieG from './PieG'
 import LineG2 from './LineG2'
 import LineG3 from './LineG3'
 import StatisticsFinishedInMonth from './StatisticsFinishedInMonth'
+import { getDurationDays } from '../Helpers'
 
 const now: Date = new Date()
 const curYear = now.getFullYear()
@@ -79,27 +80,8 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 				bwst.push(starless)
 			}
 
-			if (b.date_reading !== undefined) {
-				// get days per book
-				/** Date Reading .. leftover will be Day Reading */
-				let dr: number = b.date_reading
-				/** Date Reading Year */
-				const dry: number = Math.floor(dr / 10000)
-				dr -= dry * 10000
-				/** Date Reading Month */
-				const drm: number = Math.floor(dr / 100)
-				dr -= drm * 100
-				const date_reading_date = new Date(dry, drm, dr)
-				/** Date Finished .. leftover of dr will be Day Finished */
-				let df: number = b.date_finished
-				/** Date Finished Year */
-				const dfy: number = Math.floor(df / 10000)
-				df -= dfy * 10000
-				/** Date Finished Month */
-				const dfm: number = Math.floor(df / 100)
-				df -= dfm * 100
-				const date_finished_date: Date = new Date(dfy, dfm, df)
-				const date_difference: number = (date_finished_date.getTime() - date_reading_date.getTime()) / 1000 / 3600 / 24
+			if (b.date_reading !== undefined && b.date_finished !== undefined) {
+				const date_difference: number = getDurationDays(b.date_reading, b.date_finished)
 				if (dpb[date_difference] === undefined) dpb[date_difference] = 0
 				dpb[date_difference] = dpb[date_difference] + 1
 			}
