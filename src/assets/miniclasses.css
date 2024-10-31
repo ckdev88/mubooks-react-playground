@@ -108,6 +108,9 @@ form .notification {
 .sf {
 	font-size: 0.8em;
 }
+.fs-inherit {
+	font-size: inherit;
+}
 
 .ta-right {
 	text-align: right;
@@ -151,11 +154,20 @@ input[type='submit'].dnone {
 		display: none;
 	}
 }
+.di {
+	display: inline;
+}
 .diblock {
 	display: inline-block;
 }
 .italic {
 	font-style: italic;
+}
+.lh1em {
+	line-height: 1em;
+}
+.h1em {
+	height: 1em;
 }
 .wm6 {
 	max-width: 6rem;

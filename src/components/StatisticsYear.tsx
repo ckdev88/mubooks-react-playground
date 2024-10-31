@@ -1,14 +1,10 @@
-// TODO: line-graph: show amount of books read per month; x: months of year, y: books
-// TODO: line-graph: show amount of pages read per month; x: months of year, y: pages
-// TODO: smoother line-graph: show amount of days to finish a book; x: days, y: number of books
-// TODO: circle-diagram showing the number of books per star rating
-// TODO: circle-diagram showing the number of books per spice rating
 import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 import BooksWithoutStarsList from './BooksWithoutStarsList'
 import PieG from './PieG'
 import LineG2 from './LineG2'
 import LineG3 from './LineG3'
+import StatisticsFinishedInMonth from './StatisticsFinishedInMonth'
 
 const now: Date = new Date()
 const curYear = now.getFullYear()
@@ -130,9 +126,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	const [showCbfDetails, setShowCbfDetails] = useState<boolean>(false)
 	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
 	const [showStpbDetails, setShowStpbDetails] = useState<boolean>(false)
-
-	// TODO: move tmpSubjects into something a bit more durable
-	const tmpSubjects: string[] = ['Books', 'Pages']
+	const [showBfmDetails, setShowBfmDetails] = useState<boolean>(false) // Bfm = Books Finished Monthly
 
 	const monthNames: string[] = [
 		'January',
@@ -157,32 +151,54 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<h1>Your numbers for {year}</h1>
 			<article className="stats-item">
 				<h3 className="mb0">Books & pages per month</h3>
-				<LineG2 data={cbfm} data2={cpfm} subjects={tmpSubjects} />
-				Books finished in {year}: <b>{cbf}</b> {cbwp > 0 && <> * </>}{' '}
+				<LineG2 data={cbfm} data2={cpfm} subjects={['Books', 'Pages']} />
+				Books finished in {year}: <b>{cbf}</b>
+				{cbwp > 0 && <span className="sf">*</span>}{' '}
 				<button onClick={() => setShowCbfDetails(!showCbfDetails)} className="btn-text diblock">
 					...
 				</button>
 				{showCbfDetails && (
-					<div className="mt05">
+					<div className="mt05 sf">
+						{cbfm.map((c, index) => {
+							const yearmonth: number = year * 100 + (index + 1) // year 2022 index 2 > 202203
+							console.log('yearmonth:', yearmonth, typeof yearmonth)
+
+							return (
+								<div key={`cbfm${year}${index}`}>
+									{getMonthName(index)}:{' '}
+									<b>
+										{c} {c === 1 ? 'book' : 'books'}
+									</b>
+									&nbsp;
+									<br />
+									{showBfmDetails && (
+										<>
+											<ul className="mt0 mb0">
+												<StatisticsFinishedInMonth yearmonth={yearmonth} />
+											</ul>
+											{c > 0 && <br />}
+										</>
+									)}
+								</div>
+							)
+						})}
+						<button className="btn-text fs-inherit" onClick={() => setShowBfmDetails(!showBfmDetails)}>
+							{showBfmDetails ? 'hide' : 'show'} titles
+						</button>
+						<br />
+						Total Pages read: <b>{cpf}</b>
+						<br />
+						Average pages per day: <b>{appd}</b>
+						<br />
+						<br />
 						{bwp.length > 0 && (
 							<div>
-								* Books without pages defined *{' '}
-								<ul className="mt05">
+								<i>* Books without pages defined</i>
+								<ul className="mt0">
 									<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
 								</ul>
 							</div>
 						)}
-						{cbfm.map((c, index) => (
-							<div key={`cbfm${year}${index}`}>
-								{getMonthName(index)}: {c}
-								<br />
-							</div>
-						))}
-						<br />
-						Pages read: {cpf}
-						<br />
-						Average pages per day: {appd}
-						<br />
 					</div>
 				)}
 			</article>
@@ -194,35 +210,23 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					...
 				</button>
 				{
-					// show the used data more verbosely
-					// TODO: show title_short of books, including hash link to /savedbooks
-					showDpbDetails && (
-						<div className="mt05">
-							{dpb.map((b, index) => {
-								return (
-									<div key={`adpb${year}${index}`}>
-										{index} {index === 1 ? 'day' : 'days'}: {b} {b === 1 ? `book` : `books`}
-										<br />
-									</div>
-								)
-							})}
-						</div>
-					)
+					// TODO: show title_short of books, including hash link to /finished
 				}
+				{showDpbDetails && (
+					<div className="mt05 sf">
+						{dpb.map((b, index) => {
+							return (
+								<div key={`adpb${year}${index}`}>
+									{index} {index === 1 ? 'day' : 'days'}:{' '}
+									<b>
+										{b} {b === 1 ? `book` : `books`}
+									</b>
+								</div>
+							)
+						})}
+					</div>
+				)}
 				<br />
-				{/* --- in plaats hiervan PieG laten zien
-				cstpb.map((st, index) => {
-				return (
-				<li key={index}>
-				{index + 1} stars: {st}
-				</li>
-				)
-				})
-				*/}
-				{/*
-				 *	DPBer(dpb)
-				 *
-				 */}
 			</article>
 			<article className="stats-item">
 				<h3 className="mb0">How I rated my books in {year}</h3>
@@ -230,28 +234,36 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				Average stars per book: <b>{astpb}</b>
 				{cbwst > 0 && (
 					<>
-						*
+						<span className="sf">*</span>
 						<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
 							...
 						</button>
+						{
+							// TODO: show title_short of books, including hash link to /finished
+						}
 						{showStpbDetails && (
-							<div className="mt05">
+							<div className="mt05 sf">
+								{cstpb.length > 0 &&
+									cstpb.map((b, index) => {
+										return (
+											<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
+												{index + 1} {index + 1 === 1 ? 'star' : 'stars'}:{' '}
+												<b>
+													{b} {b === 1 ? 'book' : 'books'}
+												</b>
+											</div>
+										)
+									})}
+
 								{bwst.length > 0 && (
 									<div>
-										* Books without stars defined:{' '}
+										<br />
+										<i>* Books without stars defined: </i>
 										<ul className="mt0">
 											<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
 										</ul>
 									</div>
 								)}
-								{cstpb.length > 0 &&
-									cstpb.map((b, index) => {
-										return (
-											<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
-												{index + 1} {index + 1 === 1 ? 'star' : 'stars'}: {b} {b === 1 ? 'book' : 'books'}
-											</div>
-										)
-									})}
 							</div>
 						)}
 					</>
