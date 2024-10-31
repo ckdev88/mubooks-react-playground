@@ -53,7 +53,7 @@ const RootPage = () => {
 			if (loggedin) navigateTo = '/dashboard'
 			else {
 				if (getUrlParamVal(url, 'type') === 'recovery') navigateTo = '/auth/resetpassword'
-				else navigateTo = '/account/login'
+				else navigateTo = '/account/login' // main redirection on account related error
 			}
 		} else navigateTo = '/error?error_description=' + apiErrorsCallback().error_description
 

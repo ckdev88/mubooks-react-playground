@@ -23,24 +23,20 @@ const ResetPasswordPage = () => {
 			const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
 			if (error) setError(error.message)
 			else localStorage.setItem('supabaseSession', JSON.stringify(data.session))
-			setLoading(false)
 		}
 	}
 	useEffect(() => {
 		if (loading) {
 			/* TODO: check of verifyTokenHash echt nodig is, lijkt namelijk alleen nodig bij iets als <a href="{{ .ConfirmationURL }}mubooks/#/auth/resetpassword?token={{.TokenHash}}&type=recovery"> Click here</a> to reset your password.</p>, waar we ook echt iets doen met de meegegeven properties... wat we nu niet doen volgens mij
 			 */
-			// "{{ .RedirectTo }}mubooks/#/auth/resetpassword?token={{ .Token }}&type=recovery&email={{ .Email }}" is een ander voorbeeld van een url die wellicht onnodig is.
-			verifyTokenHash()
-			setLoading(false)
+			verifyTokenHash().then(() => setLoading(false))
 		}
 	}, [loading])
 
 	function afterSbUpdate() {
-		setTimeout(() => navigate('/dashboard'), 1000)
+		setTimeout(() => navigate('/dashboard'), 1000) // TODO check if used
 	}
 
-	// resetpassword
 	const updateSbUser = async (form_userpass: string) => {
 		const { error } = await supabase.auth.updateUser({
 			password: form_userpass,
@@ -58,7 +54,7 @@ const ResetPasswordPage = () => {
 		if (e.currentTarget.account_password.value === e.currentTarget.account_password_again.value) {
 			const form_userpass: string = e.currentTarget.account_password.value.trim()
 			updateSbUser(form_userpass)
-		} else setError('Passwords do not match, try again (63)')
+		} else setError('Passwords do not match, try again')
 	}
 
 	if (loading) return <p>Loading...</p>
@@ -103,14 +99,12 @@ const ResetPasswordPage = () => {
 							</form>
 						</main>
 						<footer>
-							<Link to="/account/login">Login without changing password.</Link>
+							<Link className="btn-text" to="/account/login">
+								Login without changing password.
+							</Link>
 						</footer>
 					</div>
 				</div>
-				{/*
-					 <h1>Reset your password</h1>
-				<p>Redirecting to the login screen...</p>
-			   */}
 			</>
 		)
 	}

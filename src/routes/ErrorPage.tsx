@@ -34,6 +34,7 @@ const ErrorPage = () => {
 	}, [navigate])
 	return (
 		<>
+			<HeaderBranding />
 			<h1>Error</h1>
 			<h2>{errormessage}</h2>
 			<p>
