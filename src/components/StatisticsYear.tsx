@@ -155,25 +155,28 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					...
 				</button>
 				{showCbfDetails && (
-					<div className="mt05">
+					<div className="mt05 sf">
 						{bwp.length > 0 && (
 							<div>
 								* Books without pages defined *{' '}
-								<ul className="mt05">
+								<ul className="mt05 sf">
 									<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
 								</ul>
 							</div>
 						)}
 						{cbfm.map((c, index) => (
 							<div key={`cbfm${year}${index}`}>
-								{getMonthName(index)}: {c}
+								{getMonthName(index)}:{' '}
+								<b>
+									{c} {c === 1 ? 'book' : 'books'}
+								</b>
 								<br />
 							</div>
 						))}
 						<br />
-						Pages read: {cpf}
+						Pages read: <b>{cpf}</b>
 						<br />
-						Average pages per day: {appd}
+						Average pages per day: <b>{appd}</b>
 						<br />
 					</div>
 				)}
@@ -188,12 +191,14 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				{
 					// TODO: show title_short of books, including hash link to /savedbooks
 					showDpbDetails && (
-						<div className="mt05">
+						<div className="mt05 sf">
 							{dpb.map((b, index) => {
 								return (
 									<div key={`adpb${year}${index}`}>
-										{index} {index === 1 ? 'day' : 'days'}: {b} {b === 1 ? `book` : `books`}
-										<br />
+										{index} {index === 1 ? 'day' : 'days'}:{' '}
+										<b>
+											{b} {b === 1 ? `book` : `books`}
+										</b>
 									</div>
 								)
 							})}
@@ -213,7 +218,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 							...
 						</button>
 						{showStpbDetails && (
-							<div className="mt05">
+							<div className="mt05 sf">
 								{bwst.length > 0 && (
 									<div>
 										* Books without stars defined:{' '}
@@ -226,7 +231,10 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 									cstpb.map((b, index) => {
 										return (
 											<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
-												{index + 1} {index + 1 === 1 ? 'star' : 'stars'}: {b} {b === 1 ? 'book' : 'books'}
+												{index + 1} {index + 1 === 1 ? 'star' : 'stars'}:{' '}
+												<b>
+													{b} {b === 1 ? 'book' : 'books'}
+												</b>
 											</div>
 										)
 									})}
