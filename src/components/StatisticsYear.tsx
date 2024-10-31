@@ -157,6 +157,9 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				</button>
 				{showCbfDetails && (
 					<div className="mt05 sf">
+						{
+							// TODO: show title_short of books, including hash link to /savedbooks
+						}
 						{cbfm.map((c, index) => (
 							<div key={`cbfm${year}${index}`}>
 								{getMonthName(index)}:{' '}
@@ -192,21 +195,21 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				</button>
 				{
 					// TODO: show title_short of books, including hash link to /savedbooks
-					showDpbDetails && (
-						<div className="mt05 sf">
-							{dpb.map((b, index) => {
-								return (
-									<div key={`adpb${year}${index}`}>
-										{index} {index === 1 ? 'day' : 'days'}:{' '}
-										<b>
-											{b} {b === 1 ? `book` : `books`}
-										</b>
-									</div>
-								)
-							})}
-						</div>
-					)
 				}
+				{showDpbDetails && (
+					<div className="mt05 sf">
+						{dpb.map((b, index) => {
+							return (
+								<div key={`adpb${year}${index}`}>
+									{index} {index === 1 ? 'day' : 'days'}:{' '}
+									<b>
+										{b} {b === 1 ? `book` : `books`}
+									</b>
+								</div>
+							)
+						})}
+					</div>
+				)}
 				<br />
 			</article>
 			<article className="stats-item">
@@ -219,6 +222,9 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 						<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
 							...
 						</button>
+						{
+							// TODO: show title_short of books, including hash link to /savedbooks
+						}
 						{showStpbDetails && (
 							<div className="mt05 sf">
 								{cstpb.length > 0 &&
