@@ -108,6 +108,9 @@ form .notification {
 .sf {
 	font-size: 0.8em;
 }
+.fs-inherit {
+	font-size: inherit;
+}
 
 .ta-right {
 	text-align: right;

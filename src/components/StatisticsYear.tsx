@@ -4,6 +4,7 @@ import BooksWithoutStarsList from './BooksWithoutStarsList'
 import PieG from './PieG'
 import LineG2 from './LineG2'
 import LineG3 from './LineG3'
+import StatisticsFinishedInMonth from './StatisticsFinishedInMonth'
 
 const now: Date = new Date()
 const curYear = now.getFullYear()
@@ -125,6 +126,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	const [showCbfDetails, setShowCbfDetails] = useState<boolean>(false)
 	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
 	const [showStpbDetails, setShowStpbDetails] = useState<boolean>(false)
+	const [showBfmDetails, setShowBfmDetails] = useState<boolean>(false) // Bfm = Books Finished Monthly
 
 	const monthNames: string[] = [
 		'January',
@@ -143,10 +145,6 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	function getMonthName(i: number): string {
 		return monthNames[i]
 	}
-	/** Get Days Per Book Per Year Per Month */
-	function getDpbPyPm(year: number, month: number): void {
-		console.log('hola')
-	}
 
 	return (
 		<section className="stats-year">
@@ -161,26 +159,34 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				</button>
 				{showCbfDetails && (
 					<div className="mt05 sf">
-						{
-							// DOING: show title_short of books, including hash link to /finished
-						}
-						{cbfm.map((c, index) => (
-							<div key={`cbfm${year}${index}`}>
-								{getMonthName(index)}:{' '}
-								<b>
-									{c} {c === 1 ? 'book' : 'books'}
-								</b>
-								&nbsp;
-								{c > 0 && (
-									<button className="btn-text diblock h1em lh1em" onClick={() => getDpbPyPm(year, index)}>
-										...
-									</button>
-								)}
-								<br />
-							</div>
-						))}
+						{cbfm.map((c, index) => {
+							const yearmonth: number = year * 100 + (index + 1) // year 2022 index 2 > 202203
+							console.log('yearmonth:', yearmonth, typeof yearmonth)
+
+							return (
+								<div key={`cbfm${year}${index}`}>
+									{getMonthName(index)}:{' '}
+									<b>
+										{c} {c === 1 ? 'book' : 'books'}
+									</b>
+									&nbsp;
+									<br />
+									{showBfmDetails && (
+										<>
+											<ul className="mt0 mb0">
+												<StatisticsFinishedInMonth yearmonth={yearmonth} />
+											</ul>
+											{c > 0 && <br />}
+										</>
+									)}
+								</div>
+							)
+						})}
+						<button className="btn-text fs-inherit" onClick={() => setShowBfmDetails(!showBfmDetails)}>
+							{showBfmDetails ? 'hide' : 'show'} titles
+						</button>
 						<br />
-						Pages read: <b>{cpf}</b>
+						Total Pages read: <b>{cpf}</b>
 						<br />
 						Average pages per day: <b>{appd}</b>
 						<br />
