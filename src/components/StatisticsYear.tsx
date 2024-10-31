@@ -143,6 +143,10 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	function getMonthName(i: number): string {
 		return monthNames[i]
 	}
+	/** Get Days Per Book Per Year Per Month */
+	function getDpbPyPm(year: number, month: number): void {
+		console.log('hola')
+	}
 
 	return (
 		<section className="stats-year">
@@ -166,6 +170,12 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 								<b>
 									{c} {c === 1 ? 'book' : 'books'}
 								</b>
+								&nbsp;
+								{c > 0 && (
+									<button className="btn-text diblock h1em lh1em" onClick={() => getDpbPyPm(year, index)}>
+										...
+									</button>
+								)}
 								<br />
 							</div>
 						))}
