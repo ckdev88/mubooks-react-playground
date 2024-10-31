@@ -171,6 +171,16 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.single-small-form input[type='number'] {
+	padding: 0.3rem 1.8rem 0.3rem 0.3rem;
+	border-style: dashed;
+	border-width: 2px;
+	border-radius: 0.4rem;
+	margin-bottom: 0;
+	width: 100%;
+}
+
 .single-small-form input[type='text'] {
 	padding: 0.3rem 1.8rem 0.3rem 0.3rem;
 	border-style: dashed;

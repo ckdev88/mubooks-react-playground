@@ -32,8 +32,6 @@ const LoginCard = () => {
 					setUserIsLoggedIn(true)
 					setUsername(res.data.user?.user_metadata.screenname)
 					setUsermail(res.data.user?.user_metadata.email)
-					// TODO: apply notification later, in a separate branch
-					// setPopupNotification('Logging in...')
 				}
 			})
 			.catch(() => setError('Something unexpected happened, try again later.'))
