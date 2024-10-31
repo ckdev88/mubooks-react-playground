@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../../utils/supabase'
 import { useState, useEffect, useContext } from 'react'
-import { getUrlParamVal } from '../../Helpers'
 import { AppContext } from '../../App'
 import HeaderBranding from '../../components/HeaderBranding'
 
@@ -15,24 +14,8 @@ const ResetPasswordPage = () => {
 
 	const [loading, setLoading] = useState(true)
 
-	async function verifyTokenHash(): Promise<void> {
-		const token = getUrlParamVal(window.location.href, 'token')
-		const type = getUrlParamVal(window.location.href, 'type')
-		const email = getUrlParamVal(window.location.href, 'email')
-		console.log('verifyTokenHash started', token, type, email)
-		if (type === 'recovery' && token !== null) {
-			console.log('verifyTokenHash verified yesyesyes 1337331')
-			const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
-			if (error) setError(error.message)
-			else localStorage.setItem('supabaseSession', JSON.stringify(data.session))
-		}
-	}
 	useEffect(() => {
-		if (loading) {
-			/* TODO: check of verifyTokenHash echt nodig is, lijkt namelijk alleen nodig bij iets als <a href="{{ .ConfirmationURL }}mubooks/#/auth/resetpassword?token={{.TokenHash}}&type=recovery"> Click here</a> to reset your password.</p>, waar we ook echt iets doen met de meegegeven properties... wat we nu niet doen volgens mij
-			 */
-			verifyTokenHash().then(() => setLoading(false))
-		}
+		if (loading) setLoading(false) // TODO remove, can later be replaced by a Suspense-like condition
 	}, [loading])
 
 	function afterSbUpdate() {
