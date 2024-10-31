@@ -38,15 +38,15 @@ export default function SignupCard() {
 				<header>Let's create an account</header>
 				<main>
 					<form onSubmit={processSignupForm}>
-						<label htmlFor="screenname">
+						<label htmlFor="signup_screenname">
 							<div className="description">Screen name</div>
 							<input type="text" id="signup_screenname" name="screenname" autoComplete="off" />
 						</label>
-						<label htmlFor="email">
+						<label htmlFor="signup_email">
 							<div className="description">Email address: *</div>
 							<input type="email" id="signup_email" name="email" required autoComplete="off" />
 						</label>
-						<label htmlFor="password">
+						<label htmlFor="signup_password">
 							<div className="description">Password: *</div>
 							<input type="password" id="signup_password" name="password" required autoComplete="off" />
 						</label>

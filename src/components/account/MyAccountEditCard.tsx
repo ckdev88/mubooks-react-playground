@@ -21,7 +21,7 @@ export default function MyAccountEditCard() {
 				password: form_userpass,
 				data: { screenname: form_username },
 			})
-			if (error) console.log('Error updating user:', error)
+			if (error) console.log('Error updating user (24):', error) 
 			else {
 				afterSbUpdate(form_username, form_usermail)
 			}
@@ -31,7 +31,7 @@ export default function MyAccountEditCard() {
 				email: form_userpass,
 				data: { screenname: form_username },
 			})
-			if (error) console.log('Error updating user:', error)
+			if (error) console.log('Error updating user (34):', error)
 			else afterSbUpdate(form_username, form_usermail)
 		}
 	}
@@ -50,7 +50,7 @@ export default function MyAccountEditCard() {
 				<header>
 					<div>
 						Edit my account
-						<sub>Change your preferences</sub>
+						<sub>Change my preferences</sub>
 					</div>
 				</header>
 

@@ -1,8 +1,9 @@
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import { Link, redirect } from 'react-router-dom'
+import HeaderBranding from '../../components/HeaderBranding'
 
-const pageTitle = 'Check Mail Password Page'
+const pageTitle = 'Check your mailbox'
 // const currentPage = 'favorites'
 
 const CheckMailPasswordPage = () => {
@@ -16,6 +17,7 @@ const CheckMailPasswordPage = () => {
 	if (usermail !== '' && !userIsLoggedIn) {
 		return (
 			<>
+				<HeaderBranding />
 				<h1>{pageTitle}</h1>
 				<p>
 					<span>You should receive an email on</span>{' '}
@@ -29,21 +31,23 @@ const CheckMailPasswordPage = () => {
 	} else if (userIsLoggedIn) {
 		return (
 			<>
+				<HeaderBranding />
 				<h1>Not so fast!</h1>
 				<p>
-					You're already logged in, do you want to <Link to="/dashboard">return to your dashboard</Link> or
-					see <Link to="/account/profile">your profile here</Link>?
+					You're already logged in, do you want to <Link to="/dashboard">return to your dashboard</Link> or see
+					<Link to="/account/profile">your profile here</Link>?
 				</p>
 			</>
 		)
 	} else {
 		return (
 			<>
+				<HeaderBranding />
 				<h1>New here?</h1>
 				<p>
 					Are you trying to reset your password or log in?
 					<br />
-					<Link to="/account/login">Click here to go to the login screen</Link>.
+					<Link to="/account/login">Click here to log in or join</Link>.
 				</p>
 			</>
 		)
