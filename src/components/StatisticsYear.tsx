@@ -1,8 +1,3 @@
-// TODO: line-graph: show amount of books read per month; x: months of year, y: books
-// TODO: line-graph: show amount of pages read per month; x: months of year, y: pages
-// TODO: smoother line-graph: show amount of days to finish a book; x: days, y: number of books
-// TODO: circle-diagram showing the number of books per star rating
-// TODO: circle-diagram showing the number of books per spice rating
 import { useState } from 'react'
 import BooksWithoutPagesList from './BooksWithoutPagesList'
 import BooksWithoutStarsList from './BooksWithoutStarsList'
@@ -194,7 +189,6 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					...
 				</button>
 				{
-					// show the used data more verbosely
 					// TODO: show title_short of books, including hash link to /savedbooks
 					showDpbDetails && (
 						<div className="mt05">
@@ -210,19 +204,6 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					)
 				}
 				<br />
-				{/* --- in plaats hiervan PieG laten zien
-				cstpb.map((st, index) => {
-				return (
-				<li key={index}>
-				{index + 1} stars: {st}
-				</li>
-				)
-				})
-				*/}
-				{/*
-				 *	DPBer(dpb)
-				 *
-				 */}
 			</article>
 			<article className="stats-item">
 				<h3 className="mb0">How I rated my books in {year}</h3>
