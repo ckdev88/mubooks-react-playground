@@ -126,9 +126,6 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
 	const [showStpbDetails, setShowStpbDetails] = useState<boolean>(false)
 
-	// TODO: move tmpSubjects into something a bit more durable
-	const tmpSubjects: string[] = ['Books', 'Pages']
-
 	const monthNames: string[] = [
 		'January',
 		'February',
@@ -152,7 +149,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<h1>Your numbers for {year}</h1>
 			<article className="stats-item">
 				<h3 className="mb0">Books & pages per month</h3>
-				<LineG2 data={cbfm} data2={cpfm} subjects={tmpSubjects} />
+				<LineG2 data={cbfm} data2={cpfm} subjects={['Books', 'Pages']} />
 				Books finished in {year}: <b>{cbf}</b> {cbwp > 0 && <> * </>}{' '}
 				<button onClick={() => setShowCbfDetails(!showCbfDetails)} className="btn-text diblock">
 					...
