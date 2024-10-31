@@ -11,15 +11,17 @@ const ResetPasswordPage = () => {
 	const navigate = useNavigate()
 	const [error, setError] = useState('')
 
-	if (userIsLoggedIn) navigate('/dashboard')
+	if (userIsLoggedIn) navigate('/dashboard#434334')
 
 	const [loading, setLoading] = useState(true)
 
-	async function verifyTokenHash() {
+	async function verifyTokenHash(): Promise<void> {
 		const token = getUrlParamVal(window.location.href, 'token')
 		const type = getUrlParamVal(window.location.href, 'type')
 		const email = getUrlParamVal(window.location.href, 'email')
+		console.log('verifyTokenHash started', token, type, email)
 		if (type === 'recovery' && token !== null) {
+			console.log('verifyTokenHash verified yesyesyes 1337331')
 			const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
 			if (error) setError(error.message)
 			else localStorage.setItem('supabaseSession', JSON.stringify(data.session))
