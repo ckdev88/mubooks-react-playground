@@ -150,20 +150,13 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			<article className="stats-item">
 				<h3 className="mb0">Books & pages per month</h3>
 				<LineG2 data={cbfm} data2={cpfm} subjects={['Books', 'Pages']} />
-				Books finished in {year}: <b>{cbf}</b> {cbwp > 0 && <> * </>}{' '}
+				Books finished in {year}: <b>{cbf}</b>
+				{cbwp > 0 && <span className="sf">*</span>}{' '}
 				<button onClick={() => setShowCbfDetails(!showCbfDetails)} className="btn-text diblock">
 					...
 				</button>
 				{showCbfDetails && (
 					<div className="mt05 sf">
-						{bwp.length > 0 && (
-							<div>
-								* Books without pages defined *{' '}
-								<ul className="mt05 sf">
-									<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
-								</ul>
-							</div>
-						)}
 						{cbfm.map((c, index) => (
 							<div key={`cbfm${year}${index}`}>
 								{getMonthName(index)}:{' '}
@@ -178,6 +171,15 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 						<br />
 						Average pages per day: <b>{appd}</b>
 						<br />
+						<br />
+						{bwp.length > 0 && (
+							<div>
+								<i>* Books without pages defined</i>
+								<ul className="mt0">
+									<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
+								</ul>
+							</div>
+						)}
 					</div>
 				)}
 			</article>
@@ -213,20 +215,12 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				Average stars per book: <b>{astpb}</b>
 				{cbwst > 0 && (
 					<>
-						*
+						<span className="sf">*</span>
 						<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
 							...
 						</button>
 						{showStpbDetails && (
 							<div className="mt05 sf">
-								{bwst.length > 0 && (
-									<div>
-										* Books without stars defined:{' '}
-										<ul className="mt0">
-											<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
-										</ul>
-									</div>
-								)}
 								{cstpb.length > 0 &&
 									cstpb.map((b, index) => {
 										return (
@@ -238,6 +232,16 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 											</div>
 										)
 									})}
+
+								{bwst.length > 0 && (
+									<div>
+										<br />
+										<i>* Books without stars defined: </i>
+										<ul className="mt0">
+											<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
+										</ul>
+									</div>
+								)}
 							</div>
 						)}
 					</>
