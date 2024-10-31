@@ -158,7 +158,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				{showCbfDetails && (
 					<div className="mt05 sf">
 						{
-							// TODO: show title_short of books, including hash link to /savedbooks
+							// DOING: show title_short of books, including hash link to /finished
 						}
 						{cbfm.map((c, index) => (
 							<div key={`cbfm${year}${index}`}>
@@ -194,7 +194,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					...
 				</button>
 				{
-					// TODO: show title_short of books, including hash link to /savedbooks
+					// TODO: show title_short of books, including hash link to /finished
 				}
 				{showDpbDetails && (
 					<div className="mt05 sf">
@@ -223,7 +223,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 							...
 						</button>
 						{
-							// TODO: show title_short of books, including hash link to /savedbooks
+							// TODO: show title_short of books, including hash link to /finished
 						}
 						{showStpbDetails && (
 							<div className="mt05 sf">
