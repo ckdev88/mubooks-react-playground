@@ -5,6 +5,7 @@ import PieG from './PieG'
 import LineG2 from './LineG2'
 import LineG3 from './LineG3'
 import StatisticsFinishedInMonth from './StatisticsFinishedInMonth'
+import StatisticsDaysPerBookInYear from './StatisticsDaysPerBookInYear'
 import { getDurationDays } from '../Helpers'
 
 const now: Date = new Date()
@@ -84,6 +85,7 @@ const countBookValues = ({ myBooksArr, year }: { myBooksArr: Books; year: number
 				const date_difference: number = getDurationDays(b.date_reading, b.date_finished)
 				if (dpb[date_difference] === undefined) dpb[date_difference] = 0
 				dpb[date_difference] = dpb[date_difference] + 1
+				// NOTE: see StatisticsDaysPerBookInYear for further handling, might be better to merge and optimize these two
 			}
 		}
 	})
@@ -107,6 +109,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	})
 	const [showCbfDetails, setShowCbfDetails] = useState<boolean>(false)
 	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
+	const [showDpbDetails2, setShowDpbDetails2] = useState<boolean>(false)
 	const [showStpbDetails, setShowStpbDetails] = useState<boolean>(false)
 	const [showBfmDetails, setShowBfmDetails] = useState<boolean>(false) // Bfm = Books Finished Monthly
 
@@ -143,7 +146,6 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					<div className="mt05 sf">
 						{cbfm.map((c, index) => {
 							const yearmonth: number = year * 100 + (index + 1) // year 2022 index 2 > 202203
-							console.log('yearmonth:', yearmonth, typeof yearmonth)
 
 							return (
 								<div key={`cbfm${year}${index}`}>
@@ -191,23 +193,30 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				<button className="btn-text diblock" onClick={() => setShowDpbDetails(!showDpbDetails)}>
 					...
 				</button>
-				{
-					// TODO: show title_short of books, including hash link to /finished
-				}
-				{showDpbDetails && (
-					<div className="mt05 sf">
-						{dpb.map((b, index) => {
-							return (
-								<div key={`adpb${year}${index}`}>
-									{index} {index === 1 ? 'day' : 'days'}:{' '}
-									<b>
-										{b} {b === 1 ? `book` : `books`}
-									</b>
-								</div>
-							)
-						})}
-					</div>
-				)}
+				<div className={showDpbDetails ? 'mt05 sf' : 'mt05 sf dnone'}>
+					<>
+						<div className={showDpbDetails2 ? 'dnone' : 'dblock'}>
+							{dpb.map((b, index) => {
+								return (
+									<div key={`adpb${year}${index}`}>
+										{index} {index === 1 ? 'day' : 'days'}:{' '}
+										<b>
+											{b} {b === 1 ? `book` : `books`}
+										</b>
+									</div>
+								)
+							})}
+						</div>
+					</>
+					{showDpbDetails2 && (
+						<>
+							<StatisticsDaysPerBookInYear year={year} />
+						</>
+					)}
+					<button className="btn-text fs-inherit" onClick={() => setShowDpbDetails2(!showDpbDetails2)}>
+						{!showDpbDetails2 ? 'show titles' : 'hide titles'}
+					</button>
+				</div>
 				<br />
 			</article>
 			<article className="stats-item">
