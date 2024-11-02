@@ -129,6 +129,7 @@ interface Book {
 	review_fav_quote?: Book['review_text']
 	search_tropes?: BookTropes
 	subject?: BookTropes
+	days?: number
 }
 type BookTropes = string[]
 
@@ -165,6 +166,11 @@ interface BookWithoutPages {
 }
 type BooksWithoutStars = BookWithoutStars[]
 interface BookWithoutStars {
+	id: Book['id']
+	title_short: Book['title_short']
+}
+type BooksDaysPerBooks = BookDaysPerBook[]
+interface BookDaysPerBook {
 	id: Book['id']
 	title_short: Book['title_short']
 }
