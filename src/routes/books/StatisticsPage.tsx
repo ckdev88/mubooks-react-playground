@@ -6,8 +6,6 @@ import { AppContext } from '../../App'
 import getFinishedBooksStatsYears from '../../functions/getFinishedBooksStatsYears'
 import StatisticsYear from '../../components/StatisticsYear'
 
-// const pageTitle = 'Mu Statistics'
-
 const StatisticsPage = () => {
 	const { userMyBooks } = useContext(AppContext)
 	const [years, setYears] = useState<number[]>([])
@@ -16,7 +14,6 @@ const StatisticsPage = () => {
 		setYears(yearArr)
 	}, [userMyBooks])
 
-			// 		<h1>{pageTitle}</h1>
 	return (
 		<>
 			{years.map((y) => {

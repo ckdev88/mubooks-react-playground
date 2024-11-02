@@ -5,7 +5,9 @@ const BooksWithoutStarsList = ({ bwst, year }: { bwst: BooksWithoutStars; year: 
 		const refer: string = 'finished' + `#${cleanAnchor(b.title_short)}_${b.id}`
 		return (
 			<li key={'bwst' + year + b.id}>
-				<HashLink className='a-text' to={`/${refer}`}>{b.title_short}</HashLink>
+				<HashLink className="a-text italic" to={`/${refer}`}>
+					{b.title_short}
+				</HashLink>
 				<br />
 			</li>
 		)
