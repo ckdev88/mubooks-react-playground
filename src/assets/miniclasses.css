@@ -194,3 +194,13 @@ input[type='submit'].dnone {
 .cbadgefg {
 	color: var(--badgefg);
 }
+/* for testing purposes */
+.bgred {
+	background-color: red !important;
+}
+.bgblue {
+	background-color: blue !important;
+}
+.bglime {
+	background-color: lime !important;
+}

@@ -6,6 +6,7 @@ import LineG2 from './LineG2'
 import LineG3 from './LineG3'
 import StatisticsFinishedInMonth from './StatisticsFinishedInMonth'
 import StatisticsDaysPerBookInYear from './StatisticsDaysPerBookInYear'
+import StatisticsStarsPerBookInYear from './StatisticsStarsPerBookInYear'
 import { getDurationDays } from '../Helpers'
 
 const now: Date = new Date()
@@ -111,6 +112,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 	const [showDpbDetails, setShowDpbDetails] = useState<boolean>(false)
 	const [showDpbDetails2, setShowDpbDetails2] = useState<boolean>(false)
 	const [showStpbDetails, setShowStpbDetails] = useState<boolean>(false)
+	const [showStpbDetails2, setShowStpbDetails2] = useState<boolean>(false)
 	const [showBfmDetails, setShowBfmDetails] = useState<boolean>(false) // Bfm = Books Finished Monthly
 
 	const monthNames: string[] = [
@@ -208,11 +210,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 							})}
 						</div>
 					</>
-					{showDpbDetails2 && (
-						<>
-							<StatisticsDaysPerBookInYear year={year} />
-						</>
-					)}
+					{showDpbDetails2 && <StatisticsDaysPerBookInYear year={year} />}
 					<button className="btn-text fs-inherit" onClick={() => setShowDpbDetails2(!showDpbDetails2)}>
 						{!showDpbDetails2 ? 'show titles' : 'hide titles'}
 					</button>
@@ -229,34 +227,39 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 						<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
 							...
 						</button>
-						{
-							// TODO: show title_short of books, including hash link to /finished
-						}
-						{showStpbDetails && (
-							<div className="mt05 sf">
-								{cstpb.length > 0 &&
-									cstpb.map((b, index) => {
-										return (
-											<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
-												{index + 1} {index + 1 === 1 ? 'star' : 'stars'}:{' '}
-												<b>
-													{b} {b === 1 ? 'book' : 'books'}
-												</b>
-											</div>
-										)
-									})}
-
-								{bwst.length > 0 && (
-									<div>
-										<br />
-										<i>* Books without stars defined: </i>
-										<ul className="mt0">
-											<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
-										</ul>
+						<div className={showStpbDetails ? 'mt05 sf ' : 'mt05 sf dnone'}>
+							{cstpb.length > 0 && (
+								<>
+									<div className={showStpbDetails2 ? 'dnone' : 'dblock'}>
+										{cstpb.map((b, index) => {
+											return (
+												<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
+													{' '}
+													{index + 1} {index + 1 === 1 ? 'star' : 'stars'}:{' '}
+													<b>{b} {b === 1 ? 'book' : 'books'}{' '} </b>
+												</div>
+											)
+										})}
 									</div>
-								)}
-							</div>
-						)}
+									{showStpbDetails2 && <StatisticsStarsPerBookInYear year={year} />}{' '}
+									<button className="btn-text fs-inherit" onClick={() => setShowStpbDetails2(!showStpbDetails2)}>
+										{' '}
+										{!showStpbDetails2 ? 'show titles' : 'hide titles'}{' '}
+									</button>
+								</>
+							)}
+
+							{bwst.length > 0 && (
+								<div>
+									{' '}
+									<br /> <i>* Books without stars defined: </i>{' '}
+									<ul className="mt0">
+										{' '}
+										<BooksWithoutStarsList bwst={bwst} year={year} key={year} />{' '}
+									</ul>{' '}
+								</div>
+							)}
+						</div>
 					</>
 				)}
 			</article>
