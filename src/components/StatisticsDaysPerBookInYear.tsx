@@ -12,6 +12,7 @@ interface ConciseDaysPerBook {
 type ArrayConciseDaysPerBook = ConciseDaysPerBook[]
 
 type OutputPerDaysAmount = {
+	days: number
 	amount: number
 	books: {
 		id: string
@@ -51,7 +52,7 @@ function getDpbData(userMyBooks: Books, year: number) {
 		const { id, title_short, days } = bitem
 		if (days) {
 			if (!groupedItems[days]) {
-				groupedItems[days] = { amount: 0, books: [] }
+				groupedItems[days] = { days: days, amount: 0, books: [] }
 			}
 
 			groupedItems[days].amount++
@@ -59,8 +60,8 @@ function getDpbData(userMyBooks: Books, year: number) {
 		}
 	})
 
-	for (const key in groupedItems) {
-		outputArray.push(groupedItems[key])
+	for (const days in groupedItems) {
+		outputArray.push(groupedItems[days])
 	}
 	return outputArray
 }
@@ -73,8 +74,8 @@ const StatisticsDaysPerBookInYear = ({ year }: { year: number }) => {
 		<div>
 			{dpbd.length > 0 &&
 				dpbd.map((b, index) => (
-					<div key={`${index}`}>
-						{index} days:{' '}
+					<div key={`dpbd${year}${index}`}>
+						{b.days} days:{' '}
 						<b>
 							{b.amount} {b.amount === 1 ? 'book' : 'books'}{' '}
 						</b>
