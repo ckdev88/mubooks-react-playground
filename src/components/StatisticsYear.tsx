@@ -176,9 +176,9 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 						<br />
 						Average pages per day: <b>{appd}</b>
 						<br />
-						<br />
 						{bwp.length > 0 && (
 							<div>
+								<br />
 								<i>* Books without pages defined</i>
 								<ul className="mt0">
 									<BooksWithoutPagesList bwp={bwp} year={year} key={year} />
@@ -201,9 +201,9 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 							{dpb.map((b, index) => {
 								return (
 									<div key={`adpb${year}${index}`}>
-										{index} {index === 1 ? 'day' : 'days'}:{' '}
+										{index} {`day${index !== 1 ? 's' : ''}`}:{' '}
 										<b>
-											{b} {b === 1 ? `book` : `books`}
+											{b} {`book${b !== 1 ? 's' : ''}`}
 										</b>
 									</div>
 								)
@@ -234,29 +234,26 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 										{cstpb.map((b, index) => {
 											return (
 												<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
-													{' '}
 													{index + 1} {index + 1 === 1 ? 'star' : 'stars'}:{' '}
-													<b>{b} {b === 1 ? 'book' : 'books'}{' '} </b>
+													<b>{`${b} ${b === 1 ? 'book' : 'books'}`}</b>
 												</div>
 											)
 										})}
 									</div>
 									{showStpbDetails2 && <StatisticsStarsPerBookInYear year={year} />}{' '}
 									<button className="btn-text fs-inherit" onClick={() => setShowStpbDetails2(!showStpbDetails2)}>
-										{' '}
-										{!showStpbDetails2 ? 'show titles' : 'hide titles'}{' '}
+										{`${!showStpbDetails2 ? 'show titles' : 'hide titles'}`}
 									</button>
 								</>
 							)}
 
 							{bwst.length > 0 && (
 								<div>
-									{' '}
-									<br /> <i>* Books without stars defined: </i>{' '}
+									<br />
+									<i>* Books without stars defined: </i>
 									<ul className="mt0">
-										{' '}
-										<BooksWithoutStarsList bwst={bwst} year={year} key={year} />{' '}
-									</ul>{' '}
+										<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
+									</ul>
 								</div>
 							)}
 						</div>
