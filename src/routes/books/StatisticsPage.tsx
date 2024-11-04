@@ -1,12 +1,9 @@
 // TODO: create graphs when all data is available ... STARTED
 // TODO: create placeholder for when no stats yet
-// TODO: show logo/icon in h1
 import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../App'
 import getFinishedBooksStatsYears from '../../functions/getFinishedBooksStatsYears'
 import StatisticsYear from '../../components/StatisticsYear'
-
-// const pageTitle = 'Mu Statistics'
 
 const StatisticsPage = () => {
 	const { userMyBooks } = useContext(AppContext)
@@ -16,7 +13,6 @@ const StatisticsPage = () => {
 		setYears(yearArr)
 	}, [userMyBooks])
 
-			// 		<h1>{pageTitle}</h1>
 	return (
 		<>
 			{years.map((y) => {

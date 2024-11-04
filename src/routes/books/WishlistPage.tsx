@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
+import Heading from '../../components/ui/Heading'
 
 const pageTitle = 'Mu Wishlist'
 const currentPage = 'wishlist'
@@ -25,22 +26,25 @@ const WishlistPage = () => {
 
 	return (
 		<>
-			<h1>
-				{pageTitle}
-				<sub>
-					{bookFilter.length > 0 && booksFiltered.length > 0 ? (
-						<>
-							Results for <i>{bookFilter}</i> : {booksFiltered.length}
-						</>
-					) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
-						<>
-							No book titles found for <i>{bookFilter}.</i>
-						</>
-					) : (
-						<> All the books I will read soon: {booksFiltered.length}</>
-					)}
-				</sub>
-			</h1>
+			<Heading
+				text={pageTitle}
+				icon={'icon-wishlist-white.png'}
+				sub={
+					<>
+						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
+							<>
+								Results for <i>{bookFilter}</i> : {booksFiltered.length}
+							</>
+						) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
+							<>
+								No book titles found for <i>{bookFilter}.</i>
+							</>
+						) : (
+							<> All the books I will read soon: {booksFiltered.length}</>
+						)}
+					</>
+				}
+			/>
 			{!hasbooks && bookFilter === '' && (
 				<>
 					<h4>No books on mu wishlist yet.</h4>

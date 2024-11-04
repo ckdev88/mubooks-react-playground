@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import TropesInMyBooks from '../../components/TropesInMyBooks'
 import TropesPrefs from '../../components/TropesPrefs'
+import Heading from '../../components/ui/Heading'
 
 export const TropesPageContext = createContext<TropesPageContextType>({} as TropesPageContextType)
 
@@ -35,7 +36,7 @@ const TropesPage = () => {
 			}}
 		>
 			<>
-				<h1>My Tropes</h1>
+				<Heading text='My Tropes' icon='icon-tropes-light.png'/>
 				<TropesPrefs field="tropes_liked" />
 				<TropesPrefs field="tropes_disliked" />
 				<TropesInMyBooks page={currentPage} />

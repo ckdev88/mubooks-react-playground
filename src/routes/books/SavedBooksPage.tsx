@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import BooksOverviewPage from './BooksOverviewPage'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
+import Heading from '../../components/ui/Heading'
 
 const pageTitle = 'Saved books'
 const currentPage = 'savedbooks'
@@ -23,22 +24,25 @@ export default function SavedBooksPage() {
 
 	return (
 		<>
-			<h1>
-				{pageTitle}
-				<sub>
-					{bookFilter.length > 0 && booksFiltered.length > 0 ? (
-						<>
-							Results for <i>{bookFilter}</i> : {booksFiltered.length}
-						</>
-					) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
-						<>
-							No book titles found for <i>{bookFilter}.</i>
-						</>
-					) : (
-						<> My books which are in whatever list: {booksFiltered.length} </>
-					)}
-				</sub>
-			</h1>
+			<Heading
+				text={pageTitle}
+				icon={'save-books-icon.png'}
+				sub={
+					<>
+						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
+							<>
+								Results for <i>{bookFilter}</i> : {booksFiltered.length}
+							</>
+						) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
+							<>
+								No book titles found for <i>{bookFilter}.</i>
+							</>
+						) : (
+							<> My books which are in whatever list: {booksFiltered.length} </>
+						)}
+					</>
+				}
+			/>
 			{!hasbooks && bookFilter === '' && (
 				<>
 					<p>

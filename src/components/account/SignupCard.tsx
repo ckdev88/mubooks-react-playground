@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
+import Heading from '../ui/Heading'
 
 async function userSignup(user: User) {
 	const signup = await supabase.auth.signUp(user)
@@ -35,23 +36,25 @@ export default function SignupCard() {
 	return (
 		<>
 			<article className="card" id="card-signup">
-				<header>Let's create an account</header>
+				<header>
+					<Heading text="Let's create an account" sub="Have your account in a few seconds" />
+				</header>
 				<main>
 					<form onSubmit={processSignupForm}>
-						<label htmlFor="screenname">
+						<label htmlFor="signup_screenname">
 							<div className="description">Screen name</div>
 							<input type="text" id="signup_screenname" name="screenname" autoComplete="off" />
 						</label>
-						<label htmlFor="email">
+						<label htmlFor="signup_email">
 							<div className="description">Email address: *</div>
 							<input type="email" id="signup_email" name="email" required autoComplete="off" />
 						</label>
-						<label htmlFor="password">
+						<label htmlFor="signup_password">
 							<div className="description">Password: *</div>
 							<input type="password" id="signup_password" name="password" required autoComplete="off" />
 						</label>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-						<button className='btn-lg'>Create account</button>
+						<button className="btn-lg">Create account</button>
 					</form>
 				</main>
 				<footer className="content-right">

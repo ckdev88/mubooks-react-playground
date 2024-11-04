@@ -1,13 +1,17 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { getUrlParamVal } from '../Helpers'
 import { useNavigate } from 'react-router-dom'
 import { cleanSigns } from '../helpers/cleanInput'
+import HeaderBranding from '../components/HeaderBranding'
+import { AppContext } from '../App'
 
 const url = window.location.href
 
 const ErrorPage = () => {
+	const { setUserIsLoggedIn } = useContext(AppContext)
 	const navigate = useNavigate()
+	setUserIsLoggedIn(false)
 	const [countdown0, setCountdown0] = useState('')
 	const [countdown1, setCountdown1] = useState('')
 
@@ -31,9 +35,11 @@ const ErrorPage = () => {
 				}, 1000)
 			}, 1000)
 		}, 200)
-	}, [navigate])
+	}, [])
+
 	return (
 		<>
+			<HeaderBranding />
 			<h1>Error</h1>
 			<h2>{errormessage}</h2>
 			<p>

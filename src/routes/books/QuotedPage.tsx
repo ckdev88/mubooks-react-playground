@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import BooksOverviewPage from './BooksOverviewPage'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
+import Heading from '../../components/ui/Heading'
 
 const pageTitle = 'Mu Quotes'
 const currentPage = 'quoted'
@@ -19,9 +20,11 @@ const QuotedPage = () => {
 
 	return (
 		<>
-			<h1>
-				{pageTitle} <sub>My books with quotes to remember: {quotedbooks.length}</sub>
-			</h1>
+			<Heading
+				text={pageTitle}
+				icon={'save-books-icon.png'}
+				sub={`My books with quotes to remember: ${quotedbooks.length}`}
+			/>
 			<div className={hasBooks === true ? 'dnone' : 'dblock'}>
 				<h4>No books added yet, find them and add them.</h4>
 				<p>

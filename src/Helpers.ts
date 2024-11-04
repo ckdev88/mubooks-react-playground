@@ -80,4 +80,36 @@ function getUrlParamVal(url: string, key: string, hash: boolean = false): string
 	return ''
 }
 
-export { isUrl, getOlCover, getBookCover, debounce, openCalendarPopUp, shuffleArray, getUrlParamVal, getOlPagesMedian }
+function getDurationDays(date_reading: Book['date_reading'], date_finished: Book['date_finished']): number {
+	/** Date Reading .. leftover will be Day Reading */
+	if (date_reading === undefined || date_finished === undefined) return -1
+	/** Date Reading Year */
+	const dry: number = Math.floor(date_reading / 10000)
+	date_reading -= dry * 10000
+	/** Date Reading Month */
+	const drm: number = Math.floor(date_reading / 100)
+	date_reading -= drm * 100
+	const date_reading_date = new Date(dry, drm, date_reading)
+	/** Date Finished .. leftover of date_reading will be Day Finished */
+	/** Date Finished Year */
+	const dfy: number = Math.floor(date_finished / 10000)
+	date_finished -= dfy * 10000
+	/** Date Finished Month */
+	const dfm: number = Math.floor(date_finished / 100)
+	date_finished -= dfm * 100
+	const date_finished_date: Date = new Date(dfy, dfm, date_finished)
+	const date_difference: number = (date_finished_date.getTime() - date_reading_date.getTime()) / 1000 / 3600 / 24
+	return date_difference
+}
+
+export {
+	isUrl,
+	getOlCover,
+	getBookCover,
+	debounce,
+	openCalendarPopUp,
+	shuffleArray,
+	getUrlParamVal,
+	getOlPagesMedian,
+	getDurationDays,
+}

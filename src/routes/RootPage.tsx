@@ -52,8 +52,8 @@ const RootPage = () => {
 		if (!checkApiErrorCallback()) {
 			if (loggedin) navigateTo = '/dashboard'
 			else {
-				navigateTo = '/account/login'
 				if (getUrlParamVal(url, 'type') === 'recovery') navigateTo = '/auth/resetpassword'
+				else navigateTo = '/account/login' // main redirection on account related error
 			}
 		} else navigateTo = '/error?error_description=' + apiErrorsCallback().error_description
 
@@ -65,7 +65,9 @@ const RootPage = () => {
 		} else {
 			if (userIsLoggedIn) setUserIsLoggedIn(true)
 			setTimeout(() => {
-				if (getUrlParamVal(url, 'type') === 'recover') navigateTo = '/auth/resetpassword'
+				if (getUrlParamVal(url, 'type') === 'recover') { // TODO is this ever used? recover / recovery
+					navigateTo = '/auth/resetpassword'
+				}
 			}, 1500)
 			navigate(navigateTo)
 		}
@@ -86,7 +88,7 @@ const RootPage = () => {
 			<main id="main">
 				<div>
 					Redirecting to wherever you should be right now... <br />
-					<a href="https://ckdev88.github.io/mubooks/#/dashboard">dashboard</a>
+					<a href="/dashboard">dashboard</a>
 					<br />
 					<Link to="/auth/resetpassword">password reset page</Link>
 				</div>
