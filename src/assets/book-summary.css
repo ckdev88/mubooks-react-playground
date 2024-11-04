@@ -189,8 +189,8 @@
 	margin-bottom: 0;
 	width: 100%;
 }
-.single-small-form input[type=text]:focus,
-.single-small-form input[type=text]:active {
+.single-small-form input[type='text']:focus,
+.single-small-form input[type='text']:active {
 	border-style: solid;
 }
 .single-small-form + .btn-text {
@@ -249,11 +249,9 @@
 	color: var(--primary);
 	font-weight: bold;
 }
-.book-summary .tropes,
-.book-summary .marks,
-.book-summary .book-started-finished,
-.book-summary .article-main .review-text {
-	padding-top: 0.5rem;
+.book-summary .article-main .review-text,
+.book-summary .book-started-finished {
+	padding-top: 0.85rem;
 }
 .book-summary .article-main {
 	position: relative;

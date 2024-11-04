@@ -36,7 +36,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		if (bookTropes === undefined) return
 		return (
-			<div className="tropes clr mb0">
+			<div className="tropes clr mb0 pt05">
 				{bookTropes.map((trope, index) => (
 					<div className="trope badge" key={'trope' + bookid + index}>
 						{trope}
@@ -50,7 +50,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 						className={showTropesForm ? 'btn-sm mb0 active trope_add' : 'btn-sm mb0 trope_add'}
 						onClick={() => setShowTropesForm(!showTropesForm)}
 					>
-						{bookTropes.length > 0 ? <>+</> : <>Add tropes</>}
+						{bookTropes.length > 0 ? <>+</> : <>Add Tropes</>}
 					</button>
 				)}
 			</div>
