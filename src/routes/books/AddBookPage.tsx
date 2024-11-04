@@ -10,6 +10,7 @@ import BookSummaryTitle from '../../components/BookSummaryTitle'
 import { AppContext } from '../../App'
 import updateEntriesDb from '../../functions/updateEntriesDb'
 import { cleanAnchor, cleanInput } from '../../helpers/cleanInput'
+import Heading from '../../components/ui/Heading'
 
 const pageTitle: string = 'Add a book'
 
@@ -197,10 +198,7 @@ const AddBookPage = () => {
 
 	return (
 		<>
-			<h1>
-				{pageTitle}
-				<sub>See your preview below</sub>
-			</h1>
+			<Heading text={pageTitle} sub="See your preview below" />
 			<form onSubmit={processAbForm}>
 				<fieldset style={{ display: 'flex', flexDirection: 'column' }}>
 					<label htmlFor="abTitle">

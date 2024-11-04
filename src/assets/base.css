@@ -11,7 +11,8 @@ body {
 	color: var(--text-primary);
 }
 
-.section-badges,.reviews .tropes {
+.section-badges,
+.reviews .tropes {
 	margin-left: -0.35rem;
 	margin-right: -0.35rem;
 	padding-left: 0;
@@ -57,7 +58,7 @@ h2 {
 
 h1 {
 	text-shadow: 2px 2px 0 var(--shadetextcolor);
-	margin-bottom: 1rem;
+	margin-bottom: 1.5rem;
 	font-size: 1.6rem;
 }
 
@@ -140,4 +141,3 @@ label:focus-within .description {
 	color: var(--primary);
 	font-weight: bold;
 }
-

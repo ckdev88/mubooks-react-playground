@@ -21,7 +21,7 @@ export default function MyAccountCard() {
 	return (
 		<div className="card">
 			<header>
-				<Heading text="My account" icon="profile-icon.svg" sub={<sub>An overview of my profile</sub>} />
+				<Heading text="My account" icon="profile-icon.svg" sub="An overview of my profile" />
 			</header>
 			<main>
 				<dl>

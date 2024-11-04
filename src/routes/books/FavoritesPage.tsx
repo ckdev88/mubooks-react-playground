@@ -30,7 +30,7 @@ const FavoritesPage = () => {
 				text={pageTitle}
 				icon={'favs-icon.png'}
 				sub={
-					<sub>
+					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
 							<>
 								Results for <i>{bookFilter}</i> : {booksFiltered.length}
@@ -42,7 +42,7 @@ const FavoritesPage = () => {
 						) : (
 							<>Beloved and adored books: {booksFiltered.length}</>
 						)}
-					</sub>
+					</>
 				}
 			/>
 			{!hasbooks && bookFilter === '' && (
