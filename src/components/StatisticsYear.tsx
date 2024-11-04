@@ -8,6 +8,7 @@ import StatisticsFinishedInMonth from './StatisticsFinishedInMonth'
 import StatisticsDaysPerBookInYear from './StatisticsDaysPerBookInYear'
 import StatisticsStarsPerBookInYear from './StatisticsStarsPerBookInYear'
 import countBookValues from '../functions/countBookValues'
+import Heading from './ui/Heading'
 
 const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number }) => {
 	const { cbf, cpf, cbfm, cpfm, cbwp, adpb, appd, astpb, cstpb, bwp, bwst, cbwst, dpb } = countBookValues({
@@ -41,9 +42,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 
 	return (
 		<section className="stats-year">
-			<h1 className="h1-with-icon">
-				Your numbers for {year} <img src="./img/graph-icon.jpg" alt="" className="h1-icon" />
-			</h1>
+			<Heading text={`Your numbers for ${year}`} icon="graph-icon.jpg" />
 			<article className="stats-item">
 				<h3 className="mb0">Books & pages per month</h3>
 				<LineG2 data={cbfm} data2={cpfm} subjects={['Books', 'Pages']} />
