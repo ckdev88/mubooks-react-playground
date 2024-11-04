@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'
 import { Link } from 'react-router-dom'
+import Heading from '../../components/ui/Heading'
 
 const pageTitle: string = 'Favorites'
 const currentPage: Page = 'favorites'
@@ -25,23 +26,25 @@ const FavoritesPage = () => {
 
 	return (
 		<>
-			<h1>
-				{pageTitle}
-				<sub>
-					{bookFilter.length > 0 && booksFiltered.length > 0 ? (
-						<>
-							Results for <i>{bookFilter}</i> : {booksFiltered.length}
-						</>
-					) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
-						<>
-							No book titles found for <i>{bookFilter}.</i>
-						</>
-					) : (
-						<>Beloved and adored books: {booksFiltered.length}</>
-					)}
-				</sub>
-			</h1>
-
+			<Heading
+				text={pageTitle}
+				icon={'favs-icon.png'}
+				sub={
+					<sub>
+						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
+							<>
+								Results for <i>{bookFilter}</i> : {booksFiltered.length}
+							</>
+						) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
+							<>
+								No book titles found for <i>{bookFilter}.</i>
+							</>
+						) : (
+							<>Beloved and adored books: {booksFiltered.length}</>
+						)}
+					</sub>
+				}
+			/>
 			{!hasbooks && bookFilter === '' && (
 				<>
 					<h4>No books marked as favorite yet.</h4>

@@ -42,7 +42,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 
 	return (
 		<section className="stats-year">
-			<Heading text={`Your numbers for ${year}`} icon="./img/graph-icon.jpg" />
+			<Heading text={`Your numbers for ${year}`} icon="graph-icon.jpg" />
 			<article className="stats-item">
 				<h3 className="mb0">Books & pages per month</h3>
 				<LineG2 data={cbfm} data2={cpfm} subjects={['Books', 'Pages']} />

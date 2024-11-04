@@ -1,4 +1,4 @@
-.h1-with-icon {
+.h1-with-icon div{
 	display: flex;
 	align-items: center;
 }
@@ -6,6 +6,6 @@
 	display: block;
 	line-height: 1em;
 	height: 1em;
-	width: 1em;
+	width: auto;
 	margin-left: 0.25em;
 }
