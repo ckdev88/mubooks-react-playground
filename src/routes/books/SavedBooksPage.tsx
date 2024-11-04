@@ -28,7 +28,7 @@ export default function SavedBooksPage() {
 				text={pageTitle}
 				icon={'save-books-icon.png'}
 				sub={
-					<sub>
+					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
 							<>
 								Results for <i>{bookFilter}</i> : {booksFiltered.length}
@@ -40,7 +40,7 @@ export default function SavedBooksPage() {
 						) : (
 							<> My books which are in whatever list: {booksFiltered.length} </>
 						)}
-					</sub>
+					</>
 				}
 			/>
 			{!hasbooks && bookFilter === '' && (

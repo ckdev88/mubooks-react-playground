@@ -33,7 +33,7 @@ const FinishedPage = () => {
 				text={pageTitle}
 				icon="icon-finished-white.png"
 				sub={
-					<sub>
+					<>
 						{bookFilter.length > 0 && bf.length > 0 ? (
 							<>
 								Results for <i>{bookFilter}</i> : {bf.length}
@@ -45,7 +45,7 @@ const FinishedPage = () => {
 						) : (
 							<>Books I finished reading: {bf.length}</>
 						)}
-					</sub>
+					</>
 				}
 			/>
 			{!hasbooks && bookFilter === '' && (

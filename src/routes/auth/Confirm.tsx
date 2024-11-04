@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import Heading from '../../components/ui/Heading'
 const AuthConfirm = () => {
 	const navigate = useNavigate()
 	setTimeout(() => {
@@ -6,9 +7,7 @@ const AuthConfirm = () => {
 	}, 2000)
 	return (
 		<>
-			<h1>
-				Your account is confirmed <sub>You can now log in.</sub>
-			</h1>
+			<Heading text="Your account is confirmed" sub="You can now log in." />
 			<p>Redirecting to the login screen...</p>
 		</>
 	)

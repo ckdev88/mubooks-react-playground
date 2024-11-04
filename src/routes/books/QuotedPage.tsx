@@ -23,7 +23,8 @@ const QuotedPage = () => {
 			<Heading
 				text={pageTitle}
 				icon={'save-books-icon.png'}
-				sub={<sub>My books with quotes to remember: {quotedbooks.length}</sub>} />
+				sub={`My books with quotes to remember: ${quotedbooks.length}`}
+			/>
 			<div className={hasBooks === true ? 'dnone' : 'dblock'}>
 				<h4>No books added yet, find them and add them.</h4>
 				<p>

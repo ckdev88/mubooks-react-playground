@@ -3,6 +3,7 @@ import { supabase } from '../../../utils/supabase'
 import { useState, useEffect, useContext } from 'react'
 import { AppContext } from '../../App'
 import HeaderBranding from '../../components/HeaderBranding'
+import Heading from '../../components/ui/Heading'
 
 const ResetPasswordPage = () => {
 	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
@@ -50,10 +51,7 @@ const ResetPasswordPage = () => {
 				<div>
 					<div className="card">
 						<header>
-							<div>
-								Reset your password
-								<sub>Fill in new password twice and activate it</sub>
-							</div>
+							<Heading text="Reset your password" sub="Fill in new password twice and activate it" />
 						</header>
 						<main>
 							<form onSubmit={handleSubmit}>
