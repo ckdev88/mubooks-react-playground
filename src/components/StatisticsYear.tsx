@@ -131,39 +131,44 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					<h3 className="mb0">How I rated my books in {year}</h3>
 					<PieG data={cstpb} />
 					Average stars per book: <b>{astpb}</b>
-					<span className="sf">*</span>
-					<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
-						...
-					</button>
-					<div className={showStpbDetails ? 'mt05 sf ' : 'mt05 sf dnone'}>
-						{cstpb.length > 0 && (
-							<>
-								<div className={showStpbDetails2 ? 'dnone' : 'dblock'}>
-									{cstpb.map((b, index) => {
-										return (
-											<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
-												{index + 1} {index + 1 === 1 ? 'star' : 'stars'}: <b>{`${b} ${b === 1 ? 'book' : 'books'}`}</b>
-											</div>
-										)
-									})}
-								</div>
-								{showStpbDetails2 && <StatisticsStarsPerBookInYear year={year} />}{' '}
-								<button className="btn-text fs-inherit" onClick={() => setShowStpbDetails2(!showStpbDetails2)}>
-									{`${!showStpbDetails2 ? 'show titles' : 'hide titles'}`}
-								</button>
-							</>
-						)}
+					{cbwst > 0 && (
+						<>
+							<span className="sf">*</span>
+							<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
+								...
+							</button>
+							<div className={showStpbDetails ? 'mt05 sf ' : 'mt05 sf dnone'}>
+								{cstpb.length > 0 && (
+									<>
+										<div className={showStpbDetails2 ? 'dnone' : 'dblock'}>
+											{cstpb.map((b, index) => {
+												return (
+													<div key={`cstpb${year}${index}`} className={b === 0 ? 'dnone' : ''}>
+														{index + 1} {index + 1 === 1 ? 'star' : 'stars'}:{' '}
+														<b>{`${b} ${b === 1 ? 'book' : 'books'}`}</b>
+													</div>
+												)
+											})}
+										</div>
+										{showStpbDetails2 && <StatisticsStarsPerBookInYear year={year} />}{' '}
+										<button className="btn-text fs-inherit" onClick={() => setShowStpbDetails2(!showStpbDetails2)}>
+											{`${!showStpbDetails2 ? 'show titles' : 'hide titles'}`}
+										</button>
+									</>
+								)}
 
-						{bwst.length > 0 && (
-							<div>
-								<br />
-								<i>* Books without stars defined: </i>
-								<ul className="mt0">
-									<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
-								</ul>
+								{bwst.length > 0 && (
+									<div>
+										<br />
+										<i>* Books without stars defined: </i>
+										<ul className="mt0">
+											<BooksWithoutStarsList bwst={bwst} year={year} key={year} />
+										</ul>
+									</div>
+								)}
 							</div>
-						)}
-					</div>
+						</>
+					)}
 				</article>
 			)}
 		</section>
