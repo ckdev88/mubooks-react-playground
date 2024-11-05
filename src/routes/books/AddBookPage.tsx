@@ -162,6 +162,9 @@ const AddBookPage = () => {
 		}
 		document.getElementById('abAuthorAdd')?.focus()
 	}
+	function removeAuthor(filterAuthor: string) {
+		setBookAuthors(bookAuthors.filter((author) => author !== filterAuthor))
+	}
 
 	const [tropeInputValue, setTropeInputValue] = useState<string>('')
 	function addTrope() {
@@ -221,6 +224,19 @@ const AddBookPage = () => {
 							></span>
 						</div>
 					</label>
+					{bookAuthors.length > 0 && (
+						<div className="mb1 mt-05">
+							{bookAuthors.map((author, index) => (
+								<div className="badge" key={`removeauthor${index}`}>
+									{author}
+									<span className="btn-x" onClick={() => removeAuthor(author)}>
+										x
+									</span>
+								</div>
+							))}
+							<br />
+						</div>
+					)}
 					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between', gap: '1rem' }}>
 						<div>
 							<label htmlFor="abYearPublished">
