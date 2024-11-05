@@ -13,12 +13,9 @@ body {
 
 .section-badges,
 .reviews .tropes {
-	margin-left: -0.35rem;
-	margin-right: -0.35rem;
-	padding-left: 0;
-	padding-right: 0;
+	padding-right: 0.35rem;
 }
-section > h2,
+
 section > .book-summary {
 	margin-left: 0.35rem;
 	margin-right: 0.35rem;
