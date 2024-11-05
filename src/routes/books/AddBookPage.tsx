@@ -321,6 +321,19 @@ const AddBookPage = () => {
 							></span>
 						</div>
 					</label>
+					{bookTropes.length > 0 && (
+						<div className="mb1 mt-05">
+							{bookTropes.map((trope, index) => (
+								<div className="badge" key={`removetrope${index}`}>
+									{trope}
+									<span className="btn-x" onClick={() => removeAuthor(trope)}>
+										x
+									</span>
+								</div>
+							))}
+							<br />
+						</div>
+					)}
 				</fieldset>
 				<button className="btn-lg" type="submit" disabled={isSubmitting}>
 					Add book to wishlist
@@ -340,7 +353,6 @@ const AddBookPage = () => {
 							currentPage="wishlist"
 						/>
 						{numberOfPages > 0 && <>{numberOfPages} pages</>}
-
 						<div className="tropes">
 							{bookTropes.map((trope, index) => (
 								<div className="trope badge" key={'trope' + index}>
