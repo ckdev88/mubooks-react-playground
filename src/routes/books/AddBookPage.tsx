@@ -23,10 +23,6 @@ const AddBookPage = () => {
 		if (firstField) firstField.focus()
 	}, [])
 
-	// for the preview
-	// 	const synopsis = 'nothing for now'
-	// 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
-
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
 	const bookId: Book['id'] = 'MU' + new Date().getTime().toString()
@@ -105,7 +101,7 @@ const AddBookPage = () => {
 		const rate_stars: Book['rate_stars'] = 0
 		const rate_spice: Book['rate_spice'] = 0
 		const title_short = title.slice(0, 55)
-		const book = {
+		const book: Book = {
 			author_name: bookAuthors,
 			cover: coverImgPosted,
 			cover_redir: coverImgPosted,
