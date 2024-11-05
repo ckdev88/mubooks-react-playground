@@ -331,7 +331,7 @@ input[type='number'] + .btn-submit-inside-caret-right {
 	height: 1.4rem;
 	line-height: 1.4rem;
 	padding: 0 0.4rem;
-	margin: 0.35rem 0 0 0.35rem;
+	margin: 0.35rem .35rem 0 0;
 	width: auto;
 }
 .badge,

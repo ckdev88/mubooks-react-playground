@@ -32,7 +32,7 @@ const ReadingPage = () => {
 				text={pageTitle}
 				icon={'save-books-icon.png'}
 				sub={
-					<sub>
+					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
 							<>
 								Results for <i>{bookFilter}</i> : {booksFiltered.length}
@@ -50,7 +50,7 @@ const ReadingPage = () => {
 							booksFiltered.length < 1 && <>Nothing, at the moment.</>
 						)}
 						&nbsp;
-					</sub>
+					</>
 				}
 			/>
 			{!hasbooks && bookFilter === '' && (

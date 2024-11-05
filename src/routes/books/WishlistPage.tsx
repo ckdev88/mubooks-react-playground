@@ -30,7 +30,7 @@ const WishlistPage = () => {
 				text={pageTitle}
 				icon={'icon-wishlist-white.png'}
 				sub={
-					<sub>
+					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
 							<>
 								Results for <i>{bookFilter}</i> : {booksFiltered.length}
@@ -42,7 +42,7 @@ const WishlistPage = () => {
 						) : (
 							<> All the books I will read soon: {booksFiltered.length}</>
 						)}
-					</sub>
+					</>
 				}
 			/>
 			{!hasbooks && bookFilter === '' && (

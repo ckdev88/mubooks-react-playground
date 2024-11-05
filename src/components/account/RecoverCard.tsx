@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../../utils/supabase'
 import { useState, useContext } from 'react'
 import { AppContext } from '../../App'
+import Heading from '../ui/Heading'
 
 const RecoverCard = () => {
 	const { setUsermail, userIsLoggedIn } = useContext(AppContext)
@@ -33,10 +34,7 @@ const RecoverCard = () => {
 		<>
 			<article className="card" id="card-recover">
 				<header>
-					<div>
-						Forgot your password?
-						<sub>Don't worry. Let's reset it.</sub>
-					</div>
+					<Heading text="Forgot your password?" sub="Don't worry. Let's reset it." />
 					<img src="/img/recover-icon.png" width="82" height="82" alt="" className="recover-icon" />
 				</header>
 				<main>
@@ -47,7 +45,7 @@ const RecoverCard = () => {
 						</label>
 						<p>We'll send a link to this email address if it matches an existing account.</p>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
-						<button disabled={isLoading} className='btn-lg'>
+						<button disabled={isLoading} className="btn-lg">
 							{isLoading ? 'Sending...' : 'Send me a password reset link'}
 						</button>
 					</form>

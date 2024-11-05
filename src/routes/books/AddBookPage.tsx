@@ -10,6 +10,7 @@ import BookSummaryTitle from '../../components/BookSummaryTitle'
 import { AppContext } from '../../App'
 import updateEntriesDb from '../../functions/updateEntriesDb'
 import { cleanAnchor, cleanInput } from '../../helpers/cleanInput'
+import Heading from '../../components/ui/Heading'
 
 const pageTitle: string = 'Add a book'
 
@@ -21,10 +22,6 @@ const AddBookPage = () => {
 		const firstField = document.getElementById('abTitle')
 		if (firstField) firstField.focus()
 	}, [])
-
-	// for the preview
-	// 	const synopsis = 'nothing for now'
-	// 	const [isShowingSynopsis, setIsShowingSynopsis] = useState<boolean>(false)
 
 	const [title, setTitle] = useState<Book['title']>('')
 	const [firstPublishYear, setFirstPublishYear] = useState<Book['first_publish_year']>('')
@@ -104,7 +101,7 @@ const AddBookPage = () => {
 		const rate_stars: Book['rate_stars'] = 0
 		const rate_spice: Book['rate_spice'] = 0
 		const title_short = title.slice(0, 55)
-		const book = {
+		const book: Book = {
 			author_name: bookAuthors,
 			cover: coverImgPosted,
 			cover_redir: coverImgPosted,
@@ -197,10 +194,7 @@ const AddBookPage = () => {
 
 	return (
 		<>
-			<h1>
-				{pageTitle}
-				<sub>See your preview below</sub>
-			</h1>
+			<Heading text={pageTitle} sub="See your preview below" />
 			<form onSubmit={processAbForm}>
 				<fieldset style={{ display: 'flex', flexDirection: 'column' }}>
 					<label htmlFor="abTitle">
