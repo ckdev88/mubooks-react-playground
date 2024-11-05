@@ -340,7 +340,7 @@ const AddBookPage = () => {
 				</button>
 			</form>
 			<h3>Preview</h3>
-			{!title && <>No data yet...</>}
+			{!title && <>No title yet...</>}
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
 				<div className="article-main">
