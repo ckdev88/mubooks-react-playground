@@ -21,14 +21,6 @@ section > .book-summary {
 	margin-right: 0.35rem;
 }
 
-section > ul.tropes {
-	padding: 0.35rem 0;
-}
-
-section > ul.tropes > li {
-	margin-left: 0.35rem;
-	margin-right: 0;
-}
 a {
 	color: inherit;
 }

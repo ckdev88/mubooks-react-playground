@@ -84,7 +84,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		updateTropes(newArr, field)
 	}
 
-	// TODO: used in many places as duplicate, refactor into 1 global method
+	// TODO DOING: used in many places as duplicate, refactor into 1 global method
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
 		return (
 			<div className="tropes clr mb0">
@@ -99,11 +99,11 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 						</button>
 					</div>
 				))}
-				<li className="trope_add">
+				<div className="trope_add">
 					<button className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'} onClick={() => setShowForm(!showForm)}>
 						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
 					</button>
-				</li>
+				</div>
 			</div>
 		)
 	}

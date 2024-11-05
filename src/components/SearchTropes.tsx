@@ -8,28 +8,28 @@ const SearchTropes = ({ book_id, tropes }: { book_id: Book['id']; tropes: BookTr
 
 	if (tropes === undefined) return
 	return (
-		<ul className="tropes clr mb0">
+		<div className="tropes clr mb0">
 			{tropes.map((trope, index) => {
 				if (showMore) {
 					return (
-						<li className="trope badge" key={'trope' + book_id + index}>
+						<div className="trope badge" key={'trope' + book_id + index}>
 							{trope}
-						</li>
+						</div>
 					)
 				} else if (index < 5) {
 					return (
-						<li className="trope badge" key={'trope' + book_id + index}>
+						<div className="trope badge" key={'trope' + book_id + index}>
 							{trope}
-						</li>
+						</div>
 					)
 				}
 			})}
-			<li className="trope_more">
+			<div className="trope_more">
 				<button onClick={() => showMoreToggle()} className="btn-sm mb0">
 					{showMore ? '<' : '...'}
 				</button>
-			</li>
-		</ul>
+			</div>
+		</div>
 	)
 }
 export default SearchTropes

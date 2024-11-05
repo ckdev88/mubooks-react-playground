@@ -208,15 +208,7 @@
 
 .tropes {
 	padding: 0;
-	list-style-type: none;
-}
-.book-summary .tropes {
-	margin-top: 0;
-}
-
-.tropes li.trope_add,
-.tropes li.trope_more {
-	padding: 0;
+	margin-bottom: 0;
 }
 
 .book-summary .review-rates {
