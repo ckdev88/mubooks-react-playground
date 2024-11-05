@@ -55,7 +55,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 			</h2>
 			{tropesArr.length > 0 ? (
 				<div
-					className={isShowingTropesInMyBooks ? 'tropes clr expandable expanded' : 'tropes clr expandable collapsed'}
+					className={isShowingTropesInMyBooks ? 'tropes expandable expanded' : 'tropes expandable collapsed'}
 					aria-expanded={isShowingTropesInMyBooks}
 				>
 					{tropesArr.map((trope, index) => {

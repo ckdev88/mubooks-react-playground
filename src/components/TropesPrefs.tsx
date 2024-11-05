@@ -87,7 +87,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 	// TODO DOING: used in many places as duplicate, refactor into 1 global method
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
 		return (
-			<div className="tropes clr mb0">
+			<div className="tropes">
 				{tropes.map((trope, index) => (
 					<div
 						className={field === 'tropes_liked' ? 'trope badge cgreen' : 'trope badge cred'}

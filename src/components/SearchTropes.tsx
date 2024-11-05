@@ -8,7 +8,7 @@ const SearchTropes = ({ book_id, tropes }: { book_id: Book['id']; tropes: BookTr
 
 	if (tropes === undefined) return
 	return (
-		<div className="tropes clr mb0">
+		<div className="tropes">
 			{tropes.map((trope, index) => {
 				if (showMore) {
 					return (

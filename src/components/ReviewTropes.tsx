@@ -36,7 +36,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		if (bookTropes === undefined) return
 		return (
-			<div className="tropes clr mb0">
+			<div className="tropes">
 				{bookTropes.map((trope, index) => (
 					<div className="trope badge" key={'trope' + bookid + index}>
 						{trope}

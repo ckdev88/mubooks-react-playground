@@ -339,7 +339,7 @@ const AddBookPage = () => {
 						/>
 						{numberOfPages > 0 && <>{numberOfPages} pages</>}
 
-						<div className="tropes clr mb0">
+						<div className="tropes">
 							{bookTropes.map((trope, index) => (
 								<div className="trope badge" key={'trope' + index}>
 									{trope}

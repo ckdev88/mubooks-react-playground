@@ -63,7 +63,7 @@ const TropesList = ({ tropes, field }: { tropes: BookTropes; field: 'tropes_like
 	}
 
 	return (
-		<div className="tropes clr mb0">
+		<div className="tropes">
 			{tropes.map((trope, index) => (
 				<div
 					className={field === 'tropes_liked' ? 'trope badge cgreen' : 'trope badge cred'}
