@@ -130,3 +130,10 @@ label:focus-within .description {
 	color: var(--primary);
 	font-weight: bold;
 }
+label .description em {
+	opacity: 0.5;
+	font-size: var(--smallfont);
+}
+label:focus-within .description em {
+	opacity: 1;
+}

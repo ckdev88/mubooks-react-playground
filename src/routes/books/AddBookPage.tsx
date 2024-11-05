@@ -203,10 +203,7 @@ const AddBookPage = () => {
 					</label>
 					<label htmlFor="abAuthors">
 						<div className="description">
-							Author(s){' '}
-							<em className="sf" style={{ opacity: '.5' }}>
-								... separate with comma (,) or hit Enter
-							</em>
+							Author(s) <em>... separate with comma (,) or hit Enter</em>
 						</div>
 						<div className="dflex ">
 							<input
@@ -244,14 +241,7 @@ const AddBookPage = () => {
 						</div>
 					</div>
 					<label htmlFor="abCover" className="dblock pb0" style={{ marginBottom: '.75rem' }}>
-						<div className="description">
-							Cover{' '}
-							{!selectedImage && (
-								<em className="sf" style={{ opacity: '.5' }}>
-									... paste URL or press Choose File
-								</em>
-							)}
-						</div>
+						<div className="description">Cover {!selectedImage && <em>... paste URL or press Choose File</em>}</div>
 						{!selectedImage && (
 							<>
 								<input
@@ -297,13 +287,9 @@ const AddBookPage = () => {
 					</label>
 					<label htmlFor="abTropeAdd" className="dblock pb035">
 						<div className="description">
-							{' '}
-							Tropes{' '}
-							<em className="sf" style={{ opacity: '.5' }}>
-								... shown again when finished reading
-							</em>
+							Tropes <em>... shown again when finished reading</em>
 						</div>
-						<div className="dflex ">
+						<div className="dflex">
 							<input
 								type="text"
 								id="abTropeAdd"

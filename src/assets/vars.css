@@ -1,6 +1,7 @@
 :root{
 	--lightbg: hsl(42, 31%, 94%); /*#f4f1ea  */
 	--darkbg: hsl(204, 33%, 12%); /* #152129 */
+	--smallfont: .8em;
 }
 :root {
 	--bg: var(--lightbg);
