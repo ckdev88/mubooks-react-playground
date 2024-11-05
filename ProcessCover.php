@@ -35,7 +35,7 @@ function convertToJpeg($file, $userid, $bookid)
 	}
 
 	// Save the new image as JPEG
-	// TODO: AVIF would be better than JPEG, but support issues
+	// OPTIMIZE: AVIF would be better than JPEG, but support issues
 	$imagick->setImageFormat('jpeg');
 	$imagick->writeImage($filename);
 

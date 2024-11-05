@@ -70,7 +70,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 					})}
 				</div>
 			) : (
-				<div className="ml035">
+				<div>
 					No tropes in my books yet, want to add some? <Link to={savedbookslink}>Go to my books</Link>
 				</div>
 			)}
