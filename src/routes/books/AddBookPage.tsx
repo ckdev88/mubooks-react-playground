@@ -197,7 +197,7 @@ const AddBookPage = () => {
 
 	return (
 		<>
-			<Heading text={pageTitle} sub="See your preview below" />
+			<Heading text={pageTitle} sub="See your preview below" icon="icon-addbook.svg" />
 			<form onSubmit={processAbForm}>
 				<fieldset style={{ display: 'flex', flexDirection: 'column' }}>
 					<label htmlFor="abTitle">

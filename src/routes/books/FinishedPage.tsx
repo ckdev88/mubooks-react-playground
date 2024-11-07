@@ -31,7 +31,7 @@ const FinishedPage = () => {
 		<>
 			<Heading
 				text={pageTitle}
-				icon="icon-finished-white.png"
+				icon="icon-finished.svg"
 				sub={
 					<>
 						{bookFilter.length > 0 && bf.length > 0 ? (
