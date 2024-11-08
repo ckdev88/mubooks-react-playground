@@ -110,7 +110,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 
 	return (
 		<>
-			<h2>{field === 'tropes_liked' ? 'Like' : 'Dislike'}</h2>
+			<div className="h2">{field === 'tropes_liked' ? 'Like' : 'Dislike'}</div>
 			<section className="section-badges">
 				<TropesList tropes={field === 'tropes_liked' ? likedTropes : dislikedTropes} />
 				{showForm && (

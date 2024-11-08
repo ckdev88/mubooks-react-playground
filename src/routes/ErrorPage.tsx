@@ -41,7 +41,7 @@ const ErrorPage = () => {
 		<>
 			<HeaderBranding />
 			<div className="h1">Error</div>
-			<h2>{errormessage}</h2>
+			<div className="h2">{errormessage}</div>
 			<p>
 				{countdown0}
 				{countdown1}

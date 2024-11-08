@@ -40,7 +40,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 
 	return (
 		<section className="section-badges">
-			<h2>
+			<div className="h2">
 				Tropes in my Books&nbsp;
 				{tropesArr.length > 0 && (
 					<button
@@ -52,7 +52,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 						onClick={() => setIsShowingTropesInMyBooks(!isShowingTropesInMyBooks)}
 					></button>
 				)}
-			</h2>
+			</div>
 			{tropesArr.length > 0 ? (
 				<div
 					className={isShowingTropesInMyBooks ? 'tropes expandable expanded' : 'tropes expandable collapsed'}
@@ -76,13 +76,13 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 			)}
 			{tropeBooks.length > 0 && (
 				<>
-					<h2 style={{ position: 'relative' }}>
+					<div className="h2" style={{ position: 'relative' }}>
 						My Books for <em>{activeTrope}</em>
 						<div
 							style={{ position: 'absolute', marginTop: '-4em' }}
 							id={cleanAnchor(activeTrope + '_' + 'books')}
 						></div>
-					</h2>
+					</div>
 					<br />
 					<BooksOverviewPage books={tropeBooks} page={page} />
 				</>

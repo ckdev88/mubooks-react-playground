@@ -29,7 +29,7 @@ a {
 }
 
 .h1,
-h2,
+.h2,
 .adder-header,
 body,
 input,
@@ -39,7 +39,7 @@ textarea,
 	font-family: Merriweather, serif;
 }
 .h1,
-h2 {
+.h2 {
 	margin-top: 1rem;
 	padding: 0;
 	letter-spacing: -0.04em;
@@ -52,7 +52,7 @@ h2 {
 	font-weight: bold;
 }
 
-h2 {
+.h2 {
 	margin-bottom: 0.5rem;
 	text-shadow: 1px 1px 0 var(--shadetextcolor);
 	font-size: 1.2rem;
