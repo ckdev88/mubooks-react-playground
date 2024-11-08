@@ -1,7 +1,7 @@
 export default function Error404() {
 	return (
 		<>
-			<h1>Nope</h1>
+			<div className="h1">Nope</div>
 			Page not found, 404.
 		</>
 	)

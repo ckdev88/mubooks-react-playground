@@ -28,7 +28,7 @@ a {
 	text-decoration: underline;
 }
 
-h1,
+.h1,
 h2,
 .adder-header,
 body,
@@ -38,17 +38,18 @@ textarea,
 .resultsfound {
 	font-family: Merriweather, serif;
 }
-h1,
+.h1,
 h2 {
 	margin-top: 1rem;
 	padding: 0;
 	letter-spacing: -0.04em;
 }
 
-h1 {
+.h1 {
 	text-shadow: 2px 2px 0 var(--shadetextcolor);
 	margin-bottom: 1.5rem;
 	font-size: 1.6rem;
+	font-weight: bold;
 }
 
 h2 {

@@ -51,7 +51,9 @@ const NavWrapper = () => {
 							<div className="burgerbar bar3"></div>
 						</div>
 					</button>
-					<h1 id="navTitle">{navTitle}</h1>
+					<div className="h1" id="navTitle">
+						{navTitle}
+					</div>
 					<div style={{ display: 'flex', alignContent: 'center' }}>
 						<button className="toggleZoekNav" onClick={() => goSearch()}>
 							<span className="alt">Search</span>
