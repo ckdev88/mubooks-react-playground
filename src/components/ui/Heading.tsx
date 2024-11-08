@@ -1,21 +1,37 @@
 import { ReactNode } from 'react'
 
 // TODO apply smart way of determining light or dark icon based on current theme
-const Heading = ({ text, icon, sub }: { text: string; icon?: string; sub?: ReactNode }) => {
+const Heading = ({
+	el = 'h1',
+	text,
+	icon,
+	sub,
+	span,
+}: {
+	el?: 'h1' | 'h2' | 'adder-header'
+	text: string
+	icon?: string
+	sub?: ReactNode
+	span?: ReactNode
+}) => {
 	if (icon) {
 		return (
-			<div className={icon ? 'h1 h1-with-icon' : 'h1'}>
+			<div className={icon ? el + ' ' + `${el}-with-icon` : el}>
 				<div>
 					{text} {icon && <img src={`/img/${icon}`} alt="" className="h1-icon" />}
 				</div>
 				{sub && <sub>{sub}</sub>}
+				{span && <span>{span}</span>}
 			</div>
 		)
 	}
 	return (
-		<div className="h1">
+		<div className={el}>
+			{' '}
+			{el}
 			{text}
 			{sub && <sub>{sub}</sub>}
+			{span && <span>{span}</span>}
 		</div>
 	)
 }
