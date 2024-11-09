@@ -27,8 +27,6 @@ const Heading = ({
 	}
 	return (
 		<div className={el}>
-			{' '}
-			{el}
 			{text}
 			{sub && <sub>{sub}</sub>}
 			{span && <span>{span}</span>}
