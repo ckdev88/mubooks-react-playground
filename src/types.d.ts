@@ -127,11 +127,12 @@ interface Book {
 	review_tropes?: BookTropes
 	review_text?: string | undefined
 	review_fav_quote?: Book['review_text']
-	search_tropes?: BookTropes
-	subject?: BookTropes
+	subject?: BookSubjects
 	days?: number
 }
 type BookTropes = string[]
+type BookSubject = string
+type BookSubjects = BookSubject[]
 
 type Results = Book[]
 interface Books extends Array<Book> {}
