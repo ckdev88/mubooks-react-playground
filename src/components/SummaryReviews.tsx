@@ -12,7 +12,7 @@ export default function SummaryReviews({ currentPage, book }: { currentPage: Pag
 			{pagesShowReviewTextAndTropes.includes(currentPage) && (
 				<>
 					<BookSummaryReview book_id={book.id} o_key="review_text" review_text={book.review_text} />
-					{book.review_tropes && <ReviewTropes book={book} tropes={book?.review_tropes} />}
+					<ReviewTropes book={book} tropes={book.review_tropes} />
 				</>
 			)}
 		</div>

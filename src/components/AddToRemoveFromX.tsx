@@ -39,6 +39,7 @@ const AddToRemoveFromX = ({
 							book_rate_stars={book.rate_stars}
 							book_rate_spice={book.rate_spice}
 							book_review_fav_quote={book.review_fav_quote}
+							book_review_tropes={book.review_tropes}
 						/>
 					)}
 				</>
@@ -65,6 +66,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 
@@ -87,6 +89,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 
@@ -109,6 +112,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 
@@ -131,6 +135,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 

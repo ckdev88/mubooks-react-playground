@@ -124,13 +124,14 @@ interface Book {
 	date_finished?: number
 	rate_stars: Scale5
 	rate_spice: Scale5
-	review_tropes?: BookTropes
+	review_tropes: BookTropes
 	review_text?: string | undefined
 	review_fav_quote?: Book['review_text']
 	subject?: BookSubjects
 	days?: number
 }
-type BookTropes = string[]
+type BookTrope = string
+type BookTropes = BookTrope[]
 type BookSubject = string
 type BookSubjects = BookSubject[]
 
