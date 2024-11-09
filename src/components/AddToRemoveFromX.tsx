@@ -20,12 +20,7 @@ const AddToRemoveFromX = ({
 			return (
 				<>
 					{book.list === limit ? (
-						<RemoveBookFromXButton
-							book_id={book.id}
-							book_list={limit}
-							targetList={book.list}
-							icon={true}
-						/>
+						<RemoveBookFromXButton book_id={book.id} book_list={limit} targetList={book.list} icon={true} />
 					) : (
 						<AddBookToXButton
 							book_id={book.id}
@@ -44,6 +39,7 @@ const AddToRemoveFromX = ({
 							book_rate_stars={book.rate_stars}
 							book_rate_spice={book.rate_spice}
 							book_review_fav_quote={book.review_fav_quote}
+							book_review_tropes={book.review_tropes}
 						/>
 					)}
 				</>
@@ -70,6 +66,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 
@@ -92,6 +89,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 
@@ -114,6 +112,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 
@@ -136,6 +135,7 @@ const AddToRemoveFromX = ({
 						book_rate_stars={book.rate_stars}
 						book_rate_spice={book.rate_spice}
 						book_review_fav_quote={book.review_fav_quote}
+						book_review_tropes={book.review_tropes}
 					/>
 				)}
 
@@ -148,39 +148,19 @@ const AddToRemoveFromX = ({
 				)}
 				<div className={showHiddenMarks ? 'marks' : 'marks dnone'}>
 					{book.list === 1 && (
-						<RemoveBookFromXButton
-							book_id={book.id}
-							book_list={book.list}
-							targetList={1}
-							icon={true}
-						/>
+						<RemoveBookFromXButton book_id={book.id} book_list={book.list} targetList={1} icon={true} />
 					)}
 
 					{book.list === 2 && (
-						<RemoveBookFromXButton
-							book_id={book.id}
-							book_list={book.list}
-							targetList={book.list}
-							icon={true}
-						/>
+						<RemoveBookFromXButton book_id={book.id} book_list={book.list} targetList={book.list} icon={true} />
 					)}
 
 					{(book.list === 3 || book.list === 4) && (
-						<RemoveBookFromXButton
-							book_id={book.id}
-							book_list={book.list}
-							targetList={3}
-							icon={true}
-						/>
+						<RemoveBookFromXButton book_id={book.id} book_list={book.list} targetList={3} icon={true} />
 					)}
 
 					{book.list === 4 && (
-						<RemoveBookFromXButton
-							book_id={book.id}
-							book_list={book.list}
-							targetList={4}
-							icon={true}
-						/>
+						<RemoveBookFromXButton book_id={book.id} book_list={book.list} targetList={4} icon={true} />
 					)}
 				</div>
 			</>

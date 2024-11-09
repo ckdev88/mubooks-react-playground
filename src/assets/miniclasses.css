@@ -116,7 +116,7 @@ form .notification {
 }
 
 .sf {
-	font-size: 0.8em;
+	font-size: var(--smallfont);
 }
 .fs-inherit {
 	font-size: inherit;

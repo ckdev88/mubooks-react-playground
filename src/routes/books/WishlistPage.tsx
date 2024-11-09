@@ -28,7 +28,7 @@ const WishlistPage = () => {
 		<>
 			<Heading
 				text={pageTitle}
-				icon={'icon-wishlist-white.png'}
+				icon={'icon-wishlist.svg'}
 				sub={
 					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (

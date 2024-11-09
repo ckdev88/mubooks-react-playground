@@ -25,7 +25,7 @@ const BookSummaryReview = ({ book_id, o_key, review_text }: PropTypes) => {
 				) : (
 					<>
 						{reviewText && (
-							<div onClick={() => setIsModding(true)}>
+							<div onClick={() => setIsModding(true)} className="pb05">
 								{o_key === 'review_fav_quote' ? <>{`“${reviewText}”`}</> : <>{reviewText}</>}
 							</div>
 						)}
