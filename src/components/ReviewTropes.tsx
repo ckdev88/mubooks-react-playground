@@ -35,7 +35,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 		setPopupNotification(msg)
 	}
 
-	// TODO: used in many places as duplicate, refactor into 1 global method
+	// NOTE: similar, but not same as TropesList in ./TropesPrefs.tsx
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		return (
 			<div className="tropes">
@@ -83,17 +83,14 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 		if (showTropesForm === true) document.getElementById('trope_add_' + book.id)?.focus()
 	}, [showTropesForm, book.id])
 
+	if (!bookTropes) {
+		console.error('bookTropes should never be falsey here! Empty array is allowed though')
+		return
+	}
+
 	return (
 		<>
 			{bookTropes && TropesList(bookTropes, book.id)}
-			{!bookTropes && (
-				<button
-					className={showTropesForm ? 'btn-sm mb0 active trope_add' : 'btn-sm mb0 trope_add'}
-					onClick={() => setShowTropesForm(!showTropesForm)}
-				>
-					<>Add Tropes</>
-				</button>
-			)}
 			{showTropesForm && (
 				<>
 					<form className="single-small-form clr" onSubmit={processForm}>
