@@ -47,23 +47,15 @@
 .book-summary .calendar-hidden + .btn-text {
 	margin-top: -1rem;
 }
-
-.book-summary h2 {
+.book-summary .h2 {
 	margin-top: 0;
 }
-.book-summary .icon-heart + h2 {
+.book-summary .icon-heart + .h2 {
 	padding-right: 1.25rem;
 }
-.book-summary h2 sub {
-	font-size: 0.9em;
-	font-weight: normal;
-	display: block;
-}
-
-.book-summary h2 sup {
+.book-summary .h2 sup {
 	vertical-align: baseline;
 }
-
 .book-summary aside {
 	width: 9rem;
 	height: auto;
@@ -125,7 +117,7 @@
 	font-size: 0.8em;
 }
 
-.book-summary .synopsis h3 {
+.book-summary .synopsis .h3 {
 	margin: 0 0 1em;
 	padding: 0;
 }
@@ -134,7 +126,7 @@
 	width: auto;
 }
 
-.book-summary h3 {
+.book-summary .h3 {
 	margin-bottom: 0.25rem;
 	font-size: 1rem;
 	text-decoration: underline;
@@ -189,8 +181,8 @@
 	margin-bottom: 0;
 	width: 100%;
 }
-.single-small-form input[type=text]:focus,
-.single-small-form input[type=text]:active {
+.single-small-form input[type='text']:focus,
+.single-small-form input[type='text']:active {
 	border-style: solid;
 }
 .single-small-form + .btn-text {
@@ -208,15 +200,7 @@
 
 .tropes {
 	padding: 0;
-	list-style-type: none;
-}
-.book-summary .tropes {
-	margin-top: 0;
-}
-
-.tropes li.trope_add,
-.tropes li.trope_more {
-	padding: 0;
+	margin-bottom: 0;
 }
 
 .book-summary .review-rates {
@@ -234,10 +218,10 @@
 	margin-bottom: 1rem;
 }
 
-.book-summary .rating h3 {
+.book-summary .rating .h3 {
 	margin-top: 0.5rem;
 }
-.book-summary .tropes h3 {
+.book-summary .tropes .h3 {
 	padding-bottom: 0;
 }
 
@@ -249,10 +233,8 @@
 	color: var(--primary);
 	font-weight: bold;
 }
-.book-summary .tropes,
-.book-summary .marks,
-.book-summary .book-started-finished,
-.book-summary .article-main .review-text {
+.book-summary .article-main .review-text,
+.book-summary .book-started-finished {
 	padding-top: 0.5rem;
 }
 .book-summary .article-main {

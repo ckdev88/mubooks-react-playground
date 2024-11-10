@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom'
 import DashboardDeckItems from './DashboardDeckItems'
+import Heading from '../ui/Heading'
 
-const DashboardDeck = ({ page, title, noBooksText }: { page: Page; title: string; noBooksText: string }) => {
+const DashboardDeck = ({
+	page,
+	title,
+	noBooksText,
+	icon,
+}: {
+	page: Page
+	title: string
+	noBooksText: string
+	icon: string
+}) => {
 	return (
 		<article className="adder">
 			<Link to={'/' + page}>
-				<header className="adder-header">
-					{title} <span>›</span>
-				</header>
+				<Heading text={title} icon={icon} el="adder-header" span={'›'} />
 			</Link>
 			<DashboardDeckItems page={page} noBooksText={noBooksText} />
 		</article>

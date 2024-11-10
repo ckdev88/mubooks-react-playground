@@ -19,22 +19,22 @@ const BookSummaryReview = ({ book_id, o_key, review_text }: PropTypes) => {
 
 	return (
 		<IsModdingReviewContext.Provider value={{ isModding, setIsModding, reviewText, setReviewText, o_key }}>
-			<div className={`review-text ${o_key}`}>
+			<div className={`review-text ${o_key} pt05`}>
 				{isModding ? (
 					<BookModifyReview book_id={book_id} o_key={o_key} review_text={reviewText} />
 				) : (
 					<>
 						{reviewText && (
-							<div onClick={() => setIsModding(true)}>
+							<div onClick={() => setIsModding(true)} className="pb05">
 								{o_key === 'review_fav_quote' ? <>{`“${reviewText}”`}</> : <>{reviewText}</>}
 							</div>
 						)}
 						{(reviewText === '' || reviewText === undefined) && isModding === false && (
 							<button
-								className={o_key === 'review_fav_quote' ? 'btn-sm mb mxauto ml0' : 'btn-sm mb0 ml0'}
+								className={o_key === 'review_fav_quote' ? 'btn-sm mb mxauto ml0 mt0' : 'btn-sm mb0 ml0'}
 								onClick={() => setIsModding(true)}
 							>
-								+ {addButtonTitle}
+								Add {addButtonTitle}
 							</button>
 						)}
 					</>

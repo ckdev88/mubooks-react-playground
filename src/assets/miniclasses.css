@@ -59,9 +59,19 @@
 .pt0 {
 	padding-top: 0;
 }
+.pt05 {
+	padding-top: 0.5rem;
+}
+.pt085 {
+	padding-top: 0.85rem;
+}
 .pb0 {
 	padding-bottom: 0;
 }
+.pb05 {
+	padding-bottom: 0.5rem;
+}
+
 .pb1 {
 	padding-bottom: 1rem;
 }
@@ -106,7 +116,7 @@ form .notification {
 }
 
 .sf {
-	font-size: 0.8em;
+	font-size: var(--smallfont);
 }
 .fs-inherit {
 	font-size: inherit;

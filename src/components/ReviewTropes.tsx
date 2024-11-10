@@ -12,12 +12,15 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const [showTropesForm, setShowTropesForm] = useState<boolean>(false)
 
 	useEffect(() => {
-		setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
+		if (bookTropes.length > 0) setBookTropesLowercase(bookTropes.map((t) => t.toLowerCase()))
 	}, [bookTropes])
 
 	function removeTrope(trope: string): void {
-		const newArr: BookTropes = bookTropes.filter((bt) => bt !== trope)
-		updateTropes(newArr)
+		let newArr: BookTropes
+		if (bookTropes) {
+			newArr = bookTropes.filter((bt) => bt !== trope)
+			updateTropes(newArr)
+		}
 	}
 
 	async function updateTropes(newArr: BookTropes) {
@@ -34,9 +37,8 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 
 	// TODO: used in many places as duplicate, refactor into 1 global method
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
-		if (bookTropes === undefined) return
 		return (
-			<div className="tropes clr mb0">
+			<div className="tropes">
 				{bookTropes.map((trope, index) => (
 					<div className="trope badge" key={'trope' + bookid + index}>
 						{trope}
@@ -50,7 +52,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 						className={showTropesForm ? 'btn-sm mb0 active trope_add' : 'btn-sm mb0 trope_add'}
 						onClick={() => setShowTropesForm(!showTropesForm)}
 					>
-						{bookTropes.length > 0 ? <>+</> : <>Add tropes</>}
+						{bookTropes.length > 0 ? <>+</> : <>Add Tropes</>}
 					</button>
 				)}
 			</div>
@@ -63,8 +65,11 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 		const tropeToAdd: string = cleanInput(e.currentTarget.trope_add.value, true)
 		if (tropeToAdd !== undefined && tropeToAdd.length > 2) {
 			const tropeIndex = bookTropesLowercase.indexOf(tropeToAdd.toLowerCase())
-			if (bookTropesLowercase.indexOf(tropeToAdd.toLowerCase()) > -1) bookTropes.splice(tropeIndex, 1)
-			const newArr: BookTropes = [...bookTropes, tropeToAdd]
+			let newArr: BookTropes
+			if (bookTropes) {
+				if (bookTropesLowercase.indexOf(tropeToAdd.toLowerCase()) > -1) bookTropes.splice(tropeIndex, 1)
+				newArr = [...bookTropes, tropeToAdd]
+			} else newArr = [tropeToAdd]
 			newArr.sort((a, b) => a.localeCompare(b))
 			updateTropes(newArr)
 			e.currentTarget.trope_add.value = ''
@@ -80,7 +85,15 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 
 	return (
 		<>
-			{TropesList(bookTropes, book.id)}
+			{bookTropes && TropesList(bookTropes, book.id)}
+			{!bookTropes && (
+				<button
+					className={showTropesForm ? 'btn-sm mb0 active trope_add' : 'btn-sm mb0 trope_add'}
+					onClick={() => setShowTropesForm(!showTropesForm)}
+				>
+					<>Add Tropes</>
+				</button>
+			)}
 			{showTropesForm && (
 				<>
 					<form className="single-small-form clr" onSubmit={processForm}>

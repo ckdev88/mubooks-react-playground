@@ -7,7 +7,7 @@ const CheckMailNewAccountPage = () => {
 	const recipientAddress = usermail
 	return (
 		<>
-			<h1>Check your email</h1>
+			<div className="h1">Check your email</div>
 			<p>
 				You should receive an email on{' '}
 				<strong>
