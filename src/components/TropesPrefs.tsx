@@ -85,7 +85,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }): 
 		updateTropes(newArr, field)
 	}
 
-	// TODO DOING: used in many places as duplicate, refactor into 1 global method
+	// NOTE: similar, but not same as TropesList in ./ReviewTropes.tsx
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
 		return (
 			<div className="tropes">

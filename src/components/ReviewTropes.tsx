@@ -35,7 +35,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 		setPopupNotification(msg)
 	}
 
-	// TODO: used in many places as duplicate, refactor into 1 global method
+	// NOTE: similar, but not same as TropesList in ./TropesPrefs.tsx
 	const TropesList = (bookTropes: BookTropes, bookid: Id) => {
 		return (
 			<div className="tropes">
