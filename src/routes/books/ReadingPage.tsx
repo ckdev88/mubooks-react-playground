@@ -30,7 +30,7 @@ const ReadingPage = () => {
 		<>
 			<Heading
 				text={pageTitle}
-				icon={'save-books-icon.png'}
+				icon={'icon-reading.svg'}
 				sub={
 					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (

@@ -51,6 +51,8 @@ const App = () => {
 	const [bookFilter, setBookFilter] = useState<string>('')
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
+	// const [headingIconsEnabled, setHeadingIconsEnabled] = useState<boolean>(false)
+	const headingIconsEnabled = false // TODO make it a setting
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -139,6 +141,7 @@ const App = () => {
 				setDarkTheme,
 				darkTheme,
 				bodyBgColor,
+				headingIconsEnabled,
 			}}
 		>
 			{userIsLoggedIn && (

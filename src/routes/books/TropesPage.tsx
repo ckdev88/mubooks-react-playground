@@ -36,7 +36,7 @@ const TropesPage = () => {
 			}}
 		>
 			<>
-				<Heading text='My Tropes' icon='icon-tropes-light.png'/>
+				<Heading text='My Tropes' icon='icon-tropes.svg'/>
 				<TropesPrefs field="tropes_liked" />
 				<TropesPrefs field="tropes_disliked" />
 				<TropesInMyBooks page={currentPage} />

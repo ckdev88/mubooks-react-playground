@@ -2,7 +2,7 @@ import { useState } from 'react'
 import AddToRemoveFromX from './AddToRemoveFromX'
 import BookStartedFinished from './BookStartedFinished'
 import ReactMarkdown from 'react-markdown'
-import SearchTropes from './SearchTropes'
+import SearchSubjects from './SearchSubjects'
 import { HashLink as Link } from 'react-router-hash-link'
 import { cleanAnchor } from '../helpers/cleanInput'
 import SummaryReviews from './SummaryReviews'
@@ -95,7 +95,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 					{pagesReviewQuotes.includes(currentPage) && (
 						<BookSummaryReview book_id={book.id} o_key="review_fav_quote" review_text={book.review_fav_quote} />
 					)}
-					{currentPage === 'search' && book.subject && <SearchTropes book_id={book.id} tropes={book.subject} />}
+					{currentPage === 'search' && book.subject && <SearchSubjects book_id={book.id} subjects={book.subject} />}
 					{synopsisPages.includes(currentPage) && synopsis ? (
 						<div className="synopsis" style={{ marginTop: '.75rem' }}>
 							<button

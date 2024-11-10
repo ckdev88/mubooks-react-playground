@@ -6,7 +6,7 @@ import BtnInsideCaret from './ui/BtnInsideCaret'
 import { TropesPageContext } from '../routes/books/TropesPage'
 import updateTropesDb from '../functions/updateTropesDb'
 
-const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) => {
+const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }): JSX.Element => {
 	const {
 		setLikedTropes,
 		likedTropes,
@@ -19,6 +19,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState<boolean>(false)
 
+	/** Updates supabase user_entries tropes_liked and/or tropes_disliked */
 	const tropesDb = async () => {
 		if (field === 'tropes_liked') {
 			const res = await supabase.from('user_entries').select('tropes_liked')
@@ -84,10 +85,10 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		updateTropes(newArr, field)
 	}
 
-	// TODO: used in many places as duplicate, refactor into 1 global method
+	// NOTE: similar, but not same as TropesList in ./ReviewTropes.tsx
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
 		return (
-			<div className="tropes clr mb0">
+			<div className="tropes">
 				{tropes.map((trope, index) => (
 					<div
 						className={field === 'tropes_liked' ? 'trope badge cgreen' : 'trope badge cred'}
@@ -99,18 +100,19 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 						</button>
 					</div>
 				))}
-				<li className="trope_add">
-					<button className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'} onClick={() => setShowForm(!showForm)}>
-						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
-					</button>
-				</li>
+				<button
+					className={showForm ? 'trope_add btn-sm mb0 active' : 'trope_add btn-sm mb0'}
+					onClick={() => setShowForm(!showForm)}
+				>
+					{tropes.length > 0 ? <>+</> : <>Add tropes</>}
+				</button>
 			</div>
 		)
 	}
 
 	return (
 		<>
-			<h2>{field === 'tropes_liked' ? 'Like' : 'Dislike'}</h2>
+			<div className="h2">{field === 'tropes_liked' ? 'Like' : 'Dislike'}</div>
 			<section className="section-badges">
 				<TropesList tropes={field === 'tropes_liked' ? likedTropes : dislikedTropes} />
 				{showForm && (

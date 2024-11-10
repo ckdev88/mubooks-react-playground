@@ -28,7 +28,7 @@ const FavoritesPage = () => {
 		<>
 			<Heading
 				text={pageTitle}
-				icon={'favs-icon.png'}
+				icon={'icon-favorites.svg'}
 				sub={
 					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (

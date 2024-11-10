@@ -40,7 +40,7 @@ html:not(.loggedin) #main {
 	padding-top: 0;
 	padding-bottom: 0;
 }
-html:not(.loggedin) h1 {
+html:not(.loggedin) .h1 {
 	margin-top: 0;
 }
 

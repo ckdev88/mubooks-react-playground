@@ -1,6 +1,6 @@
 // TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
 // TODO: create image uploading to server option, to replace hotlinking
-// TODO: make tropes same UX as in BookSummary and TropesPage
+// DOING: make tropes same UX as in BookSummary and TropesPage
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
@@ -61,6 +61,7 @@ const AddBookPage = () => {
 	// /for the preview
 
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
 	const processAbForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		// NOTE set to false when all is done if the redirect to wishlist is canceled
@@ -162,6 +163,9 @@ const AddBookPage = () => {
 		}
 		document.getElementById('abAuthorAdd')?.focus()
 	}
+	function removeAuthor(filterAuthor: string) {
+		setBookAuthors(bookAuthors.filter((author) => author !== filterAuthor))
+	}
 
 	const [tropeInputValue, setTropeInputValue] = useState<string>('')
 	function addTrope() {
@@ -179,6 +183,9 @@ const AddBookPage = () => {
 		}
 		document.getElementById('abTropeAdd')?.focus()
 	}
+	function removeTrope(filterTrope: string) {
+		setBookTropes(bookTropes.filter((trope) => trope !== filterTrope))
+	}
 	const handleKeyDownAuthor = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter' || e.key === ',') {
 			e.preventDefault()
@@ -194,7 +201,7 @@ const AddBookPage = () => {
 
 	return (
 		<>
-			<Heading text={pageTitle} sub="See your preview below" />
+			<Heading text={pageTitle} sub="See your preview below" icon="icon-addbook.svg" />
 			<form onSubmit={processAbForm}>
 				<fieldset style={{ display: 'flex', flexDirection: 'column' }}>
 					<label htmlFor="abTitle">
@@ -203,10 +210,7 @@ const AddBookPage = () => {
 					</label>
 					<label htmlFor="abAuthors">
 						<div className="description">
-							Author(s){' '}
-							<em className="sf" style={{ opacity: '.5' }}>
-								... separate with comma (,) or hit Enter
-							</em>
+							Author(s) <em>... separate with comma (,) or hit Enter</em>
 						</div>
 						<div className="dflex ">
 							<input
@@ -224,6 +228,19 @@ const AddBookPage = () => {
 							></span>
 						</div>
 					</label>
+					{bookAuthors.length > 0 && (
+						<div className="mb1 mt-05">
+							{bookAuthors.map((author, index) => (
+								<div className="badge" key={`removeauthor${index}`}>
+									{author}
+									<span className="btn-x" onClick={() => removeAuthor(author)}>
+										x
+									</span>
+								</div>
+							))}
+							<br />
+						</div>
+					)}
 					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between', gap: '1rem' }}>
 						<div>
 							<label htmlFor="abYearPublished">
@@ -244,14 +261,7 @@ const AddBookPage = () => {
 						</div>
 					</div>
 					<label htmlFor="abCover" className="dblock pb0" style={{ marginBottom: '.75rem' }}>
-						<div className="description">
-							Cover{' '}
-							{!selectedImage && (
-								<em className="sf" style={{ opacity: '.5' }}>
-									... paste URL or press Choose File
-								</em>
-							)}
-						</div>
+						<div className="description">Cover {!selectedImage && <em>... paste URL or press Choose File</em>}</div>
 						{!selectedImage && (
 							<>
 								<input
@@ -297,13 +307,9 @@ const AddBookPage = () => {
 					</label>
 					<label htmlFor="abTropeAdd" className="dblock pb035">
 						<div className="description">
-							{' '}
-							Tropes{' '}
-							<em className="sf" style={{ opacity: '.5' }}>
-								... shown again when finished reading
-							</em>
+							Tropes <em>... shown again when finished reading</em>
 						</div>
-						<div className="dflex ">
+						<div className="dflex">
 							<input
 								type="text"
 								id="abTropeAdd"
@@ -319,13 +325,28 @@ const AddBookPage = () => {
 							></span>
 						</div>
 					</label>
+					{bookTropes.length > 0 && (
+						<div className="mb1 mt-05">
+							{bookTropes.map((trope, index) => (
+								<div className="badge" key={`removetrope${index}`}>
+									{trope}
+									<span className="btn-x" onClick={() => removeTrope(trope)}>
+										x
+									</span>
+								</div>
+							))}
+							<br />
+						</div>
+					)}
 				</fieldset>
 				<button className="btn-lg" type="submit" disabled={isSubmitting}>
 					Add book to wishlist
 				</button>
 			</form>
-			<h3>Preview</h3>
-			{!title && <>No data yet...</>}
+			<div className="h2">
+				Preview
+				{!title && <sub>No title yet...</sub>}
+			</div>
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
 				<div className="article-main">
@@ -338,8 +359,7 @@ const AddBookPage = () => {
 							currentPage="wishlist"
 						/>
 						{numberOfPages > 0 && <>{numberOfPages} pages</>}
-
-						<div className="tropes clr mb0 ml-035">
+						<div className="tropes">
 							{bookTropes.map((trope, index) => (
 								<div className="trope badge" key={'trope' + index}>
 									{trope}

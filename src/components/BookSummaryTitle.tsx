@@ -27,13 +27,16 @@ const BookSummaryTitle = ({
 		)
 
 	return (
-		<h2>
+		<div className="h2">
 			{book_title_short}{' '}
-			{book_first_publish_year && (currentPage === 'search' || currentPage ==='addbook' || currentPage==='wishlist') && <sup>({book_first_publish_year})</sup>}
+			{book_first_publish_year &&
+				(currentPage === 'search' || currentPage === 'addbook' || currentPage === 'wishlist') && (
+					<sup>({book_first_publish_year})</sup>
+				)}
 			<sub>
 				<BookAuthorList book_id={book_id} book_author_name={book_author_name} />
 			</sub>
-		</h2>
+		</div>
 	)
 }
 export default BookSummaryTitle

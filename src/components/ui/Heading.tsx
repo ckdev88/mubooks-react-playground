@@ -1,22 +1,39 @@
 import { ReactNode } from 'react'
+import { useContext } from 'react'
+import { AppContext } from '../../App'
 
 // TODO apply smart way of determining light or dark icon based on current theme
-const Heading = ({ text, icon, sub }: { text: string; icon?: string; sub?: ReactNode }) => {
-	if (icon) {
+const Heading = ({
+	el = 'h1',
+	text,
+	icon,
+	sub,
+	span,
+}: {
+	el?: 'h1' | 'h2' | 'adder-header'
+	text: string
+	icon?: string
+	sub?: ReactNode
+	span?: ReactNode
+}) => {
+	const { headingIconsEnabled } = useContext(AppContext)
+	if (headingIconsEnabled && icon) {
 		return (
-				<h1 className={icon ? 'h1-with-icon' : ''}>
-					<div>
-						{text} {icon && <img src={`/img/${icon}`} alt="" className="h1-icon" />}
-					</div>
-					{sub && <sub>{sub}</sub>}
-				</h1>
+			<div className={el + ' ' + `${el}-with-icon`}>
+				<div>
+					{text} {icon && <img src={`/img/${icon}`} alt="" className="h1-icon" />}
+				</div>
+				{sub && <sub>{sub}</sub>}
+				{span && <span>{span}</span>}
+			</div>
 		)
 	}
 	return (
-		<h1>
+		<div className={el}>
 			{text}
 			{sub && <sub>{sub}</sub>}
-		</h1>
+			{span && <span>{span}</span>}
+		</div>
 	)
 }
 export default Heading

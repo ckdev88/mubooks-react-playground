@@ -26,7 +26,7 @@ export default function UserLogoutPage() {
 
 	return (
 		<>
-			<h1>Logging out.</h1>
+			<div className="h1">Logging out.</div>
 			<p>Redirecting to login page...</p>
 		</>
 	)

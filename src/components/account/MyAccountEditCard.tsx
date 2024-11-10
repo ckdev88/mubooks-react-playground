@@ -49,7 +49,7 @@ export default function MyAccountEditCard() {
 		<>
 			<div className="card">
 				<header>
-					<Heading text="Edit my account" sub="Change my preferences" />
+					<Heading text="Edit my account" sub="Change my preferences" icon="icon-profile.svg" />
 				</header>
 
 				<main>

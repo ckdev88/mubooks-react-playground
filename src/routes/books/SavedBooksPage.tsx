@@ -26,7 +26,7 @@ export default function SavedBooksPage() {
 		<>
 			<Heading
 				text={pageTitle}
-				icon={'save-books-icon.png'}
+				icon={'icon-saved.svg'}
 				sub={
 					<>
 						{bookFilter.length > 0 && booksFiltered.length > 0 ? (

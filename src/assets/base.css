@@ -21,14 +21,6 @@ section > .book-summary {
 	margin-right: 0.35rem;
 }
 
-section > ul.tropes {
-	padding: 0.35rem 0;
-}
-
-section > ul.tropes > li {
-	margin-left: 0.35rem;
-	margin-right: 0;
-}
 a {
 	color: inherit;
 }
@@ -36,8 +28,8 @@ a {
 	text-decoration: underline;
 }
 
-h1,
-h2,
+.h1,
+.h2,
 .adder-header,
 body,
 input,
@@ -46,25 +38,32 @@ textarea,
 .resultsfound {
 	font-family: Merriweather, serif;
 }
-h1,
-h2 {
+.h1,
+.h2,
+.h3 {
+	font-weight: bold;
+}
+.h1,
+.h2 {
 	margin-top: 1rem;
 	padding: 0;
 	letter-spacing: -0.04em;
 }
-
-h1 {
+.h1 {
 	text-shadow: 2px 2px 0 var(--shadetextcolor);
 	margin-bottom: 1.5rem;
 	font-size: 1.6rem;
 }
-
-h2 {
+.h2 {
 	margin-bottom: 0.5rem;
 	text-shadow: 1px 1px 0 var(--shadetextcolor);
 	font-size: 1.2rem;
 }
-
+.h2 sub {
+	font-size: 0.9em;
+	font-weight: normal;
+	display: block;
+}
 pre {
 	font-size: 0.7em;
 	max-width: calc(100vw);
@@ -137,4 +136,11 @@ label .description {
 label:focus-within .description {
 	color: var(--primary);
 	font-weight: bold;
+}
+label .description em {
+	opacity: 0.5;
+	font-size: var(--smallfont);
+}
+label:focus-within .description em {
+	opacity: 1;
 }
