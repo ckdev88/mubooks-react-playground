@@ -6,7 +6,7 @@ import BtnInsideCaret from './ui/BtnInsideCaret'
 import { TropesPageContext } from '../routes/books/TropesPage'
 import updateTropesDb from '../functions/updateTropesDb'
 
-const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) => {
+const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }): JSX.Element => {
 	const {
 		setLikedTropes,
 		likedTropes,
@@ -19,6 +19,7 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 	const { setPopupNotification, userid } = useContext(AppContext)
 	const [showForm, setShowForm] = useState<boolean>(false)
 
+	/** Updates supabase user_entries tropes_liked and/or tropes_disliked */
 	const tropesDb = async () => {
 		if (field === 'tropes_liked') {
 			const res = await supabase.from('user_entries').select('tropes_liked')
@@ -99,11 +100,12 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 						</button>
 					</div>
 				))}
-				<div className="trope_add">
-					<button className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'} onClick={() => setShowForm(!showForm)}>
-						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
-					</button>
-				</div>
+				<button
+					className={showForm ? 'trope_add btn-sm mb0 active' : 'trope_add btn-sm mb0'}
+					onClick={() => setShowForm(!showForm)}
+				>
+					{tropes.length > 0 ? <>+</> : <>Add tropes</>}
+				</button>
 			</div>
 		)
 	}
