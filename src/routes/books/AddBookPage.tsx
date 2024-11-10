@@ -61,6 +61,7 @@ const AddBookPage = () => {
 	// /for the preview
 
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
 	const processAbForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		// NOTE set to false when all is done if the redirect to wishlist is canceled
@@ -342,8 +343,10 @@ const AddBookPage = () => {
 					Add book to wishlist
 				</button>
 			</form>
-			<div className="h3">Preview</div>
-			{!title && <>No title yet...</>}
+			<div className="h2">
+				Preview
+				{!title && <sub>No title yet...</sub>}
+			</div>
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
 				<div className="article-main">

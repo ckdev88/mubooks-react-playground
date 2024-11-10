@@ -47,23 +47,15 @@
 .book-summary .calendar-hidden + .btn-text {
 	margin-top: -1rem;
 }
-
 .book-summary .h2 {
 	margin-top: 0;
 }
 .book-summary .icon-heart + .h2 {
 	padding-right: 1.25rem;
 }
-.book-summary .h2 sub {
-	font-size: 0.9em;
-	font-weight: normal;
-	display: block;
-}
-
 .book-summary .h2 sup {
 	vertical-align: baseline;
 }
-
 .book-summary aside {
 	width: 9rem;
 	height: auto;
