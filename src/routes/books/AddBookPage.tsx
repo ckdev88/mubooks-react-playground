@@ -342,7 +342,7 @@ const AddBookPage = () => {
 					Add book to wishlist
 				</button>
 			</form>
-			<h3>Preview</h3>
+			<div className="h3">Preview</div>
 			{!title && <>No title yet...</>}
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>

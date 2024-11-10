@@ -46,7 +46,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 		<section className="stats-year">
 			<Heading text={`Your numbers for ${year}`} icon="icon-statistics.svg" />
 			<article className="stats-item">
-				<h3 className="mb0">Books & pages per month</h3>
+				<div className="h3 mb0">Books & pages per month</div>
 				<LineG2 data={cbfm} data2={cpfm} subjects={['Books', 'Pages']} />
 				Books finished in {year}: <b>{cbf}</b>
 				{cbwp > 0 && <span className="sf">*</span>}{' '}
@@ -98,7 +98,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				)}
 			</article>
 			<article className="stats-item">
-				<h3 className="mb0">Days per book</h3>
+				<div className="h3 mb0">Days per book</div>
 				<LineG3 data={dpb} />
 				Average days to finish a book: <b>{adpb}</b>&nbsp;
 				<button className="btn-text diblock" onClick={() => setShowDpbDetails(!showDpbDetails)}>
@@ -128,7 +128,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 			</article>
 			{cstpbSum > 0 && (
 				<article className="stats-item">
-					<h3 className="mb0">How I rated my books in {year}</h3>
+					<div className="h3 mb0">How I rated my books in {year}</div>
 					<PieG data={cstpb} />
 					Average stars per book: <b>{astpb}</b>
 					{cbwst > 0 && (

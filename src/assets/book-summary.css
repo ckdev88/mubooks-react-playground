@@ -125,7 +125,7 @@
 	font-size: 0.8em;
 }
 
-.book-summary .synopsis h3 {
+.book-summary .synopsis .h3 {
 	margin: 0 0 1em;
 	padding: 0;
 }
@@ -134,7 +134,7 @@
 	width: auto;
 }
 
-.book-summary h3 {
+.book-summary .h3 {
 	margin-bottom: 0.25rem;
 	font-size: 1rem;
 	text-decoration: underline;
@@ -226,10 +226,10 @@
 	margin-bottom: 1rem;
 }
 
-.book-summary .rating h3 {
+.book-summary .rating .h3 {
 	margin-top: 0.5rem;
 }
-.book-summary .tropes h3 {
+.book-summary .tropes .h3 {
 	padding-bottom: 0;
 }
 
