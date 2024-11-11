@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 
-// TODO apply smart way of determining light or dark icon based on current theme
+// TODO themes_icons: apply smart way of determining light or dark icon based on current theme
 const Heading = ({
 	el = 'h1',
 	text,

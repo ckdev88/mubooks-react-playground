@@ -1,4 +1,3 @@
-// TODO tropes are not shown, intentionally, make it an option maybe?
 import { useContext } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { AppContext } from '../../App'

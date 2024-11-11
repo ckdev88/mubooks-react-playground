@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
-// TODO remove or use BtnInsideCaret, a function should be able to be passed to make it useful
+// TODO component_btn_inside_caret: remove or use BtnInsideCaret, a function should be able to be passed to make it useful
 // import BtnInsideCaret from './ui/BtnInsideCaret'
 import { TropesPageContext } from '../routes/books/TropesPage'
 import updateTropesDb from '../functions/updateTropesDb'

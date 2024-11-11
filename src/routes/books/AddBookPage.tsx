@@ -1,12 +1,7 @@
-// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
-// TODO: create image uploading to server option, to replace hotlinking
-// DOING: make tropes same UX as in BookSummary and TropesPage
-// TODO: make this form interact with openlibrary.org to help append to their database
+// TODO openlibrary: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
-// TODO apply BookSummary-BookPages to keep uniformity ??
 import BookSummaryTitle from '../../components/BookSummaryTitle'
-// TODO apply BookSummary-Components to keep uniformity
 import { AppContext } from '../../App'
 import updateEntriesDb from '../../functions/updateEntriesDb'
 import { cleanAnchor, cleanInput } from '../../helpers/cleanInput'
@@ -277,7 +272,7 @@ const AddBookPage = () => {
 									className={coverImg ? '' : 'mb0o'}
 								/>
 								{coverImg && (
-									<span className="btn-text-cancel btn-text sf mt-05 mb05" onClick={resetFile}>
+									<span className="btn-text-cancel btn-text sf2 mt-05 mb05" onClick={resetFile}>
 										cancel
 									</span>
 								)}
@@ -299,7 +294,7 @@ const AddBookPage = () => {
 								{selectedImage ? <>created blob: {URL.createObjectURL(selectedImage)} </> : ''}
 							</div>
 							{selectedImage && (
-								<span className="btn-text-cancel btn-text sf mb05" onClick={resetFile}>
+								<span className="btn-text-cancel btn-text sf2 mb05" onClick={resetFile}>
 									cancel
 								</span>
 							)}
