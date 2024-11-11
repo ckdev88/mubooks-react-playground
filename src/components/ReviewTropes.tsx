@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanInput } from '../helpers/cleanInput'
-// TODO remove or use BtnInsideCaret, a function should be able to be passed to make it useful
+// TODO component_btn_inside_caret: remove or use BtnInsideCaret, a function should be able to be passed to make it useful
 // import BtnInsideCaret from './ui/BtnInsideCaret'
 import updateEntriesDb from '../functions/updateEntriesDb'
 

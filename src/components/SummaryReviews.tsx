@@ -1,3 +1,4 @@
+// NOTE: tropes only shown when book is finished and/or user populated, possible via AddBookPage
 import ReviewTropes from './ReviewTropes'
 import BookSummaryReview from './BookSummaryReview'
 

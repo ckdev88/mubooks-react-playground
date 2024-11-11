@@ -62,7 +62,7 @@ const BookStartedFinished = ({ date_started, date_finished, book_id, list }: Pro
 						myBooks[i].list > 2
 					) {
 						myBooks[i].list = 2
-						list = 2 // TOOD: make it more state based (test properly if better/ faster)
+						list = 2
 					} else myBooks[i].date_finished = fieldVal
 				}
 			}

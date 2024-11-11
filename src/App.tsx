@@ -52,7 +52,7 @@ const App = () => {
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
 	// const [headingIconsEnabled, setHeadingIconsEnabled] = useState<boolean>(false)
-	const headingIconsEnabled = false // TODO make it a setting
+	const headingIconsEnabled = false // TODO settings: make it a setting
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -116,7 +116,7 @@ const App = () => {
 		}
 	}, [darkTheme])
 
-	// TODO when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
+	// TODO react19: when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
 		<AppContext.Provider
 			value={{

@@ -1,4 +1,4 @@
-// TODO: design & copywrite confirmation email
+// TODO account_emails: design & copywrite confirmation email
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 
