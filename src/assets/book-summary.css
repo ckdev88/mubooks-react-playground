@@ -47,23 +47,15 @@
 .book-summary .calendar-hidden + .btn-text {
 	margin-top: -1rem;
 }
-
 .book-summary .h2 {
 	margin-top: 0;
 }
 .book-summary .icon-heart + .h2 {
 	padding-right: 1.25rem;
 }
-.book-summary .h2 sub {
-	font-size: 0.9em;
-	font-weight: normal;
-	display: block;
-}
-
 .book-summary .h2 sup {
 	vertical-align: baseline;
 }
-
 .book-summary aside {
 	width: 9rem;
 	height: auto;
@@ -125,7 +117,7 @@
 	font-size: 0.8em;
 }
 
-.book-summary .synopsis h3 {
+.book-summary .synopsis .h3 {
 	margin: 0 0 1em;
 	padding: 0;
 }
@@ -134,7 +126,7 @@
 	width: auto;
 }
 
-.book-summary h3 {
+.book-summary .h3 {
 	margin-bottom: 0.25rem;
 	font-size: 1rem;
 	text-decoration: underline;
@@ -226,10 +218,10 @@
 	margin-bottom: 1rem;
 }
 
-.book-summary .rating h3 {
+.book-summary .rating .h3 {
 	margin-top: 0.5rem;
 }
-.book-summary .tropes h3 {
+.book-summary .tropes .h3 {
 	padding-bottom: 0;
 }
 

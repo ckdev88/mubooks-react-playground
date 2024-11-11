@@ -1,6 +1,6 @@
 // TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
 // TODO: create image uploading to server option, to replace hotlinking
-// TODO: make tropes same UX as in BookSummary and TropesPage
+// DOING: make tropes same UX as in BookSummary and TropesPage
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
@@ -61,6 +61,7 @@ const AddBookPage = () => {
 	// /for the preview
 
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
 	const processAbForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		// NOTE set to false when all is done if the redirect to wishlist is canceled
@@ -181,6 +182,9 @@ const AddBookPage = () => {
 			}
 		}
 		document.getElementById('abTropeAdd')?.focus()
+	}
+	function removeTrope(filterTrope: string) {
+		setBookTropes(bookTropes.filter((trope) => trope !== filterTrope))
 	}
 	const handleKeyDownAuthor = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter' || e.key === ',') {
@@ -326,7 +330,7 @@ const AddBookPage = () => {
 							{bookTropes.map((trope, index) => (
 								<div className="badge" key={`removetrope${index}`}>
 									{trope}
-									<span className="btn-x" onClick={() => removeAuthor(trope)}>
+									<span className="btn-x" onClick={() => removeTrope(trope)}>
 										x
 									</span>
 								</div>
@@ -339,8 +343,10 @@ const AddBookPage = () => {
 					Add book to wishlist
 				</button>
 			</form>
-			<h3>Preview</h3>
-			{!title && <>No title yet...</>}
+			<div className="h2">
+				Preview
+				{!title && <sub>No title yet...</sub>}
+			</div>
 			<article className="book-summary preview">
 				<aside className="aside">{showCover}</aside>
 				<div className="article-main">

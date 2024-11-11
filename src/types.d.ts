@@ -20,6 +20,8 @@ interface AppContextType {
 	darkTheme: undefined | boolean
 	setDarkTheme(darkTheme: darkTheme): void
 	bodyBgColor: string
+	headingIconsEnabled: boolean
+	// setHeadingIconsActive(headingIconsEnabled: headingIconsEnabled): void
 }
 
 interface IsModdingPagesContextType {
