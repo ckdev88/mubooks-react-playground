@@ -1,12 +1,8 @@
 // TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
-// TODO: create image uploading to server option, to replace hotlinking
-// DOING: make tropes same UX as in BookSummary and TropesPage
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
-// TODO apply BookSummary-BookPages to keep uniformity ??
 import BookSummaryTitle from '../../components/BookSummaryTitle'
-// TODO apply BookSummary-Components to keep uniformity
 import { AppContext } from '../../App'
 import updateEntriesDb from '../../functions/updateEntriesDb'
 import { cleanAnchor, cleanInput } from '../../helpers/cleanInput'
