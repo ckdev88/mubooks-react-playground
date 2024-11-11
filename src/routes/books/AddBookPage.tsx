@@ -1,4 +1,3 @@
-// TODO: cover_redir should be more dynamic, reacting to search of openlibrary OL
 // TODO: make this form interact with openlibrary.org to help append to their database
 import { useContext, useState, useEffect } from 'react'
 import { isUrl } from '../../Helpers'
