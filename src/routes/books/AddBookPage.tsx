@@ -277,7 +277,7 @@ const AddBookPage = () => {
 									className={coverImg ? '' : 'mb0o'}
 								/>
 								{coverImg && (
-									<span className="btn-text-cancel btn-text sf mt-05 mb05" onClick={resetFile}>
+									<span className="btn-text-cancel btn-text sf2 mt-05 mb05" onClick={resetFile}>
 										cancel
 									</span>
 								)}
@@ -299,7 +299,7 @@ const AddBookPage = () => {
 								{selectedImage ? <>created blob: {URL.createObjectURL(selectedImage)} </> : ''}
 							</div>
 							{selectedImage && (
-								<span className="btn-text-cancel btn-text sf mb05" onClick={resetFile}>
+								<span className="btn-text-cancel btn-text sf2 mb05" onClick={resetFile}>
 									cancel
 								</span>
 							)}

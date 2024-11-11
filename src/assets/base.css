@@ -139,7 +139,7 @@ label:focus-within .description {
 }
 label .description em {
 	opacity: 0.5;
-	font-size: var(--smallfont);
+	font-size: var(--smallerfont);
 }
 label:focus-within .description em {
 	opacity: 1;

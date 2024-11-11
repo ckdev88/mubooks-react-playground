@@ -49,7 +49,7 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 				<div className="h2 mb0">Books & pages per month</div>
 				<LineG2 data={cbfm} data2={cpfm} subjects={['Books', 'Pages']} />
 				Books finished in {year}: <b>{cbf}</b>
-				{cbwp > 0 && <span className="sf">*</span>}{' '}
+				{cbwp > 0 && <span className="sf2">*</span>}{' '}
 				<button onClick={() => setShowCbfDetails(!showCbfDetails)} className="btn-text diblock">
 					...
 				</button>
@@ -133,11 +133,11 @@ const StatisticsYear = ({ myBooksArr, year }: { myBooksArr: Books; year: number 
 					Average stars per book: <b>{astpb}</b>
 					{cbwst > 0 && (
 						<>
-							<span className="sf">*</span>
+							<span className="sf2">*</span>
 							<button onClick={() => setShowStpbDetails(!showStpbDetails)} className="btn-text diblock">
 								...
 							</button>
-							<div className={showStpbDetails ? 'mt05 sf ' : 'mt05 sf dnone'}>
+							<div className={showStpbDetails ? 'mt05 sf' : 'mt05 sf dnone'}>
 								{cstpb.length > 0 && (
 									<>
 										<div className={showStpbDetails2 ? 'dnone' : 'dblock'}>
