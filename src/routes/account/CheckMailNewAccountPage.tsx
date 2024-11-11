@@ -9,11 +9,8 @@ const CheckMailNewAccountPage = () => {
 		<>
 			<div className="h1">Check your email</div>
 			<p>
-				You should receive an email on{' '}
-				<strong>
-					<u>{recipientAddress}</u>
-				</strong>{' '}
-				containing a link to confirm your account, click it.
+				You should receive an email on <span className="bu">{recipientAddress}</span> containing a link to confirm your
+				account, click it.
 			</p>
 		</>
 	)
