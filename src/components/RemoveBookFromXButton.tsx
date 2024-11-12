@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { AppContext } from '../App'
 import getListName from '../functions/getListName'
-import updateEntriesDb from '../functions/updateEntriesDb'
 import useMyBooksUpdateDb from '../hooks/useMyBooksUpdateDb'
 
 const RemoveBookFromXButton = ({
