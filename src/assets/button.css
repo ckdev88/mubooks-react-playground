@@ -325,7 +325,7 @@ input[type='number'] + .btn-submit-inside-caret-right {
 }
 .badge,
 .btn-sm {
-	font-size: 0.8rem;
+	font-size: var(--smallerfontrem);
 	border-radius: 0.2rem;
 	position: relative;
 	height: 1.4rem;

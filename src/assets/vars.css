@@ -5,6 +5,8 @@
 	--darkbg-lighter: hsl(204,33%,17%);
 	--smallfont: .9em;
 	--smallerfont: .8em;
+	--smallfontrem: .9rem;
+	--smallerfontrem: .8rem;
 }
 :root {
 	--bg: var(--lightbg);

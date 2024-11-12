@@ -129,6 +129,12 @@ form .notification {
 .sf2 {
 	font-size: var(--smallerfont);
 }
+.sfr {
+	font-size: var(--smallfontrem);
+}
+.sfr2 {
+	font-size: var(--smallerfontrem);
+}
 .fs-inherit {
 	font-size: inherit;
 }
