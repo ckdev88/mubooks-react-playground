@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import getListName from '../functions/getListName'
 import useMyBooksUpdateDb from '../hooks/useMyBooksUpdateDb'
@@ -15,6 +15,7 @@ const RemoveBookFromXButton = ({
 	icon: boolean
 }) => {
 	const { userMyBooks, setUserMyBooks } = useContext(AppContext)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const msg = 'Removed book'
 	const updateMyBooksDb = useMyBooksUpdateDb({ myBooksNew: userMyBooks, book_id: null, msg })
 
@@ -54,20 +55,22 @@ const RemoveBookFromXButton = ({
 	}
 
 	async function RemoveBookFromXButtonAct() {
+		setIsLoading(true)
 		const newArr: Books = RemoveBookFromX(book_id)
 		setUserMyBooks(newArr)
 		await MyBooksUpdate()
 	}
 
 	async function MyBooksUpdate() {
-		updateMyBooksDb()
+		await updateMyBooksDb()
+		setIsLoading(false)
 	}
 
 	if (icon && targetList === 4) return <span className="icon-heart active" onClick={RemoveBookFromXButtonAct}></span>
 
 	return (
 		<div className="mark">
-			<button className="btn-text" onClick={RemoveBookFromXButtonAct}>
+			<button className="btn-text" onClick={RemoveBookFromXButtonAct} disabled={isLoading}>
 				<span className="icon icon-remove"></span>Remove from {getListName(targetList)}
 			</button>
 		</div>
