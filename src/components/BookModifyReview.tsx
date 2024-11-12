@@ -12,41 +12,35 @@ const BookModifyReview = ({
 	o_key: 'review_text' | 'review_fav_quote'
 	review_text: Book['review_text']
 }) => {
-	const { isModding, setIsModding, setReviewText } = useContext(IsModdingReviewContext)
-	const [processForm, isModded, newVal] = useChangeReview(book_id, o_key, review_text)
+	const { isModding, setIsModding } = useContext(IsModdingReviewContext)
+	const [processForm] = useChangeReview(book_id, o_key)
 
 	let placeholder: string
-	/** Input Id */
-	let iid: string
-	/** Button ClassName */
-	let bcn: string
+	let inputId: string
+	let btnClassName: string
 	if (o_key === 'review_fav_quote') {
 		placeholder = 'Add your favorite quote'
-		iid = 'review_fav_quote_' + book_id
-		bcn = 'btn-text btn-text-cancel flex-start'
+		inputId = 'review_fav_quote_' + book_id
+		btnClassName = 'btn-text btn-text-cancel flex-start'
 	} else {
 		placeholder = 'Add review'
-		iid = 'review_text_' + book_id
-		bcn = 'btn-text btn-text-cancel'
+		inputId = 'review_text_' + book_id
+		btnClassName = 'btn-text btn-text-cancel'
 	}
 
 	useEffect(() => {
-		if (isModded === true) {
-			setReviewText(newVal)
-			setIsModding(false)
-		}
-		if (isModding === true) document.getElementById(iid)?.focus()
-	}, [isModded, setIsModding, newVal, setReviewText, isModding, iid])
+		if (isModding) document.getElementById(inputId)?.focus()
+	}, [isModding, inputId])
 
 	return (
 		<>
 			<form className="single-small-form clr" onSubmit={processForm}>
-				<input type="text" name="review_text" id={iid} placeholder={placeholder} defaultValue={review_text} />
+				<input type="text" name="review_text" id={inputId} placeholder={placeholder} defaultValue={review_text} />
 				<BtnInsideCaret />
 			</form>
 
 			{isModding && (
-				<button className={bcn} onClick={() => setIsModding(false)}>
+				<button className={btnClassName} onClick={() => setIsModding(false)}>
 					Cancel
 				</button>
 			)}

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { IsModdingPagesContext } from './BookPages'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 import useChangePages from '../hooks/useChangePages'
@@ -13,18 +13,34 @@ const BookModifyPages = ({
 	const { isModding, setIsModding } = useContext(IsModdingPagesContext)
 	const [processForm] = useChangePages(book_id)
 
+	const placeholder: string = '0'
+	const inputId = 'pages_' + book_id
+
+	useEffect(() => {
+		if (isModding) document.getElementById(inputId)?.focus()
+	}, [isModding, inputId])
+
 	return (
-		<span className="dflex" style={{ alignItems: 'center' }}>
-			<div className="dflex" style={{ alignContent: 'center', alignItems: 'center', position: 'relative' }}>
-				<form onSubmit={processForm} className="single-small-form wm6" style={{ marginRight: '.3rem' }}>
-					<input type="number" name="pagesAmount" defaultValue={book_number_of_pages_median} />
-					<BtnInsideCaret />
-				</form>
-			</div>
-			<button className="btn-icon" onClick={() => setIsModding(!isModding)}>
-				<span className="icon icon-pencil"></span>
-			</button>
-		</span>
+		<>
+			<form onSubmit={processForm} className="single-small-form wm6" style={{ marginRight: '.3rem' }}>
+				<input
+					type="number"
+					name="pagesAmount"
+					id={inputId}
+					defaultValue={book_number_of_pages_median}
+					min="0"
+					placeholder={placeholder}
+				/>
+				<BtnInsideCaret />
+			</form>
+			{isModding && (
+				<>
+					<button className="btn-text btn-text-cancel" onClick={() => setIsModding(false)}>
+						Cancel
+					</button>
+				</>
+			)}
+		</>
 	)
 }
 export default BookModifyPages
