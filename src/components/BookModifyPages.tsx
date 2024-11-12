@@ -13,34 +13,41 @@ const BookModifyPages = ({
 	const { isModding, setIsModding } = useContext(IsModdingPagesContext)
 	const [processForm] = useChangePages(book_id)
 
-	const placeholder: string = '0'
-	const inputId = 'pages_' + book_id
+	const input = {
+		form_class: 'single-small-form wm6',
+		type: 'number',
+		name: 'pagesAmount',
+		id: 'pages_' + book_id,
+		default: book_number_of_pages_median,
+		placeholder: '0',
+		cancel_class: 'btn-text btn-text-cancel',
+	}
 
 	useEffect(() => {
-		if (isModding) document.getElementById(inputId)?.focus()
-	}, [isModding, inputId])
+		if (isModding) document.getElementById(input.id)?.focus()
+	}, [isModding, input.id])
 
 	return (
 		<>
-			<form onSubmit={processForm} className="single-small-form wm6" style={{ marginRight: '.3rem' }}>
+			<form className={input.form_class} onSubmit={processForm}>
 				<input
-					type="number"
-					name="pagesAmount"
-					id={inputId}
-					defaultValue={book_number_of_pages_median}
-					min="0"
-					placeholder={placeholder}
+					type={input.type}
+					name={input.name}
+					id={input.id}
+					defaultValue={input.default}
+					placeholder={input.placeholder}
+					autoComplete="off"
+					min={input.type === 'number' ? '0' : undefined}
 				/>
 				<BtnInsideCaret />
 			</form>
 			{isModding && (
-				<>
-					<button className="btn-text btn-text-cancel" onClick={() => setIsModding(false)}>
-						Cancel
-					</button>
-				</>
+				<button className={input.cancel_class} onClick={() => setIsModding(false)}>
+					Cancel
+				</button>
 			)}
 		</>
 	)
 }
+
 export default BookModifyPages
