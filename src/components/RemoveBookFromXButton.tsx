@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 import getListName from '../functions/getListName'
 import updateEntriesDb from '../functions/updateEntriesDb'
+import useMyBooksUpdateDb from '../hooks/useMyBooksUpdateDb'
 
 const RemoveBookFromXButton = ({
 	book_id,
@@ -14,7 +15,9 @@ const RemoveBookFromXButton = ({
 	targetList: BookList
 	icon: boolean
 }) => {
-	const { userid, userMyBooks, setUserMyBooks, setPopupNotification } = useContext(AppContext)
+	const { userMyBooks, setUserMyBooks } = useContext(AppContext)
+	const msg = 'Removed book'
+	const updateMyBooksDb = useMyBooksUpdateDb({ myBooksNew: userMyBooks, book_id: null, msg })
 
 	function RemoveBookFromX(book_id: Book['id']) {
 		let myBooks: Books
@@ -48,23 +51,20 @@ const RemoveBookFromXButton = ({
 			myBooks.splice(removeIndex, 1)
 		}
 		const myBooksNew: Books = myBooks
-		MyBooksUpdate(myBooksNew)
 		return myBooksNew
 	}
 
-	function RemoveBookFromXButtonAct() {
+	async function RemoveBookFromXButtonAct() {
 		const newArr: Books = RemoveBookFromX(book_id)
 		setUserMyBooks(newArr)
-		MyBooksUpdate(newArr)
+		await MyBooksUpdate()
 	}
 
-	async function MyBooksUpdate(myBooksNew: Books) {
-		const msg = await updateEntriesDb(myBooksNew,userid)
-		setPopupNotification(msg)
+	async function MyBooksUpdate() {
+		updateMyBooksDb()
 	}
 
-	if (icon && targetList === 4)
-		return <span className="icon-heart active" onClick={RemoveBookFromXButtonAct}></span>
+	if (icon && targetList === 4) return <span className="icon-heart active" onClick={RemoveBookFromXButtonAct}></span>
 
 	return (
 		<div className="mark">
