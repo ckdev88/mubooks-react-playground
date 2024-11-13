@@ -1,21 +1,16 @@
 import { useContext } from 'react'
 import { AppContext } from '../../App'
-// import { MyBooksUpdate } from '../../helpers/MyBooksHelpers'
-import { supabase } from '../../../utils/supabase'
+import updateEntriesDb from '../../functions/updateEntriesDb'
 
-export default function ClearMyBooks() {
-	const { setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
-	async function clearbooksyes(): Promise<void> {
-		let msg: string
-		setUserMyBooks([])
-		const { error } = await supabase.from('user_entries').update({ json: [] }).eq('user_id', userid).select()
-		if (error) {
-			msg = 'Error, data was not changed'
-			console.log('error:', error)
-		} else msg = 'Updated Mu Books.'
-
-		setPopupNotification(msg)
+const newArr: [] = []
+function ClearMyBooks() {
+	const { userid, setUserMyBooks, userMyBooks } = useContext(AppContext)
+	async function clearbooksyes() {
+		setUserMyBooks(newArr)
+		const msg = await updateEntriesDb(newArr, userid)
+		console.log(`${msg} :, ${userMyBooks}`)
 	}
 
 	return <button onClick={() => clearbooksyes()}>Clear my books</button>
 }
+export default ClearMyBooks
