@@ -237,22 +237,28 @@ input[type='submit'].dnone {
 .loader-dots:after {
 	content: '';
 	animation: loader-dots 2.5s linear infinite;
-	margin-left: 0.25em;
+	margin-left: 0;
+	width: 1rem;
+	display:inline-block;
+	text-align:left;
+}
+.loader-dots:before {
+	content: ' ';
+	display: inline-block;
 }
 
 @keyframes loader-dots {
 	0%,
 	100% {
-		width: 0;
-		content: ' .';
+		content: '.';
 	}
 	25% {
-		content: ' ..';
+		content: '..';
 	}
 	50% {
-		content: ' ...';
+		content: '...';
 	}
 	75% {
-		content: ' ..';
+		content: '..';
 	}
 }
