@@ -75,7 +75,7 @@ const AddBookToXButton = ({
 		<div className="mark">
 			<button className="btn-text" onClick={() => AddBookToXButtonAct()} disabled={isLoading}>
 				<span className={iconClassName}></span>
-				{button_title} {!isLoading && <span className="loader-dots"> </span>}
+				{button_title} {isLoading && <span className="loader-dots"> </span>}
 			</button>
 		</div>
 	)
