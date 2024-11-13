@@ -22,6 +22,7 @@ interface AppContextType {
 	bodyBgColor: string
 	headingIconsEnabled: boolean
 	// setHeadingIconsActive(headingIconsEnabled: headingIconsEnabled): void
+	settingsSynopsisEnabled:boolean
 }
 
 interface IsModdingPagesContextType {
