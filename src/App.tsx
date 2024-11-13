@@ -55,13 +55,13 @@ const App = () => {
 	const headingIconsEnabled = false // TODO settings: make it a setting
 	/** set settingsSynopsisEnabled to false when archive/OpenLibrary is unavailable */
 	const settingsSynopsisEnabled = false
-	/* NOTE 
+	/* NOTE
 	 * 3 kinds of settings?
 	 * - user settings, like theme (light|dark)
 	 * - global settings, like icons true|false ?
-	 * - admin settings, like 
+	 * - admin settings, like
 	 *   - synopsisOL
-	 *   - coverHotlinkOl 
+	 *   - coverHotlinkOl
 	 */
 
 	// add persistency to userMyBooks state throughout page refreshes
