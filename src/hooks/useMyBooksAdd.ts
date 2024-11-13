@@ -6,14 +6,12 @@ import getListName from '../functions/getListName'
 import { getBookCover } from '../Helpers'
 
 const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList }): [() => void, boolean] => {
-	const { setPopupNotification, userMyBooks, setUserMyBooks, userid, todaysDateDigit } =
-		useContext(AppContext)
+	const { setPopupNotification, userMyBooks, setUserMyBooks, userid, todaysDateDigit } = useContext(AppContext)
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	async function MyBooksUpdate(myBooksNew: Books) {
-		setIsLoading(true)
-		let msg: string
+		let msg: string = 'Added book to ' + getListName(targetList)
 		setUserMyBooks(myBooksNew)
 		const { error } = await supabase
 			.from('user_entries')
@@ -24,7 +22,6 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 			.eq('user_id', userid)
 			.select('*')
 		if (error) msg = error.message
-		else msg = 'Added book to ' + getListName(targetList)
 		setPopupNotification(msg)
 		setIsLoading(false)
 	}
@@ -77,9 +74,8 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 	}
 
 	async function AddBookToX(): Promise<void> {
-		let myBooks: Books
-		if (userMyBooks === undefined) myBooks = []
-		else myBooks = userMyBooks
+		let myBooks: Books = []
+		if (userMyBooks !== undefined) myBooks = userMyBooks
 
 		let bookIsSaved = false
 		for (let i = 0; i < myBooks.length; i++) {
@@ -97,6 +93,7 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 	}
 
 	const AddBookToXButtonAct = (): void => {
+		setIsLoading(true)
 		AddBookToX()
 	}
 

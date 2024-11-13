@@ -114,7 +114,7 @@
 
 .book-summary .synopsis p {
 	margin-top: 0;
-	font-size: 0.8em;
+	font-size: var(--smallerfont);
 }
 
 .book-summary .synopsis .h3 {
@@ -185,11 +185,12 @@
 .single-small-form input[type='text']:active {
 	border-style: solid;
 }
-.single-small-form + .btn-text {
+.single-small-form + .btn-text,
+.btn-text-cancel {
 	margin-top: -0.2em;
 	display: block;
 	width: auto;
-	font-size: 0.8rem;
+	font-size: var(--smallerfontrem);
 	padding-left: calc(2px + 0.3rem);
 	padding-right: calc(2px + 0.3rem);
 	align-self: flex-start;
