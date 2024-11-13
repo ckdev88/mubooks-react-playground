@@ -51,10 +51,11 @@ const App = () => {
 	const [bookFilter, setBookFilter] = useState<string>('')
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
-	// const [headingIconsEnabled, setHeadingIconsEnabled] = useState<boolean>(false)
-	const headingIconsEnabled = false // TODO settings: make it a setting
-	/** set settingsSynopsisEnabled to false when archive/OpenLibrary is unavailable */
+
+	// Settings
+	const settingsHeadingIconsEnabled = false
 	const settingsSynopsisEnabled = false
+
 	/* NOTE
 	 * 3 kinds of settings?
 	 * - user settings, like theme (light|dark)
@@ -151,7 +152,7 @@ const App = () => {
 				setDarkTheme,
 				darkTheme,
 				bodyBgColor,
-				headingIconsEnabled,
+				settingsHeadingIconsEnabled,
 				settingsSynopsisEnabled,
 			}}
 		>

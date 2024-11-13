@@ -16,8 +16,8 @@ const Heading = ({
 	sub?: ReactNode
 	span?: ReactNode
 }) => {
-	const { headingIconsEnabled } = useContext(AppContext)
-	if (headingIconsEnabled && icon) {
+	const { settingsHeadingIconsEnabled } = useContext(AppContext)
+	if (settingsHeadingIconsEnabled && icon) {
 		return (
 			<div className={el + ' ' + `${el}-with-icon`}>
 				<div>
