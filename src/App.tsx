@@ -1,8 +1,8 @@
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
-import AuthConfirm from './routes/auth/Confirm.tsx'
-import ResetPasswordPage from './routes/auth/ResetPasswordPage.tsx'
+import AuthConfirm from './routes/auth/Confirm'
+import ResetPasswordPage from './routes/auth/ResetPasswordPage'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
 import DashboardPage from './routes/account/DashboardPage'
@@ -10,23 +10,23 @@ import ErrorPage from './routes/ErrorPage'
 import FavoritesPage from './routes/books/FavoritesPage'
 import FinishedPage from './routes/books/FinishedPage'
 import NavWrapper from './components/NavWrapper'
-import QuotedPage from './routes/books/QuotedPage.tsx'
+import QuotedPage from './routes/books/QuotedPage'
 import ReadingPage from './routes/books/ReadingPage'
 import RootPage from './routes/RootPage'
 import SavedBooksPage from './routes/books/SavedBooksPage'
 import SearchPage from './routes/books/SearchPage'
-import StatisticsPage from './routes/books/StatisticsPage.tsx'
+import StatisticsPage from './routes/books/StatisticsPage'
 import TropesPage from './routes/books/TropesPage'
 import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
-// import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
+import ClearMyBooks from './routes/books/ClearMyBooks'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import { timestampConverter } from './helpers/convertDate.ts'
-import AddBookPage from './routes/books/AddBookPage.tsx'
+import AddBookPage from './routes/books/AddBookPage'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -51,8 +51,19 @@ const App = () => {
 	const [bookFilter, setBookFilter] = useState<string>('')
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
-	// const [headingIconsEnabled, setHeadingIconsEnabled] = useState<boolean>(false)
-	const headingIconsEnabled = false // TODO make it a setting
+
+	// Settings
+	const settingsHeadingIconsEnabled = false
+	const settingsSynopsisEnabled = false
+
+	/* NOTE
+	 * 3 kinds of settings?
+	 * - user settings, like theme (light|dark)
+	 * - global settings, like icons true|false ?
+	 * - admin settings, like
+	 *   - synopsisOL
+	 *   - coverHotlinkOl
+	 */
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -116,7 +127,7 @@ const App = () => {
 		}
 	}, [darkTheme])
 
-	// TODO when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
+	// TODO react19: when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
 		<AppContext.Provider
 			value={{
@@ -141,7 +152,8 @@ const App = () => {
 				setDarkTheme,
 				darkTheme,
 				bodyBgColor,
-				headingIconsEnabled,
+				settingsHeadingIconsEnabled,
+				settingsSynopsisEnabled,
 			}}
 		>
 			{userIsLoggedIn && (
@@ -184,9 +196,7 @@ const App = () => {
 							<Route path="/quoted" element={<QuotedPage />} />
 							<Route path="/tropes" element={<TropesPage />} />
 							<Route path="/statistics" element={<StatisticsPage />} />
-							{/* 
 							<Route path="/clear-my-books" element={<ClearMyBooks />} />
-							*/}
 						</>
 					)}
 				</Routes>

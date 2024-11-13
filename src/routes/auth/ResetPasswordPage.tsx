@@ -14,7 +14,7 @@ const ResetPasswordPage = () => {
 	if (userIsLoggedIn) navigate('/dashboard#434334')
 
 	function afterSbUpdate() {
-		setTimeout(() => navigate('/dashboard'), 1000) // TODO check if used
+		setTimeout(() => navigate('/dashboard'), 1000) // TODO cleanup: check if used
 	}
 
 	const updateSbUser = async (form_userpass: string) => {

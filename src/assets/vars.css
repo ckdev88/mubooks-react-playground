@@ -3,7 +3,10 @@
 	--lightbg-darker: hsl(42, 31%, 89%); 
 	--darkbg: hsl(204, 33%, 12%); /* #152129 */
 	--darkbg-lighter: hsl(204,33%,17%);
-	--smallfont: .8em;
+	--smallfont: .9em;
+	--smallerfont: .8em;
+	--smallfontrem: .9rem;
+	--smallerfontrem: .8rem;
 }
 :root {
 	--bg: var(--lightbg);

@@ -8,6 +8,15 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 	const savedArr: Books = userMyBooks
 	const fsPages: Page[] = ['wishlist', 'finished', 'favorites', 'savedbooks']
 
+	console.log('userMyBooks:', userMyBooks)
+	console.log(
+		'userMyBooks finished:',
+		userMyBooks.filter((book) => book.date_finished && book.date_finished > 0)
+	)
+	console.log(
+		'userMyBooks finished but no reading',
+		userMyBooks.filter((book) => book.date_finished && book.date_finished > 0 && book.date_reading === 0)
+	)
 	const [processedHash, setProcessedHash] = useState<boolean>(false)
 	useEffect(() => {
 		if (window.location.hash !== undefined && window.location.hash !== '' && processedHash === false) {

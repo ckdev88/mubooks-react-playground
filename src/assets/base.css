@@ -127,7 +127,7 @@ label .description {
 	padding: 0.2em 0.5em;
 	background-color: white;
 	border-radius: 0.2rem;
-	font-size: 0.8rem;
+	font-size: var(--smallerfontrem);
 	color: var(--gray);
 	transition: 0.18s font-weight ease-in-out, 0.18s background-color ease-in-out, 0.18s color ease-in-out,
 		0.18s margin-left ease-in-out;
@@ -139,7 +139,7 @@ label:focus-within .description {
 }
 label .description em {
 	opacity: 0.5;
-	font-size: var(--smallfont);
+	font-size: var(--smallerfont);
 }
 label:focus-within .description em {
 	opacity: 1;

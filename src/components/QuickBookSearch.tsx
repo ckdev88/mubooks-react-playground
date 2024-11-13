@@ -97,10 +97,10 @@ const QuickBookSearch = () => {
 			</div>
 
 			<div className="booksearchresults">
-				<div className={resultsMessage !== '' ? 'dblock sf' : 'dnone'}>
+				<div className={resultsMessage !== '' ? 'dblock sf2' : 'dnone'}>
 					<i>{resultsMessage}</i>
 				</div>
-				<div className={resultsWarning !== '' ? 'dblock sf' : 'dnone'}>
+				<div className={resultsWarning !== '' ? 'dblock sf2' : 'dnone'}>
 					<i>{resultsWarning}</i>
 				</div>
 				{searchResults.map((res, result_index) => {
@@ -121,9 +121,9 @@ const QuickBookSearch = () => {
 							<div key={'result' + result_index} className="result" onClick={checkit}>
 								<div className="wrapper">
 									<div className="text">
-										{title} <em className="sf"> ({res.first_publish_year})</em>
+										{title} <em className="sf2"> ({res.first_publish_year})</em>
 										<br />
-										<em className="sf cl">{authors}</em>
+										<em className="sf2 cl">{authors}</em>
 									</div>
 								</div>
 								<img src={getOlCover(res.id, 'S')} className="thumbnail" />

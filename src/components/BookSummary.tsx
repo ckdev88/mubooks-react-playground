@@ -114,7 +114,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 							</>
 						</div>
 					) : (
-						// TODO make link like 'no synopsis yet... write one?' and link to the OL page
+						// TODO openlibrary: make link like 'no synopsis yet... write one?' and link to the OL page
 						<></>
 					)}
 				</footer>

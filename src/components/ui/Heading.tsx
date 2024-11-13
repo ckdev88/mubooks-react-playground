@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 
-// TODO apply smart way of determining light or dark icon based on current theme
+// TODO themes_icons: apply smart way of determining light or dark icon based on current theme
 const Heading = ({
 	el = 'h1',
 	text,
@@ -16,8 +16,8 @@ const Heading = ({
 	sub?: ReactNode
 	span?: ReactNode
 }) => {
-	const { headingIconsEnabled } = useContext(AppContext)
-	if (headingIconsEnabled && icon) {
+	const { settingsHeadingIconsEnabled } = useContext(AppContext)
+	if (settingsHeadingIconsEnabled && icon) {
 		return (
 			<div className={el + ' ' + `${el}-with-icon`}>
 				<div>

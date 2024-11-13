@@ -16,14 +16,10 @@ const BookSummaryTitle = ({
 }) => {
 	if (style === 'quoted')
 		return (
-			<center style={{ fontSize: '.8em' }}>
-				<i>
-					<strong>
-						{book_title_short},&nbsp;
-						<BookAuthorList book_id={book_id} book_author_name={book_author_name} />
-					</strong>
-				</i>
-			</center>
+			<div className="tcenter sf2 bi">
+				{book_title_short},&nbsp;
+				<BookAuthorList book_id={book_id} book_author_name={book_author_name} />
+			</div>
 		)
 
 	return (
