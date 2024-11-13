@@ -1,13 +1,15 @@
-import { useContext } from 'react'
-import { MyBooksUpdate } from '../helpers/MyBooksHelpers'
-import { AppContext } from '../App'
+import useMyBooksUpdateDb from './useMyBooksUpdateDb'
 
-const useClearBooks = (): [() => void] => {
-	const { setUserMyBooks } = useContext(AppContext)
-	const clearnow = async (): Promise<void> => {
-		await MyBooksUpdate([]).then(() => setUserMyBooks([]))
-	}
-
-	return [clearnow]
+const useClearBooks = (): void => {
+	const myBooksNewEmpty: [] = []
+	const book_id = null
+	const msg = 'Books cleared!'
+	const updateMyBooksDb = useMyBooksUpdateDb({
+		myBooksNew: myBooksNewEmpty,
+		book_id,
+		msg,
+	})
+	updateMyBooksDb()
 }
+
 export default useClearBooks

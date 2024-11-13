@@ -13,7 +13,7 @@ const ReviewRating = ({
 	book_rate_spice: Book['rate_spice']
 	book_title_short: Book['title_short']
 }) => {
-	const { userMyBooks, setUserMyBooks } = useContext(AppContext)
+	const { userMyBooks } = useContext(AppContext)
 
 	const [reviewStars, setReviewStars] = useState(book_rate_stars)
 	const [reviewSpice, setReviewSpice] = useState(book_rate_spice)
@@ -38,8 +38,6 @@ const ReviewRating = ({
 				break
 			}
 		}
-
-		setUserMyBooks(myBooks)
 		updateMyBooksDb()
 		return myBooks
 	}
@@ -47,8 +45,7 @@ const ReviewRating = ({
 	function RateStarsAct(type: 'rate_stars' | 'rate_spice', amount: Scale5) {
 		if (type === 'rate_stars') setReviewStars(amount)
 		if (type === 'rate_spice') setReviewSpice(amount)
-		const newArr: Books = RateStars(book_id, type, amount)
-		setUserMyBooks(newArr)
+		RateStars(book_id, type, amount)
 	}
 
 	const iconClassNameEraser = 'icon icon-eraser'

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { IsModdingPagesContext } from './BookPages'
 import BtnInsideCaret from './ui/BtnInsideCaret'
 import useChangePages from '../hooks/useChangePages'
@@ -13,18 +13,41 @@ const BookModifyPages = ({
 	const { isModding, setIsModding } = useContext(IsModdingPagesContext)
 	const [processForm] = useChangePages(book_id)
 
+	const input = {
+		form_class: 'single-small-form wm6',
+		type: 'number',
+		name: 'pagesAmount',
+		id: 'pages_' + book_id,
+		default: book_number_of_pages_median,
+		placeholder: '0',
+		cancel_class: 'btn-text btn-text-cancel',
+	}
+
+	useEffect(() => {
+		if (isModding) document.getElementById(input.id)?.focus()
+	}, [isModding, input.id])
+
 	return (
-		<span className="dflex" style={{ alignItems: 'center' }}>
-			<div className="dflex" style={{ alignContent: 'center', alignItems: 'center', position: 'relative' }}>
-				<form onSubmit={processForm} className="single-small-form wm6" style={{ marginRight: '.3rem' }}>
-					<input type="number" name="pagesAmount" defaultValue={book_number_of_pages_median} />
-					<BtnInsideCaret />
-				</form>
-			</div>
-			<button className="btn-icon" onClick={() => setIsModding(!isModding)}>
-				<span className="icon icon-pencil"></span>
-			</button>
-		</span>
+		<>
+			<form className={input.form_class} onSubmit={processForm}>
+				<input
+					type={input.type}
+					name={input.name}
+					id={input.id}
+					defaultValue={input.default}
+					placeholder={input.placeholder}
+					autoComplete="off"
+					min={input.type === 'number' ? '0' : undefined}
+				/>
+				<BtnInsideCaret />
+			</form>
+			{isModding && (
+				<button className={input.cancel_class} onClick={() => setIsModding(false)}>
+					Cancel
+				</button>
+			)}
+		</>
 	)
 }
+
 export default BookModifyPages
