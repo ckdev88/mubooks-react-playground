@@ -53,6 +53,16 @@ const App = () => {
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
 	// const [headingIconsEnabled, setHeadingIconsEnabled] = useState<boolean>(false)
 	const headingIconsEnabled = false // TODO settings: make it a setting
+	/** set settingsSynopsisEnabled to false when archive/OpenLibrary is unavailable */
+	const settingsSynopsisEnabled = false
+	/* NOTE 
+	 * 3 kinds of settings?
+	 * - user settings, like theme (light|dark)
+	 * - global settings, like icons true|false ?
+	 * - admin settings, like 
+	 *   - synopsisOL
+	 *   - coverHotlinkOl 
+	 */
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -142,6 +152,7 @@ const App = () => {
 				darkTheme,
 				bodyBgColor,
 				headingIconsEnabled,
+				settingsSynopsisEnabled,
 			}}
 		>
 			{userIsLoggedIn && (
