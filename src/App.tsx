@@ -21,7 +21,7 @@ import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
-import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
+import ClearMyBooks from './routes/books/ClearMyBooks'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
@@ -51,17 +51,18 @@ const App = () => {
 	const [bookFilter, setBookFilter] = useState<string>('')
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
-	// const [headingIconsEnabled, setHeadingIconsEnabled] = useState<boolean>(false)
-	const headingIconsEnabled = false // TODO settings: make it a setting
-	/** set settingsSynopsisEnabled to false when archive/OpenLibrary is unavailable */
+
+	// Settings
+	const settingsHeadingIconsEnabled = false
 	const settingsSynopsisEnabled = false
-	/* NOTE 
+
+	/* NOTE
 	 * 3 kinds of settings?
 	 * - user settings, like theme (light|dark)
 	 * - global settings, like icons true|false ?
-	 * - admin settings, like 
+	 * - admin settings, like
 	 *   - synopsisOL
-	 *   - coverHotlinkOl 
+	 *   - coverHotlinkOl
 	 */
 
 	// add persistency to userMyBooks state throughout page refreshes
@@ -151,7 +152,7 @@ const App = () => {
 				setDarkTheme,
 				darkTheme,
 				bodyBgColor,
-				headingIconsEnabled,
+				settingsHeadingIconsEnabled,
 				settingsSynopsisEnabled,
 			}}
 		>
