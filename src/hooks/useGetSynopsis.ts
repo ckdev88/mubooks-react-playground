@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { AppContext } from '../App'
 const useGetSynopsis = (
 	book_id: Book['id'],
 	book_cover_edition_key: Book['cover_edition_key'],
 	synopsisPages: string[],
 	currentPage: string
 ): string => {
-	// NOTE set synoposisON to false when archive/OpenLibrary is unavailable
-	const synoposisON = true
-
+	const { settingsSynopsisEnabled } = useContext(AppContext)
 	const [synopsis, setSynopsis] = useState<string>('')
 
 	useEffect(() => {
-		if (!synoposisON) return
+		if (!settingsSynopsisEnabled) return
 
 		const fetchSynopsis = async (book_id: string): Promise<void> => {
 			if (book_id.slice(0, 2) !== 'OL') return

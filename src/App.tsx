@@ -21,7 +21,7 @@ import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
-// import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
+import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
@@ -53,6 +53,16 @@ const App = () => {
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
 	// const [headingIconsEnabled, setHeadingIconsEnabled] = useState<boolean>(false)
 	const headingIconsEnabled = false // TODO settings: make it a setting
+	/** set settingsSynopsisEnabled to false when archive/OpenLibrary is unavailable */
+	const settingsSynopsisEnabled = false
+	/* NOTE 
+	 * 3 kinds of settings?
+	 * - user settings, like theme (light|dark)
+	 * - global settings, like icons true|false ?
+	 * - admin settings, like 
+	 *   - synopsisOL
+	 *   - coverHotlinkOl 
+	 */
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -142,6 +152,7 @@ const App = () => {
 				darkTheme,
 				bodyBgColor,
 				headingIconsEnabled,
+				settingsSynopsisEnabled,
 			}}
 		>
 			{userIsLoggedIn && (
@@ -184,9 +195,7 @@ const App = () => {
 							<Route path="/quoted" element={<QuotedPage />} />
 							<Route path="/tropes" element={<TropesPage />} />
 							<Route path="/statistics" element={<StatisticsPage />} />
-							{/* 
 							<Route path="/clear-my-books" element={<ClearMyBooks />} />
-							*/}
 						</>
 					)}
 				</Routes>
