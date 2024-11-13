@@ -12,7 +12,7 @@ const BookSummaryStatus = ({ book, bookAnchor }: Proptypes) => {
 				<em>
 					{book.list === 1 && (
 						<>
-							Already on my <Link to={'/wishlist#' + bookAnchor}>wishlist</Link>.
+							In my <Link to={'/wishlist#' + bookAnchor}>wishlist</Link>.
 						</>
 					)}
 					{book.list === 2 && (
