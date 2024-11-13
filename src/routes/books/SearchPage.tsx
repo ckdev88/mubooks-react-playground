@@ -70,7 +70,9 @@ const SearchPage = () => {
 					<div className="description">Term or title</div>
 					<input type="text" id="search_term" />
 				</label>
-				<input className="btn-lg" type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
+				<button className="btn-lg" disabled={loading}>
+					Search {loading && <span className="loader-dots"></span>}
+				</button>
 			</form>
 			<div>
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>

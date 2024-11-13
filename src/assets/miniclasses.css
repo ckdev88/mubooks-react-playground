@@ -234,3 +234,31 @@ input[type='submit'].dnone {
 .bglime {
 	background-color: lime !important;
 }
+.loader-dots:after {
+	content: '';
+	animation: loader-dots 2.5s linear infinite;
+	margin-left: 0;
+	width: 1rem;
+	display:inline-block;
+	text-align:left;
+}
+.loader-dots:before {
+	content: ' ';
+	display: inline-block;
+}
+
+@keyframes loader-dots {
+	0%,
+	100% {
+		content: '.';
+	}
+	25% {
+		content: '..';
+	}
+	50% {
+		content: '...';
+	}
+	75% {
+		content: '..';
+	}
+}
