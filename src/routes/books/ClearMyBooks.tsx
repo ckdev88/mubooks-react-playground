@@ -1,14 +1,18 @@
 import { useContext } from 'react'
 import { AppContext } from '../../App'
-import updateEntriesDb from '../../functions/updateEntriesDb'
+import useMyBooksUpdateDb from '../../hooks/useMyBooksUpdateDb'
 
 const newArr: [] = []
 function ClearMyBooks() {
-	const { userid, setUserMyBooks, userMyBooks } = useContext(AppContext)
-	async function clearbooksyes() {
-		setUserMyBooks(newArr)
-		const msg = await updateEntriesDb(newArr, userid)
-		console.log(`${msg} :, ${userMyBooks}`)
+	const { setUserMyBooks } = useContext(AppContext)
+	setUserMyBooks(newArr)
+	const clearbooks = useMyBooksUpdateDb({
+		myBooksNew: newArr,
+		book_id: null,
+		msg: 'Books cleared',
+	})
+	function clearbooksyes() {
+		clearbooks()
 	}
 
 	return <button onClick={() => clearbooksyes()}>Clear my books</button>
