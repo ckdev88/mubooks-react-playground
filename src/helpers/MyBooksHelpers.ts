@@ -48,11 +48,7 @@ const MyBooksUpdate = async (myBooksNew: Books): Promise<void> => {
 	let msg: string
 	setUserMyBooks(myBooksNew)
 
-	const { error } = await supabase
-		.from('user_entries')
-		.update({ json: myBooksNew })
-		.eq('user_id', userid)
-		.select()
+	const { error } = await supabase.from('user_entries').update({ json: myBooksNew }).eq('user_id', userid).select()
 	if (error) {
 		msg = 'Error, data was not changed'
 		console.log('error:', error)
