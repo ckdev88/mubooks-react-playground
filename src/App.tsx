@@ -1,3 +1,4 @@
+// TODO check if setPopupNotificationShow is still used or useful
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
@@ -27,6 +28,7 @@ import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
 import { timestampConverter } from './helpers/convertDate.ts'
 import AddBookPage from './routes/books/AddBookPage'
+import PopupNotification from './components/ui/PopupNotification'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -77,19 +79,6 @@ const App = () => {
 		}
 	}
 
-	// online state checker & notifier
-	const [isOnline, setIsOnline] = useState(navigator.onLine)
-	useEffect(() => {
-		const handleStatusChange = () => setIsOnline(navigator.onLine)
-		window.addEventListener('online', handleStatusChange)
-		window.addEventListener('offline', handleStatusChange)
-		return () => {
-			window.removeEventListener('online', handleStatusChange)
-			window.removeEventListener('offline', handleStatusChange)
-		}
-	}, [isOnline])
-	// /online state checker & notifier
-
 	useEffect(() => {
 		if (userIsLoggedIn === true && userMyBooks.length < 1) persistentMyBooks()
 	}, [userIsLoggedIn, initialMyBooksSet, userMyBooks.length])
@@ -109,13 +98,6 @@ const App = () => {
 	if (userIsLoggedIn) document.getElementsByTagName('html')[0].classList.add('loggedin')
 	else document.getElementsByTagName('html')[0].classList.remove('loggedin')
 
-	function popper() {
-		let ret: string
-		if (popupNotification) ret = popupNotification
-		else ret = ''
-		setTimeout(() => setPopupNotification(''), 1000)
-		return <>{ret}</>
-	}
 	useEffect(() => {
 		const htmlNode = document.getElementsByTagName('html')[0]
 		if (darkTheme === true) {
@@ -162,12 +144,7 @@ const App = () => {
 				</header>
 			)}
 			<main id="main" className="main">
-				{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
-				{popupNotification !== '' && (
-					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
-						{popupNotification && <>{popper()}</>}
-					</div>
-				)}
+				<PopupNotification />
 				<Routes>
 					<Route path="/*" element={<RootPage />} />
 					<Route path="/error" element={<ErrorPage />} />
