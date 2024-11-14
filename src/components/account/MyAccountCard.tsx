@@ -26,7 +26,7 @@ export default function MyAccountCard() {
 					<dd>******</dd>
 				</dl>
 				<button className="btn-lg" onClick={change}>
-					<span>change</span>
+					<span>Change</span>
 				</button>
 			</main>
 			<footer>
