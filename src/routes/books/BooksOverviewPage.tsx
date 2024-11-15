@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import BookSummary from '../../components/BookSummary'
 import { AppContext } from '../../App'
 import BooksOverviewFilterSort from '../../components/BooksOverviewFilterSort'
@@ -17,15 +17,13 @@ const BooksOverviewPage = ({ books, page }: { books: Books; page: Page }) => {
 		'userMyBooks finished but no reading',
 		userMyBooks.filter((book) => book.date_finished && book.date_finished > 0 && book.date_reading === 0)
 	)
-	const [processedHash, setProcessedHash] = useState<boolean>(false)
 	useEffect(() => {
-		if (window.location.hash !== undefined && window.location.hash !== '' && processedHash === false) {
+		if (window.location.hash !== undefined && window.location.hash !== '') {
 			setTimeout(() => {
 				location.href = window.location.hash
 			}, 500)
 		}
-		setProcessedHash(true)
-	}, [location])
+	}, [])
 
 	return (
 		<>
