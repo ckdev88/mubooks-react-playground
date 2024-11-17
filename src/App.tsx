@@ -50,7 +50,6 @@ const App = () => {
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
-	const [bookFilter, setBookFilter] = useState<string>('')
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
 
@@ -115,8 +114,6 @@ const App = () => {
 			value={{
 				popupNotification,
 				popupNotificationShow,
-				bookFilter,
-				setBookFilter,
 				setPopupNotification,
 				setPopupNotificationShow,
 				setUserIsLoggedIn,

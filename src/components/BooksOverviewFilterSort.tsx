@@ -1,17 +1,17 @@
 import { useContext } from 'react'
-import { AppContext } from '../App'
+import { BooksOverviewFilterContext } from '../routes/books/BooksOverviewPage'
 const BooksOverviewFilterSort = () => {
-	const { setBookFilter, bookFilter } = useContext(AppContext)
+	const { setBooksFilter, booksFilter } = useContext(BooksOverviewFilterContext)
 
-	function updateBookFilter(e: React.ChangeEvent<HTMLInputElement>): void {
+	function updateBooksFilter(e: React.ChangeEvent<HTMLInputElement>): void {
 		e.preventDefault()
 		const searchTerm = e.target.value.toLowerCase()
-		if (searchTerm.length > 0) setBookFilter(searchTerm)
-		else setBookFilter('')
+		if (searchTerm.length > 0) setBooksFilter(searchTerm)
+		else setBooksFilter('')
 	}
 
 	function cancelFilter() {
-		setBookFilter('')
+		setBooksFilter('')
 	}
 
 	function noSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -24,14 +24,14 @@ const BooksOverviewFilterSort = () => {
 			<form className="single-small-form" onSubmit={noSubmit} id="filterForm">
 				<input
 					type="text"
-					onChange={updateBookFilter}
+					onChange={updateBooksFilter}
 					id="booksoverview-filter"
-					value={bookFilter}
+					value={booksFilter}
 					placeholder="Filter on book title"
 				/>
 			</form>
-			{bookFilter.length > 0 && (
-				<button className="btn-text btn-text-cancel" onClick={cancelFilter}>
+			{booksFilter.length > 0 && (
+				<button className="btn-text btn-text-cancel" onClick={() => cancelFilter()}>
 					Reset filter
 				</button>
 			)}

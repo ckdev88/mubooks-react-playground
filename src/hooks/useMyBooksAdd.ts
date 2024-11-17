@@ -87,7 +87,6 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 				break
 			}
 		}
-		setUserMyBooks(myBooks)
 		if (bookIsSaved === false) myBooks = await runMyBooksAdd(bookIsSaved)
 		MyBooksUpdate(myBooks)
 	}
