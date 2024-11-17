@@ -42,7 +42,18 @@ const BooksOverviewPage = ({
 	const [booksList, setBooksList] = useState<Books>(booklistStart)
 
 	useEffect(() => {
-		if (booklist) setBooksList(userMyBooks.filter((book) => book.list === booklist))
+		let bookstmp: Books = []
+		if (books.length > 0) bookstmp = books
+		if (booklist) {
+			if (booklist === 3) bookstmp = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
+			else bookstmp = userMyBooks.filter((book) => book.list === booklist)
+
+			// SORTING
+			if (booklist === 3 || booklist === 4) {
+				bookstmp.sort((a, b) => (b.date_finished ?? 0) - (a.date_finished ?? 0))
+			}
+		}
+		setBooksList(bookstmp)
 	}, [userMyBooks, booklist])
 
 	useEffect(() => {
