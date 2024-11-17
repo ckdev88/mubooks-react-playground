@@ -3,7 +3,7 @@ import { AppContext } from '../App'
 import { cleanInput } from '../helpers/cleanInput'
 // TODO component_btn_inside_caret: remove or use BtnInsideCaret, a function should be able to be passed to make it useful
 // import BtnInsideCaret from './ui/BtnInsideCaret'
-import updateEntriesDb from '../functions/updateEntriesDb'
+import updateEntriesDbxxx from '../functions/updateEntriesDb'
 
 const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 	const { userMyBooks, setPopupNotification, userid } = useContext(AppContext)
@@ -32,7 +32,7 @@ const ReviewTropes = ({ book, tropes }: { book: Book; tropes: BookTropes }) => {
 				break
 			}
 		}
-		const msg: string = await updateEntriesDb(userMyBooks, userid)
+		const msg: string = await updateEntriesDbxxx(userMyBooks, userid)
 		setPopupNotification(msg)
 	}
 

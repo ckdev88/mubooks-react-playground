@@ -1,4 +1,3 @@
-// TODO check if setPopupNotificationShow is still used or useful
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
