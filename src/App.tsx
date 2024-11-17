@@ -135,6 +135,7 @@ const App = () => {
 				settingsSynopsisEnabled,
 			}}
 		>
+			<div id="top" style={{ position: 'absolute' }}></div>
 			{userIsLoggedIn && (
 				<header id="header" className="shade">
 					<NavWrapper />

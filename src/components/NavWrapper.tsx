@@ -33,6 +33,9 @@ const NavWrapper = () => {
 	function goSearch() {
 		setNav0Expanded(false)
 		navigate('/search')
+		setTimeout(() => {
+			location.href = '#top'
+		}, 200)
 	}
 
 	const navTitle = titleMap.get(location.pathname.slice(1))
