@@ -82,7 +82,7 @@ const SearchPage = () => {
 						{resultCount > 1 || resultCount === 0 ? ' books' : ' book'} found for <em>"{searchTerm}"</em>
 						<sub className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</sub>
 					</div>
-					<BooksOverviewPage books={searchResults} page={currentPage} booklist={booklist}/>
+					<BooksOverviewPage books={searchResults} page={currentPage} booklist={booklist} />
 				</div>
 			</div>
 		</>

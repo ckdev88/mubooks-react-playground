@@ -28,7 +28,7 @@ const ReadingPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page={currentPage} />
+			<BooksOverviewPage books={books} page={currentPage} booklist={booklist} />
 		</>
 	)
 }

@@ -42,6 +42,8 @@ interface TropesPageContextType {
 	setDislikedTropes(dislikedTropes: dislikedTropes): void
 	likedTropesLowercase: BookTropes
 	dislikedTropesLowercase: BookTropes
+	tropesInMyBooksArr: Books
+	setTropesInMyBooksArr(tropesInMyBooksArr: tropesInMyBooksArr): void
 }
 interface BooksOverviewFilterContextType {
 	booksFilter: string
