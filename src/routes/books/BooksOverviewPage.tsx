@@ -21,13 +21,13 @@ const BooksOverviewPage = ({
 	const { tropesInMyBooksArr } = useContext(TropesPageContext)
 
 	let booklistStart: Books
-	if (books.length > 0) {
-		booklistStart = books
-	} else {
-		if (booklist !== undefined) {
+	if (books.length > 0) booklistStart = books
+	else {
+		if (booklist === undefined) booklistStart = userMyBooks
+		else {
 			if (booklist === 3) booklistStart = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
 			else booklistStart = userMyBooks.filter((book: Book) => book.list === booklist)
-		} else booklistStart = userMyBooks
+		}
 	}
 	if (page === 'tropes') books = tropesInMyBooksArr
 
@@ -125,7 +125,7 @@ const BooksOverviewPage = ({
 				</>
 			) : (
 				booksList.map((book) => {
-					if (book.list === booklist || page === 'tropes') {
+					if (book.list === booklist || page === 'tropes' || booklist === undefined) {
 						return <BookSummary book={book} key={`BookSummary${book.id}`} currentPage={page} />
 					}
 				})
