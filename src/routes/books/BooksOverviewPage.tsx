@@ -56,10 +56,18 @@ const BooksOverviewPage = ({
 		setBooksList(bookstmp)
 	}, [userMyBooks, booklist])
 
+	// TROPES
 	useEffect(() => {
+		if (page === 'tropes') {
+			setBooksList(tropesInMyBooksArr)
+		}
+	}, [tropesInMyBooksArr])
+
+	// FILTERED
 	useEffect(() => {
 		if (hasfilter) setBooksList(booklistStart.filter((book) => book.title_short.toLowerCase().includes(booksFilter)))
 	}, [booksFilter])
+
 	useEffect(() => {
 		if (fsPages.includes(page)) {
 			if (window.location.hash !== undefined && window.location.hash !== '') {
