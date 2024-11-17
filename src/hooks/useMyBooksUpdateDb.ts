@@ -8,9 +8,9 @@ interface UseMyBooksUpdateDbProps {
 	msg: string
 }
 
-const useMyBooksUpdateDb = ({ myBooksNew, book_id, msg }: UseMyBooksUpdateDbProps): (() => Promise<void>) => {
+function useMyBooksUpdateDb ({ myBooksNew, book_id, msg }: UseMyBooksUpdateDbProps): (() => Promise<void>)  {
 	const { setPopupNotification, userid } = useContext(AppContext)
-	const updateMyBooksDb = async (): Promise<void> => {
+	async function updateMyBooksDb  (): Promise<void> {
 		const { error } = await supabase
 			.from('user_entries')
 			.update({ json: myBooksNew, testdata: `${msg} ${book_id !== null && 'for book: ' + book_id}` })

@@ -14,7 +14,7 @@ const TropesPage = () => {
 		dislikedTropes.map((trope) => trope.toLowerCase())
 	)
 	const [likedTropesLowercase, setLikedTropesLowercase] = useState(likedTropes.map((trope) => trope.toLowerCase()))
-
+	const [tropesInMyBooksArr, setTropesInMyBooksArr] = useState<Books>([])
 	useEffect(() => {
 		setLikedTropesLowercase(likedTropes.map((t) => t.toLowerCase()))
 	}, [likedTropes])
@@ -33,10 +33,12 @@ const TropesPage = () => {
 				setDislikedTropes,
 				likedTropesLowercase,
 				dislikedTropesLowercase,
+				tropesInMyBooksArr,
+				setTropesInMyBooksArr,
 			}}
 		>
 			<>
-				<Heading text='My Tropes' icon='icon-tropes.svg'/>
+				<Heading text="My Tropes" icon="icon-tropes.svg" />
 				<TropesPrefs field="tropes_liked" />
 				<TropesPrefs field="tropes_disliked" />
 				<TropesInMyBooks page={currentPage} />

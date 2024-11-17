@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { cleanIndexKey } from '../helpers/cleanInput'
 import { AppContext } from '../App'
 import BooksOverviewPage from '../routes/books/BooksOverviewPage'
@@ -6,14 +6,20 @@ import { TropesPageContext } from '../routes/books/TropesPage'
 import { cleanAnchor } from '../helpers/cleanInput'
 import { Link } from 'react-router-dom'
 
+const booklist = undefined
 const TropesInMyBooks = ({ page }: { page: Page }) => {
 	const [isShowingTropesInMyBooks, setIsShowingTropesInMyBooks] = useState<boolean>(true)
 	const { likedTropesLowercase, dislikedTropesLowercase } = useContext(TropesPageContext)
+	const { setTropesInMyBooksArr } = useContext(TropesPageContext)
+
 	const { userMyBooks } = useContext(AppContext)
 	const [activeTrope, setActiveTrope] = useState<string>('')
 	const [tropeBooks, setTropeBooks] = useState<Books>([])
 	const tropesSet = new Set<string>()
 
+	useEffect(() => {
+		setTropesInMyBooksArr(tropeBooks)
+	}, [tropeBooks])
 	const savedbookslink: Page = 'savedbooks'
 
 	userMyBooks.map((book) => {
@@ -37,6 +43,10 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 			location.href = '#' + cleanAnchor(trope + '_books')
 		}, 200)
 	}
+
+	useEffect(() => {
+		showTropeBooks(activeTrope)
+	}, [activeTrope])
 
 	return (
 		<section className="section-badges">
@@ -84,7 +94,7 @@ const TropesInMyBooks = ({ page }: { page: Page }) => {
 						></div>
 					</div>
 					<br />
-					<BooksOverviewPage books={tropeBooks} page={page} />
+					<BooksOverviewPage booklist={booklist} page={page} />
 				</>
 			)}
 		</section>

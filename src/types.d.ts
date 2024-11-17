@@ -15,8 +15,6 @@ interface AppContextType {
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
 	todaysDateDigit: number
-	bookFilter: string
-	setBookFilter(bookFilter: bookFilter): void
 	darkTheme: undefined | boolean
 	setDarkTheme(darkTheme: darkTheme): void
 	bodyBgColor: string
@@ -44,6 +42,12 @@ interface TropesPageContextType {
 	setDislikedTropes(dislikedTropes: dislikedTropes): void
 	likedTropesLowercase: BookTropes
 	dislikedTropesLowercase: BookTropes
+	tropesInMyBooksArr: Books
+	setTropesInMyBooksArr(tropesInMyBooksArr: tropesInMyBooksArr): void
+}
+interface BooksOverviewFilterContextType {
+	booksFilter: string
+	setBooksFilter(booksFilter: booksFilter): void
 }
 
 type Page =
