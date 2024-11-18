@@ -54,7 +54,22 @@ const RemoveBookFromXButton = ({
 		return myBooksNew
 	}
 
+	function fadeout(): void {
+		/** Temporary Current Page, taken from url */
+		// OPTIMIZE: this same function is used in RemoveBookFromXButton & AddBookToXButton
+		const tcp = window.location.pathname.replace('/', '')
+		if (
+			(tcp === 'reading' && targetList !== 2) ||
+			(tcp === 'wishlist' && targetList !== 1) ||
+			(tcp === 'favorites' && targetList !== 4) ||
+			(tcp === 'finished' && targetList !== 3 && targetList !== 4)
+		) {
+			document.getElementById(`bookSummaryTransitioner${book_id}`)?.classList.add('fadeout')
+		}
+	}
+
 	async function RemoveBookFromXButtonAct() {
+		fadeout()
 		setIsLoading(true)
 		const newArr: Books = RemoveBookFromX(book_id)
 		setUserMyBooks(newArr)

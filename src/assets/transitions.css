@@ -1,0 +1,9 @@
+.transition-wrapper {
+	display: flex;
+	width: 100%;
+	opacity: 1;
+	transition: 0.3s ease-out opacity;
+}
+.transition-wrapper.fadeout {
+	opacity: 0;
+}
