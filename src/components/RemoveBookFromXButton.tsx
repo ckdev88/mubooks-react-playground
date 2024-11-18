@@ -58,11 +58,13 @@ const RemoveBookFromXButton = ({
 		/** Temporary Current Page, taken from url */
 		// OPTIMIZE: this same function is used in RemoveBookFromXButton & AddBookToXButton
 		const tcp = window.location.pathname.replace('/', '')
+		// OPTIMIZE: the finished one is a bit weird, but works for now, its Remove from finished button
 		if (
 			(tcp === 'reading' && targetList !== 2) ||
 			(tcp === 'wishlist' && targetList !== 1) ||
 			(tcp === 'favorites' && targetList !== 4) ||
-			(tcp === 'finished' && targetList !== 3 && targetList !== 4)
+			(tcp === 'finished' && targetList !== 3 && targetList !== 4) ||
+			(tcp === 'finished' && targetList === 3)
 		) {
 			document.getElementById(`bookSummaryTransitioner${book_id}`)?.classList.add('fadeout')
 		}
