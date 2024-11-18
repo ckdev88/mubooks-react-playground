@@ -30,6 +30,7 @@ const BooksOverviewPage = ({
 		}
 	}
 	if (page === 'finished') {
+		// OPTIMIZE this looks like garbage
 		booklistStart = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
 		books = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
 	}

@@ -16,7 +16,11 @@ const RemoveBookFromXButton = ({
 }) => {
 	const { userMyBooks, setUserMyBooks } = useContext(AppContext)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const msg = 'Removed book'
+
+	let msg: string = 'Moved to ' + getListName(targetList)
+	if ((book_list === 3 || book_list === 4) && targetList === 3) msg = 'Unfinished, moved to READING'
+	else if (targetList === 4) msg = 'Removed FAVORITE status'
+
 	const updateMyBooksDb = useMyBooksUpdateDb({ myBooksNew: userMyBooks, book_id: null, msg })
 
 	function RemoveBookFromX(book_id: Book['id']) {
@@ -55,16 +59,15 @@ const RemoveBookFromXButton = ({
 	}
 
 	function fadeout(): void {
-		/** Temporary Current Page, taken from url */
+		/** Current Page, taken from url */
 		// OPTIMIZE: this same function is used in RemoveBookFromXButton & AddBookToXButton
-		const tcp = window.location.pathname.replace('/', '')
+		const cp = window.location.pathname.replace('/', '')
 		// OPTIMIZE: the finished one is a bit weird, but works for now, its Remove from finished button
 		if (
-			(tcp === 'reading' && targetList !== 2) ||
-			(tcp === 'wishlist' && targetList !== 1) ||
-			(tcp === 'favorites' && targetList !== 4) ||
-			(tcp === 'finished' && targetList !== 3 && targetList !== 4) ||
-			(tcp === 'finished' && targetList === 3)
+			(cp === 'reading' && targetList !== 2) ||
+			(cp === 'wishlist' && targetList !== 1) ||
+			(cp === 'favorites' && targetList === 4) ||
+			(cp === 'finished' && targetList === 3)
 		) {
 			document.getElementById(`bookSummaryTransitioner${book_id}`)?.classList.add('fadeout')
 		}
