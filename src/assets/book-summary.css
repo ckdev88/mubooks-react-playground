@@ -6,12 +6,18 @@
 
 .book-summary {
 	list-style: none;
-	padding: 0 0 1rem;
-	margin: 0 0 1rem;
 	transition: padding 0.18s linear, background-color 0.18s linear;
 	display: flex;
 	flex-wrap: wrap;
+	padding: 0 0 1rem;
 	border-bottom: 1px solid var(--cardbg);
+}
+.book-summary,
+.book-summary.tropes {
+	margin: 0 0 1rem;
+}
+.book-summary.tropes {
+	padding-bottom: 0.5rem;
 }
 .main-dashboard .book-summary {
 	padding-bottom: 0;
