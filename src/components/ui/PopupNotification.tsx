@@ -5,7 +5,7 @@ function PopupNotification() {
 	const { popupNotification, setPopupNotification } = useContext(AppContext)
 
 	const Popper = () => {
-		setTimeout(() => setPopupNotification(''), 1000)
+		setTimeout(() => setPopupNotification(''), 1250)
 		return <>{popupNotification}</>
 	}
 	// online state checker & notifier

@@ -11,7 +11,7 @@ const booklist = 3
 const FinishedPage = () => {
 	const { userMyBooks } = useContext(AppContext)
 	let hasbooks = false
-	if (userMyBooks.filter((book) => book.list === booklist).length > 0) hasbooks = true // OPTIMIZE this is a bit meh
+	if (userMyBooks.filter((book) => book.list === booklist || book.list === 4).length > 0) hasbooks = true // OPTIMIZE this is a bit meh
 
 	return (
 		<>

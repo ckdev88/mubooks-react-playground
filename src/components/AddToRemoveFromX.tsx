@@ -2,6 +2,12 @@ import AddBookToXButton from './AddBookToXButton'
 import RemoveBookFromXButton from './RemoveBookFromXButton'
 import { useState } from 'react'
 
+/**
+ * Show button which can add/remove
+ * @prop {Book} book - book object
+ * @prop {Page} currentPage - current page/path, without prefixed /
+ * @prop {0|1|2|3|4} limit - 0 = no limit, so do all, otherwise just 1 of 1234 (wishlist, reading, saved, favorited)
+ */
 const AddToRemoveFromX = ({
 	book,
 	currentPage,

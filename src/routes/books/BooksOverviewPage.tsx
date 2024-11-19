@@ -29,6 +29,11 @@ const BooksOverviewPage = ({
 			else booklistStart = userMyBooks.filter((book: Book) => book.list === booklist)
 		}
 	}
+	if (page === 'finished') {
+		// OPTIMIZE this looks like garbage
+		booklistStart = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
+		books = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
+	}
 	if (page === 'tropes') books = tropesInMyBooksArr
 
 	let hasbooks: boolean
@@ -47,12 +52,12 @@ const BooksOverviewPage = ({
 
 	// PER LIST
 	useEffect(() => {
-		console.log('usermybooks changed')
 		let bookstmp: Books = []
 		if (books.length > 0) bookstmp = books
 		if (booklist) {
-			if (booklist === 3) bookstmp = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
-			else bookstmp = userMyBooks.filter((book) => book.list === booklist)
+			if (booklist === 3) {
+				bookstmp = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
+			} else bookstmp = userMyBooks.filter((book) => book.list === booklist)
 
 			// SORTING
 			if (booklist === 3 || booklist === 4) {
@@ -125,7 +130,12 @@ const BooksOverviewPage = ({
 				</>
 			) : (
 				booksList.map((book) => {
-					if (book.list === booklist || page === 'tropes' || booklist === undefined) {
+					if (
+						book.list === booklist ||
+						page === 'tropes' ||
+						booklist === undefined ||
+						(booklist === 3 && (book.list === 3 || book.list === 4))
+					) {
 						return <BookSummary book={book} key={`BookSummary${book.id}`} currentPage={page} />
 					}
 				})
