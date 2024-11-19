@@ -52,12 +52,10 @@ const BooksOverviewPage = ({
 
 	// PER LIST
 	useEffect(() => {
-		console.log('usermybooks changed')
 		let bookstmp: Books = []
 		if (books.length > 0) bookstmp = books
 		if (booklist) {
 			if (booklist === 3) {
-				console.log('finishedpage?', booklist)
 				bookstmp = userMyBooks.filter((book: Book) => book.list === 3 || book.list === 4)
 			} else bookstmp = userMyBooks.filter((book) => book.list === booklist)
 
