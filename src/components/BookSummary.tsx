@@ -42,21 +42,20 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 						{currentPage === 'dashboard' && refer !== undefined ? (
 							<Link to={`/${refer}`}>
 								<BookSummaryTitle
-									book_title_short={book.title_short}
-									book_first_publish_year={book.first_publish_year}
 									book_author_name={book.author_name}
-									currentPage={currentPage}
+									book_first_publish_year={book.first_publish_year}
 									book_id={book.id}
+									book_title_short={book.title_short}
+									currentPage={currentPage}
 								/>
 							</Link>
 						) : (
 							<BookSummaryTitle
-								book_title_short={book.title_short}
-								book_first_publish_year={book.first_publish_year}
 								book_author_name={book.author_name}
+								book_first_publish_year={book.first_publish_year}
 								book_id={book.id}
+								book_title_short={book.title_short}
 								currentPage={currentPage}
-								style="quoted"
 							/>
 						)}
 						{pagesMedianPages.includes(currentPage) && (
