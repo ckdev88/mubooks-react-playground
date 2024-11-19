@@ -22,7 +22,7 @@ const WishlistPage = () => {
 					<p>
 						Want to add a book to your wishlist?
 						<br />
-						<Link to="/search">Search</Link> or <Link to="/add-book">Add a book yourself</Link>.
+						<Link to="/search">Search</Link> or <Link to="/addbook">Add a book yourself</Link>.
 						<br />
 						<br />
 						<Link to="/reading">See my reading list.</Link>
