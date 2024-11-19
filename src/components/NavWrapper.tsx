@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
 import updatePreferences from '../functions/updatePreferences'
+import { isLocal } from '../Helpers'
 
 const titleMap = new Map()
 titleMap.set('dashboard', 'Dashboard')
@@ -19,6 +20,7 @@ titleMap.set('account/login', 'Log in')
 titleMap.set('account/logout', 'Log out')
 titleMap.set('auth/confirm', 'Account confirmed')
 titleMap.set('addbook', 'Add a book')
+if (isLocal()) titleMap.set('clear-my-books', 'CUIDADO! Clear books')
 
 const NavWrapper = () => {
 	const navigate = useNavigate()
@@ -216,9 +218,11 @@ const NavWrapper = () => {
 					<NavLink to={'/tropes'} onClick={toggleNav0}>
 						Tropes
 					</NavLink>
-					<NavLink to={'/clear-my-books'} onClick={toggleNav0} className="dnone-sm">
-						Clear My Books
-					</NavLink>
+					{isLocal() && (
+						<NavLink to={'/clear-my-books'} onClick={toggleNav0} className="dnone-sm">
+							Clear My Books
+						</NavLink>
+					)}
 				</nav>
 			</div>
 		</>
