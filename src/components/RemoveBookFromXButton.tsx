@@ -76,7 +76,7 @@ const RemoveBookFromXButton = ({
 		const cp = window.location.pathname.replace('/', '')
 		// OPTIMIZE: the finished one is a bit weird, but works for now, its Remove from finished button
 		if (
-			(cp === 'reading' && targetList !== 2) ||
+			(cp === 'reading' && targetList === 2) ||
 			(cp === 'wishlist' && targetList !== 1) ||
 			(cp === 'favorites' && targetList === 4) ||
 			(cp === 'finished' && targetList === 3)
