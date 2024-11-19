@@ -23,12 +23,23 @@ const RemoveBookFromXButton = ({
 
 	const updateMyBooksDb = useMyBooksUpdateDb({ myBooksNew: userMyBooks, book_id: null, msg })
 
-	function RemoveBookFromX(book_id: Book['id']) {
+	/**
+	 * Remove book from list where 1=Wishlist 2=Reading 3=Finished 4=Favorite
+	 */
+	function RemoveBookFromX(book_id: Book['id']): Books {
 		let myBooks: Books
 		if (userMyBooks === undefined) myBooks = []
 		else myBooks = userMyBooks
-
-		if (book_list === 4) {
+		if (book_list === 4 && icon && targetList === 3) {
+			// Move FINISHED > READING on favorited book, using "Remove from finished" button
+			for (let i = 0; i < myBooks.length; i++) {
+				if (myBooks[i].id === book_id) {
+					myBooks[i].list = 2
+					break
+				}
+			}
+		} else if (book_list === 4 && icon) {
+			// Remove from FAVORITES & unmark favorited in SAVED page, using heart icon
 			for (let i = 0; i < myBooks.length; i++) {
 				if (myBooks[i].id === book_id) {
 					myBooks[i].list = 3
@@ -36,6 +47,7 @@ const RemoveBookFromXButton = ({
 				}
 			}
 		} else if (book_list === 3) {
+			// Move Finished > READING on non-favorited book, using "Remove from finished" button
 			for (let i = 0; i < myBooks.length; i++) {
 				if (myBooks[i].id === book_id) {
 					myBooks[i].list = 2
@@ -45,9 +57,9 @@ const RemoveBookFromXButton = ({
 			}
 		} else {
 			let removeIndex = 0
+			// Remove book completely
 			for (let i = 0; i < myBooks.length; i++) {
 				if (myBooks[i].id === book_id) {
-					book_list = 0
 					removeIndex = i
 					break
 				}
