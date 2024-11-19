@@ -21,13 +21,14 @@ import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
-import ClearMyBooks from './routes/books/ClearMyBooks'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
+import ClearMyBooks from './routes/books/ClearMyBooks'
 import { timestampConverter } from './helpers/convertDate.ts'
 import AddBookPage from './routes/books/AddBookPage'
 import PopupNotification from './components/ui/PopupNotification'
+import { isLocal } from './Helpers.ts'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -170,7 +171,7 @@ const App = () => {
 							<Route path="/quoted" element={<QuotedPage />} />
 							<Route path="/tropes" element={<TropesPage />} />
 							<Route path="/statistics" element={<StatisticsPage />} />
-							<Route path="/clear-my-books" element={<ClearMyBooks />} />
+							{isLocal() && <Route path="/clear-my-books" element={<ClearMyBooks />} />}
 						</>
 					)}
 				</Routes>

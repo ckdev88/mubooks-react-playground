@@ -3,6 +3,11 @@ function isUrl(url: string) {
 	return false
 }
 
+function isLocal(): boolean {
+	if (window.location.hostname === 'localhost') return true
+	return false
+}
+
 function getOlCover(id: string, size: CoverSize = undefined): string {
 	let appendSize: string = ''
 	if (size) appendSize = '-' + size
@@ -104,6 +109,7 @@ function getDurationDays(date_reading: Book['date_reading'], date_finished: Book
 
 export {
 	isUrl,
+	isLocal,
 	getOlCover,
 	getBookCover,
 	debounce,
