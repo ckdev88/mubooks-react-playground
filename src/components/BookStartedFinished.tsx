@@ -54,12 +54,13 @@ const BookStartedFinished = ({ date_started, date_finished, book_id, list }: Pro
 			if (myBooks[i].id === book_id) {
 				if (fieldName === 'date_reading') myBooks[i].date_reading = fieldVal
 				if (fieldName === 'date_finished') {
+					const tmpbooklist = myBooks[i].list
 					if (isNaN(fieldVal)) myBooks[i].date_finished = undefined
 					if (
 						(myBooks[i].date_finished === null ||
 							myBooks[i].date_finished === undefined ||
 							myBooks[i].date_finished === 0) &&
-						myBooks[i].list > 2
+						tmpbooklist > 2
 					) {
 						myBooks[i].list = 2
 						list = 2

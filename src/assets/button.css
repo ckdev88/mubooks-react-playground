@@ -243,6 +243,7 @@ ul.expandable-list a {
 
 .btn-lg {
 	font-size: 1rem;
+	text-transform: capitalize;
 }
 .btn-text,
 .btn-icon {

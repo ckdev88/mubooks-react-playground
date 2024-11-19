@@ -7,17 +7,16 @@ import { getBookCover } from '../Helpers'
 
 const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList }): [() => void, boolean] => {
 	const { setPopupNotification, userMyBooks, setUserMyBooks, userid, todaysDateDigit } = useContext(AppContext)
-
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	async function MyBooksUpdate(myBooksNew: Books) {
-		let msg: string = 'Added book to ' + getListName(targetList)
+		let msg: string = book.title_short + ' added to ' + getListName(targetList)
 		setUserMyBooks(myBooksNew)
 		const { error } = await supabase
 			.from('user_entries')
 			.update({
 				json: myBooksNew,
-				testdata: `Updated from AddBookToXButton to ${getListName(targetList)}`,
+				testdata: `${book.title_short} updated list to ${getListName(targetList)}`,
 			})
 			.eq('user_id', userid)
 			.select('*')
@@ -87,7 +86,6 @@ const useMyBooksAdd = ({ book, targetList }: { book: Book; targetList: BookList 
 				break
 			}
 		}
-		setUserMyBooks(myBooks)
 		if (bookIsSaved === false) myBooks = await runMyBooksAdd(bookIsSaved)
 		MyBooksUpdate(myBooks)
 	}

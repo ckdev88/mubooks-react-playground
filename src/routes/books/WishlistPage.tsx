@@ -6,51 +6,23 @@ import Heading from '../../components/ui/Heading'
 
 const pageTitle = 'Mu Wishlist'
 const currentPage = 'wishlist'
+const booklist = 1
 
 const WishlistPage = () => {
-	const { userMyBooks, bookFilter } = useContext(AppContext)
-
+	const { userMyBooks } = useContext(AppContext)
 	let hasbooks = false
-	let booksFiltered: Books = []
-
-	if (bookFilter !== '' && bookFilter.length > 0)
-		booksFiltered = userMyBooks.filter(
-			(book: Book) => book.list === 1 && book.title_short.toLowerCase().includes(bookFilter)
-		)
-	else booksFiltered = userMyBooks.filter((book: Book) => book.list === 1)
-	if (booksFiltered !== undefined) {
-		if (booksFiltered.length > 0) hasbooks = true
-		else hasbooks = false
-	}
+	if (userMyBooks.filter((book) => book.list === booklist).length > 0) hasbooks = true // OPTIMIZE: this is a bit meh
 
 	return (
 		<>
-			<Heading
-				text={pageTitle}
-				icon={'icon-wishlist.svg'}
-				sub={
-					<>
-						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
-							<>
-								Results for <i>{bookFilter}</i> : {booksFiltered.length}
-							</>
-						) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
-							<>
-								No book titles found for <i>{bookFilter}.</i>
-							</>
-						) : (
-							<> All the books I will read soon: {booksFiltered.length}</>
-						)}
-					</>
-				}
-			/>
-			{!hasbooks && bookFilter === '' && (
+			<Heading text={pageTitle} icon={'icon-wishlist.svg'} sub="All the books I will read soon" />
+			{!hasbooks && (
 				<>
-					<h4>No books on mu wishlist yet.</h4>
+					<h4>No books here yet.</h4>
 					<p>
 						Want to add a book to your wishlist?
 						<br />
-						<Link to="/search">Search</Link> or <Link to="/add-book">Add a book yourself</Link>.
+						<Link to="/search">Search</Link> or <Link to="/addbook">Add a book yourself</Link>.
 						<br />
 						<br />
 						<Link to="/reading">See my reading list.</Link>
@@ -58,7 +30,7 @@ const WishlistPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page={currentPage} />
+			<BooksOverviewPage page={currentPage} booklist={booklist} />
 		</>
 	)
 }

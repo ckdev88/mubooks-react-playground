@@ -335,7 +335,7 @@ const AddBookPage = () => {
 					)}
 				</fieldset>
 				<button className="btn-lg" type="submit" disabled={isSubmitting}>
-					Add book to wishlist
+					Add book to wishlist {isSubmitting && <span className="loader-dots"></span>}
 				</button>
 			</form>
 			<div className="h2">

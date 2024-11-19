@@ -5,6 +5,7 @@ import Heading from '../../components/ui/Heading'
 
 const pageTitle = 'Search'
 const currentPage = 'search'
+const booklist = undefined
 
 const SearchPage = () => {
 	const [resultsMessage, setResultsMessage] = useState<string>('')
@@ -81,7 +82,7 @@ const SearchPage = () => {
 						{resultCount > 1 || resultCount === 0 ? ' books' : ' book'} found for <em>"{searchTerm}"</em>
 						<sub className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</sub>
 					</div>
-					<BooksOverviewPage books={searchResults} page={currentPage} />
+					<BooksOverviewPage books={searchResults} page={currentPage} booklist={booklist} />
 				</div>
 			</div>
 		</>

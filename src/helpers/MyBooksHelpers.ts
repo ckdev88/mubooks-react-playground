@@ -1,8 +1,9 @@
+// TODO remove if not used, marked with xxx for now
 import { supabase } from '../../utils/supabase'
 import { AppContext } from '../App'
 import { useContext } from 'react'
 
-const MyBooksAdd = async (book: Book, list = book.list) => {
+const MyBooksAddxxx = async (book: Book, list = book.list) => {
 	const { userMyBooks } = useContext(AppContext)
 	if (book.title.length > 55) book.title_short = book.title.slice(0, 55) + '...'
 	else book.title_short = book.title
@@ -29,7 +30,7 @@ const MyBooksAdd = async (book: Book, list = book.list) => {
 		review_fav_quote: '',
 	})
 
-	MyBooksUpdate(myBooks)
+	MyBooksUpdatexxx(myBooks)
 	return myBooks
 }
 
@@ -43,16 +44,12 @@ const MyBooksInsertFirst = async (): Promise<void> => {
 	return
 }
 
-const MyBooksUpdate = async (myBooksNew: Books): Promise<void> => {
+const MyBooksUpdatexxx = async (myBooksNew: Books): Promise<void> => {
 	const { setUserMyBooks, setPopupNotification, userid } = useContext(AppContext)
 	let msg: string
 	setUserMyBooks(myBooksNew)
 
-	const { error } = await supabase
-		.from('user_entries')
-		.update({ json: myBooksNew })
-		.eq('user_id', userid)
-		.select()
+	const { error } = await supabase.from('user_entries').update({ json: myBooksNew }).eq('user_id', userid).select()
 	if (error) {
 		msg = 'Error, data was not changed'
 		console.log('error:', error)
@@ -61,4 +58,4 @@ const MyBooksUpdate = async (myBooksNew: Books): Promise<void> => {
 	setPopupNotification(msg)
 }
 
-export { MyBooksAdd, MyBooksUpdate, MyBooksInsertFirst }
+export { MyBooksAddxxx, MyBooksUpdatexxx, MyBooksInsertFirst }

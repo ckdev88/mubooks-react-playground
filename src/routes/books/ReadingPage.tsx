@@ -6,54 +6,18 @@ import Heading from '../../components/ui/Heading'
 
 const pageTitle = `What I'm reading now`
 const currentPage = 'reading'
+const booklist = 2
 
 const ReadingPage = () => {
-	const { userMyBooks, bookFilter } = useContext(AppContext)
-
-	let hasbooks = false
-	let booksFiltered: Books = []
-
-	if (userMyBooks !== undefined) {
-		if (bookFilter !== '' && bookFilter.length > 0)
-			booksFiltered = userMyBooks.filter(
-				(book: Book) => book.list === 2 && book.title_short.toLowerCase().includes(bookFilter)
-			)
-		else booksFiltered = userMyBooks.filter((book: Book) => book.list === 2)
-
-		if (booksFiltered !== undefined) {
-			if (booksFiltered.length > 0) hasbooks = true
-			else hasbooks = false
-		}
-	}
+	const { userMyBooks } = useContext(AppContext)
+	let hasbooks: boolean = false
+	if (userMyBooks.filter((book) => book.list === booklist).length > 0) hasbooks = true
+	const books = userMyBooks.filter((book) => book.list === booklist)
 
 	return (
 		<>
-			<Heading
-				text={pageTitle}
-				icon={'icon-reading.svg'}
-				sub={
-					<>
-						{bookFilter.length > 0 && booksFiltered.length > 0 ? (
-							<>
-								Results for <i>{bookFilter}</i> : {booksFiltered.length}
-							</>
-						) : bookFilter.length > 0 && booksFiltered.length === 0 ? (
-							<>
-								No book titles found for <i>{bookFilter}.</i>
-							</>
-						) : booksFiltered.length > 1 ? (
-							<>
-								Currently enjoying books:&nbsp;
-								{booksFiltered.length}
-							</>
-						) : (
-							booksFiltered.length < 1 && <>Nothing, at the moment.</>
-						)}
-						&nbsp;
-					</>
-				}
-			/>
-			{!hasbooks && bookFilter === '' && (
+			<Heading text={pageTitle} icon={'icon-reading.svg'} sub="Currently enjoying books" />
+			{!hasbooks && (
 				<>
 					<p>
 						Want to add a book to your reading list?
@@ -64,7 +28,7 @@ const ReadingPage = () => {
 					</p>
 				</>
 			)}
-			<BooksOverviewPage books={booksFiltered} page={currentPage} />
+			<BooksOverviewPage books={books} page={currentPage} booklist={booklist} />
 		</>
 	)
 }

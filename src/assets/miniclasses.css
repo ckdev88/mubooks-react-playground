@@ -15,6 +15,9 @@
 .mt0 {
 	margin-top: 0;
 }
+.mt0i {
+	margin-top: 0 !important;
+}
 .mt-05 {
 	margin-top: -0.5rem;
 }
@@ -72,9 +75,6 @@
 }
 .pt05 {
 	padding-top: 0.5rem;
-}
-.pt085 {
-	padding-top: 0.85rem;
 }
 .pb0 {
 	padding-bottom: 0;
@@ -239,8 +239,8 @@ input[type='submit'].dnone {
 	animation: loader-dots 2.5s linear infinite;
 	margin-left: 0;
 	width: 1rem;
-	display:inline-block;
-	text-align:left;
+	display: inline-block;
+	text-align: left;
 }
 .loader-dots:before {
 	content: ' ';

@@ -26,8 +26,11 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 
 	return (
 		<article
+			id={`bookSummaryTransitioner${book.id}`}
 			className={
-				book.list && book.list > 0 && currentPage === 'search' ? 'book-summary saved' : `book-summary ${currentPage}`
+				book.list > 0 && currentPage === 'search'
+					? 'book-summary saved'
+					: `book-summary ${currentPage} transition-wrapper`
 			}
 		>
 			<div style={{ marginTop: '-4rem', position: 'absolute' }} id={bookAnchor}></div>
@@ -39,20 +42,20 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 						{currentPage === 'dashboard' && refer !== undefined ? (
 							<Link to={`/${refer}`}>
 								<BookSummaryTitle
-									book_title_short={book.title_short}
-									book_first_publish_year={book.first_publish_year}
 									book_author_name={book.author_name}
-									currentPage={currentPage}
+									book_first_publish_year={book.first_publish_year}
 									book_id={book.id}
+									book_title_short={book.title_short}
+									currentPage={currentPage}
 								/>
 							</Link>
 						) : (
 							<BookSummaryTitle
-								book_title_short={book.title_short}
-								book_first_publish_year={book.first_publish_year}
 								book_author_name={book.author_name}
-								currentPage={currentPage}
+								book_first_publish_year={book.first_publish_year}
 								book_id={book.id}
+								book_title_short={book.title_short}
+								currentPage={currentPage}
 							/>
 						)}
 						{pagesMedianPages.includes(currentPage) && (
@@ -73,7 +76,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 						/>
 					</div>
 				) : (
-					<div className="summary-actions">
+					<div className="summary-actions pt05">
 						<SummaryReviews book={book} currentPage={currentPage} />
 						{book.list > 1 && currentPage !== 'search' && (
 							<BookStartedFinished
@@ -83,7 +86,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 								list={book.list}
 							/>
 						)}
-						<div className={book.list === 1 ? 'pt085' : ''}>
+						<div>
 							{currentPage === 'search' && <BookSummaryStatus book={book} bookAnchor={bookAnchor} />}
 							<AddToRemoveFromX book={book} limit={0} currentPage={currentPage} />
 						</div>
