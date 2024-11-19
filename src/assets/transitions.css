@@ -1,7 +1,19 @@
-.transition-wrapper {
-	opacity: 1;
-	transition: 0.3s ease-out opacity;
-}
 .transition-wrapper.fadeout {
-	opacity: 0;
+	animation-name: fadeout;
+	animation-duration: .3s;
+	animation-timing-function: ease-out;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+	}
+	99% {
+		opacity: 0;
+	}
+	100% {
+		display: none;
+	}
 }
