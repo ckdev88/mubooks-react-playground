@@ -1,4 +1,4 @@
-const HeaderBranding = () => {
+const HeaderBranding = (): React.JSX.Element => {
 	return (
 		<>
 			<div className="h1" id="welcome">
