@@ -105,7 +105,7 @@ const BookSummary = ({ book, currentPage, refer }: { book: Book; currentPage: Pa
 								className={isShowingSynopsis ? 'btn-text caret-right-toggle active' : 'btn-text caret-right-toggle'}
 								onClick={() => setIsShowingSynopsis(!isShowingSynopsis)}
 							>
-								Synopsis{' '}
+								Synopsis
 							</button>
 							<>
 								<div
