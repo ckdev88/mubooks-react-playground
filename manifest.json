@@ -1,0 +1,28 @@
+{
+	"manifest_version": 2,
+	"version": "1.0",
+	"name": "MuBooks",
+	"short_name": "MuBooks",
+	"icons": [
+		{
+			"src": "img/logo92.png",
+			"sizes": "92x92",
+			"type": "image/png"
+		},
+		{
+			"src": "/img/logo144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "img/logo152.png",
+			"sizes": "152x152",
+			"type": "image/png"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"background_color": "#f4f2eb",
+	"theme_color": "#b63580"
+}
