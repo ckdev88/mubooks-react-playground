@@ -14,5 +14,6 @@
 	"display": "standalone",
 	"orientation": "portrait",
 	"background_color": "#f4f2eb",
-	"theme_color": "#b63580"
+	"theme_color": "#b63580",
+	"worker": "/worker.js"
 }

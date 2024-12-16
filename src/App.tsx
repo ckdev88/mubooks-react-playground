@@ -108,6 +108,19 @@ const App = () => {
 		}
 	}, [darkTheme])
 
+	/* --- activate for webworker */
+	// useEffect(() => {
+	// 	const worker = new Worker(new URL('./worker.ts', import.meta.url))
+	// 	worker.onmessage = (event) => {
+	// 		console.log('Received message from worker:', event.data)
+	// 	}
+	// 	worker.postMessage('ping? (main thread)')
+
+	// 	return () => {
+	// 		worker.terminate()
+	// 	}
+	// }, [])
+
 	// TODO react19: when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
 		<AppContext.Provider
