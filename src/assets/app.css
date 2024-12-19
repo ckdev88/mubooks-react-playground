@@ -1,8 +1,6 @@
 #root {
 	min-height: 100vh;
 	box-sizing: border-box;
-	display: flex;
-	justify-content: space-around;
 	min-width: 300px;
 	overflow-x: auto;
 	margin-left: auto;
@@ -66,3 +64,6 @@ html:not(.loggedin) .h1 {
 	font-weight: bold;
 }
 
+#footer {
+
+}

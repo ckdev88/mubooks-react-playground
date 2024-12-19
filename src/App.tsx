@@ -29,6 +29,7 @@ import { timestampConverter } from './helpers/convertDate.ts'
 import AddBookPage from './routes/books/AddBookPage'
 import PopupNotification from './components/ui/PopupNotification'
 import { isLocal } from './Helpers.ts'
+import AppFooter from './components/AppFooter.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -189,6 +190,11 @@ const App = () => {
 					)}
 				</Routes>
 			</main>
+			{userIsLoggedIn && (
+				<div id="footer">
+					<AppFooter />
+				</div>
+			)}
 		</AppContext.Provider>
 	)
 }
