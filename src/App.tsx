@@ -30,6 +30,7 @@ import AddBookPage from './routes/books/AddBookPage'
 import PopupNotification from './components/ui/PopupNotification'
 import { isLocal } from './Helpers.ts'
 import AppFooter from './components/AppFooter.tsx'
+import BugreportPage from './routes/BugreportPage.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -174,6 +175,7 @@ const App = () => {
 						<>
 							<Route path="/account/profile" element={<UserProfilePage />} />
 							<Route path="/account/*" element={<UserLoginPage />} />
+							<Route path="/bugreport" element={<BugreportPage />} />
 							<Route path="/dashboard" element={<DashboardPage />} />
 							<Route path="/search" element={<SearchPage />} />
 							<Route path="/addbook" element={<AddBookPage />} />
