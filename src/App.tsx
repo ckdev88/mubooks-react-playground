@@ -193,7 +193,7 @@ const App = () => {
 				</Routes>
 			</main>
 			{userIsLoggedIn && (
-				<div id="footer">
+				<div id="footer" className='sf'>
 					<AppFooter />
 				</div>
 			)}
