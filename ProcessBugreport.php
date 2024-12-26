@@ -3,6 +3,12 @@
 /* ini_set('display_errors', 'On'); */
 /* set_error_handler("var_dump"); */
 
+/* 
+ * wget https://github.com/PHPMailer/PHPMailer/archive/refs/tags/v6.9.3.zip & unzip in 
+ * root for intelisense, if wanted.
+ */
+
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
