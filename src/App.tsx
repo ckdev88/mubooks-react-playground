@@ -175,7 +175,7 @@ const App = () => {
 						<>
 							<Route path="/account/profile" element={<UserProfilePage />} />
 							<Route path="/account/*" element={<UserLoginPage />} />
-							<Route path="/bugreport" element={<BugreportPage />} />
+							<Route path="/suggestions" element={<BugreportPage />} />
 							<Route path="/dashboard" element={<DashboardPage />} />
 							<Route path="/search" element={<SearchPage />} />
 							<Route path="/addbook" element={<AddBookPage />} />

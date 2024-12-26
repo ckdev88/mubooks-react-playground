@@ -25,18 +25,13 @@ const BugreportForm: React.FC = () => {
 	}
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		console.log('handling submission...')
 		event.preventDefault()
 		fetch('ProcessBugreport.php', {
 			method: 'POST',
 			body: new FormData(event.target as HTMLFormElement),
 		})
-			.then((response) => {
-				return response.text()
-			})
-			.then((data) => {
-				if (data !== undefined) setMessage(data)
-			})
+			.then((response) => response.text())
+			.then((data) => setMessage(data))
 			.catch((error) => console.error('Error:', error))
 	}
 
@@ -79,5 +74,3 @@ const BugreportForm: React.FC = () => {
 }
 
 export default BugreportForm
-
-// This code defines an interface BugReportFormProps that contains the current page number. It then creates a functional component called BugReportForm, which takes in this props and renders the form with three fields: type, page (which is set to the value of currentpage), and any other information you want to include. The form includes dropdown options for "bug" or "suggestion", as well as textareas for describing a bug or suggesting solutions. The form also has an option for including additional details if desired.

@@ -20,7 +20,7 @@ titleMap.set('account/login', 'Log in')
 titleMap.set('account/logout', 'Log out')
 titleMap.set('auth/confirm', 'Account confirmed')
 titleMap.set('addbook', 'Add a book')
-titleMap.set('bugreport', 'Suggestions & bugs')
+titleMap.set('suggestions', 'Suggestions & bugs')
 if (isLocal()) titleMap.set('clear-my-books', 'CUIDADO! Clear books')
 
 const NavWrapper = () => {
