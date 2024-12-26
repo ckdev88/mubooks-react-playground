@@ -9,7 +9,7 @@ interface FormState {
 	username?: string
 }
 
-const BugreportForm: React.FC = () => {
+const SuggestionsForm: React.FC = () => {
 	const { userid } = useContext(AppContext)
 	const [formState, setFormState] = useState<FormState>({
 		type: 'suggestion',
@@ -26,7 +26,7 @@ const BugreportForm: React.FC = () => {
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		fetch('ProcessBugreport.php', {
+		fetch('ProcessSuggestion.php', {
 			method: 'POST',
 			body: new FormData(event.target as HTMLFormElement),
 		})
@@ -73,4 +73,4 @@ const BugreportForm: React.FC = () => {
 	)
 }
 
-export default BugreportForm
+export default SuggestionsForm
