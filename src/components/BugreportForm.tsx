@@ -1,32 +1,19 @@
-import { useState } from 'react'
-// Here is an example of how you could create the fields in a TypeScript file for your bug report form:
-//
-
-// prompt:
-/* 
-in tsx, i want to call a php script that shows a form for a bugreport and allows the user to submit it to bugreport@mycrazyapp.com , please create the fields
-- `type`, dropdown options `bug`, `suggestion`, `bug` is selected by default
-- page, this uses the value of tsx variable currentpage when bug was chosen in field type
-bug, shown when type is equal to bug
-- textarea with the label `describe the bug`
-- suggestion, shown when type is equal to suggestion, textarea with label `what would you suggest?`
-`anything else?`, always shown, textarea
-- `submit`, posts to a php file 
-
-Please generate the php file that handles the form and sends the values to info@mycrazyapp.com
-*/
+import { useState, useContext } from 'react'
+import { AppContext } from '../App'
 
 interface FormState {
 	type: string
-	page?: string
-	bug?: string
 	suggestion?: string
 	anythingElse?: string
+	userid: string
+	username?: string
 }
 
 const BugreportForm: React.FC = () => {
+	const { userid } = useContext(AppContext)
 	const [formState, setFormState] = useState<FormState>({
-		type: 'bug',
+		type: 'suggestion',
+		userid: userid,
 	})
 	const [message, setMessage] = useState<string>('')
 
@@ -37,65 +24,56 @@ const BugreportForm: React.FC = () => {
 		})
 	}
 
-	const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		setFormState({
-			...formState,
-			type: event.target.value,
-			[event.target.value]: '',
-		})
-	}
-
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		console.log('handling submission...')
 		event.preventDefault()
 		fetch('ProcessBugreport.php', {
 			method: 'POST',
 			body: new FormData(event.target as HTMLFormElement),
 		})
-			.then((response) => response.text())
-			.then((data) => setMessage(data))
+			.then((response) => {
+				return response.text()
+			})
+			.then((data) => {
+				if (data !== undefined) setMessage(data)
+			})
 			.catch((error) => console.error('Error:', error))
 	}
 
 	return (
 		<div>
-			{' '}
-			<form onSubmit={handleSubmit}>
-				{' '}
-				<label htmlFor="type">Type:</label>{' '}
-				<select id="type" name="type" value={formState.type} onChange={handleTypeChange}>
-					{' '}
-					<option value="bug">Bug</option> <option value="suggestion">Suggestion</option>{' '}
-				</select>{' '}
-				{formState.type === 'bug' && (
-					<>
-						<label htmlFor="page">Page:</label>{' '}
-						<input id="page" name="page" value={formState.page || ''} onChange={handleInputChange} />{' '}
-						<label htmlFor="bug">Describe the bug:</label>{' '}
-						<textarea id="bug" name="bug" value={formState.bug || ''} onChange={handleInputChange} />
-					</>
-				)}{' '}
-				{formState.type === 'suggestion' && (
-					<>
-						{' '}
-						<label htmlFor="suggestion">What would you suggest?</label>{' '}
-						<textarea
-							id="suggestion"
-							name="suggestion"
-							value={formState.suggestion || ''}
-							onChange={handleInputChange}
-						/>{' '}
-					</>
-				)}{' '}
-				<label htmlFor="anythingElse">Anything else?</label>{' '}
-				<textarea
-					id="anythingElse"
-					name="anythingElse"
-					value={formState.anythingElse || ''}
-					onChange={handleInputChange}
-				/>{' '}
-				<button type="submit">Submit</button>{' '}
-			</form>{' '}
-			{message && <p>{message}</p>}{' '}
+			{message === '' ? (
+				<>
+					<form onSubmit={handleSubmit}>
+						<label htmlFor="fsb_suggestion">
+							<div className="description">Please, let us know your ideas.</div>
+							<textarea
+								id="fsb_suggestion"
+								name="suggestion"
+								value={formState.suggestion || ''}
+								onChange={handleInputChange}
+								rows={5}
+							/>
+						</label>
+						<label htmlFor="fsb_anythingElse">
+							<div className="description">Anything else?</div>
+							<textarea
+								id="fsb_anythingElse"
+								name="anythingElse"
+								value={formState.anythingElse || ''}
+								onChange={handleInputChange}
+								rows={5}
+							/>
+						</label>
+						<input type="hidden" name="userid" value={userid} />
+						<button className="btn-lg" type="submit">
+							Submit
+						</button>
+					</form>
+				</>
+			) : (
+				<div className="h2">{message}</div>
+			)}
 		</div>
 	)
 }
