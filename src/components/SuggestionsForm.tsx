@@ -1,27 +1,30 @@
 import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanInput } from '../helpers/cleanInput'
+import useResetUsermail from '../hooks/useResetUsermail'
 
 const SuggestionsForm: React.FC = () => {
-	const { userid } = useContext(AppContext)
-	const [message, setMessage] = useState<string>('')
+	const { userid, usermail } = useContext(AppContext)
 
+	useResetUsermail()
+
+	const [message, setMessage] = useState<string>('')
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		
 		// checking & sanitizing input
-		// TODO checking & sanitizing also in PHP, just to be sure
 		const formdata: FormData = new FormData(event.target as HTMLFormElement)
 		const formdata_suggestion: string | undefined = formdata.get('suggestion')?.toString().trim()
 		if (!formdata_suggestion || (formdata_suggestion && formdata_suggestion.length < 1)) return false
-const formdata_anythingElse: string | undefined = formdata.get('anythingElse')?.toString().trim()
-if (formdata_suggestion) formdata.set('suggestion', cleanInput(formdata_suggestion))
+		const formdata_anythingElse: string | undefined = formdata.get('anythingElse')?.toString().trim()
+		if (formdata_suggestion) formdata.set('suggestion', cleanInput(formdata_suggestion))
 		if (formdata_anythingElse !== undefined) formdata.set('anythingElse', cleanInput(formdata_anythingElse))
 		else formdata.set('anythingElse', '')
+		formdata.append('usermail', usermail)
+		formdata.append('userid', userid)
 
 		fetch('ProcessSuggestion.php', {
 			method: 'POST',
-			body: new FormData(event.target as HTMLFormElement),
+			body: formdata,
 		})
 			.then((response) => response.text())
 			.then((data) => setMessage(data))
@@ -47,6 +50,7 @@ if (formdata_suggestion) formdata.set('suggestion', cleanInput(formdata_suggesti
 						friendly and helpful as possible for you.
 					</div>
 					<br />
+					<br />
 					<form onSubmit={handleSubmit}>
 						<label htmlFor="fsb_suggestion">
 							<div className="description">Your ideas or suggestions</div>
@@ -56,7 +60,6 @@ if (formdata_suggestion) formdata.set('suggestion', cleanInput(formdata_suggesti
 							<div className="description">Anything else?</div>
 							<textarea id="fsb_anythingElse" name="anythingElse" rows={5} />
 						</label>
-						<input type="hidden" name="userid" value={userid} />
 						<button className="btn-lg" type="submit">
 							Send
 						</button>

@@ -23,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	//Create an instance; passing `true` enables exceptions
 	$mail = new PHPMailer(true);
+	$suggestion = htmlspecialchars($_POST['suggestion'], ENT_QUOTES);
+	$anythingElse = htmlspecialchars($_POST['anythingElse'], ENT_QUOTES);
+	$userid = $_POST['userid'];
+	$usermail = $_POST['usermail'];
 
 	$fromaddress = $mailenv['BUGSFROMADDR'];
 	$fromname = $mailenv['BUGSFROMNAME'];
@@ -30,16 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$toname = $mailenv['BUGSTONAME'];
 	$subject = "Suggestion report";
 	$message .= '<b>Suggestion:</b><br/>';
-	$message .= $_POST['suggestion'] . '<br/>';
-	if ($_POST['anythingElse'] != '') {
+	$message .= $suggestion . '<br/>';
+	if ($anythingElse != '') {
 		$message .= '<br/><b>And...</b><br/>';
-		$message .= $_POST['anythingElse'] . '<br/>';
-		$message .= "<br/>from: " . $_POST['userid'] . "<br/>";
+		$message .= $anythingElse . '<br/>';
+		$message .= "<br/>from: " . $userid;
+		$message .= "<br/>email: " . $usermail;
 	}
-	$messageplain = "Suggestion:\n{$_POST['suggestion']}";
-	if ($_POST['anythingElse'] != '') {
-		$messageplain .= "\nAnd...\n{$_POST['anythingElse']}\n";
-		$messageplain .= "\nfrom: " . $_POST['userid'] . "\n";
+	$messageplain = "Suggestion:\n{$suggestion}";
+	if ($anythingElse != '') {
+		$messageplain .= "\nAnd...\n{$anythingElse}\n";
+		$messageplain .= "\nfrom: " . $userid;
+		$messageplain .= "\nemail: " . $usermail;
 	}
 
 	try {
