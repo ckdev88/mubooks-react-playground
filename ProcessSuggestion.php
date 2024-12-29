@@ -47,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$messageplain = "Suggestion:\n{$suggestion}";
 	if ($anythingElse != '') {
 		$messageplain .= "\nAnd...\n{$anythingElse}\n";
-		$messageplain .= "\nfrom: " . $userid;
-		$messageplain .= "\nemail: " . $usermail;
 	}
+	$messageplain .= "\nfrom: " . $userid;
+	$messageplain .= "\nemail: " . $usermail;
 
 	try {
 		//Server settings
