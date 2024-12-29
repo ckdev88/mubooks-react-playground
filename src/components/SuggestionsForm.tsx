@@ -2,13 +2,16 @@ import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanInput } from '../helpers/cleanInput'
 import useResetUsermail from '../hooks/useResetUsermail'
+import { isLocal } from '../Helpers'
 
 const SuggestionsForm: React.FC = () => {
 	const { userid, usermail } = useContext(AppContext)
 
 	useResetUsermail()
 
-	const [message, setMessage] = useState<string>('')
+	const [message, setMessage] = useState<JSX.Element>(<div></div>)
+	//TODO add isLoading state for feedback on send-button
+	const [isPosted, setIsPosted] = useState<boolean>(false)
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 		// checking & sanitizing input
@@ -22,12 +25,43 @@ const SuggestionsForm: React.FC = () => {
 		formdata.append('usermail', usermail)
 		formdata.append('userid', userid)
 
+		function setSuccessMessage ()  {
+			setMessage(
+				<div>
+					<div className="h2">Thank you!</div>
+					<div className="sub">We look forward to reading your message.</div>
+					<br />
+					<blockquote
+						style={{ border: '1px solid rgba(0,0,0,.3)', borderRadius: '0.2rem', margin: 0, padding: '.5rem' }}
+						className="sf"
+					>
+						<b>Your suggestion:</b>
+						<br />
+						{formdata_suggestion}
+						<br />
+						<br />
+						<b>Anything else?</b>
+						<br />
+						{formdata_anythingElse !== '' ? formdata_anythingElse : 'Not right now'}
+					</blockquote>
+				</div>
+			)
+		}
+
+		if (isLocal() === true) {
+			setIsPosted(true)
+			setSuccessMessage()
+			return
+		}
 		fetch('ProcessSuggestion.php', {
 			method: 'POST',
 			body: formdata,
 		})
 			.then((response) => response.text())
-			.then((data) => setMessage(data))
+			.then((data) => {
+				setIsPosted(true)
+				if(data === 'OK') setSuccessMessage()
+			})
 			.catch((error) => console.error('Error:', error))
 	}
 
@@ -37,7 +71,9 @@ const SuggestionsForm: React.FC = () => {
 
 	return (
 		<div>
-			{message === '' ? (
+			{isPosted ? (
+				<>{message}</>
+			) : (
 				<>
 					<div className="h1">
 						What do you think?
@@ -65,8 +101,6 @@ const SuggestionsForm: React.FC = () => {
 						</button>
 					</form>
 				</>
-			) : (
-				<div className="h2">{message}</div>
 			)}
 		</div>
 	)

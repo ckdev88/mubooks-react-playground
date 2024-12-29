@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$mail->AltBody = $messageplain;
 
 		$mail->send();
-		echo 'Thank you!';
+		echo 'OK';
 		return false;
 	} catch (Exception $e) {
 		echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
