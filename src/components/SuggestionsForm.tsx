@@ -10,7 +10,6 @@ const SuggestionsForm: React.FC = () => {
 	useResetUsermail()
 
 	const [message, setMessage] = useState<JSX.Element>(<div></div>)
-	//TODO add isLoading state for feedback on send-button
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isPosted, setIsPosted] = useState<boolean>(false)
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,6 +48,14 @@ const SuggestionsForm: React.FC = () => {
 				</div>
 			)
 		}
+		function setFailMessage($msg: string) {
+			setMessage(
+				<div>
+					<div className="h2">Something went wrong...</div>
+					<div className="sub">{$msg}</div>
+				</div>
+			)
+		}
 
 		if (isLocal() === true) {
 			setIsPosted(true)
@@ -64,6 +71,7 @@ const SuggestionsForm: React.FC = () => {
 			.then((data) => {
 				setIsPosted(true)
 				if (data === 'OK') setSuccessMessage()
+				else setFailMessage(data)
 			})
 			.catch((error) => console.error('Error:', error))
 			.finally(() => setIsLoading(false))

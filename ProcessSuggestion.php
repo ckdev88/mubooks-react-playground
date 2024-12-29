@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$toaddress = $mailenv['BUGSTOADDR'];
 	$toname = $mailenv['BUGSTONAME'];
 	$subject = "Suggestion report";
-	
+
 	$message .= '<b>Suggestion:</b><br/>';
 	$message .= $suggestion . '<br/>';
 	if ($anythingElse != '') {
