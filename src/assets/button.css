@@ -102,6 +102,7 @@ textarea:focus,
 .btn-lg:disabled:focus {
 	border-color: transparent;
 	background-color: var(--disabled);
+	cursor: not-allowed;
 }
 
 main button.alt,

@@ -30,17 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	$fromaddress = $mailenv['BUGSFROMADDR'];
 	$fromname = $mailenv['BUGSFROMNAME'];
+
 	$toaddress = $mailenv['BUGSTOADDR'];
 	$toname = $mailenv['BUGSTONAME'];
 	$subject = "Suggestion report";
+	
 	$message .= '<b>Suggestion:</b><br/>';
 	$message .= $suggestion . '<br/>';
 	if ($anythingElse != '') {
 		$message .= '<br/><b>And...</b><br/>';
 		$message .= $anythingElse . '<br/>';
-		$message .= "<br/>from: " . $userid;
-		$message .= "<br/>email: " . $usermail;
 	}
+	$message .= "<br/>from: " . $userid;
+	$message .= "<br/>email: " . $usermail;
+
 	$messageplain = "Suggestion:\n{$suggestion}";
 	if ($anythingElse != '') {
 		$messageplain .= "\nAnd...\n{$anythingElse}\n";

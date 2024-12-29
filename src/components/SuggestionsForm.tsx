@@ -11,9 +11,11 @@ const SuggestionsForm: React.FC = () => {
 
 	const [message, setMessage] = useState<JSX.Element>(<div></div>)
 	//TODO add isLoading state for feedback on send-button
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isPosted, setIsPosted] = useState<boolean>(false)
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
+		setIsLoading(true)
 		// checking & sanitizing input
 		const formdata: FormData = new FormData(event.target as HTMLFormElement)
 		const formdata_suggestion: string | undefined = formdata.get('suggestion')?.toString().trim()
@@ -25,7 +27,7 @@ const SuggestionsForm: React.FC = () => {
 		formdata.append('usermail', usermail)
 		formdata.append('userid', userid)
 
-		function setSuccessMessage ()  {
+		function setSuccessMessage() {
 			setMessage(
 				<div>
 					<div className="h2">Thank you!</div>
@@ -51,6 +53,7 @@ const SuggestionsForm: React.FC = () => {
 		if (isLocal() === true) {
 			setIsPosted(true)
 			setSuccessMessage()
+			setIsLoading(false)
 			return
 		}
 		fetch('ProcessSuggestion.php', {
@@ -60,9 +63,10 @@ const SuggestionsForm: React.FC = () => {
 			.then((response) => response.text())
 			.then((data) => {
 				setIsPosted(true)
-				if(data === 'OK') setSuccessMessage()
+				if (data === 'OK') setSuccessMessage()
 			})
 			.catch((error) => console.error('Error:', error))
+			.finally(() => setIsLoading(false))
 	}
 
 	useEffect(() => {
@@ -90,14 +94,14 @@ const SuggestionsForm: React.FC = () => {
 					<form onSubmit={handleSubmit}>
 						<label htmlFor="fsb_suggestion">
 							<div className="description">Your ideas or suggestions</div>
-							<textarea id="fsb_suggestion" name="suggestion" rows={5} required />
+							<textarea id="fsb_suggestion" name="suggestion" rows={5} required disabled={isLoading} />
 						</label>
 						<label htmlFor="fsb_anythingElse">
 							<div className="description">Anything else?</div>
-							<textarea id="fsb_anythingElse" name="anythingElse" rows={5} />
+							<textarea id="fsb_anythingElse" name="anythingElse" rows={5} disabled={isLoading} />
 						</label>
-						<button className="btn-lg" type="submit">
-							Send
+						<button className="btn-lg" type="submit" disabled={isLoading}>
+							{isLoading ? 'Sending...' : 'Send'}
 						</button>
 					</form>
 				</>
