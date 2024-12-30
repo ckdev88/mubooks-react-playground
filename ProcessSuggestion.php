@@ -13,6 +13,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+function isValidUUID(string $uuid): bool
+{
+	$pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i';
+	return preg_match($pattern, $uuid) === 1;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	//Load Composer's autoloader
@@ -26,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$suggestion = htmlspecialchars($_POST['suggestion'], ENT_QUOTES);
 	$anythingElse = htmlspecialchars($_POST['anythingElse'], ENT_QUOTES);
 	$userid = $_POST['userid'];
+	if (!isValidUUID($userid)) $userid = htmlspecialchars($userid, ENT_QUOTES);
 	$usermail = $_POST['usermail'];
 
 	$fromaddress = $mailenv['BUGSFROMADDR'];
