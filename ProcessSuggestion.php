@@ -33,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$anythingElse = htmlspecialchars($_POST['anythingElse'], ENT_QUOTES);
 	$userid = $_POST['userid'];
 	if (!isValidUUID($userid)) $userid = htmlspecialchars($userid, ENT_QUOTES);
-	$usermail = $_POST['usermail'];
+
+	$usermail = filter_input(INPUT_POST, 'usermail', FILTER_SANITIZE_EMAIL);
 
 	$fromaddress = $mailenv['BUGSFROMADDR'];
 	$fromname = $mailenv['BUGSFROMNAME'];
