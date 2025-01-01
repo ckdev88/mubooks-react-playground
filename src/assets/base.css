@@ -144,3 +144,6 @@ label .description em {
 label:focus-within .description em {
 	opacity: 1;
 }
+.form-loading label {
+	opacity: 0.5;
+}

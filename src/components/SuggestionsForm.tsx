@@ -3,6 +3,7 @@ import { AppContext } from '../App'
 import { cleanInput } from '../helpers/cleanInput'
 import useResetUsermail from '../hooks/useResetUsermail'
 import { isLocal } from '../Helpers'
+import { Link } from 'react-router-dom'
 
 const SuggestionsForm: React.FC = () => {
 	const { userid, usermail } = useContext(AppContext)
@@ -84,7 +85,10 @@ const SuggestionsForm: React.FC = () => {
 	return (
 		<div>
 			{isPosted ? (
-				<>{message}</>
+				<>
+					{message}
+					<br/><Link to={'/dashboard'}>Return to dashboard</Link>
+				</>
 			) : (
 				<>
 					<div className="h1">
@@ -99,7 +103,7 @@ const SuggestionsForm: React.FC = () => {
 					</div>
 					<br />
 					<br />
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} className={isLoading ? 'form-loading' : ''}>
 						<label htmlFor="fsb_suggestion">
 							<div className="description">Your ideas or suggestions</div>
 							<textarea id="fsb_suggestion" name="suggestion" rows={5} required disabled={isLoading} />
