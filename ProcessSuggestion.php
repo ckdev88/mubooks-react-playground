@@ -13,6 +13,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+function isValidUUID(string $uuid): bool
+{
+	$pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i';
+	return preg_match($pattern, $uuid) === 1;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	//Load Composer's autoloader
@@ -23,24 +29,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	//Create an instance; passing `true` enables exceptions
 	$mail = new PHPMailer(true);
+	$suggestion = htmlspecialchars($_POST['suggestion'], ENT_QUOTES);
+	$anythingElse = htmlspecialchars($_POST['anythingElse'], ENT_QUOTES);
+	$userid = $_POST['userid'];
+	if (!isValidUUID($userid)) $userid = htmlspecialchars($userid, ENT_QUOTES);
+
+	$usermail = filter_input(INPUT_POST, 'usermail', FILTER_SANITIZE_EMAIL);
 
 	$fromaddress = $mailenv['BUGSFROMADDR'];
 	$fromname = $mailenv['BUGSFROMNAME'];
+
 	$toaddress = $mailenv['BUGSTOADDR'];
 	$toname = $mailenv['BUGSTONAME'];
 	$subject = "Suggestion report";
+
 	$message .= '<b>Suggestion:</b><br/>';
-	$message .= $_POST['suggestion'] . '<br/>';
-	if ($_POST['anythingElse'] != '') {
+	$message .= $suggestion . '<br/>';
+	if ($anythingElse != '') {
 		$message .= '<br/><b>And...</b><br/>';
-		$message .= $_POST['anythingElse'] . '<br/>';
-		$message .= "<br/>from: " . $_POST['userid'] . "<br/>";
+		$message .= $anythingElse . '<br/>';
 	}
-	$messageplain = "Suggestion:\n{$_POST['suggestion']}";
-	if ($_POST['anythingElse'] != '') {
-		$messageplain .= "\nAnd...\n{$_POST['anythingElse']}\n";
-		$messageplain .= "\nfrom: " . $_POST['userid'] . "\n";
+	$message .= "<br/>from: " . $userid;
+	$message .= "<br/>email: " . $usermail;
+
+	$messageplain = "Suggestion:\n{$suggestion}";
+	if ($anythingElse != '') {
+		$messageplain .= "\nAnd...\n{$anythingElse}\n";
 	}
+	$messageplain .= "\nfrom: " . $userid;
+	$messageplain .= "\nemail: " . $usermail;
 
 	try {
 		//Server settings
@@ -74,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$mail->AltBody = $messageplain;
 
 		$mail->send();
-		echo 'Thank you!';
+		echo 'OK';
 		return false;
 	} catch (Exception $e) {
 		echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

@@ -3,7 +3,7 @@ import { supabase } from '../../utils/supabase'
 import { AppContext } from '../App'
 
 /** re-sets users email address from database if none is available in state */
-async function useResetUsermail() {
+async function useResetUsermail(): Promise<void> {
 	const { usermail, setUsermail } = useContext(AppContext)
 
 	if (usermail !== undefined && usermail !== '') return
