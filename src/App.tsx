@@ -29,6 +29,8 @@ import { timestampConverter } from './helpers/convertDate.ts'
 import AddBookPage from './routes/books/AddBookPage'
 import PopupNotification from './components/ui/PopupNotification'
 import { isLocal } from './Helpers.ts'
+import AppFooter from './components/AppFooter.tsx'
+import SuggestionsPage from './routes/SuggestionsPage.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -108,6 +110,19 @@ const App = () => {
 		}
 	}, [darkTheme])
 
+	/* --- activate for webworker */
+	// useEffect(() => {
+	// 	const worker = new Worker(new URL('./worker.ts', import.meta.url))
+	// 	worker.onmessage = (event) => {
+	// 		console.log('Received message from worker:', event.data)
+	// 	}
+	// 	worker.postMessage('ping? (main thread)')
+
+	// 	return () => {
+	// 		worker.terminate()
+	// 	}
+	// }, [])
+
 	// TODO react19: when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
 		<AppContext.Provider
@@ -160,6 +175,7 @@ const App = () => {
 						<>
 							<Route path="/account/profile" element={<UserProfilePage />} />
 							<Route path="/account/*" element={<UserLoginPage />} />
+							<Route path="/suggestions" element={<SuggestionsPage />} />
 							<Route path="/dashboard" element={<DashboardPage />} />
 							<Route path="/search" element={<SearchPage />} />
 							<Route path="/addbook" element={<AddBookPage />} />
@@ -176,6 +192,11 @@ const App = () => {
 					)}
 				</Routes>
 			</main>
+			{userIsLoggedIn && (
+				<div id="footer" className="sf">
+					<AppFooter />
+				</div>
+			)}
 		</AppContext.Provider>
 	)
 }

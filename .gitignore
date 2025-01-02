@@ -28,3 +28,5 @@ release.sh
 notes
 ideas
 todos.md
+protected
+PHPMailer-*

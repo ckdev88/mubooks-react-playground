@@ -1,3 +1,6 @@
+/* TODO be able to add more than 1 quote, implications db & field type: string -> array, 'add extra quote' when
+ isModding, on showing, pick a random quote of the array, quotes page don't know how to visualize this yet
+ */
 import { useContext, useEffect } from 'react'
 import { IsModdingReviewContext } from './BookSummaryReview'
 import BtnInsideCaret from './ui/BtnInsideCaret'
