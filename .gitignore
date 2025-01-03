@@ -26,4 +26,8 @@ dist-ssr
 data
 release.sh
 notes
-*.php
+ideas
+todos.md
+protected
+PHPMailer-*
+.env

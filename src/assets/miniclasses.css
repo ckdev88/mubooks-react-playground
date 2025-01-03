@@ -1,3 +1,11 @@
+.bu {
+	font-weight: bold;
+	font-style: italic;
+}
+.bi {
+	font-weight: bold;
+	font-style: italic;
+}
 .m0 {
 	margin: 0;
 }
@@ -6,6 +14,9 @@
 }
 .mt0 {
 	margin-top: 0;
+}
+.mt0i {
+	margin-top: 0 !important;
 }
 .mt-05 {
 	margin-top: -0.5rem;
@@ -22,6 +33,9 @@
 .mb0 {
 	margin-bottom: 0;
 }
+.mb0o {
+	margin-bottom: 0 !important;
+}
 .mb1 {
 	margin-bottom: 1rem;
 }
@@ -31,8 +45,17 @@
 .ml0 {
 	margin-left: 0;
 }
+.mb035 {
+	margin-bottom: 0.35rem;
+}
 .ml035 {
 	margin-left: 0.35rem;
+}
+.mr03 {
+	margin-right: 0.35rem;
+}
+.mt035 {
+	margin-top: 0.35rem;
 }
 .ml-035 {
 	margin-left: -0.35rem;
@@ -50,11 +73,21 @@
 .pt0 {
 	padding-top: 0;
 }
+.pt05 {
+	padding-top: 0.5rem;
+}
 .pb0 {
 	padding-bottom: 0;
 }
+.pb05 {
+	padding-bottom: 0.5rem;
+}
+
 .pb1 {
 	padding-bottom: 1rem;
+}
+.pb035 {
+	padding-bottom: 0.35rem;
 }
 .red {
 	color: red;
@@ -94,7 +127,19 @@ form .notification {
 }
 
 .sf {
-	font-size: 0.8em;
+	font-size: var(--smallfont);
+}
+.sf2 {
+	font-size: var(--smallerfont);
+}
+.sfr {
+	font-size: var(--smallfontrem);
+}
+.sfr2 {
+	font-size: var(--smallerfontrem);
+}
+.fs-inherit {
+	font-size: inherit;
 }
 
 .ta-right {
@@ -139,11 +184,20 @@ input[type='submit'].dnone {
 		display: none;
 	}
 }
+.di {
+	display: inline;
+}
 .diblock {
 	display: inline-block;
 }
 .italic {
 	font-style: italic;
+}
+.lh1em {
+	line-height: 1em;
+}
+.h1em {
+	height: 1em;
 }
 .wm6 {
 	max-width: 6rem;
@@ -169,4 +223,42 @@ input[type='submit'].dnone {
 }
 .cbadgefg {
 	color: var(--badgefg);
+}
+/* for testing purposes */
+.bgred {
+	background-color: red !important;
+}
+.bgblue {
+	background-color: blue !important;
+}
+.bglime {
+	background-color: lime !important;
+}
+.loader-dots:after {
+	content: '';
+	animation: loader-dots 2.5s linear infinite;
+	margin-left: 0;
+	width: 1rem;
+	display: inline-block;
+	text-align: left;
+}
+.loader-dots:before {
+	content: ' ';
+	display: inline-block;
+}
+
+@keyframes loader-dots {
+	0%,
+	100% {
+		content: '.';
+	}
+	25% {
+		content: '..';
+	}
+	50% {
+		content: '...';
+	}
+	75% {
+		content: '..';
+	}
 }

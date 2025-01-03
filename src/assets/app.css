@@ -1,8 +1,6 @@
 #root {
 	min-height: 100vh;
 	box-sizing: border-box;
-	display: flex;
-	justify-content: space-around;
 	min-width: 300px;
 	overflow-x: auto;
 	margin-left: auto;
@@ -40,7 +38,7 @@ html:not(.loggedin) #main {
 	padding-top: 0;
 	padding-bottom: 0;
 }
-html:not(.loggedin) h1 {
+html:not(.loggedin) .h1 {
 	margin-top: 0;
 }
 
@@ -66,3 +64,10 @@ html:not(.loggedin) h1 {
 	font-weight: bold;
 }
 
+#footer {
+	padding: 1rem 0;
+	text-align: center;
+}
+.footer-suggestions.active {
+	display: none;
+}

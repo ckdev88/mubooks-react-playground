@@ -23,7 +23,7 @@ export default function convertDate(
 		dayNum = a.getDate()
 		monthName = months[monthNum]
 	} else if (typeof dateToConvert === 'string') {
-		// date like 2023-06-30, used in calendars, but in input for this function? ... TODO
+		// for date like 2023-06-30 used in calendars
 		a = dateToConvert.split('-')
 		monthNum = Number(a[1])
 		year = Number(a[0])

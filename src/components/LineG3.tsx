@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { AppContext } from '../App'
 export default function LineG3({ data }: { data: number[] }) {
 	const { bodyBgColor, darkTheme } = useContext(AppContext)
-	const chartData: (string[] | number[])[] = [['Days from start to finish', 'Number of books per days per book']]
+	const chartData: (string[] | number[])[] = [['Days from start to finish', 'Finished books per days per book']]
 
 	for (let i = 0; i < data.length; i++) {
 		if (data[i] === undefined) continue
@@ -36,7 +36,7 @@ export default function LineG3({ data }: { data: number[] }) {
 						},
 					},
 					vAxis: {
-						title: 'Number of books',
+						title: 'Finished books',
 						titleTextStyle: { color: darkTheme ? 'white' : 'black' },
 						textStyle: { color: darkTheme ? 'white' : 'black' },
 					},

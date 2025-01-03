@@ -2,11 +2,12 @@ import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../App'
 import { cleanIndexKey, cleanInput } from '../helpers/cleanInput'
 import { supabase } from '../../utils/supabase'
-import BtnInsideCaret from './ui/BtnInsideCaret'
+// TODO component_btn_inside_caret: remove or use BtnInsideCaret, a function should be able to be passed to make it useful
+// import BtnInsideCaret from './ui/BtnInsideCaret'
 import { TropesPageContext } from '../routes/books/TropesPage'
 import updateTropesDb from '../functions/updateTropesDb'
 
-const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) => {
+const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }): JSX.Element => {
 	const {
 		setLikedTropes,
 		likedTropes,
@@ -17,8 +18,10 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 	} = useContext(TropesPageContext)
 
 	const { setPopupNotification, userid } = useContext(AppContext)
-	const [showForm, setShowForm] = useState<boolean>(false)
+	const [showTropesForm, setShowTropesForm] = useState<boolean>(false)
+	const [tropeInputValue, setTropeInputValue] = useState<BookTrope>('')
 
+	/** Updates supabase user_entries tropes_liked and/or tropes_disliked */
 	const tropesDb = async () => {
 		if (field === 'tropes_liked') {
 			const res = await supabase.from('user_entries').select('tropes_liked')
@@ -33,40 +36,36 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 	}, [])
 
 	useEffect(() => {
-		if (field === 'tropes_liked' && showForm === true) document.getElementById('trope_add_liked')?.focus()
-		if (field === 'tropes_disliked' && showForm === true) document.getElementById('trope_add_disliked')?.focus()
-	}, [showForm])
+		if (field === 'tropes_liked' && showTropesForm === true) document.getElementById('trope_add_liked')?.focus()
+		if (field === 'tropes_disliked' && showTropesForm === true) document.getElementById('trope_add_disliked')?.focus()
+	}, [showTropesForm])
 
-	let tropesLowercase: BookTropes
+	let bookTropesLowercase: BookTropes
 	let tropesArr: BookTropes
 	if (field === 'tropes_liked') {
-		tropesLowercase = likedTropesLowercase
+		bookTropesLowercase = likedTropesLowercase
 		tropesArr = likedTropes
 	} else if (field === 'tropes_disliked') {
-		tropesLowercase = dislikedTropesLowercase
+		bookTropesLowercase = dislikedTropesLowercase
 		tropesArr = dislikedTropes
 	}
 
-	async function processForm(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault()
-		const tropeToAdd: string = cleanInput(e.currentTarget.trope_add.value, false)
-		if (tropeToAdd !== undefined && tropeToAdd.length > 2) {
-			if (field === 'tropes_liked') {
-				if (dislikedTropesLowercase.includes(tropeToAdd.toLowerCase())) removeTrope(tropeToAdd, 'tropes_disliked')
-			} else if (field === 'tropes_disliked') {
-				if (likedTropesLowercase.includes(tropeToAdd)) removeTrope(tropeToAdd, 'tropes_liked')
+	async function addTrope() {
+		if (tropeInputValue.trim()) {
+			const tropeToAdd: string = cleanInput(tropeInputValue.trim(), true)
+			if (tropeToAdd !== undefined && tropeToAdd.length > 1) {
+				if (field === 'tropes_liked' && dislikedTropesLowercase.includes(tropeToAdd.toLowerCase()))
+					removeTrope(tropeToAdd, 'tropes_disliked')
+				else if (field === 'tropes_disliked' && likedTropesLowercase.includes(tropeToAdd.toLowerCase()))
+					removeTrope(tropeToAdd, 'tropes_liked')
+
+				const tropeIndex = bookTropesLowercase.indexOf(tropeToAdd.toLowerCase())
+				if (bookTropesLowercase.indexOf(tropeToAdd.toLowerCase()) > -1) tropesArr.splice(tropeIndex, 1)
+				const newArr: BookTropes = [...tropesArr, tropeToAdd]
+				newArr.sort((a, b) => a.localeCompare(b))
+				updateTropes(newArr, field)
+				setTropeInputValue('')
 			}
-			const indexOfTropeToAdd = tropesLowercase.indexOf(tropeToAdd.toLowerCase())
-			if (indexOfTropeToAdd > -1) tropesArr.splice(indexOfTropeToAdd, 1)
-
-			let newArr: BookTropes = []
-
-			newArr = [...tropesArr, tropeToAdd]
-			newArr.sort((a, b) => a.localeCompare(b))
-			updateTropes(newArr, field)
-
-			e.currentTarget.trope_add.value = ''
-			e.currentTarget.trope_add.focus()
 		}
 	}
 
@@ -84,9 +83,10 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 		updateTropes(newArr, field)
 	}
 
+	// NOTE: similar, but not same as TropesList in ./ReviewTropes.tsx
 	const TropesList = ({ tropes }: { tropes: BookTropes }) => {
 		return (
-			<div className="tropes clr mb0">
+			<div className="tropes">
 				{tropes.map((trope, index) => (
 					<div
 						className={field === 'tropes_liked' ? 'trope badge cgreen' : 'trope badge cred'}
@@ -98,34 +98,49 @@ const TropesPrefs = ({ field }: { field: 'tropes_liked' | 'tropes_disliked' }) =
 						</button>
 					</div>
 				))}
-				<li className="trope_add">
-					<button className={showForm ? 'btn-sm mb0 active' : 'btn-sm mb0'} onClick={() => setShowForm(!showForm)}>
-						{tropes.length > 0 ? <>+</> : <>Add tropes</>}
-					</button>
-				</li>
+				<button
+					className={showTropesForm ? 'trope_add btn-sm mb0 active' : 'trope_add btn-sm mb0'}
+					onClick={() => setShowTropesForm(!showTropesForm)}
+				>
+					{tropes.length > 0 ? <>+</> : <>Add tropes</>}
+				</button>
 			</div>
 		)
+	}
+	const handleKeyDownTrope = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter' || e.key === ',') {
+			e.preventDefault()
+			addTrope()
+		}
 	}
 
 	return (
 		<>
-			<h2>{field === 'tropes_liked' ? 'Like' : 'Dislike'}</h2>
-			<section className='section-badges'>
+			<div className="h2">{field === 'tropes_liked' ? 'Like' : 'Dislike'}</div>
+			<section className="section-badges">
 				<TropesList tropes={field === 'tropes_liked' ? likedTropes : dislikedTropes} />
-				{showForm && (
+				{showTropesForm && (
 					<>
-						<form className="single-small-form clr" onSubmit={processForm}>
+						<div className="single-small-form clr" style={{ alignItems: 'center' }}>
 							<input
 								type="text"
 								name="trope_add"
 								id={field === 'tropes_liked' ? 'trope_add_liked' : 'trope_add_disliked'}
+								value={tropeInputValue}
+								onChange={(e) => setTropeInputValue(e.target.value)}
+								onKeyDown={handleKeyDownTrope}
 								placeholder="Add a trope..."
 							/>
-							<BtnInsideCaret />
-						</form>
-						<button className="btn-text btn-text-cancel wauto" onClick={() => setShowForm(false)}>
+							<span
+								className="btn-submit-inside-caret-right wauto"
+								style={{ margin: '0', marginLeft: '-1.7rem' }}
+								onClick={addTrope}
+							></span>
+							{/* <BtnInsideCaret /> */}
+						</div>
+						<div className="btn-text btn-text-cancel wauto" onClick={() => setShowTropesForm(false)}>
 							Cancel
-						</button>
+						</div>
 					</>
 				)}
 			</section>

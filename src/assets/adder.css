@@ -17,9 +17,6 @@
 	text-decoration: none;
 }
 
-.adder main {
-	padding: 0.5rem;
-}
 @media screen and (max-width: 480px) {
 	.adder main {
 		padding: 0;

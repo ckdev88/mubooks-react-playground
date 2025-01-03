@@ -1,4 +1,4 @@
-// TODO: design & copywrite confirmation email
+// TODO account_emails: design & copywrite confirmation email
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 
@@ -7,13 +7,10 @@ const CheckMailNewAccountPage = () => {
 	const recipientAddress = usermail
 	return (
 		<>
-			<h1>Check your email</h1>
+			<div className="h1">Check your email</div>
 			<p>
-				You should receive an email on{' '}
-				<strong>
-					<u>{recipientAddress}</u>
-				</strong>{' '}
-				containing a link to confirm your account, click it.
+				You should receive an email on <span className="bu">{recipientAddress}</span> containing a link to confirm your
+				account, click it.
 			</p>
 		</>
 	)

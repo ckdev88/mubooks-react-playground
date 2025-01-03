@@ -15,11 +15,11 @@ interface AppContextType {
 	setPopupNotificationShow(popupNotificationShow: popupNotificationShow): void
 	todaysDateInput: string
 	todaysDateDigit: number
-	bookFilter: string
-	setBookFilter(bookFilter: bookFilter): void
 	darkTheme: undefined | boolean
 	setDarkTheme(darkTheme: darkTheme): void
 	bodyBgColor: string
+	settingsHeadingIconsEnabled: boolean
+	settingsSynopsisEnabled: boolean
 }
 
 interface IsModdingPagesContextType {
@@ -42,6 +42,12 @@ interface TropesPageContextType {
 	setDislikedTropes(dislikedTropes: dislikedTropes): void
 	likedTropesLowercase: BookTropes
 	dislikedTropesLowercase: BookTropes
+	tropesInMyBooksArr: Books
+	setTropesInMyBooksArr(tropesInMyBooksArr: tropesInMyBooksArr): void
+}
+interface BooksOverviewFilterContextType {
+	booksFilter: string
+	setBooksFilter(booksFilter: booksFilter): void
 }
 
 type Page =
@@ -124,13 +130,16 @@ interface Book {
 	date_finished?: number
 	rate_stars: Scale5
 	rate_spice: Scale5
-	review_tropes?: BookTropes
+	review_tropes: BookTropes
 	review_text?: string | undefined
 	review_fav_quote?: Book['review_text']
-	search_tropes?: BookTropes
-	subject?: BookTropes
+	subject?: BookSubjects
+	days?: number
 }
-type BookTropes = string[]
+type BookTrope = string
+type BookTropes = BookTrope[]
+type BookSubject = string
+type BookSubjects = BookSubject[]
 
 type Results = Book[]
 interface Books extends Array<Book> {}
@@ -165,6 +174,11 @@ interface BookWithoutPages {
 }
 type BooksWithoutStars = BookWithoutStars[]
 interface BookWithoutStars {
+	id: Book['id']
+	title_short: Book['title_short']
+}
+type BooksDaysPerBooks = BookDaysPerBook[]
+interface BookDaysPerBook {
 	id: Book['id']
 	title_short: Book['title_short']
 }

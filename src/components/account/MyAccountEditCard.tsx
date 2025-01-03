@@ -2,6 +2,7 @@ import useCardRotate from '../../hooks/useCardRotate'
 import { AppContext } from '../../App'
 import { useContext } from 'react'
 import { supabase } from '../../../utils/supabase'
+import Heading from '../ui/Heading'
 
 export default function MyAccountEditCard() {
 	const { see } = useCardRotate()
@@ -21,7 +22,7 @@ export default function MyAccountEditCard() {
 				password: form_userpass,
 				data: { screenname: form_username },
 			})
-			if (error) console.log('Error updating user:', error)
+			if (error) console.log('Error updating user (24):', error)
 			else {
 				afterSbUpdate(form_username, form_usermail)
 			}
@@ -31,7 +32,7 @@ export default function MyAccountEditCard() {
 				email: form_userpass,
 				data: { screenname: form_username },
 			})
-			if (error) console.log('Error updating user:', error)
+			if (error) console.log('Error updating user (34):', error)
 			else afterSbUpdate(form_username, form_usermail)
 		}
 	}
@@ -48,10 +49,7 @@ export default function MyAccountEditCard() {
 		<>
 			<div className="card">
 				<header>
-					<div>
-						Edit my account
-						<sub>Change your preferences</sub>
-					</div>
+					<Heading text="Edit my account" sub="Change my preferences" icon="icon-profile.svg" />
 				</header>
 
 				<main>
@@ -86,11 +84,13 @@ export default function MyAccountEditCard() {
 								autoComplete="new-password"
 							/>
 						</label>
-						<button className='btn-lg'>Save and return</button>
+						<button className="btn-lg">Save and return</button>
 					</form>
 				</main>
 				<footer>
-					<button className='btn-text' onClick={see}>Return without saving</button>
+					<button className="btn-text" onClick={see}>
+						Return without saving
+					</button>
 				</footer>
 			</div>
 		</>

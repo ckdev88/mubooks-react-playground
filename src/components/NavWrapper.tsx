@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../App'
 import { useNavigate, NavLink } from 'react-router-dom'
 import updatePreferences from '../functions/updatePreferences'
+import { isLocal } from '../Helpers'
 
 const titleMap = new Map()
 titleMap.set('dashboard', 'Dashboard')
@@ -19,6 +20,8 @@ titleMap.set('account/login', 'Log in')
 titleMap.set('account/logout', 'Log out')
 titleMap.set('auth/confirm', 'Account confirmed')
 titleMap.set('addbook', 'Add a book')
+titleMap.set('suggestions', 'Suggestions & bugs')
+if (isLocal()) titleMap.set('clear-my-books', 'CUIDADO! Clear books')
 
 const NavWrapper = () => {
 	const navigate = useNavigate()
@@ -33,6 +36,9 @@ const NavWrapper = () => {
 	function goSearch() {
 		setNav0Expanded(false)
 		navigate('/search')
+		setTimeout(() => {
+			location.href = '#top'
+		}, 200)
 	}
 
 	const navTitle = titleMap.get(location.pathname.slice(1))
@@ -51,7 +57,9 @@ const NavWrapper = () => {
 							<div className="burgerbar bar3"></div>
 						</div>
 					</button>
-					<h1 id="navTitle">{navTitle}</h1>
+					<div className="h1" id="navTitle">
+						{navTitle}
+					</div>
 					<div style={{ display: 'flex', alignContent: 'center' }}>
 						<button className="toggleZoekNav" onClick={() => goSearch()}>
 							<span className="alt">Search</span>
@@ -133,8 +141,8 @@ const NavWrapper = () => {
 						<NavLink to={'/wishlist'} onClick={toggleNav0}>
 							Wishlist
 						</NavLink>
-						<NavLink to={'/account/profile'} onClick={toggleNav0}>
-							Profile
+						<NavLink to={'/suggestions'} onClick={toggleNav0}>
+							Suggestions
 						</NavLink>
 					</div>
 
@@ -149,8 +157,8 @@ const NavWrapper = () => {
 						<NavLink to={'/favorites'} onClick={toggleNav0}>
 							Favorites
 						</NavLink>
-						<NavLink to={'/account/logout'} onClick={toggleNav0}>
-							Logout
+						<NavLink to={'/account/profile'} onClick={toggleNav0}>
+							Profile
 						</NavLink>
 					</div>
 					<div
@@ -163,6 +171,21 @@ const NavWrapper = () => {
 					>
 						<NavLink to={'/finished'} onClick={toggleNav0}>
 							Finished
+						</NavLink>
+						<NavLink to={'/account/logout'} onClick={toggleNav0}>
+							Logout
+						</NavLink>
+					</div>
+					<div
+						style={{
+							display: 'flex',
+							width: 'calc(100% - .3rem)',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+						}}
+					>
+						<NavLink to={'/savedbooks'} onClick={toggleNav0}>
+							Saved books
 						</NavLink>
 						<button
 							id="accessibility-darkmode"
@@ -196,27 +219,17 @@ const NavWrapper = () => {
 							</svg>
 						</button>
 					</div>
-					<div
-						style={{
-							display: 'flex',
-							width: 'calc(100% - .3rem)',
-							justifyContent: 'space-between',
-							alignItems: 'center',
-						}}
-					>
-						<NavLink to={'/savedbooks'} onClick={toggleNav0}>
-							Saved books
-						</NavLink>
-					</div>
 					<NavLink to={'/quoted'} onClick={toggleNav0}>
 						Quoted
 					</NavLink>
 					<NavLink to={'/tropes'} onClick={toggleNav0}>
 						Tropes
 					</NavLink>
-					<NavLink to={'/clear-my-books'} onClick={toggleNav0} className="dnone-sm">
-						Clear My Books
-					</NavLink>
+					{isLocal() && (
+						<NavLink to={'/clear-my-books'} onClick={toggleNav0} className="dnone-sm">
+							Clear My Books
+						</NavLink>
+					)}
 				</nav>
 			</div>
 		</>

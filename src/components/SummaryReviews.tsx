@@ -1,3 +1,4 @@
+// NOTE: tropes only shown when book is finished and/or user populated, possible via AddBookPage
 import ReviewTropes from './ReviewTropes'
 import BookSummaryReview from './BookSummaryReview'
 
@@ -7,16 +8,12 @@ export default function SummaryReviews({ currentPage, book }: { currentPage: Pag
 	return (
 		<div className="reviews">
 			{currentPage === 'quoted' && (
-				<BookSummaryReview
-					book_id={book.id}
-					o_key="review_fav_quote"
-					review_text={book.review_fav_quote}
-				/>
+				<BookSummaryReview book_id={book.id} o_key="review_fav_quote" review_text={book.review_fav_quote} />
 			)}
 			{pagesShowReviewTextAndTropes.includes(currentPage) && (
 				<>
 					<BookSummaryReview book_id={book.id} o_key="review_text" review_text={book.review_text} />
-					{book.review_tropes && <ReviewTropes book={book} tropes={book?.review_tropes} />}
+					<ReviewTropes book={book} tropes={book.review_tropes} />
 				</>
 			)}
 		</div>

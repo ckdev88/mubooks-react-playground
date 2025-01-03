@@ -20,6 +20,7 @@ interface Props {
 	book_rate_stars: Book['rate_stars']
 	book_rate_spice: Book['rate_spice']
 	book_review_fav_quote: Book['review_fav_quote']
+	book_review_tropes: Book['review_tropes']
 }
 
 const AddBookToXButton = ({
@@ -41,6 +42,7 @@ const AddBookToXButton = ({
 	book_rate_stars,
 	book_rate_spice,
 	book_review_fav_quote,
+	book_review_tropes,
 }: Props) => {
 	if (button_title === '') button_title = `Add to ${getListName(targetList)}`
 
@@ -60,19 +62,41 @@ const AddBookToXButton = ({
 		rate_stars: book_rate_stars,
 		rate_spice: book_rate_spice,
 		review_fav_quote: book_review_fav_quote,
+		review_tropes: book_review_tropes,
 	}
 	const [AddBookToXButtonAct, isLoading] = useMyBooksAdd({ book, targetList })
 
 	const iconClassName = 'icon icon-' + getListName(targetList)
+
+	function fadeout(): void {
+		/** Temporary Current Page, taken from url */
+		// OPTIMIZE: this same function is used in RemoveBookFromXButton & AddBookToXButton
+		const tcp = window.location.pathname.replace('/', '')
+		if (
+			(tcp === 'reading' && targetList !== 2) ||
+			(tcp === 'wishlist' && targetList !== 1) ||
+			(tcp === 'favorites' && targetList !== 4) ||
+			(tcp === 'finished' && targetList !== 3 && targetList !== 4)
+		) {
+			document.getElementById(`bookSummaryTransitioner${book.id}`)?.classList.add('fadeout')
+		}
+	}
 
 	if (icon && targetList === 4)
 		return <span className="icon-heart inactive" onClick={() => AddBookToXButtonAct()}></span>
 
 	return (
 		<div className="mark">
-			<button className="btn-text" onClick={() => AddBookToXButtonAct()} disabled={isLoading}>
+			<button
+				className="btn-text"
+				onClick={() => {
+					fadeout()
+					AddBookToXButtonAct()
+				}}
+				disabled={isLoading}
+			>
 				<span className={iconClassName}></span>
-				{button_title}
+				{button_title} {isLoading && <span className="loader-dots"> </span>}
 			</button>
 		</div>
 	)

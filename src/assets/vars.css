@@ -1,9 +1,16 @@
 :root{
 	--lightbg: hsl(42, 31%, 94%); /*#f4f1ea  */
+	--lightbg-darker: hsl(42, 31%, 89%); 
 	--darkbg: hsl(204, 33%, 12%); /* #152129 */
+	--darkbg-lighter: hsl(204,33%,17%);
+	--smallfont: .9em;
+	--smallerfont: .8em;
+	--smallfontrem: .9rem;
+	--smallerfontrem: .8rem;
 }
 :root {
 	--bg: var(--lightbg);
+	--bg-invert1: var(--lightbg-darker);
 	--bgInvert: var(--darkbg);
 	--shadeboxcolor: #000000;
 	--shadetextcolor: #ffffff;
@@ -38,14 +45,16 @@
 	--icon-remove: url('/img/icon-remove.png');
 	--icon-pencil:url('/img/icon-pencil.svg');
 	--icon-eraser:url('/img/icon-eraser.svg');
+	--icon-loep:url('/img/loep.svg');
 	--icon-calendar:url('/img/icon-calendar.svg');
 
 	--shade-around: 0 0 0.4rem rgba(0, 0, 0, 25%);
 	--shade-around-subtle: 0 0 0.4rem rgba(0, 0, 0, 15%);
-
 }
+
 :root.dark-mode {
 	--bg: var(--darkbg);
+	--bg-invert1: var(--darkbg-lighter);
 	--bgInvert: var(--lightbg);
 	--shadeboxcolor: white;
 	--shadetextcolor: black;
@@ -67,8 +76,8 @@
 	--icon-pencil:url('/img/icon-pencil-white.svg');
 	--icon-eraser:url('/img/icon-eraser-light.svg');
 	--icon-calendar:url('/img/icon-calendar-white.svg');
+	--icon-loep:url('/img/loep-wit.svg');
 
 	--shade-around: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 25%);
 	--shade-around-subtle: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 15%);
-
 }
