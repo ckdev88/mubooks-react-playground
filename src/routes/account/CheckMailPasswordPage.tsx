@@ -18,13 +18,10 @@ const CheckMailPasswordPage = () => {
 		return (
 			<>
 				<HeaderBranding />
-				<h1>{pageTitle}</h1>
+				<div className="h1">{pageTitle}</div>
 				<p>
-					<span>You should receive an email on</span>{' '}
-					<strong>
-						<u>{recipientAddress}</u>
-					</strong>
-					<span> containing a link to reset your password, click it.</span>
+					You should receive an email on <span className="bu">{recipientAddress}</span>
+					containing a link to reset your password, click it.
 				</p>
 			</>
 		)
@@ -32,7 +29,7 @@ const CheckMailPasswordPage = () => {
 		return (
 			<>
 				<HeaderBranding />
-				<h1>Not so fast!</h1>
+				<div className="h1">Not so fast!</div>
 				<p>
 					You're already logged in, do you want to <Link to="/dashboard">return to your dashboard</Link> or see
 					<Link to="/account/profile">your profile here</Link>?
@@ -43,7 +40,7 @@ const CheckMailPasswordPage = () => {
 		return (
 			<>
 				<HeaderBranding />
-				<h1>New here?</h1>
+				<div className="h1">New here?</div>
 				<p>
 					Are you trying to reset your password or log in?
 					<br />

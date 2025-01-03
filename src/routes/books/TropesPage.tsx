@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import TropesInMyBooks from '../../components/TropesInMyBooks'
 import TropesPrefs from '../../components/TropesPrefs'
+import Heading from '../../components/ui/Heading'
 
 export const TropesPageContext = createContext<TropesPageContextType>({} as TropesPageContextType)
 
@@ -13,7 +14,7 @@ const TropesPage = () => {
 		dislikedTropes.map((trope) => trope.toLowerCase())
 	)
 	const [likedTropesLowercase, setLikedTropesLowercase] = useState(likedTropes.map((trope) => trope.toLowerCase()))
-
+	const [tropesInMyBooksArr, setTropesInMyBooksArr] = useState<Books>([])
 	useEffect(() => {
 		setLikedTropesLowercase(likedTropes.map((t) => t.toLowerCase()))
 	}, [likedTropes])
@@ -22,7 +23,7 @@ const TropesPage = () => {
 		setDislikedTropesLowercase(dislikedTropes.map((t) => t.toLowerCase()))
 	}, [dislikedTropes])
 
-	// TODO when react19 official is released & eslint is updated: refactor <TropesPageContext.Provider... to TropesPageContext...
+	// TODO react19: when react19 official is released & eslint is updated: refactor <TropesPageContext.Provider... to TropesPageContext...
 	return (
 		<TropesPageContext.Provider
 			value={{
@@ -32,10 +33,12 @@ const TropesPage = () => {
 				setDislikedTropes,
 				likedTropesLowercase,
 				dislikedTropesLowercase,
+				tropesInMyBooksArr,
+				setTropesInMyBooksArr,
 			}}
 		>
 			<>
-				<h1>My Tropes</h1>
+				<Heading text="My Tropes" icon="icon-tropes.svg" />
 				<TropesPrefs field="tropes_liked" />
 				<TropesPrefs field="tropes_disliked" />
 				<TropesInMyBooks page={currentPage} />

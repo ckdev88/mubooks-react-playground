@@ -1,9 +1,9 @@
-const HeaderBranding = () => {
+const HeaderBranding = (): JSX.Element => {
 	return (
 		<>
-			<h1 id="welcome">
+			<div className="h1" id="welcome">
 				<img id="welcome-logo-img" src="/img/logo.svg" alt="" /> MuBooks
-			</h1>
+			</div>
 			<i className="dblock tcenter cbadgefg mt-1 mb1">Alpha version</i>
 		</>
 	)

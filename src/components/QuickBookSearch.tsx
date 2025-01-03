@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getOlCover } from '../Helpers'
+import Heading from './ui/Heading'
 // NOTE currently not used anywhere, this would be nice for cases where a search is executed on every keypress, and easily selects one of the results, which is also only useful if zoomin in on 1 result is utilized
 
 /*
@@ -85,9 +86,7 @@ const QuickBookSearch = () => {
 	return (
 		<>
 			<div className="booksearch">
-				<h1>
-					Quick search <sub>Click on a book to prefill the fields</sub>
-				</h1>
+				<Heading text="Quick search" sub="Click on a book to prefill the fields" />
 				<form onSubmit={processSearchForm} className="single-small-form clr">
 					<input type="text" id="search_term" name="search_term" />
 					<button type="submit" className="btn-submit-inside-caret-right" disabled={loading}></button>
@@ -98,10 +97,10 @@ const QuickBookSearch = () => {
 			</div>
 
 			<div className="booksearchresults">
-				<div className={resultsMessage !== '' ? 'dblock sf' : 'dnone'}>
+				<div className={resultsMessage !== '' ? 'dblock sf2' : 'dnone'}>
 					<i>{resultsMessage}</i>
 				</div>
-				<div className={resultsWarning !== '' ? 'dblock sf' : 'dnone'}>
+				<div className={resultsWarning !== '' ? 'dblock sf2' : 'dnone'}>
 					<i>{resultsWarning}</i>
 				</div>
 				{searchResults.map((res, result_index) => {
@@ -122,9 +121,9 @@ const QuickBookSearch = () => {
 							<div key={'result' + result_index} className="result" onClick={checkit}>
 								<div className="wrapper">
 									<div className="text">
-										{title} <em className="sf"> ({res.first_publish_year})</em>
+										{title} <em className="sf2"> ({res.first_publish_year})</em>
 										<br />
-										<em className="sf cl">{authors}</em>
+										<em className="sf2 cl">{authors}</em>
 									</div>
 								</div>
 								<img src={getOlCover(res.id, 'S')} className="thumbnail" />

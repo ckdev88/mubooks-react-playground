@@ -1,8 +1,8 @@
 import { supabase } from '../utils/supabase'
 import './functions/miscEventListeners.ts'
 import { useEffect } from 'react'
-import AuthConfirm from './routes/auth/Confirm.tsx'
-import ResetPasswordPage from './routes/auth/ResetPasswordPage.tsx'
+import AuthConfirm from './routes/auth/Confirm'
+import ResetPasswordPage from './routes/auth/ResetPasswordPage'
 import CheckMailNewAccountPage from './routes/account/CheckMailNewAccountPage'
 import CheckMailPasswordPage from './routes/account/CheckMailPasswordPage'
 import DashboardPage from './routes/account/DashboardPage'
@@ -10,23 +10,27 @@ import ErrorPage from './routes/ErrorPage'
 import FavoritesPage from './routes/books/FavoritesPage'
 import FinishedPage from './routes/books/FinishedPage'
 import NavWrapper from './components/NavWrapper'
-import QuotedPage from './routes/books/QuotedPage.tsx'
+import QuotedPage from './routes/books/QuotedPage'
 import ReadingPage from './routes/books/ReadingPage'
 import RootPage from './routes/RootPage'
 import SavedBooksPage from './routes/books/SavedBooksPage'
 import SearchPage from './routes/books/SearchPage'
-import StatisticsPage from './routes/books/StatisticsPage.tsx'
+import StatisticsPage from './routes/books/StatisticsPage'
 import TropesPage from './routes/books/TropesPage'
 import UserLoginPage from './routes/account/UserLoginPage'
 import UserLogoutPage from './routes/account/UserLogoutPage'
 import UserProfilePage from './routes/account/UserProfilePage'
 import WishlistPage from './routes/books/WishlistPage'
-// import ClearMyBooks from './routes/books/ClearMyBooks.tsx'
 import { Routes, Route } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import { localStorageKey } from '../utils/supabase'
+import ClearMyBooks from './routes/books/ClearMyBooks'
 import { timestampConverter } from './helpers/convertDate.ts'
-import AddBookPage from './routes/books/AddBookPage.tsx'
+import AddBookPage from './routes/books/AddBookPage'
+import PopupNotification from './components/ui/PopupNotification'
+import { isLocal } from './Helpers.ts'
+import AppFooter from './components/AppFooter.tsx'
+import SuggestionsPage from './routes/SuggestionsPage.tsx'
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
@@ -48,9 +52,21 @@ const App = () => {
 	const [popupNotification, setPopupNotification] = useState<string>('')
 	const [popupNotificationShow, setPopupNotificationShow] = useState<boolean>(false)
 	const [initialMyBooksSet, setInitialMyBooksSet] = useState<boolean>(false)
-	const [bookFilter, setBookFilter] = useState<string>('')
 	const [darkTheme, setDarkTheme] = useState<undefined | boolean>(undefined)
 	const [bodyBgColor, setBodyBgColor] = useState<string>(darkTheme ? bgColorDark : bgColorLight)
+
+	// Settings
+	const settingsHeadingIconsEnabled = false
+	const settingsSynopsisEnabled = false
+
+	/* NOTE
+	 * 3 kinds of settings?
+	 * - user settings, like theme (light|dark)
+	 * - global settings, like icons true|false ?
+	 * - admin settings, like
+	 *   - synopsisOL
+	 *   - coverHotlinkOl
+	 */
 
 	// add persistency to userMyBooks state throughout page refreshes
 	const persistentMyBooks = async () => {
@@ -63,19 +79,6 @@ const App = () => {
 			return booksArr
 		}
 	}
-
-	// online state checker & notifier
-	const [isOnline, setIsOnline] = useState(navigator.onLine)
-	useEffect(() => {
-		const handleStatusChange = () => setIsOnline(navigator.onLine)
-		window.addEventListener('online', handleStatusChange)
-		window.addEventListener('offline', handleStatusChange)
-		return () => {
-			window.removeEventListener('online', handleStatusChange)
-			window.removeEventListener('offline', handleStatusChange)
-		}
-	}, [isOnline])
-	// /online state checker & notifier
 
 	useEffect(() => {
 		if (userIsLoggedIn === true && userMyBooks.length < 1) persistentMyBooks()
@@ -96,13 +99,6 @@ const App = () => {
 	if (userIsLoggedIn) document.getElementsByTagName('html')[0].classList.add('loggedin')
 	else document.getElementsByTagName('html')[0].classList.remove('loggedin')
 
-	function popper() {
-		let ret: string
-		if (popupNotification) ret = popupNotification
-		else ret = ''
-		setTimeout(() => setPopupNotification(''), 1000)
-		return <>{ret}</>
-	}
 	useEffect(() => {
 		const htmlNode = document.getElementsByTagName('html')[0]
 		if (darkTheme === true) {
@@ -114,14 +110,25 @@ const App = () => {
 		}
 	}, [darkTheme])
 
-	// TODO when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
+	/* --- activate for webworker */
+	// useEffect(() => {
+	// 	const worker = new Worker(new URL('./worker.ts', import.meta.url))
+	// 	worker.onmessage = (event) => {
+	// 		console.log('Received message from worker:', event.data)
+	// 	}
+	// 	worker.postMessage('ping? (main thread)')
+
+	// 	return () => {
+	// 		worker.terminate()
+	// 	}
+	// }, [])
+
+	// TODO react19: when react19 official is released & eslint updated: refactor <AppContext.Provider... to AppContext...
 	return (
 		<AppContext.Provider
 			value={{
 				popupNotification,
 				popupNotificationShow,
-				bookFilter,
-				setBookFilter,
 				setPopupNotification,
 				setPopupNotificationShow,
 				setUserIsLoggedIn,
@@ -139,20 +146,18 @@ const App = () => {
 				setDarkTheme,
 				darkTheme,
 				bodyBgColor,
+				settingsHeadingIconsEnabled,
+				settingsSynopsisEnabled,
 			}}
 		>
+			<div id="top" style={{ position: 'absolute' }}></div>
 			{userIsLoggedIn && (
 				<header id="header" className="shade">
 					<NavWrapper />
 				</header>
 			)}
 			<main id="main" className="main">
-				{!isOnline && <div id="popupNotificationOffline"> Offline. Some things won&lsquo;t work.</div>}
-				{popupNotification !== '' && (
-					<div id="popupNotification" className={popupNotification ? 'show' : 'hide'}>
-						{popupNotification && <>{popper()}</>}
-					</div>
-				)}
+				<PopupNotification />
 				<Routes>
 					<Route path="/*" element={<RootPage />} />
 					<Route path="/error" element={<ErrorPage />} />
@@ -170,6 +175,7 @@ const App = () => {
 						<>
 							<Route path="/account/profile" element={<UserProfilePage />} />
 							<Route path="/account/*" element={<UserLoginPage />} />
+							<Route path="/suggestions" element={<SuggestionsPage />} />
 							<Route path="/dashboard" element={<DashboardPage />} />
 							<Route path="/search" element={<SearchPage />} />
 							<Route path="/addbook" element={<AddBookPage />} />
@@ -181,13 +187,16 @@ const App = () => {
 							<Route path="/quoted" element={<QuotedPage />} />
 							<Route path="/tropes" element={<TropesPage />} />
 							<Route path="/statistics" element={<StatisticsPage />} />
-							{/* 
-							<Route path="/clear-my-books" element={<ClearMyBooks />} />
-							*/}
+							{isLocal() && <Route path="/clear-my-books" element={<ClearMyBooks />} />}
 						</>
 					)}
 				</Routes>
 			</main>
+			{userIsLoggedIn && (
+				<div id="footer" className="sf">
+					<AppFooter />
+				</div>
+			)}
 		</AppContext.Provider>
 	)
 }

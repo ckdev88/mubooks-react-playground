@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import BooksOverviewPage from './BooksOverviewPage'
 import { getOlCover } from '../../Helpers'
+import Heading from '../../components/ui/Heading'
 
 const pageTitle = 'Search'
 const currentPage = 'search'
+const booklist = undefined
 
 const SearchPage = () => {
 	const [resultsMessage, setResultsMessage] = useState<string>('')
@@ -27,10 +29,7 @@ const SearchPage = () => {
 			const searchfields: string =
 				'title,author_name,isbn,cover_edition_key,author_key,edition_key,key,first_publish_year,number_of_pages_median,subject'
 			await fetch(
-				'https://openlibrary.org/search.json?q=' +
-					search_term +
-					'&mode=everything&limit=30&fields=' +
-					searchfields
+				'https://openlibrary.org/search.json?q=' + search_term + '&mode=everything&limit=30&fields=' + searchfields
 			)
 				.then((response) => response.json())
 				.then((json) =>
@@ -66,25 +65,24 @@ const SearchPage = () => {
 	}
 	return (
 		<>
-			<h1>
-				{pageTitle}
-				<sub>Find the book you want to add.</sub>
-			</h1>
+			<Heading text={pageTitle} sub="Find the book you want to add" />
 			<form onSubmit={processSearchForm}>
 				<label htmlFor="search_term">
 					<div className="description">Term or title</div>
 					<input type="text" id="search_term" />
 				</label>
-				<input className='btn-lg' type="submit" disabled={loading} value={loading ? 'Searching...' : 'Search'} />
+				<button className="btn-lg" disabled={loading}>
+					Search {loading && <span className="loader-dots"></span>}
+				</button>
 			</form>
 			<div>
 				<div className={searchTerm !== '' || resultsMessage !== '' ? 'dblock' : 'dnone'}>
-					<h2 className="resultsfound">
+					<div className="h2 resultsfound">
 						{resultCount > 30 ? 'Over 30' : resultCount}
 						{resultCount > 1 || resultCount === 0 ? ' books' : ' book'} found for <em>"{searchTerm}"</em>
 						<sub className={resultsMessage !== '' ? 'dblock' : 'dnone'}>{resultsMessage}</sub>
-					</h2>
-					<BooksOverviewPage books={searchResults} page={currentPage} />
+					</div>
+					<BooksOverviewPage books={searchResults} page={currentPage} booklist={booklist} />
 				</div>
 			</div>
 		</>

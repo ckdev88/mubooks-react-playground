@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../../App'
 import { supabase } from '../../../utils/supabase'
 import useCardRotate from '../../hooks/useCardRotate'
+import Heading from '../ui/Heading'
 
 const LoginCard = () => {
 	const { setUserIsLoggedIn, setUsername, setUsermail } = useContext(AppContext)
@@ -45,10 +46,7 @@ const LoginCard = () => {
 			<article className="card" id="card-login">
 				<main>
 					<header>
-						<div>
-							Log in
-							<sub>to continue</sub>
-						</div>
+						<Heading text="Log in" sub="to continue" />
 					</header>
 					<form onSubmit={processLoginForm}>
 						<div className={error !== '' ? 'notification error' : 'notification'}>{error}</div>

@@ -2,27 +2,19 @@ import { useContext } from 'react'
 import useCardRotate from '../../hooks/useCardRotate'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../../App'
-import { supabase } from '../../../utils/supabase'
+import Heading from '../ui/Heading'
+import useResetUsermail from '../../hooks/useResetUsermail'
 
 export default function MyAccountCard() {
 	const { change } = useCardRotate()
-	const { username, usermail, setUsermail } = useContext(AppContext)
+	const { username, usermail } = useContext(AppContext)
 
-	async function resetUsermail() {
-		if (usermail !== undefined && usermail !== '') return
-		const {
-			data: { user },
-		} = await supabase.auth.getUser()
-		if (user) setUsermail(String(user?.email))
-	}
-	resetUsermail()
+	useResetUsermail()
 
 	return (
 		<div className="card">
 			<header>
-				<div>
-					My account <sub>An overview of my profile</sub>
-				</div>
+				<Heading text="My account" icon="icon-profile.svg" sub="An overview of my profile" />
 			</header>
 			<main>
 				<dl>
@@ -33,12 +25,14 @@ export default function MyAccountCard() {
 					<dt>Password</dt>
 					<dd>******</dd>
 				</dl>
-				<button className='btn-lg' onClick={change}>
-					<span>change</span>
+				<button className="btn-lg" onClick={change}>
+					<span>Change</span>
 				</button>
 			</main>
 			<footer>
-				<Link className='a-text' to="/dashboard">Back to dashboard</Link>
+				<Link className="a-text" to="/dashboard">
+					Return to dashboard
+				</Link>
 			</footer>
 		</div>
 	)

@@ -10,7 +10,9 @@
 @import 'stats.css';
 @import 'button.css';
 @import 'responsive.css';
-@import 'miniclasses.css';
 @import 'login.css';
 @import 'searchResultsPop.css';
 @import 'notifications.css';
+@import 'headings.css';
+@import 'transitions.css';
+@import 'miniclasses.css';

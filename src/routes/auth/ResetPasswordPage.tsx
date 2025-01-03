@@ -1,8 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../../utils/supabase'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { AppContext } from '../../App'
 import HeaderBranding from '../../components/HeaderBranding'
+import Heading from '../../components/ui/Heading'
 
 const ResetPasswordPage = () => {
 	const { userIsLoggedIn, setPopupNotification, setPopupNotificationShow } = useContext(AppContext)
@@ -12,14 +13,8 @@ const ResetPasswordPage = () => {
 
 	if (userIsLoggedIn) navigate('/dashboard#434334')
 
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		if (loading) setLoading(false) // TODO remove, can later be replaced by a Suspense-like condition
-	}, [loading])
-
 	function afterSbUpdate() {
-		setTimeout(() => navigate('/dashboard'), 1000) // TODO check if used
+		setTimeout(() => navigate('/dashboard'), 1000) // TODO cleanup: check if used
 	}
 
 	const updateSbUser = async (form_userpass: string) => {
@@ -42,56 +37,51 @@ const ResetPasswordPage = () => {
 		} else setError('Passwords do not match, try again')
 	}
 
-	if (loading) return <p>Loading...</p>
-	else {
-		return (
-			<>
-				<HeaderBranding />
-				<div>
-					<div className="card">
-						<header>
-							<div>
-								Reset your password
-								<sub>Fill in new password twice and activate it</sub>
-							</div>
-						</header>
-						<main>
-							<form onSubmit={handleSubmit}>
-								<div className={error !== '' ? 'notification error' : 'notification'}>{error}</div>
-								<label htmlFor="account_password">
-									<div className="description">New password</div>
-									<input
-										type="password"
-										id="account_password"
-										name="account_password"
-										defaultValue=""
-										autoComplete="new-password"
-										required
-									/>
-								</label>
-								<label htmlFor="account_password">
-									<div className="description">New password again</div>
-									<input
-										type="password"
-										id="account_password_again"
-										name="account_password_again"
-										defaultValue=""
-										autoComplete="new-password"
-										required
-									/>
-								</label>
-								<button className="btn-lg">Save new password and login</button>
-							</form>
-						</main>
-						<footer>
-							<Link className="btn-text" to="/account/login">
-								Login without changing password.
-							</Link>
-						</footer>
-					</div>
+	return (
+		<>
+			<HeaderBranding />
+			<div>
+				<div className="card">
+					<header>
+						<Heading text="Reset your password" sub="Fill in new password twice and activate it" />
+					</header>
+					<main>
+						<form onSubmit={handleSubmit}>
+							<div className={error !== '' ? 'notification error' : 'notification'}>{error}</div>
+							<label htmlFor="account_password">
+								<div className="description">New password</div>
+								<input
+									type="password"
+									id="account_password"
+									name="account_password"
+									defaultValue=""
+									autoComplete="new-password"
+									required
+								/>
+							</label>
+							<label htmlFor="account_password">
+								<div className="description">New password again</div>
+								<input
+									type="password"
+									id="account_password_again"
+									name="account_password_again"
+									defaultValue=""
+									autoComplete="new-password"
+									required
+								/>
+							</label>
+							<button className="btn-lg">Save new password and login</button>
+						</form>
+					</main>
+					<footer>
+						<Link className="btn-text" to="/account/login">
+							Login without changing password.
+						</Link>
+					</footer>
 				</div>
-			</>
-		)
-	}
+			</div>
+		</>
+	)
 }
+
 export default ResetPasswordPage

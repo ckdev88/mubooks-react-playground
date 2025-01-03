@@ -102,6 +102,7 @@ textarea:focus,
 .btn-lg:disabled:focus {
 	border-color: transparent;
 	background-color: var(--disabled);
+	cursor: not-allowed;
 }
 
 main button.alt,
@@ -243,6 +244,7 @@ ul.expandable-list a {
 
 .btn-lg {
 	font-size: 1rem;
+	text-transform: capitalize;
 }
 .btn-text,
 .btn-icon {
@@ -325,13 +327,13 @@ input[type='number'] + .btn-submit-inside-caret-right {
 }
 .badge,
 .btn-sm {
-	font-size: 0.8rem;
+	font-size: var(--smallerfontrem);
 	border-radius: 0.2rem;
 	position: relative;
 	height: 1.4rem;
 	line-height: 1.4rem;
 	padding: 0 0.4rem;
-	margin: 0.35rem 0 0 0.35rem;
+	margin: 0.35rem 0.35rem 0 0;
 	width: auto;
 }
 .badge,
@@ -343,6 +345,10 @@ input[type='number'] + .btn-submit-inside-caret-right {
 .badge {
 	background-color: var(--badgebg);
 	color: var(--badgefg);
+}
+.badge.subject {
+	background-color: var(--bg-invert1);
+	color: var(--bgInvert);
 }
 .badge.cgreen,
 .btn-sm.cgreen {
@@ -361,12 +367,14 @@ input[type='number'] + .btn-submit-inside-caret-right {
 	border: 0;
 	box-sizing: content-box;
 	color: white;
+	cursor: pointer;
 	font-size: 0.6em;
 	height: 11px;
 	line-height: 11px;
 	padding: 0;
 	position: absolute;
 	right: -0.3rem;
+	text-align: center;
 	top: -0.2rem;
 	transition: background-color 0.18s linear, color 0.18s linear;
 	width: 11px;
