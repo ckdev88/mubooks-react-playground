@@ -145,6 +145,6 @@ label:focus-within .description em {
 	opacity: 1;
 }
 .form-loading label .description {
-	background-color: #575f65;
+	background-color: var(--disabled-loading-descr-bg);
 	color: var(--text-primary-dimmed);
 }
