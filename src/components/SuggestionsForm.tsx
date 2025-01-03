@@ -87,7 +87,10 @@ const SuggestionsForm: React.FC = () => {
 			{isPosted ? (
 				<>
 					{message}
-					<br/><Link to={'/dashboard'}>Return to dashboard</Link>
+					<br />
+					<Link className="a-text" to={'/dashboard'}>
+						Return to dashboard
+					</Link>
 				</>
 			) : (
 				<>
@@ -113,7 +116,7 @@ const SuggestionsForm: React.FC = () => {
 							<textarea id="fsb_anythingElse" name="anythingElse" rows={5} disabled={isLoading} />
 						</label>
 						<button className="btn-lg" type="submit" disabled={isLoading}>
-							{isLoading ? 'Sending...' : 'Send'}
+							Send {isLoading && <span className="loader-dots"></span>}
 						</button>
 					</form>
 				</>
