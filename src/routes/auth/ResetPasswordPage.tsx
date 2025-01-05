@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../../utils/supabase'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import HeaderBranding from '../../components/HeaderBranding'
 import Heading from '../../components/ui/Heading'
@@ -41,6 +41,19 @@ const ResetPasswordPage = () => {
 		} else setError('Passwords do not match, try again')
 	}
 
+	// TODO double check if this is useful for password managers
+	useEffect(() => {
+		const pwField = document.getElementById('account_password')
+		pwField?.focus()
+		setTimeout(() => {
+			const usernameField = document.getElementById('username')
+			const ls = JSON.parse(localStorage.getItem(localStorageKey) as string)
+			if (ls.user.email !== undefined) {
+				usernameField?.setAttribute('value', ls.user.email)
+			}
+		}, 500)
+	}, [])
+
 	return (
 		<>
 			<HeaderBranding />
@@ -52,7 +65,10 @@ const ResetPasswordPage = () => {
 					<main>
 						<form onSubmit={handleSubmit} className={isLoading ? 'form-loading' : ''}>
 							<div className={error !== '' ? 'notification error' : 'notification'}>{error}</div>
-							<input type="hidden" name="username" autoComplete="username" />
+							<label htmlFor="username" style={{ visibility: 'hidden' }}>
+								Username, emailaddress
+							</label>
+							<input type="hidden" name="username" autoComplete="username" id="username" />
 							<label htmlFor="account_password">
 								<div className="description">New password</div>
 								<input
@@ -64,7 +80,7 @@ const ResetPasswordPage = () => {
 									required
 								/>
 							</label>
-							<label htmlFor="account_password">
+							<label htmlFor="account_password_again">
 								<div className="description">New password again</div>
 								<input
 									type="password"
@@ -81,7 +97,7 @@ const ResetPasswordPage = () => {
 						</form>
 					</main>
 					<footer>
-						<Link className="btn-text" to="/account/login">
+						<Link className="btn-text" to="/dashboard">
 							Login without changing password.
 						</Link>
 					</footer>
