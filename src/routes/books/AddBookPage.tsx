@@ -236,7 +236,14 @@ const AddBookPage = () => {
 							<br />
 						</div>
 					)}
-					<div style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+					<div
+						style={{
+							display: 'flex',
+							alignContent: 'center',
+							justifyContent: 'space-between',
+							gap: '1rem',
+						}}
+					>
 						<div>
 							<label htmlFor="abYearPublished">
 								<div className="description">Year published</div>
@@ -256,7 +263,9 @@ const AddBookPage = () => {
 						</div>
 					</div>
 					<label htmlFor="abCover" className="dblock pb0" style={{ marginBottom: '.75rem' }}>
-						<div className="description">Cover {!selectedImage && <em>... paste URL or press Choose File</em>}</div>
+						<div className="description">
+							Cover {!selectedImage && <em>... paste URL or press Choose File</em>}
+						</div>
 						{!selectedImage && (
 							<>
 								<input
@@ -272,7 +281,7 @@ const AddBookPage = () => {
 									className={coverImg ? '' : 'mb0o'}
 								/>
 								{coverImg && (
-									<span className="btn-text-cancel btn-text sf2 mt-05 mb05" onClick={resetFile}>
+									<span className="btn-text-cancel btn-text sf2 mt-075 mb05" onClick={resetFile}>
 										cancel
 									</span>
 								)}

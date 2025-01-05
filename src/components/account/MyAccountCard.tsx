@@ -31,7 +31,7 @@ export default function MyAccountCard() {
 			</main>
 			<footer>
 				<Link className="a-text" to="/dashboard">
-					Back to dashboard
+					Return to dashboard
 				</Link>
 			</footer>
 		</div>

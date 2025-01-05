@@ -244,7 +244,9 @@ ul.expandable-list a {
 
 .btn-lg {
 	font-size: 1rem;
-	text-transform: capitalize;
+}
+.btn-lg:first-letter {
+	text-transform: uppercase;
 }
 .btn-text,
 .btn-icon {

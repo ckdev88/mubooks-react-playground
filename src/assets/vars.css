@@ -50,6 +50,7 @@
 
 	--shade-around: 0 0 0.4rem rgba(0, 0, 0, 25%);
 	--shade-around-subtle: 0 0 0.4rem rgba(0, 0, 0, 15%);
+	--disabled-loading-descr-bg: #f2f1ec;
 }
 
 :root.dark-mode {
@@ -80,4 +81,5 @@
 
 	--shade-around: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 25%);
 	--shade-around-subtle: box-shadow: 0 0 0.4rem rgba(255, 255, 255, 15%);
+	--disabled-loading-descr-bg: #575f65;
 }
