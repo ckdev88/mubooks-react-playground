@@ -38,15 +38,22 @@ const RecoverCard = () => {
 					<img src="/img/recover-icon.png" width="82" height="82" alt="" className="recover-icon" />
 				</header>
 				<main>
-					<form onSubmit={processRecoverForm}>
+					<form onSubmit={processRecoverForm} className={isLoading ? 'form-loading' : ''}>
 						<label htmlFor="recover_email">
 							<div className="description">Email address: *</div>
-							<input type="email" id="recover_email" name="email" required autoComplete="email" />
+							<input
+								type="email"
+								id="recover_email"
+								name="email"
+								required
+								autoComplete="email"
+								readOnly={isLoading}
+							/>
 						</label>
 						<p>We'll send a link to this email address if it matches an existing account.</p>
 						<div className={error !== '' ? 'dblock error' : 'dblock'}>{error}&nbsp;</div>
 						<button disabled={isLoading} className="btn-lg">
-							{isLoading ? 'Sending...' : 'Send me a password reset link'}
+							Send me a password reset link {isLoading && <span className="loader-dots"></span>}
 						</button>
 					</form>
 				</main>

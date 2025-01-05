@@ -34,7 +34,12 @@ const SuggestionsForm: React.FC = () => {
 					<div className="sub">We look forward to reading your message.</div>
 					<br />
 					<blockquote
-						style={{ border: '1px solid rgba(0,0,0,.3)', borderRadius: '0.2rem', margin: 0, padding: '.5rem' }}
+						style={{
+							border: '1px solid rgba(0,0,0,.3)',
+							borderRadius: '0.2rem',
+							margin: 0,
+							padding: '.5rem',
+						}}
 						className="sf"
 					>
 						<b>Your suggestion:</b>
@@ -101,8 +106,8 @@ const SuggestionsForm: React.FC = () => {
 					<div>
 						What do you think about MuBooks, and what could make it better?
 						<br />
-						Please tell us anything: a request, a complaint or a suggestion, we need your help to make this app as
-						friendly and helpful as possible for you.
+						Please tell us anything: a request, a complaint or a suggestion, we need your help to make this
+						app as friendly and helpful as possible for you.
 					</div>
 					<br />
 					<br />
@@ -113,7 +118,7 @@ const SuggestionsForm: React.FC = () => {
 						</label>
 						<label htmlFor="fsb_anythingElse">
 							<div className="description">Anything else?</div>
-							<textarea id="fsb_anythingElse" name="anythingElse" rows={5} disabled={isLoading} />
+							<textarea id="fsb_anythingElse" name="anythingElse" rows={5} readOnly={isLoading} />
 						</label>
 						<button className="btn-lg" type="submit" disabled={isLoading}>
 							Send {isLoading && <span className="loader-dots"></span>}

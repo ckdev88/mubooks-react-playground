@@ -12,7 +12,7 @@ export default function UserLoginPage() {
 	const { userIsLoggedIn } = useContext(AppContext)
 
 	useEffect(() => {
-		if (userIsLoggedIn) navigate('/dashboard#876554')
+		if (userIsLoggedIn) navigate('/dashboard')
 	}, [userIsLoggedIn, navigate])
 
 	useEffect(() => setDraaideurHeight(), [])
