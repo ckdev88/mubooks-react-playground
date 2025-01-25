@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@supabase/supabase-js": "^2.45.4",
+		"@tailwindcss/vite": "^4.0.0",
 		"@types/react-router-hash-link": "^2.4.9",
 		"motion": "^11.16.0",
 		"react": "^19.0.0-rc-e4953922-20240919",
@@ -20,7 +21,8 @@
 		"react-google-charts": "^5.1.0",
 		"react-markdown": "^9.0.1",
 		"react-router-dom": "^6.26.2",
-		"react-router-hash-link": "^2.4.3"
+		"react-router-hash-link": "^2.4.3",
+		"tailwindcss": "^4.0.0"
 	},
 	"devDependencies": {
 		"@fullhuman/postcss-purgecss": "^6.0.0",
