@@ -90,23 +90,24 @@
 	height: 0;
 }
 
-.deck-container .book-cover {
-	display: block;
-	padding: 0;
-	border-radius: 0.5rem;
-	width: calc(100% / 3);
-	aspect-ratio: 324/500;
-	box-sizing: border-box;
-	background: white;
-	position: relative;
-	border: 2px solid white;
-}
-
-.deck-container .book-cover img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	border-radius: 0.5rem;
-	object-fit: cover;
-	box-shadow: none;
+.deck-container {
+	& .book-cover {
+		display: block;
+		padding: 0;
+		border-radius: 0.5rem;
+		width: calc(100% / 3);
+		aspect-ratio: 324/500;
+		box-sizing: border-box;
+		background: white;
+		position: relative;
+		border: 2px solid white;
+		& img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			border-radius: 0.5rem;
+			object-fit: cover;
+			box-shadow: none;
+		}
+	}
 }
