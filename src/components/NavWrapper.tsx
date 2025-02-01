@@ -38,18 +38,24 @@ const NavWrapper = () => {
 		navigate('/search')
 		setTimeout(() => {
 			location.href = '#top'
-		}, 200)
+			document.getElementById('search_term')?.focus()
+		}, 80)
 	}
 
 	const navTitle = titleMap.get(location.pathname.slice(1))
 	document.title = 'Mu: ' + navTitle
 
-	if (userIsLoggedIn === false) return <></>
-	return (
+	if(userIsLoggedIn === true) return (
 		<>
 			<div className={nav0Expanded ? 'anyexpanded' : 'allcollapsed'}>
 				<nav id="navIcons">
-					<button id="toggleNavBurger" className={nav0Expanded ? 'expanded' : 'collapsed'} onClick={toggleNav0}>
+					<button
+						id="toggleNavBurger"
+						className={nav0Expanded ? 'expanded' : 'collapsed'}
+						onClick={() => {
+							toggleNav0()
+						}}
+					>
 						<div className="burger">
 							<div className="burgerbar bar1"></div>
 							<div className="burgerbar bar2"></div>
@@ -234,6 +240,7 @@ const NavWrapper = () => {
 			</div>
 		</>
 	)
+	return  <></>
 }
 /*
 Current layout:
