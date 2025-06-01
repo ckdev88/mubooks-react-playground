@@ -30,4 +30,6 @@ ideas
 todos.md
 protected
 PHPMailer-*
-.env
+*.env
+
+*storybook.log

@@ -1,112 +1,112 @@
 .adder {
-	margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .adder-header {
-	font-size: 1.3rem;
-	font-weight: normal;
-	display: flex;
-	justify-content: space-between;
-	letter-spacing: -0.04em;
-	padding-top: 0.75rem;
-	padding-bottom: 0.75rem;
+    font-size: 1.3rem;
+    font-weight: normal;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: -0.04em;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
 }
 
 .adder a,
 .book-summary header a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 480px) {
-	.adder main {
-		padding: 0;
-	}
+    .adder main {
+        padding: 0;
+    }
 }
 @media screen and (max-width: 379.98px) {
-	.adder main {
-		padding: 0;
-	}
+    .adder main {
+        padding: 0;
+    }
 }
 
 .adder main.toadd {
-	display: flex;
-	line-height: 2em;
-	justify-content: left;
-	display: flex;
-	align-items: center;
-	font-size: 0.9rem;
+    display: flex;
+    line-height: 2em;
+    justify-content: left;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
 }
 .adder .btn-icon {
-	display: block;
+    display: block;
 }
 
 .adder aside {
-	font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 .adder.alt header {
-	font-size: 1.3rem;
-	text-align: center;
-	display: block;
+    font-size: 1.3rem;
+    text-align: center;
+    display: block;
 }
 
 .adder .adder.alt {
-	text-align: center;
-	justify-content: space-around;
+    text-align: center;
+    justify-content: space-around;
 }
 
 .adder.alt img {
-	margin: 1rem auto;
+    margin: 1rem auto;
 }
 
 .adder.alt aside {
-	text-align: center;
+    text-align: center;
 }
 
 .deck {
-	position: relative;
+    position: relative;
 }
 
 .deck .book-summary {
-	padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 .deck-container {
-	padding: 0;
-	border-radius: 0.5rem;
+    padding: 0;
+    border-radius: 0.5rem;
 }
 
 .deck-container.spread {
-	display: flex;
-	margin-left: 0;
-	justify-items: center;
-	gap: 0.5rem;
+    display: flex;
+    margin-left: 0;
+    justify-items: center;
+    gap: 0.5rem;
 }
 .deck::after,
 .deck-container.stack::after {
-	content: ' ';
-	display: block;
-	clear: both;
-	height: 0;
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0;
 }
 
 .deck-container .book-cover {
-	display: block;
-	padding: 0;
-	border-radius: 0.5rem;
-	width: calc(100% / 3);
-	aspect-ratio: 324/500;
-	box-sizing: border-box;
-	background: white;
-	position: relative;
-	border: 2px solid white;
+    display: block;
+    padding: 0;
+    border-radius: 0.5rem;
+    width: calc(100% / 3);
+    aspect-ratio: 324 / 500;
+    box-sizing: border-box;
+    background: white;
+    position: relative;
+    border: 2px solid white;
 }
 
 .deck-container .book-cover img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	border-radius: 0.5rem;
-	object-fit: cover;
-	box-shadow: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    box-shadow: none;
 }

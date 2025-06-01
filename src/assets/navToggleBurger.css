@@ -1,63 +1,61 @@
 #toggleNavBurger {
-	height: 2rem;
-	width: 2rem;
-	background: transparent;
-	font-weight: 900;
-	font-size: 2rem;
-	color: black;
-	z-index: 3;
-	position: relative;
-	outline: none;
+    height: 2rem;
+    width: 2rem;
+    background: transparent;
+    font-weight: 900;
+    font-size: 2rem;
+    color: black;
+    z-index: 3;
+    position: relative;
+    outline: none;
 }
 #navIcons button:hover {
-	background: rgba(255, 255, 255, 2%);
+    background: rgba(255, 255, 255, 2%);
 }
 #navIcons button:active,
 #navIcons button.expanded {
-	background: #b73581 !important;
+    background: #b73581 !important;
 }
 #toggleNavBurger:hover .burgerbar,
 #toggleNavBurger.expanded .burgerbar {
-	background-color: white;
+    background-color: white;
 }
 
 .burger {
-	position: relative;
+    position: relative;
 }
 .burgerbar {
-	box-sizing: border-box;
-	background: rgba(255, 255, 255, 100%);
-	width: 100%;
-	margin-top: 3px;
-	height: 3px;
-	margin-bottom: 3px;
-	border-radius: 3px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 100%);
+    width: 100%;
+    margin-top: 3px;
+    height: 3px;
+    margin-bottom: 3px;
+    border-radius: 3px;
 }
 .burger:hover .burgerbar,
 .expanded .burgerbar {
-	background: #000000;
+    background: #000000;
 }
 .bar1,
 .bar3 {
-	transition: 0.18s width linear;
+    transition: 0.18s width linear;
 }
 .bar2,
 .bar2duplo {
-	transition:
-		width 0.18s linear,
-		transform 0.18s linear;
+    transition: width 0.18s linear, transform 0.18s linear;
 }
 .bar2duplo {
-	margin-top: -6px;
+    margin-top: -6px;
 }
 
 .expanded .bar1,
 .expanded .bar3 {
-	width: 0;
+    width: 0;
 }
 .expanded .bar2 {
-	transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 .expanded .bar2duplo {
-	transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }

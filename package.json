@@ -1,39 +1,41 @@
 {
-	"homepage": "https://mubooks.nl",
-	"name": "mubooks",
-	"private": true,
-	"version": "0.3.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "tsc && vite build",
-		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-		"preview": "vite preview",
-		"postbuild": "purgecss --css dist/assets/*.css --content dist/assets/index.html dist/assets/*.js --output dist/assets"
-	},
-	"dependencies": {
-		"@supabase/supabase-js": "^2.45.4",
-		"@types/react-router-hash-link": "^2.4.9",
-		"react": "^19.0.0-rc-e4953922-20240919",
-		"react-dom": "^19.0.0-rc-e4953922-20240919",
-		"react-google-charts": "^5.1.0",
-		"react-markdown": "^9.0.1",
-		"react-router-dom": "^6.26.2",
-		"react-router-hash-link": "^2.4.3"
-	},
-	"devDependencies": {
-		"@fullhuman/postcss-purgecss": "^6.0.0",
-		"@happy-dom/global-registrator": "^15.7.4",
-		"@testing-library/react": "^16.0.1",
-		"@types/react": "^18.3.8",
-		"@types/react-dom": "^18.3.0",
-		"@typescript-eslint/eslint-plugin": "^7.18.0",
-		"@typescript-eslint/parser": "^7.18.0",
-		"@vitejs/plugin-react-swc": "^3.7.0",
-		"eslint": "^8.57.1",
-		"eslint-plugin-react-hooks": "^4.6.2",
-		"eslint-plugin-react-refresh": "^0.4.12",
-		"typescript": "^5.6.2",
-		"vite": "^5.4.7"
-	}
+    "homepage": "https://mubooks.nl",
+    "name": "mubooks",
+    "private": true,
+    "version": "0.3.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "biome format ./src --write && tsc && vite build",
+        "lint": "biome lint --error-on-warnings ./src",
+        "preview": "vite preview",
+        "postbuild": "purgecss --css dist/assets/*.css --content dist/assets/index.html dist/assets/*.js --output dist/assets"
+    },
+    "dependencies": {
+        "@supabase/supabase-js": "^2.48.1",
+        "@types/react-router-hash-link": "^2.4.9",
+        "motion": "^11.18.2",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-google-charts": "^5.2.1",
+        "react-markdown": "^9.0.3",
+        "react-router-dom": "^6.29.0",
+        "react-router-hash-link": "^2.4.3"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.9.4",
+        "@fullhuman/postcss-purgecss": "^6.0.0",
+        "@happy-dom/global-registrator": "^15.11.7",
+        "@testing-library/react": "^16.2.0",
+        "@types/react": "^18.3.18",
+        "@types/react-dom": "^18.3.5",
+        "@typescript-eslint/eslint-plugin": "^7.18.0",
+        "@typescript-eslint/parser": "^7.18.0",
+        "@vitejs/plugin-react-swc": "^3.7.2",
+        "eslint": "^8.57.1",
+        "eslint-plugin-react-hooks": "^4.6.2",
+        "eslint-plugin-react-refresh": "^0.4.18",
+        "typescript": "^5.7.3",
+        "vite": "^5.4.14"
+    }
 }

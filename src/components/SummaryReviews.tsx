@@ -1,21 +1,37 @@
 // NOTE: tropes only shown when book is finished and/or user populated, possible via AddBookPage
-import ReviewTropes from './ReviewTropes'
-import BookSummaryReview from './BookSummaryReview'
+import ReviewTropes from "./ReviewTropes"
+import BookSummaryReview from "./BookSummaryReview"
 
-const pagesShowReviewTextAndTropes: Page[] = ['finished', 'favorites', 'savedbooks', 'tropes']
+const pagesShowReviewTextAndTropes: Page[] = [
+    "finished",
+    "favorites",
+    "savedbooks",
+    "tropes",
+]
 
-export default function SummaryReviews({ currentPage, book }: { currentPage: Page; book: Book }) {
-	return (
-		<div className="reviews">
-			{currentPage === 'quoted' && (
-				<BookSummaryReview book_id={book.id} o_key="review_fav_quote" review_text={book.review_fav_quote} />
-			)}
-			{pagesShowReviewTextAndTropes.includes(currentPage) && (
-				<>
-					<BookSummaryReview book_id={book.id} o_key="review_text" review_text={book.review_text} />
-					<ReviewTropes book={book} tropes={book.review_tropes} />
-				</>
-			)}
-		</div>
-	)
+export default function SummaryReviews({
+    currentPage,
+    book,
+}: { currentPage: Page; book: Book }) {
+    return (
+        <div className="reviews">
+            {currentPage === "quoted" && (
+                <BookSummaryReview
+                    book_id={book.id}
+                    o_key="review_fav_quote"
+                    review_text={book.review_fav_quote}
+                />
+            )}
+            {pagesShowReviewTextAndTropes.includes(currentPage) && (
+                <>
+                    <BookSummaryReview
+                        book_id={book.id}
+                        o_key="review_text"
+                        review_text={book.review_text}
+                    />
+                    <ReviewTropes book={book} tropes={book.review_tropes} />
+                </>
+            )}
+        </div>
+    )
 }

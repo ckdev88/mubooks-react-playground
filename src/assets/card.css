@@ -1,71 +1,75 @@
 .card {
-	margin: 1rem;
-	padding: 0.75rem;
-	background-color: var(--cardbg);
+    margin: 1rem;
+    padding: 0.75rem;
+    background-color: var(--cardbg);
 }
 .card header {
-	font-weight: bold;
-	font-size: 1.4rem;
-	margin-bottom: 1rem;
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 .card header div {
-	font-size: inherit;
-	margin: 0;
+    font-size: inherit;
+    margin: 0;
 }
 .card footer {
-	display: flex;
-	justify-content: space-between;
-	font-size: 0.9rem;
-	padding-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding-top: 0.5rem;
 }
 .card footer.content-right {
-	justify-content: right;
+    justify-content: right;
 }
 .cards-draaideur {
-	perspective: 500px;
-	margin: 0 auto;
-	background: var(--draaideurbg);
-	padding: 2px;
-	overflow: hidden;
+    perspective: 500px;
+    margin: 0 auto;
+    background: var(--draaideurbg);
+    padding: 2px;
+    overflow: hidden;
 }
 .cards-draaideur .card {
-	margin: 0;
-	box-sizing: border-box;
-	display: flex;
-	align-content: space-between;
-	flex-wrap: wrap;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+}
+.cards-draaideur,
+.cards-draaideur .card {
+    border-radius: 0.4rem;
 }
 .cards-draaideur .card main,
 .cards-draaideur .card footer {
-	width: 100%;
+    width: 100%;
 }
 .cards-draaideur.rotate .axis {
-	transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 .cards-draaideur .axis {
-	transition: transform 0.85s;
-	transform-style: preserve-3d;
-	position: relative;
+    transition: transform 0.85s;
+    transform-style: preserve-3d;
+    position: relative;
 }
 .cards-draaideur .card {
-	backface-visibility: hidden;
-	position: absolute;
-	width: 100%;
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
 }
 .cards-draaideur .card:first-child {
-	z-index: 2;
+    z-index: 2;
 }
 .cards-draaideur .card + .card {
-	transform: rotateY(180deg);
-	z-index: 3;
+    transform: rotateY(180deg);
+    z-index: 3;
 }
 .card .h1 {
-	margin-top: 0;
-	font-size: 1.5rem;
+    margin-top: 0;
+    font-size: 1.5rem;
 }
 .card .h1 sub {
-	font-size: var(--smallerfont);
+    font-size: var(--smallerfont);
 }

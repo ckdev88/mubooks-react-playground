@@ -1,3 +1,3 @@
 export default function ErrorAccountNotFound() {
-	return <>Account not found</>
+    return <>Account not found</>
 }

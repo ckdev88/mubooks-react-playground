@@ -1,4 +1,4 @@
 const BtnInsideCaret = () => {
-	return <button className="btn-submit-inside-caret-right"></button>
+    return <button type="button" className="btn-submit-inside-caret-right" />
 }
 export default BtnInsideCaret

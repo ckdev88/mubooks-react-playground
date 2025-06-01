@@ -1,7 +1,7 @@
 export default function ResetP() {
-	return (
-		<>
-			<div>hier!</div>
-		</>
-	)
+    return (
+        <>
+            <div>hier!</div>
+        </>
+    )
 }

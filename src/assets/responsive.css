@@ -1,61 +1,61 @@
 @media screen and (min-width: 600px) {
-	/* #header { */
-	/* 	padding-left: 0; */
-	/* 	padding-right: 0; */
-	/* } */
-	/* #nav1 { */
-	/* 	padding-right: 0.75rem; */
-	/* } */
-	/* #navIcons { */
-	/* 	width: calc(100vw - 1rem); */
-	/* } */
-	/* .nav-collapsable a { */
-	/* 	padding-right: 0; */
-	/* } */
-	/* .deck .book-summary .article-main { */
-	/* 	width: auto; */
-	/* } */
+    /* #header { */
+    /* 	padding-left: 0; */
+    /* 	padding-right: 0; */
+    /* } */
+    /* #nav1 { */
+    /* 	padding-right: 0.75rem; */
+    /* } */
+    /* #navIcons { */
+    /* 	width: calc(100vw - 1rem); */
+    /* } */
+    /* .nav-collapsable a { */
+    /* 	padding-right: 0; */
+    /* } */
+    /* .deck .book-summary .article-main { */
+    /* 	width: auto; */
+    /* } */
 
-	.quote.shade-light {
-		box-shadow: none;
-	}
-	.dashboard-quote {
-		margin-top: 0;
-		background: transparent;
-	}
-	.loggedin #header {
-		margin-top: 0.4rem;
-		border-radius: 0.4rem;
-		width: calc(100% - 2rem);
-	}
+    .quote.shade-light {
+        box-shadow: none;
+    }
+    .dashboard-quote {
+        margin-top: 0;
+        background: transparent;
+    }
+    .loggedin #header {
+        margin-top: 0.4rem;
+        border-radius: 0.4rem;
+        width: calc(100% - 2rem);
+    }
 }
 
 @media screen and (max-width: 600px) and (min-width: 360px) {
-	#navIcons {
-		padding-left: 0;
-	}
-	#nav1 {
-		padding-right: 1.5rem;
-	}
-	.nav-collapsable a {
-		padding: 0.1em 0 0.1em 0.2em;
-	}
+    #navIcons {
+        padding-left: 0;
+    }
+    #nav1 {
+        padding-right: 1.5rem;
+    }
+    .nav-collapsable a {
+        padding: 0.1em 0 0.1em 0.2em;
+    }
 }
 
 @media screen and (max-width: 359.98px) {
-	#root,
-	.loggedin #header {
-		min-width: 320px;
-	}
-	#navIcons {
-		min-width: 0;
-		width: 100%;
-	}
-	.nav-collapsable {
-		padding-left: 0.25rem;
-		padding-right: 0.25rem;
-	}
-	.nav-collapsable.expanded {
-		width: 100%;
-	}
+    #root,
+    .loggedin #header {
+        min-width: 320px;
+    }
+    #navIcons {
+        min-width: 0;
+        width: 100%;
+    }
+    .nav-collapsable {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+    .nav-collapsable.expanded {
+        width: 100%;
+    }
 }
